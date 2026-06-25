@@ -1,0 +1,29 @@
+[project]
+name = "open-evals-optimizers"
+version = "0.1.0"
+description = "Optional Python optimizer engines for open-evals."
+requires-python = ">=3.12"
+license = "MIT"
+dependencies = [
+  "pydantic>=2.12.0",
+  "numpy>=2.3.0",
+  "pytest>=8.4.0"
+]
+
+[project.optional-dependencies]
+gepa = ["gepa>=0.0.20"]
+dspy = ["dspy>=3.0.0"]
+search = ["optuna>=4.0.0"]
+smac = ["smac>=2.3.0"]
+test = []
+
+[tool.uv]
+package = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[build-system]
+requires = ["uv_build>=0.9.0,<0.10.0"]
+build-backend = "uv_build"

@@ -1,0 +1,37 @@
+{
+  "name": "open-evals",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.14.0",
+  "license": "MIT",
+  "scripts": {
+    "dev": "pnpm --filter @open-evals/web dev",
+    "build": "turbo run build --filter=@open-evals/core --filter=@open-evals/adapters --filter=@open-evals/db --filter=@open-evals/sdk --filter=@open-evals/mcp --filter=@open-evals/statistics --filter=@open-evals/test-fixtures --filter=@open-evals/cli --filter=@open-evals/web --filter=@open-evals/workflows",
+    "start": "pnpm --filter @open-evals/web start",
+    "lint": "turbo run lint --filter=@open-evals/core --filter=@open-evals/adapters --filter=@open-evals/db --filter=@open-evals/sdk --filter=@open-evals/mcp --filter=@open-evals/statistics --filter=@open-evals/test-fixtures --filter=@open-evals/cli --filter=@open-evals/web --filter=@open-evals/workflows",
+    "typecheck": "turbo run typecheck --filter=@open-evals/core --filter=@open-evals/adapters --filter=@open-evals/db --filter=@open-evals/sdk --filter=@open-evals/mcp --filter=@open-evals/statistics --filter=@open-evals/test-fixtures --filter=@open-evals/cli --filter=@open-evals/web --filter=@open-evals/workflows",
+    "test": "turbo run test --filter=@open-evals/core --filter=@open-evals/adapters --filter=@open-evals/db --filter=@open-evals/sdk --filter=@open-evals/mcp --filter=@open-evals/statistics --filter=@open-evals/test-fixtures --filter=@open-evals/cli --filter=@open-evals/web --filter=@open-evals/workflows",
+    "test:python": "uv run --directory python/open_evals_optimizers pytest",
+    "test:e2e": "pnpm --filter @open-evals/web test:e2e",
+    "db:migrate": "tsx packages/db/src/migrate.ts",
+    "db:seed": "tsx packages/db/src/seed.ts",
+    "setup:local": "node scripts/setup-local.mjs",
+    "doctor": "tsx scripts/doctor.ts"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.57.0",
+    "@types/node": "^20.19.25",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^5.1.2",
+    "eslint": "^9.39.1",
+    "eslint-config-next": "16.2.9",
+    "jsdom": "^27.3.0",
+    "tsx": "^4.21.0",
+    "turbo": "^2.6.3",
+    "typescript": "^5.9.3",
+    "vite-tsconfig-paths": "^5.1.4",
+    "vitest": "^4.0.15"
+  }
+}

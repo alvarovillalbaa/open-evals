@@ -1,0 +1,20 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: open-evals-postgres
+    environment:
+      POSTGRES_USER: open_evals
+      POSTGRES_PASSWORD: open_evals
+      POSTGRES_DB: open_evals
+    ports:
+      - "54329:5432"
+    volumes:
+      - open-evals-postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U open_evals -d open_evals"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+volumes:
+  open-evals-postgres:

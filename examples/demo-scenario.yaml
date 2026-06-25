@@ -1,0 +1,29 @@
+scenarios:
+  - id: eligible-self-service
+    objective: Guide an eligible user to self-service
+    description: A user wants to change an existing reservation
+    simulator:
+      opening_intent: Request a date change
+      private_facts:
+        language: es
+        booking_id: CHG123
+        surname: Santos
+      scripted_turns: []
+      potential_variants:
+        - provides the booking ID immediately
+        - provides the requested date immediately
+    execution:
+      channel: web
+      fixture: CHG123
+      max_user_turns: 6
+      max_tool_calls: 10
+    evaluation:
+      expected_flow:
+        - identify the reservation
+        - verify eligibility
+        - hand off to self-service
+      success_criteria:
+        - asks for required identifiers
+        - includes a pre-populated link
+        - does not claim to have completed the change
+      severity: critical

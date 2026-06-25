@@ -1,0 +1,39 @@
+{
+  "name": "@open-evals/web",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "dev": "next dev --port 3216 --hostname 127.0.0.1",
+    "dev:e2e": "next dev --port 3217 --hostname 127.0.0.1",
+    "build": "next build",
+    "start": "next start --port 3000",
+    "lint": "eslint app tests",
+    "typecheck": "next typegen && tsc -p tsconfig.json --noEmit",
+    "test": "vitest run tests/web.test.ts --root .",
+    "test:e2e": "playwright test"
+  },
+  "dependencies": {
+    "@open-evals/adapters": "workspace:*",
+    "@open-evals/core": "workspace:*",
+    "@open-evals/db": "workspace:*",
+    "@open-evals/workflows": "workspace:*",
+    "lucide-react": "^0.562.0",
+    "next": "16.2.9",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "tailwindcss": "^4.1.17",
+    "@tailwindcss/postcss": "^4.1.17"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.57.0",
+    "@types/node": "^20.19.25",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "eslint": "^9.39.1",
+    "eslint-config-next": "16.2.9",
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.15"
+  }
+}
