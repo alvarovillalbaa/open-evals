@@ -1,9 +1,10 @@
 import { importBenchmark, type BenchmarkFamily, type JsonValue } from "@open-evals/core";
+import { persistBenchmarkImport } from "@open-evals/db";
 import { authErrorResponse, requireRouteAuth } from "@/lib/auth";
 
 export async function POST(request: Request) {
   try {
-    await requireRouteAuth("editor", "evals:write");
+    const auth = await requireRouteAuth("editor", "evals:write");
     const body = (await request.json()) as {
       family?: BenchmarkFamily;
       version?: string;
@@ -19,9 +20,8 @@ export async function POST(request: Request) {
       license: body.license ?? "user-supplied",
       payload: body.payload
     });
-    return Response.json(result, { status: 201 });
+    return Response.json(await persistBenchmarkImport(auth.workspaceId, result), { status: 201 });
   } catch (error) {
     return authErrorResponse(error);
   }
 }
-

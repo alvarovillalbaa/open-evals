@@ -1,37 +1,63 @@
-import { baselinePrompt, candidatePrompt, demoEvalSet, demoRows, resolveRunPlan } from "@open-evals/core";
-
 export type McpToolResult = { content: Array<{ type: "text"; text: string }>; requiresApproval?: boolean };
 
 export const tools = {
-  list_eval_sets(): McpToolResult {
-    return text([{ id: demoEvalSet.id, name: demoEvalSet.name }]);
+  async list_runs(): Promise<McpToolResult> {
+    return text(await get("/api/v1/run-batches"));
   },
-  list_datasets(): McpToolResult {
-    return text([{ id: "demo-dataset-v1", rows: demoRows.length }]);
+  async list_benchmarks(): Promise<McpToolResult> {
+    return text(await get("/api/v1/benchmarks"));
   },
-  list_targets(): McpToolResult {
-    return text([{ id: "target_demo_reservation_agent", kinds: ["provided_output", "invoke_http_target", "invoke_mcp_target"] }]);
+  async list_scenarios(): Promise<McpToolResult> {
+    return text(await get("/api/v1/scenarios"));
+  },
+  async list_instructions(): Promise<McpToolResult> {
+    return text(await get("/api/v1/instructions"));
+  },
+  async list_campaigns(): Promise<McpToolResult> {
+    return text(await get("/api/v1/campaigns"));
+  },
+  async ingest_traces(payload: unknown): Promise<McpToolResult> {
+    return text(await post("/api/v1/traces", payload));
   },
   create_draft_run_plan(): McpToolResult {
-    return text(resolveRunPlan({ id: "mcp_draft_plan", targetId: "target_demo_reservation_agent", targetKind: "provided_output", rows: demoRows, evalSet: demoEvalSet, historicalDataAllowed: true }));
-  },
-  start_eval_run(): McpToolResult {
-    return { ...text({ runId: "mcp_run_requires_approval" }), requiresApproval: true };
-  },
-  get_eval_run(): McpToolResult {
-    return text({ id: "run_demo", status: "completed" });
-  },
-  compare_prompt_versions(): McpToolResult {
-    return text({ baseline: baselinePrompt.id, candidate: candidatePrompt.id, changedComponentIds: ["decision-rules"] });
+    return text({ status: "requires_rows_eval_set_and_target", endpoint: "/api/v1/run-plans/resolve" });
   },
   create_draft_optimization_campaign(): McpToolResult {
-    return { ...text({ campaignId: "mcp_campaign_draft", status: "draft" }), requiresApproval: true };
+    return { ...text({ status: "approval_required", resource: "optimization_campaign" }), requiresApproval: true };
   },
-  get_prompt_release(): McpToolResult {
-    return text({ active: baselinePrompt.id, canary: candidatePrompt.id });
+  start_eval_run(): McpToolResult {
+    return { ...text({ status: "approval_required", endpoint: "/api/v1/eval-runs" }), requiresApproval: true };
   }
 };
 
 function text(value: unknown): McpToolResult {
   return { content: [{ type: "text", text: JSON.stringify(value, null, 2) }] };
+}
+
+async function get(path: string) {
+  const endpoint = serviceEndpoint();
+  if (!endpoint) return { error: "OPEN_EVALS_URL_required" };
+  const response = await fetch(`${endpoint}${path}`, { headers: authHeaders() });
+  return response.json();
+}
+
+async function post(path: string, payload: unknown) {
+  const endpoint = serviceEndpoint();
+  if (!endpoint) return { error: "OPEN_EVALS_URL_required" };
+  const response = await fetch(`${endpoint}${path}`, {
+    method: "POST",
+    headers: { "content-type": "application/json", ...authHeaders() },
+    body: JSON.stringify(payload)
+  });
+  return response.json();
+}
+
+function serviceEndpoint() {
+  return process.env.OPEN_EVALS_URL?.replace(/\/$/, "");
+}
+
+function authHeaders() {
+  const headers: Record<string, string> = {};
+  if (process.env.OPEN_EVALS_API_KEY) headers.authorization = `Bearer ${process.env.OPEN_EVALS_API_KEY}`;
+  return headers;
 }

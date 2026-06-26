@@ -2,13 +2,16 @@ import { createHmac, randomBytes, timingSafeEqual } from "node:crypto";
 import { cookies, headers } from "next/headers";
 import type { ApiKeyScope, AuthenticatedUser, WorkspaceRole } from "@open-evals/core";
 import { hashApiKey, verifyApiKey } from "@open-evals/core";
+import { ensureWorkspaceForHostedUser, findApiKeyByHash, isDatabaseUnavailable } from "@open-evals/db";
+import { getSupabaseServerClient, hasSupabaseConfig } from "@/lib/supabase/server";
 
 export interface RouteAuthContext {
   user: AuthenticatedUser;
   workspaceId: string;
   role: WorkspaceRole;
   scopes: ApiKeyScope[];
-  authKind: "local" | "session" | "api_key";
+  authKind: "local" | "session" | "supabase" | "api_key";
+  projectId?: string;
 }
 
 const SESSION_COOKIE = "open_evals_session";
@@ -35,6 +38,7 @@ export async function getRouteAuthContext(): Promise<RouteAuthContext> {
   const headerList = await headers();
   const authorization = headerList.get("authorization");
   if (authorization?.startsWith("Bearer ")) return apiKeyContext(authorization.slice("Bearer ".length));
+  if (hasSupabaseConfig()) return supabaseSessionContext();
   const cookieStore = await cookies();
   const session = cookieStore.get(SESSION_COOKIE)?.value;
   if (!session) throw httpError(401, "authentication_required");
@@ -90,9 +94,26 @@ function sessionContext(value: string): RouteAuthContext {
   };
 }
 
-function apiKeyContext(plaintext: string): RouteAuthContext {
-  const configuredHash = process.env.HOSTED_DEMO_API_KEY_HASH;
+async function apiKeyContext(plaintext: string): Promise<RouteAuthContext> {
   const pepper = process.env.API_KEY_PEPPER ?? "";
+  if (pepper) {
+    try {
+      const persisted = await findApiKeyByHash(hashApiKey(plaintext, pepper));
+      if (persisted && !persisted.revokedAt) {
+        return {
+          user: { id: `api_key:${persisted.id}`, name: persisted.name, authMode: "hosted" },
+          workspaceId: persisted.workspaceId,
+          role: "editor",
+          scopes: normalizeScopes(persisted.scopes),
+          authKind: "api_key",
+          projectId: persisted.projectId
+        };
+      }
+    } catch (error) {
+      if (!isDatabaseUnavailable(error)) throw error;
+    }
+  }
+  const configuredHash = process.env.HOSTED_DEMO_API_KEY_HASH;
   if (!configuredHash || !pepper || !verifyApiKey(plaintext, configuredHash, pepper)) throw httpError(401, "api_key_invalid");
   return {
     user: { id: "api_key", name: "API key", authMode: "hosted" },
@@ -100,6 +121,31 @@ function apiKeyContext(plaintext: string): RouteAuthContext {
     role: "editor",
     scopes: (process.env.HOSTED_DEMO_API_KEY_SCOPES?.split(",").filter(Boolean) as ApiKeyScope[] | undefined) ?? ["traces:write", "evals:write", "evals:read"],
     authKind: "api_key"
+  };
+}
+
+async function supabaseSessionContext(): Promise<RouteAuthContext> {
+  const supabase = await getSupabaseServerClient();
+  if (!supabase) throw httpError(500, "supabase_not_configured");
+  const claims = await supabase.auth.getClaims();
+  if (claims.error || !claims.data?.claims?.sub) throw httpError(401, "authentication_required");
+  const userResult = await supabase.auth.getUser();
+  const user = userResult.data.user;
+  const userId = claims.data.claims.sub;
+  const email = user?.email ?? (typeof claims.data.claims.email === "string" ? claims.data.claims.email : undefined);
+  const name =
+    typeof user?.user_metadata?.name === "string"
+      ? user.user_metadata.name
+      : typeof user?.user_metadata?.full_name === "string"
+        ? user.user_metadata.full_name
+        : undefined;
+  const membership = await ensureWorkspaceForHostedUser({ id: userId, email, name });
+  return {
+    user: { id: userId, email, name, authMode: "hosted" },
+    workspaceId: membership.workspaceId,
+    role: membership.role,
+    scopes: ["admin"],
+    authKind: "supabase"
   };
 }
 
@@ -126,6 +172,11 @@ function httpError(status: number, message: string) {
   return error;
 }
 
+function normalizeScopes(scopes: string[]): ApiKeyScope[] {
+  const allowed = new Set<ApiKeyScope>(["traces:write", "traces:read", "evals:write", "evals:read", "prompts:write", "prompts:read", "experiments:write", "admin"]);
+  return scopes.filter((scope): scope is ApiKeyScope => allowed.has(scope as ApiKeyScope));
+}
+
 export function authErrorResponse(error: unknown) {
   const status = typeof error === "object" && error !== null && "status" in error ? Number((error as { status: unknown }).status) : 500;
   return Response.json({ error: error instanceof Error ? error.message : "auth_error" }, { status: Number.isInteger(status) ? status : 500 });
@@ -134,4 +185,3 @@ export function authErrorResponse(error: unknown) {
 export function demoApiKeyHash(plaintext: string) {
   return hashApiKey(plaintext, process.env.API_KEY_PEPPER ?? "dev-open-evals-pepper");
 }
-

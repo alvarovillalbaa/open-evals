@@ -14,7 +14,8 @@
   },
   "dependencies": {
     "@open-evals/adapters": "workspace:*",
-    "@open-evals/core": "workspace:*"
+    "@open-evals/core": "workspace:*",
+    "@open-evals/sdk": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^20.19.25",

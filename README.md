@@ -26,11 +26,27 @@ pnpm setup:local
 pnpm dev
 ```
 
-Open `http://127.0.0.1:3216`. The authenticated product surface opens directly to Runs and Improve. The top-level product navigation intentionally contains only `Evals` and `Improve`; settings and connections are utility areas.
+Open `http://127.0.0.1:3216`. The product surface opens directly to `Runs`. The left sidebar contains `Runs`, `Benchmarks`, `Scenarios`, `Instructions`, and `Campaigns`.
 
 ## Hosted Setup
 
-Use Vercel for the web/control plane and Neon for Postgres. Configure `.env.example` values in Vercel project settings. AI-powered authoring and LLM judges use Vercel AI Gateway. Vercel Blob is optional; local mode stores artifacts under `.data/artifacts`.
+Use Vercel for the web/control plane and Supabase for auth plus Postgres. Configure:
+
+- `AUTH_MODE=hosted`
+- `NEXT_PUBLIC_SUPABASE_URL`
+- `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`
+- `DATABASE_URL` or `SUPABASE_DB_URL`
+- `API_KEY_PEPPER`
+- `AUTH_SECRET`
+
+Run `pnpm db:migrate` against the hosted database. The Supabase migration enables RLS and keeps workspace data scoped to authenticated members. Local mode still works without Supabase, but API routes and pages do not synthesize mocked workspace data when a database is missing.
+
+Trace ingestion is available through:
+
+- manual import at `/runs/import`
+- CLI: `open-evals ingest file --file traces.jsonl --endpoint http://127.0.0.1:3216`
+- MCP: set `OPEN_EVALS_URL` and use the `ingest_traces` tool
+- SDK: `new OpenEvalsClient({ endpoint, apiKey }).submitTrace(trace)`
 
 ## Commands
 

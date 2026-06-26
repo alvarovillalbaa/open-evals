@@ -1,31 +1,38 @@
 #!/usr/bin/env node
-import { GenericJsonTraceAdapter } from "@open-evals/adapters";
-import { demoEvalSet, demoRows, evaluateGates, importBenchmark, resolveRunPlan, runDeterministicEval } from "@open-evals/core";
+import { readFile } from "node:fs/promises";
+import { importBenchmark } from "@open-evals/core";
+import { OpenEvalsClient } from "@open-evals/sdk";
 
 const args = process.argv.slice(2);
 const json = args.includes("--json");
-const command = args.filter((arg) => arg !== "--json" && !arg.startsWith("--")).join(" ");
+const command = args.filter((arg) => arg !== "--json" && !arg.startsWith("--") && !valueFlagPrevious(arg)).join(" ");
 
 async function main() {
+  const client = new OpenEvalsClient({ endpoint: flag("--endpoint") ?? process.env.OPEN_EVALS_URL, apiKey: flag("--api-key") ?? process.env.OPEN_EVALS_API_KEY });
   switch (command) {
     case "doctor":
-      return output({ ok: true, aiEnabled: process.env.AI_ENABLED === "true", pythonOptimizers: process.env.PYTHON_OPTIMIZERS_ENABLED === "true" });
+      return output({ ok: true, endpoint: flag("--endpoint") ?? process.env.OPEN_EVALS_URL ?? "http://127.0.0.1:3216" });
     case "ingest file":
     case "ingest otlp": {
-      const adapter = new GenericJsonTraceAdapter();
-      return output(await adapter.importBatch({ workspaceId: "ws_demo", payload: JSON.stringify({ id: "cli-trace", spans: [] }), dryRun: true }));
+      const path = flag("--file");
+      if (!path) throw new Error("missing_required_flag:--file");
+      const payload = await readFile(path, "utf8");
+      const response = await client.submitTraces(payload);
+      return output(await response.json());
     }
     case "eval run":
     case "scenario run":
     case "benchmark run": {
-      const plan = resolveRunPlan({ id: "cli_run", targetId: "target", targetKind: "provided_output", rows: demoRows, evalSet: demoEvalSet, historicalDataAllowed: true });
-      const results = plan.sampleManifest.rows.map((sample) => runDeterministicEval(demoEvalSet.itemVersions[0]!.item, sample));
-      return output({ planId: plan.id, results: results.length, gates: evaluateGates(plan.id, demoEvalSet, results) });
+      const path = flag("--file");
+      if (!path) throw new Error("missing_required_flag:--file");
+      const payload = JSON.parse(await readFile(path, "utf8")) as Record<string, unknown>;
+      const response = await client.evaluate(payload as never);
+      return output(await response.json());
     }
     case "eval status":
     case "optimize status":
     case "experiment status":
-      return output({ status: "demo_complete" });
+      return output({ status: "use_api", endpoint: flag("--endpoint") ?? process.env.OPEN_EVALS_URL ?? "http://127.0.0.1:3216" });
     case "eval cancel":
       return output({ cancelled: true, resumable: true });
     case "eval export":
@@ -33,21 +40,9 @@ async function main() {
     case "calibration run":
       return output({ status: "passed", aggregateShiftPct: 1.2, criticalFalseNegatives: 0 });
     case "benchmark list":
-      return output({ benchmarks: ["gsm8k-mini", "bfcl-mini"] });
+      return output(await fetchJson(clientEndpoint(), "/api/v1/benchmarks"));
     case "benchmark import":
-      return output(
-        importBenchmark({
-          family: args.includes("--bfcl") ? "bfcl" : "gsm8k",
-          version: "mini-v1",
-          sourceName: "cli-fixture",
-          license: args.includes("--bfcl") ? "Apache-2.0 fixture" : "fixture",
-          payload: args.includes("--bfcl")
-            ? [{ prompt: "Call weather for Madrid", expected_tool_call: { name: "weather", arguments: { city: "Madrid" } } }]
-            : [{ question: "What is 2+2?", answer: "4" }]
-        })
-      );
-    case "connections test":
-      return output({ ok: true, message: "fixture connection ready" });
+      return output(importBenchmarkPayload());
     case "prompt pull":
     case "prompt push":
     case "prompt diff":
@@ -83,7 +78,6 @@ function usage() {
       "login",
       "ingest file",
       "ingest otlp",
-      "connections test",
       "eval run",
       "eval status",
       "eval cancel",
@@ -104,6 +98,32 @@ function usage() {
       "release rollback"
     ]
   });
+}
+
+function flag(name: string) {
+  const index = args.indexOf(name);
+  return index >= 0 ? args[index + 1] : undefined;
+}
+
+function valueFlagPrevious(arg: string) {
+  const index = args.indexOf(arg);
+  return index > 0 && ["--file", "--endpoint", "--api-key"].includes(args[index - 1]!);
+}
+
+function clientEndpoint() {
+  return (flag("--endpoint") ?? process.env.OPEN_EVALS_URL ?? "http://127.0.0.1:3216").replace(/\/$/, "");
+}
+
+async function fetchJson(endpoint: string, path: string) {
+  const response = await fetch(`${endpoint}${path}`, {
+    headers: process.env.OPEN_EVALS_API_KEY ? { authorization: `Bearer ${process.env.OPEN_EVALS_API_KEY}` } : {}
+  });
+  return response.json();
+}
+
+function importBenchmarkPayload() {
+  const payload = flag("--file") ? { file: flag("--file") } : { error: "benchmark_import_requires_api_payload_or_file" };
+  return { accepted: false, payload };
 }
 
 await main();
