@@ -30,7 +30,13 @@ Checkout has read-only repository permissions and does not retain credentials.
 The workflow generates the lock with lifecycle scripts disabled, preserves its
 candidate/diff even if validation fails, and requires the exact single CLI
 `tsx` importer edge. It rejects other tracked-file changes or any other lock
-byte change before dependency installation. Then it installs the frozen
+byte change before dependency installation, except the three exact registry
+deprecation notices independently reviewed after runs 40723508585/40724191531:
+the two `@esbuild-kit` notices change their documentation URL, and locked
+`eslint@9.39.4` gains its upstream unsupported-version notice. The literal,
+package-specific whitelist preserves these generated notices; versions,
+resolutions, integrities, snapshots and all other importers remain unchanged.
+Then it installs the frozen
 generated graph and runs only the four explicit test files below. Dependency
 downloads use the existing public package graph; no local install is proposed
 because Storage Guard's reserve is not met.

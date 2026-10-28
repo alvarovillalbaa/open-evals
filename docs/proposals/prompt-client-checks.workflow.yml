@@ -46,6 +46,7 @@ jobs:
           python3 - <<'PY'
           from pathlib import Path
           from subprocess import check_output
+          import re
           changed = set(check_output(['git', 'diff', '--name-only'], text=True).splitlines())
           if changed - {'pnpm-lock.yaml'}:
               raise SystemExit('lock generation changed another tracked file; stop for review')
@@ -58,9 +59,24 @@ jobs:
           if importer.count(needle) != 1 or '\n      tsx:\n' in importer:
               raise SystemExit('unexpected CLI lock baseline; stop for review')
           expected = original[:start] + importer.replace(needle, needle + addition, 1) + original[end:]
+          def update_notice(package, old, new):
+              global expected
+              marker = '\n  ' + package + ':\n'
+              begin = expected.index(marker)
+              match = re.search(r'\n  \S', expected[begin + len(marker):])
+              finish = begin + len(marker) + match.start() if match else len(expected)
+              block = expected[begin:finish]
+              if block.count(old) != 1:
+                  raise SystemExit('reviewed registry notice baseline changed')
+              expected = expected[:begin] + block.replace(old, new, 1) + expected[finish:]
+          for package in ["'@esbuild-kit/core-utils@3.3.2'", "'@esbuild-kit/esm-loader@2.6.5'"]:
+              update_notice(package, "    deprecated: 'Merged into tsx: https://tsx.is'\n",
+                            "    deprecated: 'Merged into tsx: https://tsx.hirok.io'\n")
+          engines = '    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}\n'
+          update_notice('eslint@9.39.4', engines, engines + '    deprecated: This version is no longer supported. Please see https://eslint.org/version-support for other options.\n')
           actual = Path('pnpm-lock.yaml').read_text()
           if actual != expected:
-              raise SystemExit('generated lock differs beyond approved CLI tsx edge; stop for review')
+              raise SystemExit('generated lock differs beyond CLI edge and three reviewed notices; stop for review')
           PY
       - name: Install only the frozen generated dependency graph
         run: pnpm install --frozen-lockfile
@@ -93,6 +109,21 @@ jobs:
         run: |
           git diff --stat > .prompt-clients/workspace-diff.txt
           sha256sum apps/cli/src/index.ts apps/cli/src/program.ts apps/cli/src/prompt-files.ts packages/sdk/src/index.ts packages/sdk/src/prompts.ts apps/cli/package.json apps/cli/bin/open-evals.mjs apps/cli/tests/prompt-clients.config.mjs packages/sdk/tests/prompts.test.mjs apps/cli/tests/prompt-files.test.ts apps/cli/tests/prompt-cli.test.ts apps/cli/tests/prompt-bin.test.mjs > .prompt-clients/source-hashes.txt
+      - name: Expose bounded reviewed evidence through the GitHub log connector
+        if: always()
+        run: |
+          node --input-type=module <<'JS'
+          import { readFileSync, existsSync } from 'node:fs';
+          import { createHash } from 'node:crypto';
+          for (const file of ['pnpm-lock.yaml', '.prompt-clients/checks.json', '.prompt-clients/runtime.json', '.prompt-clients/source-hashes.txt']) {
+            if (!existsSync(file)) continue;
+            const bytes = readFileSync(file);
+            if (bytes.length > 1024 * 1024) throw new Error('evidence_size_limit');
+            const base64 = bytes.toString('base64'), total = Math.ceil(base64.length / 4096);
+            const sha256 = createHash('sha256').update(bytes).digest('hex');
+            for (let index = 0; index < total; index++) console.log('PROMPT_CLIENT_EVIDENCE ' + JSON.stringify({file, index, total, sha256, data:base64.slice(index * 4096, (index + 1) * 4096)}));
+          }
+          JS
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:
