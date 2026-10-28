@@ -96,6 +96,32 @@ did not import or execute the domain code and supplies no passing-test claim.
 | Native cases | `e7ae40f765c90f6eee006dcc41cd977e67d4cb1c729d15e0aead9855d6d0f706` |
 | Source import hook | `1e3ec9a7807fbc507b39c5b0995035910b770295f355934fc2082be876b2f38d` |
 
+## Publication and hosted compilation
+
+Published [a4b95fcdd308601fc4ee8bb47395dc315537ebdc](https://github.com/alvarovillalbaa/open-evals/commit/a4b95fcdd308601fc4ee8bb47395dc315537ebdc)
+to the existing personal repository. Eleven candidate Git blobs matched their
+local content hashes. The new tree `16a6c21db2b6e34c8aaf948115bfd1328cda46fe`
+inherits the complete prior root: full tree comparison found exactly those
+eleven added/modified files, no removals and 1,176 untouched blobs. The branch
+advanced without force, conditionally from the exact inspected `50c98c6` head.
+Immutable GitHub readback matched all eleven files; remote main matched the
+published commit. No local checkout or unrelated worktree was modified.
+
+The existing Git-linked Vercel project `open-evals-web`
+(`prj_FG3VAWXbwS6VRHq4Wd2B4vyIms4l`) automatically deployed that exact source
+as `dpl_EBEKMv3Vsa1v1dvVw9rAAbViuW8s`, production `READY`, owning
+`open-evals-web.vercel.app`. Logs record cache-miss core `tsc --noEmit`, the DB,
+adapter and workflow type checks, successful Next.js compilation and completed
+web TypeScript checking. Turbo reports five successful tasks out of five.
+The first log response omitted 46 middle entries; a bounded timestamp-window
+read recovered the missing compilation evidence. This supplies hosted semantic
+compilation proof for that dependency graph, not the entire repository or tests.
+
+Connected GET of the canonical root returned HTML 200 with the exact deployment
+ID. That authenticated/share-capable read is not independent anonymous access
+or browser/workflow acceptance. No new hosting settings, account or plan was
+changed. The subsequent receipt update preserves every source/test byte.
+
 ## Remaining product scope
 
 This compiler does not complete application composability. Current database
