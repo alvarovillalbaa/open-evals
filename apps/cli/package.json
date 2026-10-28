@@ -4,7 +4,7 @@
   "type": "module",
   "license": "MIT",
   "bin": {
-    "open-evals": "./src/index.ts"
+    "open-evals": "./bin/open-evals.mjs"
   },
   "scripts": {
     "build": "tsc -p tsconfig.json --noEmit",
@@ -15,7 +15,8 @@
   "dependencies": {
     "@open-evals/adapters": "workspace:*",
     "@open-evals/core": "workspace:*",
-    "@open-evals/sdk": "workspace:*"
+    "@open-evals/sdk": "workspace:*",
+    "tsx": "4.22.4"
   },
   "devDependencies": {
     "@types/node": "^20.19.25",

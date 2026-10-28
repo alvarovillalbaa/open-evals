@@ -1,8 +1,9 @@
 # Prompt client runtime and focused checks
 
-Status: prepared for explicit owner approval under supplied AGENTS.md §§7 and
-14. **Not run or activated.** Earlier compiler/authoring approvals are closed
-and do not cover these new clients.
+Status: explicitly approved by the owner on 2026-10-28: “Approve runtime repair
+and 71 checks.” Execution is being prepared within the scope below; no result
+is claimed here. Earlier compiler/authoring approvals are closed and do not
+cover these new clients.
 
 ## Concrete change for approval
 

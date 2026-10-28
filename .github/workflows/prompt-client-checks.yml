@@ -1,0 +1,102 @@
+# Owner approved the exact runtime repair and 71-check scope on 2026-10-28.
+name: Focused prompt client checks
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/prompt-client-checks.yml]
+permissions:
+  contents: read
+jobs:
+  clients:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        shell: bash
+    env:
+      CI: 'true'
+      NEXT_TELEMETRY_DISABLED: '1'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1
+        with:
+          version: 10.14.0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 24.21.0
+      - name: Record exact checked source and runtime
+        run: |
+          mkdir -p .prompt-clients
+          git rev-parse HEAD > .prompt-clients/source-sha.txt
+          node -p 'JSON.stringify({version:process.version,execPath:process.execPath})' > .prompt-clients/runtime.json
+          git show HEAD:pnpm-lock.yaml > .prompt-clients/base-pnpm-lock.yaml
+      - name: Generate lock for the one approved CLI runtime edge
+        run: pnpm install --lockfile-only --ignore-scripts --no-frozen-lockfile --prefer-offline | tee .prompt-clients/lock-generation.log
+      - name: Preserve the candidate lock even if generation or validation fails
+        if: always()
+        run: |
+          cp pnpm-lock.yaml .prompt-clients/pnpm-lock.yaml
+          git diff -- pnpm-lock.yaml > .prompt-clients/lock.diff
+          git diff --stat > .prompt-clients/lock-generation-workspace-diff.txt
+      - name: Reject unrelated lockfile drift
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          from subprocess import check_output
+          changed = set(check_output(['git', 'diff', '--name-only'], text=True).splitlines())
+          if changed - {'pnpm-lock.yaml'}:
+              raise SystemExit('lock generation changed another tracked file; stop for review')
+          original = Path('.prompt-clients/base-pnpm-lock.yaml').read_text()
+          start = original.index('\n  apps/cli:\n')
+          end = original.index('\n  apps/web:\n', start)
+          importer = original[start:end]
+          needle = "      '@open-evals/sdk':\n        specifier: workspace:*\n        version: link:../../packages/sdk\n"
+          addition = '      tsx:\n        specifier: 4.22.4\n        version: 4.22.4\n'
+          if importer.count(needle) != 1 or '\n      tsx:\n' in importer:
+              raise SystemExit('unexpected CLI lock baseline; stop for review')
+          expected = original[:start] + importer.replace(needle, needle + addition, 1) + original[end:]
+          actual = Path('pnpm-lock.yaml').read_text()
+          if actual != expected:
+              raise SystemExit('generated lock differs beyond approved CLI tsx edge; stop for review')
+          PY
+      - name: Install only the frozen generated dependency graph
+        run: pnpm install --frozen-lockfile
+      - name: Run only the authored prompt SDK CLI and native-bin cases
+        run: pnpm exec vitest run --config apps/cli/tests/prompt-clients.config.mjs --reporter=verbose --reporter=json --outputFile=.prompt-clients/checks.json | tee .prompt-clients/checks.log
+      - name: Require all 71 authored cases without skips or retries
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          report = json.loads(Path('.prompt-clients/checks.json').read_text())
+          expected = {'packages/sdk/tests/prompts.test.mjs': 22,
+                      'apps/cli/tests/prompt-files.test.ts': 19,
+                      'apps/cli/tests/prompt-cli.test.ts': 26,
+                      'apps/cli/tests/prompt-bin.test.mjs': 4}
+          seen = {}
+          for result in report['testResults']:
+              matches = [path for path in expected if result['name'].endswith('/' + path)]
+              if len(matches) != 1 or matches[0] in seen:
+                  raise SystemExit('unexpected or duplicate checked file')
+              cases = result['assertionResults']
+              if len(cases) != expected[matches[0]] or any(case['status'] != 'passed' for case in cases):
+                  raise SystemExit('missing or non-passing authored case')
+              seen[matches[0]] = len(cases)
+          if seen != expected or report['numTotalTests'] != 71 or report['numPassedTests'] != 71 or report['numFailedTests'] != 0:
+              raise SystemExit('client check total mismatch')
+          PY
+      - name: Record bounded source hashes and workspace delta
+        if: always()
+        run: |
+          git diff --stat > .prompt-clients/workspace-diff.txt
+          sha256sum apps/cli/src/index.ts apps/cli/src/program.ts apps/cli/src/prompt-files.ts packages/sdk/src/index.ts packages/sdk/src/prompts.ts apps/cli/package.json apps/cli/bin/open-evals.mjs apps/cli/tests/prompt-clients.config.mjs packages/sdk/tests/prompts.test.mjs apps/cli/tests/prompt-files.test.ts apps/cli/tests/prompt-cli.test.ts apps/cli/tests/prompt-bin.test.mjs > .prompt-clients/source-hashes.txt
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: prompt-client-checks
+          retention-days: 3
+          include-hidden-files: true
+          if-no-files-found: warn
+          path: .prompt-clients/

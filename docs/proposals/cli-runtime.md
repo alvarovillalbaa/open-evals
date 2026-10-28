@@ -1,8 +1,9 @@
 # CLI runtime bootstrap
 
-Status: source-reviewed proposal; dependency, lockfile, executable and temporary
-CI changes are **not approved or applied**. No CLI, SDK or test function was
-executed during this audit.
+Status: the exact runtime repair and 71-check temporary CI scope were explicitly
+approved on 2026-10-28. Launcher/dependency implementation is being applied;
+generated lock and execution evidence remain pending. No CLI, SDK or test
+function was executed during the original source audit below.
 
 Source: [`1ea43b13517c11342cd30bc661134db29ebb8c38`](https://github.com/alvarovillalbaa/open-evals/tree/1ea43b13517c11342cd30bc661134db29ebb8c38).
 

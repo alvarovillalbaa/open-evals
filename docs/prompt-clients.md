@@ -1,13 +1,13 @@
 # Prompt CLI and TypeScript clients
 
-Status: authored implementation under focused review; new SDK/CLI checks and
-the native CLI runtime repair are pending separate approval. The previous
-58 authoring checks cover the server/editor, not these new clients.
+Status: implementation source reviewed; the owner approved the exact runtime
+repair and 71 new SDK/CLI checks on 2026-10-28. Execution evidence is pending.
+The previous 58 authoring checks cover the server/editor, not these new clients.
 
 The CLI uses the existing instruction API and canonical core compiler. It does
 not generate version IDs, reinterpret the prompt DSL or activate releases.
-The [runtime proposal](proposals/cli-runtime.md) describes the executable
-bootstrap still needed before the manifest binary can be claimed usable.
+The [runtime proposal](proposals/cli-runtime.md) describes the approved
+executable bootstrap; the manifest binary still needs its focused checks.
 
 ## Create, review and save
 
