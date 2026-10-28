@@ -55,14 +55,46 @@ Vercel reported production deployment `dpl_DxuKAeJf1Hdw6MaswDXkzNRkmfTQ`
 This establishes the hosted build only; it does not execute the new SDK/CLI or
 establish hosted Auth/database readiness.
 
-## Not verified
+## Approved focused execution: 71 passed
 
-The **71 newly authored SDK/CLI/file/native-bin cases have not run**. No
-semantic typecheck, dependency installation, native subprocess, HTTP server,
-browser, database, model or production check ran for this increment. The native
-bin/runtime dependency is deliberately unchanged until separate approval.
-Earlier 55 compiler and 58 authoring passes do not prove these clients.
+The owner approved the exact runtime repair and new checks. Source
+[`135ef951ec5fcb672569cb27bfbafbcb6d65a11e`](https://github.com/alvarovillalbaa/open-evals/tree/135ef951ec5fcb672569cb27bfbafbcb6d65a11e)
+passed [run 40725370059](https://github.com/alvarovillalbaa/open-evals/actions/runs/40725370059),
+job 122947065758: **22 SDK + 19 file + 26 CLI + 4 executable = 71 passed**,
+zero failed/skipped/todo, retry count zero. Independent report/source-hash review
+confirmed 71 unique case names and all 12 recorded source hashes.
 
-The exact dependency repair, bounded CI workflow, case list and proof limits
-are prepared in [the approval proposal](../../../proposals/prompt-client-checks.md).
-Live database/Auth/configuration remain [unverified](hosted-readiness.md).
+Node 24.21.0 and pnpm 10.14.0 ran the existing frozen graph on one temporary
+public Ubuntu job definition. Four bounded sequential attempts took place:
+two stopped before installation/tests when the strict lock guard caught three
+registry deprecation notices, one reported 70 passed/one fixture failure, and
+the final attempt passed all cases. The fixture's default stream prefetch could
+close it before observing SDK cancellation; setting its queue high-water mark
+to zero retains the finite 33-chunk producer, exact size error and exact cancel
+assertions. Production SDK source did not change for that correction.
+
+The generated lock adds only the approved CLI `tsx` 4.22.4 importer edge plus
+the three reviewed registry notices. Existing dependency versions, resolutions,
+integrities, snapshots and other importers remain unchanged. Lock SHA256:
+`77443b49cd42f85638d82f00bd0e9c510f3662cac777ee0082ffb103775702ea`.
+The executable launcher registers its own declared runtime before importing
+the TypeScript entry. The active workflow is removed; the reviewed inactive
+definition remains in the proposal folder.
+
+The [machine receipt](prompt-client-checks.json) retains source/runtime,
+case totals, source hashes, earlier attempts and artifact metadata. Exact
+[passing](prompt-clients/vitest-passed.json) and [earlier failing](prompt-clients/vitest-failed.json)
+reports are retained. ZIP artifact 12832467130 could not be downloaded from the
+local network; four bounded text files were recovered through authenticated
+GitHub job logs and verified by SHA256. The receipt does not claim ZIP-byte
+verification.
+
+## Remaining proof limits
+
+The executable checks invoke the manifest path through plain Node and an
+ephemeral loopback HTTP fixture. They do not establish npm packaging/global
+installation or actual Next/PostgreSQL/Supabase behavior. No browser, database,
+model/provider, production configuration, release, promotion or experiment was
+used. No broad suite or semantic typecheck ran. Earlier 55 compiler and 58
+authoring passes remain separate receipts. Live database/Auth/configuration
+remain [unverified](hosted-readiness.md).

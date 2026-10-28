@@ -1,13 +1,13 @@
 # Prompt CLI and TypeScript clients
 
-Status: implementation source reviewed; the owner approved the exact runtime
-repair and 71 new SDK/CLI checks on 2026-10-28. Execution evidence is pending.
-The previous 58 authoring checks cover the server/editor, not these new clients.
+Status: the approved runtime repair is implemented and all 71 focused client
+checks passed on 2026-10-28. See [the receipt](results/2026/10-28/prompt-clients.md).
+The previous 58 authoring checks remain the separate server/editor receipt.
 
 The CLI uses the existing instruction API and canonical core compiler. It does
 not generate version IDs, reinterpret the prompt DSL or activate releases.
 The [runtime proposal](proposals/cli-runtime.md) describes the approved
-executable bootstrap; the manifest binary still needs its focused checks.
+executable bootstrap, now verified by the four focused native-bin scenarios.
 
 ## Create, review and save
 
@@ -121,5 +121,5 @@ version IDs in query/body fields or definition IDs in the JSON resolve call.
 
 This source increment does not publish npm packages or establish SDK/core
 standalone package distribution. Hosted configuration, Supabase login/RLS,
-production persistence and native executable behavior remain separate proof
-boundaries.
+production persistence and standalone package distribution remain separate
+proof boundaries.

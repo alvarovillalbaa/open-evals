@@ -126,8 +126,11 @@ checked source and totals. This run is separate from the existing Vitest suite.
 
 The [prompt client contract](docs/prompt-clients.md) describes the new real
 SDK/CLI authoring calls, endpoint-bound review files and offline source diff.
-Their focused checks and the CLI runtime dependency repair are pending separate
-approval; the earlier 58 checks do not establish client or native-bin behavior.
+All 71 separately approved client checks passed, including four plain-Node
+manifest executable scenarios. The CLI declares the existing locked `tsx`
+runtime and uses its JavaScript launcher. See [the client receipt](docs/results/2026/10-28/prompt-clients.md)
+for exact source, earlier harness failures and hosted proof limits. Temporary
+client CI has been retired.
 
 The shared optimization control plane supports one-shot candidate generation, FAPO-style routing, hill climbing, structured GA, optional official GEPA, and optional DSPy engines. Target prompt campaigns cannot mutate their own judges or thresholds. Blind holdout examples are blocked from reflection.
 

@@ -1,0 +1,98 @@
+{
+  "schemaVersion": "prompt-client-checks-v1",
+  "sourceCommit": "135ef951ec5fcb672569cb27bfbafbcb6d65a11e",
+  "runId": 40725370059,
+  "jobId": 122947065758,
+  "runUrl": "https://github.com/alvarovillalbaa/open-evals/actions/runs/40725370059",
+  "runtime": {
+    "version": "v24.21.0",
+    "execPath": "/opt/hostedtoolcache/node/24.21.0/x64/bin/node"
+  },
+  "totals": {
+    "tests": 71,
+    "passed": 71,
+    "failed": 0,
+    "skipped": 0,
+    "todo": 0,
+    "retries": 0
+  },
+  "files": [
+    {
+      "path": "packages/sdk/tests/prompts.test.mjs",
+      "cases": 22,
+      "status": "passed"
+    },
+    {
+      "path": "apps/cli/tests/prompt-bin.test.mjs",
+      "cases": 4,
+      "status": "passed"
+    },
+    {
+      "path": "apps/cli/tests/prompt-cli.test.ts",
+      "cases": 26,
+      "status": "passed"
+    },
+    {
+      "path": "apps/cli/tests/prompt-files.test.ts",
+      "cases": 19,
+      "status": "passed"
+    }
+  ],
+  "generatedLock": {
+    "sha256": "77443b49cd42f85638d82f00bd0e9c510f3662cac777ee0082ffb103775702ea",
+    "gitBlob": "1a16e66a423cd53893438704821a7758ba8ca625",
+    "change": "CLI tsx4.22.4 importer edge plus three reviewed deprecation notices; existing dependency versions, resolutions, integrities and snapshots unchanged"
+  },
+  "evidence": [
+    {
+      "path": "runtime.json",
+      "sha256": "77f8bb2baa82c8093c1f4f3c67792f2cf46ff7f467db919381e7f2400256de5e"
+    },
+    {
+      "path": "source-hashes.txt",
+      "sha256": "5b22122b1f522a16400f86c9609fe9c583c81ce0bf0a9c4386454d3d455b8b85"
+    },
+    {
+      "path": "vitest-failed.json",
+      "sha256": "028183ac805b4733f25d152e4a99dbf4a721d53b541db06f9003934053516935"
+    },
+    {
+      "path": "vitest-passed.json",
+      "sha256": "6badd1037b604bd0d70f373e2863117a6cf68029ac1adbbd716c7b993a40d1db"
+    },
+    {
+      "path": "reviewed-lock.json",
+      "sha256": "901ebb85be3bd4cec2eb7daa59d990d4655a6868b62d13c65943eb3d54a1d2f1"
+    }
+  ],
+  "artifact": {
+    "id": 12832467130,
+    "bytes": 145727,
+    "sha256FromGithubMetadata": "b878f2f9ebd431f8a611f02fe92e18d3a831adcd10f54f217b4523c78d058f36",
+    "zipDownloadedLocally": false,
+    "textRecovery": "Four exact files recovered from chunked authenticated GitHub job logs and verified against per-file SHA256; no ZIP-byte verification claim"
+  },
+  "earlierAttempts": [
+    {
+      "runId": 40723508585,
+      "source": "c3499fdad5eb866aa66d5c13bade8032348bb44e",
+      "result": "strict lock guard rejected three registry notices before install/tests"
+    },
+    {
+      "runId": 40724191531,
+      "source": "77e0762958febc10f7452cc663b97a638e516bad",
+      "result": "same guard rejection; public diff added to log for review"
+    },
+    {
+      "runId": 40724811042,
+      "source": "b47f04fbae1cb436a26b1fdededae4cae27f64c8",
+      "result": "70 passed, one SDK fixture prefetch/cancellation assertion failed; production limit error already asserted successfully"
+    }
+  ],
+  "proofLimits": [
+    "No Next server, PostgreSQL, Supabase Auth/client-role RLS or production configuration exercised",
+    "Native executable uses manifest bin with plain Node and fixture HTTP; npm package/global installation not checked",
+    "No model/provider, browser, promotion, release or experiment call",
+    "No broad suite or semantic typecheck; earlier compiler55 and authoring58 remain separate receipts"
+  ]
+}

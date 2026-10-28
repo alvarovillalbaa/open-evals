@@ -1,9 +1,9 @@
 # Prompt client runtime and focused checks
 
-Status: explicitly approved by the owner on 2026-10-28: “Approve runtime repair
-and 71 checks.” Execution is being prepared within the scope below; no result
-is claimed here. Earlier compiler/authoring approvals are closed and do not
-cover these new clients.
+Status: completed under explicit owner approval on 2026-10-28: “Approve runtime
+repair and 71 checks.” All 71 passed; temporary CI is retired. The exact checked
+source, generated lock and earlier attempts are in [the execution receipt](../results/2026/10-28/prompt-clients.md).
+This closed approval does not authorize additional checks or dependency changes.
 
 ## Concrete change for approval
 

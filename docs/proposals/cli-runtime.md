@@ -1,9 +1,9 @@
 # CLI runtime bootstrap
 
-Status: the exact runtime repair and 71-check temporary CI scope were explicitly
-approved on 2026-10-28. Launcher/dependency implementation is being applied;
-generated lock and execution evidence remain pending. No CLI, SDK or test
-function was executed during the original source audit below.
+Status: completed under explicit approval on 2026-10-28. Launcher/dependency and
+the generated lock are implemented; all 71 client checks passed, including the
+four native-bin scenarios. See [the execution receipt](../results/2026/10-28/prompt-clients.md).
+No CLI, SDK or test function was executed during the original source audit below.
 
 Source: [`1ea43b13517c11342cd30bc661134db29ebb8c38`](https://github.com/alvarovillalbaa/open-evals/tree/1ea43b13517c11342cd30bc661134db29ebb8c38).
 
