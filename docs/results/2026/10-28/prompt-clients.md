@@ -34,8 +34,26 @@ formats, example workflow, error behavior and remaining runtime boundary.
 - `git diff --no-index --check` between the immutable selected-text base and
   candidate: no whitespace findings. Exit 1 represents the expected differing
   files; the SIDE parent is not a Git repository.
+- Nine selected production/test/config source files parsed with zero syntax
+  diagnostics, and 20 relative Markdown links resolved against the published
+  repository tree. This does not establish semantic typing or runtime behavior.
 - Source comparisons preserve manifests, lockfile, schema, Auth/access-policy
   and previously closed check files. No active workflow is introduced.
+
+## Publication
+
+The implementation and exact pending-check proposal were published in
+[`c89ec78ce7137ca2d2ba5cf2ae637231464f5d70`](https://github.com/alvarovillalbaa/open-evals/commit/c89ec78ce7137ca2d2ba5cf2ae637231464f5d70).
+All 18 changed/new text blobs matched the local candidate; the complete Git
+tree comparison preserved the other 1,215 existing blobs. The branch moved with
+an expected-parent lease, and selected files were fetched again to verify blob
+correspondence.
+
+Vercel reported production deployment `dpl_DxuKAeJf1Hdw6MaswDXkzNRkmfTQ`
+**READY**, with `githubCommitSha` equal to that implementation commit. See its
+[deployment inspection](https://vercel.com/my-team-4f230354/open-evals-web/DxuKAeJf1Hdw6MaswDXkzNRkmfTQ).
+This establishes the hosted build only; it does not execute the new SDK/CLI or
+establish hosted Auth/database readiness.
 
 ## Not verified
 
