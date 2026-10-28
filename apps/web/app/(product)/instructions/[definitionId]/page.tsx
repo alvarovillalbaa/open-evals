@@ -25,5 +25,5 @@ export default async function InstructionDetailPage({ params, searchParams }: {
     throw error;
   }
 
-  return <div className="grid min-w-0 gap-5"><PageHeader title={detail.definition.stableKey} eyebrow="Improve · Instructions" /><InstructionEditor key={`${detail.definition.id}:${detail.selectedVersion?.id ?? "empty"}`} initialDetail={detail} /></div>;
+  return <div className="grid min-w-0 gap-5"><div className="min-w-0 [overflow-wrap:anywhere]"><PageHeader title={detail.definition.stableKey} eyebrow="Improve · Instructions" /></div><InstructionEditor key={`${detail.definition.id}:${detail.selectedVersion?.id ?? "empty"}`} initialDetail={detail} /></div>;
 }
