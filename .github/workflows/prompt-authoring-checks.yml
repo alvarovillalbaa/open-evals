@@ -76,7 +76,7 @@ jobs:
           done
           exit 1
       - name: Twenty-three hosted HTTP and database cases
-        run: node --test --test-reporter=tap --test-name-pattern='^(?!hosted deployment flags)' apps/web/tests/instruction-authoring.api.mjs | tee .authoring/api-hosted.tap
+        run: node --test --test-reporter=tap --test-skip-pattern='hosted deployment flags' apps/web/tests/instruction-authoring.api.mjs | tee .authoring/api-hosted.tap
       - name: Four desktop and narrow Chromium scenarios
         run: pnpm --filter @open-evals/web exec playwright test --config tests/instruction-authoring.browser.config.mjs
       - name: Stop hosted server before reusing the Next dev directory
@@ -99,7 +99,7 @@ jobs:
           done
           exit 1
       - name: One hosted-local-demo write-denial case
-        run: node --test --test-reporter=tap --test-name-pattern='^hosted deployment flags' apps/web/tests/instruction-authoring.api.mjs | tee .authoring/api-demo.tap
+        run: node --test --test-reporter=tap --test-name-pattern='hosted deployment flags' apps/web/tests/instruction-authoring.api.mjs | tee .authoring/api-demo.tap
       - name: Stop only the owned server process group
         if: always()
         run: |
@@ -113,6 +113,7 @@ jobs:
         with:
           name: instruction-authoring-checks
           retention-days: 3
+          include-hidden-files: true
           if-no-files-found: warn
           path: |
             .authoring/*.tap
