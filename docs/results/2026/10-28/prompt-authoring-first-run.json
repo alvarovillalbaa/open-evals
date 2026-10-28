@@ -1,0 +1,44 @@
+{
+  "schemaVersion": "instruction-authoring-checks-v1",
+  "status": "failed_orchestration",
+  "runId": 40707120573,
+  "jobId": 122882125266,
+  "sourceCommit": "72b832b392ee626517304774ce1c0ebfb992edaa",
+  "runtime": {
+    "version": "v24.21.0",
+    "execPath": "/opt/hostedtoolcache/node/24.21.0/x64/bin/node"
+  },
+  "core": {
+    "tests": 30,
+    "passed": 30,
+    "failed": 0,
+    "skipped": 0
+  },
+  "httpHosted": {
+    "tests": 24,
+    "passed": 23,
+    "failed": 1,
+    "skipped": 0,
+    "failedCase": "hosted deployment flags deny implicit local-demo writes before persistence",
+    "reason": "demo-only case incorrectly selected before server startup"
+  },
+  "browser": {
+    "executed": 0
+  },
+  "httpDemoPhase": {
+    "executed": 0
+  },
+  "cleanup": {
+    "ownedServerStopStep": "success",
+    "jobContainersStopStep": "success"
+  },
+  "artifact": {
+    "uploaded": false,
+    "reason": "selected paths were hidden; logs retained in GitHub job"
+  },
+  "scopeNotes": [
+    "No application source or case-body change required",
+    "No provider/model call or production data",
+    "Separate source/hash verification required for later runs"
+  ]
+}

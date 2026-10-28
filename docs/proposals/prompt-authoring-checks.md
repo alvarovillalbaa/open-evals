@@ -16,6 +16,8 @@ The fixture credentials are public disposable constants for this isolated job. N
 
 ## What the checks can establish
 
+Execution note: the [first approved run](https://github.com/alvarovillalbaa/open-evals/actions/runs/40707120573) passed all 30 protocol cases and 23 hosted API cases. Its negative name-filter also selected the demo-only case before that server existed, producing one fetch failure; browser and demo phases were skipped. The workflow now uses Node's dedicated skip pattern for the hosted phase and a positive unanchored name pattern for the demo phase. Artifact upload explicitly includes only the selected hidden result/log paths. Application source and all 58 case bodies are unchanged for this correction.
+
 The API cases exercise actual routes and SQL, including workspace/project/role/scope boundaries, definition races, immutable source reload, old-base branching, idempotent retries, stale previews/locks, audit privacy and rollback, draft serving, legacy byte preservation, catalog ordering and body limits. An owned fixture base is temporarily changed and restored to prove stale-review sensitivity; a uniquely named fixture-only audit trigger proves transactional rollback.
 
 The browser cases exercise definition creation, literal/composed editor controls, preview invalidation and stale response ownership, exact saved-source reload, locked fields, narrow-screen keyboard controls, and ambiguous/acknowledged save retries. Authored browser request interception affects only disposable UI responses; persistence remains real local SQL.
