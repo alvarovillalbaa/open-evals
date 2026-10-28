@@ -1,6 +1,6 @@
 # Focused instruction authoring execution proposal
 
-Status: **explicitly approved by Alvaro on 2026-10-28**, against source/proposal commit `23a6a0b77439cb66f66f5f035190fb3dd1d42405`. Execution is pending activation of the exact reviewed workflow. This does not broaden or rerun the closed 55 compiler checks. The earlier instruction access policy approval was separate from this test/CI approval.
+Status: **completed: 58/58 passed** in [run 40712375228](https://github.com/alvarovillalbaa/open-evals/actions/runs/40712375228), against source `679a6973c29542b89a9985168bed4e317523ca86`. Alvaro approved this scope on 2026-10-28 against `23a6a0b77439cb66f66f5f035190fb3dd1d42405`. The temporary active workflow is retired in the result-publication commit; the payload below is an inactive reproducibility reference. See [the final receipt](../results/2026/10-28/prompt-authoring.md).
 
 The proposed scope is **58 authored checks**: [30 pure protocol cases](prompt-authoring-core-checks.md), [24 HTTP/database cases](../../apps/web/tests/instruction-authoring.api.mjs), and [four Chromium scenarios](prompt-authoring-browser-checks.md). The [shared disposable fixtures](../../apps/web/tests/instruction-authoring.fixtures.mjs) require explicit disposable-target acknowledgement, loopback URLs and a database named `open_evals_authoring_test_*`.
 

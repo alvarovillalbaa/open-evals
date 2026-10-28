@@ -1,0 +1,504 @@
+{
+  "schemaVersion": "instruction-authoring-checks-v1",
+  "status": "passed",
+  "approvalSourceCommit": "23a6a0b77439cb66f66f5f035190fb3dd1d42405",
+  "sourceCommit": "679a6973c29542b89a9985168bed4e317523ca86",
+  "runId": 40712375228,
+  "jobId": 122900773658,
+  "runUrl": "https://github.com/alvarovillalbaa/open-evals/actions/runs/40712375228",
+  "runtime": {
+    "version": "v24.21.0",
+    "execPath": "/opt/hostedtoolcache/node/24.21.0/x64/bin/node",
+    "postgres": "16.15",
+    "playwrightVersion": "1.61.1",
+    "installedChromiumVersion": "149.0.7827.55",
+    "installedChromiumRevision": "1228",
+    "browserVersionEvidence": "Locked Chromium/Headless Shell installer log; no separate browser.version() probe"
+  },
+  "totals": {
+    "uniqueChecks": 58,
+    "passed": 58,
+    "failed": 0,
+    "skipped": 0,
+    "cancelled": 0,
+    "flaky": 0
+  },
+  "phases": {
+    "core": {
+      "totals": {
+        "tests": 30,
+        "pass": 30,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "cases": [
+        {
+          "name": "literal preview and stored row retain exact text, hash and server-derived draft",
+          "status": "passed"
+        },
+        {
+          "name": "composed roundtrip retains unused bindings and libraries with a full source digest",
+          "status": "passed"
+        },
+        {
+          "name": "canonical request identity ignores record insertion order and omitted empty libraries",
+          "status": "passed"
+        },
+        {
+          "name": "request identity binds actor, workspace, definition, version and base without fetching a base",
+          "status": "passed"
+        },
+        {
+          "name": "request identity binds unrendered source intent even when compiled output is unchanged",
+          "status": "passed"
+        },
+        {
+          "name": "preview changes when the same base identity has different valid immutable semantics",
+          "status": "passed"
+        },
+        {
+          "name": "base lifecycle transitions and creation of a sibling do not stale an identical review",
+          "status": "passed"
+        },
+        {
+          "name": "an explicit fork can name an older canonical base and derives only that parent",
+          "status": "passed"
+        },
+        {
+          "name": "a changed binding cannot bypass the rendered content of a locked component",
+          "status": "passed"
+        },
+        {
+          "name": "authoring preserves lock flags, contents and relative locked order",
+          "status": "passed"
+        },
+        {
+          "name": "base identity, definition and presence are verified with zero or one derived parent",
+          "status": "passed"
+        },
+        {
+          "name": "draft requests reject unknown fields and all client authority fields",
+          "status": "passed"
+        },
+        {
+          "name": "component, binding and operation source shapes remain strict",
+          "status": "passed"
+        },
+        {
+          "name": "storage and write envelopes reject unknown fields, modes and schemas",
+          "status": "passed"
+        },
+        {
+          "name": "all persisted fingerprints require complete lowercase SHA-256 and a valid actor",
+          "status": "passed"
+        },
+        {
+          "name": "a format-valid but incorrect full source fingerprint invalidates an authored row",
+          "status": "passed"
+        },
+        {
+          "name": "composition snapshot hashes and unrendered source tampering are recompiled exactly",
+          "status": "passed"
+        },
+        {
+          "name": "materialized content, lock, kind and component identity must exactly match source",
+          "status": "passed"
+        },
+        {
+          "name": "authoritative text, content hash, status and invalid parent columns fail closed",
+          "status": "passed"
+        },
+        {
+          "name": "replay derivation binds authoritative row identity, definition and sole parent",
+          "status": "passed"
+        },
+        {
+          "name": "legacy text, hash and unknown lifecycle status remain unchanged and view-only",
+          "status": "passed"
+        },
+        {
+          "name": "recognized malformed authored storage never silently falls back to ordinary legacy",
+          "status": "passed"
+        },
+        {
+          "name": "normalized drafts, previews, storage and decoded records are detached and deeply frozen",
+          "status": "passed"
+        },
+        {
+          "name": "retry re-derives exact source intent without a base and rejects context or request substitution",
+          "status": "passed"
+        },
+        {
+          "name": "NUL is rejected in literal, rendered and unused source strings including JSON keys",
+          "status": "passed"
+        },
+        {
+          "name": "isolated UTF-16 surrogates fail storage validation even in unused libraries and keys",
+          "status": "passed"
+        },
+        {
+          "name": "valid astral pairs and ordinary Unicode survive preview, storage and reload exactly",
+          "status": "passed"
+        },
+        {
+          "name": "authoring retains compiler source byte and component count bounds",
+          "status": "passed"
+        },
+        {
+          "name": "authoring retains nested operation and JSON depth bounds",
+          "status": "passed"
+        },
+        {
+          "name": "non-JSON source accessors, sparse arrays and cycles are rejected without evaluating getters",
+          "status": "passed"
+        }
+      ],
+      "bytes": 7011,
+      "sha256": "0776c53484f920d55a2a4f30a8d1b5dc53e8e41d999a871b8e041be4fb84a269"
+    },
+    "api-hosted": {
+      "totals": {
+        "tests": 23,
+        "pass": 23,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "cases": [
+        {
+          "name": "unauthenticated instruction requests fail before malformed request parsing",
+          "status": "passed"
+        },
+        {
+          "name": "viewer sessions can read but cannot create, preview or save",
+          "status": "passed"
+        },
+        {
+          "name": "persisted project API keys enforce separate read and write scopes",
+          "status": "passed"
+        },
+        {
+          "name": "empty definition creation returns a recoverable saved detail",
+          "status": "passed"
+        },
+        {
+          "name": "same creation intent replays across authorized sessions with one audit event",
+          "status": "passed"
+        },
+        {
+          "name": "definition identity and stable-key reuse conflict without exposing foreign rows",
+          "status": "passed"
+        },
+        {
+          "name": "concurrent creation serializes stable-key uniqueness through the workspace lock",
+          "status": "passed"
+        },
+        {
+          "name": "target ownership and project binding constrain creation and detail reads",
+          "status": "passed"
+        },
+        {
+          "name": "literal preview derives draft metadata without persisting a version",
+          "status": "passed"
+        },
+        {
+          "name": "root save and reload preserve exact materialized bytes, source and server ownership",
+          "status": "passed"
+        },
+        {
+          "name": "composition persistence retains unused bindings and named operation blocks",
+          "status": "passed"
+        },
+        {
+          "name": "a second root requires an explicit canonical base",
+          "status": "passed"
+        },
+        {
+          "name": "research siblings can fork from the same older canonical version",
+          "status": "passed"
+        },
+        {
+          "name": "exact retries survive newer siblings while actor or intent reuse conflicts",
+          "status": "passed"
+        },
+        {
+          "name": "locked source changes are rejected before saving",
+          "status": "passed"
+        },
+        {
+          "name": "source edits invalidate the reviewed preview without consuming the stable version ID",
+          "status": "passed"
+        },
+        {
+          "name": "a changed canonical base invalidates review and fixture tampering is restored",
+          "status": "passed"
+        },
+        {
+          "name": "audit rows occur exactly once and contain only identifiers, hashes and counts",
+          "status": "passed"
+        },
+        {
+          "name": "audit insertion failure rolls the version back and permits the same reviewed retry",
+          "status": "passed"
+        },
+        {
+          "name": "drafts fail default resolve, explicit candidates work, and legacy active bytes stay unchanged",
+          "status": "passed"
+        },
+        {
+          "name": "catalog correlated aggregates avoid duplication and project filters cover related records",
+          "status": "passed"
+        },
+        {
+          "name": "project keys cannot cross projects and configured keys without projects fail closed",
+          "status": "passed"
+        },
+        {
+          "name": "HTTP boundaries reject malformed, oversized, spoofed and ambiguous requests",
+          "status": "passed"
+        }
+      ],
+      "bytes": 5167,
+      "sha256": "675e203a17e9bdb6df3b16635b1dbb5d51a0f33c4b618512737bdc5b9ad2bb8e"
+    },
+    "api-demo": {
+      "totals": {
+        "tests": 1,
+        "pass": 1,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "cases": [
+        {
+          "name": "hosted deployment flags deny implicit local-demo writes before persistence",
+          "status": "passed"
+        }
+      ],
+      "bytes": 342,
+      "sha256": "5a9a179917650e898937d94d9e016cbffaaf089590499e5be3a6c271eed8231c"
+    },
+    "browser": {
+      "stats": {
+        "startTime": "2026-10-28T15:09:17.714Z",
+        "duration": 13665.736,
+        "expected": 4,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "name": "desktop empty catalog creates, composes typed blocks, saves and reloads the immutable source",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "durationMs": 6223
+            }
+          ]
+        },
+        {
+          "name": "desktop fork preserves parent locks and rejects an obsolete delayed preview",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "durationMs": 1909
+            }
+          ]
+        },
+        {
+          "name": "390px keyboard controls reorder components and preserve bindings through save and reload",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "durationMs": 2530
+            }
+          ]
+        },
+        {
+          "name": "lost save acknowledgement replays one insert and acknowledged reload retries only GET",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "durationMs": 2054
+            }
+          ]
+        }
+      ],
+      "bytes": 8730,
+      "sha256": "33936beea69099738af6e338ecadebe1dbefab416ce1128d0fb362d197f64273"
+    }
+  },
+  "artifact": {
+    "id": 12826713758,
+    "bytes": 8395,
+    "sha256": "ff557b85e813d545513894cc8bc155eed865b31a475df08106985cbe46d30ef6",
+    "downloadedAndHashVerified": true
+  },
+  "cleanup": {
+    "fixtureHooks": "succeeded",
+    "hostedServerPhaseSwitchStop": "verified process group disappeared",
+    "finalDemoServerStop": "TERM requested; final stop step succeeded",
+    "postgresJobServiceStop": "succeeded",
+    "activeWorkflow": "removed in the report publication commit"
+  },
+  "applicationSource": [
+    {
+      "path": "apps/web/app/(product)/components.tsx",
+      "sha": "26064759a5c3d0adb171fe9f715fb6886ba0b729"
+    },
+    {
+      "path": "apps/web/app/(product)/instructions/[definitionId]/page.tsx",
+      "sha": "d934bc6cb24c48d4b0ccf2a2d582d075457aeccc"
+    },
+    {
+      "path": "apps/web/app/(product)/instructions/create-instruction.tsx",
+      "sha": "0c012c6d9103b7b6826b436dc16a5094ba6769f1"
+    },
+    {
+      "path": "apps/web/app/(product)/instructions/instruction-authoring-client.ts",
+      "sha": "70bd4ff3372f4ff397f029b2a49aff4c2b04993b"
+    },
+    {
+      "path": "apps/web/app/(product)/instructions/instruction-editor.tsx",
+      "sha": "7f7dddd3c17b1bed35b300e3955ad8e1172bcf77"
+    },
+    {
+      "path": "apps/web/app/(product)/instructions/page.tsx",
+      "sha": "e15f8705ee726632ab60673e12ce512dbbdbd6e6"
+    },
+    {
+      "path": "apps/web/app/api/v1/instructions/[definitionId]/preview/route.ts",
+      "sha": "5e3e12ed6b761f0c2cc8adffd71006a1c1961c5a"
+    },
+    {
+      "path": "apps/web/app/api/v1/instructions/[definitionId]/route.ts",
+      "sha": "18e3e8b787092c970168fe4134975f588007bdf0"
+    },
+    {
+      "path": "apps/web/app/api/v1/instructions/[definitionId]/versions/route.ts",
+      "sha": "fc7c9a8a1b53f577ed4e9e5ecdaebb365c54faf9"
+    },
+    {
+      "path": "apps/web/app/api/v1/instructions/route.ts",
+      "sha": "aae4dd70e44fa418985c35dc2882cbf27f225f9b"
+    },
+    {
+      "path": "apps/web/app/api/v1/prompts/resolve/route.ts",
+      "sha": "3bc4220342b58aa4f380bb8823f817ee6c07b27c"
+    },
+    {
+      "path": "apps/web/lib/instruction-authoring.ts",
+      "sha": "5a3edc6e805e6a909f30535da220c4533d0b22e4"
+    },
+    {
+      "path": "apps/web/lib/instruction-request.ts",
+      "sha": "58737fdf1e2c3a2745fc3ba4fa876f9e22d7f357"
+    },
+    {
+      "path": "apps/web/lib/instruction-service.ts",
+      "sha": "4f5909ce1beae4353dde749f8cf1d104f7ccfa45"
+    },
+    {
+      "path": "apps/web/lib/loaders.ts",
+      "sha": "4272ae40ffc85f878193dbb63ebe603a792cc376"
+    },
+    {
+      "path": "packages/core/src/index.ts",
+      "sha": "e4dbd95c945e789edff8f9023f8028f6ecb7ee19"
+    },
+    {
+      "path": "packages/core/src/prompt-authoring.ts",
+      "sha": "0c495af3b3ec882075265be9914fda1ec78f2a40"
+    },
+    {
+      "path": "packages/db/src/index.ts",
+      "sha": "785effc6029c155fb3caa8d4c2377db1fb6f9d40"
+    },
+    {
+      "path": "packages/db/src/prompt-authoring.ts",
+      "sha": "4cc44a6cda4d315c5e8a26f345e664b828f1dfd3"
+    },
+    {
+      "path": "packages/db/src/service.ts",
+      "sha": "8c79cc2b12509575f59f4e2d06404755f29c4470"
+    }
+  ],
+  "unchangedProtectedFiles": [
+    {
+      "path": "package.json",
+      "sha": "d0326fa71712e70b994d9feb9d9cb0a871860cd0"
+    },
+    {
+      "path": "pnpm-lock.yaml",
+      "sha": "693edad0cdc53ab0be9175959b6832e679775b2d"
+    },
+    {
+      "path": "pnpm-workspace.yaml",
+      "sha": "2cb88564f7715d5d02790576017ed76949e8159e"
+    },
+    {
+      "path": "turbo.json",
+      "sha": "db2edd946dbde6a99306e0774f1cfb3bcb096a18"
+    },
+    {
+      "path": "apps/web/package.json",
+      "sha": "f4aafb62479ab08554047ad59ebd55af3e4047e2"
+    },
+    {
+      "path": "packages/core/package.json",
+      "sha": "a96d4213dd95d4a6e008850b89a043844a4d2c27"
+    },
+    {
+      "path": "packages/db/package.json",
+      "sha": "135404cc067b2f21ee8ec53d4f17967227b14de6"
+    },
+    {
+      "path": "packages/db/src/schema.ts",
+      "sha": "dbf993cc57f61095d035de778b03169db96f7ad0"
+    },
+    {
+      "path": "packages/db/migrations/0001_init.sql",
+      "sha": "b2eb54ce117e08a789849d8186398e114e11bac5"
+    },
+    {
+      "path": "packages/db/migrations/0002_hosted_integrations.sql",
+      "sha": "fd74a6fbd8158c0a8d8e1d38947d1256d69947f7"
+    },
+    {
+      "path": "packages/db/migrations/0003_supabase_hosted_auth_rls.sql",
+      "sha": "58c8462282c0567407c8861155e5601a173172f5"
+    },
+    {
+      "path": "packages/core/src/prompt.ts",
+      "sha": "6f4b680c460b330c02084555ca49e9e9ddfbf564"
+    },
+    {
+      "path": "packages/core/src/prompt-composition.ts",
+      "sha": "d365ad2031b1557edd194b84c8bb36410e9fb199"
+    },
+    {
+      "path": "packages/core/src/hash.ts",
+      "sha": "140471745127c6e0e0a8a58cc79b245006c6ae89"
+    },
+    {
+      "path": "packages/core/src/types.ts",
+      "sha": "277767b4a09236f6625db707d961b0befd0daef1"
+    }
+  ],
+  "limits": [
+    "Disposable PostgreSQL with SQL owner credentials: application mediation, not Supabase client-role RLS proof",
+    "Auth fixtures use signed sessions and persisted project keys, not live Supabase/email providers",
+    "Chromium desktop and 390px keyboard viewport, not native phone/touch hardware",
+    "No production database, provider, model, promotion or paid service call",
+    "Earlier 55 compiler checks remain a separate closed run"
+  ]
+}

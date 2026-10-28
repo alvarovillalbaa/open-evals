@@ -111,8 +111,9 @@ own project's targeted definitions; hosted local/demo ownership is read-only.
 Legacy demonstration versions retain their original text/hash as read-only.
 See [the authoring contract](docs/proposals/prompt-authoring-contract.md) and
 [implementation evidence and remaining checks](docs/results/2026/10-28/prompt-authoring.md).
-The separately approved authoring checks are in progress; their receipt records
-the first run and remaining browser/demo verification.
+All 58 separately approved authoring checks passed in disposable PostgreSQL and
+desktop/narrow Chromium. Their receipt preserves case results, earlier harness
+failures and proof limits. The temporary CI workflow has been retired.
 All 55 explicitly approved focused compiler cases passed; the
 [exact report](docs/results/2026/10-28/prompt-composition-checks.json) records the
 checked source and totals. This run is separate from the existing Vitest suite.

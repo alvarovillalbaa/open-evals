@@ -1,0 +1,148 @@
+TAP version 13
+# Subtest: unauthenticated instruction requests fail before malformed request parsing
+ok 1 - unauthenticated instruction requests fail before malformed request parsing
+  ---
+  duration_ms: 1324.048734
+  type: 'test'
+  ...
+# Subtest: viewer sessions can read but cannot create, preview or save
+ok 2 - viewer sessions can read but cannot create, preview or save
+  ---
+  duration_ms: 1769.030346
+  type: 'test'
+  ...
+# Subtest: persisted project API keys enforce separate read and write scopes
+ok 3 - persisted project API keys enforce separate read and write scopes
+  ---
+  duration_ms: 84.98614
+  type: 'test'
+  ...
+# Subtest: empty definition creation returns a recoverable saved detail
+ok 4 - empty definition creation returns a recoverable saved detail
+  ---
+  duration_ms: 824.034715
+  type: 'test'
+  ...
+# Subtest: same creation intent replays across authorized sessions with one audit event
+ok 5 - same creation intent replays across authorized sessions with one audit event
+  ---
+  duration_ms: 45.940911
+  type: 'test'
+  ...
+# Subtest: definition identity and stable-key reuse conflict without exposing foreign rows
+ok 6 - definition identity and stable-key reuse conflict without exposing foreign rows
+  ---
+  duration_ms: 120.154235
+  type: 'test'
+  ...
+# Subtest: concurrent creation serializes stable-key uniqueness through the workspace lock
+ok 7 - concurrent creation serializes stable-key uniqueness through the workspace lock
+  ---
+  duration_ms: 32.844744
+  type: 'test'
+  ...
+# Subtest: target ownership and project binding constrain creation and detail reads
+ok 8 - target ownership and project binding constrain creation and detail reads
+  ---
+  duration_ms: 101.719718
+  type: 'test'
+  ...
+# Subtest: literal preview derives draft metadata without persisting a version
+ok 9 - literal preview derives draft metadata without persisting a version
+  ---
+  duration_ms: 60.984196
+  type: 'test'
+  ...
+# Subtest: root save and reload preserve exact materialized bytes, source and server ownership
+ok 10 - root save and reload preserve exact materialized bytes, source and server ownership
+  ---
+  duration_ms: 73.484793
+  type: 'test'
+  ...
+# Subtest: composition persistence retains unused bindings and named operation blocks
+ok 11 - composition persistence retains unused bindings and named operation blocks
+  ---
+  duration_ms: 183.852805
+  type: 'test'
+  ...
+# Subtest: a second root requires an explicit canonical base
+ok 12 - a second root requires an explicit canonical base
+  ---
+  duration_ms: 49.916394
+  type: 'test'
+  ...
+# Subtest: research siblings can fork from the same older canonical version
+ok 13 - research siblings can fork from the same older canonical version
+  ---
+  duration_ms: 118.365148
+  type: 'test'
+  ...
+# Subtest: exact retries survive newer siblings while actor or intent reuse conflicts
+ok 14 - exact retries survive newer siblings while actor or intent reuse conflicts
+  ---
+  duration_ms: 97.876158
+  type: 'test'
+  ...
+# Subtest: locked source changes are rejected before saving
+ok 15 - locked source changes are rejected before saving
+  ---
+  duration_ms: 18.092026
+  type: 'test'
+  ...
+# Subtest: source edits invalidate the reviewed preview without consuming the stable version ID
+ok 16 - source edits invalidate the reviewed preview without consuming the stable version ID
+  ---
+  duration_ms: 92.118323
+  type: 'test'
+  ...
+# Subtest: a changed canonical base invalidates review and fixture tampering is restored
+ok 17 - a changed canonical base invalidates review and fixture tampering is restored
+  ---
+  duration_ms: 92.876088
+  type: 'test'
+  ...
+# Subtest: audit rows occur exactly once and contain only identifiers, hashes and counts
+ok 18 - audit rows occur exactly once and contain only identifiers, hashes and counts
+  ---
+  duration_ms: 2.699068
+  type: 'test'
+  ...
+# Subtest: audit insertion failure rolls the version back and permits the same reviewed retry
+ok 19 - audit insertion failure rolls the version back and permits the same reviewed retry
+  ---
+  duration_ms: 146.461743
+  type: 'test'
+  ...
+# Subtest: drafts fail default resolve, explicit candidates work, and legacy active bytes stay unchanged
+ok 20 - drafts fail default resolve, explicit candidates work, and legacy active bytes stay unchanged
+  ---
+  duration_ms: 122.520312
+  type: 'test'
+  ...
+# Subtest: catalog correlated aggregates avoid duplication and project filters cover related records
+ok 21 - catalog correlated aggregates avoid duplication and project filters cover related records
+  ---
+  duration_ms: 44.137887
+  type: 'test'
+  ...
+# Subtest: project keys cannot cross projects and configured keys without projects fail closed
+ok 22 - project keys cannot cross projects and configured keys without projects fail closed
+  ---
+  duration_ms: 79.43019
+  type: 'test'
+  ...
+# Subtest: HTTP boundaries reject malformed, oversized, spoofed and ambiguous requests
+ok 23 - HTTP boundaries reject malformed, oversized, spoofed and ambiguous requests
+  ---
+  duration_ms: 222.62096
+  type: 'test'
+  ...
+1..23
+# tests 23
+# suites 0
+# pass 23
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 5845.718272

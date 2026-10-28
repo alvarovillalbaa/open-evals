@@ -1,6 +1,6 @@
 # Focused authoring protocol checks
 
-Status: approved on 2026-10-28 as part of the [58-check execution scope](prompt-authoring-checks.md); **not executed** yet. The earlier 55 compiler checks remain
+Status: **completed: 30/30 passed** in the separately approved [58-check run](prompt-authoring-checks.md). The earlier 55 compiler checks remain
 closed and unchanged; they do not authorize or prove this authoring scope.
 
 The proposed scope is exactly **30 native Node checks** in

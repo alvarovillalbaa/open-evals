@@ -1,6 +1,6 @@
 # Instruction authoring browser checks
 
-Status: explicitly approved by Alvaro on 2026-10-28 as part of the [58-check scope](prompt-authoring-checks.md), against commit `23a6a0b77439cb66f66f5f035190fb3dd1d42405`; not executed yet. Earlier compiler checks did not authorize this separate scope.
+Status: **completed: four/four passed** in the separately approved [58-check run](prompt-authoring-checks.md), using source `679a6973c29542b89a9985168bed4e317523ca86`. The temporary workflow is retired; [the final receipt](../results/2026/10-28/prompt-authoring.md) records actual results and limits.
 
 Source: [authoring contract](prompt-authoring-contract.md). The opt-in entry point is `apps/web/tests/instruction-authoring.browser.config.mjs`; its sole matched file is `instruction-authoring.browser.spec.mjs`. Existing Playwright/Vitest configs, package scripts and dependencies are unchanged.
 
@@ -34,6 +34,6 @@ pnpm exec playwright test --config tests/instruction-authoring.browser.config.mj
 
 The scope is Chromium only, one worker, zero retries, four tests and a six-minute runner deadline. A JSON reporter writes the four individual outcomes and totals to `apps/web/tests/.authoring-browser-results/report.json`; screenshots are collected only on failure in the same output directory. Trace/video and extra success screenshots are off. Any authorized temporary CI job retains these bounded report/failure artifacts for three days. Server startup/provisioning and the temporary CI job require their own concrete approved scope. Do not install or provision locally to bypass Storage Guard.
 
-## Evidence still required
+## Recorded evidence and limits
 
-Only source parsing and whitespace checks may be recorded before approval. A future run must record exact source revision, same-shell Node version/path, four individual outcomes and totals, browser version, fixture cleanup, stderr/failures and limitations. An authored scenario or hosted build is not a browser pass. These checks do not prove native mobile behavior, external authentication, hostile project-key policy, real provider access, promotion, production deployment or globally immutable SQL/RLS.
+The final receipt records the exact source, same-shell Node runtime/path, four individual passes, browser report/artifact hashes, Playwright version and installed Chromium identity, cleanup and the earlier harness failures. The browser version comes from the locked runtime installer log; no separate browser.version() probe ran. The native-phone, external-provider, Supabase client-role RLS, promotion and production-data boundaries remain unverified by these four browser scenarios.

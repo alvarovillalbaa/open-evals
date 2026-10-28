@@ -1,0 +1,190 @@
+TAP version 13
+# Subtest: literal preview and stored row retain exact text, hash and server-derived draft
+ok 1 - literal preview and stored row retain exact text, hash and server-derived draft
+  ---
+  duration_ms: 8.835824
+  type: 'test'
+  ...
+# Subtest: composed roundtrip retains unused bindings and libraries with a full source digest
+ok 2 - composed roundtrip retains unused bindings and libraries with a full source digest
+  ---
+  duration_ms: 6.303064
+  type: 'test'
+  ...
+# Subtest: canonical request identity ignores record insertion order and omitted empty libraries
+ok 3 - canonical request identity ignores record insertion order and omitted empty libraries
+  ---
+  duration_ms: 1.374162
+  type: 'test'
+  ...
+# Subtest: request identity binds actor, workspace, definition, version and base without fetching a base
+ok 4 - request identity binds actor, workspace, definition, version and base without fetching a base
+  ---
+  duration_ms: 1.329949
+  type: 'test'
+  ...
+# Subtest: request identity binds unrendered source intent even when compiled output is unchanged
+ok 5 - request identity binds unrendered source intent even when compiled output is unchanged
+  ---
+  duration_ms: 4.260973
+  type: 'test'
+  ...
+# Subtest: preview changes when the same base identity has different valid immutable semantics
+ok 6 - preview changes when the same base identity has different valid immutable semantics
+  ---
+  duration_ms: 1.927817
+  type: 'test'
+  ...
+# Subtest: base lifecycle transitions and creation of a sibling do not stale an identical review
+ok 7 - base lifecycle transitions and creation of a sibling do not stale an identical review
+  ---
+  duration_ms: 3.079642
+  type: 'test'
+  ...
+# Subtest: an explicit fork can name an older canonical base and derives only that parent
+ok 8 - an explicit fork can name an older canonical base and derives only that parent
+  ---
+  duration_ms: 2.152247
+  type: 'test'
+  ...
+# Subtest: a changed binding cannot bypass the rendered content of a locked component
+ok 9 - a changed binding cannot bypass the rendered content of a locked component
+  ---
+  duration_ms: 2.471134
+  type: 'test'
+  ...
+# Subtest: authoring preserves lock flags, contents and relative locked order
+ok 10 - authoring preserves lock flags, contents and relative locked order
+  ---
+  duration_ms: 1.56626
+  type: 'test'
+  ...
+# Subtest: base identity, definition and presence are verified with zero or one derived parent
+ok 11 - base identity, definition and presence are verified with zero or one derived parent
+  ---
+  duration_ms: 1.370574
+  type: 'test'
+  ...
+# Subtest: draft requests reject unknown fields and all client authority fields
+ok 12 - draft requests reject unknown fields and all client authority fields
+  ---
+  duration_ms: 0.482352
+  type: 'test'
+  ...
+# Subtest: component, binding and operation source shapes remain strict
+ok 13 - component, binding and operation source shapes remain strict
+  ---
+  duration_ms: 0.621353
+  type: 'test'
+  ...
+# Subtest: storage and write envelopes reject unknown fields, modes and schemas
+ok 14 - storage and write envelopes reject unknown fields, modes and schemas
+  ---
+  duration_ms: 3.251955
+  type: 'test'
+  ...
+# Subtest: all persisted fingerprints require complete lowercase SHA-256 and a valid actor
+ok 15 - all persisted fingerprints require complete lowercase SHA-256 and a valid actor
+  ---
+  duration_ms: 6.670843
+  type: 'test'
+  ...
+# Subtest: a format-valid but incorrect full source fingerprint invalidates an authored row
+ok 16 - a format-valid but incorrect full source fingerprint invalidates an authored row
+  ---
+  duration_ms: 0.883252
+  type: 'test'
+  ...
+# Subtest: composition snapshot hashes and unrendered source tampering are recompiled exactly
+ok 17 - composition snapshot hashes and unrendered source tampering are recompiled exactly
+  ---
+  duration_ms: 2.417383
+  type: 'test'
+  ...
+# Subtest: materialized content, lock, kind and component identity must exactly match source
+ok 18 - materialized content, lock, kind and component identity must exactly match source
+  ---
+  duration_ms: 2.42592
+  type: 'test'
+  ...
+# Subtest: authoritative text, content hash, status and invalid parent columns fail closed
+ok 19 - authoritative text, content hash, status and invalid parent columns fail closed
+  ---
+  duration_ms: 1.682328
+  type: 'test'
+  ...
+# Subtest: replay derivation binds authoritative row identity, definition and sole parent
+ok 20 - replay derivation binds authoritative row identity, definition and sole parent
+  ---
+  duration_ms: 3.064694
+  type: 'test'
+  ...
+# Subtest: legacy text, hash and unknown lifecycle status remain unchanged and view-only
+ok 21 - legacy text, hash and unknown lifecycle status remain unchanged and view-only
+  ---
+  duration_ms: 0.398636
+  type: 'test'
+  ...
+# Subtest: recognized malformed authored storage never silently falls back to ordinary legacy
+ok 22 - recognized malformed authored storage never silently falls back to ordinary legacy
+  ---
+  duration_ms: 0.599783
+  type: 'test'
+  ...
+# Subtest: normalized drafts, previews, storage and decoded records are detached and deeply frozen
+ok 23 - normalized drafts, previews, storage and decoded records are detached and deeply frozen
+  ---
+  duration_ms: 1.797614
+  type: 'test'
+  ...
+# Subtest: retry re-derives exact source intent without a base and rejects context or request substitution
+ok 24 - retry re-derives exact source intent without a base and rejects context or request substitution
+  ---
+  duration_ms: 6.24758
+  type: 'test'
+  ...
+# Subtest: NUL is rejected in literal, rendered and unused source strings including JSON keys
+ok 25 - NUL is rejected in literal, rendered and unused source strings including JSON keys
+  ---
+  duration_ms: 1.95071
+  type: 'test'
+  ...
+# Subtest: isolated UTF-16 surrogates fail storage validation even in unused libraries and keys
+ok 26 - isolated UTF-16 surrogates fail storage validation even in unused libraries and keys
+  ---
+  duration_ms: 3.844724
+  type: 'test'
+  ...
+# Subtest: valid astral pairs and ordinary Unicode survive preview, storage and reload exactly
+ok 27 - valid astral pairs and ordinary Unicode survive preview, storage and reload exactly
+  ---
+  duration_ms: 1.515106
+  type: 'test'
+  ...
+# Subtest: authoring retains compiler source byte and component count bounds
+ok 28 - authoring retains compiler source byte and component count bounds
+  ---
+  duration_ms: 0.557343
+  type: 'test'
+  ...
+# Subtest: authoring retains nested operation and JSON depth bounds
+ok 29 - authoring retains nested operation and JSON depth bounds
+  ---
+  duration_ms: 0.679712
+  type: 'test'
+  ...
+# Subtest: non-JSON source accessors, sparse arrays and cycles are rejected without evaluating getters
+ok 30 - non-JSON source accessors, sparse arrays and cycles are rejected without evaluating getters
+  ---
+  duration_ms: 1.000662
+  type: 'test'
+  ...
+1..30
+# tests 30
+# suites 0
+# pass 30
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 249.548686
