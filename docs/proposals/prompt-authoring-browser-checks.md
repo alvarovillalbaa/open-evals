@@ -1,6 +1,6 @@
 # Instruction authoring browser checks
 
-Status: authored, not executed. Separate approval under supplied AGENTS.md §§7 and 14 is required before browser/database execution or temporary CI changes. Earlier compiler checks do not authorize this scope.
+Status: explicitly approved by Alvaro on 2026-10-28 as part of the [58-check scope](prompt-authoring-checks.md), against commit `23a6a0b77439cb66f66f5f035190fb3dd1d42405`; not executed yet. Earlier compiler checks did not authorize this separate scope.
 
 Source: [authoring contract](prompt-authoring-contract.md). The opt-in entry point is `apps/web/tests/instruction-authoring.browser.config.mjs`; its sole matched file is `instruction-authoring.browser.spec.mjs`. Existing Playwright/Vitest configs, package scripts and dependencies are unchanged.
 

@@ -1,6 +1,6 @@
 # Focused instruction authoring execution proposal
 
-Status: prepared, **not approved or executed**. This does not broaden the closed 55 compiler checks. The instruction access policy was separately approved; it does not authorize tests or CI changes.
+Status: **explicitly approved by Alvaro on 2026-10-28**, against source/proposal commit `23a6a0b77439cb66f66f5f035190fb3dd1d42405`. Execution is pending activation of the exact reviewed workflow. This does not broaden or rerun the closed 55 compiler checks. The earlier instruction access policy approval was separate from this test/CI approval.
 
 The proposed scope is **58 authored checks**: [30 pure protocol cases](prompt-authoring-core-checks.md), [24 HTTP/database cases](../../apps/web/tests/instruction-authoring.api.mjs), and [four Chromium scenarios](prompt-authoring-browser-checks.md). The [shared disposable fixtures](../../apps/web/tests/instruction-authoring.fixtures.mjs) require explicit disposable-target acknowledgement, loopback URLs and a database named `open_evals_authoring_test_*`.
 

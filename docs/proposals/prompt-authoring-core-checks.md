@@ -1,7 +1,6 @@
 # Focused authoring protocol checks
 
-Status: prepared only; **not executed**. Separate owner approval is required
-before running these new domain checks. The earlier 55 compiler checks remain
+Status: approved on 2026-10-28 as part of the [58-check execution scope](prompt-authoring-checks.md); **not executed** yet. The earlier 55 compiler checks remain
 closed and unchanged; they do not authorize or prove this authoring scope.
 
 The proposed scope is exactly **30 native Node checks** in
