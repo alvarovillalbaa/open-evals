@@ -55,9 +55,9 @@ async function addBinding(page, number, name, type, value) {
   await page.getByRole("button", { name: "Add binding", exact: true }).click();
   const row = binding(page, number);
   await row.getByLabel("Name", { exact: true }).fill(name);
-  await row.getByLabel("Type", { exact: true }).selectOption(type);
-  if (type === "boolean") await row.getByLabel("Value", { exact: true }).selectOption(value);
-  else await row.getByLabel("Value", { exact: true }).fill(value);
+  await row.getByRole("combobox", { name: "Type", exact: true }).selectOption(type);
+  if (type === "boolean") await row.getByRole("combobox", { name: "Value", exact: true }).selectOption(value);
+  else await row.getByRole("textbox", { name: "Value", exact: true }).fill(value);
 }
 
 async function compileThroughUI(page, definitionId) {
@@ -104,19 +104,19 @@ test("desktop empty catalog creates, composes typed blocks, saves and reloads th
   const first = component(page, 1);
   await first.getByLabel("Component ID", { exact: true }).fill("greeting");
   await first.getByLabel("Kind", { exact: true }).fill("role");
-  await first.getByLabel("Source", { exact: true }).selectOption("operations");
+  await first.getByRole("combobox", { name: "Source", exact: true }).selectOption("operations");
   const operations = [
     { op: "include", name: "intro" },
     { op: "if", variable: "formal", then: [{ op: "text", template: " Welcome." }] },
     { op: "each", variable: "items", as: "item", indexAs: "index", body: [{ op: "text", template: " {{index}}:{{item}}" }], separator: "," }
   ];
-  await first.getByLabel("Operation array (JSON)", { exact: true }).fill(JSON.stringify(operations));
+  await first.getByRole("textbox", { name: "Operation array (JSON)", exact: true }).fill(JSON.stringify(operations));
   await addBinding(page, 1, "name", "string", "Ada");
   await addBinding(page, 2, "formal", "boolean", "true");
   await addBinding(page, 3, "items", "json", '["one","two"]');
   await addBinding(page, 4, "limit", "number", "2");
   const blocks = { intro: [{ op: "text", template: "Hello {{name}}." }] };
-  await page.getByLabel("Named block library (JSON object)", { exact: true }).fill(JSON.stringify(blocks));
+  await page.getByRole("textbox", { name: "Named block library (JSON object)", exact: true }).fill(JSON.stringify(blocks));
   const preview = await compileThroughUI(page, definition.id);
   expect(preview.version.compiledText).toContain("Hello Ada. Welcome. 0:one, 1:two");
   expect(preview.version.compositionSnapshot.components[0].operations).toEqual(operations);
@@ -146,11 +146,11 @@ test("desktop fork preserves parent locks and rejects an obsolete delayed previe
   await page.getByRole("button", { name: "Compose version", exact: true }).click();
   const locked = component(page, 1), mutable = component(page, 2);
   await expect(locked.getByLabel("Component ID", { exact: true })).toBeDisabled();
-  await expect(locked.getByLabel("Literal text", { exact: true })).toBeDisabled();
+  await expect(locked.getByRole("textbox", { name: "Literal text", exact: true })).toBeDisabled();
   await expect(locked.getByRole("checkbox", { name: "Lock rendered text", exact: true })).toBeChecked();
-  await mutable.getByLabel("Literal text", { exact: true }).fill("First reviewed change.");
+  await mutable.getByRole("textbox", { name: "Literal text", exact: true }).fill("First reviewed change.");
   await compileThroughUI(page, definition.id);
-  await mutable.getByLabel("Literal text", { exact: true }).fill("Old delayed source.");
+  await mutable.getByRole("textbox", { name: "Literal text", exact: true }).fill("Old delayed source.");
   await expect(page.getByRole("button", { name: "Save reviewed draft", exact: true })).toBeDisabled();
   await expect(page.getByRole("heading", { name: "Review compiled draft", exact: true })).toHaveCount(0);
 
@@ -175,7 +175,7 @@ test("desktop fork preserves parent locks and rejects an obsolete delayed previe
     const [old] = await Promise.all([received.promise, page.getByRole("button", { name: "Compile preview", exact: true }).click()]);
     expect(old.version.components[1].content).toBe("Old delayed source.");
     const cancellation = page.waitForEvent("requestfailed", { predicate: request => apiPath(request.url()) === path, timeout: 10_000 });
-    await mutable.getByLabel("Literal text", { exact: true }).fill("Newest source wins.");
+    await mutable.getByRole("textbox", { name: "Literal text", exact: true }).fill("Newest source wins.");
     expect((await cancellation).failure()?.errorText).toMatch(/ERR_ABORTED/i);
     release.resolve();
     await completed.promise;
@@ -196,12 +196,12 @@ test("390px keyboard controls reorder components and preserve bindings through s
   const definition = await createThroughUI(page, fixture, "narrow");
   await page.getByRole("checkbox", { name: /^Enable composition/ }).check();
   await component(page, 1).getByLabel("Component ID", { exact: true }).fill("first");
-  await component(page, 1).getByLabel("Template text", { exact: true }).fill("First {{count}}.");
+  await component(page, 1).getByRole("textbox", { name: "Template text", exact: true }).fill("First {{count}}.");
   const add = page.getByRole("button", { name: "Add component", exact: true });
   await add.focus();
   await page.keyboard.press("Enter");
   await component(page, 2).getByLabel("Component ID", { exact: true }).fill("second");
-  await component(page, 2).getByLabel("Template text", { exact: true }).fill("Second {{count}}.");
+  await component(page, 2).getByRole("textbox", { name: "Template text", exact: true }).fill("Second {{count}}.");
   await component(page, 2).getByRole("button", { name: "Move component 2 up", exact: true }).focus();
   await page.keyboard.press("Enter");
   await expect(component(page, 1).getByLabel("Component ID", { exact: true })).toHaveValue("second");
@@ -212,12 +212,12 @@ test("390px keyboard controls reorder components and preserve bindings through s
   await count.getByLabel("Name", { exact: true }).focus();
   await page.keyboard.type("count");
   await page.keyboard.press("Tab");
-  await expect(count.getByLabel("Type", { exact: true })).toBeFocused();
-  await count.getByLabel("Type", { exact: true }).selectOption("number");
+  await expect(count.getByRole("combobox", { name: "Type", exact: true })).toBeFocused();
+  await count.getByRole("combobox", { name: "Type", exact: true }).selectOption("number");
   await page.keyboard.press("Tab");
-  await expect(count.getByLabel("Value", { exact: true })).toBeFocused();
-  await count.getByLabel("Value", { exact: true }).fill("3");
-  expect(await count.getByLabel("Value", { exact: true }).evaluate(element => parseFloat(getComputedStyle(element).fontSize))).toBeGreaterThanOrEqual(16);
+  await expect(count.getByRole("textbox", { name: "Value", exact: true })).toBeFocused();
+  await count.getByRole("textbox", { name: "Value", exact: true }).fill("3");
+  expect(await count.getByRole("textbox", { name: "Value", exact: true }).evaluate(element => parseFloat(getComputedStyle(element).fontSize))).toBeGreaterThanOrEqual(16);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1)).toBe(true);
   const preview = await compileThroughUI(page, definition.id);
   expect(preview.version.components.map(row => row.id)).toEqual(["second", "first"]);
@@ -232,9 +232,9 @@ test("390px keyboard controls reorder components and preserve bindings through s
 test("lost save acknowledgement replays one insert and acknowledged reload retries only GET", async ({ page, fixture }) => {
   const definition = await createThroughUI(page, fixture, "lost_ack");
   await page.getByRole("checkbox", { name: /^Enable composition/ }).check();
-  await component(page, 1).getByLabel("Template text", { exact: true }).fill("Hello {{name}}.");
+  await component(page, 1).getByRole("textbox", { name: "Template text", exact: true }).fill("Hello {{name}}.");
   await addBinding(page, 1, "name", "string", "Ada");
-  await page.getByLabel("Named block library (JSON object)", { exact: true }).fill(JSON.stringify({ unused: [{ op: "text", template: "source A" }] }));
+  await page.getByRole("textbox", { name: "Named block library (JSON object)", exact: true }).fill(JSON.stringify({ unused: [{ op: "text", template: "source A" }] }));
   const preview = await compileThroughUI(page, definition.id);
   const savePath = fixture.definitionPath(definition.id, "/versions");
   const detailPath = fixture.definitionPath(definition.id);
@@ -262,7 +262,7 @@ test("lost save acknowledgement replays one insert and acknowledged reload retri
   await page.getByRole("button", { name: "Save reviewed draft", exact: true }).click();
   await expect(page.getByRole("button", { name: "Retry same save", exact: true })).toBeEnabled();
   await expect(page.getByRole("alert")).toBeVisible();
-  await expect(component(page, 1).getByLabel("Template text", { exact: true })).toBeDisabled();
+  await expect(component(page, 1).getByRole("textbox", { name: "Template text", exact: true })).toBeDisabled();
   expect(postResults[0].status).toBe(201);
   await expectSingleWrite(fixture, definition.id, preview.version.id);
   await page.getByRole("button", { name: "Retry same save", exact: true }).click();
@@ -275,7 +275,7 @@ test("lost save acknowledgement replays one insert and acknowledged reload retri
   await page.getByRole("button", { name: "Retry loading saved version", exact: true }).click();
   await expect(page.getByRole("alert")).toContainText("saved source snapshot does not match");
   await expect(page.getByRole("button", { name: "Retry loading saved version", exact: true })).toBeEnabled();
-  await expect(component(page, 1).getByLabel("Template text", { exact: true })).toBeDisabled();
+  await expect(component(page, 1).getByRole("textbox", { name: "Template text", exact: true })).toBeDisabled();
   expect(postBodies).toHaveLength(2);
   await page.getByRole("button", { name: "Retry loading saved version", exact: true }).click();
   await expect(page.getByRole("heading", { name: "Saved version · draft", exact: true })).toBeVisible();

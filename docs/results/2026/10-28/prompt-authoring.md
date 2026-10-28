@@ -35,3 +35,10 @@ The narrow-heading wrapper and all prepared checks were published at `23a6a0b774
 The [first-run report](prompt-authoring-first-run.json) retains the failure boundary. The workflow correction uses a dedicated skip pattern for the hosted phase and positive unanchored name matching for demo. Explicit hidden-file inclusion fixes artifact upload; the first job's logs remain the primary evidence because its artifact step found no visible paths. No application source or test body changed for these CI corrections. A fresh approved-scope attempt is required before claiming all 58 cases pass.
 
 The existing database's RLS/audit update permissions and missing global stable-key uniqueness constraint are unchanged. API-level locking and append-only behavior do not claim database-wide protection against independent SQL writers. Full Supabase session/provider behavior, production data persistence, clean anonymous access and native mobile behavior remain unverified.
+
+
+## Browser harness correction
+
+[Run 40709926864](https://github.com/alvarovillalbaa/open-evals/actions/runs/40709926864), job `122892098805`, used corrected workflow source `3891c09b80e976dbe80ed7d3b8d7d0070e99acec`. Its preserved TAP files report 30/30 protocol and 23/23 hosted API cases passing, with zero failures or skips. All four Chromium scenarios then failed on exact label-query resolution; the demo phase was skipped.
+
+The [second-run report](prompt-authoring-second-run.json) records artifact `12825746541`, whose 301,301 downloaded bytes matched SHA-256 `1325c0dc0587e0e6955b1b71f9f77797207e502d3278feb3e7ec63196cf1e63c`. Actual accessibility snapshots showed the intended textbox/combobox names, including Source, Type and Literal text. Only the spec's affected queries change to exact native control roles with those same names. All assertions, group scopes, test names and four scenarios remain intact; application source is unchanged. This is a harness correction, not evidence that product labels were defective. The next attempt remains within the approved 58-check scope.

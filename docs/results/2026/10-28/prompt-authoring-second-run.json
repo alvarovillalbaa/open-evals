@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "instruction-authoring-checks-v1",
+  "status": "failed_browser_harness_locator",
+  "runId": 40709926864,
+  "jobId": 122892098805,
+  "sourceCommit": "3891c09b80e976dbe80ed7d3b8d7d0070e99acec",
+  "runtime": {
+    "version": "v24.21.0",
+    "execPath": "/opt/hostedtoolcache/node/24.21.0/x64/bin/node"
+  },
+  "core": {
+    "tests": 30,
+    "passed": 30,
+    "failed": 0,
+    "skipped": 0
+  },
+  "httpHosted": {
+    "tests": 23,
+    "passed": 23,
+    "failed": 0,
+    "skipped": 0
+  },
+  "browser": {
+    "executed": 4,
+    "passed": 0,
+    "failed": 4,
+    "skipped": 0,
+    "flaky": 0,
+    "reason": "Exact getByLabel queries did not resolve some wrapping labels; captured accessibility names were correct",
+    "correction": "Use exact native textbox/combobox roles and the same accessible names; retain all assertions, scopes and four scenarios"
+  },
+  "httpDemoPhase": {
+    "executed": 0,
+    "reason": "preceding browser step failed"
+  },
+  "artifact": {
+    "id": 12825746541,
+    "bytes": 301301,
+    "sha256": "1325c0dc0587e0e6955b1b71f9f77797207e502d3278feb3e7ec63196cf1e63c",
+    "downloadedAndHashVerified": true,
+    "contains": [
+      "core TAP",
+      "hosted API TAP",
+      "browser JSON report",
+      "four error-context snapshots",
+      "four failure screenshots"
+    ]
+  },
+  "cleanup": {
+    "ownedServerStopStep": "success",
+    "jobContainersStopStep": "success"
+  },
+  "applicationSourceChanged": false
+}
