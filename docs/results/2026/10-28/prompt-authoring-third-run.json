@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "instruction-authoring-checks-v1",
+  "status": "failed_browser_harness_alert_ambiguity",
+  "runId": 40711478089,
+  "jobId": 122897628715,
+  "sourceCommit": "096e5aed74445f721d8ecfb8f79c2f6125c2f43c",
+  "runtime": {
+    "version": "v24.21.0"
+  },
+  "core": {
+    "tests": 30,
+    "passed": 30,
+    "failed": 0,
+    "skipped": 0
+  },
+  "httpHosted": {
+    "tests": 23,
+    "passed": 23,
+    "failed": 0,
+    "skipped": 0
+  },
+  "browser": {
+    "executed": 4,
+    "passed": 3,
+    "failed": 1,
+    "skipped": 0,
+    "flaky": 0,
+    "passedCases": [
+      "desktop composition persistence",
+      "locked fork and stale-preview handling",
+      "390px keyboard order, save, reload and overflow"
+    ],
+    "failedCase": "lost save acknowledgement replays one insert and acknowledged reload retries only GET",
+    "reason": "Unscoped role=alert matched both the application error and the empty Next route announcer",
+    "correction": "Scope three role=alert queries to their existing expected error messages; preserve assertions and retry/single-write checks"
+  },
+  "httpDemoPhase": {
+    "executed": 0,
+    "reason": "preceding browser step failed"
+  },
+  "artifact": {
+    "id": 12826980955,
+    "bytes": 107773,
+    "sha256FromUploadLog": "d1a85414ee7ba4c9889f1b14014285126ca148af1e5bd5bb236f8db3c1b7f564",
+    "downloadedAndHashVerified": false
+  },
+  "cleanup": {
+    "ownedServerStopStep": "success",
+    "jobContainersStopStep": "success"
+  },
+  "applicationSourceChanged": false
+}

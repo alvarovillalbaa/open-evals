@@ -42,3 +42,10 @@ The existing database's RLS/audit update permissions and missing global stable-k
 [Run 40709926864](https://github.com/alvarovillalbaa/open-evals/actions/runs/40709926864), job `122892098805`, used corrected workflow source `3891c09b80e976dbe80ed7d3b8d7d0070e99acec`. Its preserved TAP files report 30/30 protocol and 23/23 hosted API cases passing, with zero failures or skips. All four Chromium scenarios then failed on exact label-query resolution; the demo phase was skipped.
 
 The [second-run report](prompt-authoring-second-run.json) records artifact `12825746541`, whose 301,301 downloaded bytes matched SHA-256 `1325c0dc0587e0e6955b1b71f9f77797207e502d3278feb3e7ec63196cf1e63c`. Actual accessibility snapshots showed the intended textbox/combobox names, including Source, Type and Literal text. Only the spec's affected queries change to exact native control roles with those same names. All assertions, group scopes, test names and four scenarios remain intact; application source is unchanged. This is a harness correction, not evidence that product labels were defective. The next attempt remains within the approved 58-check scope.
+
+
+## Retry-scenario alert scope
+
+[Run 40711478089](https://github.com/alvarovillalbaa/open-evals/actions/runs/40711478089), job `122897628715`, passed all 30 protocol and 23 hosted API cases. Three Chromium scenarios passed: full typed composition roundtrip, locked fork/stale-preview behavior, and 390px keyboard/save/reload/overflow. The fourth stopped because an unscoped alert query matched both the application error and Next's empty route announcer. The [third-run report](prompt-authoring-third-run.json) retains that boundary.
+
+Only three test queries now filter the alert role by their existing expected error messages. No assertion, scenario, single-write count, frozen-control check or POST/GET count was removed. Application source is unchanged; the final retry and demo-denial evidence remains outstanding until another approved-scope run passes.

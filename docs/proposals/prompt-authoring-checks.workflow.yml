@@ -1,5 +1,5 @@
 # Inactive proposal: copy to .github/workflows/prompt-authoring-checks.yml only after approval.
-# Verification revision: exact control-role queries preserve the four approved browser scenarios.
+# Verification revision: exact control-role and error-message queries preserve all four browser scenarios.
 name: Focused instruction authoring checks
 on:
   push:
