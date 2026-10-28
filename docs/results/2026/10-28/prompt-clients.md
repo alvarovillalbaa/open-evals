@@ -81,6 +81,13 @@ The executable launcher registers its own declared runtime before importing
 the TypeScript entry. The active workflow is removed; the reviewed inactive
 definition remains in the proposal folder.
 
+The closure was published as
+[`c03b6275783e5167eea08a72e0a05be7302674a4`](https://github.com/alvarovillalbaa/open-evals/commit/c03b6275783e5167eea08a72e0a05be7302674a4).
+Its complete Git tree verified the generated lock blob, executable launcher
+mode and workflow removal while preserving the other 1,228 blobs. Vercel
+deployment `dpl_EGuR4NU5m7w3Xvbq3i61ctbYWHsV` reported **READY** with that
+exact commit. This final receipt update changes documentation only.
+
 The [machine receipt](prompt-client-checks.json) retains source/runtime,
 case totals, source hashes, earlier attempts and artifact metadata. Exact
 [passing](prompt-clients/vitest-passed.json) and [earlier failing](prompt-clients/vitest-failed.json)
