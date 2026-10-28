@@ -39,7 +39,13 @@ Use Vercel for the web/control plane and Supabase for auth plus Postgres. Config
 - `API_KEY_PEPPER`
 - `AUTH_SECRET`
 
-Run `pnpm db:migrate` against the hosted database. The Supabase migration enables RLS and keeps workspace data scoped to authenticated members. Local mode still works without Supabase, but API routes and pages do not synthesize mocked workspace data when a database is missing.
+Database enablement requires an approved target and migration/access review.
+The existing RLS migration changes grants across `public`; do not apply it
+unchanged to a shared app database. Current production configuration and
+Supabase login/persistence remain unverified. See [deployment requirements](docs/deployment.md)
+and the [hosted readiness receipt](docs/results/2026/10-28/hosted-readiness.md).
+Local mode works without Supabase Auth, but persistence routes and pages require
+PostgreSQL and do not synthesize workspace records when it is unavailable.
 
 Trace ingestion is available through:
 
@@ -117,6 +123,11 @@ failures and proof limits. The temporary CI workflow has been retired.
 All 55 explicitly approved focused compiler cases passed; the
 [exact report](docs/results/2026/10-28/prompt-composition-checks.json) records the
 checked source and totals. This run is separate from the existing Vitest suite.
+
+The [prompt client contract](docs/prompt-clients.md) describes the new real
+SDK/CLI authoring calls, endpoint-bound review files and offline source diff.
+Their focused checks and the CLI runtime dependency repair are pending separate
+approval; the earlier 58 checks do not establish client or native-bin behavior.
 
 The shared optimization control plane supports one-shot candidate generation, FAPO-style routing, hill climbing, structured GA, optional official GEPA, and optional DSPy engines. Target prompt campaigns cannot mutate their own judges or thresholds. Blind holdout examples are blocked from reflection.
 

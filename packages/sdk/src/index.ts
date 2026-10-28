@@ -1,4 +1,8 @@
 import { normalizeGenericTrace, type CanonicalTrace, type JsonValue } from "@open-evals/core";
+import type { InstructionDetailDTO, PromptDraftInput, PromptDraftPreview } from "@open-evals/core";
+import { PromptClient, type CreatePromptDefinitionInput, type CreatePromptDefinitionResult, type PromptRequestOptions,
+  type PromptResolution, type PromptResolveInput, type PromptSaveResult } from "./prompts";
+export * from "./prompts";
 
 export interface OpenEvalsSdkOptions {
   endpoint?: string;
@@ -60,6 +64,26 @@ export class OpenEvalsClient {
 
   async resolvePrompt(payload: JsonValue): Promise<Response> {
     return this.post("/api/v1/prompts/resolve", payload);
+  }
+
+  createPromptDefinition(input: CreatePromptDefinitionInput, options?: PromptRequestOptions): Promise<CreatePromptDefinitionResult> {
+    return new PromptClient(this.endpoint, this.apiKey).createPromptDefinition(input, options);
+  }
+
+  getPromptDefinition(definitionId: string, versionId?: string, options?: PromptRequestOptions): Promise<InstructionDetailDTO> {
+    return new PromptClient(this.endpoint, this.apiKey).getPromptDefinition(definitionId, versionId, options);
+  }
+
+  previewPromptVersion(definitionId: string, input: PromptDraftInput, options?: PromptRequestOptions): Promise<PromptDraftPreview> {
+    return new PromptClient(this.endpoint, this.apiKey).previewPromptVersion(definitionId, input, options);
+  }
+
+  savePromptVersion(definitionId: string, input: PromptDraftInput, previewFingerprint: string, options?: PromptRequestOptions): Promise<PromptSaveResult> {
+    return new PromptClient(this.endpoint, this.apiKey).savePromptVersion(definitionId, input, previewFingerprint, options);
+  }
+
+  resolvePromptJson(input: PromptResolveInput, options?: PromptRequestOptions): Promise<PromptResolution> {
+    return new PromptClient(this.endpoint, this.apiKey).resolvePromptJson(input, options);
   }
 
   async evaluate(payload: JsonValue): Promise<Response> {
