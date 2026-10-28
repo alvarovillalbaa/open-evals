@@ -1,4 +1,5 @@
 # Owner approved the exact runtime repair and 71-check scope on 2026-10-28.
+# Fixture revision: zero stream prefetch makes the existing cancellation assertion deterministic.
 name: Focused prompt client checks
 on:
   push:

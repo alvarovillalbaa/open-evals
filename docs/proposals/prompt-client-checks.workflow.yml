@@ -1,4 +1,5 @@
 # Inactive proposal. Activate only after explicit dependency/CI/check approval.
+# Fixture revision: zero stream prefetch makes the existing cancellation assertion deterministic.
 name: Focused prompt client checks
 on:
   push:

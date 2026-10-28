@@ -209,7 +209,8 @@ describe("checked prompt transport without real network access", () => {
     const client = new PromptClient("https://example.invalid");
     await expect(client.getPromptDefinition("definition")).rejects.toMatchObject({ code: "prompt_response_too_large" });
     const cancel = vi.fn(), chunk = new Uint8Array(1024 * 1024); let sent = 0;
-    const stream = new ReadableStream({ pull(controller) { if (sent++ < 33) controller.enqueue(chunk); else controller.close(); }, cancel });
+    // Pull only for reader demand, keeping the finite producer open until SDK cancellation.
+    const stream = new ReadableStream({ pull(controller) { if (sent++ < 33) controller.enqueue(chunk); else controller.close(); }, cancel }, { highWaterMark: 0 });
     fetch.mockImplementationOnce(async () => new Response(stream, { headers: { "content-type": "application/json" } }));
     await expect(client.getPromptDefinition("definition")).rejects.toMatchObject({ code: "prompt_response_too_large" });
     expect(cancel).toHaveBeenCalledTimes(1);
