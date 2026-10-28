@@ -557,7 +557,7 @@ export async function listScenarios(workspaceId: string): Promise<ScenarioCatalo
   return { suites, evalSets };
 }
 
-export async function listInstructions(workspaceId: string): Promise<InstructionCatalog> {
+export async function listInstructions(workspaceId: string, projectId?: string): Promise<InstructionCatalog> {
   const [definitions, candidates, experiments, releases] = await Promise.all([
     queryRows<InstructionCatalog["definitions"][number]>(
       `
@@ -566,21 +566,28 @@ export async function listInstructions(workspaceId: string): Promise<Instruction
           prompt_definitions.stable_key as "stableKey",
           prompt_definitions.target_id as "targetId",
           coalesce(
-            jsonb_agg(distinct to_jsonb(prompt_versions) order by prompt_versions.created_at desc) filter (where prompt_versions.id is not null),
+            (select jsonb_agg(jsonb_build_object(
+              'id', v.id, 'prompt_definition_id', v.prompt_definition_id,
+              'parent_version_ids', v.parent_version_ids, 'content_hash', v.content_hash,
+              'status', v.status, 'created_at', v.created_at
+            ) order by v.created_at desc, v.id desc)
+              from prompt_versions v where v.prompt_definition_id = prompt_definitions.id),
             '[]'::jsonb
           ) as versions,
           coalesce(
-            jsonb_agg(distinct to_jsonb(prompt_releases) order by prompt_releases.created_at desc) filter (where prompt_releases.id is not null),
+            (select jsonb_agg(to_jsonb(r) order by r.created_at desc, r.id desc)
+              from prompt_releases r where r.prompt_definition_id = prompt_definitions.id),
             '[]'::jsonb
           ) as releases
         from prompt_definitions
-        left join prompt_versions on prompt_versions.prompt_definition_id = prompt_definitions.id
-        left join prompt_releases on prompt_releases.prompt_definition_id = prompt_definitions.id
         where prompt_definitions.workspace_id = $1
-        group by prompt_definitions.id
-        order by prompt_definitions.stable_key
+          and ($2::text is null or exists (
+            select 1 from targets t join projects p on p.id = t.project_id and p.workspace_id = t.workspace_id
+            where t.id = prompt_definitions.target_id and t.workspace_id = $1 and p.id = $2
+          ))
+        order by prompt_definitions.stable_key, prompt_definitions.id
       `,
-      [workspaceId]
+      [workspaceId, projectId ?? null]
     ),
     queryRows(
       `
@@ -588,18 +595,31 @@ export async function listInstructions(workspaceId: string): Promise<Instruction
         from optimization_candidates
         join optimization_campaigns on optimization_campaigns.id = optimization_candidates.campaign_id
         where optimization_campaigns.workspace_id = $1
+          and ($2::text is null or exists (
+            select 1 from prompt_versions v
+            join prompt_definitions d on d.id = v.prompt_definition_id and d.workspace_id = $1
+            join targets t on t.id = d.target_id and t.workspace_id = d.workspace_id
+            join projects p on p.id = t.project_id and p.workspace_id = d.workspace_id
+            where v.id = optimization_candidates.prompt_version_id and p.id = $2
+          ))
         order by optimization_candidates.generation desc, optimization_candidates.id
       `,
-      [workspaceId]
+      [workspaceId, projectId ?? null]
     ),
     queryRows(
       `
         select online_experiments.*
         from online_experiments
         where workspace_id = $1
+          and ($2::text is null or exists (
+            select 1 from prompt_definitions d
+            join targets t on t.id = d.target_id and t.workspace_id = d.workspace_id
+            join projects p on p.id = t.project_id and p.workspace_id = d.workspace_id
+            where d.id = online_experiments.prompt_definition_id and d.workspace_id = $1 and p.id = $2
+          ))
         order by id
       `,
-      [workspaceId]
+      [workspaceId, projectId ?? null]
     ),
     queryRows(
       `
@@ -607,9 +627,13 @@ export async function listInstructions(workspaceId: string): Promise<Instruction
         from prompt_releases
         join prompt_definitions on prompt_definitions.id = prompt_releases.prompt_definition_id
         where prompt_definitions.workspace_id = $1
-        order by prompt_releases.created_at desc
+          and ($2::text is null or exists (
+            select 1 from targets t join projects p on p.id = t.project_id and p.workspace_id = t.workspace_id
+            where t.id = prompt_definitions.target_id and t.workspace_id = $1 and p.id = $2
+          ))
+        order by prompt_releases.created_at desc, prompt_releases.id desc
       `,
-      [workspaceId]
+      [workspaceId, projectId ?? null]
     )
   ]);
   return { definitions, candidates, experiments, releases };

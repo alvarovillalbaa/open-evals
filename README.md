@@ -104,8 +104,15 @@ The core compiler now supports explicit typed bindings and text/include/if/each
 operation blocks under `prompt-composition-v1`, with immutable rendered and
 authoring snapshots. See [the composition contract](docs/prompt-management.md)
 and [source/check evidence](docs/results/2026/10-28/prompt-composition.md).
-The composition editor, version-write APIs and persisted authoring manifest
-remain unfinished. All 55 explicitly approved focused Node cases passed; the
+The Instructions editor now has definition creation, authenticated preview,
+immutable draft saves and persisted-version review. Source snapshots use the
+existing JSONB column without a migration. Project keys are limited to their
+own project's targeted definitions; hosted local/demo ownership is read-only.
+Legacy demonstration versions retain their original text/hash as read-only.
+See [the authoring contract](docs/proposals/prompt-authoring-contract.md) and
+[implementation evidence and remaining checks](docs/results/2026/10-28/prompt-authoring.md).
+New persistence/browser checks are prepared separately and have not run.
+All 55 explicitly approved focused compiler cases passed; the
 [exact report](docs/results/2026/10-28/prompt-composition-checks.json) records the
 checked source and totals. This run is separate from the existing Vitest suite.
 

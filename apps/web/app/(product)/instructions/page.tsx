@@ -1,7 +1,9 @@
 import Link from "next/link";
 import { ArrowRight, GitBranch, SplitSquareHorizontal, Tag } from "lucide-react";
-import { EmptyState, PageHeader, Panel, StateGate, Stat, Table } from "../components";
+import { EmptyState, PageHeader, Panel, StateGate, Stat } from "../components";
 import { loadInstructions } from "@/lib/loaders";
+import { instructionWriteAllowed } from "@/lib/instruction-authoring";
+import { CreateInstruction } from "./create-instruction";
 
 const subroutes = [
   { href: "/instructions/candidates", label: "Candidates", icon: GitBranch },
@@ -11,6 +13,7 @@ const subroutes = [
 
 export default async function InstructionsPage() {
   const state = await loadInstructions();
+  const canWrite = state.status === "ready" && await instructionWriteAllowed(state.auth);
   return (
     <div className="grid gap-5">
       <PageHeader title="Instructions" eyebrow="Improve" />
@@ -37,30 +40,19 @@ export default async function InstructionsPage() {
                 );
               })}
             </div>
+            {canWrite ? <CreateInstruction /> : <p className="text-sm text-muted-foreground">Read-only access. An editor can create definitions and compose immutable drafts.</p>}
             {data.definitions.length ? (
-              <Table>
-                <thead>
-                  <tr className="border-b border-border bg-muted text-left text-xs uppercase text-muted-foreground">
-                    <th className="px-3 py-2 font-medium">instruction</th>
-                    <th className="px-3 py-2 font-medium">versions</th>
-                    <th className="px-3 py-2 font-medium">active releases</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {data.definitions.map((definition) => (
-                    <tr className="border-b border-border last:border-0" key={definition.id}>
-                      <td className="px-3 py-3">
-                        <p className="font-medium">{definition.stableKey}</p>
-                        <p className="font-mono text-xs text-muted-foreground">{definition.id}</p>
-                      </td>
-                      <td className="px-3 py-3">{definition.versions.length}</td>
-                      <td className="px-3 py-3">{definition.releases.length}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </Table>
+              <section className="grid min-w-0 gap-3 sm:grid-cols-2" aria-label="Instruction definitions">
+                {data.definitions.map((definition) => (
+                  <Link href={`/instructions/${encodeURIComponent(definition.id)}`} key={definition.id} className="grid min-w-0 gap-3 border border-border bg-panel p-4 hover:bg-muted">
+                    <div className="min-w-0"><h2 className="break-words font-medium">{definition.stableKey}</h2><p className="mt-1 break-all font-mono text-xs text-muted-foreground">{definition.id}</p></div>
+                    <p className="flex flex-wrap gap-x-4 gap-y-1 text-sm text-muted-foreground"><span>{definition.versions.length} saved versions</span><span>{definition.releases.length} releases</span></p>
+                    <span className="inline-flex items-center gap-2 text-sm font-medium">Review versions <ArrowRight className="size-4" aria-hidden="true" /></span>
+                  </Link>
+                ))}
+              </section>
             ) : (
-              <EmptyState title="No instructions yet" body="Prompt definitions and versions will appear after SDK or API calls persist them." />
+              <EmptyState title="No instructions yet" body={canWrite ? "Create a definition above, then compose and review its first immutable draft." : "No definitions are available in this workspace. An editor can create one."} />
             )}
             <Panel title="Instruction sub-objects">
               <p className="text-sm text-muted-foreground">Candidates, experiments, and releases are nested under Instructions.</p>

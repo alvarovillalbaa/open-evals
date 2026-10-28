@@ -16,10 +16,12 @@ import {
   type WorkspaceRecord
 } from "@open-evals/db";
 import { getRouteAuthContext, type RouteAuthContext } from "@/lib/auth";
+import { requireInstructionAuth } from "@/lib/instruction-authoring";
 
 export type LoadState<T> =
   | { status: "ready"; auth: RouteAuthContext; workspace?: WorkspaceRecord; data: T }
   | { status: "auth_required"; message: string }
+  | { status: "access_denied"; message: string }
   | { status: "database_unavailable"; message: string };
 
 export async function loadRunBatches(): Promise<LoadState<RunBatchSummary[]>> {
@@ -39,22 +41,28 @@ export async function loadScenarios(): Promise<LoadState<ScenarioCatalog>> {
 }
 
 export async function loadInstructions(): Promise<LoadState<InstructionCatalog>> {
-  return loadAuthed((workspaceId) => listInstructions(workspaceId));
+  return loadAuthed(
+    (workspaceId, auth) => listInstructions(workspaceId, auth.authKind === "api_key" ? auth.projectId : undefined),
+    async () => (await requireInstructionAuth("read")).auth
+  );
 }
 
 export async function loadCampaigns(): Promise<LoadState<CampaignCatalog>> {
   return loadAuthed((workspaceId) => listCampaigns(workspaceId));
 }
 
-async function loadAuthed<T>(loader: (workspaceId: string) => Promise<T>): Promise<LoadState<T>> {
+async function loadAuthed<T>(loader: (workspaceId: string, auth: RouteAuthContext) => Promise<T>, authenticate = getRouteAuthContext): Promise<LoadState<T>> {
   try {
-    const auth = await getRouteAuthContext();
-    const [workspace, data] = await Promise.all([getWorkspace(auth.workspaceId), loader(auth.workspaceId)]);
+    const auth = await authenticate();
+    const [workspace, data] = await Promise.all([getWorkspace(auth.workspaceId), loader(auth.workspaceId, auth)]);
     return { status: "ready", auth, workspace, data };
   } catch (error) {
     if (isDatabaseUnavailable(error)) return { status: "database_unavailable", message: error.message };
     if (error instanceof Error && "status" in error && Number((error as { status?: unknown }).status) === 401) {
       return { status: "auth_required", message: error.message };
+    }
+    if (error instanceof Error && "status" in error && Number(error.status) === 403) {
+      return { status: "access_denied", message: "instruction_access_forbidden" };
     }
     throw error;
   }

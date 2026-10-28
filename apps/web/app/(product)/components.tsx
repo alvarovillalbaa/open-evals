@@ -47,6 +47,9 @@ export function StateGate<T>({ state, children }: { state: LoadState<T>; childre
       />
     );
   }
+  if (state.status === "access_denied") {
+    return <EmptyState title="Instruction access unavailable" body="Your current role, key or scope does not allow these instructions." />;
+  }
   return (
     <EmptyState
       icon={<Database className="size-5" aria-hidden="true" />}

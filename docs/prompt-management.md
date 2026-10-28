@@ -98,17 +98,43 @@ text into one component. Locked slots retain their position.
 
 ## Persistence and application boundary
 
-This compiler does not persist a version, activate a release or run a campaign.
-The current database writes only rendered components/text/hash/parents/status;
-it does not retain the new top-level `compositionSnapshot`. The seed also has
-an older object-shaped component payload and demonstration hashes. Do not
-silently reconstruct or rehash those historical records.
+The compiler remains a pure operation. The web authoring flow now creates a
+definition, previews a new source program, saves an immutable `draft`, and
+reloads that exact version for review. Every source edit invalidates preview.
+Saving does not activate a release or run a campaign. A definition containing
+only drafts has no implicit serving baseline; an explicit eval-only candidate
+override may still resolve that scoped draft.
 
-Canonical authoring persistence, version-write APIs and an editor/review flow
-remain required. Existing instruction pages/catalog reads, resolve APIs, SDK
-resolution and Python string-patch optimizers are not an implemented composition
-workflow. Promotion, rollback, live experiments and structural work orders keep
-their approval gates. The wider Features requirements—SDK-only evidence entry,
+The existing `prompt_versions.components` JSONB stores a versioned envelope
+with materialized components, literal source or full composition snapshot,
+source fingerprint, and write/review fingerprints. Existing SQL columns remain
+authoritative. The decoder recompiles source and checks text/hash/materialized
+correspondence. The seed's older object-shaped payloads and demonstration hashes
+remain view-only, with their original bytes retained. Malformed authored rows
+are visibly read-only and cannot become a base.
+
+Authoring uses the existing read/write scopes and editor role, with the approved
+project-key access boundary. The server derives workspace, actor, definition,
+base, parents and draft status; request fields cannot replace them. The save
+transaction locks the definition, verifies a canonical base, recompiles and
+compares the reviewed fingerprint, then inserts version and audit together.
+Identical version-ID retries return the verified original; conflicting intent
+returns 409. Explicit forks from older canonical bases are valid. A newer
+sibling does not invalidate an immutable-base preview. Audit metadata contains
+IDs, hashes and counts, without prompt bodies/bindings.
+
+The storage codec additionally rejects NUL and isolated Unicode surrogates in
+all source strings and keys, including unused entries, because PostgreSQL
+cannot preserve them. Valid astral Unicode is retained. Application insert-only
+behavior is not a claim of globally immutable SQL/RLS or a database-wide unique
+stable-key constraint. No schema, dependency or Auth provider changes are made.
+
+The exact API, retry and access policy is in the
+[authoring contract](proposals/prompt-authoring-contract.md). Verification status
+and unexecuted checks are in the [authoring receipt](results/2026/10-28/prompt-authoring.md).
+SDK resolution and Python string-patch optimizers remain separate consumers;
+promotion, rollback, live experiments and structural work orders retain their
+approval gates. The wider Features requirements—SDK-only evidence entry,
 unified evals, Harbor tasks and production campaigns—remain separate scope.
 
 Focused source and authored-check evidence belongs in

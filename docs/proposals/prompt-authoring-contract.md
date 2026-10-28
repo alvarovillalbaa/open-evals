@@ -1,9 +1,9 @@
 # Immutable instruction authoring
 
-Status: implementation contract; project-key access policy awaiting owner approval.
+Status: implementation contract; scoped instruction access explicitly approved by Alvaro on 2026-10-28. Backend and browser checks require their separate approval.
 Source baseline: `aac1581a53453b6b8661322819c7c69fb5b8b81a`.
 
-## Access policy requiring approval
+## Approved access policy
 
 Existing `viewer + prompts:read` and `editor + prompts:write` remain the role/scope requirements. Workspace sessions retain workspace access. A project-bound API key may read, resolve, create and author only definitions attached to a target in that key's project and workspace. It may not access untargeted workspace definitions or definitions in another project. Keys without a verifiable project fail closed for these instruction operations. Target ownership is checked server-side. This policy covers the existing instruction catalog and resolve route as well as the new routes, so the catalog cannot expose new authoring bindings across projects.
 
@@ -17,7 +17,7 @@ No provider settings, role grants, RLS policies, database migrations, dependenci
 - `POST /api/v1/instructions/[definitionId]/preview`: accept `{versionId, baseVersionId?, components, composition?}` and return `{version, requestFingerprint, previewFingerprint}`. The server fetches and verifies the base and derives parents and `draft` status.
 - `POST /api/v1/instructions/[definitionId]/versions`: accept the preview input plus `previewFingerprint`, recompile and validate in the save transaction, and return `{version: StoredVersionDTO, replayed}`.
 
-Reject client-supplied workspace, actor, status, compiled text, parent list or release fields. Bound streamed JSON before parsing (2 MiB) in addition to compiler limits. Authenticate before reading request content. Errors use `{error: string}` with 400 malformed, 401 unauthenticated, 403 access, 404 scoped resource absent, 409 conflicting identity or stale preview, 422 invalid source/locked change/legacy base, 503 unavailable storage. Do not return SQL or binding values in error messages.
+Reject client-supplied workspace, actor, status, compiled text, parent list or release fields. Bound streamed JSON before parsing (2 MiB) in addition to compiler limits. Authenticate before reading request content. Errors use `{error: string}` with 400 malformed, 401 unauthenticated, 403 access, 404 scoped resource absent, 409 conflicting identity or stale preview, 413 request byte limit, 422 invalid source/locked change/legacy base, 503 unavailable storage. Do not return SQL or binding values in error messages.
 
 `InstructionDetailDTO` contains `{definition:{id,stableKey,targetId?}, versions:VersionSummary[], selectedVersion:StoredVersionDTO|null, canWrite:boolean}`. A summary has `{id,status,createdAt,parentVersionIds,contentHash,authoring:"composition"|"literal"|"legacy"}`. A stored version also has `compiledText`, optional verified canonical `version`, and optional `readOnlyReason`. No authentication principal is passed to client components.
 

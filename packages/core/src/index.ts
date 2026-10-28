@@ -3,6 +3,7 @@ export * from "./hash";
 export * from "./trace";
 export * from "./eval-engine";
 export * from "./prompt";
+export * from "./prompt-authoring";
 export * from "./statistics";
 export * from "./experiment";
 export * from "./calibration";
