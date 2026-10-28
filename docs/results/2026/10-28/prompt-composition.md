@@ -1,8 +1,8 @@
 # Instruction composition source
 
 28 October 2026. Complete pure composition compiler and candidate integration
-prepared toward the full OpenEvals product. Domain execution, persisted authoring
-and the composition editor remain unverified or unfinished as described below.
+published toward the full OpenEvals product. All 55 approved pure compiler checks
+passed. Persisted authoring and the composition editor remain unfinished.
 
 ## Requirement and source boundary
 
@@ -71,15 +71,16 @@ UTF-8 bytes before unbounded expansion. The authored cases include bounded
 regressions for these source-discovered issues; no red/green runtime result is
 claimed before owner-approved execution.
 
-There are **55 authored native Node cases**, counted from source declarations,
+At source preparation there were **55 authored native Node cases**, counted from declarations,
 covering composition, snapshots, lock/provenance tampering, multi-component
 budgets, ablations and malformed/resource-bound inputs. The [focused execution
-proposal](../../../proposals/prompt-composition-checks.md) requires explicit
+proposal](../../../proposals/prompt-composition-checks.md) required explicit
 approval under the supplied AGENTS.md §7. It uses the actual pure source with
-Node's type stripping and a narrowly scoped import hook. No case has run.
-The existing Vitest test and package scripts remain unchanged. No domain test,
-browser/server check, database, migration, Auth/configuration change, CI,
-model/provider call, release promotion, rollback or live campaign was performed.
+Node's type stripping and a narrowly scoped import hook. No case ran during
+preparation; the subsequently approved execution is recorded below. The existing
+Vitest test and package scripts remain unchanged. No local application server,
+browser check, database, migration, Auth/configuration change, CI, model/provider
+call, release promotion, rollback or live campaign was performed.
 
 Independent read-only review rechecked the complete compiler, types, both
 candidate callers, test hook and all 55 authored cases after the resource and
@@ -121,6 +122,39 @@ Connected GET of the canonical root returned HTML 200 with the exact deployment
 ID. That authenticated/share-capable read is not independent anonymous access
 or browser/workflow acceptance. No new hosting settings, account or plan was
 changed. The subsequent receipt update preserves every source/test byte.
+
+## Approved focused execution
+
+Alvaro explicitly approved the immutable [55-case proposal at `e5ee8c1`](https://github.com/alvarovillalbaa/open-evals/blob/e5ee8c1493f640e69d163b50cc1ce13e1ed4fdd4/docs/proposals/prompt-composition-checks.md).
+Before running, all eight source/test/hook Git blobs matched the exact published
+bytes in the retained candidate bundle. The existing Node `v24.21.0` process
+recorded its executable, then launched that same executable with the published
+import hook, test entrypoint and TAP reporter. Native type stripping loaded the
+actual prompt, composition, hash and ablation modules. No dependency environment,
+substitute compiler implementation or application server was used.
+
+**55 passed, zero failures/cancellations/skips/TODOs; exit code 0.**
+
+The [machine-readable report](prompt-composition-checks.json) records the checked
+commit, exact runner arguments, totals and all eight Git blob/SHA-256 pairs.
+Its source fields include the types and demo integration files; those two files
+were fingerprinted but are not runtime imports of this focused test graph.
+The report retains the 11,476-byte raw TAP output's SHA-256 and empty stderr.
+These are actual pure-code assertions against T2 authored prompts/bindings,
+including the reviewed resource and snapshot round-trip regression cases.
+No implementation or test changes were needed after execution.
+
+Independent evidence review confirmed all 55 sequential pass records, matching
+case names and the complete TAP plan, no skip/TODO/failure/bailout directives,
+empty stderr and all eight fingerprints against both the candidate and immutable
+GitHub publication. The exact task-owned TAP/stderr files were then removed;
+the bounded JSON retains their proof hashes and counts. The small source bundle
+remains intentionally available; it contains no dependency/test environment.
+
+The passing scope does not execute the existing Vitest suite, verify an editor,
+create a persisted version or approve a release/campaign. Hosted compilation
+above supplies its separate semantic type/build evidence. The broader product
+requirements below remain open.
 
 ## Remaining product scope
 

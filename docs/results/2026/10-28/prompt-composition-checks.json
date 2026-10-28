@@ -1,0 +1,53 @@
+{
+  "date": "2026-10-28",
+  "scope": "55 focused compiler cases explicitly approved by Alvaro",
+  "sourceCommit": "e5ee8c1493f640e69d163b50cc1ce13e1ed4fdd4",
+  "nodeVersion": "v24.21.0",
+  "runnerArguments": [
+    "--import",
+    "./packages/core/tests/register-typescript.mjs",
+    "--test",
+    "--test-reporter=tap",
+    "packages/core/tests/prompt-composition.node.mjs"
+  ],
+  "dataTier": "T2 authored prompts and bindings",
+  "exitCode": 0,
+  "signal": null,
+  "executionErrorCode": null,
+  "totals": {
+    "tests": 55,
+    "suites": 0,
+    "pass": 55,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "gitBlob": {
+    "packages/core/src/prompt.ts": "6f4b680c460b330c02084555ca49e9e9ddfbf564",
+    "packages/core/src/prompt-composition.ts": "d365ad2031b1557edd194b84c8bb36410e9fb199",
+    "packages/core/src/hash.ts": "140471745127c6e0e0a8a58cc79b245006c6ae89",
+    "packages/core/src/types.ts": "277767b4a09236f6625db707d961b0befd0daef1",
+    "packages/core/src/improvement.ts": "c3209ebe9973beca200000d043082aaa922b73ea",
+    "packages/core/src/demo.ts": "5012034ae706654cbc9d2a273dd688311b6add77",
+    "packages/core/tests/prompt-composition.node.mjs": "da9c1724e92310d593c75cf0347a797d3c42494b",
+    "packages/core/tests/register-typescript.mjs": "dd8d2198e03dbad929674339da0cc6c72fdc90f5"
+  },
+  "sha256": {
+    "packages/core/src/prompt.ts": "0aa64698ac7729daf5609d11279a1daacf416bc7e5d46aa1b5931f8a5f8050a8",
+    "packages/core/src/prompt-composition.ts": "fd735d5554ce3cdc4c99b906d1ffd6b77c4104274f56e7dd0a67465d9d95f185",
+    "packages/core/src/hash.ts": "14c6a74e885a8bbc11b71a80bf4b4e306d4c6feb1868eafe59684eaeee3c7ab0",
+    "packages/core/src/types.ts": "f033bfd60b1883dd8efd35768deb380cf92186df69089ffc29ad991ca97ac25f",
+    "packages/core/src/improvement.ts": "511b0f953f7dac987d3c51c6ea15e2486b609ecbc9f48de7c8eb2ba62a4dc34a",
+    "packages/core/src/demo.ts": "3300ca9c8aae84ab6c5f21ebf26ebaff516286102cdd242c053e38d2ffcbbd71",
+    "packages/core/tests/prompt-composition.node.mjs": "e7ae40f765c90f6eee006dcc41cd977e67d4cb1c729d15e0aead9855d6d0f706",
+    "packages/core/tests/register-typescript.mjs": "1e3ec9a7807fbc507b39c5b0995035910b770295f355934fc2082be876b2f38d"
+  },
+  "tapEvidence": {
+    "bytes": 11476,
+    "sha256": "f239a7fc2aefe6f2e247535f4006875221bb2736bb97caa4731462c356a5f305",
+    "stderrBytes": 0,
+    "passingTestRecords": 55,
+    "plan": 55
+  }
+}

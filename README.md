@@ -105,8 +105,9 @@ operation blocks under `prompt-composition-v1`, with immutable rendered and
 authoring snapshots. See [the composition contract](docs/prompt-management.md)
 and [source/check evidence](docs/results/2026/10-28/prompt-composition.md).
 The composition editor, version-write APIs and persisted authoring manifest
-remain unfinished. The focused 55-case Node scope is authored and awaiting
-explicit execution approval; it is separate from the existing Vitest suite.
+remain unfinished. All 55 explicitly approved focused Node cases passed; the
+[exact report](docs/results/2026/10-28/prompt-composition-checks.json) records the
+checked source and totals. This run is separate from the existing Vitest suite.
 
 The shared optimization control plane supports one-shot candidate generation, FAPO-style routing, hill climbing, structured GA, optional official GEPA, and optional DSPy engines. Target prompt campaigns cannot mutate their own judges or thresholds. Blind holdout examples are blocked from reflection.
 
