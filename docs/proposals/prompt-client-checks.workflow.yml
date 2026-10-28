@@ -40,6 +40,7 @@ jobs:
           cp pnpm-lock.yaml .prompt-clients/pnpm-lock.yaml
           git diff -- pnpm-lock.yaml > .prompt-clients/lock.diff
           git diff --stat > .prompt-clients/lock-generation-workspace-diff.txt
+          cat .prompt-clients/lock.diff
       - name: Reject unrelated lockfile drift
         run: |
           python3 - <<'PY'
