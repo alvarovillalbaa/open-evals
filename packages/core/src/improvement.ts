@@ -28,22 +28,32 @@ export function buildAblationVariants(base: PromptVersion, componentId: string):
     ["rewrite_one_instruction", `${component.content} Be explicit and concise.`],
     ["strictness_tighten", `${component.content} Treat violations as release-blocking.`],
     ["strictness_relax", component.content.replace("Never", "Avoid")],
-    ["order_test", base.components.map((item) => item.content).reverse().join("\n")]
+    ["order_test", component.content]
   ];
   return variants.map(([mutation, content]) => {
+    const components = base.components.map((item) => (item.id === componentId ? { ...item, content } : item));
+    if (mutation === "order_test") {
+      // Reorder mutable slots without copying locked instructions into a block.
+      const mutable = components.filter((item) => !item.locked).reverse();
+      let index = 0;
+      for (let position = 0; position < components.length; position++) {
+        if (!components[position]!.locked) components[position] = mutable[index++]!;
+      }
+    }
     const promptVersion = compilePromptVersion({
       id: `${base.id}-${mutation}`,
       definitionId: base.definitionId,
       parentVersionIds: [base.id],
       status: "draft",
-      components: base.components.map((item) => (item.id === componentId ? { ...item, content } : item))
+      components,
+      baseVersion: base
     });
     return {
       id: `ablation_${base.id}_${mutation}`,
       mutation,
       componentId,
       promptVersion,
-      evidenceLevel: "controlled ablation evidence"
+      evidenceLevel: "hypothesis only"
     };
   });
 }

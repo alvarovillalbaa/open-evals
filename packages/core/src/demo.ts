@@ -139,6 +139,7 @@ export const candidatePrompt = compilePromptVersion({
   id: "prompt-v2-candidate",
   definitionId: "reservation-agent",
   parentVersionIds: [baselinePrompt.id],
+  baseVersion: baselinePrompt,
   status: "offline_validated",
   components: baselinePrompt.components.map((component) =>
     component.id === "decision-rules"

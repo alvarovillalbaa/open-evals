@@ -278,20 +278,63 @@ export interface GateResult {
 }
 
 export interface PromptComponent {
-  id: string;
-  kind: string;
-  locked: boolean;
-  content: string;
+  readonly id: string;
+  readonly kind: string;
+  readonly locked: boolean;
+  readonly content: string;
+}
+
+export type PromptBinding =
+  | { readonly type: "string"; readonly value: string }
+  | { readonly type: "number"; readonly value: number }
+  | { readonly type: "boolean"; readonly value: boolean }
+  | { readonly type: "json"; readonly value: JsonValue };
+
+export type PromptBlock =
+  | { readonly op: "text"; readonly template: string }
+  | { readonly op: "include"; readonly name: string }
+  | { readonly op: "if"; readonly variable: string; readonly then: readonly PromptBlock[]; readonly else?: readonly PromptBlock[] }
+  | {
+      readonly op: "each";
+      readonly variable: string;
+      readonly as: string;
+      readonly indexAs?: string;
+      readonly body: readonly PromptBlock[];
+      readonly separator?: string;
+    };
+
+export type PromptComponentSource = {
+  readonly id: string;
+  readonly kind: string;
+  readonly locked: boolean;
+} & (
+  | { readonly content: string; readonly operations?: never }
+  | { readonly operations: readonly PromptBlock[]; readonly content?: never }
+);
+
+export interface PromptComposition {
+  readonly schemaVersion: "prompt-composition-v1";
+  readonly bindings: Readonly<Record<string, PromptBinding>>;
+  readonly blocks?: Readonly<Record<string, readonly PromptBlock[]>>;
+}
+
+export interface PromptCompositionSnapshot {
+  readonly schemaVersion: "prompt-composition-v1";
+  readonly components: readonly PromptComponentSource[];
+  readonly bindings: Readonly<Record<string, PromptBinding>>;
+  readonly blocks: Readonly<Record<string, readonly PromptBlock[]>>;
+  readonly sourceHash: string;
 }
 
 export interface PromptVersion {
-  id: string;
-  definitionId: string;
-  components: PromptComponent[];
-  compiledText: string;
-  parentVersionIds: string[];
-  contentHash: string;
-  status: "draft" | "searching" | "offline_validated" | "shadow" | "canary" | "active" | "retired" | "rolled_back";
+  readonly id: string;
+  readonly definitionId: string;
+  readonly components: readonly PromptComponent[];
+  readonly compiledText: string;
+  readonly parentVersionIds: readonly string[];
+  readonly contentHash: string;
+  readonly status: "draft" | "searching" | "offline_validated" | "shadow" | "canary" | "active" | "retired" | "rolled_back";
+  readonly compositionSnapshot?: PromptCompositionSnapshot;
 }
 
 export interface PromptRelease {

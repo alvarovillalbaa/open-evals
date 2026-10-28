@@ -1,34 +1,59 @@
-import type { PromptComponent, PromptRelease, PromptVersion } from "./types";
+import type { PromptComponentSource, PromptComposition, PromptRelease, PromptVersion } from "./types";
 import { stableHash, textHash } from "./hash";
+import {
+  freezePromptValue, inspectPromptVersion, materializePromptComponents, promptArray,
+  promptField, promptIdentity, promptRecord, promptStatus, promptText
+} from "./prompt-composition";
 
-export function compilePromptVersion(args: {
+export interface CompilePromptVersionInput {
   id: string;
   definitionId: string;
-  components: PromptComponent[];
-  parentVersionIds?: string[];
+  components: readonly PromptComponentSource[];
+  parentVersionIds?: readonly string[];
   status?: PromptVersion["status"];
-}): PromptVersion {
-  const compiledText = args.components.map((component) => `<!-- ${component.id}:${component.kind} -->\n${component.content}`).join("\n\n");
-  return {
-    id: args.id,
-    definitionId: args.definitionId,
-    components: args.components,
+  composition?: PromptComposition;
+  baseVersion?: PromptVersion;
+}
+
+export function compilePromptVersion(args: CompilePromptVersionInput): PromptVersion {
+  const input = promptRecord(args, "compile_input", ["id", "definitionId", "components", "parentVersionIds", "status", "composition", "baseVersion"]);
+  const id = promptIdentity(promptField(input, "id", "compile_input"), "prompt_id");
+  const definitionId = promptIdentity(promptField(input, "definitionId", "compile_input"), "definition_id");
+  const parentVersionIds = (input.parentVersionIds !== undefined ? promptArray(input.parentVersionIds, "parents") : [])
+    .map(parent => promptIdentity(parent, "parent_id"));
+  if (new Set(parentVersionIds).size !== parentVersionIds.length || parentVersionIds.includes(id)) throw new TypeError("compile_input:invalid_parents");
+  const prepared = materializePromptComponents(promptField(input, "components", "compile_input") as readonly PromptComponentSource[], input.composition as PromptComposition | undefined);
+  const compiledText = promptText(prepared.components);
+  const version: PromptVersion = freezePromptValue({
+    id, definitionId, components: prepared.components,
     compiledText,
-    parentVersionIds: args.parentVersionIds ?? [],
+    parentVersionIds,
     contentHash: textHash(compiledText),
-    status: args.status ?? "draft"
-  };
+    status: input.status !== undefined ? promptStatus(input.status) : "draft",
+    ...(prepared.compositionSnapshot ? { compositionSnapshot: prepared.compositionSnapshot } : {})
+  });
+  if (input.baseVersion !== undefined) {
+    const base = inspectPromptVersion(input.baseVersion as PromptVersion);
+    if (!parentVersionIds.includes(base.id)) throw new TypeError("compile_input:base_parent_required");
+    assertLockedComponentsPreserved(base, version);
+  }
+  return version;
 }
 
 export function assertLockedComponentsPreserved(base: PromptVersion, candidate: PromptVersion): void {
+  inspectPromptVersion(base); inspectPromptVersion(candidate);
+  if (base.definitionId !== candidate.definitionId) throw new Error("locked_components:definition_mismatch");
   const candidateById = new Map(candidate.components.map((component) => [component.id, component]));
+  const lockedIds = base.components.filter(component => component.locked).map(component => component.id);
   for (const component of base.components) {
     if (!component.locked) continue;
     const next = candidateById.get(component.id);
-    if (!next || next.content !== component.content) {
+    if (!next || !next.locked || next.kind !== component.kind || next.content !== component.content) {
       throw new Error(`locked_component_changed:${component.id}`);
     }
   }
+  const candidateLockedOrder = candidate.components.filter(component => lockedIds.includes(component.id)).map(component => component.id);
+  if (candidateLockedOrder.some((id, index) => id !== lockedIds[index])) throw new Error("locked_component_order_changed");
 }
 
 export function resolvePromptRelease(args: {
