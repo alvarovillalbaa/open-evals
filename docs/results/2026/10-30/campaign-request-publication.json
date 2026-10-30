@@ -1,0 +1,112 @@
+{
+  "schemaVersion": "campaign-request-publication-v1",
+  "date": "2026-10-30",
+  "repository": "alvarovillalbaa/open-evals",
+  "baselineCommit": "d4944d941d7f59181b174f38ff6400bc9afe6353",
+  "sourceCommit": "507bd13ba1f1de560c049464ef97065612b6e5c2",
+  "sourceTree": {
+    "baseLeaves": 1240,
+    "sourceLeaves": 1255,
+    "changed": 23,
+    "unrelatedPreserved": 1232,
+    "newFiles": 15,
+    "originalRemoved": 0,
+    "retiredOwnTestPathRemoved": true,
+    "applicationSealed": 288,
+    "mismatches": 0,
+    "sourceTreeSha": "455f367a848ceee0952b13296cc881f083cea2d8"
+  },
+  "sourceManifest": {
+    "path": "docs/results/2026/10-30/campaign-request-source.json",
+    "gitSha": "6c6c1b1e1d7d431fee85c5facefc454df2b3831b",
+    "sha256": "517af74b3b5568ae5d26279610eb85428b90989c4796c354fb6199af52455ca4",
+    "applicationFiles": 288
+  },
+  "initialFailure": {
+    "sourceCommit": "124def7363756ca897f4697fd1e5491b4214239b",
+    "deploymentId": "dpl_7j6BkN8VfgVQMrAodt55sgqwiPkX",
+    "state": "ERROR",
+    "cause": "Cross-application integration test was inside the database package production compilation scope.",
+    "repair": "Move 19-case test to repository tests/integration and resolve pg from its existing owner; unchanged dependencies and build configuration."
+  },
+  "deployment": {
+    "id": "dpl_CU7BPqnG4uU2ZeTiZw3KyVuzJ6is",
+    "state": "READY",
+    "sourceCommit": "507bd13ba1f1de560c049464ef97065612b6e5c2",
+    "target": "production",
+    "url": "https://open-evals-bxg8xo0iy-my-team-4f230354.vercel.app",
+    "aliases": [
+      {
+        "alias": "open-evals-web-my-team-4f230354.vercel.app",
+        "redirect": null
+      },
+      {
+        "alias": "open-evals-web.vercel.app",
+        "redirect": null
+      },
+      {
+        "alias": "open-evals-web-git-main-my-team-4f230354.vercel.app",
+        "redirect": null
+      }
+    ],
+    "buildEvidence": [
+      "5 successful Turbo tasks",
+      "Next compiled successfully",
+      "Next TypeScript completed",
+      "Both new campaign-request route paths emitted"
+    ],
+    "limits": "Compilation and alias metadata only; no behavioral, browser, hosted Auth or production database proof."
+  },
+  "staticChecks": {
+    "typescript": "5.9.3",
+    "changedModulesParsed": 14,
+    "originalStoreFunctionsIdentical": 14,
+    "selectedBaseGitBlobsVerified": 31,
+    "localRelativeWorkspaceImportsResolved": 55,
+    "inactiveYamlJobs": 1,
+    "shellStepsSyntaxChecked": 11,
+    "embeddedNodeProgramsSyntaxChecked": 2,
+    "whitespaceErrors": 0,
+    "newMarkdownRelativeLinksMissing": 0
+  },
+  "checks": {
+    "core": {
+      "authored": 26,
+      "executed": 0
+    },
+    "postgresHttp": {
+      "authored": 19,
+      "executed": 0
+    },
+    "browser": {
+      "authored": 8,
+      "executed": 0
+    },
+    "total": {
+      "authored": 53,
+      "executed": 0
+    },
+    "status": "Awaiting separate explicit approval; question accepted is not approval.",
+    "proposalCommit": "507bd13ba1f1de560c049464ef97065612b6e5c2",
+    "proposalPath": "docs/proposals/campaign-request-checks.md",
+    "proposalGitSha": "3908ca499c4c0068a4ceb718eb42d541bf34b229",
+    "activeWorkflows": 0,
+    "sourceHeadActionsRuns": 0
+  },
+  "unchanged": [
+    "dependencies",
+    "lockfile",
+    "SQL schema and migrations",
+    "instruction access policy",
+    "Auth provider",
+    "active CI",
+    "hosting configuration"
+  ],
+  "unfinished": [
+    "approval decisions and eligibility/self-approval policy",
+    "candidate generation and campaign execution",
+    "controlled evaluations and release changes",
+    "hosted Auth and production persistence acceptance",
+    "complete OpenEvals and portfolio delivery"
+  ]
+}
