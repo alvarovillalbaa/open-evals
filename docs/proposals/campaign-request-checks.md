@@ -12,7 +12,7 @@ define the behavior and proof limits.
 | Check file | Cases | What it checks |
 | --- | ---: | --- |
 | `tests/unit/campaign-preparation.test.ts` | 26 | Exact data-only inputs, Unicode/byte bounds, canonical baseline identity, six operation hypotheses, zero-call limits, immutable hashes and detached results. |
-| `packages/db/tests/integration/campaign-request-storage.test.ts` | 19 | Actual PostgreSQL transactions, audit rollback, concurrent replay, stored identity, scoped history, existing instruction authorization and direct HTTP handlers. |
+| `tests/integration/campaign-request-storage.test.ts` | 19 | Actual PostgreSQL transactions, audit rollback, concurrent replay, stored identity, scoped history, existing instruction authorization and direct HTTP handlers. |
 | `campaign-request-browser.spec.ts.example` | 8 | Four actual loopback application scenarios, once in desktop Chromium and once in narrow Chromium with emulated touch. |
 | **Total** | **53** | No broad regression suite or Python optimizer run. |
 

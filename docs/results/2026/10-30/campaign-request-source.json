@@ -895,12 +895,12 @@
     {
       "path": "docs/proposals/campaign-request-checks.md",
       "mode": "100644",
-      "gitSha": "c55841c66cfbb8895a3e929cbdf804a43ce370ed"
+      "gitSha": "3908ca499c4c0068a4ceb718eb42d541bf34b229"
     },
     {
       "path": "docs/proposals/campaign-request-checks.yml.example",
       "mode": "100644",
-      "gitSha": "4282862912a0e28bc8d0e59e43b54477bf3f0646"
+      "gitSha": "c12bde25f3b2dc7ddcd056502e56816d5080237b"
     },
     {
       "path": "docs/proposals/cli-runtime.md",
@@ -1243,11 +1243,6 @@
       "gitSha": "8c79cc2b12509575f59f4e2d06404755f29c4470"
     },
     {
-      "path": "packages/db/tests/integration/campaign-request-storage.test.ts",
-      "mode": "100644",
-      "gitSha": "55354c31c3b6a6b1f4e8a80895d2ac9eef788eeb"
-    },
-    {
       "path": "packages/db/tests/schema.test.ts",
       "mode": "100644",
       "gitSha": "dc1230783241903543db649d8d9de5a907e5a437"
@@ -1431,6 +1426,11 @@
       "path": "skills-lock.json",
       "mode": "100644",
       "gitSha": "70f0eb9ce118fe6274d6c1b98e95a16c62d905e1"
+    },
+    {
+      "path": "tests/integration/campaign-request-storage.test.ts",
+      "mode": "100644",
+      "gitSha": "95f177cf3c3c86b341e7fe59198c092523db30b3"
     },
     {
       "path": "tests/unit/campaign-preparation.test.ts",
@@ -1661,17 +1661,17 @@
     {
       "path": "docs/proposals/campaign-request-checks.md",
       "mode": "100644",
-      "gitSha": "c55841c66cfbb8895a3e929cbdf804a43ce370ed",
-      "sha256": "3d71f6343e06c5f9401f8d849520b9e68bb84706a4d8022bf1a647e0111ae8e4",
-      "bytes": 5662,
+      "gitSha": "3908ca499c4c0068a4ceb718eb42d541bf34b229",
+      "sha256": "2d2b0fdf27d5901b8270200f4d9f9bc115fe3f579b665fbfeaedfda6b6f96594",
+      "bytes": 5650,
       "changed": true
     },
     {
       "path": "docs/proposals/campaign-request-checks.yml.example",
       "mode": "100644",
-      "gitSha": "4282862912a0e28bc8d0e59e43b54477bf3f0646",
-      "sha256": "8796b8acab184df41585916bd86a0d2732ce553f965a5a850f07ca1e14887c5c",
-      "bytes": 18571,
+      "gitSha": "c12bde25f3b2dc7ddcd056502e56816d5080237b",
+      "sha256": "937070fe7fc3e4b39a9069e11ce7bfb521c1e5cdee78a768c791616fa24e6314",
+      "bytes": 18547,
       "changed": true
     },
     {
@@ -1811,11 +1811,11 @@
       "changed": false
     },
     {
-      "path": "packages/db/tests/integration/campaign-request-storage.test.ts",
+      "path": "tests/integration/campaign-request-storage.test.ts",
       "mode": "100644",
-      "gitSha": "55354c31c3b6a6b1f4e8a80895d2ac9eef788eeb",
-      "sha256": "7772da4c336033848e9a466ec4994edef52e75ed02e63c3f5e8958f21acadfa5",
-      "bytes": 34554,
+      "gitSha": "95f177cf3c3c86b341e7fe59198c092523db30b3",
+      "sha256": "72a7647e1a10bc306bf95d43b398c6ab52bc2219cfda0c0e5187adfc630e0f89",
+      "bytes": 34969,
       "changed": true
     },
     {
@@ -1829,7 +1829,7 @@
   ],
   "testFiles": [
     {
-      "path": "packages/db/tests/integration/campaign-request-storage.test.ts",
+      "path": "tests/integration/campaign-request-storage.test.ts",
       "names": [
         "campaign request PostgreSQL boundary previews a canonical saved baseline without persisting requests or audit events",
         "campaign request PostgreSQL boundary atomically stores one pending approval and content-free audit through the route",

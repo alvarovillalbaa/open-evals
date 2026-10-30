@@ -1,14 +1,26 @@
 import { randomUUID } from "node:crypto";
-import { Client } from "pg";
+import { createRequire } from "node:module";
 import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
-import { encodePromptVersionStorage, preparePromptDraft } from "../../../core/src/prompt-authoring";
-import { stableHash } from "../../../core/src/hash";
-import type { CampaignPreparationInput } from "../../../core/src/campaign-preparation";
-import type { PromptAuthoringScope } from "../../src/prompt-authoring";
-import type { RouteAuthContext } from "../../../../apps/web/lib/auth";
-import { loadCampaignRequests, previewCampaignRequest, saveCampaignRequest } from "../../../../apps/web/lib/campaign-request-service";
-import { GET, POST } from "../../../../apps/web/app/api/v1/instructions/[definitionId]/campaign-requests/route";
-import { POST as PREVIEW } from "../../../../apps/web/app/api/v1/instructions/[definitionId]/campaign-requests/preview/route";
+import { encodePromptVersionStorage, preparePromptDraft } from "../../packages/core/src/prompt-authoring";
+import { stableHash } from "../../packages/core/src/hash";
+import type { CampaignPreparationInput } from "../../packages/core/src/campaign-preparation";
+import type { PromptAuthoringScope } from "../../packages/db/src/prompt-authoring";
+import type { RouteAuthContext } from "../../apps/web/lib/auth";
+import { loadCampaignRequests, previewCampaignRequest, saveCampaignRequest } from "../../apps/web/lib/campaign-request-service";
+import { GET, POST } from "../../apps/web/app/api/v1/instructions/[definitionId]/campaign-requests/route";
+import { POST as PREVIEW } from "../../apps/web/app/api/v1/instructions/[definitionId]/campaign-requests/preview/route";
+
+interface Client {
+  connect(): Promise<void>;
+  end(): Promise<void>;
+  query<Row extends Record<string, unknown> = Record<string, unknown>>(
+    sql: string, values?: unknown[],
+  ): Promise<{ rows: Row[] }>;
+}
+
+const { Client } = createRequire(new URL("../../packages/db/package.json", import.meta.url))("pg") as {
+  Client: new (options: { connectionString: string; ssl: false }) => Client;
+};
 
 const verifiedAuth = vi.hoisted(() => ({
   context: undefined as RouteAuthContext | undefined,
@@ -18,7 +30,7 @@ const verifiedAuth = vi.hoisted(() => ({
 
 // Only the already-verified authentication boundary is substituted. Instruction ownership,
 // services, route parsing, PostgreSQL transactions, constraints and queries remain actual code.
-vi.mock("../../../../apps/web/lib/auth", () => ({
+vi.mock("../../apps/web/lib/auth", () => ({
   requireRouteAuth: vi.fn(async (role: string, scope?: string) => {
     verifiedAuth.calls.push([role, scope]);
     if (verifiedAuth.failure || !verifiedAuth.context) {

@@ -139,7 +139,7 @@ jobs:
           }
           function report(p){const file=path.join(root,p),s=fs.lstatSync(file);if(!s.isFile()||s.size>2*1024*1024)fail('report_size_or_kind');return JSON.parse(fs.readFileSync(file,'utf8'));}
           function results(){let failures=0;const m=manifest();
-            try{const r=report('unit.json'), expected=m.testFiles, selected={'tests/unit/campaign-preparation.test.ts':26,'packages/db/tests/integration/campaign-request-storage.test.ts':19};console.log(JSON.stringify({unitActual:{total:r.numTotalTests,passed:r.numPassedTests,failed:r.numFailedTests,pending:r.numPendingTests,todo:r.numTodoTests}}));if(!Array.isArray(expected)||expected.length!==2||expected.some(f=>selected[f.path]!==f.names.length)||new Set(expected.map(f=>f.path)).size!==2||!Array.isArray(r.testResults)||r.testResults.length!==2)fail('unit_manifest_or_files');
+            try{const r=report('unit.json'), expected=m.testFiles, selected={'tests/unit/campaign-preparation.test.ts':26,'tests/integration/campaign-request-storage.test.ts':19};console.log(JSON.stringify({unitActual:{total:r.numTotalTests,passed:r.numPassedTests,failed:r.numFailedTests,pending:r.numPendingTests,todo:r.numTodoTests}}));if(!Array.isArray(expected)||expected.length!==2||expected.some(f=>selected[f.path]!==f.names.length)||new Set(expected.map(f=>f.path)).size!==2||!Array.isArray(r.testResults)||r.testResults.length!==2)fail('unit_manifest_or_files');
               const seen=[];for(const file of r.testResults){const p=path.isAbsolute(file.name)?path.relative(repo,file.name):file.name, wanted=expected.find(f=>f.path===p);if(!wanted||seen.includes(p)||file.status!=='passed')fail('unit_file');seen.push(p);const actual=file.assertionResults.map(t=>t.fullName);if(new Set(actual).size!==actual.length||JSON.stringify([...actual].sort())!==JSON.stringify([...wanted.names].sort()))fail('unit_names');for(const t of file.assertionResults){console.log(JSON.stringify({file:p,name:t.fullName,status:t.status}));if(t.status!=='passed'||t.retryCount>0||t.retryReasons?.length)fail('unit_case');}}
               if(r.numTotalTests!==45||r.numPassedTests!==45||r.numFailedTests!==0||r.numPendingTests!==0||r.numTodoTests!==0)fail('unit_totals');if(read('unit-exit.json').code!==0||read('unit-exit.json').overflow)fail('unit_exit');console.log(JSON.stringify({unitPassed:45,unitTotal:45}));
             }catch(error){failures++;console.log(JSON.stringify({unitValidation:'failed',reason:error.message}));}
@@ -159,7 +159,7 @@ jobs:
         run: node "$CAMPAIGN_TASK_ROOT/control.mjs" setup
       - name: Run the 45 exact unit and PostgreSQL cases
         continue-on-error: true
-        run: node "$CAMPAIGN_TASK_ROOT/control.mjs" run unit pnpm exec vitest run tests/unit/campaign-preparation.test.ts packages/db/tests/integration/campaign-request-storage.test.ts --maxWorkers=1 --fileParallelism=false --retry=0 --reporter=json --silent
+        run: node "$CAMPAIGN_TASK_ROOT/control.mjs" run unit pnpm exec vitest run tests/unit/campaign-preparation.test.ts tests/integration/campaign-request-storage.test.ts --maxWorkers=1 --fileParallelism=false --retry=0 --reporter=json --silent
       - name: Install runner-only Chromium from the declared Playwright version
         run: node "$CAMPAIGN_TASK_ROOT/control.mjs" run chromium pnpm --filter @open-evals/web exec playwright install --with-deps chromium
       - name: Prepare only the authored browser namespace

@@ -65,6 +65,23 @@ from that application seal; remote publication separately preserves the full
 original repository tree. The lockfile, dependencies, SQL schema/migrations,
 Auth policy/provider, active CI and hosting configuration are unchanged.
 
+## Initial build correction
+
+The first published source, `124def7363756ca897f4697fd1e5491b4214239b`,
+triggered the existing automatic Vercel build. Deployment
+`dpl_7j6BkN8VfgVQMrAodt55sgqwiPkX` failed during the database package's
+TypeScript check. Its `tsconfig.json` includes `tests/**/*.ts`; placing a
+cross-application boundary test there pulled core and web source outside its
+package root and exposed unresolved web aliases. This was a test-placement
+error, not behavioral test evidence.
+
+The 19-case file was moved to the repository's `tests/integration/` area.
+Its actual PostgreSQL driver resolves from the database package's existing
+dependency using Node's `createRequire`, with no dependency or build-config
+change. The inactive job and source seal use the corrected exact path. The
+failed initial build is retained here; later build results belong in the
+publication receipt and do not imply the 53 cases ran.
+
 ## Pending verification
 
 The [new proposal](../../../proposals/campaign-request-checks.md) contains
@@ -74,9 +91,10 @@ It is a separate scope from the completed 55 compiler, 58 authoring and 71
 SDK/CLI checks. The new workflow and browser files are inactive examples;
 they must not be activated or run before explicit approval.
 
-No new test, product module import, installation, local server, database,
-browser, provider/model call, migration, release promotion or CI job was run
-to produce this source receipt. Local storage does not support a new build or
+None of the 53 new behavioral cases was executed. No local product-module
+import, installation, server, database or browser, provider/model call,
+migration, release promotion or new GitHub Actions job was run. Local storage
+does not support a new build or
 database environment under the existing Storage Guard reserve. A subsequent
 Vercel build/alias readback, if recorded, proves only deployment compilation
 and routing metadata; it cannot replace these behavioral checks or prove
