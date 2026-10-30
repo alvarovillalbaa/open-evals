@@ -1,5 +1,7 @@
 # open-evals
 
+Last updated: 2026-10-30
+
 `open-evals` is an MIT-licensed, provider-independent platform for two product functions:
 
 1. Evals
@@ -132,7 +134,25 @@ runtime and uses its JavaScript launcher. See [the client receipt](docs/results/
 for exact source, earlier harness failures and hosted proof limits. Temporary
 client CI has been retired.
 
+From a saved canonical version in Instructions, an editor can now select a
+mutable component and objective, explicitly preview six existing deterministic
+ablation operations, then save a pending preparation request. Server-owned
+fingerprints bind the request to immutable baseline source, including unused
+typed authoring data. Request and minimal audit metadata commit together in
+the existing tables. Read-only history and exact-ID recovery retain submitted
+requests; global navigation can discard unsubmitted local input.
+This creates no campaign row, candidates, approval decision, evaluation, model
+call or release change. Approver and self-approval policy remain future work.
+See [campaign requests](docs/campaign-requests.md), the
+[53-check proposal](docs/proposals/campaign-request-checks.md) and
+[source receipt](docs/results/2026/10-30/campaign-requests.md).
+Those 26 core, 19 PostgreSQL and eight browser checks are authored **unrun**;
+their temporary CI remains inactive pending separate approval. The earlier
+55/58/71 passing scopes above are independent evidence.
+
 The shared optimization control plane supports one-shot candidate generation, FAPO-style routing, hill climbing, structured GA, optional official GEPA, and optional DSPy engines. Target prompt campaigns cannot mutate their own judges or thresholds. Blind holdout examples are blocked from reflection.
+Those optimizer primitives are separate from the Instructions preparation flow;
+the new request endpoints do not invoke them.
 
 ## A/B/n
 

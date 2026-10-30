@@ -1,5 +1,5 @@
 import { Flag } from "lucide-react";
-import { EmptyState, PageHeader, StateGate, Stat, Table, Notice } from "../components";
+import { EmptyState, PageHeader, StateGate, Stat, Table, Notice, LinkButton } from "../components";
 import { loadCampaigns } from "@/lib/loaders";
 
 export default async function CampaignsPage() {
@@ -8,6 +8,7 @@ export default async function CampaignsPage() {
     <div className="grid gap-5">
       <PageHeader title="Campaigns" eyebrow="Improve" />
       <Notice>Campaign starts, release promotions, rollback, and live experiment changes require approval before mutation.</Notice>
+      <div className="flex flex-wrap items-center gap-3"><LinkButton href="/instructions">Prepare a request from a saved instruction</LinkButton><p className="text-sm text-muted-foreground">Request preparation records pending review only. It does not start a campaign or generate candidates.</p></div>
       <StateGate state={state}>
         {({ data }) => (
           <div className="grid gap-5">

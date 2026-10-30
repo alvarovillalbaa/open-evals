@@ -1,0 +1,181 @@
+// INACTIVE, UNRUN. Copy only to apps/web/tests/campaign-request-browser.spec.ts with its two scoped siblings.
+// T2 authored input, real disposable PostgreSQL and actual loopback Next routes; no0003 or live account/provider.
+import { expect, test, type BrowserContext, type Page, type TestInfo } from "@playwright/test";
+import { baseURL, fixture, casePrefix, caseRequestIds, prepareBrowserFixture, cleanupBrowserFixture, cleanupCase, inspectCase } from "./campaign-request-browser-seed";
+
+let prepared = false;
+test.beforeAll(async () => { await prepareBrowserFixture(); prepared = true; });
+test.afterAll(async () => { if (prepared) await cleanupBrowserFixture(); });
+const apiPath = `/api/v1/instructions/${fixture.definition}/campaign-requests`;
+const definitionURL = (index = 0) => `/instructions/${fixture.definition}?versionId=${fixture.versions[index]}`;
+const panel = (page: Page) => page.getByRole("region", { name: "Campaign preparation requests", exact: true });
+const history = (page: Page) => panel(page).getByRole("region", { name: "Stored preparation request history", exact: true });
+const pendingId = (page: Page) => panel(page).getByText("Request ID · retain this for recovery", { exact: true }).locator("..").locator("dd");
+const objective = "Authored objective: Café 🌊 — preserve <literal> text.\nNo evaluation result is claimed.";
+function deferred<T>() { let resolve!: (value: T) => void, reject!: (error: unknown) => void; const promise = new Promise<T>((done, fail) => { resolve = done; reject = fail; }); return { promise, resolve, reject }; }
+const pathname = (url: string) => new URL(url).pathname;
+
+async function scenario(page: Page, context: BrowserContext, info: TestInfo, number: number, operation: (tag: string) => Promise<void>) {
+  const tag = `${info.project.name}-${number}`;
+  const external: string[] = [], pageErrors: string[] = [], executionRequests: string[] = [];
+  await cleanupCase(tag);
+  await context.setExtraHTTPHeaders({ authorization: `Bearer ${fixture.writerKey}` });
+  await context.route("**/*", async route => {
+    const url = new URL(route.request().url());
+    if (url.origin === baseURL) return route.continue();
+    external.push(url.origin); await route.abort("blockedbyclient");
+  });
+  await context.routeWebSocket("**/*", socket => {
+    const url = new URL(socket.url());
+    if (url.protocol === "ws:" && url.hostname === "127.0.0.1" && url.port === "3217") socket.connectToServer();
+    else { external.push(url.origin); socket.close(); }
+  });
+  page.on("pageerror", error => pageErrors.push(error.message));
+  page.on("request", request => {
+    if (request.method() !== "GET" && /\/api\/v1\/(?:campaigns|eval-runs|experiments|releases|optimizer)(?:\/|$)/.test(pathname(request.url()))) executionRequests.push(pathname(request.url()));
+  });
+  await page.addInitScript(prefix => {
+    let counter = 0;
+    Object.defineProperty(globalThis.crypto, "randomUUID", { configurable: true, value: () => {
+      if (++counter > 32) throw new Error("Authored UUID fixture exhausted");
+      return `${prefix}${String(counter).padStart(12, "0")}`;
+    } });
+  }, casePrefix(tag));
+  try {
+    await operation(tag);
+    await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1)).toBe(true);
+    expect(external, "all browser HTTP/WebSocket requests stay on the selected loopback app").toEqual([]);
+    expect(pageErrors, "no global client exceptions").toEqual([]);
+    expect(executionRequests, "preparation must not call an execution endpoint").toEqual([]);
+  } finally {
+    await page.unrouteAll({ behavior: "wait" });
+    await context.unrouteAll({ behavior: "wait" });
+    await cleanupCase(tag);
+  }
+}
+
+async function openBaseline(page: Page, index = 0) {
+  await page.goto(definitionURL(index));
+  await expect(page.getByRole("heading", { name: fixture.stableKey, exact: true })).toBeVisible();
+  await expect(panel(page)).toBeVisible();
+  await expect(panel(page).getByLabel("Mutable component", { exact: true })).toHaveValue(fixture.mutable);
+  await expect(panel(page).getByLabel("Mutable component", { exact: true }).locator("option")).toHaveText([`${fixture.mutable} · instruction`]);
+}
+
+async function previewThroughUI(page: Page) {
+  const responsePromise = page.waitForResponse(response => pathname(response.url()) === `${apiPath}/preview` && response.request().method() === "POST");
+  await panel(page).getByRole("button", { name: "Preview request", exact: true }).click();
+  const response = await responsePromise; expect(response.status()).toBe(200);
+  const value = await response.json();
+  await expect(panel(page).getByRole("button", { name: "Save pending request", exact: true })).toBeEnabled();
+  return value;
+}
+
+test("campaign request saves a reviewed Unicode pending request and reloads its exact stored history", async ({ page, context }, info) => {
+  await scenario(page, context, info, 1, async tag => {
+    await openBaseline(page);
+    await panel(page).getByLabel("Objective", { exact: true }).fill(objective);
+    const id = await pendingId(page).textContent(); expect(caseRequestIds(tag)).toContain(id);
+    const preview = await previewThroughUI(page);
+    expect(preview.input).toEqual({ requestId: id, baselineVersionId: fixture.versions[0], componentId: fixture.mutable, objective });
+    expect(preview.approvalId).toBe(`campaign_request_${id}`);
+    expect(preview.payloadPreview.limits).toEqual({ providerCalls: 0, targetCalls: 0, judgeCalls: 0, releaseChanges: 0 });
+    expect(preview.payloadPreview.requestedOperations).toHaveLength(6);
+    const savedResponse = page.waitForResponse(response => pathname(response.url()) === apiPath && response.request().method() === "POST");
+    await panel(page).getByRole("button", { name: "Save pending request", exact: true }).click();
+    const response = await savedResponse; expect(response.status()).toBe(201);
+    const saved = await response.json();
+    expect(saved.request.status).toBe("pending"); expect(saved.request.requestId).toBe(id); expect(saved.request.payloadHash).toBe(preview.payloadHash);
+    await expect(panel(page).getByText("Request prepared; approval not granted; no campaign started.", { exact: true })).toBeVisible();
+    await page.reload();
+    await panel(page).getByRole("button", { name: "Reload requests", exact: true }).click();
+    await expect(history(page).getByText(id!, { exact: true })).toBeVisible();
+    await expect(history(page).getByText(objective, { exact: true })).toBeVisible();
+    const state = await inspectCase(tag); expect(state.requests).toHaveLength(1); expect(state.audits).toHaveLength(1);
+    expect(state.requests[0].payload_preview.objective).toBe(objective); expect(state.requests[0].payload_hash).toBe(preview.payloadHash);
+  });
+});
+
+test("campaign request invalidates held previews on input edits and saved-version context changes", async ({ page, context }, info) => {
+  await scenario(page, context, info, 2, async tag => {
+    await openBaseline(page);
+    const held = [deferred<any>(), deferred<any>()], release = [deferred<void>(), deferred<void>()], done = [deferred<void>(), deferred<void>()];
+    let index = 0;
+    await page.route(`**${apiPath}/preview`, async route => {
+      const selected = index++;
+      if (selected >= held.length) return route.continue();
+      try {
+        const response = await route.fetch(); held[selected].resolve(await response.json());
+        await release[selected].promise;
+        // The client may already have aborted this old request after editing/discarding.
+        try { await route.fulfill({ response }); } catch {}
+      } catch (error) { held[selected].reject(error); throw error; }
+      finally { done[selected].resolve(); }
+    });
+    try {
+      await panel(page).getByLabel("Objective", { exact: true }).fill("Authored old objective");
+      await panel(page).getByRole("button", { name: "Preview request", exact: true }).click();
+      const old = await held[0].promise;
+      await panel(page).getByLabel("Objective", { exact: true }).fill("Authored latest objective 🌊");
+      const latestId = await pendingId(page).textContent(); expect(latestId).not.toBe(old.input.requestId);
+      release[0].resolve(); await done[0].promise;
+      await expect(panel(page).getByLabel("Objective", { exact: true })).toHaveValue("Authored latest objective 🌊");
+      await expect(panel(page).getByRole("button", { name: "Save pending request", exact: true })).toHaveCount(0);
+      await panel(page).getByRole("button", { name: "Preview request", exact: true }).click();
+      const latest = await held[1].promise; expect(latest.input.requestId).toBe(latestId); expect(latest.input.objective).toBe("Authored latest objective 🌊");
+      await panel(page).getByRole("button", { name: "Discard unsubmitted request", exact: true }).click();
+      await page.getByRole("button", { name: new RegExp(fixture.versions[1]) }).click();
+      await expect(page).toHaveURL(`${baseURL}${definitionURL(1)}`);
+      release[1].resolve(); await done[1].promise;
+      await expect(panel(page).getByLabel("Objective", { exact: true })).toHaveValue("");
+      await expect(panel(page).getByRole("button", { name: "Save pending request", exact: true })).toHaveCount(0);
+      expect((await inspectCase(tag)).requests).toHaveLength(0);
+    } finally { for (const gate of release) gate.resolve(); await Promise.all(done.slice(0, Math.min(index, 2)).map(value => value.promise)); }
+  });
+});
+
+test("campaign request recovers a committed lost acknowledgement with the same frozen identity and no duplicate", async ({ page, context }, info) => {
+  await scenario(page, context, info, 3, async tag => {
+    await openBaseline(page); await panel(page).getByLabel("Objective", { exact: true }).fill(objective);
+    const preview = await previewThroughUI(page), committed = deferred<void>(); let posts = 0;
+    await page.route(`**${apiPath}`, async route => {
+      if (route.request().method() !== "POST") return route.continue();
+      posts += 1;
+      try {
+        const response = await route.fetch(); expect(response.status()).toBe(201);
+        const saved = await response.json(); expect(saved.request.payloadHash).toBe(preview.payloadHash); committed.resolve();
+        await route.abort("failed"); // Fault injection occurs only after the real transaction returned success.
+      } catch (error) { committed.reject(error); throw error; }
+    });
+    await panel(page).getByRole("button", { name: "Save pending request", exact: true }).click(); await committed.promise;
+    await expect(panel(page).getByRole("button", { name: "Check stored request", exact: true })).toBeEnabled();
+    await expect(panel(page).getByLabel("Objective", { exact: true })).toBeDisabled();
+    await expect(pendingId(page)).toHaveText(preview.input.requestId);
+    await panel(page).getByRole("button", { name: "Check stored request", exact: true }).click();
+    await expect(panel(page).getByText("Request prepared; approval not granted; no campaign started.", { exact: true })).toBeVisible();
+    const state = await inspectCase(tag); expect(posts).toBe(1); expect(state.requests).toHaveLength(1); expect(state.audits).toHaveLength(1);
+    expect(state.requests[0].id).toBe(preview.approvalId); expect(state.requests[0].payload_hash).toBe(preview.payloadHash);
+    await page.reload(); await expect(history(page).getByText(preview.input.requestId, { exact: true })).toBeVisible();
+  });
+});
+
+test("campaign request read-only project key reviews canonical history without write controls or locked-component selection", async ({ page, context }, info) => {
+  await scenario(page, context, info, 4, async tag => {
+    const input = { requestId: caseRequestIds(tag)[0], baselineVersionId: fixture.versions[0], componentId: fixture.mutable, objective };
+    const previewResponse = await context.request.post(`${baseURL}${apiPath}/preview`, { data: input, headers: { authorization: `Bearer ${fixture.writerKey}` } }); expect(previewResponse.status()).toBe(200);
+    const preview = await previewResponse.json();
+    const savedResponse = await context.request.post(`${baseURL}${apiPath}`, { data: { ...input, previewFingerprint: preview.payloadHash }, headers: { authorization: `Bearer ${fixture.writerKey}` } }); expect(savedResponse.status()).toBe(201);
+    await openBaseline(page); // Writer selection excludes the locked baseline component.
+    await expect(panel(page).getByLabel("Mutable component", { exact: true }).locator(`option[value="${fixture.locked}"]`)).toHaveCount(0);
+    await context.setExtraHTTPHeaders({ authorization: `Bearer ${fixture.readerKey}` });
+    await page.reload();
+    await expect(page.getByRole("region", { name: "Saved version review", exact: true })).toBeVisible();
+    await panel(page).getByRole("button", { name: "Reload requests", exact: true }).click();
+    await expect(history(page).getByText(input.requestId, { exact: true })).toBeVisible();
+    await expect(panel(page).getByText("Read-only access. You can reload request history; an authorized editor can prepare a request.", { exact: true })).toBeVisible();
+    await expect(panel(page).getByLabel("Objective", { exact: true })).toHaveCount(0);
+    await expect(panel(page).getByRole("combobox")).toHaveCount(0);
+    for (const name of ["Preview request", "Save pending request", "Retry same submission", "Discard unsubmitted request"]) await expect(panel(page).getByRole("button", { name, exact: true })).toHaveCount(0);
+    const state = await inspectCase(tag); expect(state.requests).toHaveLength(1); expect(state.audits).toHaveLength(1);
+  });
+});

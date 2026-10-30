@@ -1,0 +1,166 @@
+// INACTIVE, UNRUN. Approved runner may copy this to apps/web/tests/campaign-request-browser-seed.ts.
+import assert from "node:assert/strict";
+import { createRequire } from "node:module";
+import { preparePromptDraft, encodePromptVersionStorage } from "../../../packages/core/src/prompt-authoring";
+import { hashApiKey } from "../../../packages/core/src/auth";
+
+const { Pool } = createRequire(new URL("../../../packages/db/package.json", import.meta.url))("pg");
+export const marker = "open-evals-campaign-requests-v1";
+export const baseURL = "http://127.0.0.1:3217";
+export const fixture = {
+  workspace: "ws_demo", name: `${marker}:browser-owned`, project: "cr_browser_project_v1", target: "cr_browser_target_v1",
+  definition: "cr_browser_definition_v1", stableKey: "authored-browser-instruction", versions: ["cr_browser_baseline_v1", "cr_browser_baseline_v2"],
+  writerId: "cr_browser_writer_v1", readerId: "cr_browser_reader_v1",
+  writerKey: "oe_authored_campaign_browser_writer.disposable-only", readerKey: "oe_authored_campaign_browser_reader.disposable-only",
+  mutable: "decision_rules", locked: "locked_rules",
+} as const;
+
+export function guardEnvironment() {
+  assert.equal(process.env.CAMPAIGN_REQUEST_TEST_TARGET, "local-disposable");
+  assert.equal(process.env.CAMPAIGN_REQUEST_TEST_MARKER, marker);
+  const url = new URL(process.env.CAMPAIGN_REQUEST_TEST_DATABASE_URL ?? "missing:");
+  assert.ok(["postgres:", "postgresql:"].includes(url.protocol));
+  assert.ok(["127.0.0.1", "localhost", "[::1]"].includes(url.hostname));
+  assert.equal(url.pathname, "/campaign_requests_test");
+  assert.equal(url.search, ""); assert.equal(url.hash, "");
+  assert.equal(process.env.AUTH_MODE, "hosted");
+  const pepper = process.env.API_KEY_PEPPER;
+  assert.ok(typeof pepper === "string" && pepper.startsWith("authored-campaign-browser-") && pepper.length >= 48, "explicit ephemeral browser-fixture pepper required");
+  for (const name of ["NEXT_PUBLIC_SUPABASE_URL", "NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY", "NEXT_PUBLIC_SUPABASE_ANON_KEY", "SUPABASE_SERVICE_ROLE_KEY"]) assert.ok(!process.env[name], "Supabase must remain disabled in this fixture");
+  return { databaseURL: url.href, pepper };
+}
+
+type Client = { query(sql: string, values?: unknown[]): Promise<{ rows: any[] }> };
+async function database<T>(operation: (client: Client) => Promise<T>): Promise<T> {
+  const { databaseURL } = guardEnvironment();
+  const pool = new Pool({ connectionString: databaseURL, max: 1, connectionTimeoutMillis: 5_000, statement_timeout: 10_000 });
+  let client: any;
+  try {
+    client = await pool.connect();
+    const owner = (await client.query("select datname as name, obj_description(oid, 'pg_database') as marker from pg_database where datname = current_database()" )).rows;
+    assert.deepEqual(owner, [{ name: "campaign_requests_test", marker }]);
+    await client.query("begin");
+    try { const result = await operation(client); await client.query("commit"); return result; }
+    catch (error) { await client.query("rollback"); throw error; }
+  } finally { client?.release(); await pool.end(); }
+}
+
+export function casePrefix(tag: string) {
+  assert.match(tag, /^(desktop|narrow)-[1-4]$/);
+  const [profile, number] = tag.split("-");
+  return `7${profile === "desktop" ? "1" : "2"}0${number}0000-0000-4000-8000-`;
+}
+export function caseRequestIds(tag: string) { return Array.from({ length: 32 }, (_, index) => `${casePrefix(tag)}${String(index + 1).padStart(12, "0")}`); }
+const allRequestIds = () => ["desktop", "narrow"].flatMap(profile => [1, 2, 3, 4].flatMap(number => caseRequestIds(`${profile}-${number}`)));
+const approvalIds = (ids: string[]) => ids.map(id => `campaign_request_${id}`);
+
+function versions() {
+  const context = { workspaceId: fixture.workspace, actorId: `api_key:${fixture.writerId}`, definitionId: fixture.definition };
+  const components = [
+    { id: fixture.locked, kind: "safety", locked: true, content: "Never claim that a tool ran without evidence." },
+    { id: fixture.mutable, kind: "instruction", locked: false, content: "Ask one clear question before suggesting a next step. Café 🌊." },
+  ];
+  const first = preparePromptDraft({ versionId: fixture.versions[0], components }, context);
+  const second = preparePromptDraft({ versionId: fixture.versions[1], baseVersionId: first.version.id, components: components.map(component => component.locked ? component : { ...component, content: `${component.content} Use concise language.` }) }, context, first.version);
+  return [first, second].map(preview => ({ version: preview.version, storage: encodePromptVersionStorage(preview, context) }));
+}
+
+async function namespace(client: Client) {
+  const workspace = (await client.query("select id, name, mode from workspaces where id = $1 for update", [fixture.workspace])).rows;
+  if (!workspace.length) return false;
+  assert.deepEqual(workspace, [{ id: fixture.workspace, name: fixture.name, mode: "hosted" }], "refuse an existing unowned ws_demo");
+  for (const table of ["connections", "ingest_jobs", "raw_artifacts", "traces", "eval_packs", "eval_sets", "datasets", "benchmarks", "scenario_suites", "context_packs", "run_plans", "eval_runs", "calibration_runs", "optimization_campaigns", "online_experiments", "workflow_runs", "queue_messages"]) {
+    assert.equal((await client.query(`select count(*)::int as count from ${table} where workspace_id = $1`, [fixture.workspace])).rows[0].count, 0, `unexpected rows in owned fixture ${table}`);
+  }
+  assert.equal((await client.query("select count(*)::int as count from workspace_memberships where workspace_id = $1", [fixture.workspace])).rows[0].count, 0);
+  const projects = (await client.query("select id, workspace_id, name, environment from projects where workspace_id = $1 or id = $2", [fixture.workspace, fixture.project])).rows;
+  for (const row of projects) assert.deepEqual(row, { id: fixture.project, workspace_id: fixture.workspace, name: fixture.name, environment: "test" });
+  const targets = (await client.query("select id, workspace_id, project_id, name, kind from targets where workspace_id = $1 or id = $2", [fixture.workspace, fixture.target])).rows;
+  for (const row of targets) assert.deepEqual(row, { id: fixture.target, workspace_id: fixture.workspace, project_id: fixture.project, name: fixture.name, kind: "prompt" });
+  const definitions = (await client.query("select id, workspace_id, target_id, stable_key from prompt_definitions where workspace_id = $1 or id = $2", [fixture.workspace, fixture.definition])).rows;
+  for (const row of definitions) assert.deepEqual(row, { id: fixture.definition, workspace_id: fixture.workspace, target_id: fixture.target, stable_key: fixture.stableKey });
+  const keys = (await client.query("select id, name, project_id from project_api_keys where project_id = $1 or id = any($2::text[])", [fixture.project, [fixture.writerId, fixture.readerId]])).rows;
+  for (const key of keys) { assert.ok([fixture.writerId, fixture.readerId].includes(key.id)); assert.equal(key.name, fixture.name); assert.equal(key.project_id, fixture.project); }
+  const stored = (await client.query("select id, prompt_definition_id, compiled_text, components, parent_version_ids, content_hash, status from prompt_versions where prompt_definition_id = $1 or id = any($2::text[]) order by id", [fixture.definition, [...fixture.versions]])).rows;
+  const expected = versions().map(({ version, storage }) => ({ id: version.id, prompt_definition_id: fixture.definition, compiled_text: version.compiledText, components: storage, parent_version_ids: version.parentVersionIds, content_hash: version.contentHash, status: "draft" }));
+  for (const row of stored) assert.deepEqual(row, expected.find(item => item.id === row.id), "existing baseline is not the exact authored fixture");
+  for (const table of ["prompt_components", "prompt_releases"]) assert.equal((await client.query(`select count(*)::int as count from ${table} where prompt_definition_id = $1`, [fixture.definition])).rows[0].count, 0);
+  return true;
+}
+
+async function ownRequests(client: Client, requestIds: string[]) {
+  const ids = approvalIds(requestIds);
+  const requests = (await client.query("select * from approval_requests where id = any($1::text[]) for update", [ids])).rows;
+  for (const row of requests) {
+    assert.equal(row.workspace_id, fixture.workspace); assert.equal(row.action, "start_optimization_campaign");
+    assert.equal(row.requester_id, `api_key:${fixture.writerId}`); assert.equal(row.status, "pending");
+    assert.equal(row.payload_preview.schemaVersion, "prompt-ablation-request-v1");
+    assert.equal(row.payload_preview.definitionId, fixture.definition);
+    assert.ok(fixture.versions.includes(row.payload_preview.baselineVersionId));
+    assert.ok(requestIds.includes(row.payload_preview.requestId));
+    assert.equal(row.id, `campaign_request_${row.payload_preview.requestId}`);
+  }
+  const audits = (await client.query("select * from audit_events where resource_id = any($1::text[]) for update", [ids])).rows;
+  for (const row of audits) {
+    assert.equal(row.workspace_id, fixture.workspace); assert.equal(row.actor_user_id, `api_key:${fixture.writerId}`);
+    assert.equal(row.action, "prompt.campaign.requested"); assert.equal(row.resource_type, "approval_request");
+    assert.equal(row.metadata.definitionId, fixture.definition); assert.ok(requestIds.includes(row.metadata.requestId));
+    assert.equal(row.resource_id, `campaign_request_${row.metadata.requestId}`);
+  }
+  return { requests, audits };
+}
+
+export async function prepareBrowserFixture() {
+  const { pepper } = guardEnvironment();
+  await database(async client => {
+    await client.query("select pg_advisory_xact_lock(hashtext($1))", [`${marker}:browser`]);
+    await namespace(client);
+    await client.query("insert into workspaces (id, name, mode) values ($1, $2, 'hosted') on conflict (id) do nothing", [fixture.workspace, fixture.name]);
+    await client.query("insert into projects (id, workspace_id, name, environment) values ($1, $2, $3, 'test') on conflict (id) do nothing", [fixture.project, fixture.workspace, fixture.name]);
+    await client.query("insert into targets (id, workspace_id, project_id, name, kind) values ($1, $2, $3, $4, 'prompt') on conflict (id) do nothing", [fixture.target, fixture.workspace, fixture.project, fixture.name]);
+    await client.query("insert into prompt_definitions (id, workspace_id, target_id, stable_key) values ($1, $2, $3, $4) on conflict (id) do nothing", [fixture.definition, fixture.workspace, fixture.target, fixture.stableKey]);
+    for (const [index, { version, storage }] of versions().entries()) await client.query("insert into prompt_versions (id, prompt_definition_id, compiled_text, components, parent_version_ids, content_hash, status, created_at) values ($1, $2, $3, $4::jsonb, $5::text[], $6, 'draft', $7) on conflict (id) do nothing", [version.id, fixture.definition, version.compiledText, JSON.stringify(storage), version.parentVersionIds, version.contentHash, `2026-10-30T00:0${index}:00.000Z`]);
+    for (const [id, key, scopes] of [[fixture.writerId, fixture.writerKey, ["prompts:read", "prompts:write"]], [fixture.readerId, fixture.readerKey, ["prompts:read"]]] as const) {
+      await client.query("insert into project_api_keys (id, project_id, key_hash, scope, scopes, name, key_prefix) values ($1, $2, $3, 'test', $4::text[], $5, 'oe_authored') on conflict (id) do nothing", [id, fixture.project, hashApiKey(key, pepper), [...scopes], fixture.name]);
+      const stored = (await client.query("select project_id, key_hash, scope, scopes, name, key_prefix, revoked_at from project_api_keys where id = $1", [id])).rows;
+      assert.deepEqual(stored, [{ project_id: fixture.project, key_hash: hashApiKey(key, pepper), scope: "test", scopes: [...scopes], name: fixture.name, key_prefix: "oe_authored", revoked_at: null }]);
+    }
+    await namespace(client);
+    const all = await ownRequests(client, allRequestIds());
+    assert.equal((await client.query("select count(*)::int as count from approval_requests where workspace_id = $1", [fixture.workspace])).rows[0].count, all.requests.length);
+    assert.equal((await client.query("select count(*)::int as count from audit_events where workspace_id = $1", [fixture.workspace])).rows[0].count, all.audits.length);
+  });
+}
+
+export async function cleanupCase(tag: string) {
+  await database(async client => {
+    if (!await namespace(client)) return;
+    const owned = await ownRequests(client, caseRequestIds(tag));
+    await client.query("delete from audit_events where id = any($1::text[]) and workspace_id = $2", [owned.audits.map(row => row.id), fixture.workspace]);
+    await client.query("delete from approval_requests where id = any($1::text[]) and workspace_id = $2", [owned.requests.map(row => row.id), fixture.workspace]);
+  });
+}
+
+export async function inspectCase(tag: string) {
+  return database(async client => {
+    assert.equal(await namespace(client), true); // Also asserts zero campaign/eval/workflow/release rows.
+    return ownRequests(client, caseRequestIds(tag));
+  });
+}
+
+export async function cleanupBrowserFixture() {
+  for (const profile of ["desktop", "narrow"]) for (const number of [1, 2, 3, 4]) await cleanupCase(`${profile}-${number}`);
+  await database(async client => {
+    if (!await namespace(client)) return;
+    assert.equal((await client.query("select count(*)::int as count from approval_requests where workspace_id = $1", [fixture.workspace])).rows[0].count, 0);
+    assert.equal((await client.query("select count(*)::int as count from audit_events where workspace_id = $1", [fixture.workspace])).rows[0].count, 0);
+    const keys = (await client.query("select id, name, project_id from project_api_keys where project_id = $1", [fixture.project])).rows;
+    for (const key of keys) { assert.ok([fixture.writerId, fixture.readerId].includes(key.id)); assert.equal(key.name, fixture.name); }
+    await client.query("delete from project_api_keys where id = any($1::text[]) and project_id = $2", [[fixture.writerId, fixture.readerId], fixture.project]);
+    await client.query("delete from prompt_versions where id = any($1::text[]) and prompt_definition_id = $2", [[...fixture.versions], fixture.definition]);
+    await client.query("delete from prompt_definitions where id = $1 and workspace_id = $2", [fixture.definition, fixture.workspace]);
+    await client.query("delete from targets where id = $1 and workspace_id = $2", [fixture.target, fixture.workspace]);
+    await client.query("delete from projects where id = $1 and workspace_id = $2", [fixture.project, fixture.workspace]);
+    await client.query("delete from workspaces where id = $1 and name = $2", [fixture.workspace, fixture.name]);
+  });
+}

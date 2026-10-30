@@ -1,0 +1,28 @@
+// INACTIVE, UNRUN. Copy only to apps/web/tests/campaign-request-browser.config.ts in the approved disposable job.
+import { defineConfig } from "@playwright/test";
+import { fileURLToPath } from "node:url";
+import { baseURL, guardEnvironment } from "./campaign-request-browser-seed";
+
+const { databaseURL, pepper } = guardEnvironment();
+export default defineConfig({
+  testDir: ".", testMatch: "campaign-request-browser.spec.ts",
+  fullyParallel: false, workers: 1, retries: 0, forbidOnly: true,
+  timeout: 45_000, globalTimeout: 300_000, expect: { timeout: 10_000 },
+  reporter: [["json"]], outputDir: ".campaign-request-browser-output", preserveOutput: "never",
+  use: { baseURL, browserName: "chromium", actionTimeout: 10_000, navigationTimeout: 30_000, trace: "off", video: "off", screenshot: "off", serviceWorkers: "block" },
+  projects: [
+    { name: "desktop", use: { viewport: { width: 1440, height: 1000 }, isMobile: false, hasTouch: false } },
+    { name: "narrow", use: { viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true } },
+  ],
+  webServer: {
+    command: "pnpm --filter @open-evals/web dev:e2e", cwd: fileURLToPath(new URL("../../../", import.meta.url)), url: `${baseURL}/login`, reuseExistingServer: false,
+    timeout: 120_000, stdout: "ignore", stderr: "pipe",
+    env: {
+      AUTH_MODE: "hosted", AUTH_SECRET: "authored-campaign-browser-session-fixture-only", API_KEY_PEPPER: pepper,
+      DATABASE_URL: databaseURL, SUPABASE_DB_URL: "", NEXT_PUBLIC_SUPABASE_URL: "", NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: "",
+      NEXT_PUBLIC_SUPABASE_ANON_KEY: "", SUPABASE_SERVICE_ROLE_KEY: "", SUPABASE_JWT_SECRET: "", HOSTED_DEMO_API_KEY_HASH: "",
+      WORKFLOWS_ENABLED: "false", EVE_ENABLED: "false", PYTHON_OPTIMIZERS_ENABLED: "false", GEPA_ENABLED: "false", DSPY_ENABLED: "false", SMAC_ENABLED: "false",
+      OPENAI_API_KEY: "", AI_GATEWAY_API_KEY: "", VERCEL_OIDC_TOKEN: "", VERCEL_TOKEN: "", NEXT_TELEMETRY_DISABLED: "1",
+    },
+  },
+});

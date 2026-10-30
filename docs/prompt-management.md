@@ -1,6 +1,6 @@
 # Prompt Management
 
-Last updated: 2026-10-28
+Last updated: 2026-10-30
 
 Prompt definitions contain stable identifiers, target links, variable schemas, component schemas, locked components, mutable components, permitted scopes, and baseline versions.
 
@@ -132,6 +132,31 @@ stable-key constraint. No schema, dependency or Auth provider changes are made.
 The exact API, retry and access policy is in the
 [authoring contract](proposals/prompt-authoring-contract.md). Verification status
 and unexecuted checks are in the [authoring receipt](results/2026/10-28/prompt-authoring.md).
+
+## Campaign preparation requests
+
+A saved canonical version now exposes a request form in Instructions. Select a
+mutable component and objective, then explicitly preview before saving a pending
+request. Every edit invalidates the preview and request identity. The server
+reconstructs the saved baseline and owns the content, semantic, intent and
+payload fingerprints. Semantic identity includes typed source bindings and
+unused authoring blocks, even when rendered text is unchanged.
+
+Saving inserts an existing `approval_requests` row and minimal audit event in
+one transaction; it creates no `optimization_campaigns` row or candidate version.
+The same reviewed ID and intent recover the original request after an uncertain
+acknowledgement. History is scoped to this definition and saved baseline through
+the existing `requireInstructionAuth` ownership rules. Malformed or stale stored
+requests fail the list with 409 rather than becoming executable approval.
+
+Submitted stored requests remain recoverable; global app navigation can discard
+unsubmitted local input. Approval decisions, approver/self-approval policy,
+campaign execution, evaluations and releases remain outside this increment.
+There is no migration, dependency or Auth-policy change. The
+[campaign request contract](campaign-requests.md) owns the API, recovery and
+retention details; its [53 authored checks](proposals/campaign-request-checks.md)
+are unrun pending separate execution/temporary-CI approval.
+
 SDK resolution and Python string-patch optimizers remain separate consumers;
 promotion, rollback, live experiments and structural work orders retain their
 approval gates. The wider Features requirements—SDK-only evidence entry,

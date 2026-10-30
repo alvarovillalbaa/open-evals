@@ -9,6 +9,7 @@ import {
   draftInput, newAuthoringId, previewMatchesDraft, storedVersionMatches,
   type BindingRow, type ComponentRow, type EditorDraft
 } from "./instruction-authoring-client";
+import { CampaignRequestPanel } from "./campaign-request-panel";
 
 const inputClass = "min-h-10 min-w-0 w-full rounded-md border border-border bg-panel px-3 py-2 text-base disabled:opacity-60";
 const buttonClass = "inline-flex min-h-10 items-center justify-center gap-2 rounded-md border border-border bg-panel px-3 text-sm font-medium hover:bg-muted disabled:cursor-not-allowed disabled:opacity-50";
@@ -28,6 +29,7 @@ export function InstructionEditor({ initialDetail }: { initialDetail: Instructio
   const [error, setError] = useState("");
   const [signInRequired, setSignInRequired] = useState(false);
   const [notice, setNotice] = useState("");
+  const [campaignWork, setCampaignWork] = useState(false);
   const mounted = useRef(false);
   const request = useRef<RequestOwner | null>(null);
   const revision = useRef(0);
@@ -50,11 +52,11 @@ export function InstructionEditor({ initialDetail }: { initialDetail: Instructio
   }, []);
 
   useEffect(() => {
-    if (!draft) return;
+    if (!draft && !campaignWork) return;
     function warnUnsaved(event: BeforeUnloadEvent) { event.preventDefault(); event.returnValue = ""; }
     window.addEventListener("beforeunload", warnUnsaved);
     return () => window.removeEventListener("beforeunload", warnUnsaved);
-  }, [draft]);
+  }, [draft, campaignWork]);
 
   useEffect(() => { if (error) errorRef.current?.focus(); }, [error]);
 
@@ -95,7 +97,7 @@ export function InstructionEditor({ initialDetail }: { initialDetail: Instructio
   }
 
   function startDraft(base?: PromptVersion) {
-    if (!detail.canWrite || draft || busy || attemptRef.current) return;
+    if (!detail.canWrite || draft || busy || attemptRef.current || campaignWork) return;
     try {
       const next = draftFromVersion(newAuthoringId("prompt"), base);
       revision.current += 1;
@@ -119,7 +121,7 @@ export function InstructionEditor({ initialDetail }: { initialDetail: Instructio
   }
 
   async function loadVersion(versionId: string, afterSave = false) {
-    if (request.current?.kind === "save" || (!afterSave && (draft || attemptRef.current))) return;
+    if (request.current?.kind === "save" || (!afterSave && (draft || attemptRef.current || campaignWork))) return;
     const owner = beginRequest("load");
     try {
       const loaded = await authoringRequest<InstructionDetailDTO>(`${apiPath}?versionId=${encodeURIComponent(versionId)}`, { method: "GET" }, owner.controller.signal);
@@ -236,7 +238,7 @@ export function InstructionEditor({ initialDetail }: { initialDetail: Instructio
   return (
     <div className="grid min-w-0 gap-5">
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <Link href="/instructions" className="min-h-10 py-2 text-sm underline" onClick={event => { if (draft && !window.confirm("Leave this page and discard the unsaved draft? A pending save may already have completed.")) event.preventDefault(); }}>All instructions</Link>
+        <Link href="/instructions" className="min-h-10 py-2 text-sm underline" onClick={event => { if ((draft || campaignWork) && !window.confirm(draft ? "Leave this page and discard the unsaved draft? A pending save may already have completed." : "Leave this page and discard the local request input? A submitted request may already be stored; retain its request ID for recovery.")) event.preventDefault(); }}>All instructions</Link>
         <span className="text-sm text-muted-foreground">{detail.canWrite ? "Editor access" : "Read-only access"}</span>
       </div>
       <div ref={errorRef} tabIndex={-1} role={error ? "alert" : undefined} className={error ? "rounded-md border border-danger bg-panel p-3 text-sm text-danger" : "sr-only"}>
@@ -247,12 +249,12 @@ export function InstructionEditor({ initialDetail }: { initialDetail: Instructio
       <section aria-labelledby="versions-heading" className="min-w-0 border border-border bg-panel p-4">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <h2 id="versions-heading" className="font-semibold">Saved versions</h2>
-          <button type="button" disabled={Boolean(draft) || Boolean(busy) || !selected} className={buttonClass} onClick={() => { if (selected) void loadVersion(selected.id); }}>Reload version</button>
+          <button type="button" disabled={Boolean(draft) || Boolean(busy) || campaignWork || !selected} className={buttonClass} onClick={() => { if (selected) void loadVersion(selected.id); }}>Reload version</button>
         </div>
         {detail.versions.length ? (
           <div className="mt-3 grid gap-2 sm:grid-cols-2">
             {detail.versions.map(version => (
-              <button type="button" key={version.id} aria-pressed={selected?.id === version.id} disabled={Boolean(draft) || Boolean(busy)} onClick={() => void loadVersion(version.id)} className={`grid min-w-0 gap-1 rounded-md border p-3 text-left disabled:opacity-60 ${selected?.id === version.id ? "border-accent bg-accent-soft" : "border-border hover:bg-muted"}`}>
+              <button type="button" key={version.id} aria-pressed={selected?.id === version.id} disabled={Boolean(draft) || Boolean(busy) || campaignWork} onClick={() => void loadVersion(version.id)} className={`grid min-w-0 gap-1 rounded-md border p-3 text-left disabled:opacity-60 ${selected?.id === version.id ? "border-accent bg-accent-soft" : "border-border hover:bg-muted"}`}>
                 <span className="break-all font-mono text-xs">{version.id}</span>
                 <span className="text-sm">{version.status} · {version.authoring}</span>
                 <time dateTime={version.createdAt} className="text-xs text-muted-foreground">{version.createdAt.replace("T", " ").replace(/\.\d+Z$/, " UTC")}</time>
@@ -261,13 +263,14 @@ export function InstructionEditor({ initialDetail }: { initialDetail: Instructio
           </div>
         ) : <p className="mt-3 text-sm text-muted-foreground">No versions saved. Compose the first draft for this definition.</p>}
         {draft ? <p className="mt-3 text-xs text-muted-foreground">Finish or discard the current draft before changing saved versions.</p> : null}
+        {campaignWork ? <p className="mt-3 text-xs text-muted-foreground">Finish or discard the unsubmitted preparation request below before changing versions. A submitted request stays frozen until its stored outcome is confirmed.</p> : null}
       </section>
 
       {!draft && selected ? (
         <section className="grid min-w-0 gap-4 border border-border bg-panel p-4" aria-label="Saved version review">
           <div className="flex flex-wrap items-start justify-between gap-3">
             <div><h2 className="font-semibold">Saved version · {selected.status}</h2><p className="mt-1 break-all font-mono text-xs text-muted-foreground">{selected.id}</p></div>
-            {detail.canWrite && selected.version ? <button type="button" className={primaryClass} disabled={Boolean(busy)} onClick={() => startDraft(selected.version)}><GitBranch className="size-4" aria-hidden="true" />Compose version</button> : null}
+            {detail.canWrite && selected.version ? <button type="button" className={primaryClass} disabled={Boolean(busy) || campaignWork} onClick={() => startDraft(selected.version)}><GitBranch className="size-4" aria-hidden="true" />Compose version</button> : null}
           </div>
           {selected.version ? <VersionReview version={selected.version} /> : <><p className="text-sm text-muted-foreground">{selected.readOnlyReason === "invalid_authored_version" ? "This stored version failed authoring validation. Its original text and hash are shown, and it cannot be used as a base." : "This historical record has no verified authoring source. Its original text and hash remain read-only."}</p><HashValue label="Original content hash" value={selected.contentHash} /><HashValue label="Parent versions" value={selected.parentVersionIds.join(", ") || "none"} /><PromptText title="Stored compiled text" text={selected.compiledText} /></>}
           <p className="text-xs text-muted-foreground">Saved snapshots are immutable. Authoring does not promote releases or start experiments.</p>
@@ -275,6 +278,8 @@ export function InstructionEditor({ initialDetail }: { initialDetail: Instructio
       ) : !draft && detail.canWrite && !detail.versions.length ? (
         <section className="grid justify-items-start gap-3 border border-dashed border-border bg-panel p-5"><h2 className="font-semibold">Compose the first version</h2><p className="text-sm text-muted-foreground">Start with a literal instruction or enable typed bindings and operation blocks.</p><button type="button" className={primaryClass} onClick={() => startDraft()}><Plus className="size-4" aria-hidden="true" />Compose first version</button></section>
       ) : null}
+
+      {!draft && selected?.version ? <CampaignRequestPanel definitionId={detail.definition.id} version={selected.version} canWrite={detail.canWrite} onWorkChange={setCampaignWork} /> : null}
 
       {draft ? (
         <section className="grid min-w-0 gap-5 border border-border bg-panel p-4" aria-labelledby="draft-heading">

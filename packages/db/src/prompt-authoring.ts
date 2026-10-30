@@ -49,6 +49,25 @@ export interface PreparedPromptAuthoringVersion {
   auditMetadata: { sourceFingerprint: string; componentCount: number };
 }
 
+export interface PromptCampaignRequestRow {
+  id: string;
+  workspaceId: string;
+  action: string;
+  requesterId: string;
+  status: string;
+  risk: string;
+  summary: string;
+  payloadHash: string;
+  payloadPreview: unknown;
+  createdAt: Date | string;
+}
+
+export interface PreparedPromptCampaignApproval {
+  payloadHash: string;
+  requestFingerprint: string;
+  payloadPreview: Record<string, unknown>;
+}
+
 export class PromptAuthoringStoreError extends Error {
   constructor(public readonly status: number, public readonly code: string) {
     super(code);
@@ -250,6 +269,116 @@ export async function savePromptAuthoringVersion(input: {
     });
     return { row: inserted.rows[0], replayed: false };
   }));
+}
+
+const CAMPAIGN_REQUEST_COLUMNS = `a.id, a.workspace_id as "workspaceId", a.action,
+  a.requester_id as "requesterId", a.status, a.risk, a.summary,
+  a.payload_hash as "payloadHash", a.payload_preview as "payloadPreview", a.created_at as "createdAt"`;
+
+/** Uses the same underlying instruction ownership policy; no campaign catalog row is created. */
+export async function listPromptCampaignRequests(input: {
+  scope: PromptAuthoringScope;
+  definitionId: string;
+  baselineVersionId: string;
+  requestId?: string;
+}): Promise<{ rows: PromptCampaignRequestRow[]; hasMore: boolean }> {
+  validateScope(input.scope);
+  identifier(input.definitionId);
+  identifier(input.baselineVersionId);
+  const approvalId = input.requestId === undefined ? null : campaignApprovalId(input.requestId);
+  return storeOperation(async () => {
+    const rows = await queryRows<PromptCampaignRequestRow>(
+      `select ${CAMPAIGN_REQUEST_COLUMNS} from approval_requests a
+        where a.workspace_id = $1 and a.action = 'start_optimization_campaign'
+          and a.payload_preview ->> 'schemaVersion' = 'prompt-ablation-request-v1'
+          and a.payload_preview ->> 'definitionId' = $2
+          and a.payload_preview ->> 'baselineVersionId' = $4
+          and ($5::text is null or a.id = $5)
+          and exists (select 1 ${SCOPED_DEFINITION})
+        order by a.created_at desc, a.id desc limit 21`,
+      [input.scope.workspaceId, input.definitionId, input.scope.projectId ?? null, input.baselineVersionId, approvalId]
+    );
+    return { rows: rows.slice(0, 20), hasMore: rows.length > 20 };
+  });
+}
+
+export async function savePromptCampaignRequest(input: {
+  scope: PromptAuthoringScope;
+  definitionId: string;
+  baselineVersionId: string;
+  requestId: string;
+  previewFingerprint: string;
+  prepare: (baseRow: PromptVersionRow) => PreparedPromptCampaignApproval | Promise<PreparedPromptCampaignApproval>;
+  verifyReplay: (row: PromptCampaignRequestRow, prepared: PreparedPromptCampaignApproval) => void | Promise<void>;
+}): Promise<{ row: PromptCampaignRequestRow; replayed: boolean }> {
+  validateScope(input.scope);
+  identifier(input.definitionId);
+  identifier(input.baselineVersionId);
+  fingerprint(input.previewFingerprint);
+  const approvalId = campaignApprovalId(input.requestId);
+  if (typeof input.prepare !== "function" || typeof input.verifyReplay !== "function") fail(422, "campaign_preparation_required");
+  return storeOperation(() => withTransaction(async client => {
+    const definition = (await client.query<PromptDefinitionRow>(
+      `select ${DEFINITION_COLUMNS} ${SCOPED_DEFINITION} for update of d`,
+      [input.scope.workspaceId, input.definitionId, input.scope.projectId ?? null]
+    )).rows[0];
+    if (!definition) fail(404, "prompt_definition_not_found");
+    if (definition.targetId) await requireTarget(client, input.scope, definition.targetId);
+    const base = (await client.query<PromptVersionRow>(
+      `select ${VERSION_COLUMNS} from prompt_versions v where v.prompt_definition_id = $1 and v.id = $2 for share`,
+      [input.definitionId, input.baselineVersionId]
+    )).rows[0];
+    if (!base) fail(404, "prompt_base_version_not_found");
+    const prepared = await input.prepare(base);
+    fingerprint(prepared.payloadHash);
+    fingerprint(prepared.requestFingerprint);
+    if (prepared.payloadHash !== input.previewFingerprint) fail(409, "campaign_preview_stale");
+    const payload = object(prepared.payloadPreview);
+    if (!payload || payload.schemaVersion !== "prompt-ablation-request-v1"
+      || payload.workspaceId !== input.scope.workspaceId || payload.actorId !== input.scope.actorId
+      || payload.definitionId !== input.definitionId || payload.baselineVersionId !== input.baselineVersionId
+      || payload.requestId !== input.requestId || payload.requestFingerprint !== prepared.requestFingerprint) {
+      fail(422, "campaign_prepared_identity_invalid");
+    }
+    const json = JSON.stringify(payload);
+    if (!json || Buffer.byteLength(json, "utf8") > 64 * 1024 || !databaseText(json)) fail(422, "campaign_prepared_payload_invalid");
+    const existing = (await client.query<PromptCampaignRequestRow>(
+      `select ${CAMPAIGN_REQUEST_COLUMNS} from approval_requests a
+        where a.workspace_id = $1 and a.id = $2 for update`,
+      [input.scope.workspaceId, approvalId]
+    )).rows[0];
+    if (existing) {
+      if (existing.action !== "start_optimization_campaign" || existing.requesterId !== input.scope.actorId
+        || existing.payloadHash !== prepared.payloadHash) fail(409, "campaign_request_identity_conflict");
+      await input.verifyReplay(existing, prepared);
+      return { row: existing, replayed: true };
+    }
+    const inserted = (await client.query<PromptCampaignRequestRow>(
+      `insert into approval_requests as a
+        (id, workspace_id, action, requester_id, status, risk, summary, payload_hash, payload_preview)
+        values ($1, $2, 'start_optimization_campaign', $3, 'pending', 'medium', $4, $5, $6::jsonb)
+        on conflict (id) do nothing returning ${CAMPAIGN_REQUEST_COLUMNS}`,
+      [approvalId, input.scope.workspaceId, input.scope.actorId,
+        "Prepare six deterministic draft ablation hypotheses; no evaluations or release changes", prepared.payloadHash, json]
+    )).rows[0];
+    if (!inserted) fail(409, "campaign_request_identity_conflict");
+    await audit(client, input.scope, "prompt.campaign.requested", "approval_request", approvalId, {
+      definitionId: input.definitionId,
+      baselineVersionId: input.baselineVersionId,
+      requestId: input.requestId,
+      payloadHash: prepared.payloadHash,
+      requestFingerprint: prepared.requestFingerprint,
+      candidateCountRequested: 6
+    });
+    return { row: inserted, replayed: false };
+  }));
+}
+
+function campaignApprovalId(requestId: string): string {
+  if (typeof requestId !== "string" || !/^[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}$/.test(requestId)) {
+    fail(422, "campaign_request_id_invalid");
+  }
+  return `campaign_request_${requestId}`;
 }
 
 async function requireTarget(client: PoolClient, scope: PromptAuthoringScope, targetId: string) {
