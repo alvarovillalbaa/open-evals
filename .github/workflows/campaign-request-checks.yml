@@ -183,12 +183,12 @@ jobs:
             const s=fs.lstatSync(root), marker=fs.lstatSync(path.join(root,'owner'));
             if(path.dirname(root)!==fs.realpathSync(process.env.RUNNER_TEMP)||!path.basename(root).startsWith('campaign-request-checks-')||!s.isDirectory()||s.isSymbolicLink()||!marker.isFile()||marker.isSymbolicLink()||marker.size>128||String(s.dev)!==process.env.CAMPAIGN_TASK_DEV||String(s.ino)!==process.env.CAMPAIGN_TASK_INO||fs.readFileSync(path.join(root,'owner'),'utf8')!==process.env.CAMPAIGN_TASK_TOKEN)fail();
             const secrets=[process.env.AUTH_SECRET,process.env.API_KEY_PEPPER,process.env.DATABASE_URL,process.env.CAMPAIGN_REQUEST_TEST_DATABASE_URL,process.env.CAMPAIGN_TASK_TOKEN,'oe_authored_campaign_browser_writer.disposable-only','oe_authored_campaign_browser_reader.disposable-only'].filter(x=>typeof x==='string'&&x.length>0);
-            function clean(value){
+            function clean(value,limit=2000,head=false){
               let text=String(value).replace(/\x1b\[[0-?]*[ -/]*[@-~]/g,'').replace(/[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]/g,'');
               for(const secret of secrets)text=text.split(secret).join('[redacted]');
               text=text.replace(/Bearer\s+[^\s"',}]+/gi,'Bearer [redacted]').replace(/postgres(?:ql)?:\/\/[^\s"'<>]+/gi,'[database-url-redacted]').replace(/oe_authored_[A-Za-z0-9._-]+/g,'[fixture-key-redacted]');
               text=text.split(root).join('[owned-task]').split(process.cwd()).join('[repository]');
-              return Buffer.from(text).subarray(-2000).toString('utf8');
+              const bytes=Buffer.from(text);return (head?bytes.subarray(0,limit):bytes.subarray(-limit)).toString('utf8');
             }
             function read(name,limit){
               const file=path.join(root,name);let before;
@@ -198,7 +198,41 @@ jobs:
               if(before.dev!==after.dev||before.ino!==after.ino||before.size!==after.size||before.mtimeMs!==after.mtimeMs||bytes.length!==before.size)fail();
               return {bytes,sha256:createHash('sha256').update(bytes).digest('hex')};
             }
-            const labels=['install','unit','chromium','seed-prepare','browser'], evidence=[];
+            function browserProjection(record){
+              const projection={diagnosticOnly:true,reportBytes:record.bytes.length,reportSha256:record.sha256};
+              try{
+                const text=new TextDecoder('utf-8',{fatal:true,ignoreBOM:true}).decode(record.bytes);
+                try{JSON.parse(text);projection.wholeFileParse={passed:true};}
+                catch(error){projection.wholeFileParse={passed:false,message:clean(error.message,400)};}
+                let start=0;while(/[ \t\r\n]/.test(text[start]??'!'))start++;
+                if(text[start]!=='{')throw new Error('leading_report_object_missing');
+                const stack=[];let quoted=false,escaped=false,end=-1;
+                for(let i=start;i<text.length;i++){
+                  const char=text[i];
+                  if(quoted){if(escaped)escaped=false;else if(char==='\\')escaped=true;else if(char==='"')quoted=false;continue;}
+                  if(char==='"'){quoted=true;continue;}
+                  if(char==='{')stack.push('}');else if(char==='[')stack.push(']');
+                  else if(char==='}'||char===']'){if(stack.pop()!==char)throw new Error('leading_report_brackets_invalid');if(!stack.length){end=i+1;break;}}
+                }
+                if(end<0||quoted||stack.length)throw new Error('leading_report_object_incomplete');
+                const report=JSON.parse(text.slice(0,end));
+                if(!report||typeof report!=='object'||Array.isArray(report))throw new Error('leading_report_not_record');
+                const trailer=record.bytes.subarray(Buffer.byteLength(text.slice(0,end)));
+                projection.leadingObjectParse='passed';projection.trailingBytes={bytes:trailer.length,sha256:createHash('sha256').update(trailer).digest('hex'),containsNonWhitespace:/[^ \t\r\n]/.test(text.slice(end))};
+                projection.stats={};for(const key of ['expected','unexpected','skipped','flaky','duration'])projection.stats[key]=typeof report.stats?.[key]==='number'&&Number.isFinite(report.stats[key])?report.stats[key]:null;
+                projection.globalErrorCount=Array.isArray(report.errors)?report.errors.length:null;
+                projection.firstGlobalErrorMessage=typeof report.errors?.[0]?.message==='string'?clean(report.errors[0].message,2000,true):null;
+                const suites=Array.isArray(report.suites)?[...report.suites].reverse():[],cases=[];let totalCases=0;
+                while(suites.length){const suite=suites.pop();for(const spec of Array.isArray(suite?.specs)?suite.specs:[])for(const test of Array.isArray(spec?.tests)?spec.tests:[]){
+                  totalCases++;if(cases.length>=8)continue;
+                  const result=test.results?.[0],error=(Array.isArray(result?.errors)?result.errors:[]).find(value=>typeof value?.message==='string')??(typeof result?.error?.message==='string'?result.error:null),location=error?.location??result?.errorLocation;
+                  cases.push({title:clean(spec.title,256),profile:clean(test.projectName,32),status:clean(test.status,32),expectedStatus:clean(test.expectedStatus,32),resultStatus:result?clean(result.status,32):null,retry:Number.isInteger(result?.retry)?result.retry:null,firstError:error?{message:clean(error.message,2000,true),messagePrefix:true,location:location?{file:typeof location.file==='string'?clean(location.file,256):null,line:Number.isInteger(location.line)?location.line:null,column:Number.isInteger(location.column)?location.column:null}:null}:null});
+                }for(const child of Array.isArray(suite?.suites)?[...suite.suites].reverse():[])suites.push(child);}
+                projection.totalCaseRecords=totalCases;projection.caseRecordsOmitted=Math.max(0,totalCases-cases.length);projection.cases=cases;
+              }catch(error){projection.projectionFailure=clean(error.message,400);}
+              return projection;
+            }
+            const labels=['install','unit','chromium','seed-prepare','browser'], evidence=[];let browserReport=null;
             for(const label of labels){
               const row={label}, exit=read(label+'-exit.json',4096);
               if(exit){const value=JSON.parse(exit.bytes.toString('utf8'));
@@ -206,11 +240,13 @@ jobs:
                 row.outcome={code:value.code,signal:value.signal===null?null:clean(value.signal),overflow:value.overflow,stdoutBytes:value.stdoutBytes,stderrBytes:value.stderrBytes};
               }
               for(const [suffix,limit] of [['json',['unit','browser'].includes(label)?2*1024*1024:256*1024],['stderr',256*1024]]){
-                const record=read(label+'.'+suffix,limit);if(record)row[suffix]={bytes:record.bytes.length,sha256:record.sha256,tail:clean(record.bytes.toString('utf8'))};
+                const record=read(label+'.'+suffix,limit);if(record){row[suffix]={bytes:record.bytes.length,sha256:record.sha256,tail:clean(record.bytes.toString('utf8'))};if(label==='browser'&&suffix==='json')browserReport=browserProjection(record);}
               }
               evidence.push(row);
             }
-            const output=JSON.stringify({campaignRequestFailureEvidence:{source:process.env.SOURCE_COMMIT,scope:'fixed owned runner logs; tails only; no rerun',evidence}});
+            const packet={campaignRequestFailureEvidence:{source:process.env.SOURCE_COMMIT,scope:'fixed owned logs and diagnostic-only leading browser JSON projection; strict acceptance unchanged; no rerun',evidence,browserReport}};
+            let output=JSON.stringify(packet);
+            if(Buffer.byteLength(output)>cap){for(const row of evidence)for(const suffix of ['json','stderr'])if(row[suffix])delete row[suffix].tail;packet.campaignRequestFailureEvidence.rawTailsOmittedForBound=true;output=JSON.stringify(packet);}
             if(Buffer.byteLength(output)>cap)fail();console.log(output);
           }catch{console.log(JSON.stringify({campaignRequestFailureEvidence:{status:'unavailable',reason:'owned_log_identity_or_bound_failed'}}));process.exitCode=1;}
           JS
