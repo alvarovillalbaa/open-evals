@@ -37,7 +37,7 @@ async function database<T>(operation: (client: Client) => Promise<T>): Promise<T
   let client: any;
   try {
     client = await pool.connect();
-    const owner = (await client.query("select datname as name, obj_description(oid, 'pg_database') as marker from pg_database where datname = current_database()" )).rows;
+    const owner = (await client.query("select datname as name, shobj_description(oid, 'pg_database') as marker from pg_database where datname = current_database()" )).rows;
     assert.deepEqual(owner, [{ name: "campaign_requests_test", marker }]);
     await client.query("begin");
     try { const result = await operation(client); await client.query("commit"); return result; }

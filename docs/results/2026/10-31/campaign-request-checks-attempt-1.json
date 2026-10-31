@@ -1,0 +1,471 @@
+{
+  "schemaVersion": 1,
+  "scope": "OpenEvals pending campaign-request preparation; first focused CI attempt",
+  "result": "failed-before-browser",
+  "checkedSource": "97f88b181b41252f9e5bef5904b7583f73efe6b8",
+  "activationCommit": "519aa9c8ccfd67f52d143e92d7ef4cdd8dad1162",
+  "sourceSeal": "docs/results/2026/10-30/campaign-request-source.json",
+  "workflow": {
+    "path": ".github/workflows/campaign-request-checks.yml",
+    "sha256": "98857013129006b9085bc637be8b64085ac097c764f568a17443591ed2b9401e",
+    "runner": "ubuntu-24.04",
+    "timeoutMinutes": 20,
+    "contentsPermission": "read"
+  },
+  "run": {
+    "id": 41243607033,
+    "attempt": 1,
+    "url": "https://github.com/alvarovillalbaa/open-evals/actions/runs/41243607033",
+    "status": "completed",
+    "conclusion": "failure",
+    "startedAt": "2026-10-31T21:26:36Z",
+    "completedAt": "2026-10-31T21:27:41Z"
+  },
+  "job": {
+    "id": 124662382869,
+    "name": "campaign-requests",
+    "status": "completed",
+    "conclusion": "failure",
+    "startedAt": "2026-10-31T21:26:39Z",
+    "completedAt": "2026-10-31T21:27:41Z",
+    "steps": [
+      {
+        "number": 1,
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "number": 2,
+        "name": "Initialize containers",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "number": 3,
+        "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "number": 4,
+        "name": "Run pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "number": 5,
+        "name": "Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "number": 6,
+        "name": "Pin source and create only owned runner tools",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "number": 7,
+        "name": "Write bounded source and result guards",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "number": 8,
+        "name": "Install only the existing frozen dependency graph",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "number": 9,
+        "name": "Prepare only the fresh marked database and owned fixture copies",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "number": 10,
+        "name": "Run the 45 exact unit and PostgreSQL cases",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "number": 11,
+        "name": "Install runner-only Chromium from the declared Playwright version",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "number": 12,
+        "name": "Prepare only the authored browser namespace",
+        "status": "completed",
+        "conclusion": "failure"
+      },
+      {
+        "number": 13,
+        "name": "Run the four scenarios once per desktop and narrow profile",
+        "status": "completed",
+        "conclusion": "skipped"
+      },
+      {
+        "number": 14,
+        "name": "Validate exact names totals statuses and actual exit codes",
+        "status": "completed",
+        "conclusion": "failure"
+      },
+      {
+        "number": 15,
+        "name": "Recheck the complete approved source seal after outcomes",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "number": 16,
+        "name": "Print bounded redacted failure evidence before owned cleanup",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "number": 17,
+        "name": "Clean only the guarded browser namespace and owned temporary files",
+        "status": "completed",
+        "conclusion": "failure"
+      },
+      {
+        "number": 31,
+        "name": "Post Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+        "status": "completed",
+        "conclusion": "skipped"
+      },
+      {
+        "number": 32,
+        "name": "Post Run pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "number": 33,
+        "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "number": 34,
+        "name": "Stop containers",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "number": 35,
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success"
+      }
+    ]
+  },
+  "runtimeObserved": {
+    "node": "24.21.0",
+    "pnpm": "10.14.0",
+    "postgres": "16.15",
+    "vitest": "4.1.9",
+    "playwright": "1.61.1",
+    "chromiumInstalled": "149.0.7827.55",
+    "browserLaunched": false
+  },
+  "sourceGuards": [
+    {
+      "sourceFiles": 288,
+      "head": "97f88b181b41252f9e5bef5904b7583f73efe6b8",
+      "sourceGuard": "passed"
+    },
+    {
+      "sourceFiles": 288,
+      "head": "97f88b181b41252f9e5bef5904b7583f73efe6b8",
+      "sourceGuard": "passed"
+    }
+  ],
+  "processOutcomes": [
+    {
+      "label": "install",
+      "code": 0,
+      "signal": null,
+      "overflow": false,
+      "stdoutBytes": 927,
+      "stderrBytes": 0
+    },
+    {
+      "label": "unit",
+      "code": 1,
+      "signal": null,
+      "overflow": false,
+      "stdoutBytes": 15617,
+      "stderrBytes": 256
+    },
+    {
+      "label": "chromium",
+      "code": 0,
+      "signal": null,
+      "overflow": false,
+      "stdoutBytes": 15938,
+      "stderrBytes": 237
+    },
+    {
+      "label": "seed-prepare",
+      "code": 1,
+      "signal": null,
+      "overflow": false,
+      "stdoutBytes": 0,
+      "stderrBytes": 1027
+    },
+    {
+      "label": "seed-cleanup",
+      "code": 1,
+      "signal": null,
+      "overflow": false,
+      "stdoutBytes": 0,
+      "stderrBytes": 1149
+    }
+  ],
+  "unitReport": {
+    "total": 45,
+    "passed": 26,
+    "failed": 0,
+    "pending": 19,
+    "todo": 0,
+    "actualProcessExit": 1,
+    "exactAllCaseIdentityValidation": "not-completed: integration file rejected before per-case emission",
+    "validationFailure": "unit_file",
+    "scheduledFiles": [
+      {
+        "path": "tests/integration/campaign-request-storage.test.ts",
+        "count": 19,
+        "scheduledNames": [
+          "campaign request PostgreSQL boundary previews a canonical saved baseline without persisting requests or audit events",
+          "campaign request PostgreSQL boundary atomically stores one pending approval and content-free audit through the route",
+          "campaign request PostgreSQL boundary rolls back the pending insert when its fixture-scoped audit insert fails",
+          "campaign request PostgreSQL boundary replays identical saved intent without changing the row time or adding an audit",
+          "campaign request PostgreSQL boundary serializes concurrent identical saves into one creation and one replay",
+          "campaign request PostgreSQL boundary rejects changed reviewed intent reusing a saved request identity",
+          "campaign request PostgreSQL boundary rejects saved identity reuse by another actor or workspace without disclosing source",
+          "campaign request PostgreSQL boundary requires the reviewed payload hash and rejects altered input with an old review",
+          "campaign request PostgreSQL boundary rejects a baseline changed after review and marks an existing request stale on read",
+          "campaign request PostgreSQL boundary creates no candidates campaigns jobs evaluations or release changes at any request step",
+          "campaign request PostgreSQL boundary enforces existing project ownership for foreign and untargeted instruction definitions",
+          "campaign request PostgreSQL boundary denies cross-workspace preview save and history even to an authenticated workspace session",
+          "campaign request PostgreSQL boundary rejects request-body actor workspace and definition overrides",
+          "campaign request PostgreSQL boundary rejects missing legacy invalid and locked baseline selections without pending rows",
+          "campaign request PostgreSQL boundary fails closed on stored payload tampering and never repairs it during replay",
+          "campaign request PostgreSQL boundary projects recorded decisions read-only and rejects invalid stored decision states",
+          "campaign request PostgreSQL boundary filters history before paging and supports exact identity lookup outside the first page",
+          "campaign request PostgreSQL boundary rejects ambiguous or unknown history queries and uses the read authorization boundary",
+          "campaign request PostgreSQL boundary authenticates before reading bodies and retains existing instruction write restrictions"
+        ]
+      },
+      {
+        "path": "tests/unit/campaign-preparation.test.ts",
+        "count": 26,
+        "scheduledNames": [
+          "campaign preparation input returns a detached frozen exact request",
+          "campaign preparation input accepts a data-only null-prototype request",
+          "campaign preparation input rejects non-record request shapes",
+          "campaign preparation input requires every field and rejects unknown or symbol properties",
+          "campaign preparation input rejects accessors without evaluating them and rejects hidden properties",
+          "campaign preparation input requires a lowercase hyphenated UUID",
+          "campaign preparation input rejects invalid baseline and component identities",
+          "campaign preparation input rejects absent non-string and empty objectives",
+          "campaign preparation input enforces the inclusive 2048-byte ASCII objective limit",
+          "campaign preparation input charges objective UTF-8 bytes rather than UTF-16 length",
+          "campaign preparation input rejects NUL and unpaired surrogates before persistence",
+          "campaign preparation input preserves valid objective whitespace and line breaks exactly",
+          "pending prompt campaign preparation describes exactly six draft hypothesis operations with zero execution limits",
+          "pending prompt campaign preparation binds canonical baseline semantics and hashes the complete payload",
+          "pending prompt campaign preparation is deterministic across equivalent objects and key order",
+          "pending prompt campaign preparation binds the server workspace and actor to review fingerprints",
+          "pending prompt campaign preparation binds request identity objective component and baseline identity",
+          "pending prompt campaign preparation changes the reviewed fingerprint when canonical baseline semantics change",
+          "pending prompt campaign preparation keeps review identity stable through lifecycle-only transitions",
+          "pending prompt campaign preparation rejects a different baseline version or definition",
+          "pending prompt campaign preparation rejects missing and locked selected components",
+          "pending prompt campaign preparation rejects stale hashes malformed source and accessor baselines",
+          "pending prompt campaign preparation binds unused composition source even when rendered prompt text is unchanged",
+          "pending prompt campaign preparation omits raw prompt source bindings and candidate bodies from persisted metadata",
+          "pending prompt campaign preparation rejects malformed server contexts without evaluating getters",
+          "pending prompt campaign preparation deeply freezes preparation without mutating the supplied intent or baseline"
+        ]
+      }
+    ]
+  },
+  "browser": {
+    "status": "UNRUN",
+    "reason": "browser seed ownership check failed before browser command",
+    "scheduledCases": [
+      {
+        "title": "campaign request saves a reviewed Unicode pending request and reloads its exact stored history",
+        "project": "desktop"
+      },
+      {
+        "title": "campaign request saves a reviewed Unicode pending request and reloads its exact stored history",
+        "project": "narrow"
+      },
+      {
+        "title": "campaign request invalidates held previews on input edits and saved-version context changes",
+        "project": "desktop"
+      },
+      {
+        "title": "campaign request invalidates held previews on input edits and saved-version context changes",
+        "project": "narrow"
+      },
+      {
+        "title": "campaign request recovers a committed lost acknowledgement with the same frozen identity and no duplicate",
+        "project": "desktop"
+      },
+      {
+        "title": "campaign request recovers a committed lost acknowledgement with the same frozen identity and no duplicate",
+        "project": "narrow"
+      },
+      {
+        "title": "campaign request read-only project key reviews canonical history without write controls or locked-component selection",
+        "project": "desktop"
+      },
+      {
+        "title": "campaign request read-only project key reviews canonical history without write controls or locked-component selection",
+        "project": "narrow"
+      }
+    ],
+    "globalBrowserErrors": null
+  },
+  "failure": {
+    "observed": "Browser fixture queried the expected marked disposable database and received marker:null; integration suite reported 19 pending cases and a nonzero process exit.",
+    "causeAssessment": "Both test-owned marker readers use obj_description for pg_database. PostgreSQL stores database comments as shared-object descriptions and documents shobj_description for this lookup.",
+    "sourceLocations": [
+      {
+        "path": "tests/integration/campaign-request-storage.test.ts",
+        "line": 88
+      },
+      {
+        "path": "docs/proposals/campaign-request-browser-seed.ts.example",
+        "line": 40
+      }
+    ],
+    "primaryReference": "https://www.postgresql.org/docs/16/functions-info.html#FUNCTIONS-INFO-COMMENT-TABLE",
+    "repairApplied": false
+  },
+  "cleanup": {
+    "databaseNamespace": "guarded seed cleanup refused; no cleanup success claimed",
+    "seedCleanupProcessExit": 1,
+    "ownedTemporaryFiles": "passed: controller emitted ownedTemporaryCleanup",
+    "containerStop": "success",
+    "processLimit": "No browser or application server was launched. Process-level cleanup beyond completed commands/container stop was not separately inventoried."
+  },
+  "boundaries": {
+    "freshDisposableDatabase": true,
+    "databaseName": "campaign_requests_test",
+    "expectedDatabaseComment": "open-evals-campaign-requests-v1",
+    "migrations": [
+      "0001_init.sql",
+      "0002_hosted_integrations.sql"
+    ],
+    "migration0003Applied": false,
+    "productionData": false,
+    "realAuthAccount": false,
+    "providerOrModelCalls": false,
+    "campaignStarted": false,
+    "workflowRemoved": false,
+    "localProductTestsExecuted": false
+  },
+  "diagnosticEvidence": {
+    "source": "97f88b181b41252f9e5bef5904b7583f73efe6b8",
+    "scope": "fixed owned runner logs; tails only; no rerun",
+    "evidence": [
+      {
+        "label": "install",
+        "outcome": {
+          "code": 0,
+          "signal": null,
+          "overflow": false,
+          "stdoutBytes": 927,
+          "stderrBytes": 0
+        },
+        "json": {
+          "bytes": 927,
+          "sha256": "f403e677ef32e086b13cb60692b197e13e868ba5a8571fcbbc81642a5bbbc891",
+          "tail": "Scope: all 11 workspace projects\nLockfile is up to date, resolution step is skipped\nProgress: resolved 1, reused 0, downloaded 0, added 0\nPackages: +490\n++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\nProgress: resolved 490, reused 0, downloaded 105, added 41\nProgress: resolved 490, reused 0, downloaded 399, added 235\nProgress: resolved 490, reused 0, downloaded 446, added 255\nProgress: resolved 490, reused 0, downloaded 483, added 271\nProgress: resolved 490, reused 0, downloaded 489, added 489\nProgress: resolved 490, reused 0, downloaded 490, added 490, done\n\ndevDependencies:\n+ @playwright/test 1.61.1\n+ @types/node 20.19.43\n+ @types/react 19.2.17\n+ @types/react-dom 19.2.3\n+ @vitejs/plugin-react 5.2.0\n+ eslint 9.39.4\n+ eslint-config-next 16.2.9\n+ jsdom 27.4.0\n+ tsx 4.22.4\n+ turbo 2.10.0\n+ typescript 5.9.3\n+ vite-tsconfig-paths 5.1.4\n+ vitest 4.1.9\n\nDone in 6.8s using pnpm v10.14.0\n"
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "tail": ""
+        }
+      },
+      {
+        "label": "unit",
+        "outcome": {
+          "code": 1,
+          "signal": null,
+          "overflow": false,
+          "stdoutBytes": 15617,
+          "stderrBytes": 256
+        },
+        "json": {
+          "bytes": 15617,
+          "sha256": "a991bd868606c8aed58b4c9b3b12555a28bc1e5d6ff7ded33ea1d37ba418e0e2",
+          "tail": "ssing and locked selected components\",\"duration\":1.2780150000000106,\"failureMessages\":[],\"meta\":{},\"tags\":[]},{\"ancestorTitles\":[\"pending prompt campaign preparation\"],\"fullName\":\"pending prompt campaign preparation rejects stale hashes malformed source and accessor baselines\",\"status\":\"passed\",\"title\":\"rejects stale hashes malformed source and accessor baselines\",\"duration\":0.9793049999999823,\"failureMessages\":[],\"meta\":{},\"tags\":[]},{\"ancestorTitles\":[\"pending prompt campaign preparation\"],\"fullName\":\"pending prompt campaign preparation binds unused composition source even when rendered prompt text is unchanged\",\"status\":\"passed\",\"title\":\"binds unused composition source even when rendered prompt text is unchanged\",\"duration\":2.501456999999988,\"failureMessages\":[],\"meta\":{},\"tags\":[]},{\"ancestorTitles\":[\"pending prompt campaign preparation\"],\"fullName\":\"pending prompt campaign preparation omits raw prompt source bindings and candidate bodies from persisted metadata\",\"status\":\"passed\",\"title\":\"omits raw prompt source bindings and candidate bodies from persisted metadata\",\"duration\":1.7341000000000122,\"failureMessages\":[],\"meta\":{},\"tags\":[]},{\"ancestorTitles\":[\"pending prompt campaign preparation\"],\"fullName\":\"pending prompt campaign preparation rejects malformed server contexts without evaluating getters\",\"status\":\"passed\",\"title\":\"rejects malformed server contexts without evaluating getters\",\"duration\":1.2215190000000007,\"failureMessages\":[],\"meta\":{},\"tags\":[]},{\"ancestorTitles\":[\"pending prompt campaign preparation\"],\"fullName\":\"pending prompt campaign preparation deeply freezes preparation without mutating the supplied intent or baseline\",\"status\":\"passed\",\"title\":\"deeply freezes preparation without mutating the supplied intent or baseline\",\"duration\":0.7544540000000097,\"failureMessages\":[],\"meta\":{},\"tags\":[]}],\"startTime\":1793482031559,\"endTime\":1793482031594.7544,\"status\":\"passed\",\"message\":\"\",\"name\":\"[repository]/tests/unit/campaign-preparation.test.ts\"}]}\n"
+        },
+        "stderr": {
+          "bytes": 256,
+          "sha256": "b90e8483106951a0f720e203b8e2f50ece6095e97e1ceb235f53525423accbf3",
+          "tail": "The plugin \"vite-tsconfig-paths\" is detected. Vite now supports tsconfig paths resolution natively via the resolve.tsconfigPaths option. You can remove the plugin and set resolve.tsconfigPaths: true in your Vite config instead.\n"
+        }
+      },
+      {
+        "label": "chromium",
+        "outcome": {
+          "code": 0,
+          "signal": null,
+          "overflow": false,
+          "stdoutBytes": 15938,
+          "stderrBytes": 237
+        },
+        "json": {
+          "bytes": 15938,
+          "sha256": "4349e85ae97b7044c22ccf85964227e03feba502b166c09b9c3fcdb53da073e7",
+          "tail": "                                                                |  10% of 114.2 MiB\n|■■■■■■■■■■■■■■■■                                                                |  20% of 114.2 MiB\n|■■■■■■■■■■■■■■■■■■■■■■■■                                                        |  30% of 114.2 MiB\n|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                                |  40% of 114.2 MiB\n|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                        |  50% of 114.2 MiB\n|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                |  60% of 114.2 MiB\n|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                        |  70% of 114.2 MiB\n|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                |  80% of 114.2 MiB\n|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■        |  90% of 114.2 MiB\n|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■| 100% of 114.2 MiB\nChrome Headless Shell 149.0.7827.55 (playwright chromium-headless-shell v1228) downloaded to [owned-task]/browser/chromium_headless_shell-1228\n"
+        },
+        "stderr": {
+          "bytes": 237,
+          "sha256": "3b419c69ff321ee6851fa5489a2bb0c9a2ef093815a709dbd05391f89767267f",
+          "tail": "\nRunning kernel seems to be up-to-date.\n\nNo services need to be restarted.\n\nNo containers need to be restarted.\n\nNo user sessions are running outdated binaries.\n\nNo VM guests are running outdated hypervisor (qemu) binaries on this host.\n"
+        }
+      },
+      {
+        "label": "seed-prepare",
+        "outcome": {
+          "code": 1,
+          "signal": null,
+          "overflow": false,
+          "stdoutBytes": 0,
+          "stderrBytes": 1027
+        },
+        "json": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "tail": ""
+        },
+        "stderr": {
+          "bytes": 1027,
+          "sha256": "33d7b65d907c2b6e6eed8564e913598398deec0d2edb04b271b9a0266410d267",
+          "tail": "node:internal/modules/run_main:107\n    triggerUncaughtException(\n    ^\n\nAssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n  [\n    {\n+     marker: null,\n-     marker: 'open-evals-campaign-requests-v1',\n      name: 'campaign_requests_test'\n    }\n  ]\n\n    at database ([repository]/apps/web/tests/campaign-request-browser-seed.ts:41:12)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async Module.prepareBrowserFixture ([repository]/apps/web/tests/campaign-request-browser-seed.ts:115:3)\n    at async <anonymous> ([owned-task]/seed.mts:1:172) {\n  generatedMessage: true,\n  code: 'ERR_ASSERTION',\n  actual: [ { name: 'campaign_requests_test', marker: null } ],\n  expected: [\n    {\n      name: 'campaign_requests_test',\n      marker: 'open-evals-campaign-requests-v1'\n    }\n  ],\n  operator: 'deepStrictEqual',\n  diff: 'simple'\n}\n\nNode.js v24.21.0\n"
+        }
+      },
+      {
+        "label": "browser"
+      }
+    ]
+  },
+  "evidenceLimits": [
+    "GitHub marked the continue-on-error unit step successful, but its actual process exited1; this receipt uses actual process/report outcomes.",
+    "The bounded unit report tail does not retain all45 full actual case records; scheduled identities come from the immutable manifest, not a claim that all ran.",
+    "Failure diagnostics contain fixed owned-log tails and hashes, not full reports. Raw seed-cleanup stderr was removed by owned cleanup and was not projected by the preceding diagnostic step.",
+    "No installed-consumer, hosted-production, live provider, campaign execution, or broader regression proof is implied."
+  ]
+}

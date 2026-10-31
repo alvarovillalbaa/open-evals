@@ -85,7 +85,7 @@ function db(): Client {
 
 async function assertDatabaseMarker() {
   const row = (await db().query<{ name: string; marker: string | null }>(
-    `select datname as name, obj_description(oid, 'pg_database') as marker
+    `select datname as name, shobj_description(oid, 'pg_database') as marker
        from pg_database where datname = current_database()`,
   )).rows[0];
   if (row?.name !== DATABASE_NAME || row.marker !== MARKER) throw new Error("campaign_test_database_marker_required");

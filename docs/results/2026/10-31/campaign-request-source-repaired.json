@@ -1,0 +1,1928 @@
+{
+  "schemaVersion": "campaign-request-check-source-v1",
+  "repository": "alvarovillalbaa/open-evals",
+  "baselineCommit": "d4944d941d7f59181b174f38ff6400bc9afe6353",
+  "scope": "pending campaign preparation only; no decisions, generation, execution or release changes",
+  "checkStatus": "53 authored cases; repaired source not run. Original 97f attempt: 26 passed, 19 pending, 8 browser cases unrun.",
+  "sourceGuard": {
+    "exclusions": [
+      ".agents/",
+      "docs/results/",
+      "any node_modules, .next, dist or __pycache__ segment"
+    ],
+    "manifestMustMatchPinnedGitBytes": true,
+    "checkBeforeInstallAndAfterOutcomes": true
+  },
+  "runtime": {
+    "node": "24.21.0",
+    "pnpm": "10.14.0",
+    "install": "unchanged frozen lockfile; scripts disabled",
+    "lockfile": {
+      "path": "pnpm-lock.yaml",
+      "mode": "100644",
+      "gitSha": "1a16e66a423cd53893438704821a7758ba8ca625"
+    },
+    "postgres": "16",
+    "chromium": "existing declared Playwright dependency; runner only"
+  },
+  "totals": {
+    "core": 26,
+    "postgres": 19,
+    "browser": 8,
+    "total": 53
+  },
+  "files": [
+    {
+      "path": ".gitignore",
+      "mode": "100644",
+      "gitSha": "f162ba19efabe6e7eb996354c8cef17bfa48e919"
+    },
+    {
+      "path": "agent/agent.ts",
+      "mode": "100644",
+      "gitSha": "d285d86ac571d8a4cbe9dfa0c9e1cb7e4982f6c9"
+    },
+    {
+      "path": "agent/instructions.md",
+      "mode": "100644",
+      "gitSha": "aefff848a6d2896c76bf7bda27265dc191896460"
+    },
+    {
+      "path": "agent/tools/approvals.ts",
+      "mode": "100644",
+      "gitSha": "abdbd51a1a93ee3cad859e83ae0b3fc8eb2aa8a7"
+    },
+    {
+      "path": "agent/tools/open-evals.ts",
+      "mode": "100644",
+      "gitSha": "35c8881d3975e6351ef7d00d716ef79ca6199884"
+    },
+    {
+      "path": "AGENTS.md",
+      "mode": "100644",
+      "gitSha": "78bb03d83f83399e214447a99d84bfc36343ca12"
+    },
+    {
+      "path": "app/favicon.ico",
+      "mode": "100644",
+      "gitSha": "718d6fea4835ec2d246af9800eddb7ffb276240c"
+    },
+    {
+      "path": "app/globals.css",
+      "mode": "100644",
+      "gitSha": "dd5ca04fb93f58a131f3b62915ae2c262c7a4806"
+    },
+    {
+      "path": "app/layout.tsx",
+      "mode": "100644",
+      "gitSha": "e159121b6f0cd650f4820fda31fdeae718bbcdf9"
+    },
+    {
+      "path": "app/page.tsx",
+      "mode": "100644",
+      "gitSha": "3f36f7c5c4cfb7fb3c745bfd7d38b2d21a8c441d"
+    },
+    {
+      "path": "apps/cli/bin/open-evals.mjs",
+      "mode": "100755",
+      "gitSha": "adc62701e2a3287247f82d47557de7c277b8535f"
+    },
+    {
+      "path": "apps/cli/package.json",
+      "mode": "100644",
+      "gitSha": "8e208614b8e754ab304844b2de4545fb457cb372"
+    },
+    {
+      "path": "apps/cli/src/index.ts",
+      "mode": "100644",
+      "gitSha": "eba65000e3d64ddec3b05b49ccea1f6228cffb1d"
+    },
+    {
+      "path": "apps/cli/src/program.ts",
+      "mode": "100644",
+      "gitSha": "bfcc83d53cc4971f0c9e0957e9bcf949af3fddee"
+    },
+    {
+      "path": "apps/cli/src/prompt-files.ts",
+      "mode": "100644",
+      "gitSha": "4916c5ef04418e2977dc04797c4b920ad5c0537f"
+    },
+    {
+      "path": "apps/cli/tests/cli.test.ts",
+      "mode": "100644",
+      "gitSha": "efb333b7712a088e3f4bcaea9eddeb0a402de5ec"
+    },
+    {
+      "path": "apps/cli/tests/prompt-bin.test.mjs",
+      "mode": "100644",
+      "gitSha": "226a0347ac812a583f5f97c1120c640fe43e8019"
+    },
+    {
+      "path": "apps/cli/tests/prompt-cli.test.ts",
+      "mode": "100644",
+      "gitSha": "1633bc51b0637dce73cec244c262de4aad9cdaaf"
+    },
+    {
+      "path": "apps/cli/tests/prompt-clients.config.mjs",
+      "mode": "100644",
+      "gitSha": "18e7a133660e7b723ade7175ba3864511db88f37"
+    },
+    {
+      "path": "apps/cli/tests/prompt-files.test.ts",
+      "mode": "100644",
+      "gitSha": "f2d28c65e5325169ce2a75e19fb4e2667f42c523"
+    },
+    {
+      "path": "apps/cli/tsconfig.json",
+      "mode": "100644",
+      "gitSha": "da27b463184720912090ea8a9dfd563f2254349b"
+    },
+    {
+      "path": "apps/web/app/(product)/benchmarks/page.tsx",
+      "mode": "100644",
+      "gitSha": "6b818f66dc6b892d0500fb9a87da04a1d7698c97"
+    },
+    {
+      "path": "apps/web/app/(product)/campaigns/page.tsx",
+      "mode": "100644",
+      "gitSha": "1e7ad9e51d29439543377e5394e1897260282ade"
+    },
+    {
+      "path": "apps/web/app/(product)/components.tsx",
+      "mode": "100644",
+      "gitSha": "26064759a5c3d0adb171fe9f715fb6886ba0b729"
+    },
+    {
+      "path": "apps/web/app/(product)/instructions/[definitionId]/page.tsx",
+      "mode": "100644",
+      "gitSha": "d934bc6cb24c48d4b0ccf2a2d582d075457aeccc"
+    },
+    {
+      "path": "apps/web/app/(product)/instructions/campaign-request-panel.tsx",
+      "mode": "100644",
+      "gitSha": "12775803bad1f6a88e4919237289e4d4fee86b23"
+    },
+    {
+      "path": "apps/web/app/(product)/instructions/candidates/page.tsx",
+      "mode": "100644",
+      "gitSha": "3925e9ac346b2c0f767e745550c9a8ea0c3dc20f"
+    },
+    {
+      "path": "apps/web/app/(product)/instructions/create-instruction.tsx",
+      "mode": "100644",
+      "gitSha": "0c012c6d9103b7b6826b436dc16a5094ba6769f1"
+    },
+    {
+      "path": "apps/web/app/(product)/instructions/experiments/page.tsx",
+      "mode": "100644",
+      "gitSha": "e33c787a1275f39aac976dadda135328ffc47279"
+    },
+    {
+      "path": "apps/web/app/(product)/instructions/instruction-authoring-client.ts",
+      "mode": "100644",
+      "gitSha": "70bd4ff3372f4ff397f029b2a49aff4c2b04993b"
+    },
+    {
+      "path": "apps/web/app/(product)/instructions/instruction-editor.tsx",
+      "mode": "100644",
+      "gitSha": "3946454a753e92e9913a1650eec9de35407c4a95"
+    },
+    {
+      "path": "apps/web/app/(product)/instructions/page.tsx",
+      "mode": "100644",
+      "gitSha": "e15f8705ee726632ab60673e12ce512dbbdbd6e6"
+    },
+    {
+      "path": "apps/web/app/(product)/instructions/releases/page.tsx",
+      "mode": "100644",
+      "gitSha": "dee6d39fc7fbe04b45f5f10676187424e24e926b"
+    },
+    {
+      "path": "apps/web/app/(product)/layout.tsx",
+      "mode": "100644",
+      "gitSha": "4db413b3701756fb09e8d464cfe5aefe2e47d4c5"
+    },
+    {
+      "path": "apps/web/app/(product)/product-sidebar.tsx",
+      "mode": "100644",
+      "gitSha": "9e130648fe23b6a46c4feefc32a71e2342b262f7"
+    },
+    {
+      "path": "apps/web/app/(product)/runs/[batchId]/page.tsx",
+      "mode": "100644",
+      "gitSha": "03cd0092ba1b36081b7b052d27fd23fd5e574285"
+    },
+    {
+      "path": "apps/web/app/(product)/runs/import/import-form.tsx",
+      "mode": "100644",
+      "gitSha": "1607c2ac6f6fd8b4187725772dc79a7138764767"
+    },
+    {
+      "path": "apps/web/app/(product)/runs/import/page.tsx",
+      "mode": "100644",
+      "gitSha": "41cbee11f935d2296c45c0071b9c96d48ffdf401"
+    },
+    {
+      "path": "apps/web/app/(product)/runs/page.tsx",
+      "mode": "100644",
+      "gitSha": "873fd6cb5a7de18cccd58bbf332933f1a0c3b0d9"
+    },
+    {
+      "path": "apps/web/app/(product)/scenarios/page.tsx",
+      "mode": "100644",
+      "gitSha": "7409c5d676cf16d203565af79c7c9e1ce1cfecc9"
+    },
+    {
+      "path": "apps/web/app/api/v1/auth/github/callback/route.ts",
+      "mode": "100644",
+      "gitSha": "aae5ec891d28dafa12ef4cff0f61cfc58e739eec"
+    },
+    {
+      "path": "apps/web/app/api/v1/auth/github/start/route.ts",
+      "mode": "100644",
+      "gitSha": "80dc365e7b3583f73c644182d6cff6ffcd1e71d4"
+    },
+    {
+      "path": "apps/web/app/api/v1/auth/session/route.ts",
+      "mode": "100644",
+      "gitSha": "adf32b6d27fb1ab753a4f771f76055362320f2ec"
+    },
+    {
+      "path": "apps/web/app/api/v1/benchmarks/import/route.ts",
+      "mode": "100644",
+      "gitSha": "c433535f56cdeec3066ec7418c34939037a4f15c"
+    },
+    {
+      "path": "apps/web/app/api/v1/benchmarks/route.ts",
+      "mode": "100644",
+      "gitSha": "b8225213e2618a6668fd2035170d7e84c3c9d378"
+    },
+    {
+      "path": "apps/web/app/api/v1/campaigns/route.ts",
+      "mode": "100644",
+      "gitSha": "dc8a6ab5b982fb21e6745f9831e73a4c491789ed"
+    },
+    {
+      "path": "apps/web/app/api/v1/eval-runs/route.ts",
+      "mode": "100644",
+      "gitSha": "178137e55a631a59235745bc11e415e9ebac94d3"
+    },
+    {
+      "path": "apps/web/app/api/v1/experiments/assign/route.ts",
+      "mode": "100644",
+      "gitSha": "d64d5526bac488346a9485e10b2e8e885baf8ec1"
+    },
+    {
+      "path": "apps/web/app/api/v1/instructions/[definitionId]/campaign-requests/preview/route.ts",
+      "mode": "100644",
+      "gitSha": "00c8a35f201fe86fe32ff55eed79e072de7edd9f"
+    },
+    {
+      "path": "apps/web/app/api/v1/instructions/[definitionId]/campaign-requests/route.ts",
+      "mode": "100644",
+      "gitSha": "56dc2cc8f86b4f49395de35cbd0afb6d65b44ac7"
+    },
+    {
+      "path": "apps/web/app/api/v1/instructions/[definitionId]/preview/route.ts",
+      "mode": "100644",
+      "gitSha": "5e3e12ed6b761f0c2cc8adffd71006a1c1961c5a"
+    },
+    {
+      "path": "apps/web/app/api/v1/instructions/[definitionId]/route.ts",
+      "mode": "100644",
+      "gitSha": "18e3e8b787092c970168fe4134975f588007bdf0"
+    },
+    {
+      "path": "apps/web/app/api/v1/instructions/[definitionId]/versions/route.ts",
+      "mode": "100644",
+      "gitSha": "fc7c9a8a1b53f577ed4e9e5ecdaebb365c54faf9"
+    },
+    {
+      "path": "apps/web/app/api/v1/instructions/route.ts",
+      "mode": "100644",
+      "gitSha": "aae4dd70e44fa418985c35dc2882cbf27f225f9b"
+    },
+    {
+      "path": "apps/web/app/api/v1/optimizer/capabilities/route.ts",
+      "mode": "100644",
+      "gitSha": "109a637ff3b876e0a92d4df68a65def1e6240f22"
+    },
+    {
+      "path": "apps/web/app/api/v1/otlp/v1/traces/route.ts",
+      "mode": "100644",
+      "gitSha": "48e0344f4fc690b35e012527c2f08195f76c231b"
+    },
+    {
+      "path": "apps/web/app/api/v1/prompts/resolve/route.ts",
+      "mode": "100644",
+      "gitSha": "3bc4220342b58aa4f380bb8823f817ee6c07b27c"
+    },
+    {
+      "path": "apps/web/app/api/v1/run-batches/[batchId]/route.ts",
+      "mode": "100644",
+      "gitSha": "c3204bbbef0275575fd5a7fcd85925deb9367941"
+    },
+    {
+      "path": "apps/web/app/api/v1/run-batches/route.ts",
+      "mode": "100644",
+      "gitSha": "89accac7c1a876885fa2af8dbbe11154e6bacaa5"
+    },
+    {
+      "path": "apps/web/app/api/v1/run-plans/resolve/route.ts",
+      "mode": "100644",
+      "gitSha": "8addf1d57b53317921a81e704b7549b489f9f342"
+    },
+    {
+      "path": "apps/web/app/api/v1/scenarios/route.ts",
+      "mode": "100644",
+      "gitSha": "8222e0eb83418b842268abf1bf58990b9375277e"
+    },
+    {
+      "path": "apps/web/app/api/v1/traces/batch/route.ts",
+      "mode": "100644",
+      "gitSha": "2d6e65cf10f7d795811273954e63f3aaa2b19667"
+    },
+    {
+      "path": "apps/web/app/api/v1/traces/route.ts",
+      "mode": "100644",
+      "gitSha": "8f1c0408e80f51dac4f7b7e6b495a48a52d5b347"
+    },
+    {
+      "path": "apps/web/app/auth/callback/route.ts",
+      "mode": "100644",
+      "gitSha": "dc223580556e736ad71b801b20245131b8e6e0dd"
+    },
+    {
+      "path": "apps/web/app/globals.css",
+      "mode": "100644",
+      "gitSha": "e0bf8b6d748b6633f40d61baa733896b199b8e63"
+    },
+    {
+      "path": "apps/web/app/layout.tsx",
+      "mode": "100644",
+      "gitSha": "49981beb77695766aca0d8e8fa2bfff714dc0887"
+    },
+    {
+      "path": "apps/web/app/login/auth-form.tsx",
+      "mode": "100644",
+      "gitSha": "dc4047609df31e23388ff6f6c79d1f463d1db287"
+    },
+    {
+      "path": "apps/web/app/login/page.tsx",
+      "mode": "100644",
+      "gitSha": "377c4603ac52ed3950de3e036841d03f8f0ddd77"
+    },
+    {
+      "path": "apps/web/app/page.tsx",
+      "mode": "100644",
+      "gitSha": "ca70c96d9a1b3e8f6f4d8853ceb81a8ba73f495e"
+    },
+    {
+      "path": "apps/web/app/signup/page.tsx",
+      "mode": "100644",
+      "gitSha": "ddd9b6cfb8d27677e336cb0c4d689460b8be7c0f"
+    },
+    {
+      "path": "apps/web/eslint.config.mjs",
+      "mode": "100644",
+      "gitSha": "3b528c3618a928e936418e846a7c21991bb556c9"
+    },
+    {
+      "path": "apps/web/lib/auth.ts",
+      "mode": "100644",
+      "gitSha": "9ceec8aa2b107c5a86adc36d902670d31a43ba9e"
+    },
+    {
+      "path": "apps/web/lib/campaign-request-service.ts",
+      "mode": "100644",
+      "gitSha": "54cebdd958584146c7697a7a56b1369734514abb"
+    },
+    {
+      "path": "apps/web/lib/instruction-authoring.ts",
+      "mode": "100644",
+      "gitSha": "5a3edc6e805e6a909f30535da220c4533d0b22e4"
+    },
+    {
+      "path": "apps/web/lib/instruction-request.ts",
+      "mode": "100644",
+      "gitSha": "58737fdf1e2c3a2745fc3ba4fa876f9e22d7f357"
+    },
+    {
+      "path": "apps/web/lib/instruction-service.ts",
+      "mode": "100644",
+      "gitSha": "4f5909ce1beae4353dde749f8cf1d104f7ccfa45"
+    },
+    {
+      "path": "apps/web/lib/loaders.ts",
+      "mode": "100644",
+      "gitSha": "4272ae40ffc85f878193dbb63ebe603a792cc376"
+    },
+    {
+      "path": "apps/web/lib/supabase/browser.ts",
+      "mode": "100644",
+      "gitSha": "dbccabc5dcc2bc0dbf31a323aed3753c20408fc6"
+    },
+    {
+      "path": "apps/web/lib/supabase/server.ts",
+      "mode": "100644",
+      "gitSha": "3caf89cabddc4a340d0ee04ea4aa1a7b8f4a6594"
+    },
+    {
+      "path": "apps/web/next.config.ts",
+      "mode": "100644",
+      "gitSha": "b7380195c6c737c654980704d61a02400b3b9941"
+    },
+    {
+      "path": "apps/web/package.json",
+      "mode": "100644",
+      "gitSha": "f4aafb62479ab08554047ad59ebd55af3e4047e2"
+    },
+    {
+      "path": "apps/web/playwright.config.ts",
+      "mode": "100644",
+      "gitSha": "6f86656f20b23f5329a9f7fb635336e4fb583fce"
+    },
+    {
+      "path": "apps/web/postcss.config.mjs",
+      "mode": "100644",
+      "gitSha": "5ed0260478f306f6fb474f8b078c10b1d04b7b47"
+    },
+    {
+      "path": "apps/web/proxy.ts",
+      "mode": "100644",
+      "gitSha": "20edc9b6b024f316dbbe358968648f9f79d24461"
+    },
+    {
+      "path": "apps/web/tests/e2e/app.spec.ts",
+      "mode": "100644",
+      "gitSha": "8c611ab51cddbaf70872c67eabc445273b1976ad"
+    },
+    {
+      "path": "apps/web/tests/instruction-authoring.api.mjs",
+      "mode": "100644",
+      "gitSha": "3b83a5cb4167e8ec3234766d6e713ff7d593cbbd"
+    },
+    {
+      "path": "apps/web/tests/instruction-authoring.browser.config.mjs",
+      "mode": "100644",
+      "gitSha": "2316ee667c182698074bf4f5eef5daeb9850a313"
+    },
+    {
+      "path": "apps/web/tests/instruction-authoring.browser.spec.mjs",
+      "mode": "100644",
+      "gitSha": "28dd7d42e5f216c7472284a77567e4dc7da4a55e"
+    },
+    {
+      "path": "apps/web/tests/instruction-authoring.fixtures.mjs",
+      "mode": "100644",
+      "gitSha": "6fddfe2915d5d68edbbd98635d39481accd477d3"
+    },
+    {
+      "path": "apps/web/tests/web.test.ts",
+      "mode": "100644",
+      "gitSha": "3e85a5174429144c98aa2d0dafdc2990946c45e0"
+    },
+    {
+      "path": "apps/web/tsconfig.json",
+      "mode": "100644",
+      "gitSha": "84649519632009dc84406dd2096d0ee76fb6f1de"
+    },
+    {
+      "path": "CLAUDE.md",
+      "mode": "100644",
+      "gitSha": "43c994c2d3617f947bcb5adf1933e21dabe46bb5"
+    },
+    {
+      "path": "CODE_OF_CONDUCT.md",
+      "mode": "100644",
+      "gitSha": "fd41486224aa21bb28966d62f96b9c01d7deab39"
+    },
+    {
+      "path": "components.json",
+      "mode": "100644",
+      "gitSha": "8d0a50e14598d7d60bc5e5ccb999a790ee25f6fa"
+    },
+    {
+      "path": "components/ui/accordion.tsx",
+      "mode": "100644",
+      "gitSha": "ce3db7589fafd760fcdf86fa25f7cac8bb2aa951"
+    },
+    {
+      "path": "components/ui/alert-dialog.tsx",
+      "mode": "100644",
+      "gitSha": "cc8fed0e252cb193e4736e6214c6fdad66ac7cc0"
+    },
+    {
+      "path": "components/ui/alert.tsx",
+      "mode": "100644",
+      "gitSha": "2d8ecacc48f2b8b962ff4d17275fac60f343c5d4"
+    },
+    {
+      "path": "components/ui/aspect-ratio.tsx",
+      "mode": "100644",
+      "gitSha": "57e38fa96f9c0cb767d7b8de0d6dbc171d1b921a"
+    },
+    {
+      "path": "components/ui/avatar.tsx",
+      "mode": "100644",
+      "gitSha": "47ff2e2f444ae5dd3288e213e77f7b55bdf7281c"
+    },
+    {
+      "path": "components/ui/badge.tsx",
+      "mode": "100644",
+      "gitSha": "f428bc5f7cc265b96fc33c4ad5083383d729e90e"
+    },
+    {
+      "path": "components/ui/breadcrumb.tsx",
+      "mode": "100644",
+      "gitSha": "a48cc1f60de4841e7925d3f4f0dba8388225702c"
+    },
+    {
+      "path": "components/ui/button-group.tsx",
+      "mode": "100644",
+      "gitSha": "e1c0f5b2ea93c73bc11c0b604312891f2fb90d75"
+    },
+    {
+      "path": "components/ui/button.tsx",
+      "mode": "100644",
+      "gitSha": "524cbd1410bc74a48c439553327e1cde1200fd25"
+    },
+    {
+      "path": "components/ui/calendar.tsx",
+      "mode": "100644",
+      "gitSha": "cb4859c068628b5e40526cb1b2b13bda100c6e32"
+    },
+    {
+      "path": "components/ui/card.tsx",
+      "mode": "100644",
+      "gitSha": "a45acf47d171940fe8e8236099b6e97a93a741a2"
+    },
+    {
+      "path": "components/ui/carousel.tsx",
+      "mode": "100644",
+      "gitSha": "dafc1498778e41160f3baf3636ea628062801cb7"
+    },
+    {
+      "path": "components/ui/chart.tsx",
+      "mode": "100644",
+      "gitSha": "7c2dc8472673ad6fb3cc694542f8486eb7d84d6a"
+    },
+    {
+      "path": "components/ui/checkbox.tsx",
+      "mode": "100644",
+      "gitSha": "9e221455f797a945606fe78b6654ca83205c24c0"
+    },
+    {
+      "path": "components/ui/collapsible.tsx",
+      "mode": "100644",
+      "gitSha": "2f7a4e7fc64a8874373c1584646a63f28cd63c47"
+    },
+    {
+      "path": "components/ui/combobox.tsx",
+      "mode": "100644",
+      "gitSha": "103fbc68b475ed200b85a1e00d23b21544e7d896"
+    },
+    {
+      "path": "components/ui/command.tsx",
+      "mode": "100644",
+      "gitSha": "d6375b335d1c9dfb793c1b161ad4ffac6b7e8173"
+    },
+    {
+      "path": "components/ui/context-menu.tsx",
+      "mode": "100644",
+      "gitSha": "ef285184a8af6ecc81652c81f652cc5f85c23971"
+    },
+    {
+      "path": "components/ui/dialog.tsx",
+      "mode": "100644",
+      "gitSha": "3346683671399581e3d5fb4a9ae8a54b4075f938"
+    },
+    {
+      "path": "components/ui/direction.tsx",
+      "mode": "100644",
+      "gitSha": "22e165774bd595fbf41d0c45efef1cf996897983"
+    },
+    {
+      "path": "components/ui/drawer.tsx",
+      "mode": "100644",
+      "gitSha": "7685cb4c3670fb70547fdf42ca4eda40932d8188"
+    },
+    {
+      "path": "components/ui/dropdown-menu.tsx",
+      "mode": "100644",
+      "gitSha": "172cc1542634c67b2dfdb2b47280dbbc53090529"
+    },
+    {
+      "path": "components/ui/empty.tsx",
+      "mode": "100644",
+      "gitSha": "57d9aec71714a305fde891bfa1737270ba0a7f26"
+    },
+    {
+      "path": "components/ui/field.tsx",
+      "mode": "100644",
+      "gitSha": "0c3dde6245967a076e4174242b52b34aacde4165"
+    },
+    {
+      "path": "components/ui/hover-card.tsx",
+      "mode": "100644",
+      "gitSha": "b0fa422110639b6ac255691323d32c46b863efa6"
+    },
+    {
+      "path": "components/ui/input-group.tsx",
+      "mode": "100644",
+      "gitSha": "e4b6599a25b5e1d5ada274ae5b2d5537ce32dcc3"
+    },
+    {
+      "path": "components/ui/input-otp.tsx",
+      "mode": "100644",
+      "gitSha": "b6820279864b67e295063e6f3d914e023cd91bbe"
+    },
+    {
+      "path": "components/ui/input.tsx",
+      "mode": "100644",
+      "gitSha": "e49996f0b420b3f6f1766e6eb5d9a84b29c53e99"
+    },
+    {
+      "path": "components/ui/item.tsx",
+      "mode": "100644",
+      "gitSha": "2d492197ef279b6733e16ec363737ed440cdc4ce"
+    },
+    {
+      "path": "components/ui/kbd.tsx",
+      "mode": "100644",
+      "gitSha": "ff93b53226636d022aa339795571031ffab0d8b3"
+    },
+    {
+      "path": "components/ui/label.tsx",
+      "mode": "100644",
+      "gitSha": "1ac80f701ebfe9dc02d632c08cafade732e46625"
+    },
+    {
+      "path": "components/ui/menubar.tsx",
+      "mode": "100644",
+      "gitSha": "bc4622313756702c2f0bfee15e618b8203f8580e"
+    },
+    {
+      "path": "components/ui/native-select.tsx",
+      "mode": "100644",
+      "gitSha": "b579bda82c203ebbd200ac3c285c4910d139b5c5"
+    },
+    {
+      "path": "components/ui/navigation-menu.tsx",
+      "mode": "100644",
+      "gitSha": "9cda5a35d3be0e1898172cea2eb4cc9dd6a8e1a6"
+    },
+    {
+      "path": "components/ui/pagination.tsx",
+      "mode": "100644",
+      "gitSha": "88ac19fca4d1bb6a81163d2ba29b27d5cd5e6a41"
+    },
+    {
+      "path": "components/ui/popover.tsx",
+      "mode": "100644",
+      "gitSha": "e248f05df313380548a2146993261407891be815"
+    },
+    {
+      "path": "components/ui/progress.tsx",
+      "mode": "100644",
+      "gitSha": "777e627a006b7a48c5c50ad66c0a7746e147f50d"
+    },
+    {
+      "path": "components/ui/radio-group.tsx",
+      "mode": "100644",
+      "gitSha": "da46bc3d1a6db0d09bbfcf37c8a88cbd19daba29"
+    },
+    {
+      "path": "components/ui/resizable.tsx",
+      "mode": "100644",
+      "gitSha": "c9e767a94c164fcf5b1ac3708d4c82737f87728a"
+    },
+    {
+      "path": "components/ui/scroll-area.tsx",
+      "mode": "100644",
+      "gitSha": "facbbe7d8dfdb177b8498f338232c705768b7334"
+    },
+    {
+      "path": "components/ui/select.tsx",
+      "mode": "100644",
+      "gitSha": "f3ef9c0134a079bb66ce3966f40dc42550706654"
+    },
+    {
+      "path": "components/ui/separator.tsx",
+      "mode": "100644",
+      "gitSha": "d4570908d42d3da4e15111a776f52c88bd0e6911"
+    },
+    {
+      "path": "components/ui/sheet.tsx",
+      "mode": "100644",
+      "gitSha": "41c2914e85c9f24cdc84fb14afe5b2a535f371d4"
+    },
+    {
+      "path": "components/ui/sidebar.tsx",
+      "mode": "100644",
+      "gitSha": "1d87a9d5bfb1868ca1370e45b08c19858fccba56"
+    },
+    {
+      "path": "components/ui/skeleton.tsx",
+      "mode": "100644",
+      "gitSha": "5b3fd9413435239f0fe427d6883d0006a68e4994"
+    },
+    {
+      "path": "components/ui/slider.tsx",
+      "mode": "100644",
+      "gitSha": "84c865522df1bbcde06d28f14c8928a10b983aa1"
+    },
+    {
+      "path": "components/ui/sonner.tsx",
+      "mode": "100644",
+      "gitSha": "9280ee52ffedac56107a4880828f61fac897c7f8"
+    },
+    {
+      "path": "components/ui/spinner.tsx",
+      "mode": "100644",
+      "gitSha": "8dca22b3f80eadc7685d74ad660eb6913e5be07c"
+    },
+    {
+      "path": "components/ui/switch.tsx",
+      "mode": "100644",
+      "gitSha": "356206e86c352bae9143bc5fb4fbe8e11a178c92"
+    },
+    {
+      "path": "components/ui/table.tsx",
+      "mode": "100644",
+      "gitSha": "6c0e3e8d69951ff292eb5f506466320fbd447fd2"
+    },
+    {
+      "path": "components/ui/tabs.tsx",
+      "mode": "100644",
+      "gitSha": "b641f89d80175be06fc570bf6f3fa1e20d6ca308"
+    },
+    {
+      "path": "components/ui/textarea.tsx",
+      "mode": "100644",
+      "gitSha": "e62bf7da62ad79059222b77068a4952f305f8fb9"
+    },
+    {
+      "path": "components/ui/toggle-group.tsx",
+      "mode": "100644",
+      "gitSha": "7b7344db2d6493b2465c1a7798745e12d113fe7c"
+    },
+    {
+      "path": "components/ui/toggle.tsx",
+      "mode": "100644",
+      "gitSha": "a08fc57cdcd64273ee2d9b1adfa811322060e94c"
+    },
+    {
+      "path": "components/ui/tooltip.tsx",
+      "mode": "100644",
+      "gitSha": "1f61e3d3b8614204f3e70dfa59c4d60c54ae07e0"
+    },
+    {
+      "path": "CONTRIBUTING.md",
+      "mode": "100644",
+      "gitSha": "cf3983d6400639df2fb6b47dc41ffc71d027aaaf"
+    },
+    {
+      "path": "docker-compose.yml",
+      "mode": "100644",
+      "gitSha": "f1ae98fdb725d7657b6231bfe66948792058baf4"
+    },
+    {
+      "path": "docs/adapter-development.md",
+      "mode": "100644",
+      "gitSha": "e92b41c87d524448915aeb2f9a51f95b41fa58f1"
+    },
+    {
+      "path": "docs/api.md",
+      "mode": "100644",
+      "gitSha": "45efcf03141d4ee14affd9f6053a11a9a1e5ba8c"
+    },
+    {
+      "path": "docs/architecture.md",
+      "mode": "100644",
+      "gitSha": "d35e4ac2bc6842a5730128857b4ea513b74a47c4"
+    },
+    {
+      "path": "docs/calibration.md",
+      "mode": "100644",
+      "gitSha": "188c2594f0d239538aea41e018a23cbbcc3e1963"
+    },
+    {
+      "path": "docs/campaign-requests.md",
+      "mode": "100644",
+      "gitSha": "205f887b6dc5a5dd139d9ad83fcdab52bf931c31"
+    },
+    {
+      "path": "docs/context-packs.md",
+      "mode": "100644",
+      "gitSha": "2da60ca16d4939c6af16fa9640e44b832d800801"
+    },
+    {
+      "path": "docs/datasets-and-benchmarks.md",
+      "mode": "100644",
+      "gitSha": "ed70887a548a0e16b65df542331400e684a28531"
+    },
+    {
+      "path": "docs/deployment.md",
+      "mode": "100644",
+      "gitSha": "8eadf45325e5659602efe2e544bb69fadcd8f598"
+    },
+    {
+      "path": "docs/eval-contracts.md",
+      "mode": "100644",
+      "gitSha": "27a0b513058ac66e480b4598f7a0987d6f626283"
+    },
+    {
+      "path": "docs/eve-agents.md",
+      "mode": "100644",
+      "gitSha": "f169c3123d76b7b83413cae4d7122f46e8793cfa"
+    },
+    {
+      "path": "docs/experiments-and-statistics.md",
+      "mode": "100644",
+      "gitSha": "8b57c44cb4a4c82ff1fb685b991d7781d424d9dd"
+    },
+    {
+      "path": "docs/limitations.md",
+      "mode": "100644",
+      "gitSha": "cbdacf117e14a20b8f3c0c08eca5288e6bc3049c"
+    },
+    {
+      "path": "docs/local-development.md",
+      "mode": "100644",
+      "gitSha": "e3d7ad9d8c2ddff1ccb68ba700ddf6b208917284"
+    },
+    {
+      "path": "docs/mcp.md",
+      "mode": "100644",
+      "gitSha": "81499b23cdf64c5d3dec123b8a89577de99704b8"
+    },
+    {
+      "path": "docs/privacy-and-retention.md",
+      "mode": "100644",
+      "gitSha": "730060c17ae8a9cc6d6aa03ef63a1029d48f8899"
+    },
+    {
+      "path": "docs/prompt-clients.md",
+      "mode": "100644",
+      "gitSha": "6eb881ab97d6e004d200d918b17aae69be6b913a"
+    },
+    {
+      "path": "docs/prompt-management.md",
+      "mode": "100644",
+      "gitSha": "919c29c81366d5004de678512b5ba88c85295a16"
+    },
+    {
+      "path": "docs/prompt-optimization.md",
+      "mode": "100644",
+      "gitSha": "9f8ef98c6d233d9961aa080e35370a4a211b2e28"
+    },
+    {
+      "path": "docs/proposals/campaign-request-browser-seed.ts.example",
+      "mode": "100644",
+      "gitSha": "fcf027e91f1f99b067ac61988ecf9be1603e660e"
+    },
+    {
+      "path": "docs/proposals/campaign-request-browser.config.ts.example",
+      "mode": "100644",
+      "gitSha": "ba75d4be447135d2cec2f62a02f2a9b192cc6575"
+    },
+    {
+      "path": "docs/proposals/campaign-request-browser.spec.ts.example",
+      "mode": "100644",
+      "gitSha": "1d810cb5dab9fed130592a4379494131415d8034"
+    },
+    {
+      "path": "docs/proposals/campaign-request-checks.md",
+      "mode": "100644",
+      "gitSha": "3908ca499c4c0068a4ceb718eb42d541bf34b229"
+    },
+    {
+      "path": "docs/proposals/campaign-request-checks.yml.example",
+      "mode": "100644",
+      "gitSha": "c12bde25f3b2dc7ddcd056502e56816d5080237b"
+    },
+    {
+      "path": "docs/proposals/cli-runtime.md",
+      "mode": "100644",
+      "gitSha": "2c5fb77478f88d81e184883b811a7686dd56f472"
+    },
+    {
+      "path": "docs/proposals/prompt-authoring-browser-checks.md",
+      "mode": "100644",
+      "gitSha": "8591d8b5b7f090b8804b6b5945374dd3b758fe33"
+    },
+    {
+      "path": "docs/proposals/prompt-authoring-checks.md",
+      "mode": "100644",
+      "gitSha": "4703ac211455468799af880ef884c0a023753fc4"
+    },
+    {
+      "path": "docs/proposals/prompt-authoring-checks.workflow.yml",
+      "mode": "100644",
+      "gitSha": "237ec276e8f0e7407747fd605586c5accea30e8a"
+    },
+    {
+      "path": "docs/proposals/prompt-authoring-contract.md",
+      "mode": "100644",
+      "gitSha": "4c6ad42046f451dd6c13961d935a71e21419431a"
+    },
+    {
+      "path": "docs/proposals/prompt-authoring-core-checks.md",
+      "mode": "100644",
+      "gitSha": "6e5412c9e0488a9df36335b756b54ba4403d8938"
+    },
+    {
+      "path": "docs/proposals/prompt-client-checks.md",
+      "mode": "100644",
+      "gitSha": "fe149afcc98773fef2a08b8a70483375daa9dee0"
+    },
+    {
+      "path": "docs/proposals/prompt-client-checks.workflow.yml",
+      "mode": "100644",
+      "gitSha": "96ef73048c83731dcacf1f51f8fb479b155ae3bf"
+    },
+    {
+      "path": "docs/proposals/prompt-composition-checks.md",
+      "mode": "100644",
+      "gitSha": "013546879f4df82932e42b2df1e97f1beea8b621"
+    },
+    {
+      "path": "docs/reference-architecture.md",
+      "mode": "100644",
+      "gitSha": "ad1408fe22e3d65b1eab50298d896f46cfd9ff77"
+    },
+    {
+      "path": "docs/reference-arecture.md",
+      "mode": "100644",
+      "gitSha": "410e3711b53da5d7928e7f437338c593591dfba1"
+    },
+    {
+      "path": "docs/scenarios.md",
+      "mode": "100644",
+      "gitSha": "1ec2199195c47771391a18a6059fa9e766c93be0"
+    },
+    {
+      "path": "docs/terminology.md",
+      "mode": "100644",
+      "gitSha": "f88f916d53656594b66baee4be0a9146b6c90c73"
+    },
+    {
+      "path": "docs/trace-ingestion.md",
+      "mode": "100644",
+      "gitSha": "2d814a3bcd64eb995fd78691eacf2063d4612cf9"
+    },
+    {
+      "path": "eslint.config.mjs",
+      "mode": "100644",
+      "gitSha": "05e726d1b4201bc8c7716d2b058279676582e8c0"
+    },
+    {
+      "path": "examples/demo-scenario.yaml",
+      "mode": "100644",
+      "gitSha": "e4c9ac7e6b29a125cf1ad4b91f5fe2c73271b279"
+    },
+    {
+      "path": "examples/demo-traces.jsonl",
+      "mode": "100644",
+      "gitSha": "44e35002215815f292b2f2cc6c05e3894355712a"
+    },
+    {
+      "path": "examples/github-action.yml",
+      "mode": "100644",
+      "gitSha": "28391decfe9a0c1d6755d70e096295a631266ef7"
+    },
+    {
+      "path": "hooks/use-mobile.ts",
+      "mode": "100644",
+      "gitSha": "2b0fe1dfef3b17850bbac040665f514a8ffd0f15"
+    },
+    {
+      "path": "lib/utils.ts",
+      "mode": "100644",
+      "gitSha": "bd0c391ddd1088e9067844c48835bf4abcd61783"
+    },
+    {
+      "path": "LICENSE",
+      "mode": "100644",
+      "gitSha": "5f4a5c4b96eb4e809d75358f2f67484d7b42c736"
+    },
+    {
+      "path": "next.config.ts",
+      "mode": "100644",
+      "gitSha": "e9ffa3083ad279ecf95fd8eae59cb253e9a539c4"
+    },
+    {
+      "path": "package.json",
+      "mode": "100644",
+      "gitSha": "d0326fa71712e70b994d9feb9d9cb0a871860cd0"
+    },
+    {
+      "path": "packages/adapters/package.json",
+      "mode": "100644",
+      "gitSha": "05bc0832e90a1739f4eb76dc443d4f8aca16a664"
+    },
+    {
+      "path": "packages/adapters/src/artifact-store.ts",
+      "mode": "100644",
+      "gitSha": "636d9abba651809e2332f480e4ddf043c381b829"
+    },
+    {
+      "path": "packages/adapters/src/index.ts",
+      "mode": "100644",
+      "gitSha": "841f5e431012def4de02cc98f5d2e7b4b8d21849"
+    },
+    {
+      "path": "packages/adapters/src/redaction.ts",
+      "mode": "100644",
+      "gitSha": "f27eb3c2a9deedebb84fcb1f464330a9e73b6e5c"
+    },
+    {
+      "path": "packages/adapters/src/sandbox.ts",
+      "mode": "100644",
+      "gitSha": "7544b34c16e1bd706eef634b8344fb7253b7b987"
+    },
+    {
+      "path": "packages/adapters/src/secrets.ts",
+      "mode": "100644",
+      "gitSha": "bed752aa0c26b49b45cf0c093dcbdb34e5177c5f"
+    },
+    {
+      "path": "packages/adapters/src/targets.ts",
+      "mode": "100644",
+      "gitSha": "ec9ee2520cf1846a9c5ed06708ae32edb62817d4"
+    },
+    {
+      "path": "packages/adapters/src/trace-sources.ts",
+      "mode": "100644",
+      "gitSha": "844e184713d44297c377ccb2934a419967abfb65"
+    },
+    {
+      "path": "packages/adapters/tests/adapters.test.ts",
+      "mode": "100644",
+      "gitSha": "84ff8f49da176933bfd831f0717a04f4fe7e6a1b"
+    },
+    {
+      "path": "packages/adapters/tsconfig.json",
+      "mode": "100644",
+      "gitSha": "da27b463184720912090ea8a9dfd563f2254349b"
+    },
+    {
+      "path": "packages/core/package.json",
+      "mode": "100644",
+      "gitSha": "a96d4213dd95d4a6e008850b89a043844a4d2c27"
+    },
+    {
+      "path": "packages/core/src/approvals.ts",
+      "mode": "100644",
+      "gitSha": "5936e1dc64700759cde8d4ae88706de24654bd1e"
+    },
+    {
+      "path": "packages/core/src/auth.ts",
+      "mode": "100644",
+      "gitSha": "4f48c6b9e9c0f35340ac1e74295898bfea62de6a"
+    },
+    {
+      "path": "packages/core/src/benchmarks.ts",
+      "mode": "100644",
+      "gitSha": "9c7f6023001c5e4d4e52633c4b49a77879a22112"
+    },
+    {
+      "path": "packages/core/src/calibration.ts",
+      "mode": "100644",
+      "gitSha": "038972df7d8eaf2d31ca92a883f3e30f5bfb9c6c"
+    },
+    {
+      "path": "packages/core/src/campaign-preparation.ts",
+      "mode": "100644",
+      "gitSha": "23641c539f7fa4763a4adb334fb626fc44b60cc3"
+    },
+    {
+      "path": "packages/core/src/demo.ts",
+      "mode": "100644",
+      "gitSha": "5012034ae706654cbc9d2a273dd688311b6add77"
+    },
+    {
+      "path": "packages/core/src/eval-engine.ts",
+      "mode": "100644",
+      "gitSha": "fc6a2284f730cea82759dab73da021df0ead274a"
+    },
+    {
+      "path": "packages/core/src/experiment.ts",
+      "mode": "100644",
+      "gitSha": "4f895c22d37070363d00bcd9a43097a062e8c899"
+    },
+    {
+      "path": "packages/core/src/hash.ts",
+      "mode": "100644",
+      "gitSha": "140471745127c6e0e0a8a58cc79b245006c6ae89"
+    },
+    {
+      "path": "packages/core/src/improvement.ts",
+      "mode": "100644",
+      "gitSha": "c3209ebe9973beca200000d043082aaa922b73ea"
+    },
+    {
+      "path": "packages/core/src/index.ts",
+      "mode": "100644",
+      "gitSha": "eddb432acedfddaebc47f59f700df7fae5ff08a6"
+    },
+    {
+      "path": "packages/core/src/orchestration.ts",
+      "mode": "100644",
+      "gitSha": "5bdf4b90ceca75e713ad43b596cfe67a8e32d2b5"
+    },
+    {
+      "path": "packages/core/src/prompt-authoring.ts",
+      "mode": "100644",
+      "gitSha": "0c495af3b3ec882075265be9914fda1ec78f2a40"
+    },
+    {
+      "path": "packages/core/src/prompt-composition.ts",
+      "mode": "100644",
+      "gitSha": "d365ad2031b1557edd194b84c8bb36410e9fb199"
+    },
+    {
+      "path": "packages/core/src/prompt.ts",
+      "mode": "100644",
+      "gitSha": "6f4b680c460b330c02084555ca49e9e9ddfbf564"
+    },
+    {
+      "path": "packages/core/src/statistics.ts",
+      "mode": "100644",
+      "gitSha": "72fb6bd3a45201a3c6672479d2a28b6447a1f22c"
+    },
+    {
+      "path": "packages/core/src/trace.ts",
+      "mode": "100644",
+      "gitSha": "4f3486953129d76fc3b7d287186a4f44c4bbb34e"
+    },
+    {
+      "path": "packages/core/src/types.ts",
+      "mode": "100644",
+      "gitSha": "277767b4a09236f6625db707d961b0befd0daef1"
+    },
+    {
+      "path": "packages/core/tests/core.test.ts",
+      "mode": "100644",
+      "gitSha": "0def867a02001453699ee4a9f0a7787713c1f9bf"
+    },
+    {
+      "path": "packages/core/tests/prompt-authoring.node.mjs",
+      "mode": "100644",
+      "gitSha": "2381b544f8134894cfc942a9b56463d2218ac0a2"
+    },
+    {
+      "path": "packages/core/tests/prompt-composition.node.mjs",
+      "mode": "100644",
+      "gitSha": "da9c1724e92310d593c75cf0347a797d3c42494b"
+    },
+    {
+      "path": "packages/core/tests/register-authoring-typescript.mjs",
+      "mode": "100644",
+      "gitSha": "304e9287a651132918418106836da63681c53ea3"
+    },
+    {
+      "path": "packages/core/tests/register-typescript.mjs",
+      "mode": "100644",
+      "gitSha": "dd8d2198e03dbad929674339da0cc6c72fdc90f5"
+    },
+    {
+      "path": "packages/core/tsconfig.json",
+      "mode": "100644",
+      "gitSha": "da27b463184720912090ea8a9dfd563f2254349b"
+    },
+    {
+      "path": "packages/db/migrations/0001_init.sql",
+      "mode": "100644",
+      "gitSha": "b2eb54ce117e08a789849d8186398e114e11bac5"
+    },
+    {
+      "path": "packages/db/migrations/0002_hosted_integrations.sql",
+      "mode": "100644",
+      "gitSha": "fd74a6fbd8158c0a8d8e1d38947d1256d69947f7"
+    },
+    {
+      "path": "packages/db/migrations/0003_supabase_hosted_auth_rls.sql",
+      "mode": "100644",
+      "gitSha": "58c8462282c0567407c8861155e5601a173172f5"
+    },
+    {
+      "path": "packages/db/package.json",
+      "mode": "100644",
+      "gitSha": "135404cc067b2f21ee8ec53d4f17967227b14de6"
+    },
+    {
+      "path": "packages/db/src/index.ts",
+      "mode": "100644",
+      "gitSha": "785effc6029c155fb3caa8d4c2377db1fb6f9d40"
+    },
+    {
+      "path": "packages/db/src/migrate.ts",
+      "mode": "100644",
+      "gitSha": "0c6add53322519b7b0e2f5c7f65d92cec6730fbd"
+    },
+    {
+      "path": "packages/db/src/prompt-authoring.ts",
+      "mode": "100644",
+      "gitSha": "f19a4af9995cd51e37598a28cc5ea3aaf505fd95"
+    },
+    {
+      "path": "packages/db/src/schema.ts",
+      "mode": "100644",
+      "gitSha": "dbf993cc57f61095d035de778b03169db96f7ad0"
+    },
+    {
+      "path": "packages/db/src/seed.ts",
+      "mode": "100644",
+      "gitSha": "4064da1da281851f88ecffc7d14c6501029e3d76"
+    },
+    {
+      "path": "packages/db/src/service.ts",
+      "mode": "100644",
+      "gitSha": "8c79cc2b12509575f59f4e2d06404755f29c4470"
+    },
+    {
+      "path": "packages/db/tests/schema.test.ts",
+      "mode": "100644",
+      "gitSha": "dc1230783241903543db649d8d9de5a907e5a437"
+    },
+    {
+      "path": "packages/db/tsconfig.json",
+      "mode": "100644",
+      "gitSha": "da27b463184720912090ea8a9dfd563f2254349b"
+    },
+    {
+      "path": "packages/mcp/package.json",
+      "mode": "100644",
+      "gitSha": "8fa3cec0e046279c4a4ca4502966fa9f5f975e37"
+    },
+    {
+      "path": "packages/mcp/src/index.ts",
+      "mode": "100644",
+      "gitSha": "739126277bee2897767f7b9fc3e94feb220cfc3b"
+    },
+    {
+      "path": "packages/mcp/tests/mcp.test.ts",
+      "mode": "100644",
+      "gitSha": "c1d3afabb0565b4f4ac866ad62fe26aa87456a9e"
+    },
+    {
+      "path": "packages/mcp/tsconfig.json",
+      "mode": "100644",
+      "gitSha": "da27b463184720912090ea8a9dfd563f2254349b"
+    },
+    {
+      "path": "packages/sdk/package.json",
+      "mode": "100644",
+      "gitSha": "541ce233fb650c50819650921297a28461a97340"
+    },
+    {
+      "path": "packages/sdk/src/index.ts",
+      "mode": "100644",
+      "gitSha": "367c3620e996fe6b1156c093864d27fbf80bc0e8"
+    },
+    {
+      "path": "packages/sdk/src/prompts.ts",
+      "mode": "100644",
+      "gitSha": "282e1f96d3dbff1dd60ffe54db5e05ead73f46af"
+    },
+    {
+      "path": "packages/sdk/tests/prompts.test.mjs",
+      "mode": "100644",
+      "gitSha": "6e182f73f99ce3682db285caf343363a965b141a"
+    },
+    {
+      "path": "packages/sdk/tests/sdk.test.ts",
+      "mode": "100644",
+      "gitSha": "eff9bb12de3d8a75b008544a8db9c24af8e4a4ba"
+    },
+    {
+      "path": "packages/sdk/tsconfig.json",
+      "mode": "100644",
+      "gitSha": "da27b463184720912090ea8a9dfd563f2254349b"
+    },
+    {
+      "path": "packages/statistics/package.json",
+      "mode": "100644",
+      "gitSha": "7b4e5c04510d11b1a976a933fb00c0908a802bae"
+    },
+    {
+      "path": "packages/statistics/src/index.ts",
+      "mode": "100644",
+      "gitSha": "7ca04ffff20937e148e487859331dcd505287cf5"
+    },
+    {
+      "path": "packages/statistics/tsconfig.json",
+      "mode": "100644",
+      "gitSha": "055946e90f15bb7f7b9d359ba8b1416d8d5ced4a"
+    },
+    {
+      "path": "packages/test-fixtures/package.json",
+      "mode": "100644",
+      "gitSha": "ecb6fe1bc7497f1d1fe3cc5b96890dbae1726bf9"
+    },
+    {
+      "path": "packages/test-fixtures/src/index.ts",
+      "mode": "100644",
+      "gitSha": "e1d5877ce46b62f9e6417fb683c7ea587080c933"
+    },
+    {
+      "path": "packages/test-fixtures/tsconfig.json",
+      "mode": "100644",
+      "gitSha": "055946e90f15bb7f7b9d359ba8b1416d8d5ced4a"
+    },
+    {
+      "path": "pnpm-lock.yaml",
+      "mode": "100644",
+      "gitSha": "1a16e66a423cd53893438704821a7758ba8ca625"
+    },
+    {
+      "path": "pnpm-workspace.yaml",
+      "mode": "100644",
+      "gitSha": "2cb88564f7715d5d02790576017ed76949e8159e"
+    },
+    {
+      "path": "postcss.config.mjs",
+      "mode": "100644",
+      "gitSha": "61e36849cf7cfa9f1f71b4a3964a4953e3e243d3"
+    },
+    {
+      "path": "public/file.svg",
+      "mode": "100644",
+      "gitSha": "004145cddf3f9db91b57b9cb596683c8eb420862"
+    },
+    {
+      "path": "public/globe.svg",
+      "mode": "100644",
+      "gitSha": "567f17b0d7c7fb662c16d4357dd74830caf2dccb"
+    },
+    {
+      "path": "public/next.svg",
+      "mode": "100644",
+      "gitSha": "5174b28c565c285e3e312ec5178be64fbeca8398"
+    },
+    {
+      "path": "public/vercel.svg",
+      "mode": "100644",
+      "gitSha": "77053960334e2e34dc584dea8019925c3b4ccca9"
+    },
+    {
+      "path": "public/window.svg",
+      "mode": "100644",
+      "gitSha": "b2b2a44f6ebc70c450043c05a002e7a93ba5d651"
+    },
+    {
+      "path": "python/open_evals_optimizers/pyproject.toml",
+      "mode": "100644",
+      "gitSha": "94e5647d1c2c7a2322c1a6410a70bbe5f52cc4ff"
+    },
+    {
+      "path": "python/open_evals_optimizers/src/open_evals_optimizers/__init__.py",
+      "mode": "100644",
+      "gitSha": "81cd7fe7fc9e91ff51cf2b1158aae5488b05256b"
+    },
+    {
+      "path": "python/open_evals_optimizers/src/open_evals_optimizers/engines.py",
+      "mode": "100644",
+      "gitSha": "279beb7142317540c1a5c1c1d3bd7f804e146e2c"
+    },
+    {
+      "path": "python/open_evals_optimizers/src/open_evals_sdk.py",
+      "mode": "100644",
+      "gitSha": "c97a5aba2d2bcfd21b49103751b5792d89fa2b41"
+    },
+    {
+      "path": "python/open_evals_optimizers/tests/test_engines.py",
+      "mode": "100644",
+      "gitSha": "3fdd1f14fe7cef5fdec23e820fdb9dfa64ffb5c5"
+    },
+    {
+      "path": "python/open_evals_optimizers/uv.lock",
+      "mode": "100644",
+      "gitSha": "b6dfd3e6f2ab967acaf322e6f4bc1b7aa64cb7ab"
+    },
+    {
+      "path": "README.md",
+      "mode": "100644",
+      "gitSha": "4e5efa790775e5dda27336c3d0ff4637f40212d2"
+    },
+    {
+      "path": "scripts/doctor.ts",
+      "mode": "100644",
+      "gitSha": "c5929b30b253eb28ab5833cfae74e6b93a9b2bee"
+    },
+    {
+      "path": "scripts/setup-local.mjs",
+      "mode": "100644",
+      "gitSha": "d5de84eba8fe8863559f3dbe0bcc5b59127142a8"
+    },
+    {
+      "path": "SECURITY.md",
+      "mode": "100644",
+      "gitSha": "022a5877104890832cbf35f06e8bc360621cb07e"
+    },
+    {
+      "path": "skills-lock.json",
+      "mode": "100644",
+      "gitSha": "70f0eb9ce118fe6274d6c1b98e95a16c62d905e1"
+    },
+    {
+      "path": "tests/integration/campaign-request-storage.test.ts",
+      "mode": "100644",
+      "gitSha": "cfdbd31293761adffd8f8082d6fa1c1cc5c85634"
+    },
+    {
+      "path": "tests/unit/campaign-preparation.test.ts",
+      "mode": "100644",
+      "gitSha": "773d65adfa433e4e8264d61e45caf91492f04d9a"
+    },
+    {
+      "path": "tsconfig.base.json",
+      "mode": "100644",
+      "gitSha": "bb2675e23bf1839b60a11c80df6b4695378a691e"
+    },
+    {
+      "path": "tsconfig.json",
+      "mode": "100644",
+      "gitSha": "3a13f90a773b0facb675bf5b1a8239c8f33d36f5"
+    },
+    {
+      "path": "turbo.json",
+      "mode": "100644",
+      "gitSha": "db2edd946dbde6a99306e0774f1cfb3bcb096a18"
+    },
+    {
+      "path": "vitest.config.ts",
+      "mode": "100644",
+      "gitSha": "d6ae3a3bb2bf3de655f44c2e94f80d682adc0af7"
+    },
+    {
+      "path": "workflows/package.json",
+      "mode": "100644",
+      "gitSha": "675fbda4835876a7dab03e91fe91c950b959bbf4"
+    },
+    {
+      "path": "workflows/src/index.ts",
+      "mode": "100644",
+      "gitSha": "5ff1f7a90d30204796b4b9a324bd7b2b33495da6"
+    },
+    {
+      "path": "workflows/tsconfig.json",
+      "mode": "100644",
+      "gitSha": "c12dce0a45e67dae3ee45acc43b40727d97aec8e"
+    }
+  ],
+  "selectedInputs": [
+    {
+      "path": "AGENTS.md",
+      "mode": "100644",
+      "gitSha": "78bb03d83f83399e214447a99d84bfc36343ca12",
+      "sha256": "258170eca3c41433e585ee3af8c2277dcaa11e41876c1bacb30fc304663d2ece",
+      "bytes": 915,
+      "changed": false
+    },
+    {
+      "path": "README.md",
+      "mode": "100644",
+      "gitSha": "4e5efa790775e5dda27336c3d0ff4637f40212d2",
+      "sha256": "f96fdfbcfe07f17a397f61d11036293a12e0988a9bd9d9f7e1772632ab86317c",
+      "bytes": 9723,
+      "changed": true
+    },
+    {
+      "path": "apps/web/app/(product)/campaigns/page.tsx",
+      "mode": "100644",
+      "gitSha": "1e7ad9e51d29439543377e5394e1897260282ade",
+      "sha256": "f0d77d93a1425ffafc82f3e7904a44e495a2ef66b09282eb05b764e8c8d5c04b",
+      "bytes": 2535,
+      "changed": true
+    },
+    {
+      "path": "apps/web/app/(product)/instructions/campaign-request-panel.tsx",
+      "mode": "100644",
+      "gitSha": "12775803bad1f6a88e4919237289e4d4fee86b23",
+      "sha256": "d57cc68d68b9e10dcd260370dda71caf65abe4acbaf8b58dd8fca44bb983aebc",
+      "bytes": 24589,
+      "changed": true
+    },
+    {
+      "path": "apps/web/app/(product)/instructions/instruction-authoring-client.ts",
+      "mode": "100644",
+      "gitSha": "70bd4ff3372f4ff397f029b2a49aff4c2b04993b",
+      "sha256": "827456a0081d8cd89a3f6111b229bbebcb66962f848b4d874f827ee843de696e",
+      "bytes": 10930,
+      "changed": false
+    },
+    {
+      "path": "apps/web/app/(product)/instructions/instruction-editor.tsx",
+      "mode": "100644",
+      "gitSha": "3946454a753e92e9913a1650eec9de35407c4a95",
+      "sha256": "535de5a343622f2baeacbd5105a4bfa782e23bd2aff8b4174abf64c8078dc281",
+      "bytes": 30520,
+      "changed": true
+    },
+    {
+      "path": "apps/web/app/api/v1/instructions/[definitionId]/campaign-requests/preview/route.ts",
+      "mode": "100644",
+      "gitSha": "00c8a35f201fe86fe32ff55eed79e072de7edd9f",
+      "sha256": "7d0c42dcad28edc9b3f4f9097e1c5f7d8fe3e0f0e80e26242d486393ab1d25d4",
+      "bytes": 649,
+      "changed": true
+    },
+    {
+      "path": "apps/web/app/api/v1/instructions/[definitionId]/campaign-requests/route.ts",
+      "mode": "100644",
+      "gitSha": "56dc2cc8f86b4f49395de35cbd0afb6d65b44ac7",
+      "sha256": "aeb22e766a61caa2b5dbbdde63206245daee84c7b3644e82771e767f7b45239e",
+      "bytes": 1490,
+      "changed": true
+    },
+    {
+      "path": "apps/web/app/api/v1/instructions/[definitionId]/versions/route.ts",
+      "mode": "100644",
+      "gitSha": "fc7c9a8a1b53f577ed4e9e5ecdaebb365c54faf9",
+      "sha256": "ae822f27092620d6af23ec15f93e0428c446707e63b338b1c83f0a90ae3c3a21",
+      "bytes": 706,
+      "changed": false
+    },
+    {
+      "path": "apps/web/lib/auth.ts",
+      "mode": "100644",
+      "gitSha": "9ceec8aa2b107c5a86adc36d902670d31a43ba9e",
+      "sha256": "32f35257f9dbe65cd5e40f9c5c6981ff27a54ef0dee955919a49e8bd88ed82e0",
+      "bytes": 7872,
+      "changed": false
+    },
+    {
+      "path": "apps/web/lib/campaign-request-service.ts",
+      "mode": "100644",
+      "gitSha": "54cebdd958584146c7697a7a56b1369734514abb",
+      "sha256": "0ba0c2adaacfafa29f8bc75f57beb3fe0fc15cb507a472791111db656c333692",
+      "bytes": 6354,
+      "changed": true
+    },
+    {
+      "path": "apps/web/lib/instruction-authoring.ts",
+      "mode": "100644",
+      "gitSha": "5a3edc6e805e6a909f30535da220c4533d0b22e4",
+      "sha256": "4c0f01b5edd24ed0a04013ed2102d5bca7de23e03eae4e85d6afdfced86a516d",
+      "bytes": 3078,
+      "changed": false
+    },
+    {
+      "path": "apps/web/lib/instruction-request.ts",
+      "mode": "100644",
+      "gitSha": "58737fdf1e2c3a2745fc3ba4fa876f9e22d7f357",
+      "sha256": "97a8b508637e0080d7ffb8645c4866551945625744f6e76ab2645be3898d915a",
+      "bytes": 2527,
+      "changed": false
+    },
+    {
+      "path": "apps/web/lib/instruction-service.ts",
+      "mode": "100644",
+      "gitSha": "4f5909ce1beae4353dde749f8cf1d104f7ccfa45",
+      "sha256": "84cc9a05c7f3491b300b9dc1770959c5cd669555122bad212948b7bfd1cf49f8",
+      "bytes": 6467,
+      "changed": false
+    },
+    {
+      "path": "apps/web/package.json",
+      "mode": "100644",
+      "gitSha": "f4aafb62479ab08554047ad59ebd55af3e4047e2",
+      "sha256": "8bf8eb6f8d4cb25279b80be1bc8cf088cbaa789409ace2f408b18c49f671e2c5",
+      "bytes": 1207,
+      "changed": false
+    },
+    {
+      "path": "docs/api.md",
+      "mode": "100644",
+      "gitSha": "45efcf03141d4ee14affd9f6053a11a9a1e5ba8c",
+      "sha256": "658f779efeefcec3780836a8622c9c7762c3a805c0454ba3b85860e574c39452",
+      "bytes": 1032,
+      "changed": true
+    },
+    {
+      "path": "docs/architecture.md",
+      "mode": "100644",
+      "gitSha": "d35e4ac2bc6842a5730128857b4ea513b74a47c4",
+      "sha256": "bdcfe16e53397476dfa78f0d45f112078ed3e8ae6bcc6e3b2f3fa458082bf1cf",
+      "bytes": 705,
+      "changed": false
+    },
+    {
+      "path": "docs/campaign-requests.md",
+      "mode": "100644",
+      "gitSha": "205f887b6dc5a5dd139d9ad83fcdab52bf931c31",
+      "sha256": "5bd406f1428ee1cab9e90e55c86248bd6878f0804f9646d98f8c9c2c3e516604",
+      "bytes": 5107,
+      "changed": true
+    },
+    {
+      "path": "docs/prompt-management.md",
+      "mode": "100644",
+      "gitSha": "919c29c81366d5004de678512b5ba88c85295a16",
+      "sha256": "a5107ada3b30f505422c5cb236c150bc1d2b4bed32bbb1c937817ba03cc4fade",
+      "bytes": 9178,
+      "changed": true
+    },
+    {
+      "path": "docs/prompt-optimization.md",
+      "mode": "100644",
+      "gitSha": "9f8ef98c6d233d9961aa080e35370a4a211b2e28",
+      "sha256": "856b808abb0a2d5a4f669b69a24be5661cde216ada6f1d0700f647d0842f016b",
+      "bytes": 1325,
+      "changed": true
+    },
+    {
+      "path": "docs/proposals/campaign-request-browser-seed.ts.example",
+      "mode": "100644",
+      "gitSha": "fcf027e91f1f99b067ac61988ecf9be1603e660e",
+      "sha256": "12ded990a46fca6faa4138d24e920dc79b82a4529632594f42a600b5a10fcb68",
+      "bytes": 14751,
+      "changed": true
+    },
+    {
+      "path": "docs/proposals/campaign-request-browser.config.ts.example",
+      "mode": "100644",
+      "gitSha": "ba75d4be447135d2cec2f62a02f2a9b192cc6575",
+      "sha256": "2743dc86e49fb17d3904e7aab0d2e4cdde97a4b3f1c09d4dd69c698995f211da",
+      "bytes": 1975,
+      "changed": true
+    },
+    {
+      "path": "docs/proposals/campaign-request-browser.spec.ts.example",
+      "mode": "100644",
+      "gitSha": "1d810cb5dab9fed130592a4379494131415d8034",
+      "sha256": "35872b7d7af1f45ec2b60ea24e1b8b61230c401c6d7a606eea3386e5591c5e9c",
+      "bytes": 13636,
+      "changed": true
+    },
+    {
+      "path": "docs/proposals/campaign-request-checks.md",
+      "mode": "100644",
+      "gitSha": "3908ca499c4c0068a4ceb718eb42d541bf34b229",
+      "sha256": "2d2b0fdf27d5901b8270200f4d9f9bc115fe3f579b665fbfeaedfda6b6f96594",
+      "bytes": 5650,
+      "changed": true
+    },
+    {
+      "path": "docs/proposals/campaign-request-checks.yml.example",
+      "mode": "100644",
+      "gitSha": "c12bde25f3b2dc7ddcd056502e56816d5080237b",
+      "sha256": "937070fe7fc3e4b39a9069e11ce7bfb521c1e5cdee78a768c791616fa24e6314",
+      "bytes": 18547,
+      "changed": true
+    },
+    {
+      "path": "package.json",
+      "mode": "100644",
+      "gitSha": "d0326fa71712e70b994d9feb9d9cb0a871860cd0",
+      "sha256": "1a10d0138fae69c7c297c80456d93d0824ed6c85b8f7f161ce5c75d6f5c8651e",
+      "bytes": 2248,
+      "changed": false
+    },
+    {
+      "path": "packages/core/package.json",
+      "mode": "100644",
+      "gitSha": "a96d4213dd95d4a6e008850b89a043844a4d2c27",
+      "sha256": "5ffeec812bd1c17cbf8790ae632fda6e6413d19445fc5c8ec21324f34cec4c8b",
+      "bytes": 512,
+      "changed": false
+    },
+    {
+      "path": "packages/core/src/approvals.ts",
+      "mode": "100644",
+      "gitSha": "5936e1dc64700759cde8d4ae88706de24654bd1e",
+      "sha256": "95e016a2bb090c21e6649c004e65aa9a3e39e69dde981536adde2abb08136607",
+      "bytes": 2145,
+      "changed": false
+    },
+    {
+      "path": "packages/core/src/campaign-preparation.ts",
+      "mode": "100644",
+      "gitSha": "23641c539f7fa4763a4adb334fb626fc44b60cc3",
+      "sha256": "b63132f08fb8c415efee5a478ce8078921b58cd5b7222bfe18aef24f37b6013e",
+      "bytes": 6518,
+      "changed": true
+    },
+    {
+      "path": "packages/core/src/hash.ts",
+      "mode": "100644",
+      "gitSha": "140471745127c6e0e0a8a58cc79b245006c6ae89",
+      "sha256": "14c6a74e885a8bbc11b71a80bf4b4e306d4c6feb1868eafe59684eaeee3c7ab0",
+      "bytes": 969,
+      "changed": false
+    },
+    {
+      "path": "packages/core/src/improvement.ts",
+      "mode": "100644",
+      "gitSha": "c3209ebe9973beca200000d043082aaa922b73ea",
+      "sha256": "511b0f953f7dac987d3c51c6ea15e2486b609ecbc9f48de7c8eb2ba62a4dc34a",
+      "bytes": 2719,
+      "changed": false
+    },
+    {
+      "path": "packages/core/src/index.ts",
+      "mode": "100644",
+      "gitSha": "eddb432acedfddaebc47f59f700df7fae5ff08a6",
+      "sha256": "819531dec4fdd12d18fded912a3356718ab5231535b7678a0c184bdc8d4fd71e",
+      "bytes": 469,
+      "changed": true
+    },
+    {
+      "path": "packages/core/src/prompt-authoring.ts",
+      "mode": "100644",
+      "gitSha": "0c495af3b3ec882075265be9914fda1ec78f2a40",
+      "sha256": "eb9a7c5dcc0aa87354798f2c6202eb206de95ca6b81f2ddfece69147c006e3ff",
+      "bytes": 18260,
+      "changed": false
+    },
+    {
+      "path": "packages/core/src/prompt-composition.ts",
+      "mode": "100644",
+      "gitSha": "d365ad2031b1557edd194b84c8bb36410e9fb199",
+      "sha256": "fd735d5554ce3cdc4c99b906d1ffd6b77c4104274f56e7dd0a67465d9d95f185",
+      "bytes": 23985,
+      "changed": false
+    },
+    {
+      "path": "packages/core/src/prompt.ts",
+      "mode": "100644",
+      "gitSha": "6f4b680c460b330c02084555ca49e9e9ddfbf564",
+      "sha256": "0aa64698ac7729daf5609d11279a1daacf416bc7e5d46aa1b5931f8a5f8050a8",
+      "bytes": 4803,
+      "changed": false
+    },
+    {
+      "path": "packages/core/src/types.ts",
+      "mode": "100644",
+      "gitSha": "277767b4a09236f6625db707d961b0befd0daef1",
+      "sha256": "f033bfd60b1883dd8efd35768deb380cf92186df69089ffc29ad991ca97ac25f",
+      "bytes": 9194,
+      "changed": false
+    },
+    {
+      "path": "packages/db/migrations/0001_init.sql",
+      "mode": "100644",
+      "gitSha": "b2eb54ce117e08a789849d8186398e114e11bac5",
+      "sha256": "5472b6946bec22c5cd56b6e671a2ae38503882e37ca8b3bea1b7ac0b7128043d",
+      "bytes": 14836,
+      "changed": false
+    },
+    {
+      "path": "packages/db/migrations/0002_hosted_integrations.sql",
+      "mode": "100644",
+      "gitSha": "fd74a6fbd8158c0a8d8e1d38947d1256d69947f7",
+      "sha256": "0ab45c7cb5f653a094204e42c1d08725bfa26717ccef5581c90dd61f434cff5e",
+      "bytes": 4066,
+      "changed": false
+    },
+    {
+      "path": "packages/db/package.json",
+      "mode": "100644",
+      "gitSha": "135404cc067b2f21ee8ec53d4f17967227b14de6",
+      "sha256": "3d6ff2202d0aee127293f7b4298088e10c1b893b47528180e1a7a4098f837906",
+      "bytes": 600,
+      "changed": false
+    },
+    {
+      "path": "packages/db/src/index.ts",
+      "mode": "100644",
+      "gitSha": "785effc6029c155fb3caa8d4c2377db1fb6f9d40",
+      "sha256": "6985b0cd22f0be60f2420b35ac6a51f641dfa99fcfb70d4afcda7560410d3282",
+      "bytes": 284,
+      "changed": false
+    },
+    {
+      "path": "packages/db/src/prompt-authoring.ts",
+      "mode": "100644",
+      "gitSha": "f19a4af9995cd51e37598a28cc5ea3aaf505fd95",
+      "sha256": "00736a5ea1b0d3534843a07709d6927faf0d3e8895649b7bdfac1af24d3ff8a3",
+      "bytes": 22233,
+      "changed": true
+    },
+    {
+      "path": "packages/db/src/service.ts",
+      "mode": "100644",
+      "gitSha": "8c79cc2b12509575f59f4e2d06404755f29c4470",
+      "sha256": "a31492fe91e60388c9ccfa9678c4ac33f9993075c63c2ef9956244152997acc8",
+      "bytes": 37811,
+      "changed": false
+    },
+    {
+      "path": "tests/integration/campaign-request-storage.test.ts",
+      "mode": "100644",
+      "gitSha": "cfdbd31293761adffd8f8082d6fa1c1cc5c85634",
+      "sha256": "03b41695621475e1e467e437a3536d8e087aba7004b1da681a01250c093ade08",
+      "bytes": 34971,
+      "changed": true
+    },
+    {
+      "path": "tests/unit/campaign-preparation.test.ts",
+      "mode": "100644",
+      "gitSha": "773d65adfa433e4e8264d61e45caf91492f04d9a",
+      "sha256": "d131e876b4ea2e4aac591f752eee67ae0a0b7ec3d6f4b5b031d9de84ba089c16",
+      "bytes": 15297,
+      "changed": true
+    }
+  ],
+  "testFiles": [
+    {
+      "path": "tests/integration/campaign-request-storage.test.ts",
+      "names": [
+        "campaign request PostgreSQL boundary previews a canonical saved baseline without persisting requests or audit events",
+        "campaign request PostgreSQL boundary atomically stores one pending approval and content-free audit through the route",
+        "campaign request PostgreSQL boundary rolls back the pending insert when its fixture-scoped audit insert fails",
+        "campaign request PostgreSQL boundary replays identical saved intent without changing the row time or adding an audit",
+        "campaign request PostgreSQL boundary serializes concurrent identical saves into one creation and one replay",
+        "campaign request PostgreSQL boundary rejects changed reviewed intent reusing a saved request identity",
+        "campaign request PostgreSQL boundary rejects saved identity reuse by another actor or workspace without disclosing source",
+        "campaign request PostgreSQL boundary requires the reviewed payload hash and rejects altered input with an old review",
+        "campaign request PostgreSQL boundary rejects a baseline changed after review and marks an existing request stale on read",
+        "campaign request PostgreSQL boundary creates no candidates campaigns jobs evaluations or release changes at any request step",
+        "campaign request PostgreSQL boundary enforces existing project ownership for foreign and untargeted instruction definitions",
+        "campaign request PostgreSQL boundary denies cross-workspace preview save and history even to an authenticated workspace session",
+        "campaign request PostgreSQL boundary rejects request-body actor workspace and definition overrides",
+        "campaign request PostgreSQL boundary rejects missing legacy invalid and locked baseline selections without pending rows",
+        "campaign request PostgreSQL boundary fails closed on stored payload tampering and never repairs it during replay",
+        "campaign request PostgreSQL boundary projects recorded decisions read-only and rejects invalid stored decision states",
+        "campaign request PostgreSQL boundary filters history before paging and supports exact identity lookup outside the first page",
+        "campaign request PostgreSQL boundary rejects ambiguous or unknown history queries and uses the read authorization boundary",
+        "campaign request PostgreSQL boundary authenticates before reading bodies and retains existing instruction write restrictions"
+      ]
+    },
+    {
+      "path": "tests/unit/campaign-preparation.test.ts",
+      "names": [
+        "campaign preparation input returns a detached frozen exact request",
+        "campaign preparation input accepts a data-only null-prototype request",
+        "campaign preparation input rejects non-record request shapes",
+        "campaign preparation input requires every field and rejects unknown or symbol properties",
+        "campaign preparation input rejects accessors without evaluating them and rejects hidden properties",
+        "campaign preparation input requires a lowercase hyphenated UUID",
+        "campaign preparation input rejects invalid baseline and component identities",
+        "campaign preparation input rejects absent non-string and empty objectives",
+        "campaign preparation input enforces the inclusive 2048-byte ASCII objective limit",
+        "campaign preparation input charges objective UTF-8 bytes rather than UTF-16 length",
+        "campaign preparation input rejects NUL and unpaired surrogates before persistence",
+        "campaign preparation input preserves valid objective whitespace and line breaks exactly",
+        "pending prompt campaign preparation describes exactly six draft hypothesis operations with zero execution limits",
+        "pending prompt campaign preparation binds canonical baseline semantics and hashes the complete payload",
+        "pending prompt campaign preparation is deterministic across equivalent objects and key order",
+        "pending prompt campaign preparation binds the server workspace and actor to review fingerprints",
+        "pending prompt campaign preparation binds request identity objective component and baseline identity",
+        "pending prompt campaign preparation changes the reviewed fingerprint when canonical baseline semantics change",
+        "pending prompt campaign preparation keeps review identity stable through lifecycle-only transitions",
+        "pending prompt campaign preparation rejects a different baseline version or definition",
+        "pending prompt campaign preparation rejects missing and locked selected components",
+        "pending prompt campaign preparation rejects stale hashes malformed source and accessor baselines",
+        "pending prompt campaign preparation binds unused composition source even when rendered prompt text is unchanged",
+        "pending prompt campaign preparation omits raw prompt source bindings and candidate bodies from persisted metadata",
+        "pending prompt campaign preparation rejects malformed server contexts without evaluating getters",
+        "pending prompt campaign preparation deeply freezes preparation without mutating the supplied intent or baseline"
+      ]
+    }
+  ],
+  "browserCases": [
+    {
+      "title": "campaign request saves a reviewed Unicode pending request and reloads its exact stored history",
+      "project": "desktop"
+    },
+    {
+      "title": "campaign request saves a reviewed Unicode pending request and reloads its exact stored history",
+      "project": "narrow"
+    },
+    {
+      "title": "campaign request invalidates held previews on input edits and saved-version context changes",
+      "project": "desktop"
+    },
+    {
+      "title": "campaign request invalidates held previews on input edits and saved-version context changes",
+      "project": "narrow"
+    },
+    {
+      "title": "campaign request recovers a committed lost acknowledgement with the same frozen identity and no duplicate",
+      "project": "desktop"
+    },
+    {
+      "title": "campaign request recovers a committed lost acknowledgement with the same frozen identity and no duplicate",
+      "project": "narrow"
+    },
+    {
+      "title": "campaign request read-only project key reviews canonical history without write controls or locked-component selection",
+      "project": "desktop"
+    },
+    {
+      "title": "campaign request read-only project key reviews canonical history without write controls or locked-component selection",
+      "project": "narrow"
+    }
+  ],
+  "repair": {
+    "previousSeal": "docs/results/2026/10-30/campaign-request-source.json",
+    "previousCheckedSource": "97f88b181b41252f9e5bef5904b7583f73efe6b8",
+    "previousAttempt": "docs/results/2026/10-31/campaign-request-checks-attempt-1.json",
+    "scope": "Only two test-fixture pg_database comment lookups change from obj_description to shobj_description. Exact marker checks, all53 case identities, product source, migrations and frozen lockfile remain unchanged.",
+    "primaryReference": "https://www.postgresql.org/docs/16/functions-info.html#FUNCTIONS-INFO-COMMENT-TABLE"
+  }
+}
