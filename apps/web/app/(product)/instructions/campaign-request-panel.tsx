@@ -78,6 +78,7 @@ export function CampaignRequestPanel(props: Props) {
 
 function CampaignRequestContext({ definitionId, version, canWrite, onWorkChange }: Props) {
   const componentSelectId = useId();
+  const objectiveId = useId();
   const mutable = version.components.filter(component => !component.locked);
   const [componentId, setComponentId] = useState(mutable[0]?.id ?? "");
   const [objective, setObjective] = useState("");
@@ -226,7 +227,7 @@ function CampaignRequestContext({ definitionId, version, canWrite, onWorkChange 
     {canWrite ? <>
       {mutable.length ? <fieldset disabled={Boolean(attempt)} className="grid min-w-0 gap-3 disabled:opacity-70"><legend className="sr-only">Preparation request input</legend>
         <div className="grid min-w-0 gap-1 text-sm"><label htmlFor={componentSelectId}>Mutable component</label><select id={componentSelectId} className={inputClass} value={componentId} onChange={event => edit(event.target.value, objective)}>{mutable.map(component => <option key={component.id} value={component.id}>{component.id} · {component.kind}</option>)}</select></div>
-        <label className="grid min-w-0 gap-1 text-sm"><span>Objective</span><textarea className={`${inputClass} min-h-28`} maxLength={2048} value={objective} onChange={event => edit(componentId, event.target.value)} aria-describedby="campaign-objective-help" /></label>
+        <div className="grid min-w-0 gap-1 text-sm"><label htmlFor={objectiveId}>Objective</label><textarea id={objectiveId} className={`${inputClass} min-h-28`} maxLength={2048} value={objective} onChange={event => edit(componentId, event.target.value)} aria-describedby="campaign-objective-help" /></div>
         <p id="campaign-objective-help" className="text-xs text-muted-foreground">1–2,048 UTF-8 bytes. Every edit requires a new preview and request identity. {new TextEncoder().encode(objective).length}/2,048 bytes.</p>
       </fieldset> : <p className="text-sm text-muted-foreground">This saved version has no mutable components. Locked components cannot be requested for ablation.</p>}
       {requestId ? <Fingerprint label="Request ID · retain this for recovery" value={requestId} /> : null}
