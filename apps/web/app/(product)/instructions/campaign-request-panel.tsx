@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import type { CampaignPreparationInput, CampaignRequestDTO, PreparedPromptCampaignRequest, PromptVersion } from "@open-evals/core";
 import { AuthoringRequestError, authoringRequest } from "./instruction-authoring-client";
 
@@ -77,6 +77,7 @@ export function CampaignRequestPanel(props: Props) {
 }
 
 function CampaignRequestContext({ definitionId, version, canWrite, onWorkChange }: Props) {
+  const componentSelectId = useId();
   const mutable = version.components.filter(component => !component.locked);
   const [componentId, setComponentId] = useState(mutable[0]?.id ?? "");
   const [objective, setObjective] = useState("");
@@ -224,7 +225,7 @@ function CampaignRequestContext({ definitionId, version, canWrite, onWorkChange 
     <p role="status" aria-live="polite" className={busy || notice ? "text-sm text-muted-foreground" : "sr-only"}>{busy === "preview" ? "Preparing review…" : busy === "save" ? "Saving this pending request…" : busy === "check" ? "Checking this exact stored request…" : notice}</p>
     {canWrite ? <>
       {mutable.length ? <fieldset disabled={Boolean(attempt)} className="grid min-w-0 gap-3 disabled:opacity-70"><legend className="sr-only">Preparation request input</legend>
-        <label className="grid min-w-0 gap-1 text-sm"><span>Mutable component</span><select className={inputClass} value={componentId} onChange={event => edit(event.target.value, objective)}>{mutable.map(component => <option key={component.id} value={component.id}>{component.id} · {component.kind}</option>)}</select></label>
+        <div className="grid min-w-0 gap-1 text-sm"><label htmlFor={componentSelectId}>Mutable component</label><select id={componentSelectId} className={inputClass} value={componentId} onChange={event => edit(event.target.value, objective)}>{mutable.map(component => <option key={component.id} value={component.id}>{component.id} · {component.kind}</option>)}</select></div>
         <label className="grid min-w-0 gap-1 text-sm"><span>Objective</span><textarea className={`${inputClass} min-h-28`} maxLength={2048} value={objective} onChange={event => edit(componentId, event.target.value)} aria-describedby="campaign-objective-help" /></label>
         <p id="campaign-objective-help" className="text-xs text-muted-foreground">1–2,048 UTF-8 bytes. Every edit requires a new preview and request identity. {new TextEncoder().encode(objective).length}/2,048 bytes.</p>
       </fieldset> : <p className="text-sm text-muted-foreground">This saved version has no mutable components. Locked components cannot be requested for ablation.</p>}
