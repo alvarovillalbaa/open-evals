@@ -1,0 +1,223 @@
+# Temporary activation of the approved immutable campaign-request packet.
+# The inactive example and all sealed application inputs remain unchanged.
+name: Approved campaign preparation checks
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/campaign-request-checks.yml]
+permissions:
+  contents: read
+jobs:
+  campaign-requests:
+    if: >-
+      github.event_name == 'push' && github.repository == 'alvarovillalbaa/open-evals' &&
+      github.event.repository.private == false && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    defaults:
+      run:
+        shell: bash
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: campaign_fixture
+          POSTGRES_PASSWORD: campaign_disposable_only
+          POSTGRES_DB: campaign_requests_test
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U campaign_fixture -d campaign_requests_test"
+          --health-interval 5s --health-timeout 5s --health-retries 10
+    env:
+      CI: 'true'
+      NEXT_TELEMETRY_DISABLED: '1'
+      SOURCE_COMMIT: 97f88b181b41252f9e5bef5904b7583f73efe6b8
+      CAMPAIGN_REQUEST_TEST_TARGET: local-disposable
+      CAMPAIGN_REQUEST_TEST_MARKER: open-evals-campaign-requests-v1
+      CAMPAIGN_REQUEST_TEST_DATABASE_URL: postgres://campaign_fixture:campaign_disposable_only@127.0.0.1:5432/campaign_requests_test
+      DATABASE_URL: postgres://campaign_fixture:campaign_disposable_only@127.0.0.1:5432/campaign_requests_test
+      DATABASE_SSL: 'false'
+      SUPABASE_DB_SSL: 'false'
+      AUTH_MODE: hosted
+      AUTH_SECRET: authored-campaign-browser-session-fixture-only
+      API_KEY_PEPPER: authored-campaign-browser-ephemeral-disposable-pepper-only-v1
+      HOSTED_DEMO_API_KEY_HASH: ''
+      POSTGRES_URL: ''
+      SUPABASE_DB_URL: ''
+      NEXT_PUBLIC_SUPABASE_URL: ''
+      NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: ''
+      NEXT_PUBLIC_SUPABASE_ANON_KEY: ''
+      SUPABASE_SERVICE_ROLE_KEY: ''
+      SUPABASE_JWT_SECRET: ''
+      OPENAI_API_KEY: ''
+      ANTHROPIC_API_KEY: ''
+      AI_GATEWAY_API_KEY: ''
+      VERCEL_OIDC_TOKEN: ''
+      VERCEL_TOKEN: ''
+      WORKFLOWS_ENABLED: 'false'
+      QUEUES_ENABLED: 'false'
+      EVE_ENABLED: 'false'
+      PYTHON_OPTIMIZERS_ENABLED: 'false'
+      GEPA_ENABLED: 'false'
+      DSPY_ENABLED: 'false'
+      SMAC_ENABLED: 'false'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ env.SOURCE_COMMIT }}
+          persist-credentials: false
+      - uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1
+        with:
+          version: 10.14.0
+          run_install: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 24.21.0
+      - name: Pin source and create only owned runner tools
+        run: |
+          set -euo pipefail
+          [[ "$SOURCE_COMMIT" =~ ^[0-9a-f]{40}$ ]]
+          [[ "$(git rev-parse HEAD)" == "$SOURCE_COMMIT" ]]
+          node --input-type=module <<'JS'
+          import * as fs from 'node:fs'; import path from 'node:path'; import { randomUUID } from 'node:crypto';
+          const root=fs.mkdtempSync(path.join(process.env.RUNNER_TEMP,'campaign-request-checks-')), token=randomUUID(), stat=fs.lstatSync(root);
+          fs.writeFileSync(path.join(root,'owner'),token,{flag:'wx'});
+          for(const [key,value] of Object.entries({CAMPAIGN_TASK_ROOT:root,CAMPAIGN_TASK_TOKEN:token,CAMPAIGN_TASK_DEV:String(stat.dev),CAMPAIGN_TASK_INO:String(stat.ino),PLAYWRIGHT_BROWSERS_PATH:path.join(root,'browser')})) fs.appendFileSync(process.env.GITHUB_ENV,`${key}=${value}\n`);
+          JS
+      - name: Write bounded source and result guards
+        run: |
+          set -euo pipefail
+          cat > "$CAMPAIGN_TASK_ROOT/control.mjs" <<'JS'
+          import * as fs from 'node:fs'; import path from 'node:path'; import { createHash } from 'node:crypto';
+          import { execFileSync, spawn } from 'node:child_process'; import { createRequire } from 'node:module'; import { pathToFileURL } from 'node:url';
+          const repo=process.cwd(), root=process.env.CAMPAIGN_TASK_ROOT, manifestPath='docs/results/2026/10-30/campaign-request-source.json';
+          const fail=message=>{throw new Error(message)}, hash=bytes=>createHash('sha256').update(bytes).digest('hex');
+          function owner(){const s=fs.lstatSync(root), marker=fs.lstatSync(path.join(root,'owner')); if(path.dirname(root)!==fs.realpathSync(process.env.RUNNER_TEMP)||!path.basename(root).startsWith('campaign-request-checks-')||!s.isDirectory()||s.isSymbolicLink()||!marker.isFile()||marker.isSymbolicLink()||String(s.dev)!==process.env.CAMPAIGN_TASK_DEV||String(s.ino)!==process.env.CAMPAIGN_TASK_INO||fs.readFileSync(path.join(root,'owner'),'utf8')!==process.env.CAMPAIGN_TASK_TOKEN)fail('owned_task_root_changed');}
+          owner(); const read=p=>JSON.parse(fs.readFileSync(path.join(root,p),'utf8')), write=(p,v)=>fs.writeFileSync(path.join(root,p),JSON.stringify(v));
+          const ignored=p=>p.startsWith('.agents/')||p.startsWith('docs/results/')||p.split('/').some(x=>['node_modules','.next','dist','__pycache__'].includes(x));
+          function manifest(){const stat=fs.lstatSync(manifestPath);if(!stat.isFile()||stat.isSymbolicLink()||stat.size>8*1024*1024)fail('manifest_kind_or_size_changed');const current=fs.readFileSync(manifestPath), pinned=execFileSync('git',['show',`HEAD:${manifestPath}`],{maxBuffer:8*1024*1024}); if(!current.equals(pinned))fail('manifest_changed'); return JSON.parse(current);}
+          function sourceGuard(){
+            if(execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim()!==process.env.SOURCE_COMMIT)fail('head_changed');
+            const m=manifest(), tracked=execFileSync('git',['ls-files','-s','-z'],{encoding:'utf8',maxBuffer:32*1024*1024}).split('\0').filter(Boolean).map(x=>{const [entry,p]=x.split('\t');const [mode,sha,stage]=entry.split(' ');if(stage!=='0')fail('unmerged_source');return {path:p,mode,gitSha:sha};}).filter(x=>!ignored(x.path));
+            if(!Array.isArray(m.files)||JSON.stringify(tracked.map(x=>x.path).sort())!==JSON.stringify(m.files.map(x=>x.path).sort())||new Set(m.files.map(x=>x.path)).size!==m.files.length)fail('source_path_set_changed');
+            for(const expected of m.files){const row=tracked.find(x=>x.path===expected.path), s=fs.lstatSync(expected.path);let bytes, mode;
+              if(s.isSymbolicLink()){bytes=fs.readlinkSync(expected.path,{encoding:'buffer'});mode='120000';}else if(s.isFile()){bytes=fs.readFileSync(expected.path);mode=s.mode&0o111?'100755':'100644';}else fail('source_kind_changed');
+              const sha=createHash('sha1').update(Buffer.from(`blob ${bytes.length}\0`)).update(bytes).digest('hex');
+              if(row.mode!==expected.mode||row.gitSha!==expected.gitSha||mode!==expected.mode||sha!==expected.gitSha)fail(`source_changed:${expected.path}`);
+            } console.log(JSON.stringify({sourceFiles:m.files.length,head:process.env.SOURCE_COMMIT,sourceGuard:'passed'}));
+          }
+          function record(p){const s=fs.lstatSync(p);return {path:p,dev:s.dev,ino:s.ino,mode:s.mode,kind:s.isDirectory()?'directory':'file',hash:s.isFile()?hash(fs.readFileSync(p)):null};}
+          function copies(){const entries=[];write('copies.json',entries);for(const [source,dest] of [
+            ['campaign-request-browser.spec.ts.example','campaign-request-browser.spec.ts'],['campaign-request-browser.config.ts.example','campaign-request-browser.config.ts'],['campaign-request-browser-seed.ts.example','campaign-request-browser-seed.ts']]){
+              const p=path.join(repo,'apps/web/tests',dest);fs.copyFileSync(path.join(repo,'docs/proposals',source),p,fs.constants.COPYFILE_EXCL);entries.push(record(p));write('copies.json',entries);
+            }
+            const next=path.join(repo,'apps/web/.next');fs.mkdirSync(next);entries.push(record(next));write('copies.json',entries);
+            const seed=pathToFileURL(path.join(repo,'apps/web/tests/campaign-request-browser-seed.ts')).href;
+            fs.writeFileSync(path.join(root,'seed.mts'),`const helper=await import(${JSON.stringify(seed)});const mode=process.argv[2];if(mode==='prepare')await helper.prepareBrowserFixture();else if(mode==='cleanup')await helper.cleanupBrowserFixture();else throw new Error('seed_mode_invalid');\n`,{flag:'wx'});
+          }
+          async function setup(){
+            const u=new URL(process.env.CAMPAIGN_REQUEST_TEST_DATABASE_URL);if(!['postgres:','postgresql:'].includes(u.protocol)||!['127.0.0.1','localhost','[::1]'].includes(u.hostname)||u.pathname!=='/campaign_requests_test'||u.search||u.hash||process.env.CAMPAIGN_REQUEST_TEST_TARGET!=='local-disposable'||process.env.CAMPAIGN_REQUEST_TEST_MARKER!=='open-evals-campaign-requests-v1'||process.env.DATABASE_URL!==u.href)fail('database_guard');
+            const {Client}=createRequire(path.join(repo,'packages/db/package.json'))('pg'), client=new Client({connectionString:u.href,ssl:false});await client.connect();
+            try{const db=(await client.query('select current_database() as name')).rows[0];if(db.name!=='campaign_requests_test')fail('database_name_changed');
+              const empty=(await client.query("select (select count(*)::int from pg_class c join pg_namespace n on n.oid=c.relnamespace where n.nspname='public') as relations,(select count(*)::int from pg_proc p join pg_namespace n on n.oid=p.pronamespace where n.nspname='public') as routines")).rows[0];if(empty.relations!==0||empty.routines!==0)fail('public_schema_not_fresh');
+              await client.query("comment on database campaign_requests_test is 'open-evals-campaign-requests-v1'");
+              for(const p of ['packages/db/migrations/0001_init.sql','packages/db/migrations/0002_hosted_integrations.sql'])await client.query(fs.readFileSync(p,'utf8'));
+              write('database-ready.json',{ready:true});
+            }finally{await client.end();} copies();
+          }
+          async function run(label,args){
+            if(!/^[a-z-]+$/.test(label)||!args.length)fail('command_invalid');const cap=['unit','browser'].includes(label)?2*1024*1024:256*1024, output=path.join(root,`${label}.json`), diagnostics=path.join(root,`${label}.stderr`);let bytes=0, errors=0, overflow=false, timer;
+            const out=fs.openSync(output,'wx'), err=fs.openSync(diagnostics,'wx'), child=spawn(args[0],args.slice(1),{stdio:['ignore','pipe','pipe'],detached:true});
+            const stop=()=>{overflow=true;try{process.kill(-child.pid,'SIGTERM');}catch{}timer??=setTimeout(()=>{try{process.kill(-child.pid,'SIGKILL');}catch{}},3000);};
+            child.stdout.on('data',chunk=>{bytes+=chunk.length;if(bytes>cap)stop();else fs.writeSync(out,chunk);});child.stderr.on('data',chunk=>{errors+=chunk.length;if(errors>256*1024)stop();else fs.writeSync(err,chunk);});
+            const result=await new Promise(resolve=>{child.on('error',()=>resolve({code:1,signal:'spawn_error'}));child.on('close',(code,signal)=>resolve({code,signal}));});clearTimeout(timer);fs.closeSync(out);fs.closeSync(err);
+            const outcome={label,...result,overflow,stdoutBytes:Math.min(bytes,cap),stderrBytes:Math.min(errors,256*1024)};write(`${label}-exit.json`,outcome);console.log(JSON.stringify(outcome));return overflow||result.code!==0?1:0;
+          }
+          function report(p){const file=path.join(root,p),s=fs.lstatSync(file);if(!s.isFile()||s.size>2*1024*1024)fail('report_size_or_kind');return JSON.parse(fs.readFileSync(file,'utf8'));}
+          function results(){let failures=0;const m=manifest();
+            try{const r=report('unit.json'), expected=m.testFiles, selected={'tests/unit/campaign-preparation.test.ts':26,'tests/integration/campaign-request-storage.test.ts':19};console.log(JSON.stringify({unitActual:{total:r.numTotalTests,passed:r.numPassedTests,failed:r.numFailedTests,pending:r.numPendingTests,todo:r.numTodoTests}}));if(!Array.isArray(expected)||expected.length!==2||expected.some(f=>selected[f.path]!==f.names.length)||new Set(expected.map(f=>f.path)).size!==2||!Array.isArray(r.testResults)||r.testResults.length!==2)fail('unit_manifest_or_files');
+              const seen=[];for(const file of r.testResults){const p=path.isAbsolute(file.name)?path.relative(repo,file.name):file.name, wanted=expected.find(f=>f.path===p);if(!wanted||seen.includes(p)||file.status!=='passed')fail('unit_file');seen.push(p);const actual=file.assertionResults.map(t=>t.fullName);if(new Set(actual).size!==actual.length||JSON.stringify([...actual].sort())!==JSON.stringify([...wanted.names].sort()))fail('unit_names');for(const t of file.assertionResults){console.log(JSON.stringify({file:p,name:t.fullName,status:t.status}));if(t.status!=='passed'||t.retryCount>0||t.retryReasons?.length)fail('unit_case');}}
+              if(r.numTotalTests!==45||r.numPassedTests!==45||r.numFailedTests!==0||r.numPendingTests!==0||r.numTodoTests!==0)fail('unit_totals');if(read('unit-exit.json').code!==0||read('unit-exit.json').overflow)fail('unit_exit');console.log(JSON.stringify({unitPassed:45,unitTotal:45}));
+            }catch(error){failures++;console.log(JSON.stringify({unitValidation:'failed',reason:error.message}));}
+            try{const r=report('browser.json'), expected=m.browserCases, actual=[];console.log(JSON.stringify({browserActual:r.stats,globalErrors:r.errors?.length??0}));if(!Array.isArray(expected)||expected.length!==8||expected.filter(x=>x.project==='desktop').length!==4||expected.filter(x=>x.project==='narrow').length!==4||new Set(expected.map(x=>x.title)).size!==4)fail('browser_manifest');
+              const visit=s=>{for(const spec of s.specs??[])for(const t of spec.tests??[]){actual.push({title:spec.title,project:t.projectName});console.log(JSON.stringify({title:spec.title,project:t.projectName,status:t.results?.[0]?.status}));if(!spec.ok||t.expectedStatus!=='passed'||t.status!=='expected'||t.results?.length!==1||t.results[0].status!=='passed'||t.results[0].retry!==0||t.results[0].errors?.length)fail('browser_case');}for(const child of s.suites??[])visit(child);};for(const s of r.suites??[])visit(s);
+              const key=x=>JSON.stringify([x.title,x.project]);if(actual.length!==8||new Set(actual.map(key)).size!==8||JSON.stringify(actual.map(key).sort())!==JSON.stringify(expected.map(key).sort()))fail('browser_names');if(r.errors?.length||r.stats?.unexpected!==0||r.stats?.flaky!==0||r.stats?.skipped!==0||r.stats?.expected!==8)fail('browser_totals');if(read('browser-exit.json').code!==0||read('browser-exit.json').overflow)fail('browser_exit');console.log(JSON.stringify({browserPassed:8,browserTotal:8}));
+            }catch(error){failures++;console.log(JSON.stringify({browserValidation:'failed',reason:error.message}));}if(failures)process.exitCode=1;
+          }
+          function cleanup(){let failures=0;for(const owned of fs.existsSync(path.join(root,'copies.json'))?read('copies.json').reverse():[]){try{const s=fs.lstatSync(owned.path);if(s.isSymbolicLink()||s.dev!==owned.dev||s.ino!==owned.ino||s.mode!==owned.mode||(owned.kind==='file'&&(!s.isFile()||hash(fs.readFileSync(owned.path))!==owned.hash))||(owned.kind==='directory'&&!s.isDirectory()))fail('copied_identity_changed');fs.rmSync(owned.path,{recursive:owned.kind==='directory'});}catch(error){failures++;console.log(JSON.stringify({cleanup:'refused',path:path.relative(repo,owned.path),reason:error.message}));}}
+            owner();fs.rmSync(root,{recursive:true});if(failures)process.exitCode=1;else console.log(JSON.stringify({ownedTemporaryCleanup:'passed'}));}
+          const mode=process.argv[2];if(mode==='guard')sourceGuard();else if(mode==='setup')await setup();else if(mode==='run')process.exitCode=await run(process.argv[3],process.argv.slice(4));else if(mode==='results')results();else if(mode==='cleanup')cleanup();else fail('mode_invalid');
+          JS
+          node "$CAMPAIGN_TASK_ROOT/control.mjs" guard
+      - name: Install only the existing frozen dependency graph
+        run: node "$CAMPAIGN_TASK_ROOT/control.mjs" run install pnpm install --frozen-lockfile --ignore-scripts --store-dir "$CAMPAIGN_TASK_ROOT/store" --reporter=append-only
+      - name: Prepare only the fresh marked database and owned fixture copies
+        run: node "$CAMPAIGN_TASK_ROOT/control.mjs" setup
+      - name: Run the 45 exact unit and PostgreSQL cases
+        continue-on-error: true
+        run: node "$CAMPAIGN_TASK_ROOT/control.mjs" run unit pnpm exec vitest run tests/unit/campaign-preparation.test.ts tests/integration/campaign-request-storage.test.ts --maxWorkers=1 --fileParallelism=false --retry=0 --reporter=json --silent
+      - name: Install runner-only Chromium from the declared Playwright version
+        run: node "$CAMPAIGN_TASK_ROOT/control.mjs" run chromium pnpm --filter @open-evals/web exec playwright install --with-deps chromium
+      - name: Prepare only the authored browser namespace
+        run: node "$CAMPAIGN_TASK_ROOT/control.mjs" run seed-prepare pnpm exec tsx "$CAMPAIGN_TASK_ROOT/seed.mts" prepare
+      - name: Run the four scenarios once per desktop and narrow profile
+        continue-on-error: true
+        run: node "$CAMPAIGN_TASK_ROOT/control.mjs" run browser pnpm --filter @open-evals/web exec playwright test tests/campaign-request-browser.spec.ts --config tests/campaign-request-browser.config.ts --output "$CAMPAIGN_TASK_ROOT/playwright-output"
+      - name: Validate exact names totals statuses and actual exit codes
+        if: always() && env.CAMPAIGN_TASK_ROOT != ''
+        run: node "$CAMPAIGN_TASK_ROOT/control.mjs" results
+      - name: Recheck the complete approved source seal after outcomes
+        if: always() && env.CAMPAIGN_TASK_ROOT != ''
+        run: node "$CAMPAIGN_TASK_ROOT/control.mjs" guard
+      - name: Print bounded redacted failure evidence before owned cleanup
+        if: failure() && env.CAMPAIGN_TASK_ROOT != ''
+        run: |
+          node --input-type=module <<'JS'
+          import * as fs from 'node:fs'; import path from 'node:path'; import { createHash } from 'node:crypto';
+          const root=process.env.CAMPAIGN_TASK_ROOT, cap=64*1024;
+          const fail=()=>{throw new Error('diagnostic_identity_or_bound_failed');};
+          try{
+            const s=fs.lstatSync(root), marker=fs.lstatSync(path.join(root,'owner'));
+            if(path.dirname(root)!==fs.realpathSync(process.env.RUNNER_TEMP)||!path.basename(root).startsWith('campaign-request-checks-')||!s.isDirectory()||s.isSymbolicLink()||!marker.isFile()||marker.isSymbolicLink()||marker.size>128||String(s.dev)!==process.env.CAMPAIGN_TASK_DEV||String(s.ino)!==process.env.CAMPAIGN_TASK_INO||fs.readFileSync(path.join(root,'owner'),'utf8')!==process.env.CAMPAIGN_TASK_TOKEN)fail();
+            const secrets=[process.env.AUTH_SECRET,process.env.API_KEY_PEPPER,process.env.DATABASE_URL,process.env.CAMPAIGN_REQUEST_TEST_DATABASE_URL,process.env.CAMPAIGN_TASK_TOKEN,'oe_authored_campaign_browser_writer.disposable-only','oe_authored_campaign_browser_reader.disposable-only'].filter(x=>typeof x==='string'&&x.length>0);
+            function clean(value){
+              let text=String(value).replace(/\x1b\[[0-?]*[ -/]*[@-~]/g,'').replace(/[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]/g,'');
+              for(const secret of secrets)text=text.split(secret).join('[redacted]');
+              text=text.replace(/Bearer\s+[^\s"',}]+/gi,'Bearer [redacted]').replace(/postgres(?:ql)?:\/\/[^\s"'<>]+/gi,'[database-url-redacted]').replace(/oe_authored_[A-Za-z0-9._-]+/g,'[fixture-key-redacted]');
+              text=text.split(root).join('[owned-task]').split(process.cwd()).join('[repository]');
+              return Buffer.from(text).subarray(-2000).toString('utf8');
+            }
+            function read(name,limit){
+              const file=path.join(root,name);let before;
+              try{before=fs.lstatSync(file);}catch(error){if(error.code==='ENOENT')return null;throw error;}
+              if(!before.isFile()||before.isSymbolicLink()||before.size>limit)fail();
+              const bytes=fs.readFileSync(file), after=fs.lstatSync(file);
+              if(before.dev!==after.dev||before.ino!==after.ino||before.size!==after.size||before.mtimeMs!==after.mtimeMs||bytes.length!==before.size)fail();
+              return {bytes,sha256:createHash('sha256').update(bytes).digest('hex')};
+            }
+            const labels=['install','unit','chromium','seed-prepare','browser'], evidence=[];
+            for(const label of labels){
+              const row={label}, exit=read(label+'-exit.json',4096);
+              if(exit){const value=JSON.parse(exit.bytes.toString('utf8'));
+                if(value.label!==label||!(value.code===null||Number.isInteger(value.code))||!(value.signal===null||typeof value.signal==='string')||typeof value.overflow!=='boolean'||!Number.isSafeInteger(value.stdoutBytes)||!Number.isSafeInteger(value.stderrBytes))fail();
+                row.outcome={code:value.code,signal:value.signal===null?null:clean(value.signal),overflow:value.overflow,stdoutBytes:value.stdoutBytes,stderrBytes:value.stderrBytes};
+              }
+              for(const [suffix,limit] of [['json',['unit','browser'].includes(label)?2*1024*1024:256*1024],['stderr',256*1024]]){
+                const record=read(label+'.'+suffix,limit);if(record)row[suffix]={bytes:record.bytes.length,sha256:record.sha256,tail:clean(record.bytes.toString('utf8'))};
+              }
+              evidence.push(row);
+            }
+            const output=JSON.stringify({campaignRequestFailureEvidence:{source:process.env.SOURCE_COMMIT,scope:'fixed owned runner logs; tails only; no rerun',evidence}});
+            if(Buffer.byteLength(output)>cap)fail();console.log(output);
+          }catch{console.log(JSON.stringify({campaignRequestFailureEvidence:{status:'unavailable',reason:'owned_log_identity_or_bound_failed'}}));process.exitCode=1;}
+          JS
+      - name: Clean only the guarded browser namespace and owned temporary files
+        if: always() && env.CAMPAIGN_TASK_ROOT != ''
+        run: |
+          set +e
+          cleanup_exit=0
+          if [[ -f "$CAMPAIGN_TASK_ROOT/seed.mts" && -x node_modules/.bin/tsx ]]; then
+            node "$CAMPAIGN_TASK_ROOT/control.mjs" run seed-cleanup pnpm exec tsx "$CAMPAIGN_TASK_ROOT/seed.mts" cleanup || cleanup_exit=1
+          fi
+          node "$CAMPAIGN_TASK_ROOT/control.mjs" cleanup || cleanup_exit=1
+          exit "$cleanup_exit"
