@@ -1,0 +1,655 @@
+{
+  "schemaVersion": 1,
+  "scope": "OpenEvals pending campaign-request preparation; exact53-case acceptance",
+  "result": "passed",
+  "testDate": "2026-10-31",
+  "receiptAuthoredOn": "2026-11-02",
+  "checkedSource": "e3cec0fffb80c0a3d5896110a897508cb7ff861d",
+  "activationCommit": "9ac5c2dea117218886be652ffe0fd312c3445e71",
+  "sourceSeal": {
+    "path": "docs/results/2026/10-31/campaign-request-source-fields-repaired.json",
+    "sha256": "389c71aef55fd8fded76042e021fff504f5c3d0d4aeb2415f38fd578f175651a",
+    "inputCount": 288
+  },
+  "workflow": {
+    "path": ".github/workflows/campaign-request-checks.yml",
+    "runner": "ubuntu-24.04",
+    "timeoutMinutes": 20,
+    "contentsPermission": "read",
+    "strictAcceptanceParser": "unchanged; completeJSON reports and actual process exits required",
+    "workflowRetiredInThisReceipt": false
+  },
+  "run": {
+    "id": 41246867367,
+    "attempt": 1,
+    "url": "https://github.com/alvarovillalbaa/open-evals/actions/runs/41246867367",
+    "status": "completed",
+    "conclusion": "success",
+    "startedAt": "2026-10-31T22:09:11Z",
+    "completedAt": "2026-10-31T22:10:43Z"
+  },
+  "job": {
+    "id": 124672002328,
+    "name": "campaign-requests",
+    "status": "completed",
+    "conclusion": "success",
+    "startedAt": "2026-10-31T22:09:15Z",
+    "completedAt": "2026-10-31T22:10:42Z",
+    "steps": [
+      {
+        "number": 1,
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "number": 2,
+        "name": "Initialize containers",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "number": 3,
+        "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "number": 4,
+        "name": "Run pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "number": 5,
+        "name": "Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "number": 6,
+        "name": "Pin source and create only owned runner tools",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "number": 7,
+        "name": "Write bounded source and result guards",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "number": 8,
+        "name": "Install only the existing frozen dependency graph",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "number": 9,
+        "name": "Prepare only the fresh marked database and owned fixture copies",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "number": 10,
+        "name": "Run the 45 exact unit and PostgreSQL cases",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "number": 11,
+        "name": "Install runner-only Chromium from the declared Playwright version",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "number": 12,
+        "name": "Prepare only the authored browser namespace",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "number": 13,
+        "name": "Run the four scenarios once per desktop and narrow profile",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "number": 14,
+        "name": "Validate exact names totals statuses and actual exit codes",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "number": 15,
+        "name": "Recheck the complete approved source seal after outcomes",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "number": 16,
+        "name": "Print bounded redacted failure evidence before owned cleanup",
+        "status": "completed",
+        "conclusion": "skipped"
+      },
+      {
+        "number": 17,
+        "name": "Clean only the guarded browser namespace and owned temporary files",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "number": 31,
+        "name": "Post Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "number": 32,
+        "name": "Post Run pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "number": 33,
+        "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "number": 34,
+        "name": "Stop containers",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "number": 35,
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success"
+      }
+    ]
+  },
+  "runtime": {
+    "observed": {
+      "os": "Ubuntu 24.04.5",
+      "runnerImage": "ubuntu-24.04",
+      "node": "24.21.0",
+      "pnpm": "10.14.0",
+      "postgres": "16.15"
+    },
+    "pinned": {
+      "node": "24.21.0",
+      "pnpm": "10.14.0",
+      "install": "unchanged frozen lockfile; scripts disabled",
+      "lockfile": {
+        "path": "pnpm-lock.yaml",
+        "mode": "100644",
+        "gitSha": "1a16e66a423cd53893438704821a7758ba8ca625"
+      },
+      "postgres": "16",
+      "chromium": "existing declared Playwright dependency; runner only"
+    },
+    "playwrightDependencyVersion": "1.61.1 (existing frozen lockfile)",
+    "chromiumVersionLimit": "Runner-only Chromium installation and all8 real browser journeys passed. The exact Chromium build string was not separately emitted in this successful run's retained stdout."
+  },
+  "totals": {
+    "core": 26,
+    "postgres": 19,
+    "browser": 8,
+    "total": 53,
+    "passed": 53,
+    "failed": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "unitPostgres": {
+    "actualReport": {
+      "total": 45,
+      "passed": 45,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0
+    },
+    "strictValidation": {
+      "unitPassed": 45,
+      "unitTotal": 45
+    },
+    "actualCases": [
+      {
+        "file": "tests/integration/campaign-request-storage.test.ts",
+        "name": "campaign request PostgreSQL boundary previews a canonical saved baseline without persisting requests or audit events",
+        "status": "passed"
+      },
+      {
+        "file": "tests/integration/campaign-request-storage.test.ts",
+        "name": "campaign request PostgreSQL boundary atomically stores one pending approval and content-free audit through the route",
+        "status": "passed"
+      },
+      {
+        "file": "tests/integration/campaign-request-storage.test.ts",
+        "name": "campaign request PostgreSQL boundary rolls back the pending insert when its fixture-scoped audit insert fails",
+        "status": "passed"
+      },
+      {
+        "file": "tests/integration/campaign-request-storage.test.ts",
+        "name": "campaign request PostgreSQL boundary replays identical saved intent without changing the row time or adding an audit",
+        "status": "passed"
+      },
+      {
+        "file": "tests/integration/campaign-request-storage.test.ts",
+        "name": "campaign request PostgreSQL boundary serializes concurrent identical saves into one creation and one replay",
+        "status": "passed"
+      },
+      {
+        "file": "tests/integration/campaign-request-storage.test.ts",
+        "name": "campaign request PostgreSQL boundary rejects changed reviewed intent reusing a saved request identity",
+        "status": "passed"
+      },
+      {
+        "file": "tests/integration/campaign-request-storage.test.ts",
+        "name": "campaign request PostgreSQL boundary rejects saved identity reuse by another actor or workspace without disclosing source",
+        "status": "passed"
+      },
+      {
+        "file": "tests/integration/campaign-request-storage.test.ts",
+        "name": "campaign request PostgreSQL boundary requires the reviewed payload hash and rejects altered input with an old review",
+        "status": "passed"
+      },
+      {
+        "file": "tests/integration/campaign-request-storage.test.ts",
+        "name": "campaign request PostgreSQL boundary rejects a baseline changed after review and marks an existing request stale on read",
+        "status": "passed"
+      },
+      {
+        "file": "tests/integration/campaign-request-storage.test.ts",
+        "name": "campaign request PostgreSQL boundary creates no candidates campaigns jobs evaluations or release changes at any request step",
+        "status": "passed"
+      },
+      {
+        "file": "tests/integration/campaign-request-storage.test.ts",
+        "name": "campaign request PostgreSQL boundary enforces existing project ownership for foreign and untargeted instruction definitions",
+        "status": "passed"
+      },
+      {
+        "file": "tests/integration/campaign-request-storage.test.ts",
+        "name": "campaign request PostgreSQL boundary denies cross-workspace preview save and history even to an authenticated workspace session",
+        "status": "passed"
+      },
+      {
+        "file": "tests/integration/campaign-request-storage.test.ts",
+        "name": "campaign request PostgreSQL boundary rejects request-body actor workspace and definition overrides",
+        "status": "passed"
+      },
+      {
+        "file": "tests/integration/campaign-request-storage.test.ts",
+        "name": "campaign request PostgreSQL boundary rejects missing legacy invalid and locked baseline selections without pending rows",
+        "status": "passed"
+      },
+      {
+        "file": "tests/integration/campaign-request-storage.test.ts",
+        "name": "campaign request PostgreSQL boundary fails closed on stored payload tampering and never repairs it during replay",
+        "status": "passed"
+      },
+      {
+        "file": "tests/integration/campaign-request-storage.test.ts",
+        "name": "campaign request PostgreSQL boundary projects recorded decisions read-only and rejects invalid stored decision states",
+        "status": "passed"
+      },
+      {
+        "file": "tests/integration/campaign-request-storage.test.ts",
+        "name": "campaign request PostgreSQL boundary filters history before paging and supports exact identity lookup outside the first page",
+        "status": "passed"
+      },
+      {
+        "file": "tests/integration/campaign-request-storage.test.ts",
+        "name": "campaign request PostgreSQL boundary rejects ambiguous or unknown history queries and uses the read authorization boundary",
+        "status": "passed"
+      },
+      {
+        "file": "tests/integration/campaign-request-storage.test.ts",
+        "name": "campaign request PostgreSQL boundary authenticates before reading bodies and retains existing instruction write restrictions",
+        "status": "passed"
+      },
+      {
+        "file": "tests/unit/campaign-preparation.test.ts",
+        "name": "campaign preparation input returns a detached frozen exact request",
+        "status": "passed"
+      },
+      {
+        "file": "tests/unit/campaign-preparation.test.ts",
+        "name": "campaign preparation input accepts a data-only null-prototype request",
+        "status": "passed"
+      },
+      {
+        "file": "tests/unit/campaign-preparation.test.ts",
+        "name": "campaign preparation input rejects non-record request shapes",
+        "status": "passed"
+      },
+      {
+        "file": "tests/unit/campaign-preparation.test.ts",
+        "name": "campaign preparation input requires every field and rejects unknown or symbol properties",
+        "status": "passed"
+      },
+      {
+        "file": "tests/unit/campaign-preparation.test.ts",
+        "name": "campaign preparation input rejects accessors without evaluating them and rejects hidden properties",
+        "status": "passed"
+      },
+      {
+        "file": "tests/unit/campaign-preparation.test.ts",
+        "name": "campaign preparation input requires a lowercase hyphenated UUID",
+        "status": "passed"
+      },
+      {
+        "file": "tests/unit/campaign-preparation.test.ts",
+        "name": "campaign preparation input rejects invalid baseline and component identities",
+        "status": "passed"
+      },
+      {
+        "file": "tests/unit/campaign-preparation.test.ts",
+        "name": "campaign preparation input rejects absent non-string and empty objectives",
+        "status": "passed"
+      },
+      {
+        "file": "tests/unit/campaign-preparation.test.ts",
+        "name": "campaign preparation input enforces the inclusive 2048-byte ASCII objective limit",
+        "status": "passed"
+      },
+      {
+        "file": "tests/unit/campaign-preparation.test.ts",
+        "name": "campaign preparation input charges objective UTF-8 bytes rather than UTF-16 length",
+        "status": "passed"
+      },
+      {
+        "file": "tests/unit/campaign-preparation.test.ts",
+        "name": "campaign preparation input rejects NUL and unpaired surrogates before persistence",
+        "status": "passed"
+      },
+      {
+        "file": "tests/unit/campaign-preparation.test.ts",
+        "name": "campaign preparation input preserves valid objective whitespace and line breaks exactly",
+        "status": "passed"
+      },
+      {
+        "file": "tests/unit/campaign-preparation.test.ts",
+        "name": "pending prompt campaign preparation describes exactly six draft hypothesis operations with zero execution limits",
+        "status": "passed"
+      },
+      {
+        "file": "tests/unit/campaign-preparation.test.ts",
+        "name": "pending prompt campaign preparation binds canonical baseline semantics and hashes the complete payload",
+        "status": "passed"
+      },
+      {
+        "file": "tests/unit/campaign-preparation.test.ts",
+        "name": "pending prompt campaign preparation is deterministic across equivalent objects and key order",
+        "status": "passed"
+      },
+      {
+        "file": "tests/unit/campaign-preparation.test.ts",
+        "name": "pending prompt campaign preparation binds the server workspace and actor to review fingerprints",
+        "status": "passed"
+      },
+      {
+        "file": "tests/unit/campaign-preparation.test.ts",
+        "name": "pending prompt campaign preparation binds request identity objective component and baseline identity",
+        "status": "passed"
+      },
+      {
+        "file": "tests/unit/campaign-preparation.test.ts",
+        "name": "pending prompt campaign preparation changes the reviewed fingerprint when canonical baseline semantics change",
+        "status": "passed"
+      },
+      {
+        "file": "tests/unit/campaign-preparation.test.ts",
+        "name": "pending prompt campaign preparation keeps review identity stable through lifecycle-only transitions",
+        "status": "passed"
+      },
+      {
+        "file": "tests/unit/campaign-preparation.test.ts",
+        "name": "pending prompt campaign preparation rejects a different baseline version or definition",
+        "status": "passed"
+      },
+      {
+        "file": "tests/unit/campaign-preparation.test.ts",
+        "name": "pending prompt campaign preparation rejects missing and locked selected components",
+        "status": "passed"
+      },
+      {
+        "file": "tests/unit/campaign-preparation.test.ts",
+        "name": "pending prompt campaign preparation rejects stale hashes malformed source and accessor baselines",
+        "status": "passed"
+      },
+      {
+        "file": "tests/unit/campaign-preparation.test.ts",
+        "name": "pending prompt campaign preparation binds unused composition source even when rendered prompt text is unchanged",
+        "status": "passed"
+      },
+      {
+        "file": "tests/unit/campaign-preparation.test.ts",
+        "name": "pending prompt campaign preparation omits raw prompt source bindings and candidate bodies from persisted metadata",
+        "status": "passed"
+      },
+      {
+        "file": "tests/unit/campaign-preparation.test.ts",
+        "name": "pending prompt campaign preparation rejects malformed server contexts without evaluating getters",
+        "status": "passed"
+      },
+      {
+        "file": "tests/unit/campaign-preparation.test.ts",
+        "name": "pending prompt campaign preparation deeply freezes preparation without mutating the supplied intent or baseline",
+        "status": "passed"
+      }
+    ],
+    "perFile": [
+      {
+        "path": "tests/integration/campaign-request-storage.test.ts",
+        "actualPassed": 19
+      },
+      {
+        "path": "tests/unit/campaign-preparation.test.ts",
+        "actualPassed": 26
+      }
+    ],
+    "actualProcessExit": 0
+  },
+  "browser": {
+    "actualReport": {
+      "startTime": "2026-10-31T22:10:13.315Z",
+      "duration": 25149.578,
+      "expected": 8,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "globalReporterErrors": 0,
+    "strictValidation": {
+      "browserPassed": 8,
+      "browserTotal": 8
+    },
+    "actualCases": [
+      {
+        "title": "campaign request saves a reviewed Unicode pending request and reloads its exact stored history",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "title": "campaign request invalidates held previews on input edits and saved-version context changes",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "title": "campaign request recovers a committed lost acknowledgement with the same frozen identity and no duplicate",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "title": "campaign request read-only project key reviews canonical history without write controls or locked-component selection",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "title": "campaign request saves a reviewed Unicode pending request and reloads its exact stored history",
+        "project": "narrow",
+        "status": "passed"
+      },
+      {
+        "title": "campaign request invalidates held previews on input edits and saved-version context changes",
+        "project": "narrow",
+        "status": "passed"
+      },
+      {
+        "title": "campaign request recovers a committed lost acknowledgement with the same frozen identity and no duplicate",
+        "project": "narrow",
+        "status": "passed"
+      },
+      {
+        "title": "campaign request read-only project key reviews canonical history without write controls or locked-component selection",
+        "project": "narrow",
+        "status": "passed"
+      }
+    ],
+    "actualProcessExit": 0,
+    "retries": 0,
+    "workerCount": 1,
+    "profiles": [
+      {
+        "name": "desktop",
+        "viewport": {
+          "width": 1440,
+          "height": 1000
+        },
+        "isMobile": false,
+        "hasTouch": false
+      },
+      {
+        "name": "narrow",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "isMobile": true,
+        "hasTouch": true
+      }
+    ],
+    "fixtureAssertions": "Each passed scenario includes no unexpected external HTTP/WebSocket requests, no global client page errors, no execution-endpoint requests, and narrow-page width checks."
+  },
+  "sourceGuards": [
+    {
+      "sourceFiles": 288,
+      "head": "e3cec0fffb80c0a3d5896110a897508cb7ff861d",
+      "sourceGuard": "passed"
+    },
+    {
+      "sourceFiles": 288,
+      "head": "e3cec0fffb80c0a3d5896110a897508cb7ff861d",
+      "sourceGuard": "passed"
+    }
+  ],
+  "databaseOwnership": {
+    "name": "campaign_requests_test",
+    "marker": "open-evals-campaign-requests-v1",
+    "readback": "passed"
+  },
+  "processOutcomes": [
+    {
+      "label": "install",
+      "code": 0,
+      "signal": null,
+      "overflow": false,
+      "stdoutBytes": 927,
+      "stderrBytes": 0
+    },
+    {
+      "label": "unit",
+      "code": 0,
+      "signal": null,
+      "overflow": false,
+      "stdoutBytes": 16118,
+      "stderrBytes": 256
+    },
+    {
+      "label": "chromium",
+      "code": 0,
+      "signal": null,
+      "overflow": false,
+      "stdoutBytes": 15938,
+      "stderrBytes": 237
+    },
+    {
+      "label": "seed-prepare",
+      "code": 0,
+      "signal": null,
+      "overflow": false,
+      "stdoutBytes": 0,
+      "stderrBytes": 0
+    },
+    {
+      "label": "browser",
+      "code": 0,
+      "signal": null,
+      "overflow": false,
+      "stdoutBytes": 15876,
+      "stderrBytes": 0
+    },
+    {
+      "label": "seed-cleanup",
+      "code": 0,
+      "signal": null,
+      "overflow": false,
+      "stdoutBytes": 0,
+      "stderrBytes": 0
+    }
+  ],
+  "cleanup": {
+    "guardedDatabaseNamespace": "passed: seed-cleanup actual process exit0 and unchanged ownership checks",
+    "ownedTemporaryFiles": "passed: controller emitted ownedTemporaryCleanup after validating copied-file identities and owned directory",
+    "containerStop": "success",
+    "processLimit": "Browser command exited0 and its managed webServer teardown completed within that command; a separate surviving-process inventory was not recorded."
+  },
+  "boundaries": {
+    "freshDisposableDatabase": true,
+    "databaseName": "campaign_requests_test",
+    "databaseComment": "open-evals-campaign-requests-v1",
+    "migrations": [
+      "0001_init.sql",
+      "0002_hosted_integrations.sql"
+    ],
+    "migration0003Applied": false,
+    "fixtureNamespace": "authored browser-owned ws_demo plus isolated test-owned namespaces",
+    "auth": "authored scoped project API keys; no real account or Supabase credentials",
+    "productionData": false,
+    "providerOrModelCalls": false,
+    "campaignStarted": false,
+    "approvalGranted": false,
+    "releaseChanged": false,
+    "localProductTestsExecuted": false,
+    "artifactsOrScreenshotsRetained": false
+  },
+  "priorFailures": [
+    "campaign-request-checks-attempt-1.json",
+    "campaign-request-checks-attempt-2.json",
+    "campaign-request-checks-attempt-3.json",
+    "campaign-request-checks-attempt-4.json"
+  ],
+  "documentationHandoff": {
+    "status": "planned after receipt freeze; owner verifies the resulting publication",
+    "documentationOnlyPaths": [
+      "README.md",
+      "docs/campaign-requests.md",
+      "docs/proposals/campaign-request-checks.md"
+    ],
+    "permittedSealedDocumentationDifferences": 3,
+    "expectedUnchangedSealedInputs": 285,
+    "reproductionSource": "e3cec0fffb80c0a3d5896110a897508cb7ff861d",
+    "historicalSeals": "all four source seals remain immutable"
+  },
+  "evidenceLimits": [
+    "This receipt accepts the exact checked immutable source, not an unverified later documentation/deployment edition.",
+    "All53 actual case identities/statuses, both288-input source checks, marker readback, process outcomes and cleanup outcomes are retained from the successful job's stdout/metadata. Temporary full reports were removed by owned cleanup.",
+    "These are focused disposable PostgreSQL and loopback desktop/mobile-emulated Chromium checks. They do not prove hosted-production Auth, real-user accounts, native/mobile-device behavior, full-app build coverage or unrelated regression coverage.",
+    "Pending request preparation grants no campaign approval, starts no campaign and makes no model/provider calls. Live decisions, execution, generation and release promotion remain outside this packet.",
+    "The active workflow is left untouched for owner review and retirement; receipt authorship/publication on November2 does not change the October31 test date."
+  ]
+}

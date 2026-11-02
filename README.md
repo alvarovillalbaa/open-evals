@@ -1,6 +1,6 @@
 # open-evals
 
-Last updated: 2026-10-30
+Last updated: 2026-11-02
 
 `open-evals` is an MIT-licensed, provider-independent platform for two product functions:
 
@@ -146,9 +146,12 @@ call or release change. Approver and self-approval policy remain future work.
 See [campaign requests](docs/campaign-requests.md), the
 [53-check proposal](docs/proposals/campaign-request-checks.md) and
 [source receipt](docs/results/2026/10-30/campaign-requests.md).
-Those 26 core, 19 PostgreSQL and eight browser checks are authored **unrun**;
-their temporary CI remains inactive pending separate approval. The earlier
-55/58/71 passing scopes above are independent evidence.
+All 26 core, 19 PostgreSQL and eight desktop/narrow Chromium checks passed at
+`e3cec0fffb80c0a3d5896110a897508cb7ff861d`; see the
+[53-check result](docs/results/2026/10-31/campaign-request-checks.md) for the
+fixture-marker and explicit-label repairs, earlier failures and cleanup.
+Temporary campaign CI is retired. The earlier 55/58/71 passing scopes above
+are independent evidence; hosted production and campaign execution remain open.
 
 The shared optimization control plane supports one-shot candidate generation, FAPO-style routing, hill climbing, structured GA, optional official GEPA, and optional DSPy engines. Target prompt campaigns cannot mutate their own judges or thresholds. Blind holdout examples are blocked from reflection.
 Those optimizer primitives are separate from the Instructions preparation flow;

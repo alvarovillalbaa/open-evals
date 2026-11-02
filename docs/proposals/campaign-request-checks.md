@@ -1,6 +1,10 @@
 # Campaign preparation checks
 
-Status: proposed, authored, **not run**. No workflow is active.
+Status: **53/53 passed** on 31 October 2026 at
+`e3cec0fffb80c0a3d5896110a897508cb7ff861d`; published and temporary CI retired
+on 2 November. See the [result](../results/2026/10-31/campaign-request-checks.md)
+and [checked source seal](../results/2026/10-31/campaign-request-source-fields-repaired.json).
+The proposed procedure below is retained as historical scope.
 
 The source adds pending campaign preparation requests to saved Instructions.
 It does not approve a request, generate candidates or start a campaign.
@@ -78,12 +82,13 @@ delete unrelated work to make a check pass.
 
 ## Approval and limits
 
-Activation requires a separate explicit approval for these **53 checks and
-temporary CI** under the supplied AGENTS.md sections 7 and 14. Earlier 55
-compiler, 58 authoring and 71 client approvals/results are separate scopes.
-After approval, replace `APPROVED_SOURCE_SHA` with the reviewed immutable
-40-character commit, activate that example temporarily and dispatch that
-exact source. Retire the workflow after recording actual results and cleanup.
+The owner's persistent approval and instruction to keep going covered these
+**53 checks and temporary CI** under the supplied AGENTS.md sections 7 and 14.
+Earlier 55 compiler, 58 authoring and 71 client approvals/results are separate
+scopes. The completed job pinned its immutable preparation commit, verified all
+source inputs before/after and recorded exact cases, exits and cleanup. Its
+temporary active workflow is removed; the original example and seals remain
+historical records, not an instruction to rerun or claim current-head coverage.
 
 No production data, real account, hosted Auth configuration, provider/model
 call, promotion, release change, paid enrollment or store submission is in

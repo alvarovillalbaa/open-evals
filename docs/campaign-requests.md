@@ -1,6 +1,6 @@
 # Campaign preparation requests
 
-Last updated: 2026-10-30
+Last updated: 2026-11-02
 
 Instructions can prepare and store a pending hypothesis-review request against
 one saved canonical prompt version. This is request preparation, not approval
@@ -80,9 +80,13 @@ policy remain undefined future gates. Existing optimizer primitives and the
 [wider lifecycle](prompt-optimization.md) do not turn a pending request into an
 authorized campaign.
 
-The [focused proposal](proposals/campaign-request-checks.md) contains 26 core,
-19 PostgreSQL and eight browser checks: **53 authored, unrun** cases. Temporary
-CI stays inactive until separately approved. Earlier 55 compiler, 58 authoring
-and 71 client successes cover their own scopes. The
-[dated source receipt](results/2026/10-30/campaign-requests.md) owns current
-implementation/publication evidence and its limits.
+The [focused scope](proposals/campaign-request-checks.md) passed all 26 core,
+19 PostgreSQL and eight desktop/narrow Chromium checks at
+`e3cec0fffb80c0a3d5896110a897508cb7ff861d`. The
+[result](results/2026/10-31/campaign-request-checks.md) preserves earlier
+fixture/label failures, exact source identities and verified disposable cleanup.
+Temporary CI is retired. These checks establish preparation behavior on that
+runner; hosted production, real touch hardware and campaign execution remain
+unverified. Earlier 55 compiler, 58 authoring and 71 client successes cover
+their own scopes. The [original source receipt](results/2026/10-30/campaign-requests.md)
+remains historical implementation evidence.
