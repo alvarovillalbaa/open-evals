@@ -1,0 +1,25 @@
+--- a/packages/core/src/eval-composition.ts
++++ b/packages/core/src/eval-composition.ts
+@@ -179,8 +179,9 @@
+ export function resolveCustomEvalSetPreviewV2(input: T.ResolveCustomEvalSetPreviewV2Input): T.CustomEvalSetPreviewV2 {
+   const workspaceId = text(input.workspaceId), draft = prepareCustomEvalSetDraftV2(input.draft), parent = head("set", input.head);
+   try {
+-    if (!Array.isArray(input.items) || input.items.length !== draft.members.length) return fail("eval_composition_sources_invalid");
+-    const records = input.items.map(v => restoreCustomEvalItemVersionRecordV2(v, workspaceId));
++    const sources = snapshot(input.items);
++    if (!Array.isArray(sources) || sources.length !== draft.members.length) return fail("eval_composition_sources_invalid");
++    const records = sources.map(v => restoreCustomEvalItemVersionRecordV2(v, workspaceId));
+     const byId = new Map(records.map(r => [r.draft.itemId + "/" + r.draft.versionId, r])); if (byId.size !== records.length) return fail("eval_composition_sources_invalid");
+     const selected = draft.members.map(m => { const r = byId.get(m.itemId + "/" + m.versionId); if (!r || r.contract.fingerprint !== m.fingerprint) return fail("eval_composition_sources_invalid"); return r; });
+     return setPreview(workspaceId, draft, parent, selected.map(r => r.contract), selected.map(r => r.fingerprint));
+--- a/packages/core/src/http-eval-runs.ts
++++ b/packages/core/src/http-eval-runs.ts
+@@ -57,7 +57,7 @@
+   const stopReason = s.stopReason === null ? null : safeError(s.stopReason);
+   const tokens = new Set<string>();
+   const rows: HttpEvalLedgerRow[] = s.rows.map((raw, index) => {
+-    const r = httpEvalObject(raw, ["rowId", "status", "claim", "eventId", "eventFingerprint"]); if (r.rowId !== initial.rows[index]!.rowId || !["pending", "claimed", "succeeded", "failed", "outcome_unknown", "not_sent"].includes(String(r.status))) return httpEvalFail("http_eval_ledger_corrupt");
++    const r = httpEvalObject(raw, ["rowId", "status", "claim", "eventId", "eventFingerprint"]); if (r.rowId !== initial.rows[index]!.rowId || typeof r.status !== "string" || !["pending", "claimed", "succeeded", "failed", "outcome_unknown", "not_sent"].includes(r.status)) return httpEvalFail("http_eval_ledger_corrupt");
+     const status = r.status as HttpEvalLedgerRow["status"]; let claim: HttpEvalLedgerRow["claim"] = null;
+     if (r.claim !== null) { const c = httpEvalObject(r.claim, ["rowId", "claimToken", "claimedAt", "requestFingerprint"]), claimedAt = httpEvalTimestamp(c.claimedAt), claimToken = httpEvalUuid(c.claimToken);
+       if (c.rowId !== r.rowId || c.requestFingerprint !== callBody(plan, initial.publicRunId, r.rowId as string).requestFingerprint || Date.parse(claimedAt) < Date.parse(initial.startedAt) || Date.parse(claimedAt) >= Date.parse(initial.deadlineAt) || tokens.has(claimToken)) return httpEvalFail("http_eval_ledger_corrupt"); tokens.add(claimToken);

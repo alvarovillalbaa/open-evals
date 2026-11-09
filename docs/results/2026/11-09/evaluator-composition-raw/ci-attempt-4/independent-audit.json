@@ -1,0 +1,169 @@
+{
+  "schemaVersion": "eval-composition-ci4-independent-audit-v1",
+  "reviewer": "dataset_contract",
+  "status": "first-compiled-browser-failure-preserved-and-independently-verified",
+  "source": "9c748e48f47644123c0364ec5b34a11e9eaa44f0",
+  "tree": "6ba1826f4aad0d86cf7886795662e9c63fe7de33",
+  "runId": "42717825539",
+  "jobId": "129503812286",
+  "reconstruction": {
+    "directory": "ci-run-4/independent-reconstruction",
+    "selectedOriginals": 18,
+    "decodedBytes": 150087,
+    "allOffsetsSizesSha256Verified": true,
+    "allEqualSeparateRootDecodedOriginals": true,
+    "commandMetadataFrames": 35,
+    "allCommandSourceStreamsComplete": true,
+    "artifactZipRetrieved": false
+  },
+  "results": {
+    "core": {
+      "tests": 76,
+      "pass": 76,
+      "fail": 0,
+      "skip": 0
+    },
+    "web": {
+      "tests": 24,
+      "pass": 24,
+      "fail": 0,
+      "skip": 0
+    },
+    "sql": {
+      "tests": 24,
+      "pass": 24,
+      "fail": 0,
+      "skip": 0
+    },
+    "build": {
+      "started": true,
+      "commandExit": 0,
+      "fullRootBuildPassed": true,
+      "rawBuildStreamsRetrieved": false
+    },
+    "browser": {
+      "tests": 4,
+      "pass": 1,
+      "fail": 3,
+      "retries": 0,
+      "skipped": 0,
+      "passedIds": [
+        "CP-BR03"
+      ],
+      "failedIds": [
+        "CP-BR01",
+        "CP-BR02",
+        "CP-BR04"
+      ],
+      "failures": [
+        {
+          "id": "CP-BR01",
+          "reason": "Exact-labelled saved-item select was not located; selectOption timed out."
+        },
+        {
+          "id": "CP-BR02",
+          "reason": "Exact-labelled recent custom evaluator select was not located; selectOption timed out."
+        },
+        {
+          "id": "CP-BR04",
+          "reason": "Suite-wide journal expected two prior authored responses but observed zero after CP-BR01 failed before execution."
+        }
+      ],
+      "receiptBrowserResults": [],
+      "rawReportAuthoritativeForAttemptedCases": true
+    },
+    "overall": "failed"
+  },
+  "browserFixtureCleanup": {
+    "workspaceCounts": [
+      1,
+      1,
+      1,
+      2
+    ],
+    "actorCounts": [
+      1,
+      1,
+      1,
+      3
+    ],
+    "allFourOwnershipValidated": true,
+    "allFourAfterCountsZero": 17,
+    "allFourWorkspacesAndActorsAbsent": true,
+    "allFourNormalBounds": true,
+    "dispatchClaims": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "transportCalls": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "transport": {
+    "journalEntries": 1,
+    "phases": [
+      "guard_ready"
+    ],
+    "preloadProcessId": 3068,
+    "authoredDnsObservations": 0,
+    "authoredRequestObservations": 0,
+    "nativeDnsSocketTlsChecked": false,
+    "actualExternalTargetCalls": 0,
+    "fullAuthoredExecutionChecked": false
+  },
+  "sourceIntegrity": {
+    "protectedFilesBeforeAfterEqual": 144,
+    "expectedSourcesMatchFinalCiBindingsV5": 143,
+    "directParent": "894025656a7d264b3b2d573c90e67c40aba57fcf",
+    "workflow": {
+      "bytes": 103617,
+      "sha256": "b5afc478187bec7867b20b8f2598b9a87a6b34087b1fd9132d22cdc61d408c52"
+    }
+  },
+  "lifecycle": {
+    "application": {
+      "pid": 3068,
+      "pgid": 3068,
+      "startTicks": "25759",
+      "uid": 1001,
+      "nodeVersionPath": "24.22.2",
+      "returncode": 143,
+      "stopMode": "graceful",
+      "pidAbsent": true,
+      "processGroupAbsent": true,
+      "portFree": true,
+      "stdoutBytesMetadataOnly": 116,
+      "stderrSelectedCompleteBytes": 0
+    },
+    "timeline": {
+      "buildCommandMetadataEmittedAt": "2026-11-09T23:09:28.5711358Z",
+      "browserReportStartedAt": "2026-11-09T23:09:41.315Z",
+      "browserCommandMetadataEmittedAt": "2026-11-09T23:10:13.9841840Z",
+      "fixtureFinalCommandMetadataEmittedAt": "2026-11-09T23:10:15.1818760Z",
+      "clusterStopMetadataEmittedAt": "2026-11-09T23:10:15.1858459Z",
+      "sourceFinalMetadataEmittedAt": "2026-11-09T23:10:15.8250606Z"
+    },
+    "timingLimit": "No separate server wall-clock startup timestamp is emitted; startTicks is process identity metadata. Log completion timestamps and browser report times establish observed phase ordering."
+  },
+  "cleanup": {
+    "postSqlNativeTablesZero": 26,
+    "finalOwnedTablesZero": 26,
+    "databaseAbsent": true,
+    "validatedOwner": "postgres",
+    "validatedMarker": "open-evals-composition-v2-20261109-created-disposable-v1",
+    "clusterStopped": true,
+    "clusterAbsent": true
+  },
+  "proofLimits": [
+    "Existing raw-log decoding and static data/source audit only by this peer; no new tests/app/compiler/build/SQL/browser/provider/Git operation.",
+    "The124 protocol/core/Web/SQL cases and complete root build passed on this exact source. Browser acceptance is only1of4; the overall attempt remains failed.",
+    "All four fixture cleanup attachments were inspected even though driver validation stopped at the first failed spec.",
+    "Screenshots/error-context/trace ZIP paths in the report are metadata only. No artifact ZIP, screenshot or trace archive bytes were retrieved.",
+    "No authored target responses, native DNS/socket/TLS, real external model/provider, hosted auth/RLS, production page or physical-device acceptance is established."
+  ]
+}

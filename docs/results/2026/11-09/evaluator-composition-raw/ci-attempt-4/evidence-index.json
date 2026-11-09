@@ -1,0 +1,136 @@
+{
+  "schemaVersion": "eval-composition-ci-evidence-index-v1",
+  "status": "failed-compiled-browser-staged-private-for-release-review",
+  "intendedCanonicalDirectory": "docs/results/2026/11-09/evaluator-composition.raw/ci-attempt-4",
+  "source": "9c748e48f47644123c0364ec5b34a11e9eaa44f0",
+  "tree": "6ba1826f4aad0d86cf7886795662e9c63fe7de33",
+  "runId": "42717825539",
+  "jobId": "129503812286",
+  "jobIdBinding": "Recorded caller metadata; selected frames bind source/run, not the job ID.",
+  "selectedOriginals": {
+    "count": 18,
+    "bytes": 150087,
+    "manifest": "decoded-originals.json",
+    "handling": "Exact complete selected ORIGINAL_CHUNK files; root and independent decoder copies agree. Browser report bytes preserve the original absent final newline."
+  },
+  "metadata": {
+    "independentAudit": "independent-audit.json",
+    "strictReconstructionIndex": "decoded-originals.json",
+    "commandMetadata": "command-metadata.json",
+    "diagnosticRanges": "diagnostic-ranges.json",
+    "handling": "Four existing metadata files are byte-identical copies. Historical relative locators are provenance, not public download links."
+  },
+  "results": {
+    "overall": "failed",
+    "core": {
+      "tests": 76,
+      "pass": 76,
+      "fail": 0
+    },
+    "web": {
+      "tests": 24,
+      "pass": 24,
+      "fail": 0
+    },
+    "sql": {
+      "tests": 24,
+      "pass": 24,
+      "fail": 0
+    },
+    "build": {
+      "fullRootBuildPassed": true,
+      "commandExit": 0,
+      "rawBuildStreamsRetrieved": false
+    },
+    "browser": {
+      "tests": 4,
+      "pass": 1,
+      "fail": 3,
+      "retries": 0,
+      "skipped": 0,
+      "passedIds": [
+        "CP-BR03"
+      ],
+      "failedIds": [
+        "CP-BR01",
+        "CP-BR02",
+        "CP-BR04"
+      ],
+      "failureSummary": "BR01 and BR02 timed out on exact-labelled select controls. BR04 observed zero suite-wide authored responses after BR01 failed before execution. These failures are preserved."
+    }
+  },
+  "browserCleanup": {
+    "workspaceCounts": [
+      1,
+      1,
+      1,
+      2
+    ],
+    "actorCounts": [
+      1,
+      1,
+      1,
+      3
+    ],
+    "allFourOwnershipValidated": true,
+    "allFourAfterCountsZero": 17,
+    "allFourWorkspacesAndActorsAbsent": true,
+    "allFourDispatchClaims": 0,
+    "allFourTransportCalls": 0
+  },
+  "transport": {
+    "journal": "transport-journal.jsonl",
+    "entries": 1,
+    "phases": [
+      "guard_ready"
+    ],
+    "authoredDnsObservations": 0,
+    "authoredRequestObservations": 0,
+    "productionRouteAuthoredExecutionChecked": false,
+    "nativeDnsSocketTlsChecked": false,
+    "actualExternalTargetCalls": 0
+  },
+  "application": {
+    "started": true,
+    "pid": 3068,
+    "startTicks": "25759",
+    "pgid": 3068,
+    "stopMode": "graceful",
+    "returncode": 143,
+    "pidAbsent": true,
+    "processGroupAbsent": true,
+    "portFree": true,
+    "stdoutBytesMetadataOnly": 116,
+    "stderrSelectedBytes": 0,
+    "timing": "Independent audit binds build/browser/cleanup log completion timestamps and browser-report times; no separate server wall-clock start timestamp is present."
+  },
+  "cleanup": {
+    "postSqlTablesZero": 26,
+    "finalTablesZero": 26,
+    "databaseAbsent": true,
+    "clusterStopped": true,
+    "clusterAbsent": true,
+    "records": [
+      "postgres-fixture-absence.json",
+      "fixture-final-absence.json",
+      "cleanup.json",
+      "receipt.json"
+    ]
+  },
+  "privacy": {
+    "localUserOrPrivatePathMatches": 0,
+    "credentialMarkerMatches": 0,
+    "normalizedFiles": 0,
+    "publicRunnerPathOccurrences": 39,
+    "note": "Ephemeral public-CI runner paths and attachment locators remain unchanged. Attachment path metadata is not attachment retrieval."
+  },
+  "proofLimits": [
+    "124 core/Web/SQL cases and the complete root build passed on this exact source. Browser acceptance is 1 of 4 and the overall attempt remains failed.",
+    "The browser report contains cleanup attachment bodies and screenshot/error-context/trace ZIP path metadata. No screenshot, trace ZIP or artifact archive bytes were retrieved.",
+    "Journal guard_ready proves preload initialization only; no authored target DNS/request/response was observed.",
+    "Other build/server stdout logs are metadata only. No whole job log, historical source tree or dependency folders are included.",
+    "Repeated attempts do not add distinct checks. Native DNS/socket/TLS, real external target/model/provider, hosted Auth/RLS, production-page and physical-device acceptance remain unverified."
+  ],
+  "artifactZipRetrieved": false,
+  "exportManifest": "export-manifest.json"
+}

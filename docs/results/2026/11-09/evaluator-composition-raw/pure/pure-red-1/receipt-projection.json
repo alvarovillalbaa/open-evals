@@ -1,0 +1,117 @@
+{
+  "schemaVersion": "eval-composition-pure-receipt-projection-v1",
+  "kind": "documented-projection-not-unchanged-original",
+  "original": {
+    "path": "pure-red-1/receipt.json",
+    "bytes": 8523,
+    "sha256": "347b12a0226db41b4172380385b8be8d89c4d0536d89e476030133b938b9306b"
+  },
+  "omittedFields": [
+    "argv",
+    "authoredCaseNames"
+  ],
+  "projectionNotes": [
+    "The private executable path is replaced by a safe executable label and relative command arguments.",
+    "Redundant authoredCaseNames are omitted when present; caseNames and exact original stream metadata remain.",
+    "data.streams describes original private streams; exportedStreams identifies the corresponding export and any path normalization."
+  ],
+  "command": {
+    "executableLabel": "node v26.8.2",
+    "args": [
+      "--experimental-vm-modules",
+      "--test",
+      "--test-reporter=tap",
+      "tests/unit/eval-composition.test.mjs",
+      "tests/unit/http-eval-composition.test.mjs"
+    ],
+    "originalArgvCompactJsonSha256": "f4981cee4eadf3f5f4aa12a4615337ba2536c4b03244b6bc780e4c899da4a141",
+    "originalArgvHashDefinition": "SHA256 of UTF-8 JSON with compact comma/colon separators, no trailing newline."
+  },
+  "data": {
+    "schemaVersion": "eval-composition-pure-checks-v1",
+    "parent": "894025656a7d264b3b2d573c90e67c40aba57fcf",
+    "status": "failed",
+    "startedAt": "2026-11-09T21:56:04.906263+00:00",
+    "completedAt": "2026-11-09T21:56:09.862668+00:00",
+    "nodeVersion": "v26.8.2",
+    "returncode": 1,
+    "expectedDistinctCases": 33,
+    "totals": {
+      "tests": 33,
+      "pass": 31,
+      "fail": 2,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "failedCases": [
+      "EC17 unknown source-array element getters are rejected without invoking caller code",
+      "EC-HTTP16 ledger row status must be a string enum for both strict profile families"
+    ],
+    "caseNames": [
+      "EC01 item native identity includes workspace, public aggregate and version with independent hash oracles",
+      "EC02 semantic and record fingerprints preserve exact contains bytes and trusted timestamp metadata",
+      "EC03 exact keys, public IDs, parent versions and PostgreSQL version bounds reject malformed drafts",
+      "EC04 descriptor-safe copying refuses getters and cycles without invoking caller code",
+      "EC05 Unicode, NUL, blank text and byte/codepoint limits fail closed",
+      "EC06 preview accounts complete record bytes and never exposes a synthetic creation timestamp",
+      "EC07 stale heads and altered preview fingerprints cannot save while appends preserve old names",
+      "EC08 set membership order freezes exact native identities and full public/provenance proofs",
+      "EC09 source enumeration order does not replace the author's explicit member order",
+      "EC10 duplicate membership, changed fingerprints, absent and foreign source records are rejected",
+      "EC11 identical configs under distinct version identities stay distinct and are not content-deduplicated",
+      "EC12 an old exact item remains valid after renamed heads and a set rename does not mutate old snapshots",
+      "EC13 stored-record corruption cannot be repaired by only recomputing its outer fingerprint",
+      "EC14 complete32-member resource records retain membership metadata and independent serialized size",
+      "EC15 raw outer JSON is checked before numbers can round or duplicate keys can disappear",
+      "EC16 timestamp belongs to stored metadata while replay restoration preserves the original record exactly",
+      "EC17 unknown source-array element getters are rejected without invoking caller code",
+      "EC-HTTP01 two real v2 sets share one exact item and retain memberships with six unique results and twenty gates",
+      "EC-HTTP02 equal configurations under different saved version identities remain two required evaluators",
+      "EC-HTTP03 v2 refs are canonical across selected sets while membership order stays authored",
+      "EC-HTTP04 explicit mixed saved v1/v2 refs resolve without changing immutable v1 source contracts",
+      "EC-HTTP05 exact public tuple and fingerprint mismatches, duplicate refs and lost full proofs fail before work",
+      "EC-HTTP06 contradictory valid snapshots of one version identity cannot deduplicate away changed intent",
+      "EC-HTTP07 profile and version families cannot mix, and v2 append heads carry their explicit family",
+      "EC-HTTP08 v2 critical failures block every affected low-threshold scope while v1 policy remains unchanged",
+      "EC-HTTP09 a shared v2 request sends each input once and excludes all references and evaluator configuration",
+      "EC-HTTP10 running snapshots have no terminal gates and deadline recovery emits matching v2 uncertain events",
+      "EC-HTTP11 owner stop handles only never-claimed rows and immutable v2 events cannot wear v1 tags",
+      "EC-HTTP12 all eight sets can retain32 memberships each with32 unique items and one target row",
+      "EC-HTTP13 simultaneous maximum coverage and complete output allowance fail preview before an oversized run",
+      "EC-HTTP14 complete source budgets and actual large response values remain bound on readback",
+      "EC-HTTP15 unique-item, selected-set and row ceilings reject excess coverage without truncation",
+      "EC-HTTP16 ledger row status must be a string enum for both strict profile families"
+    ],
+    "sourcesChangedDuringRun": [],
+    "streams": {
+      "stdout": {
+        "file": "pure.stdout.txt",
+        "bytes": 11506,
+        "sha256": "7430ae9d6e0cd3077072f6fb0fedfba07517215ae9c5c1a02fe212558dbf92c0",
+        "complete": true
+      },
+      "stderr": {
+        "file": "pure.stderr.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "complete": true
+      }
+    },
+    "proofLimits": [
+      "Actual core source through Node type stripping and restricted VM modules; no TypeScript semantic compilation.",
+      "Prepared call bodies and state transitions only; no target, DNS/socket/TLS, server, database, browser, install or model call.",
+      "Repeated cases across attempts do not increase the distinct-case count."
+    ]
+  },
+  "exportedStreams": {
+    "stdout": {
+      "path": "pure.stdout.path-normalized.txt",
+      "kind": "path-normalized-complete-diagnostic-projection"
+    },
+    "stderr": {
+      "path": "pure.stderr.txt",
+      "kind": "complete-original"
+    }
+  }
+}

@@ -1,0 +1,229 @@
+TAP version 13
+# Subtest: Evaluator composition native persistence [T3; authored UNRUN]
+    # Subtest: CP-PG01 standalone item canonical record, native columns and content-free audit round trip
+    ok 1 - CP-PG01 standalone item canonical record, native columns and content-free audit round trip
+      ---
+      duration_ms: 42.283817
+      type: 'test'
+      ...
+    # Subtest: CP-PG02 item append rename preserves exact old item, set and frozen plan after both heads advance
+    ok 2 - CP-PG02 item append rename preserves exact old item, set and frozen plan after both heads advance
+      ---
+      duration_ms: 236.681067
+      type: 'test'
+      ...
+    # Subtest: CP-PG03 identical item replay precedes malformed later head and changes no rows
+    ok 3 - CP-PG03 identical item replay precedes malformed later head and changes no rows
+      ---
+      duration_ms: 30.358726
+      type: 'test'
+      ...
+    # Subtest: CP-PG04 two multi-item sets share one exact native item version while retaining order and all memberships
+    not ok 4 - CP-PG04 two multi-item sets share one exact native item version while retaining order and all memberships
+      ---
+      duration_ms: 59.817235
+      type: 'test'
+      location: '/home/runner/work/open-evals/open-evals/tests/integration/eval-composition.node.mjs:186:3'
+      failureType: 'testCodeFailure'
+      error: |-
+        Expected values to be strictly equal:
+        
+        undefined !== 3
+        
+      code: 'ERR_ASSERTION'
+      name: 'AssertionError'
+      expected: 3
+      operator: 'strictEqual'
+      stack: |-
+        TestContext.<anonymous> (/home/runner/work/open-evals/open-evals/tests/integration/eval-composition.node.mjs:187:45)
+        process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+        async Test.run (node:internal/test_runner/test:1409:7)
+        async Suite.processPendingSubtests (node:internal/test_runner/test:974:7)
+      ...
+    # Subtest: CP-PG05 set replay precedes later head corruption and never substitutes current source item versions
+    ok 5 - CP-PG05 set replay precedes later head corruption and never substitutes current source item versions
+      ---
+      duration_ms: 69.276919
+      type: 'test'
+      ...
+    # Subtest: CP-PG06 independently blocked item CAS writers produce one winner and no orphan version
+    not ok 6 - CP-PG06 independently blocked item CAS writers produce one winner and no orphan version
+      ---
+      duration_ms: 58.375741
+      type: 'test'
+      location: '/home/runner/work/open-evals/open-evals/tests/integration/eval-composition.node.mjs:197:3'
+      failureType: 'testCodeFailure'
+      error: |-
+        Expected values to be strictly equal:
+        
+        undefined !== 2
+        
+      code: 'ERR_ASSERTION'
+      name: 'AssertionError'
+      expected: 2
+      operator: 'strictEqual'
+      stack: |-
+        TestContext.<anonymous> (/home/runner/work/open-evals/open-evals/tests/integration/eval-composition.node.mjs:201:162)
+        process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+        async Test.run (node:internal/test_runner/test:1409:7)
+        async Suite.processPendingSubtests (node:internal/test_runner/test:974:7)
+      ...
+    # Subtest: CP-PG07 independently blocked set CAS writers preserve exactly one ordered membership revision
+    not ok 7 - CP-PG07 independently blocked set CAS writers preserve exactly one ordered membership revision
+      ---
+      duration_ms: 111.979848
+      type: 'test'
+      location: '/home/runner/work/open-evals/open-evals/tests/integration/eval-composition.node.mjs:203:3'
+      failureType: 'testCodeFailure'
+      error: |-
+        Expected values to be strictly equal:
+        
+        undefined !== 2
+        
+      code: 'ERR_ASSERTION'
+      name: 'AssertionError'
+      expected: 2
+      operator: 'strictEqual'
+      stack: |-
+        TestContext.<anonymous> (/home/runner/work/open-evals/open-evals/tests/integration/eval-composition.node.mjs:206:166)
+        process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+        async Test.run (node:internal/test_runner/test:1409:7)
+        async Suite.processPendingSubtests (node:internal/test_runner/test:974:7)
+      ...
+    # Subtest: CP-PG08 identical concurrent create requests reserve one item identity and return exact replay
+    not ok 8 - CP-PG08 identical concurrent create requests reserve one item identity and return exact replay
+      ---
+      duration_ms: 19.684931
+      type: 'test'
+      location: '/home/runner/work/open-evals/open-evals/tests/integration/eval-composition.node.mjs:208:3'
+      failureType: 'testCodeFailure'
+      error: |-
+        Expected values to be strictly equal:
+        
+        undefined !== 1
+        
+      code: 'ERR_ASSERTION'
+      name: 'AssertionError'
+      expected: 1
+      operator: 'strictEqual'
+      stack: |-
+        TestContext.<anonymous> (/home/runner/work/open-evals/open-evals/tests/integration/eval-composition.node.mjs:210:145)
+        process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+        async Test.run (node:internal/test_runner/test:1409:7)
+        async Suite.processPendingSubtests (node:internal/test_runner/test:974:7)
+      ...
+    # Subtest: CP-PG09 item audit failure rolls back aggregate, version and audit atomically
+    ok 9 - CP-PG09 item audit failure rolls back aggregate, version and audit atomically
+      ---
+      duration_ms: 16.853863
+      type: 'test'
+      ...
+    # Subtest: CP-PG10 set audit failure rolls back native version and every membership without touching source items
+    ok 10 - CP-PG10 set audit failure rolls back native version and every membership without touching source items
+      ---
+      duration_ms: 50.252052
+      type: 'test'
+      ...
+    # Subtest: CP-PG11 public UUID tuples are workspace scoped and foreign or mismatched source refs cannot write
+    ok 11 - CP-PG11 public UUID tuples are workspace scoped and foreign or mismatched source refs cannot write
+      ---
+      duration_ms: 24.013719
+      type: 'test'
+      ...
+    # Subtest: CP-PG12 item native schema, canonical envelope, timestamp and audit corruption fail closed without repair
+    ok 12 - CP-PG12 item native schema, canonical envelope, timestamp and audit corruption fail closed without repair
+      ---
+      duration_ms: 22.364372
+      type: 'test'
+      ...
+    # Subtest: CP-PG13 duplicate positions, non-unit weights and altered native membership criticality are refused
+    ok 13 - CP-PG13 duplicate positions, non-unit weights and altered native membership criticality are refused
+      ---
+      duration_ms: 75.875168
+      type: 'test'
+      ...
+    # Subtest: CP-PG14 bounded metadata history retains twenty versions and oversized or malformed indices fail closed
+    ok 14 - CP-PG14 bounded metadata history retains twenty versions and oversized or malformed indices fail closed
+      ---
+      duration_ms: 181.368875
+      type: 'test'
+      ...
+    # Subtest: CP-PG15 benchmark imports reject absent and foreign reserved identities before any write while near-prefix IDs remain valid
+    ok 15 - CP-PG15 benchmark imports reject absent and foreign reserved identities before any write while near-prefix IDs remain valid
+      ---
+      duration_ms: 21.715563
+      type: 'test'
+      ...
+    # Subtest: CP-PG16 generic catalogue hides corrupt v2 ownership by aggregate, version or profile instead of treating it as legacy
+    ok 16 - CP-PG16 generic catalogue hides corrupt v2 ownership by aggregate, version or profile instead of treating it as legacy
+      ---
+      duration_ms: 65.344639
+      type: 'test'
+      ...
+    # Subtest: CP-PG17 shared HTTP store preserves v1 execution and rejects plan-family switches in either direction
+    ok 17 - CP-PG17 shared HTTP store preserves v1 execution and rejects plan-family switches in either direction
+      ---
+      duration_ms: 6250.416287
+      type: 'test'
+      ...
+    # Subtest: CP-PG18 two real overlapping sets execute one claim per row, six unique results and all twenty gates
+    ok 18 - CP-PG18 two real overlapping sets execute one claim per row, six unique results and all twenty gates
+      ---
+      duration_ms: 1029.887097
+      type: 'test'
+      ...
+    # Subtest: CP-PG19 shared critical failure blocks both owning sets and dataset at permissive thresholds without duplicate scoring
+    ok 19 - CP-PG19 shared critical failure blocks both owning sets and dataset at permissive thresholds without duplicate scoring
+      ---
+      duration_ms: 1021.480781
+      type: 'test'
+      ...
+    # Subtest: CP-PG20 completed request and finalization replay do not redispatch and survive deletion of live sources
+    ok 20 - CP-PG20 completed request and finalization replay do not redispatch and survive deletion of live sources
+      ---
+      duration_ms: 1321.527959
+      type: 'test'
+      ...
+    # Subtest: CP-PG21 v2 recovery preserves known responses, records uncertainty once and prevents late overwrite
+    ok 21 - CP-PG21 v2 recovery preserves known responses, records uncertainty once and prevents late overwrite
+      ---
+      duration_ms: 20617.415655
+      type: 'test'
+      ...
+    # Subtest: CP-PG22 mixed profile events and altered native result or gate projections cannot be read or repaired by GET
+    ok 22 - CP-PG22 mixed profile events and altered native result or gate projections cannot be read or repaired by GET
+      ---
+      duration_ms: 1180.124449
+      type: 'test'
+      ...
+    # Subtest: CP-PG23 thirty-two native members round trip and a thirty-third member or duplicate ref writes nothing
+    ok 23 - CP-PG23 thirty-two native members round trip and a thirty-third member or duplicate ref writes nothing
+      ---
+      duration_ms: 376.452944
+      type: 'test'
+      ...
+    # Subtest: CP-PG24 tiny finite thresholds and large tiny-decimal responses retain canonical text without JSONB expansion
+    ok 24 - CP-PG24 tiny finite thresholds and large tiny-decimal responses retain canonical text without JSONB expansion
+      ---
+      duration_ms: 1738.247292
+      type: 'test'
+      ...
+    1..24
+not ok 1 - Evaluator composition native persistence [T3; authored UNRUN]
+  ---
+  duration_ms: 34839.308421
+  type: 'suite'
+  location: '/home/runner/work/open-evals/open-evals/tests/integration/eval-composition.node.mjs:150:1'
+  failureType: 'subtestsFailed'
+  error: '4 subtests failed'
+  code: 'ERR_TEST_FAILURE'
+  ...
+1..1
+# tests 24
+# suites 1
+# pass 20
+# fail 4
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 44950.70375

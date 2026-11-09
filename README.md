@@ -1,6 +1,6 @@
 # open-evals
 
-Last updated: 2026-11-09
+Last updated: 2026-11-10
 
 `open-evals` is an MIT-licensed, provider-independent platform for two product functions:
 
@@ -121,8 +121,11 @@ an eval. The new [reusable evaluator composition](docs/evaluator-composition.md)
 flow saves independent contains items and ordered sets of exact item versions.
 Its explicit HTTP v2 profile retains overlapping memberships and scores each
 unique row/item pair once, with one target claim per input row. Existing v1
-sets and plans retain their original contracts. Pure checks pass; database,
-compiler and browser verification for this increment is pending. See
+sets and plans retain their original contracts. All 128 focused checks and the
+full root build passed at checked QA source `b3442e2`, including compiled-app
+browser execution with real disposable SQL and authored DNS/HTTPS responses.
+See the [composition result](docs/results/2026/11-09/evaluator-composition.md).
+Native DNS/socket/TLS and hosted Auth/RLS acceptance remain unverified. See
 [the product contract and remaining work](docs/product-surface.md).
 
 The [focused product-surface receipt](docs/results/2026/11-09/product-surface-checks.md)
@@ -229,8 +232,9 @@ Screenshots are intentionally left as placeholders for maintainers to capture fr
 ## Roadmap
 
 - Harbor task identity, versioned artifacts and execution integration.
-- Further custom evaluators, explicit input/evaluator composition and actual
-  saved-definition execution, followed by campaign use of pinned definitions.
+- Further evaluator kinds and target runtimes, followed by campaign use of
+  pinned saved definitions. Native network and hosted acceptance remain
+  separate verification gates.
 - Campaign execution and approved production A/B safety rollouts from Improve.
 - More benchmark importers behind license checks.
 - Structural optimization work orders backed by connected GitHub pull requests.

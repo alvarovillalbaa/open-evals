@@ -1,8 +1,11 @@
 # Reusable evaluator composition
 
 Implementation contract for saved deterministic Eval Items, ordered multi-item
-Eval Sets and immutable HTTP plans. Pure checks passed; integrated database,
-compiler and browser verification for this increment remains pending.
+Eval Sets and immutable HTTP plans. All 128 focused checks and the full root
+build passed at checked QA source `b3442e2`; see the
+[source-bound result](results/2026/11-09/evaluator-composition.md). Browser
+execution uses real disposable SQL and authored DNS/HTTPS responses. Native
+transport and hosted Auth/RLS acceptance remain unverified.
 
 ## Author and compose
 
@@ -91,6 +94,15 @@ Improve; the legacy custom-set editor stays available.
 
 ## Proof boundary
 
+The complete focused scope passed 128 checks and a full root build: 76 core,
+24 Web/API, 24 PostgreSQL and four desktop/narrow Chromium journeys, with zero
+browser retries. This binds checked QA source `b3442e2`, rather than subsequent
+documentation/evidence publication. The compiled app exercised actual routes,
+durable SQL claims, scoring and recovery with two authored responses, six unique
+results and twenty gates; replay and reload added no calls. Source, earlier
+failures, cleanup and exact proof limits are in the
+[owning result](results/2026/11-09/evaluator-composition.md).
+
 The focused existing-Node packet passed 76 cases: 33 new composition cases,
 38 HTTP v1 regressions and five compatibility checks against values frozen from
 the published parent. No case was skipped and source pins stayed unchanged.
@@ -106,12 +118,11 @@ status. The final 76-case packet passed with unchanged historical fingerprints.
 Earlier attempts retain the same case identities; 76 is the distinct scope.
 Both findings were reproduced at the pure-library boundary.
 
-Focused authored checks must establish shared-item persistence, exact-version
-selection, unique result coverage, set gates, compatibility, access and recovery.
-Disposable database and browser fixtures use authored content and transport
-seams. They do not establish native DNS/socket/TLS execution or genuine hosted
-account acceptance. The existing HTTP release's results retain their own source
-identities; they are not evidence that this increment has passed.
+The passing disposable SQL and compiled-app journeys cover shared-item
+persistence, exact-version selection, unique result coverage, set gates,
+compatibility, access and recovery. Their authored transport seams do not
+establish native DNS/socket/TLS execution or genuine hosted account acceptance.
+The earlier HTTP release retains its own source identity and separate evidence.
 
 See [HTTP execution](http-target-runs.md), [the product contract](product-surface.md)
 and the unchanged [legacy custom-set contract](custom-evals.md).

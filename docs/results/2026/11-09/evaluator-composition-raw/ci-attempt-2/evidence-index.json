@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "eval-composition-ci-evidence-index-v1",
+  "status": "failed-build-staged-private-for-release-review",
+  "intendedCanonicalDirectory": "docs/results/2026/11-09/evaluator-composition.raw/ci-attempt-2",
+  "source": "2344342ee0211f76aa6c93d7e92a8cb781ab1a8b",
+  "tree": "84fd7cbf0a2da2a2c41f28ab895a019e0043112e",
+  "runId": "42715252378",
+  "jobId": "129494978383",
+  "jobIdBinding": "Recorded caller metadata; selected log frames independently bind source and run, not the job ID.",
+  "selectedOriginals": {
+    "count": 13,
+    "bytes": 102167,
+    "manifest": "decoded-originals.json",
+    "handling": "Exact complete selected base64-decoded originals with unchanged filenames and bytes; root and independent decoder copies agree."
+  },
+  "metadata": {
+    "independentAudit": "independent-audit.json",
+    "strictReconstructionIndex": "decoded-originals.json",
+    "commandMetadata": "command-metadata.json",
+    "diagnosticFrames": "diagnostic-ranges.json",
+    "handling": "Existing metadata records are copied byte-for-byte. Historical relative locators are provenance, not public download links."
+  },
+  "buildDiagnostics": {
+    "provenance": "diagnostics/provenance.json",
+    "stdout": "diagnostics/build-candidate.stdout.full-range.txt",
+    "stderr": "diagnostics/build-candidate.stderr.full-range.txt",
+    "streams": 2,
+    "bytes": 4236,
+    "transport": "Decoded commandDiagnostic range frames, separate from the13 ORIGINAL_CHUNK files.",
+    "completeness": "Both ranges start at offset0, cover the entire stream length, match command source SHA-256 and have complete EOF metadata. These are full failed-build stream bytes, not metadata alone.",
+    "limit": "The build stopped at its first observed DB TypeScript diagnostic; these bytes do not prove later compiler stages passed."
+  },
+  "results": {
+    "overall": "failed",
+    "core": { "tests": 76, "pass": 76, "fail": 0 },
+    "web": { "tests": 24, "pass": 24, "fail": 0 },
+    "sql": { "tests": 24, "pass": 24, "fail": 0 },
+    "build": {
+      "started": true,
+      "commandExit": 2,
+      "firstObservedDiagnostic": "packages/db/src/eval-composition.ts(213,136): TS2322; selected item records may be undefined."
+    },
+    "browserStarted": false,
+    "applicationStarted": false
+  },
+  "cleanup": {
+    "postSqlTablesZero": 26,
+    "finalTablesZero": 26,
+    "databaseAbsent": true,
+    "clusterStopped": true,
+    "clusterAbsent": true,
+    "records": ["postgres-fixture-absence.json", "fixture-final-absence.json", "cleanup.json", "receipt.json"]
+  },
+  "privacy": {
+    "localUserOrPrivatePathMatches": 0,
+    "credentialMarkerMatches": 0,
+    "normalizedFiles": 0,
+    "publicRunnerPathOccurrences": 11,
+    "note": "Ephemeral public-CI runner paths remain unchanged. Decoded diagnostic payloads were also checked; no local-user/private path or credential marker was found."
+  },
+  "proofLimits": [
+    "The124 core/Web/SQL cases passed on this exact source. Repeated cases across attempts do not increase the128 distinct planned checks.",
+    "Full failed-build diagnostic bytes are verified separately from selected originals; other command/server logs remain metadata only.",
+    "Browser, application and authored target preload did not start. No complete release-build success is established.",
+    "No full job log, historical source tree, dependency folder or artifact ZIP is included. Artifact ZIP retrieval remains false.",
+    "No native DNS/socket/TLS, actual external target/model call, hosted Auth/RLS, production page, screenshot archive or physical-device acceptance is established."
+  ],
+  "exportManifest": "export-manifest.json"
+}

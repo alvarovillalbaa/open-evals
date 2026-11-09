@@ -1,0 +1,72 @@
+[
+  {
+    "path": "packages/core/src/custom-evals.ts",
+    "bytes": 8855,
+    "sha256": "20276d52b66ef0e1fca0efa85b0d10ea8bde3b3d5854cd160664d40628e5886d"
+  },
+  {
+    "path": "packages/core/src/eval-composition-types.ts",
+    "bytes": 9976,
+    "sha256": "9bf08ccd0976ec9822922adc53069806413a27e15b4a0d9556847def7c68690c"
+  },
+  {
+    "path": "packages/core/src/eval-composition.ts",
+    "bytes": 24144,
+    "sha256": "b93f5ed5ee9c51ee130404278a1f08cca36b45a9519e4a6108751496e2768af4"
+  },
+  {
+    "path": "packages/core/src/eval-engine.ts",
+    "bytes": 10877,
+    "sha256": "847d2e79dcb767acece965ab25cbed1acc38cbebabc95372d273f694669c28d3"
+  },
+  {
+    "path": "packages/core/src/hash.ts",
+    "bytes": 969,
+    "sha256": "14c6a74e885a8bbc11b71a80bf4b4e306d4c6feb1868eafe59684eaeee3c7ab0"
+  },
+  {
+    "path": "packages/core/src/http-eval-plans.ts",
+    "bytes": 29351,
+    "sha256": "9c454acc0c63c0b819aaff586ee25c34c47694d7d01e37b5bed3f70d852329d2"
+  },
+  {
+    "path": "packages/core/src/http-eval-runs.ts",
+    "bytes": 26818,
+    "sha256": "4e6446fe0c5dd88551ef653761fd7ba674e4e84d9447fccab1cac0156798dfb4"
+  },
+  {
+    "path": "packages/core/src/http-eval-types.ts",
+    "bytes": 6698,
+    "sha256": "e7f279937a8c5a06d3ddc31a2dc2841f13653796a3051fed5809f6fa6234f5a9"
+  },
+  {
+    "path": "packages/core/src/index.ts",
+    "bytes": 681,
+    "sha256": "133cbd7cb81f66f67af3e54b65b69934cce6c236b5b6fb694c5b29915aa68bf2"
+  },
+  {
+    "path": "packages/core/src/provided-output-runs.ts",
+    "bytes": 23809,
+    "sha256": "1d4268df1886158630c19b7cbc040118cef4ee32b42bc60e2438c7dd2efdf38d"
+  },
+  {
+    "path": "tests/helpers/eval-composition-fixtures.mjs",
+    "bytes": 8677,
+    "sha256": "54a9a577ac91a0f4c76fed73c5d94cfef3aaec096b45104ae2386ebfdc22f463"
+  },
+  {
+    "path": "tests/fixtures/http-eval-v1-golden.json",
+    "bytes": 10748,
+    "sha256": "4b993b5721528669bdda81add41eed3e8d9cb708c5618dd28ff464727bc3e1be"
+  },
+  {
+    "path": "tests/unit/eval-composition.test.mjs",
+    "bytes": 10801,
+    "sha256": "09ba2d4b9f8ed6e8fe1f9b9d78db831336533ff61ed3cbcbf992fb80d8567894"
+  },
+  {
+    "path": "tests/unit/http-eval-composition.test.mjs",
+    "bytes": 14425,
+    "sha256": "af557fda793531cce6198ca435608c09b860e0fdfcdcd77672e72e63d31b642c"
+  }
+]

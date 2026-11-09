@@ -23,8 +23,11 @@ exactly Evals and Improve.
   acquire workspace authoring. [Exact contract](custom-evals.md).
 - `/evals/composition` defines reusable contains Eval Items and ordered sets of
   exact saved item versions, with immutable history and save recovery. Two sets
-  can share the same check without cloning it. The versioned implementation and
-  its pending verification are in [the composition contract](evaluator-composition.md).
+  can share the same check without cloning it. All 128 focused checks and the
+  full root build passed on checked QA source `b3442e2`, including compiled-app
+  execution with disposable SQL and authored transport responses. See
+  [the composition contract](evaluator-composition.md) and
+  [source-bound result](results/2026/11-09/evaluator-composition.md).
 - `/evals/datasets` authors complete JSON/JSONL datasets with explicit review
   declarations, immutable history and exact-version scoring links.
   [Dataset contract](custom-datasets.md).
@@ -57,7 +60,7 @@ Authentication/database failures remain separate from a ready but empty workspac
 | Owner requirement | Remaining implementation |
 | --- | --- |
 | Evals contain Harbor tasks | Task identity/version/artifacts, task selection and actual Harbor execution integration |
-| Custom evals combine inputs and scoring | Saved datasets and HTTP v1 retain their recorded fixture checks; reusable item/set v2 verification is pending. Actual native execution and hosted acceptance remain unverified, alongside further target runtimes and evaluator types |
+| Further custom evaluator kinds and targets | Extend the verified saved-composition/HTTP profile with additional evaluator types and target runtimes; native network execution and hosted acceptance remain unverified |
 | Campaigns consume Evals and optimizer algorithms | Bind pinned eval definitions into actual approved campaign execution; current request preparation does not do this |
 | Improved instructions reach production with safe A/B rollout | Product approval, execution and release integration; existing primitives do not prove the complete flow |
 | Usable hosted app | Existing Auth/database/provider configuration and genuine current-source interaction acceptance |

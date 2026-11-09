@@ -1,0 +1,97 @@
+{
+  "schemaVersion": "eval-composition-ci2-independent-audit-v1",
+  "reviewer": "dataset_contract",
+  "status": "failed-build-preserved-and-independently-verified",
+  "source": "2344342ee0211f76aa6c93d7e92a8cb781ab1a8b",
+  "tree": "84fd7cbf0a2da2a2c41f28ab895a019e0043112e",
+  "runId": "42715252378",
+  "jobId": "129494978383",
+  "log": {
+    "bytes": 333284,
+    "sha256": "6fb82b5c010bf05b4d77022389cee63885dd1ce3c0df2761c61f5a70eeee2c6e",
+    "timestampStrippedBytes": 278822,
+    "timestampStrippedSha256": "d33428de1b5b98d75bc313c1d0d7ef99b9fc158fc1e030ba162138278b53f098"
+  },
+  "reconstruction": {
+    "directory": "ci-run-2/independent-reconstruction",
+    "selectedOriginals": 13,
+    "decodedBytes": 102167,
+    "allOffsetsSizesSha256Verified": true,
+    "allEqualSeparateRootDecodedOriginals": true,
+    "commandMetadataFrames": 32,
+    "allCommandSourceStreamsComplete": true,
+    "diagnosticFullStreams": 2,
+    "diagnosticProvenance": "diagnostics/provenance.json",
+    "artifactZipRetrieved": false
+  },
+  "results": {
+    "core": {
+      "tests": 76,
+      "pass": 76,
+      "fail": 0,
+      "skip": 0,
+      "commandExit": 0
+    },
+    "web": {
+      "tests": 24,
+      "pass": 24,
+      "fail": 0,
+      "skip": 0,
+      "commandExit": 0
+    },
+    "sql": {
+      "tests": 24,
+      "pass": 24,
+      "fail": 0,
+      "skip": 0,
+      "commandExit": 0
+    },
+    "build": {
+      "started": true,
+      "commandExit": 2,
+      "terminationReason": null,
+      "firstObservedDiagnostic": {
+        "file": "packages/db/src/eval-composition.ts",
+        "line": 213,
+        "column": 136,
+        "code": "TS2322",
+        "message": "Type 'EvalCompositionItemRecord[] | undefined' is not assignable to type 'unknown[]'."
+      }
+    },
+    "browser": {
+      "started": false
+    },
+    "application": {
+      "started": false
+    },
+    "overall": "failed"
+  },
+  "sourceIntegrity": {
+    "protectedFilesBeforeAfterEqual": 144,
+    "expectedSourcesMatchFinalCiBindingsV3": 143,
+    "onlyV3SourcePinChangeFromV2": "tests/integration/eval-composition.node.mjs",
+    "directParent": "894025656a7d264b3b2d573c90e67c40aba57fcf",
+    "parentTree": "9794779b04cae8a9a8490e8854d71dd0f25293ce",
+    "reviewedChangedPaths": 57,
+    "workflow": {
+      "bytes": 103616,
+      "sha256": "6d8fad4377ca873da90d6914f7655499987f74c02226ac88e436f0cd45b9be09"
+    }
+  },
+  "cleanup": {
+    "postSqlNativeTablesZero": 26,
+    "finalOwnedTablesZero": 26,
+    "databaseAbsent": true,
+    "validatedOwner": "postgres",
+    "validatedMarker": "open-evals-composition-v2-20261109-created-disposable-v1",
+    "clusterStopped": true,
+    "clusterAbsent": true,
+    "receiptCleanupEqualsSeparateOriginal": true
+  },
+  "proofLimits": [
+    "Only existing raw-log decoding and static data/source-binding audit executed by this peer; no new application or test execution, compiler, build, SQL, browser, provider or Git mutations.",
+    "The124 core/Web/SQL cases passed on this exact CI2 source. Repeated76/24 core/Web cases do not add to the final128 distinct planned scope.",
+    "The full build failed at the first observed TypeScript diagnostic. Browser/app did not start and remain unverified; no native target, hosted auth/RLS or production acceptance is inferred.",
+    "Selected frames and the two full diagnostic ranges are reconstructed and hash verified; no artifact archive, screenshot or browser trace was retrieved."
+  ]
+}

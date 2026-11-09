@@ -1,0 +1,176 @@
+{
+  "schemaVersion": "eval-composition-ci-export-manifest-v1",
+  "scope": "All staged attempt files except this manifest itself.",
+  "boundFileCount": 21,
+  "boundBytes": 149353,
+  "selectedOriginals": 13,
+  "selectedOriginalBytes": 102163,
+  "diagnosticRangeFiles": 2,
+  "diagnosticRangeBytes": 5700,
+  "diagnosticRangeKinds": {
+    "full": 1,
+    "tail": 1
+  },
+  "unchangedMetadataFiles": 5,
+  "files": [
+    {
+      "path": "cleanup.json",
+      "originalPath": "ci-run-3/independent-reconstruction/originals/cleanup.json",
+      "kind": "selected-complete-original",
+      "bytes": 659,
+      "sha256": "e6a43040a526cf43ebdd8cc2135cd1a25c537bbfbc17c9d5b38ba7d9254988ab"
+    },
+    {
+      "path": "command-metadata.json",
+      "originalPath": "ci-run-3/independent-reconstruction/command-metadata.json",
+      "kind": "existing-complete-audit-or-decoder-metadata",
+      "bytes": 18796,
+      "sha256": "31bf37e21878fa2816082940102b8451db7e79dd86acba72e7271a493ac8bd8f"
+    },
+    {
+      "path": "composition-postgres-cases.stderr.txt",
+      "originalPath": "ci-run-3/independent-reconstruction/originals/composition-postgres-cases.stderr.txt",
+      "kind": "selected-complete-original",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "composition-postgres-cases.stdout.txt",
+      "originalPath": "ci-run-3/independent-reconstruction/originals/composition-postgres-cases.stdout.txt",
+      "kind": "selected-complete-original",
+      "bytes": 7493,
+      "sha256": "55f53478486d2f3c29eb38adda852748d6083a040dad37f8cf175d9c8e842029"
+    },
+    {
+      "path": "core-cases.stderr.txt",
+      "originalPath": "ci-run-3/independent-reconstruction/originals/core-cases.stderr.txt",
+      "kind": "selected-complete-original",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "core-cases.stdout.txt",
+      "originalPath": "ci-run-3/independent-reconstruction/originals/core-cases.stdout.txt",
+      "kind": "selected-complete-original",
+      "bytes": 20363,
+      "sha256": "62cabe014675ceca617d10c471dd45fb7dda32501aafa59778adacc835092490"
+    },
+    {
+      "path": "decoded-originals.json",
+      "originalPath": "ci-run-3/independent-reconstruction/decoded-originals.json",
+      "kind": "existing-complete-audit-or-decoder-metadata",
+      "bytes": 4544,
+      "sha256": "9414cbc5b8db50fc46a516a0110f75d0e51eb2eb9162fe53e9d398c9cf0a224b"
+    },
+    {
+      "path": "diagnostic-ranges.json",
+      "originalPath": "ci-run-3/independent-reconstruction/diagnostic-ranges.json",
+      "kind": "existing-complete-audit-or-decoder-metadata",
+      "bytes": 8430,
+      "sha256": "3379d2214484137c43571586f8cc71d3d7c618f251ab1af7c1bc82ffef1c7658"
+    },
+    {
+      "path": "diagnostics/build-candidate.stderr.full-range.txt",
+      "originalPath": "ci-run-3/diagnostics/build-candidate.stderr.full-range.txt",
+      "kind": "complete-hash-bound-commandDiagnostic-range",
+      "bytes": 1604,
+      "sha256": "4b38f7104326f935e35e6e352b6010a711f4d4e644a9b1df8ff42e193b00a44b"
+    },
+    {
+      "path": "diagnostics/build-candidate.stdout.tail-range.txt",
+      "originalPath": "ci-run-3/diagnostics/build-candidate.stdout.tail-range.txt",
+      "kind": "partial-hash-bound-commandDiagnostic-tail",
+      "bytes": 4096,
+      "sha256": "baabb30c72e26e7ad1d805bead74fc4448eff0253ba5bc8fe5a5a0954b6c4c4a"
+    },
+    {
+      "path": "diagnostics/provenance.json",
+      "originalPath": "ci-run-3/diagnostics/provenance.json",
+      "kind": "existing-complete-audit-or-decoder-metadata",
+      "bytes": 2034,
+      "sha256": "f15e4ec131873d009ab718f53523eca81a5f385a0de9f36ec7416c000713fe46"
+    },
+    {
+      "path": "evidence-index.json",
+      "bytes": 4195,
+      "sha256": "5225273c0d73741781fd8839f5c7d915cee0bda9ab6414fcd8cec7cc2ddaf2d7",
+      "kind": "derived-staging-index"
+    },
+    {
+      "path": "fixture-final-absence.json",
+      "originalPath": "ci-run-3/independent-reconstruction/originals/fixture-final-absence.json",
+      "kind": "selected-complete-original",
+      "bytes": 714,
+      "sha256": "8d2f1ab4f9cd8f1c84e244f123c68195b0627a1e8053b381ba4ec6e68d83a571"
+    },
+    {
+      "path": "independent-audit.json",
+      "originalPath": "ci-run-3/independent-audit.json",
+      "kind": "existing-complete-audit-or-decoder-metadata",
+      "bytes": 3491,
+      "sha256": "6731076a297f01a2ed53efee5747a049c41cba4a51b3f325dcef9d8bc651d841"
+    },
+    {
+      "path": "postgres-fixture-absence.json",
+      "originalPath": "ci-run-3/independent-reconstruction/originals/postgres-fixture-absence.json",
+      "kind": "selected-complete-original",
+      "bytes": 1358,
+      "sha256": "22af82ed267ca8bb04ff7d93c882b4fad7f2600a5dafff64712d123b19a4edb0"
+    },
+    {
+      "path": "receipt.json",
+      "originalPath": "ci-run-3/independent-reconstruction/originals/receipt.json",
+      "kind": "selected-complete-original",
+      "bytes": 4819,
+      "sha256": "4c355f8164a9c58f882bb330d940947efb6560b3e6614f9fbcd3a119764b53a9"
+    },
+    {
+      "path": "source-final.json",
+      "originalPath": "ci-run-3/independent-reconstruction/originals/source-final.json",
+      "kind": "selected-complete-original",
+      "bytes": 25535,
+      "sha256": "3e5d6334c31ac50bb3e41f98a1123294ae920cb67da85be194123d6a30fd4396"
+    },
+    {
+      "path": "source.json",
+      "originalPath": "ci-run-3/independent-reconstruction/originals/source.json",
+      "kind": "selected-complete-original",
+      "bytes": 30312,
+      "sha256": "f13f3ac2db8e3dba8e4ac9fe2350212449f6063b8a02c2d1656dfdeb3236cde3"
+    },
+    {
+      "path": "unprotected-tracked-delta.json",
+      "originalPath": "ci-run-3/independent-reconstruction/originals/unprotected-tracked-delta.json",
+      "kind": "selected-complete-original",
+      "bytes": 3812,
+      "sha256": "0912deb91c5274d0197b6270955234832ee9954157d0055f37cceb8c3cbd2cd3"
+    },
+    {
+      "path": "web-cases.stderr.txt",
+      "originalPath": "ci-run-3/independent-reconstruction/originals/web-cases.stderr.txt",
+      "kind": "selected-complete-original",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "web-cases.stdout.txt",
+      "originalPath": "ci-run-3/independent-reconstruction/originals/web-cases.stdout.txt",
+      "kind": "selected-complete-original",
+      "bytes": 7098,
+      "sha256": "68792b68cbbe9c9c421ab640db552fabdf1a8d37c5cb3e64ce9d2dbdac489105"
+    }
+  ],
+  "verification": {
+    "allCopiedFilesByteIdentical": true,
+    "allSelectedOriginalHashBindingsVerified": true,
+    "rangeHashesAndOffsetsBoundToCommandMetadata": true,
+    "stdoutTailNotCompleteOriginal": true,
+    "all124ProtocolAndSqlCasesPass": true,
+    "failedWebBuildAndNoBrowserApplicationConfirmed": true,
+    "privacyMarkerMatches": [],
+    "publicRunnerPathOccurrences": 6,
+    "noNormalizationNeeded": true
+  },
+  "artifactZipRetrieved": false,
+  "proofLimits": "Static copy/hash/privacy review only; no new app/test/compiler/build/SQL/browser/provider/Git operation. One diagnostic is a tail, never a complete stdout original."
+}

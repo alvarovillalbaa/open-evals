@@ -1,0 +1,59 @@
+
+> open-evals@0.1.0 build /home/runner/work/open-evals/open-evals
+> turbo run build --filter=@open-evals/core --filter=@open-evals/adapters --filter=@open-evals/db --filter=@open-evals/sdk --filter=@open-evals/mcp --filter=@open-evals/statistics --filter=@open-evals/test-fixtures --filter=@open-evals/cli --filter=@open-evals/web --filter=@open-evals/workflows --force
+
+
+   • Packages in scope: @open-evals/adapters, @open-evals/cli, @open-evals/core, @open-evals/db, @open-evals/mcp, @open-evals/sdk, @open-evals/statistics, @open-evals/test-fixtures, @open-evals/web, @open-evals/workflows
+   • Running build in 10 packages
+   • Remote caching disabled
+
+@open-evals/db:build: cache bypass, force executing 120145b6ea01e480
+@open-evals/core:build: cache bypass, force executing 4fc62d4586e6d097
+@open-evals/core:build: 
+@open-evals/core:build: > @open-evals/core@0.1.0 build /home/runner/work/open-evals/open-evals/packages/core
+@open-evals/core:build: > tsc -p tsconfig.json --noEmit
+@open-evals/core:build: 
+@open-evals/db:build: 
+@open-evals/db:build: > @open-evals/db@0.1.0 build /home/runner/work/open-evals/open-evals/packages/db
+@open-evals/db:build: > tsc -p tsconfig.json --noEmit
+@open-evals/db:build: 
+@open-evals/adapters:build: cache bypass, force executing dc2384571949f55a
+@open-evals/workflows:build: cache bypass, force executing 3813c71cd8a75676
+@open-evals/test-fixtures:build: cache bypass, force executing b7c2c4b7528885a1
+@open-evals/mcp:build: cache bypass, force executing b34c1544d569eac6
+@open-evals/sdk:build: cache bypass, force executing 491d60f25027aff8
+@open-evals/statistics:build: cache bypass, force executing 560151df441ddcde
+@open-evals/workflows:build: 
+@open-evals/workflows:build: > @open-evals/workflows@0.1.0 build /home/runner/work/open-evals/open-evals/workflows
+@open-evals/workflows:build: > tsc -p tsconfig.json --noEmit
+@open-evals/workflows:build: 
+@open-evals/mcp:build: 
+@open-evals/mcp:build: > @open-evals/mcp@0.1.0 build /home/runner/work/open-evals/open-evals/packages/mcp
+@open-evals/mcp:build: > tsc -p tsconfig.json --noEmit
+@open-evals/mcp:build: 
+@open-evals/db:build: src/eval-composition.ts(213,136): error TS2322: Type 'EvalCompositionItemRecord[] | undefined' is not assignable to type 'unknown[]'.
+@open-evals/db:build:   Type 'undefined' is not assignable to type 'unknown[]'.
+@open-evals/sdk:build: 
+@open-evals/sdk:build: > @open-evals/sdk@0.1.0 build /home/runner/work/open-evals/open-evals/packages/sdk
+@open-evals/sdk:build: > tsc -p tsconfig.json --noEmit
+@open-evals/sdk:build: 
+@open-evals/statistics:build: 
+@open-evals/statistics:build: > @open-evals/statistics@0.1.0 build /home/runner/work/open-evals/open-evals/packages/statistics
+@open-evals/statistics:build: > tsc -p tsconfig.json --noEmit
+@open-evals/statistics:build: 
+@open-evals/test-fixtures:build: 
+@open-evals/test-fixtures:build: > @open-evals/test-fixtures@0.1.0 build /home/runner/work/open-evals/open-evals/packages/test-fixtures
+@open-evals/test-fixtures:build: > tsc -p tsconfig.json --noEmit
+@open-evals/test-fixtures:build: 
+@open-evals/adapters:build: 
+@open-evals/adapters:build: > @open-evals/adapters@0.1.0 build /home/runner/work/open-evals/open-evals/packages/adapters
+@open-evals/adapters:build: > tsc -p tsconfig.json --noEmit
+@open-evals/adapters:build: 
+@open-evals/db:build:  ELIFECYCLE  Command failed with exit code 2.
+
+ Tasks:    1 successful, 8 total
+Cached:    0 cached, 8 total
+  Time:    5.4s 
+Failed:    @open-evals/db#build
+
+ ELIFECYCLE  Command failed with exit code 2.

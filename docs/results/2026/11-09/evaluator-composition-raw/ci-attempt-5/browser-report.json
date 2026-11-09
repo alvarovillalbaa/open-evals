@@ -1,0 +1,267 @@
+{
+  "config": {
+    "argv": [
+      "/opt/hostedtoolcache/node/24.22.2/x64/bin/node",
+      "/home/runner/work/open-evals/open-evals/node_modules/.pnpm/@playwright+test@1.61.1/node_modules/@playwright/test/cli.js",
+      "test",
+      "--config",
+      "tests/e2e/eval-composition.browser.config.ts"
+    ],
+    "configFile": "/home/runner/work/open-evals/open-evals/tests/e2e/eval-composition.browser.config.ts",
+    "rootDir": "/home/runner/work/open-evals/open-evals/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": true,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/home/runner/work/_temp/open-evals-composition-v2-evidence/browser-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium-owned-production-authored-transport",
+        "name": "chromium-owned-production-authored-transport",
+        "testDir": "/home/runner/work/open-evals/open-evals/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "eval-composition.browser.spec.ts"
+        ],
+        "timeout": 120000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/home/runner/work/_temp/open-evals-composition-v2-evidence/browser-report.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "eval-composition.browser.spec.ts",
+      "file": "eval-composition.browser.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "CP-BR01 UI reusable items and overlapping sets execute two authored transport calls with six results, critical scopes and no replay dispatch",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-owned-production-authored-transport",
+              "projectName": "chromium-owned-production-authored-transport",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7320,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T23:18:24.925Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "owned-composition-cleanup",
+                      "contentType": "application/json",
+                      "body": "eyJzY2hlbWFWZXJzaW9uIjoiZXZhbC1jb21wb3NpdGlvbi1icm93c2VyLWNsZWFudXAtdjEiLCJzdGF0dXMiOiJyZW1vdmVkIiwid29ya3NwYWNlQ291bnQiOjEsImFjdG9yQ291bnQiOjEsIm93bmVyc2hpcFZhbGlkYXRlZCI6dHJ1ZSwiYmVmb3JlIjp7ImRhdGFzZXRzIjoxLCJyb3dzIjoyLCJldmFsSXRlbXMiOjMsIml0ZW1WZXJzaW9ucyI6MywiZXZhbFNldHMiOjIsInNldFZlcnNpb25zIjoyLCJtZW1iZXJzaGlwcyI6NCwicGxhbnMiOjEsInJ1bnMiOjEsInNhbXBsZXMiOjIsInJlc3VsdHMiOjYsImdhdGVzIjoyMCwid29ya2Zsb3dzIjoxLCJldmVudHMiOjUsImF1ZGl0cyI6OCwicHJvamVjdHMiOjEsImJlbmNobWFya3MiOjB9LCJhZnRlciI6eyJkYXRhc2V0cyI6MCwicm93cyI6MCwiZXZhbEl0ZW1zIjowLCJpdGVtVmVyc2lvbnMiOjAsImV2YWxTZXRzIjowLCJzZXRWZXJzaW9ucyI6MCwibWVtYmVyc2hpcHMiOjAsInBsYW5zIjowLCJydW5zIjowLCJzYW1wbGVzIjowLCJyZXN1bHRzIjowLCJnYXRlcyI6MCwid29ya2Zsb3dzIjowLCJldmVudHMiOjAsImF1ZGl0cyI6MCwicHJvamVjdHMiOjAsImJlbmNobWFya3MiOjB9LCJ6ZXJvQ291bnRzQ29uZmlybWVkIjp0cnVlLCJub3JtYWxGaXh0dXJlQm91bmRzUmVzcGVjdGVkIjp0cnVlLCJkaWFnbm9zdGljRmFpbHVyZURlZmVycmVkIjpmYWxzZSwiZGlzcGF0Y2hDbGFpbXMiOjIsInRyYW5zcG9ydENhbGxzIjoyLCJjbGFpbXNNYXRjaFRyYW5zcG9ydCI6dHJ1ZSwid29ya3NwYWNlQWJzZW50Ijp0cnVlLCJhY3RvcnNBYnNlbnQiOnRydWUsInByb2R1Y3Rpb25Sb3V0ZUV4ZWN1dGlvbldpdGhBdXRob3JlZFRyYW5zcG9ydENoZWNrZWQiOnRydWUsIm5hdGl2ZUh0dHBFeGVjdXRpb25DaGVja2VkIjpmYWxzZSwibmF0aXZlRG5zU29ja2V0VGxzQ2hlY2tlZCI6ZmFsc2UsImFjdHVhbEV4dGVybmFsVGFyZ2V0Q2FsbHMiOjB9"
+                    },
+                    {
+                      "name": "owned-composition-transport",
+                      "contentType": "application/json",
+                      "body": "eyJzY2hlbWFWZXJzaW9uIjoiZXZhbC1jb21wb3NpdGlvbi1icm93c2VyLXRyYW5zcG9ydC12MSIsInN0YXR1cyI6Im1hdGNoZWQiLCJ3b3Jrc3BhY2VJZCI6IjE4NjcwNGYzLWQ0MDctNGMwMS1iMzFhLTlmODU0NTY1NDM4NCIsIm93bk9ic2VydmF0aW9uQ291bnQiOjIsIm93bkNsYWltQ291bnQiOjIsImNsYWltS2V5c01hdGNoIjp0cnVlLCJhZ2dyZWdhdGVBY3Jvc3NQcmVsb2FkSW5zdGFuY2VzIjp0cnVlLCJjb3VudGVyU2NvcGUiOiJwcm9jZXNzLWxvY2FsIiwiYWdncmVnYXRlRG5zT2JzZXJ2YXRpb25zIjoyLCJhZ2dyZWdhdGVSZXF1ZXN0T2JzZXJ2YXRpb25zIjoyLCJhZ2dyZWdhdGVVbmV4cGVjdGVkT2JzZXJ2YXRpb25zIjowLCJuYXRpdmVEbnNTb2NrZXRUbHNDaGVja2VkIjpmYWxzZSwiYWN0dWFsRXh0ZXJuYWxUYXJnZXRDYWxscyI6MH0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "38ac30226f4f8c583b68-ab045ef657bfd97af199",
+          "file": "eval-composition.browser.spec.ts",
+          "line": 47,
+          "column": 1
+        },
+        {
+          "title": "CP-BR02 narrow exact history retains two versions of one item and ordered membership after a new set version",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-owned-production-authored-transport",
+              "projectName": "chromium-owned-production-authored-transport",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4140,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T23:18:32.439Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "owned-composition-cleanup",
+                      "contentType": "application/json",
+                      "body": "eyJzY2hlbWFWZXJzaW9uIjoiZXZhbC1jb21wb3NpdGlvbi1icm93c2VyLWNsZWFudXAtdjEiLCJzdGF0dXMiOiJyZW1vdmVkIiwid29ya3NwYWNlQ291bnQiOjEsImFjdG9yQ291bnQiOjEsIm93bmVyc2hpcFZhbGlkYXRlZCI6dHJ1ZSwiYmVmb3JlIjp7ImRhdGFzZXRzIjoxLCJyb3dzIjoyLCJldmFsSXRlbXMiOjMsIml0ZW1WZXJzaW9ucyI6NCwiZXZhbFNldHMiOjIsInNldFZlcnNpb25zIjozLCJtZW1iZXJzaGlwcyI6NywicGxhbnMiOjEsInJ1bnMiOjAsInNhbXBsZXMiOjAsInJlc3VsdHMiOjAsImdhdGVzIjowLCJ3b3JrZmxvd3MiOjAsImV2ZW50cyI6MCwiYXVkaXRzIjo4LCJwcm9qZWN0cyI6MSwiYmVuY2htYXJrcyI6MH0sImFmdGVyIjp7ImRhdGFzZXRzIjowLCJyb3dzIjowLCJldmFsSXRlbXMiOjAsIml0ZW1WZXJzaW9ucyI6MCwiZXZhbFNldHMiOjAsInNldFZlcnNpb25zIjowLCJtZW1iZXJzaGlwcyI6MCwicGxhbnMiOjAsInJ1bnMiOjAsInNhbXBsZXMiOjAsInJlc3VsdHMiOjAsImdhdGVzIjowLCJ3b3JrZmxvd3MiOjAsImV2ZW50cyI6MCwiYXVkaXRzIjowLCJwcm9qZWN0cyI6MCwiYmVuY2htYXJrcyI6MH0sInplcm9Db3VudHNDb25maXJtZWQiOnRydWUsIm5vcm1hbEZpeHR1cmVCb3VuZHNSZXNwZWN0ZWQiOnRydWUsImRpYWdub3N0aWNGYWlsdXJlRGVmZXJyZWQiOmZhbHNlLCJkaXNwYXRjaENsYWltcyI6MCwidHJhbnNwb3J0Q2FsbHMiOjAsImNsYWltc01hdGNoVHJhbnNwb3J0Ijp0cnVlLCJ3b3Jrc3BhY2VBYnNlbnQiOnRydWUsImFjdG9yc0Fic2VudCI6dHJ1ZSwicHJvZHVjdGlvblJvdXRlRXhlY3V0aW9uV2l0aEF1dGhvcmVkVHJhbnNwb3J0Q2hlY2tlZCI6ZmFsc2UsIm5hdGl2ZUh0dHBFeGVjdXRpb25DaGVja2VkIjpmYWxzZSwibmF0aXZlRG5zU29ja2V0VGxzQ2hlY2tlZCI6ZmFsc2UsImFjdHVhbEV4dGVybmFsVGFyZ2V0Q2FsbHMiOjB9"
+                    },
+                    {
+                      "name": "owned-composition-transport",
+                      "contentType": "application/json",
+                      "body": "eyJzY2hlbWFWZXJzaW9uIjoiZXZhbC1jb21wb3NpdGlvbi1icm93c2VyLXRyYW5zcG9ydC12MSIsInN0YXR1cyI6Im1hdGNoZWQiLCJ3b3Jrc3BhY2VJZCI6ImI0NTBkNGExLWQyOGYtNDY1Mi1hMDk1LTc5MTlkY2FhMmQ1NSIsIm93bk9ic2VydmF0aW9uQ291bnQiOjAsIm93bkNsYWltQ291bnQiOjAsImNsYWltS2V5c01hdGNoIjp0cnVlLCJhZ2dyZWdhdGVBY3Jvc3NQcmVsb2FkSW5zdGFuY2VzIjp0cnVlLCJjb3VudGVyU2NvcGUiOiJwcm9jZXNzLWxvY2FsIiwiYWdncmVnYXRlRG5zT2JzZXJ2YXRpb25zIjoyLCJhZ2dyZWdhdGVSZXF1ZXN0T2JzZXJ2YXRpb25zIjoyLCJhZ2dyZWdhdGVVbmV4cGVjdGVkT2JzZXJ2YXRpb25zIjowLCJuYXRpdmVEbnNTb2NrZXRUbHNDaGVja2VkIjpmYWxzZSwiYWN0dWFsRXh0ZXJuYWxUYXJnZXRDYWxscyI6MH0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "38ac30226f4f8c583b68-d374e3f765cb78c8f3ce",
+          "file": "eval-composition.browser.spec.ts",
+          "line": 114,
+          "column": 1
+        },
+        {
+          "title": "CP-BR03 actual item CAS requires visible head review and a committed set retry replays before a later head",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-owned-production-authored-transport",
+              "projectName": "chromium-owned-production-authored-transport",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1700,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T23:18:36.592Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "owned-composition-cleanup",
+                      "contentType": "application/json",
+                      "body": "eyJzY2hlbWFWZXJzaW9uIjoiZXZhbC1jb21wb3NpdGlvbi1icm93c2VyLWNsZWFudXAtdjEiLCJzdGF0dXMiOiJyZW1vdmVkIiwid29ya3NwYWNlQ291bnQiOjEsImFjdG9yQ291bnQiOjEsIm93bmVyc2hpcFZhbGlkYXRlZCI6dHJ1ZSwiYmVmb3JlIjp7ImRhdGFzZXRzIjowLCJyb3dzIjowLCJldmFsSXRlbXMiOjEsIml0ZW1WZXJzaW9ucyI6MywiZXZhbFNldHMiOjEsInNldFZlcnNpb25zIjoyLCJtZW1iZXJzaGlwcyI6MiwicGxhbnMiOjAsInJ1bnMiOjAsInNhbXBsZXMiOjAsInJlc3VsdHMiOjAsImdhdGVzIjowLCJ3b3JrZmxvd3MiOjAsImV2ZW50cyI6MCwiYXVkaXRzIjo1LCJwcm9qZWN0cyI6MSwiYmVuY2htYXJrcyI6MH0sImFmdGVyIjp7ImRhdGFzZXRzIjowLCJyb3dzIjowLCJldmFsSXRlbXMiOjAsIml0ZW1WZXJzaW9ucyI6MCwiZXZhbFNldHMiOjAsInNldFZlcnNpb25zIjowLCJtZW1iZXJzaGlwcyI6MCwicGxhbnMiOjAsInJ1bnMiOjAsInNhbXBsZXMiOjAsInJlc3VsdHMiOjAsImdhdGVzIjowLCJ3b3JrZmxvd3MiOjAsImV2ZW50cyI6MCwiYXVkaXRzIjowLCJwcm9qZWN0cyI6MCwiYmVuY2htYXJrcyI6MH0sInplcm9Db3VudHNDb25maXJtZWQiOnRydWUsIm5vcm1hbEZpeHR1cmVCb3VuZHNSZXNwZWN0ZWQiOnRydWUsImRpYWdub3N0aWNGYWlsdXJlRGVmZXJyZWQiOmZhbHNlLCJkaXNwYXRjaENsYWltcyI6MCwidHJhbnNwb3J0Q2FsbHMiOjAsImNsYWltc01hdGNoVHJhbnNwb3J0Ijp0cnVlLCJ3b3Jrc3BhY2VBYnNlbnQiOnRydWUsImFjdG9yc0Fic2VudCI6dHJ1ZSwicHJvZHVjdGlvblJvdXRlRXhlY3V0aW9uV2l0aEF1dGhvcmVkVHJhbnNwb3J0Q2hlY2tlZCI6ZmFsc2UsIm5hdGl2ZUh0dHBFeGVjdXRpb25DaGVja2VkIjpmYWxzZSwibmF0aXZlRG5zU29ja2V0VGxzQ2hlY2tlZCI6ZmFsc2UsImFjdHVhbEV4dGVybmFsVGFyZ2V0Q2FsbHMiOjB9"
+                    },
+                    {
+                      "name": "owned-composition-transport",
+                      "contentType": "application/json",
+                      "body": "eyJzY2hlbWFWZXJzaW9uIjoiZXZhbC1jb21wb3NpdGlvbi1icm93c2VyLXRyYW5zcG9ydC12MSIsInN0YXR1cyI6Im1hdGNoZWQiLCJ3b3Jrc3BhY2VJZCI6ImNiNGZmM2Y0LTQ2YmQtNDc1Zi1hOTMwLWM2YTgyZWE2NWZjNiIsIm93bk9ic2VydmF0aW9uQ291bnQiOjAsIm93bkNsYWltQ291bnQiOjAsImNsYWltS2V5c01hdGNoIjp0cnVlLCJhZ2dyZWdhdGVBY3Jvc3NQcmVsb2FkSW5zdGFuY2VzIjp0cnVlLCJjb3VudGVyU2NvcGUiOiJwcm9jZXNzLWxvY2FsIiwiYWdncmVnYXRlRG5zT2JzZXJ2YXRpb25zIjoyLCJhZ2dyZWdhdGVSZXF1ZXN0T2JzZXJ2YXRpb25zIjoyLCJhZ2dyZWdhdGVVbmV4cGVjdGVkT2JzZXJ2YXRpb25zIjowLCJuYXRpdmVEbnNTb2NrZXRUbHNDaGVja2VkIjpmYWxzZSwiYWN0dWFsRXh0ZXJuYWxUYXJnZXRDYWxscyI6MH0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "38ac30226f4f8c583b68-db2c79e7c41f5a65e203",
+          "file": "eval-composition.browser.spec.ts",
+          "line": 145,
+          "column": 1
+        },
+        {
+          "title": "CP-BR04 real viewer, key and foreign workspace boundaries reject writes before malformed bodies and preserve scoped metadata",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-owned-production-authored-transport",
+              "projectName": "chromium-owned-production-authored-transport",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 932,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T23:18:38.303Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "owned-composition-cleanup",
+                      "contentType": "application/json",
+                      "body": "eyJzY2hlbWFWZXJzaW9uIjoiZXZhbC1jb21wb3NpdGlvbi1icm93c2VyLWNsZWFudXAtdjEiLCJzdGF0dXMiOiJyZW1vdmVkIiwid29ya3NwYWNlQ291bnQiOjIsImFjdG9yQ291bnQiOjMsIm93bmVyc2hpcFZhbGlkYXRlZCI6dHJ1ZSwiYmVmb3JlIjp7ImRhdGFzZXRzIjoxLCJyb3dzIjoyLCJldmFsSXRlbXMiOjEsIml0ZW1WZXJzaW9ucyI6MSwiZXZhbFNldHMiOjEsInNldFZlcnNpb25zIjoxLCJtZW1iZXJzaGlwcyI6MSwicGxhbnMiOjEsInJ1bnMiOjAsInNhbXBsZXMiOjAsInJlc3VsdHMiOjAsImdhdGVzIjowLCJ3b3JrZmxvd3MiOjAsImV2ZW50cyI6MCwiYXVkaXRzIjo0LCJwcm9qZWN0cyI6MSwiYmVuY2htYXJrcyI6MH0sImFmdGVyIjp7ImRhdGFzZXRzIjowLCJyb3dzIjowLCJldmFsSXRlbXMiOjAsIml0ZW1WZXJzaW9ucyI6MCwiZXZhbFNldHMiOjAsInNldFZlcnNpb25zIjowLCJtZW1iZXJzaGlwcyI6MCwicGxhbnMiOjAsInJ1bnMiOjAsInNhbXBsZXMiOjAsInJlc3VsdHMiOjAsImdhdGVzIjowLCJ3b3JrZmxvd3MiOjAsImV2ZW50cyI6MCwiYXVkaXRzIjowLCJwcm9qZWN0cyI6MCwiYmVuY2htYXJrcyI6MH0sInplcm9Db3VudHNDb25maXJtZWQiOnRydWUsIm5vcm1hbEZpeHR1cmVCb3VuZHNSZXNwZWN0ZWQiOnRydWUsImRpYWdub3N0aWNGYWlsdXJlRGVmZXJyZWQiOmZhbHNlLCJkaXNwYXRjaENsYWltcyI6MCwidHJhbnNwb3J0Q2FsbHMiOjAsImNsYWltc01hdGNoVHJhbnNwb3J0Ijp0cnVlLCJ3b3Jrc3BhY2VBYnNlbnQiOnRydWUsImFjdG9yc0Fic2VudCI6dHJ1ZSwicHJvZHVjdGlvblJvdXRlRXhlY3V0aW9uV2l0aEF1dGhvcmVkVHJhbnNwb3J0Q2hlY2tlZCI6ZmFsc2UsIm5hdGl2ZUh0dHBFeGVjdXRpb25DaGVja2VkIjpmYWxzZSwibmF0aXZlRG5zU29ja2V0VGxzQ2hlY2tlZCI6ZmFsc2UsImFjdHVhbEV4dGVybmFsVGFyZ2V0Q2FsbHMiOjB9"
+                    },
+                    {
+                      "name": "owned-composition-transport",
+                      "contentType": "application/json",
+                      "body": "eyJzY2hlbWFWZXJzaW9uIjoiZXZhbC1jb21wb3NpdGlvbi1icm93c2VyLXRyYW5zcG9ydC12MSIsInN0YXR1cyI6Im1hdGNoZWQiLCJ3b3Jrc3BhY2VJZCI6ImQzZmI1NzIyLTdmNTYtNGQyMi05NzdjLWE3M2ZjZGIxY2FkYyIsIm93bk9ic2VydmF0aW9uQ291bnQiOjAsIm93bkNsYWltQ291bnQiOjAsImNsYWltS2V5c01hdGNoIjp0cnVlLCJhZ2dyZWdhdGVBY3Jvc3NQcmVsb2FkSW5zdGFuY2VzIjp0cnVlLCJjb3VudGVyU2NvcGUiOiJwcm9jZXNzLWxvY2FsIiwiYWdncmVnYXRlRG5zT2JzZXJ2YXRpb25zIjoyLCJhZ2dyZWdhdGVSZXF1ZXN0T2JzZXJ2YXRpb25zIjoyLCJhZ2dyZWdhdGVVbmV4cGVjdGVkT2JzZXJ2YXRpb25zIjowLCJuYXRpdmVEbnNTb2NrZXRUbHNDaGVja2VkIjpmYWxzZSwiYWN0dWFsRXh0ZXJuYWxUYXJnZXRDYWxscyI6MH0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "38ac30226f4f8c583b68-70d690795ccc236f6875",
+          "file": "eval-composition.browser.spec.ts",
+          "line": 180,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-09T23:18:24.203Z",
+    "duration": 15112.697,
+    "expected": 4,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

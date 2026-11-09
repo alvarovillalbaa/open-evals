@@ -1,0 +1,62 @@
+[
+  {
+    "file": "source.json",
+    "bytes": 30312,
+    "sha256": "635281f078498ec4cd7a7c7a7fa5d834768e580b088c952efc82430264879add"
+  },
+  {
+    "file": "core-cases.stdout.txt",
+    "bytes": 20348,
+    "sha256": "8a5e43688a035522e12ba1a2a4654e8a746a4913d0dd1efe6e0d11a77d0ef62f"
+  },
+  {
+    "file": "core-cases.stderr.txt",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "file": "web-cases.stdout.txt",
+    "bytes": 7088,
+    "sha256": "09922356a735852513c08bd05aba4a3dafc7cef6f553ce8cc9f2d3b2dcdb2d48"
+  },
+  {
+    "file": "web-cases.stderr.txt",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "file": "composition-postgres-cases.stdout.txt",
+    "bytes": 10603,
+    "sha256": "798fe1a19c217f63facf98f8cd5748fe70f87d7d21a8d678f5933a483c0040fe"
+  },
+  {
+    "file": "composition-postgres-cases.stderr.txt",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "file": "fixture-final-absence.json",
+    "bytes": 714,
+    "sha256": "76e85a37ec801d94f7ce766cf59b8d2abcab9fd5ac298076fbc92bfa4bc090a1"
+  },
+  {
+    "file": "source-final.json",
+    "bytes": 25535,
+    "sha256": "5464dff2e2787a6b0b4e1cc0aba0a4744070658738fc4935c2baa30fdd9e7e5f"
+  },
+  {
+    "file": "unprotected-tracked-delta.json",
+    "bytes": 3812,
+    "sha256": "0912deb91c5274d0197b6270955234832ee9954157d0055f37cceb8c3cbd2cd3"
+  },
+  {
+    "file": "cleanup.json",
+    "bytes": 660,
+    "sha256": "528b94ddc2a9cd05f465692027126d95454a121c8b5508981b31e2b2a313fe69"
+  },
+  {
+    "file": "receipt.json",
+    "bytes": 4404,
+    "sha256": "5e49e2b526a50c34639e99dc2453bdda7556680e96adef03b531c30ffc6c4352"
+  }
+]

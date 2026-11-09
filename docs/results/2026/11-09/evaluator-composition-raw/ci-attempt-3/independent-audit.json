@@ -1,0 +1,96 @@
+{
+  "schemaVersion": "eval-composition-ci3-independent-audit-v1",
+  "reviewer": "dataset_contract",
+  "status": "failed-web-build-preserved-and-independently-verified",
+  "source": "cdfd35b8076be3e75959a7a8d5f33f0ce3cfd341",
+  "tree": "c75bebdda09abce560cc6b2f96ce6f7a27a0bf0e",
+  "runId": "42716305159",
+  "jobId": "129498611523",
+  "log": {
+    "bytes": 335242,
+    "sha256": "7696e684e17cbb1cb0be2c5336572f813b2682ff0254a80aaf6fbf4063a090a7",
+    "timestampStrippedBytes": 280780,
+    "timestampStrippedSha256": "91bcb16845b145542574beaeedbc9940f3f47b6c75cd47838c1b18d16b8a987c"
+  },
+  "reconstruction": {
+    "directory": "ci-run-3/independent-reconstruction",
+    "selectedOriginals": 13,
+    "decodedBytes": 102163,
+    "allOffsetsSizesSha256Verified": true,
+    "allEqualSeparateRootDecodedOriginals": true,
+    "commandMetadataFrames": 32,
+    "allCommandSourceStreamsComplete": true,
+    "diagnosticTailRanges": 1,
+    "diagnosticFullStreams": 1,
+    "diagnosticProvenance": "diagnostics/provenance.json",
+    "artifactZipRetrieved": false
+  },
+  "results": {
+    "core": {
+      "tests": 76,
+      "pass": 76,
+      "fail": 0,
+      "skip": 0
+    },
+    "web": {
+      "tests": 24,
+      "pass": 24,
+      "fail": 0,
+      "skip": 0
+    },
+    "sql": {
+      "tests": 24,
+      "pass": 24,
+      "fail": 0,
+      "skip": 0
+    },
+    "build": {
+      "started": true,
+      "commandExit": 1,
+      "terminationReason": null,
+      "reportedPackagesSuccessful": 9,
+      "reportedPackagesTotal": 10,
+      "webTurbopackCompiledSeconds": 9.8,
+      "firstObservedDiagnostic": {
+        "file": "apps/web/lib/http-target-plans.ts",
+        "line": 130,
+        "column": 23,
+        "function": "readHttpTargetPlanList",
+        "message": "The inferred type cannot be named without a reference to the linked database source type. A type annotation is necessary."
+      }
+    },
+    "browser": {
+      "started": false
+    },
+    "application": {
+      "started": false
+    },
+    "overall": "failed"
+  },
+  "sourceIntegrity": {
+    "protectedFilesBeforeAfterEqual": 144,
+    "expectedSourcesMatchFinalCiBindingsV4": 143,
+    "directParent": "894025656a7d264b3b2d573c90e67c40aba57fcf",
+    "parentTree": "9794779b04cae8a9a8490e8854d71dd0f25293ce",
+    "workflow": {
+      "bytes": 103616,
+      "sha256": "14bdb0d2da8d502c934cd4bd35a266dff33f6d768190757f965e537296f3a61b"
+    }
+  },
+  "cleanup": {
+    "postSqlNativeTablesZero": 26,
+    "finalOwnedTablesZero": 26,
+    "databaseAbsent": true,
+    "validatedOwner": "postgres",
+    "validatedMarker": "open-evals-composition-v2-20261109-created-disposable-v1",
+    "clusterStopped": true,
+    "clusterAbsent": true,
+    "receiptCleanupEqualsSeparateOriginal": true
+  },
+  "proofLimits": [
+    "Existing raw-log decoding and static data/source audit only by this peer; no new app, tests, compiler, build, SQL, browser, provider or Git mutations.",
+    "All124 core/Web/SQL cases passed on this exact source. Repeated attempts are not additional distinct checks.",
+    "Only stdout tail4096of6730bytes is available, while stderr1604bytes is complete; source EOF and complete-source SHA are metadata for stdout. Neither captured range is mislabelled as a complete stdout original.",
+    "The build failed after reporting9of10packages successful and Web bundle compilation; semantic Web type checking did not pass. Browser/app never started. No artifact archive, native target, hosted auth/RLS or production acceptance is inferred."
+  ]
+}

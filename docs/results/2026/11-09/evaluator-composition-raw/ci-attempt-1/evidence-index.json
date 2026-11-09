@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "eval-composition-ci-evidence-index-v1",
+  "status": "failed-run-staged-private-for-release-review",
+  "intendedCanonicalDirectory": "docs/results/2026/11-09/evaluator-composition.raw/ci-attempt-1",
+  "source": "1286157be31048ad93e3e0ea531ecdc9837fd8a2",
+  "tree": "511e7b399e1dfdda75a7d01a51f4d89c3bab09d8",
+  "runId": "42714189619",
+  "jobId": "129491306429",
+  "jobIdBinding": "Recorded caller metadata; the selected log frames independently bind source and run, not the job ID.",
+  "selectedOriginals": {
+    "count": 12,
+    "bytes": 103476,
+    "manifest": "decoded-index.json",
+    "handling": "Exact complete selected base64-decoded originals, preserving their existing filenames and bytes. Root and independent strict decoder copies agree."
+  },
+  "metadata": {
+    "independentAudit": "independent-audit.json",
+    "strictReconstructionIndex": "decoded-originals.json",
+    "commandMetadata": "command-metadata.json",
+    "handling": "These four existing metadata records, including decoded-index.json, are copied byte-for-byte. Their private historical relative locators are provenance, not public download links."
+  },
+  "results": {
+    "overall": "failed",
+    "core": { "tests": 76, "pass": 76, "fail": 0 },
+    "web": { "tests": 24, "pass": 24, "fail": 0 },
+    "sql": {
+      "tests": 24,
+      "pass": 20,
+      "fail": 4,
+      "failedIds": ["CP-PG04", "CP-PG06", "CP-PG07", "CP-PG08"],
+      "observedFailure": "Undefined version-count fields; the test helper used unquoted camelCase SELECT aliases. This run remains failed."
+    },
+    "buildStarted": false,
+    "browserStarted": false,
+    "applicationStarted": false
+  },
+  "cleanup": {
+    "finalTablesZero": 26,
+    "databaseAbsent": true,
+    "clusterStopped": true,
+    "clusterAbsent": true,
+    "records": ["fixture-final-absence.json", "cleanup.json", "receipt.json"]
+  },
+  "privacy": {
+    "localUserOrPrivatePathMatches": 0,
+    "credentialMarkerMatches": 0,
+    "normalizedFiles": 0,
+    "publicRunnerPathOccurrences": 9,
+    "note": "Ephemeral /home/runner paths in the failed SQL stdout are retained as original public-CI diagnostics. No local /Users, package-manager, private-temp path or credential marker was found."
+  },
+  "proofLimits": [
+    "The76 core cases repeat the previously passed local packet and remain76 distinct cases; attempts are not additive.",
+    "Selected stream bytes and their EOF completeness are bound independently. Other command/server stream hashes are metadata only.",
+    "Build, browser, application and authored target preload did not start in this attempt.",
+    "No full job log, historical source tree, dependency folder or artifact ZIP is included. Artifact ZIP retrieval remains false.",
+    "No native DNS/socket/TLS, actual external target/model call, hosted Auth/RLS, production page, screenshot archive or physical-device acceptance is established."
+  ],
+  "exportManifest": "export-manifest.json"
+}

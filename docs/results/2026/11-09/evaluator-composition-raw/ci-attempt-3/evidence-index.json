@@ -1,0 +1,103 @@
+{
+  "schemaVersion": "eval-composition-ci-evidence-index-v1",
+  "status": "failed-web-build-staged-private-for-release-review",
+  "intendedCanonicalDirectory": "docs/results/2026/11-09/evaluator-composition.raw/ci-attempt-3",
+  "source": "cdfd35b8076be3e75959a7a8d5f33f0ce3cfd341",
+  "tree": "c75bebdda09abce560cc6b2f96ce6f7a27a0bf0e",
+  "runId": "42716305159",
+  "jobId": "129498611523",
+  "jobIdBinding": "Recorded caller metadata; selected frames bind source/run, not the job ID.",
+  "selectedOriginals": {
+    "count": 13,
+    "bytes": 102163,
+    "manifest": "decoded-originals.json",
+    "handling": "Exact complete selected ORIGINAL_CHUNK files. Root and independent decoder byte copies agree."
+  },
+  "metadata": {
+    "independentAudit": "independent-audit.json",
+    "strictReconstructionIndex": "decoded-originals.json",
+    "commandMetadata": "command-metadata.json",
+    "diagnosticFrames": "diagnostic-ranges.json",
+    "handling": "Five existing metadata files are exact copies. Historical relative locators are provenance, not public download links."
+  },
+  "buildDiagnostics": {
+    "provenance": "diagnostics/provenance.json",
+    "stdout": {
+      "file": "diagnostics/build-candidate.stdout.tail-range.txt",
+      "kind": "tail",
+      "bytes": 4096,
+      "offset": 2634,
+      "sourceBytes": 6730,
+      "sha256": "baabb30c72e26e7ad1d805bead74fc4448eff0253ba5bc8fe5a5a0954b6c4c4a",
+      "fullSourceSha256": "64068658d7672d0c218dff5a43c7f8b29cae67c6f691664d4359c8f53f6c8ea2",
+      "sourceStreamCompleteMetadata": true,
+      "completeStdoutRetrieved": false
+    },
+    "stderr": {
+      "file": "diagnostics/build-candidate.stderr.full-range.txt",
+      "kind": "full",
+      "bytes": 1604,
+      "offset": 0,
+      "sourceBytes": 1604,
+      "sha256": "4b38f7104326f935e35e6e352b6010a711f4d4e644a9b1df8ff42e193b00a44b",
+      "completeStderrRetrieved": true
+    },
+    "handling": "Range hashes and offsets are verified against structured commandDiagnostic metadata. Stdout complete-source SHA is metadata only; its2634-byte prefix was not retrieved. Stderr bytes recompute the complete source SHA. Neither range is counted among13 selected originals."
+  },
+  "results": {
+    "overall": "failed",
+    "core": {
+      "tests": 76,
+      "pass": 76,
+      "fail": 0
+    },
+    "web": {
+      "tests": 24,
+      "pass": 24,
+      "fail": 0
+    },
+    "sql": {
+      "tests": 24,
+      "pass": 24,
+      "fail": 0
+    },
+    "build": {
+      "started": true,
+      "commandExit": 1,
+      "reportedSuccessfulPackages": 9,
+      "reportedTotalPackages": 10,
+      "webTurbopackCompiledSeconds": 9.8,
+      "firstObservedDiagnostic": "apps/web/lib/http-target-plans.ts:130:23 readHttpTargetPlanList inferred return type is not portable; explicit annotation required."
+    },
+    "browserStarted": false,
+    "applicationStarted": false
+  },
+  "cleanup": {
+    "postSqlTablesZero": 26,
+    "finalTablesZero": 26,
+    "databaseAbsent": true,
+    "clusterStopped": true,
+    "clusterAbsent": true,
+    "records": [
+      "postgres-fixture-absence.json",
+      "fixture-final-absence.json",
+      "cleanup.json",
+      "receipt.json"
+    ]
+  },
+  "privacy": {
+    "localUserOrPrivatePathMatches": 0,
+    "credentialMarkerMatches": 0,
+    "normalizedFiles": 0,
+    "publicRunnerPathOccurrences": 6,
+    "note": "Ephemeral public-CI runner paths remain unchanged; decoded diagnostics were checked as well."
+  },
+  "proofLimits": [
+    "124 core/Web/SQL cases passed on this exact source; repeated attempts do not increase128 distinct planned checks.",
+    "Web bundle compilation completed, but semantic type checking and the complete release build failed. Browser/application/preload never started.",
+    "Stdout is only an explicitly labelled4096-byte tail. Other command/server log hashes remain metadata unless complete bytes are separately included.",
+    "No whole job log, source trees, dependencies, archive ZIP or screenshot/trace archive is included or claimed retrieved.",
+    "No native DNS/socket/TLS, real external target/model/provider, hosted Auth/RLS, production page or physical-device acceptance is established."
+  ],
+  "exportManifest": "export-manifest.json"
+}

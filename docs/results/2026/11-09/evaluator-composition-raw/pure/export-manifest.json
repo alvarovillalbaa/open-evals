@@ -1,0 +1,131 @@
+{
+  "schemaVersion": "eval-composition-pure-export-manifest-v1",
+  "scope": "All staged export files except this manifest itself. This file is derived metadata, not an original test receipt.",
+  "boundFileCount": 23,
+  "boundBytes": 126789,
+  "files": [
+    {
+      "path": "evidence-index.json",
+      "bytes": 5173,
+      "sha256": "8af030222efc8f7bcf9b5828dfb06ac7cd69699234e83b9d9911cfc2e6d99e87"
+    },
+    {
+      "path": "peers/core-source-peer.json",
+      "bytes": 4269,
+      "sha256": "b05636ca61074018ee9df876d14ae8d148c773f78cc51afbad3baf83528ed5f5"
+    },
+    {
+      "path": "provenance.json",
+      "bytes": 6700,
+      "sha256": "2bc122be968817ba7b3494da446b9b3178c8efd6bbd98e345293f5bfaeef516f"
+    },
+    {
+      "path": "pure-checks-1/pure.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "pure-checks-1/pure.stdout.txt",
+      "bytes": 19848,
+      "sha256": "f8f82377b792f519fd7514b1d324a4b236907280cf73684325c1089276ea6203"
+    },
+    {
+      "path": "pure-checks-1/receipt-projection.json",
+      "bytes": 10176,
+      "sha256": "ba79b4e47211235f68b93ae551a72d2488d809a5c280276039c4e27785d0c393"
+    },
+    {
+      "path": "pure-checks-1/source-final.json",
+      "bytes": 2586,
+      "sha256": "45d0d7e752df5e31b666591355cd58f7b1180338c5dea1a473570bc49280114e"
+    },
+    {
+      "path": "pure-checks-1/source.json",
+      "bytes": 2586,
+      "sha256": "45d0d7e752df5e31b666591355cd58f7b1180338c5dea1a473570bc49280114e"
+    },
+    {
+      "path": "pure-checks-2/pure.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "pure-checks-2/pure.stdout.txt",
+      "bytes": 20333,
+      "sha256": "6a7198d1853799455a1d0cfa20979437cb2c787c6dc393787fa6b048f0bfd44b"
+    },
+    {
+      "path": "pure-checks-2/receipt-projection.json",
+      "bytes": 10387,
+      "sha256": "44f95d03bf5f3178a3e7197356ed84e2dcb5769117c140a95cf36ec970b8311c"
+    },
+    {
+      "path": "pure-checks-2/source-final.json",
+      "bytes": 2586,
+      "sha256": "1a069cc7d36bbd590c78947c9cbe572d6f51c9673017a8e1585f30024b06acbf"
+    },
+    {
+      "path": "pure-checks-2/source.json",
+      "bytes": 2586,
+      "sha256": "1a069cc7d36bbd590c78947c9cbe572d6f51c9673017a8e1585f30024b06acbf"
+    },
+    {
+      "path": "pure-red-1/pure.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "pure-red-1/pure.stdout.path-normalized.txt",
+      "bytes": 11156,
+      "sha256": "322aa8dafc1e3e2667f7df20201b3406790a611dd8323c0e57eaef383e33ed84"
+    },
+    {
+      "path": "pure-red-1/receipt-projection.json",
+      "bytes": 6479,
+      "sha256": "9054ba1d0c3bbbae1b0eb6cc9681d2eef23228d56db68c16678a530c12958b78"
+    },
+    {
+      "path": "pure-red-1/source-final.json",
+      "bytes": 2262,
+      "sha256": "21d01c63ec5fca56e0643bb7d6621018fc7d9efb239a3201bfa2edd2d9383e5e"
+    },
+    {
+      "path": "pure-red-1/source.json",
+      "bytes": 2262,
+      "sha256": "21d01c63ec5fca56e0643bb7d6621018fc7d9efb239a3201bfa2edd2d9383e5e"
+    },
+    {
+      "path": "repairs/two-boundary-fixes.patch",
+      "bytes": 2935,
+      "sha256": "51cf2e1bd01fa4fbffa725145f0baf50baa2d8c1a1364d4dbc808a68d1d92718"
+    },
+    {
+      "path": "v1-golden-baseline/parent-verification.json",
+      "bytes": 1410,
+      "sha256": "d35e5ad2577ccd76e090cbe0b0b78f4762ef82da7be8144a0cb89d2ff76afdec"
+    },
+    {
+      "path": "v1-golden-baseline/receipt.json",
+      "bytes": 2023,
+      "sha256": "ddbd3e57234534546921d2cfa37346e90696c602af8787b624bfcfb52900b57c"
+    },
+    {
+      "path": "v1-golden-baseline/stderr.txt",
+      "bytes": 284,
+      "sha256": "4c5aa0fdfe120ab08bf91b580ab9d8cd663dc88b436f382380cd0482cc914b9b"
+    },
+    {
+      "path": "v1-golden-baseline/stdout.txt",
+      "bytes": 10748,
+      "sha256": "4b993b5721528669bdda81add41eed3e8d9cb708c5618dd28ff464727bc3e1be"
+    }
+  ],
+  "checks": {
+    "jsonParsed": true,
+    "allOriginalBindingsVerified": true,
+    "receiptProjectionFieldsVerified": true,
+    "sourcePeerPinsMatchCandidate": true,
+    "privatePathOrCredentialMarkerMatches": []
+  },
+  "proofLimits": "Static byte/hash/privacy staging verification only; no source import, application test, compiler, build, server, SQL, browser, provider or Git operation."
+}

@@ -1,0 +1,129 @@
+{
+  "schemaVersion": "eval-composition-log-reconstruction-v1",
+  "source": "2344342ee0211f76aa6c93d7e92a8cb781ab1a8b",
+  "runId": "42715252378",
+  "jobId": "129494978383",
+  "jobIdBinding": "caller-supplied-not-authenticated-by-log",
+  "rawLog": {
+    "bytes": 333284,
+    "sha256": "6fb82b5c010bf05b4d77022389cee63885dd1ce3c0df2761c61f5a70eeee2c6e"
+  },
+  "timestampStrippedLog": {
+    "bytes": 278822,
+    "sha256": "d33428de1b5b98d75bc313c1d0d7ef99b9fc158fc1e030ba162138278b53f098",
+    "transformation": "leading UTC timestamp and one following space only; all other bytes retained"
+  },
+  "receiptStatus": "failed",
+  "files": [
+    {
+      "file": "source.json",
+      "bytes": 30312,
+      "sha256": "5a3347526e3a0368b0e66369763a097c796db6d2cc723865dc8b2cf0cf4e856c",
+      "transportComplete": true,
+      "sourceStreamComplete": null,
+      "transport": "original-base64-chunks"
+    },
+    {
+      "file": "core-cases.stdout.txt",
+      "bytes": 20365,
+      "sha256": "c28f3a4f45dd70898b73ff060a06f3ae3762cd7eca71a8f375d15192a3a8aa3f",
+      "transportComplete": true,
+      "sourceStreamComplete": true,
+      "transport": "original-base64-chunks"
+    },
+    {
+      "file": "core-cases.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "transportComplete": true,
+      "sourceStreamComplete": true,
+      "transport": "original-base64-chunks"
+    },
+    {
+      "file": "web-cases.stdout.txt",
+      "bytes": 7098,
+      "sha256": "3fc655001aa743525154bfd1c62257a1b9f34e67f00bcfceba30f4c502647d53",
+      "transportComplete": true,
+      "sourceStreamComplete": true,
+      "transport": "original-base64-chunks"
+    },
+    {
+      "file": "web-cases.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "transportComplete": true,
+      "sourceStreamComplete": true,
+      "transport": "original-base64-chunks"
+    },
+    {
+      "file": "composition-postgres-cases.stdout.txt",
+      "bytes": 7495,
+      "sha256": "9da7b42d8e0ba4534177ff23c0725395f795c2d30dd99f0d7c457ec7df973f86",
+      "transportComplete": true,
+      "sourceStreamComplete": true,
+      "transport": "original-base64-chunks"
+    },
+    {
+      "file": "composition-postgres-cases.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "transportComplete": true,
+      "sourceStreamComplete": true,
+      "transport": "original-base64-chunks"
+    },
+    {
+      "file": "postgres-fixture-absence.json",
+      "bytes": 1358,
+      "sha256": "3b8706bfa64f97662eda52340e5043f3c1cdbe22b4f4f493f34e24304cba86ac",
+      "transportComplete": true,
+      "sourceStreamComplete": null,
+      "transport": "original-base64-chunks"
+    },
+    {
+      "file": "fixture-final-absence.json",
+      "bytes": 714,
+      "sha256": "06e34a7bbba87e9f05953ea61e27e8a2914f57cd559aa98c23e65a22117c1b2d",
+      "transportComplete": true,
+      "sourceStreamComplete": null,
+      "transport": "original-base64-chunks"
+    },
+    {
+      "file": "source-final.json",
+      "bytes": 25535,
+      "sha256": "c7d72bc17997f68f288e6ccb4eb113fea6920d82f0e382f20a98576929657c00",
+      "transportComplete": true,
+      "sourceStreamComplete": null,
+      "transport": "original-base64-chunks"
+    },
+    {
+      "file": "unprotected-tracked-delta.json",
+      "bytes": 3812,
+      "sha256": "0912deb91c5274d0197b6270955234832ee9954157d0055f37cceb8c3cbd2cd3",
+      "transportComplete": true,
+      "sourceStreamComplete": null,
+      "transport": "original-base64-chunks"
+    },
+    {
+      "file": "cleanup.json",
+      "bytes": 659,
+      "sha256": "5e3f2dbef8b32b8e94387e8b7bc75567be8cca72fc64a14c16a13293a207f2dd",
+      "transportComplete": true,
+      "sourceStreamComplete": null,
+      "transport": "original-base64-chunks"
+    },
+    {
+      "file": "receipt.json",
+      "bytes": 4819,
+      "sha256": "3cde6a7d218f9ba1abd485a7412b64ef1ba5308d1c3685e5c87068a6c77dacf8",
+      "transportComplete": true,
+      "sourceStreamComplete": null,
+      "transport": "original-base64-chunks"
+    }
+  ],
+  "decodedBytes": 102167,
+  "commandMetadataCount": 32,
+  "diagnosticRangeCount": 2,
+  "requiredSuccessContractChecked": false,
+  "artifactZipRetrieved": false,
+  "proofLimits": "Decoded selected log frames only. Command/build stream metadata is not raw stream retrieval. No artifact ZIP, screenshots, browser trace archive, provider call, or production acceptance is established."
+}

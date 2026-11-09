@@ -1,0 +1,156 @@
+{
+  "schemaVersion": "eval-composition-pure-receipt-projection-v1",
+  "kind": "documented-projection-not-unchanged-original",
+  "original": {
+    "path": "pure-checks-1/receipt.json",
+    "bytes": 8753,
+    "sha256": "a3ee823465f0a643374f65d33645cb4c9a9fe5a20ce7a7454630867412272b95"
+  },
+  "omittedFields": [
+    "argv"
+  ],
+  "projectionNotes": [
+    "The private executable path is replaced by a safe executable label and relative command arguments.",
+    "Redundant authoredCaseNames are omitted when present; caseNames and exact original stream metadata remain.",
+    "data.streams describes original private streams; exportedStreams identifies the corresponding export and any path normalization."
+  ],
+  "command": {
+    "executableLabel": "node v26.8.2",
+    "args": [
+      "--experimental-vm-modules",
+      "--test",
+      "--test-reporter=tap",
+      "tests/unit/eval-composition.test.mjs",
+      "tests/unit/http-eval-composition.test.mjs",
+      "tests/unit/http-eval-core.test.mjs",
+      "tests/unit/http-eval-v1-compat.test.mjs"
+    ],
+    "originalArgvCompactJsonSha256": "41d59548fe3bb7940b07a89c82d4b4d6b9390aa16e9f2d281557a7231954e041",
+    "originalArgvHashDefinition": "SHA256 of UTF-8 JSON with compact comma/colon separators, no trailing newline."
+  },
+  "data": {
+    "schemaVersion": "eval-composition-pure-checks-v1",
+    "parent": "894025656a7d264b3b2d573c90e67c40aba57fcf",
+    "status": "passed",
+    "startedAt": "2026-11-09T21:51:18.866803+00:00",
+    "completedAt": "2026-11-09T21:51:23.622388+00:00",
+    "nodeVersion": "v26.8.2",
+    "returncode": 0,
+    "expectedDistinctCases": 74,
+    "totals": {
+      "tests": 74,
+      "pass": 74,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "failedCases": [],
+    "caseNames": [
+      "EC01 item native identity includes workspace, public aggregate and version with independent hash oracles",
+      "EC02 semantic and record fingerprints preserve exact contains bytes and trusted timestamp metadata",
+      "EC03 exact keys, public IDs, parent versions and PostgreSQL version bounds reject malformed drafts",
+      "EC04 descriptor-safe copying refuses getters and cycles without invoking caller code",
+      "EC05 Unicode, NUL, blank text and byte/codepoint limits fail closed",
+      "EC06 preview accounts complete record bytes and never exposes a synthetic creation timestamp",
+      "EC07 stale heads and altered preview fingerprints cannot save while appends preserve old names",
+      "EC08 set membership order freezes exact native identities and full public/provenance proofs",
+      "EC09 source enumeration order does not replace the author's explicit member order",
+      "EC10 duplicate membership, changed fingerprints, absent and foreign source records are rejected",
+      "EC11 identical configs under distinct version identities stay distinct and are not content-deduplicated",
+      "EC12 an old exact item remains valid after renamed heads and a set rename does not mutate old snapshots",
+      "EC13 stored-record corruption cannot be repaired by only recomputing its outer fingerprint",
+      "EC14 complete32-member resource records retain membership metadata and independent serialized size",
+      "EC15 raw outer JSON is checked before numbers can round or duplicate keys can disappear",
+      "EC16 timestamp belongs to stored metadata while replay restoration preserves the original record exactly",
+      "EC-HTTP01 two real v2 sets share one exact item and retain memberships with six unique results and twenty gates",
+      "EC-HTTP02 equal configurations under different saved version identities remain two required evaluators",
+      "EC-HTTP03 v2 refs are canonical across selected sets while membership order stays authored",
+      "EC-HTTP04 explicit mixed saved v1/v2 refs resolve without changing immutable v1 source contracts",
+      "EC-HTTP05 exact public tuple and fingerprint mismatches, duplicate refs and lost full proofs fail before work",
+      "EC-HTTP06 contradictory valid snapshots of one version identity cannot deduplicate away changed intent",
+      "EC-HTTP07 profile and version families cannot mix, and v2 append heads carry their explicit family",
+      "EC-HTTP08 v2 critical failures block every affected low-threshold scope while v1 policy remains unchanged",
+      "EC-HTTP09 a shared v2 request sends each input once and excludes all references and evaluator configuration",
+      "EC-HTTP10 running snapshots have no terminal gates and deadline recovery emits matching v2 uncertain events",
+      "EC-HTTP11 owner stop handles only never-claimed rows and immutable v2 events cannot wear v1 tags",
+      "EC-HTTP12 all eight sets can retain32 memberships each with32 unique items and one target row",
+      "EC-HTTP13 simultaneous maximum coverage and complete output allowance fail preview before an oversized run",
+      "EC-HTTP14 complete source budgets and actual large response values remain bound on readback",
+      "EC-HTTP15 unique-item, selected-set and row ceilings reject excess coverage without truncation",
+      "HTTP01 preview freezes complete source presence, metadata, evaluator membership and hidden-reference policy",
+      "HTTP02 plan record identity/hash preimages include workspace and both public identities",
+      "HTTP03 saved plan versions allow reviewed rename but enforce exact parent and next number",
+      "HTTP04 target, execution limits and references bind preview; stale preview cannot save",
+      "HTTP05 source set order is canonical and duplicates, missing members and source mismatch fail",
+      "HTTP06 unavailable judge types cannot masquerade as the deterministic capability",
+      "HTTP07 exact draft keys, public identities and integer boundaries fail closed",
+      "HTTP08 endpoint protocol excludes credentials/query/fragment/nondefault ports/IP literals",
+      "HTTP09 descriptor inspection refuses getters without executing caller code",
+      "HTTP10 raw parser detects decoded duplicate keys and retains prototype-looking data keys",
+      "HTTP11 raw decimal equivalence accepts canonical values and zero with a long exponent",
+      "HTTP12 raw numeric parser refuses rounding, underflow and exponent overflow at any depth",
+      "HTTP13 Unicode, NUL, trailing syntax, depth and aggregate source byte limits are enforced",
+      "HTTP14 snapshot sizes and row/set maxima are validated before target work",
+      "HTTP15 record readers recompute snapshots even when an attacker rehashes the outer record",
+      "HTTP16 start intent binds exact saved storage version, workspace and plan fingerprint",
+      "HTTP17 outbound request contains input/present context and excludes all reference/evaluator fields",
+      "HTTP18 owner lease, concurrency, duplicate token and already-claimed rows cannot dispatch",
+      "HTTP19 deadline clips timeout and refuses a new dispatch inside the final 500ms",
+      "HTTP20 response echo, output presence and exact protocol fields are mandatory",
+      "HTTP21 raw response rejects numeric loss/duplicates and separately bounds normalized output",
+      "HTTP22 reported usage/cost are bounded and not inserted into local evaluator token accounting",
+      "HTTP23 one real response creates one result per distinct row+item and only declared fields",
+      "HTTP24 invalid target response finalizes a safe failed outcome without persisting remote HTML",
+      "HTTP25 transport uncertainty and known not-sent outcomes remain distinct",
+      "HTTP26 identical finalize replays but changed content or token cannot overwrite",
+      "HTTP27 partial execution retains results without persisting premature gates",
+      "HTTP28 terminal gates cover all eight levels and use actual dataset and unique rows",
+      "HTTP29 multi-set pass rates are computed from actual row coverage, not result count",
+      "HTTP30 owner stop immediately marks only pending rows and blocks further dispatch",
+      "HTTP31 recovery requires expiry, preserves completed evidence and never reclaims a call",
+      "HTTP32 recovery marks never-claimed rows not_sent with no invented response or claim",
+      "HTTP33 readback detects missing, duplicate and tampered immutable row events",
+      "HTTP34 rehashed result/gate/ledger corruption cannot override recomputed execution",
+      "HTTP35 run and row-item result identities remain workspace/run scoped and collision-free",
+      "HTTP36 pure preview/read/replay code needs no ambient network capability",
+      "HTTP37 full 100-row near-1MiB input and eight real saved sets fit the complete worst-case record allowance",
+      "HTTP38 static endpoint rules match the native no-query/no-fragment and reserved-host boundary",
+      "V1-COMPAT01 preview retains published canonical bytes and fingerprint",
+      "V1-COMPAT02 plan retains published canonical bytes and fingerprint",
+      "V1-COMPAT03 initial ledger retains published canonical bytes and fingerprint",
+      "V1-COMPAT04 execution retains published canonical bytes, result IDs and gate IDs",
+      "V1-COMPAT05 complete run retains published canonical bytes and fingerprint"
+    ],
+    "sourcesChangedDuringRun": [],
+    "streams": {
+      "stdout": {
+        "file": "pure.stdout.txt",
+        "bytes": 19848,
+        "sha256": "f8f82377b792f519fd7514b1d324a4b236907280cf73684325c1089276ea6203",
+        "complete": true
+      },
+      "stderr": {
+        "file": "pure.stderr.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "complete": true
+      }
+    },
+    "proofLimits": [
+      "Actual core source through Node type stripping and restricted VM modules; no TypeScript semantic compilation.",
+      "Prepared call bodies and state transitions only; no target, DNS/socket/TLS, server, database, browser, install or model call.",
+      "Repeated cases across attempts do not increase the distinct-case count."
+    ]
+  },
+  "exportedStreams": {
+    "stdout": {
+      "path": "pure.stdout.txt",
+      "kind": "complete-original"
+    },
+    "stderr": {
+      "path": "pure.stderr.txt",
+      "kind": "complete-original"
+    }
+  }
+}

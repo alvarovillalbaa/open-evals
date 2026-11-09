@@ -1,0 +1,157 @@
+TAP version 13
+# (node:2567) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:2567) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# Subtest: CP-WEB01 every new handler denies project keys before body or scoped store access [T2]
+ok 1 - CP-WEB01 every new handler denies project keys before body or scoped store access [T2]
+  ---
+  duration_ms: 292.930457
+  type: 'test'
+  ...
+# Subtest: CP-WEB02 hosted-local ownership is refused before both new preview and save bodies [T2]
+ok 2 - CP-WEB02 hosted-local ownership is refused before both new preview and save bodies [T2]
+  ---
+  duration_ms: 106.290571
+  type: 'test'
+  ...
+# Subtest: CP-WEB03 viewers can inspect and preview both resources but cannot save or dispatch [T2]
+ok 3 - CP-WEB03 viewers can inspect and preview both resources but cannot save or dispatch [T2]
+  ---
+  duration_ms: 132.755754
+  type: 'test'
+  ...
+# Subtest: CP-WEB04 editor session writes complete item and set records with private exact-version readback [T2]
+ok 4 - CP-WEB04 editor session writes complete item and set records with private exact-version readback [T2]
+  ---
+  duration_ms: 114.77649
+  type: 'test'
+  ...
+# Subtest: CP-WEB05 preview freezes exact refs and complete full proofs without any save operation [T2]
+ok 5 - CP-WEB05 preview freezes exact refs and complete full proofs without any save operation [T2]
+  ---
+  duration_ms: 90.163716
+  type: 'test'
+  ...
+# Subtest: CP-WEB06 missing sessions and missing eval scopes fail before streamed body admission [T2]
+ok 6 - CP-WEB06 missing sessions and missing eval scopes fail before streamed body admission [T2]
+  ---
+  duration_ms: 94.082642
+  type: 'test'
+  ...
+# Subtest: CP-WEB07 exact resource paths and optional prefills remain bound to the authorized workspace [T2]
+ok 7 - CP-WEB07 exact resource paths and optional prefills remain bound to the authorized workspace [T2]
+  ---
+  duration_ms: 89.752002
+  type: 'test'
+  ...
+# Subtest: CP-WEB08 item Unicode and contains whitespace survive preview save and exact read without hidden normalization [T2]
+ok 8 - CP-WEB08 item Unicode and contains whitespace survive preview save and exact read without hidden normalization [T2]
+  ---
+  duration_ms: 96.067917
+  type: 'test'
+  ...
+# Subtest: CP-WEB09 duplicate raw fields lossy decimal tokens BOM and malformed UTF8 fail before source lookup [T2]
+ok 9 - CP-WEB09 duplicate raw fields lossy decimal tokens BOM and malformed UTF8 fail before source lookup [T2]
+  ---
+  duration_ms: 189.032713
+  type: 'test'
+  ...
+# Subtest: CP-WEB10 both resource preview handlers enforce the streamed2MiB cap and cancel a misleading body [T2]
+ok 10 - CP-WEB10 both resource preview handlers enforce the streamed2MiB cap and cancel a misleading body [T2]
+  ---
+  duration_ms: 170.24347
+  type: 'test'
+  ...
+# Subtest: CP-WEB11 an item stale-head conflict preserves the submitted draft and does not commit a third version [T2]
+ok 11 - CP-WEB11 an item stale-head conflict preserves the submitted draft and does not commit a third version [T2]
+  ---
+  duration_ms: 100.443931
+  type: 'test'
+  ...
+# Subtest: CP-WEB12 a set stale-head conflict preserves explicit item version order and rejects a competing revision [T2]
+ok 12 - CP-WEB12 a set stale-head conflict preserves explicit item version order and rejects a competing revision [T2]
+  ---
+  duration_ms: 138.450822
+  type: 'test'
+  ...
+# Subtest: CP-WEB13 committed invalid item readback remains500 unknown and identical retry returns the exact original record [T2]
+ok 13 - CP-WEB13 committed invalid item readback remains500 unknown and identical retry returns the exact original record [T2]
+  ---
+  duration_ms: 87.175783
+  type: 'test'
+  ...
+# Subtest: CP-WEB14 committed invalid set readback remains500 unknown with full proof-preserving same-intent replay [T2]
+ok 14 - CP-WEB14 committed invalid set readback remains500 unknown with full proof-preserving same-intent replay [T2]
+  ---
+  duration_ms: 97.557204
+  type: 'test'
+  ...
+# Subtest: CP-WEB15 original item save replay reaches no newer head lookup after later versions exist [T2]
+ok 15 - CP-WEB15 original item save replay reaches no newer head lookup after later versions exist [T2]
+  ---
+  duration_ms: 94.722468
+  type: 'test'
+  ...
+# Subtest: CP-WEB16 item and set historical names/configs remain exact after both current heads rename [T2]
+ok 16 - CP-WEB16 item and set historical names/configs remain exact after both current heads rename [T2]
+  ---
+  duration_ms: 127.274652
+  type: 'test'
+  ...
+# Subtest: CP-WEB17 a valid stored record under the wrong requested identity is hidden as an internal readback failure [T2]
+ok 17 - CP-WEB17 a valid stored record under the wrong requested identity is hidden as an internal readback failure [T2]
+  ---
+  duration_ms: 82.930048
+  type: 'test'
+  ...
+# Subtest: CP-WEB18 resource detail refuses mixed head metadata instead of silently choosing another version [T2]
+ok 18 - CP-WEB18 resource detail refuses mixed head metadata instead of silently choosing another version [T2]
+  ---
+  duration_ms: 86.93754
+  type: 'test'
+  ...
+# Subtest: CP-WEB19 server loads return ordinary JSON props and scoped exact source-prefills without creating work [T2]
+ok 19 - CP-WEB19 server loads return ordinary JSON props and scoped exact source-prefills without creating work [T2]
+  ---
+  duration_ms: 141.83101
+  type: 'test'
+  ...
+# Subtest: CP-WEB20 shared HTTP preview/save handles exact mixed v1/v2 refs without broadening v1 drafts [T2]
+ok 20 - CP-WEB20 shared HTTP preview/save handles exact mixed v1/v2 refs without broadening v1 drafts [T2]
+  ---
+  duration_ms: 109.851938
+  type: 'test'
+  ...
+# Subtest: CP-WEB21 historical v1 plans remain v1 while explicit composition copy only prefills exact frozen selections [T2]
+ok 21 - CP-WEB21 historical v1 plans remain v1 while explicit composition copy only prefills exact frozen selections [T2]
+  ---
+  duration_ms: 103.821111
+  type: 'test'
+  ...
+# Subtest: CP-WEB22 shared HTTP detail rejects a wrong family summary and foreign copy-prefills remain unavailable [T2]
+ok 22 - CP-WEB22 shared HTTP detail rejects a wrong family summary and foreign copy-prefills remain unavailable [T2]
+  ---
+  duration_ms: 110.06221
+  type: 'test'
+  ...
+# Subtest: CP-WEB23 actual v2 coordinator commits reservation and two claims before authored transport seams score six pairs [T2]
+ok 23 - CP-WEB23 actual v2 coordinator commits reservation and two claims before authored transport seams score six pairs [T2]
+  ---
+  duration_ms: 1019.603894
+  type: 'test'
+  ...
+# Subtest: CP-WEB24 completed start replay reads and shared recovery operation do not invoke another authored target [T2]
+ok 24 - CP-WEB24 completed start replay reads and shared recovery operation do not invoke another authored target [T2]
+  ---
+  duration_ms: 1448.851882
+  type: 'test'
+  ...
+1..24
+# tests 24
+# suites 0
+# pass 24
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 5244.507077

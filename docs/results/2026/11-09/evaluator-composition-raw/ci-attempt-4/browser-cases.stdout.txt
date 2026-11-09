@@ -1,0 +1,109 @@
+
+Running 4 tests using 1 worker
+
+  ✘  1 [chromium-owned-production-authored-transport] › tests/e2e/eval-composition.browser.spec.ts:47:1 › CP-BR01 UI reusable items and overlapping sets execute two authored transport calls with six results, critical scopes and no replay dispatch (11.7s)
+  ✘  2 [chromium-owned-production-authored-transport] › tests/e2e/eval-composition.browser.spec.ts:114:1 › CP-BR02 narrow exact history retains two versions of one item and ordered membership after a new set version (14.3s)
+  ✓  3 [chromium-owned-production-authored-transport] › tests/e2e/eval-composition.browser.spec.ts:145:1 › CP-BR03 actual item CAS requires visible head review and a committed set retry replays before a later head (2.0s)
+  ✘  4 [chromium-owned-production-authored-transport] › tests/e2e/eval-composition.browser.spec.ts:180:1 › CP-BR04 real viewer, key and foreign workspace boundaries reject writes before malformed bodies and preserve scoped metadata (2.1s)
+
+
+  1) [chromium-owned-production-authored-transport] › tests/e2e/eval-composition.browser.spec.ts:47:1 › CP-BR01 UI reusable items and overlapping sets execute two authored transport calls with six results, critical scopes and no replay dispatch 
+
+    TimeoutError: locator.selectOption: Timeout 10000ms exceeded.
+    Call log:
+      - waiting for getByRole('region', { name: 'Composed Eval Set editor', exact: true }).getByLabel('Add an exact saved item version', { exact: true })
+
+
+      36 |   const editor = page.getByRole("region", { name: "Composed Eval Set editor", exact: true });
+      37 |   await editor.getByLabel("Set name", { exact: true }).fill(name);
+    > 38 |   for (const item of items) await editor.getByLabel("Add an exact saved item version", { exact: true }).selectOption(`${item.draft.itemId}/${item.draft.versionId}`);
+         |                                                                                                         ^
+      39 |   await expect(editor.getByLabel("Add an exact saved item version", { exact: true }).getByRole("option", { name: `${items[0]!.draft.name} · version ${items[0]!.draft.version}`, exact: true })).toBeDisabled();
+      40 |   await editor.getByLabel("Dataset pass-rate gate (%)", { exact: true }).fill("0");
+      41 |   const preview = await capturePost<{ preview: CustomEvalSetPreviewV2 }>(page, "/api/v2/eval-sets/preview", () => editor.getByRole("button", { name: "Preview set without saving", exact: true }).click());
+        at uiSet (/home/runner/work/open-evals/open-evals/tests/e2e/eval-composition.browser.spec.ts:38:105)
+        at /home/runner/work/open-evals/open-evals/tests/e2e/eval-composition.browser.spec.ts:53:17
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../_temp/open-evals-composition-v2-evidence/browser-output/eval-composition.browser-C-535e0-opes-and-no-replay-dispatch-chromium-owned-production-authored-transport/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../_temp/open-evals-composition-v2-evidence/browser-output/eval-composition.browser-C-535e0-opes-and-no-replay-dispatch-chromium-owned-production-authored-transport/error-context.md
+
+    attachment #5: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../_temp/open-evals-composition-v2-evidence/browser-output/eval-composition.browser-C-535e0-opes-and-no-replay-dispatch-chromium-owned-production-authored-transport/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace ../../_temp/open-evals-composition-v2-evidence/browser-output/eval-composition.browser-C-535e0-opes-and-no-replay-dispatch-chromium-owned-production-authored-transport/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [chromium-owned-production-authored-transport] › tests/e2e/eval-composition.browser.spec.ts:114:1 › CP-BR02 narrow exact history retains two versions of one item and ordered membership after a new set version 
+
+    TimeoutError: locator.selectOption: Timeout 10000ms exceeded.
+    Call log:
+      - waiting for getByLabel('Add a recent saved custom evaluator version', { exact: true })
+
+
+      135 |   expect(JSON.parse(await page.getByLabel("Exact evaluator-set references (JSON)", { exact: true }).inputValue())).toEqual([{ schemaVersion: "custom-eval-set-ref-v1", setId: legacyDraft.setId, versionId: legacy.id, fingerprint: legacy.contract.fingerprint }]);
+      136 |   await expect(page.getByLabel("Exact dataset version ID", { exact: true })).toHaveValue(datasetVersionId);
+    > 137 |   await page.getByLabel("Add a recent saved custom evaluator version", { exact: true }).selectOption(`custom-eval-set-ref-v2/${set.draft.setId}/${saved.value.record.draft.versionId}`);
+          |                                                                                         ^
+      138 |   await page.getByLabel("Plan name", { exact: true }).fill("Explicit mixed-source plan"); await page.getByLabel("Target identity", { exact: true }).fill("authored-mixed-target"); await page.getByLabel("Declared target version", { exact: true }).fill("1"); await page.getByLabel("Public HTTPS endpoint", { exact: true }).fill("https://composition-target.example.com/evaluate");
+      139 |   const mixed = await capturePost<{ preview: AnyHttpEvalPlanPreview }>(page, "/api/v1/http-target-plans/preview", () => page.getByRole("button", { name: "Preview plan without calling target", exact: true }).click()); expect(mixed.status).toBe(200); if (mixed.value.preview.schemaVersion !== "http-eval-plan-preview-v2") throw new Error("v2_preview_required");
+      140 |   expect(mixed.value.preview.counts).toEqual({ rowCount: 2, evalSetCount: 2, uniqueItemCount: 4, resultPairs: 8, targetCalls: 2 }); expect(mixed.value.preview.draft.planId).not.toBe(legacyPlan.content.draft.planId);
+        at /home/runner/work/open-evals/open-evals/tests/e2e/eval-composition.browser.spec.ts:137:89
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../_temp/open-evals-composition-v2-evidence/browser-output/eval-composition.browser-C-82237-hip-after-a-new-set-version-chromium-owned-production-authored-transport/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../_temp/open-evals-composition-v2-evidence/browser-output/eval-composition.browser-C-82237-hip-after-a-new-set-version-chromium-owned-production-authored-transport/error-context.md
+
+    attachment #5: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../_temp/open-evals-composition-v2-evidence/browser-output/eval-composition.browser-C-82237-hip-after-a-new-set-version-chromium-owned-production-authored-transport/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace ../../_temp/open-evals-composition-v2-evidence/browser-output/eval-composition.browser-C-82237-hip-after-a-new-set-version-chromium-owned-production-authored-transport/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) [chromium-owned-production-authored-transport] › tests/e2e/eval-composition.browser.spec.ts:180:1 › CP-BR04 real viewer, key and foreign workspace boundaries reject writes before malformed bodies and preserve scoped metadata 
+
+    Error: expect(received).toHaveLength(expected)
+
+    Expected length: 2
+    Received length: 0
+    Received array:  []
+
+      198 |   const invalidUtf8 = await page.context().request.post(`${owned.baseUrl}/api/v2/eval-items/preview`, { maxRedirects: 0, headers: { "Content-Type": "application/json" }, data: Buffer.from([0xff]) }); expect(invalidUtf8.status()).toBe(400);
+      199 |   expect((await owned.snapshot()).counts).toEqual(before); unchangedCalls(owned, journalBefore);
+    > 200 |   const all = owned.journal(); expect(all.filter(entry => entry.phase === "committed_claim_before_authored_response")).toHaveLength(2); expect(all.filter(entry => entry.phase === "authored_dns")).toHaveLength(2); expect(all.every(entry => ["guard_ready", "authored_dns", "committed_claim_before_authored_response"].includes(entry.phase))).toBe(true);
+          |                                                                                                                        ^
+      201 | });
+      202 |
+        at /home/runner/work/open-evals/open-evals/tests/e2e/eval-composition.browser.spec.ts:200:120
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../_temp/open-evals-composition-v2-evidence/browser-output/eval-composition.browser-C-5f07f-nd-preserve-scoped-metadata-chromium-owned-production-authored-transport/test-failed-2.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../_temp/open-evals-composition-v2-evidence/browser-output/eval-composition.browser-C-5f07f-nd-preserve-scoped-metadata-chromium-owned-production-authored-transport/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../_temp/open-evals-composition-v2-evidence/browser-output/eval-composition.browser-C-5f07f-nd-preserve-scoped-metadata-chromium-owned-production-authored-transport/error-context.md
+
+    attachment #6: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../_temp/open-evals-composition-v2-evidence/browser-output/eval-composition.browser-C-5f07f-nd-preserve-scoped-metadata-chromium-owned-production-authored-transport/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace ../../_temp/open-evals-composition-v2-evidence/browser-output/eval-composition.browser-C-5f07f-nd-preserve-scoped-metadata-chromium-owned-production-authored-transport/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3 failed
+    [chromium-owned-production-authored-transport] › tests/e2e/eval-composition.browser.spec.ts:47:1 › CP-BR01 UI reusable items and overlapping sets execute two authored transport calls with six results, critical scopes and no replay dispatch 
+    [chromium-owned-production-authored-transport] › tests/e2e/eval-composition.browser.spec.ts:114:1 › CP-BR02 narrow exact history retains two versions of one item and ordered membership after a new set version 
+    [chromium-owned-production-authored-transport] › tests/e2e/eval-composition.browser.spec.ts:180:1 › CP-BR04 real viewer, key and foreign workspace boundaries reject writes before malformed bodies and preserve scoped metadata 
+  1 passed (32.6s)

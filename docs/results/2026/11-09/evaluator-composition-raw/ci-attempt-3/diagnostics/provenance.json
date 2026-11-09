@@ -1,0 +1,47 @@
+{
+  "schemaVersion": "eval-composition-ci3-diagnostic-ranges-v1",
+  "source": "cdfd35b8076be3e75959a7a8d5f33f0ce3cfd341",
+  "runId": "42716305159",
+  "jobId": "129498611523",
+  "transport": "structured commandDiagnostic base64 ranges from retained raw job log; separate from selected ORIGINAL_CHUNK files",
+  "files": [
+    {
+      "file": "diagnostics/build-candidate.stdout.tail-range.txt",
+      "label": "build-candidate",
+      "channel": "stdout",
+      "kind": "tail",
+      "sourceBytes": 6730,
+      "sourceSha256": "64068658d7672d0c218dff5a43c7f8b29cae67c6f691664d4359c8f53f6c8ea2",
+      "sourceStreamComplete": true,
+      "offset": 2634,
+      "bytes": 4096,
+      "sha256": "baabb30c72e26e7ad1d805bead74fc4448eff0253ba5bc8fe5a5a0954b6c4c4a",
+      "fullOriginalStreamProved": false,
+      "rangeBytesSha256Verified": true,
+      "sourceMetadataBoundToCommandFrame": true,
+      "sourceFile": "build-candidate.stdout.txt"
+    },
+    {
+      "file": "diagnostics/build-candidate.stderr.full-range.txt",
+      "label": "build-candidate",
+      "channel": "stderr",
+      "kind": "full",
+      "sourceBytes": 1604,
+      "sourceSha256": "4b38f7104326f935e35e6e352b6010a711f4d4e644a9b1df8ff42e193b00a44b",
+      "sourceStreamComplete": true,
+      "offset": 0,
+      "bytes": 1604,
+      "sha256": "4b38f7104326f935e35e6e352b6010a711f4d4e644a9b1df8ff42e193b00a44b",
+      "fullOriginalStreamProved": true,
+      "rangeBytesSha256Verified": true,
+      "sourceMetadataBoundToCommandFrame": true,
+      "sourceFile": "build-candidate.stderr.txt"
+    }
+  ],
+  "archiveRetrieved": false,
+  "proofLimits": [
+    "Stdout is only the last4096bytes of a6730-byte complete source stream, offset2634; its own range SHA is verified. The complete source SHA is bound to command metadata, not recomputed from unavailable prefix bytes.",
+    "Stderr covers its complete1604-byte stream, offset0, with matching source/range SHA and complete EOF metadata.",
+    "No complete release-build success or browser execution is established."
+  ]
+}

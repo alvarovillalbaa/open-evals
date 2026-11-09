@@ -1,0 +1,54 @@
+{
+  "parent": "894025656a7d264b3b2d573c90e67c40aba57fcf",
+  "status": "passed",
+  "nodeVersion": "v26.8.2",
+  "fixtureSource": "existing authored HTTP01 fixture helpers, before first registered test",
+  "sourcePins": [
+    {
+      "path": "packages/core/src/hash.ts",
+      "bytes": 969,
+      "sha256": "14c6a74e885a8bbc11b71a80bf4b4e306d4c6feb1868eafe59684eaeee3c7ab0",
+      "gitBlob": "140471745127c6e0e0a8a58cc79b245006c6ae89"
+    },
+    {
+      "path": "packages/core/src/custom-evals.ts",
+      "bytes": 8855,
+      "sha256": "20276d52b66ef0e1fca0efa85b0d10ea8bde3b3d5854cd160664d40628e5886d",
+      "gitBlob": "07b8e07c302c01d9ac9e3ced02f91aea6592af15"
+    },
+    {
+      "path": "packages/core/src/eval-engine.ts",
+      "bytes": 10877,
+      "sha256": "847d2e79dcb767acece965ab25cbed1acc38cbebabc95372d273f694669c28d3",
+      "gitBlob": "fc6a2284f730cea82759dab73da021df0ead274a"
+    },
+    {
+      "path": "packages/core/src/provided-output-runs.ts",
+      "bytes": 23809,
+      "sha256": "1d4268df1886158630c19b7cbc040118cef4ee32b42bc60e2438c7dd2efdf38d",
+      "gitBlob": "ff5b67524171437a56d03043013722dd83f3b170"
+    },
+    {
+      "path": "packages/core/src/http-eval-plans.ts",
+      "bytes": 23103,
+      "sha256": "2c80411b193831d2aca9d92577a8995fd7b4502ed33bda77abb2a6c859c9ece5",
+      "gitBlob": "174de53f9eb4e09727c66bec5b7f8a4e01664725"
+    },
+    {
+      "path": "packages/core/src/http-eval-runs.ts",
+      "bytes": 25918,
+      "sha256": "b6d4f2f7f54bb6199e6693e045d7012ff478fe3ae6ebcc95628a090cbb432e58",
+      "gitBlob": "cbcb90c5e4a53dc3585809dce34a3fefcc1130ba"
+    },
+    {
+      "path": "tests/unit/http-eval-core.test.mjs",
+      "bytes": 29658,
+      "sha256": "0e265c84b2a9e9cf671cf20ea13ed9c909a1a66fcfb26005523a0f5d24fbeade"
+    }
+  ],
+  "proofLimits": [
+    "Pure source baseline derivation only; no registered test or target call.",
+    "No socket, database, browser, install or build.",
+    "Golden values are frozen from the immutable parent, not the composition candidate."
+  ]
+}

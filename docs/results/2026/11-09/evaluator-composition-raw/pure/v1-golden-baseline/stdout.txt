@@ -1,0 +1,293 @@
+{
+  "schemaVersion": "http-eval-v1-golden-v1",
+  "parent": "894025656a7d264b3b2d573c90e67c40aba57fcf",
+  "fixture": {
+    "workspaceId": "authored-http-workspace",
+    "createdAt": "2026-11-09T00:00:00.000Z",
+    "completedAt": "2026-11-09T00:00:01.000Z",
+    "draft": {
+      "schemaVersion": "http-eval-plan-draft-v1",
+      "planId": "00000001-1111-4111-8111-111111111111",
+      "versionId": "00000002-1111-4111-8111-111111111111",
+      "version": 1,
+      "expectedVersionId": null,
+      "name": "Authored HTTP plan",
+      "datasetVersionId": "authored-version",
+      "evalSetVersionIds": [
+        "00000010-1111-4111-8111-111111111111",
+        "00000011-1111-4111-8111-111111111111"
+      ],
+      "target": {
+        "targetId": "authored-target",
+        "targetVersion": "1",
+        "endpoint": "https://authored.example.com/evaluate",
+        "timeoutMs": 1000
+      },
+      "limits": {
+        "concurrency": 1,
+        "maxDurationSeconds": 5
+      }
+    },
+    "dataset": {
+      "dataset": {
+        "id": "authored-dataset",
+        "name": "Authored inputs",
+        "kind": "custom-dataset-v1"
+      },
+      "version": {
+        "id": "authored-version",
+        "datasetId": "authored-dataset",
+        "version": 1,
+        "fingerprint": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "createdAt": "2026-11-09T00:00:00.000Z"
+      },
+      "rows": [
+        {
+          "id": "source-row-0",
+          "rowKey": "Key0",
+          "input": {
+            "prompt": "authored input 0"
+          },
+          "expectedOutput": {
+            "present": true,
+            "value": "SECRET_REFERENCE"
+          },
+          "context": {
+            "present": true,
+            "value": null
+          },
+          "history": {
+            "present": false,
+            "value": null
+          },
+          "traceFixture": {
+            "present": true,
+            "value": "SECRET_TRACE_REFERENCE"
+          },
+          "metadata": {
+            "origin": "authored",
+            "constructor": "data",
+            "toJSON": "data"
+          },
+          "reviewStatus": "reviewed"
+        },
+        {
+          "id": "source-row-1",
+          "rowKey": "Key1",
+          "input": {
+            "prompt": "authored input 1"
+          },
+          "expectedOutput": {
+            "present": true,
+            "value": "SECRET_REFERENCE"
+          },
+          "context": {
+            "present": false,
+            "value": null
+          },
+          "history": {
+            "present": false,
+            "value": null
+          },
+          "traceFixture": {
+            "present": true,
+            "value": "SECRET_TRACE_REFERENCE"
+          },
+          "metadata": {
+            "origin": "authored",
+            "constructor": "data",
+            "toJSON": "data"
+          },
+          "reviewStatus": "reviewed"
+        }
+      ]
+    },
+    "evalSets": [
+      {
+        "contract": {
+          "schemaVersion": "custom-eval-set-v1",
+          "id": "00000010-1111-4111-8111-111111111111",
+          "setId": "00000110-1111-4111-8111-111111111111",
+          "name": "Authored set 10",
+          "itemVersions": [
+            {
+              "item": {
+                "id": "custom_item_version_00000010-1111-4111-8111-111111111111",
+                "itemId": "custom_item_00000110-1111-4111-8111-111111111111",
+                "name": "Authored set 10",
+                "type": "string_check",
+                "evaluationUnits": [
+                  "llm_call"
+                ],
+                "outputSchema": {
+                  "fields": [
+                    {
+                      "key": "contains_expected",
+                      "displayName": "Contains configured text",
+                      "type": "boolean",
+                      "criticality": "critical",
+                      "gating": true
+                    }
+                  ]
+                },
+                "criticality": "critical",
+                "config": {
+                  "contains": "approved"
+                },
+                "version": 1,
+                "fingerprint": "cd77caaf102460c37180e891ba40cd5608d6e60edd48f751e2721eea9b27c749"
+              },
+              "weight": 1,
+              "criticality": "critical"
+            }
+          ],
+          "gates": {
+            "rowThreshold": 100,
+            "datasetPassRateThreshold": 100,
+            "evalSetThreshold": 100,
+            "runThreshold": 100
+          },
+          "authoring": {
+            "requestFingerprint": "af48212a96693600dad4180a5780afc6371809c2f4a7ed6f57b720a8b182733c",
+            "expectedVersionId": null,
+            "version": 1
+          },
+          "fingerprint": "8ebdfeaa92073e5c6de129c9b2a44cb97df0b8149dc72d8e6847ab2965c1ad87"
+        },
+        "members": [
+          {
+            "evalSetVersionId": "00000010-1111-4111-8111-111111111111",
+            "evalItemVersionId": "custom_item_version_00000010-1111-4111-8111-111111111111",
+            "position": 0,
+            "weight": 1,
+            "criticality": "critical",
+            "itemFingerprint": "cd77caaf102460c37180e891ba40cd5608d6e60edd48f751e2721eea9b27c749"
+          }
+        ]
+      },
+      {
+        "contract": {
+          "schemaVersion": "custom-eval-set-v1",
+          "id": "00000011-1111-4111-8111-111111111111",
+          "setId": "00000111-1111-4111-8111-111111111111",
+          "name": "Authored set 11",
+          "itemVersions": [
+            {
+              "item": {
+                "id": "custom_item_version_00000011-1111-4111-8111-111111111111",
+                "itemId": "custom_item_00000111-1111-4111-8111-111111111111",
+                "name": "Authored set 11",
+                "type": "string_check",
+                "evaluationUnits": [
+                  "llm_call"
+                ],
+                "outputSchema": {
+                  "fields": [
+                    {
+                      "key": "contains_expected",
+                      "displayName": "Contains configured text",
+                      "type": "boolean",
+                      "criticality": "critical",
+                      "gating": true
+                    }
+                  ]
+                },
+                "criticality": "critical",
+                "config": {
+                  "contains": "ready"
+                },
+                "version": 1,
+                "fingerprint": "11a02e91fd3f5646f083c6c708a54ccc7b82e67e47987bd5353c95cfd04d2a32"
+              },
+              "weight": 1,
+              "criticality": "critical"
+            }
+          ],
+          "gates": {
+            "rowThreshold": 100,
+            "datasetPassRateThreshold": 100,
+            "evalSetThreshold": 100,
+            "runThreshold": 100
+          },
+          "authoring": {
+            "requestFingerprint": "b8617e17fa3c31a85438cf79c304b3fbc9bea79607e35267386f466cd982b3d1",
+            "expectedVersionId": null,
+            "version": 1
+          },
+          "fingerprint": "4ea7a22986c9d43d2ddae6754a0e756124e708410318399ab608e54ba492baf7"
+        },
+        "members": [
+          {
+            "evalSetVersionId": "00000011-1111-4111-8111-111111111111",
+            "evalItemVersionId": "custom_item_version_00000011-1111-4111-8111-111111111111",
+            "position": 0,
+            "weight": 1,
+            "criticality": "critical",
+            "itemFingerprint": "11a02e91fd3f5646f083c6c708a54ccc7b82e67e47987bd5353c95cfd04d2a32"
+          }
+        ]
+      }
+    ],
+    "runId": "00000020-1111-4111-8111-111111111111",
+    "leaseToken": "00000021-1111-4111-8111-111111111111",
+    "claimTokens": [
+      "00000030-1111-4111-8111-111111111111",
+      "00000031-1111-4111-8111-111111111111"
+    ],
+    "outputs": [
+      "Approved and ready",
+      "Approved and ready"
+    ]
+  },
+  "hashes": {
+    "preview": {
+      "fingerprint": "970a54e98be3aab07b8b87f06d6f5511635fc311eb250f2463126d35c6b4d98b",
+      "canonicalSha256": "2188835cdb71cdf90dbdb3fcc159fd3b5c18d1d245248ad6426ef67d44bd6e7c",
+      "bytes": 7133
+    },
+    "plan": {
+      "fingerprint": "ca2205a49377796884b5f420824b9e999b4b5ee8623bf96eb1a894c773ca3f8f",
+      "canonicalSha256": "03d41cf3f2da94ef341622ac1623e98c80ee68983a1d915aa8c448c23943ceb8",
+      "bytes": 7089
+    },
+    "ledger": {
+      "fingerprint": "4d00bbacd8d35109d66b888c2b567a231868dbaa055cdfe18cdc36cee41329d2",
+      "canonicalSha256": "76ec9d3ca495f77f4791b61794519f5ce875eb7bb9b7af0592387f09257ae30f",
+      "bytes": 1229
+    },
+    "execution": {
+      "fingerprint": "c732de321850bd3c10a933742af710093cde565279e8fbdb50edf3a15cc13bf5",
+      "canonicalSha256": "fb0622be439ad882fbc1f4deb4974012c46a9380d8b9d30d145be3a4372d8280",
+      "bytes": 17289
+    },
+    "run": {
+      "fingerprint": "b93d5ba261698c61fb6a4e0924a8f5d9a9c94837178361bb70f25dc0d7828f01",
+      "canonicalSha256": "60c1a05bfa5c97f3ff1466a565b02f931ce17acff5933b893fec751e6fc40a2f",
+      "bytes": 28657
+    }
+  },
+  "resultIds": [
+    "http_eval_result_3f4b5696064aa24a286cb40d1582cec6c5449bdab606d2abddbbf443611bc7d9",
+    "http_eval_result_b1b77bec14bbcda2f73cc2c7000e51a76ddfd0ea98bd878ebcc4d32a96a2a966",
+    "http_eval_result_2b36718737ed69afba5e4a0f8e86437b951a647afbcf6ba92ada83d273519c86",
+    "http_eval_result_9e57a5acc12a4480add3a91d5490a2b7fdcb5e61df37e75301481c0487c8b05b"
+  ],
+  "gateIds": [
+    "http_eval_gate_1d4dbde2c9b8965c8d1a2c92e59c0aa04327a9c7131d55e1eddb8825bb05dcb2",
+    "http_eval_gate_de387593fd378f52dfde0ace4200465016cb13ab6fa4da7a3de35e1899f0a9b4",
+    "http_eval_gate_584d7eccd34c6afece56890958e6d8993227597fbd4c88dd02a68140aefa5d77",
+    "http_eval_gate_e9bd6c44d911c727ddfd106d1c7d57fe6b37a7662e7135247c44599b9e0ec0ee",
+    "http_eval_gate_4ec7277e6bf0c931c5db8e40a915cb61de075389f6bc99e72d968a79a4e0ae2e",
+    "http_eval_gate_12f9a1c01c2c31e3ce2185dd2dde6b2be6f74e3f372be11bcb9af99a46effc00",
+    "http_eval_gate_bddd9463b0afc296843f5d6d647d8c9d4b865a5b6f3be22eafc2f104509b1ec9",
+    "http_eval_gate_2257dbb096b39cd93b4062426463a66ecf88a703f8a3bafddd267b660df9a471",
+    "http_eval_gate_d74fe6ddf72067fa7446f009aad4e7296928327a1d504c6e02db86ef917def62",
+    "http_eval_gate_3a447cf39d4ca54f6a998ba95c0800cb35c35eedfa92e646e82922b020ce523d",
+    "http_eval_gate_0dc430964e64cb2c332b3ebba7f254909a629885966300f9910a062964bedb55",
+    "http_eval_gate_05b38985f2a8d0b9812f6ab965b8cae9f6dc79db78bee859ee70dee472925ff3",
+    "http_eval_gate_408a32a930bcba37f99a5252ca67fa01d771e2c017ab25a05f38dd41a981a11b",
+    "http_eval_gate_79bac38814b587a129ea5d35013af26e8b54d052302b2dad26d720da8d53d57b",
+    "http_eval_gate_a07020fd28ef0589aaea68791cb28088aaeaef9f5e2954a4769a800d931eba28",
+    "http_eval_gate_d3b342d499a6acdb292bd43d65fdf0306bac8343fd9b0f13532e9708f2f22240"
+  ]
+}

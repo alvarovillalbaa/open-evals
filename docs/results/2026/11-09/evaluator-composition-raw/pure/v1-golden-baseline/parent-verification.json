@@ -1,0 +1,47 @@
+{
+  "parent": "894025656a7d264b3b2d573c90e67c40aba57fcf",
+  "sourcePins": [
+    {
+      "path": "packages/core/src/hash.ts",
+      "bytes": 969,
+      "sha": "140471745127c6e0e0a8a58cc79b245006c6ae89"
+    },
+    {
+      "path": "packages/core/src/custom-evals.ts",
+      "bytes": 8855,
+      "sha": "07b8e07c302c01d9ac9e3ced02f91aea6592af15"
+    },
+    {
+      "path": "packages/core/src/eval-engine.ts",
+      "bytes": 10877,
+      "sha": "fc6a2284f730cea82759dab73da021df0ead274a"
+    },
+    {
+      "path": "packages/core/src/provided-output-runs.ts",
+      "bytes": 23809,
+      "sha": "ff5b67524171437a56d03043013722dd83f3b170"
+    },
+    {
+      "path": "packages/core/src/http-eval-plans.ts",
+      "bytes": 23103,
+      "sha": "174de53f9eb4e09727c66bec5b7f8a4e01664725"
+    },
+    {
+      "path": "packages/core/src/http-eval-runs.ts",
+      "bytes": 25918,
+      "sha": "cbcb90c5e4a53dc3585809dce34a3fefcc1130ba"
+    },
+    {
+      "path": "tests/unit/http-eval-core.test.mjs",
+      "bytes": 29658,
+      "sha": "bc2778cb89c12ec2f8c7100e0defa46a460152a3"
+    }
+  ],
+  "allMatchPublishedParent": true,
+  "fixture": {
+    "path": "tests/fixtures/http-eval-v1-golden.json",
+    "bytes": 10748,
+    "sha256": "4b993b5721528669bdda81add41eed3e8d9cb708c5618dd28ff464727bc3e1be"
+  },
+  "scope": "Post-derivation parent map/source verification; individual VM source reads also check inode/time stability."
+}

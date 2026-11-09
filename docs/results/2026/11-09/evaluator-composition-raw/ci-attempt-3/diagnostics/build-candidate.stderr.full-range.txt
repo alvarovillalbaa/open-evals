@@ -1,0 +1,18 @@
+
+Attention:
+Turborepo now collects completely anonymous telemetry regarding usage.
+This information is used to shape the Turborepo roadmap and prioritize features.
+You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+https://turborepo.dev/docs/telemetry
+
+ ERROR  @open-evals/web#build: command (/home/runner/work/open-evals/open-evals/apps/web) /home/runner/work/_temp/open-evals-composition-v2-tools/node_modules/.bin/pnpm run build exited (1)
+ WARNING  no output files found for task @open-evals/adapters#build. Please check your `outputs` key in `turbo.json`
+ WARNING  no output files found for task @open-evals/cli#build. Please check your `outputs` key in `turbo.json`
+ WARNING  no output files found for task @open-evals/core#build. Please check your `outputs` key in `turbo.json`
+ WARNING  no output files found for task @open-evals/db#build. Please check your `outputs` key in `turbo.json`
+ WARNING  no output files found for task @open-evals/mcp#build. Please check your `outputs` key in `turbo.json`
+ WARNING  no output files found for task @open-evals/sdk#build. Please check your `outputs` key in `turbo.json`
+ WARNING  no output files found for task @open-evals/statistics#build. Please check your `outputs` key in `turbo.json`
+ WARNING  no output files found for task @open-evals/test-fixtures#build. Please check your `outputs` key in `turbo.json`
+ WARNING  no output files found for task @open-evals/workflows#build. Please check your `outputs` key in `turbo.json`
+ ERROR  run failed: command  exited (1)

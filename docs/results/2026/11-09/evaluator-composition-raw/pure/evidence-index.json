@@ -1,0 +1,96 @@
+{
+  "schemaVersion": "eval-composition-pure-evidence-index-v1",
+  "status": "staged-private-for-release-review",
+  "parent": "894025656a7d264b3b2d573c90e67c40aba57fcf",
+  "scope": "T1 actual core source through Node v26.8.2 type stripping and restricted VM modules; prepared requests, parsing, immutable state and scoring only.",
+  "distinctChecks": {
+    "total": 76,
+    "newComposition": 33,
+    "existingHttpV1Regressions": 38,
+    "immutableParentGoldenComparisons": 5,
+    "rule": "Use the final pure-checks-2 case set once. Earlier attempts, repeated cases and baseline derivation are not additional distinct checks."
+  },
+  "attempts": [
+    {
+      "id": "pure-checks-1",
+      "status": "passed",
+      "tests": 74,
+      "passed": 74,
+      "failed": 0,
+      "skipped": 0,
+      "returncode": 0,
+      "receipt": "pure-checks-1/receipt-projection.json",
+      "stdout": "pure-checks-1/pure.stdout.txt",
+      "stderr": "pure-checks-1/pure.stderr.txt",
+      "sourceBefore": "pure-checks-1/source.json",
+      "sourceAfter": "pure-checks-1/source-final.json",
+      "note": "Earlier successful 31-new + 38-regression + 5-golden scope, before the two additional boundary cases."
+    },
+    {
+      "id": "pure-red-1",
+      "status": "failed",
+      "tests": 33,
+      "passed": 31,
+      "failed": 2,
+      "skipped": 0,
+      "returncode": 1,
+      "failedIds": ["EC17", "EC-HTTP16"],
+      "receipt": "pure-red-1/receipt-projection.json",
+      "stdout": "pure-red-1/pure.stdout.path-normalized.txt",
+      "stderr": "pure-red-1/pure.stderr.txt",
+      "sourceBefore": "pure-red-1/source.json",
+      "sourceAfter": "pure-red-1/source-final.json",
+      "note": "The expanded 33-case new-composition lane deliberately exposed source-array getter access and coerced ledger status. Failed evidence is retained; stdout is an explicitly path-normalized diagnostic projection."
+    },
+    {
+      "id": "pure-checks-2",
+      "status": "passed",
+      "tests": 76,
+      "passed": 76,
+      "failed": 0,
+      "skipped": 0,
+      "returncode": 0,
+      "receipt": "pure-checks-2/receipt-projection.json",
+      "stdout": "pure-checks-2/pure.stdout.txt",
+      "stderr": "pure-checks-2/pure.stderr.txt",
+      "sourceBefore": "pure-checks-2/source.json",
+      "sourceAfter": "pure-checks-2/source-final.json",
+      "note": "Final 33-new + 38-regression + 5-golden scope after the two boundary repairs; all 76 pass without skips or cancellation."
+    }
+  ],
+  "repairs": {
+    "patch": "repairs/two-boundary-fixes.patch",
+    "kind": "derived-two-file-unified-diff-not-original-stream",
+    "from": "pure-red-1/source",
+    "to": "pure-checks-2/source",
+    "changes": [
+      "Descriptor-snapshot unknown source arrays before reading their elements.",
+      "Require ledger row status to be a string enum instead of coercing other values."
+    ],
+    "note": "The patch contains only the two core repairs. It is not a whole-release source export; exact historical source trees remain private."
+  },
+  "immutableV1Baseline": {
+    "receipt": "v1-golden-baseline/receipt.json",
+    "publishedParentVerification": "v1-golden-baseline/parent-verification.json",
+    "goldenStdout": "v1-golden-baseline/stdout.txt",
+    "stderr": "v1-golden-baseline/stderr.txt",
+    "goldenSha256": "4b993b5721528669bdda81add41eed3e8d9cb708c5618dd28ff464727bc3e1be",
+    "note": "Golden values derive from the immutable published parent before registered tests. This derivation is not a separate test pass; the final five V1-COMPAT checks compare the candidate against these frozen values."
+  },
+  "sourcePeer": "peers/core-source-peer.json",
+  "provenance": "provenance.json",
+  "exportManifest": "export-manifest.json",
+  "evidenceHandling": [
+    "Passing stdout/stderr, source manifests, baseline records and core source-peer receipt are exact complete originals with byte/SHA provenance.",
+    "Receipt projections replace the private executable path with node v26.8.2 and relative arguments, omit redundant authoredCaseNames, and retain original receipt byte/SHA provenance. They are not unchanged originals.",
+    "Failed stdout preserves every other byte while replacing exactly four local-path prefixes with candidate-relative:/. Original byte/SHA provenance and transformation counts are recorded.",
+    "Before/after manifests are byte-identical within each attempt. All 46 recorded historical source-file bindings were checked against private retained snapshots; final 16 bindings also match the candidate at staging time.",
+    "No candidate path is changed by this staging operation, and no historical source tree is duplicated into this export."
+  ],
+  "proofLimits": [
+    "No target dispatch or actual DNS, socket, TLS, external provider or model call is established by this T1 evidence.",
+    "No TypeScript semantic compiler, application build, server, SQL or browser execution is established by these files.",
+    "No hosted Auth/RLS, production page, real-user or physical-device acceptance is established.",
+    "Source peer records establish source-review scope only. Separate CI and browser evidence must retain its own source bindings and proof limits."
+  ]
+}

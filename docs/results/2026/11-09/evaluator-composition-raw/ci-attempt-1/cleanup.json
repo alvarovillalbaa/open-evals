@@ -1,0 +1,27 @@
+{
+  "status": "removed",
+  "database": "oe_composition_v2_test_42714189619_1",
+  "validatedBeforeDrop": {
+    "name": "oe_composition_v2_test_42714189619_1",
+    "owner": "postgres",
+    "marker": "open-evals-composition-v2-20261109-created-disposable-v1"
+  },
+  "databaseAbsent": true,
+  "clusterStopped": true,
+  "serverLog": {
+    "file": "postgres-server.log",
+    "bytes": 7527,
+    "sha256": "ebcc035df14aace6dadb6e9a3fe22cd78ca780df46ae46bc53a46829e20f8587",
+    "complete": true
+  },
+  "removedCluster": {
+    "entries": 1001,
+    "fileBytes": 57011913,
+    "rootIdentity": [
+      66305,
+      9437185,
+      1001
+    ]
+  },
+  "clusterAbsent": true
+}

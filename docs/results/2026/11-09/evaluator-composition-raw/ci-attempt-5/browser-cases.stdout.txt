@@ -1,0 +1,9 @@
+
+Running 4 tests using 1 worker
+
+  ✓  1 [chromium-owned-production-authored-transport] › tests/e2e/eval-composition.browser.spec.ts:47:1 › CP-BR01 UI reusable items and overlapping sets execute two authored transport calls with six results, critical scopes and no replay dispatch (7.3s)
+  ✓  2 [chromium-owned-production-authored-transport] › tests/e2e/eval-composition.browser.spec.ts:114:1 › CP-BR02 narrow exact history retains two versions of one item and ordered membership after a new set version (4.1s)
+  ✓  3 [chromium-owned-production-authored-transport] › tests/e2e/eval-composition.browser.spec.ts:145:1 › CP-BR03 actual item CAS requires visible head review and a committed set retry replays before a later head (1.7s)
+  ✓  4 [chromium-owned-production-authored-transport] › tests/e2e/eval-composition.browser.spec.ts:180:1 › CP-BR04 real viewer, key and foreign workspace boundaries reject writes before malformed bodies and preserve scoped metadata (932ms)
+
+  4 passed (15.1s)

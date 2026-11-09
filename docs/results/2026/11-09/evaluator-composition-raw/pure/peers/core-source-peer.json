@@ -1,0 +1,107 @@
+{
+  "schemaVersion": "eval-composition-source-peer-v1",
+  "parent": "894025656a7d264b3b2d573c90e67c40aba57fcf",
+  "reviewer": "root",
+  "status": "source-review-clear-pure-checks-passed-integrated-runtime-unverified",
+  "files": [
+    {
+      "path": "packages/core/src/custom-evals.ts",
+      "bytes": 8855,
+      "sha256": "20276d52b66ef0e1fca0efa85b0d10ea8bde3b3d5854cd160664d40628e5886d"
+    },
+    {
+      "path": "packages/core/src/eval-composition-types.ts",
+      "bytes": 9976,
+      "sha256": "9bf08ccd0976ec9822922adc53069806413a27e15b4a0d9556847def7c68690c"
+    },
+    {
+      "path": "packages/core/src/eval-composition.ts",
+      "bytes": 24175,
+      "sha256": "959f8266e9e20c063d5c0e3af8760318548863bfbe1ad910f5a527c0e6abf158"
+    },
+    {
+      "path": "packages/core/src/eval-engine.ts",
+      "bytes": 10877,
+      "sha256": "847d2e79dcb767acece965ab25cbed1acc38cbebabc95372d273f694669c28d3"
+    },
+    {
+      "path": "packages/core/src/hash.ts",
+      "bytes": 969,
+      "sha256": "14c6a74e885a8bbc11b71a80bf4b4e306d4c6feb1868eafe59684eaeee3c7ab0"
+    },
+    {
+      "path": "packages/core/src/http-eval-plans.ts",
+      "bytes": 29351,
+      "sha256": "9c454acc0c63c0b819aaff586ee25c34c47694d7d01e37b5bed3f70d852329d2"
+    },
+    {
+      "path": "packages/core/src/http-eval-runs.ts",
+      "bytes": 26842,
+      "sha256": "71a05c4f537599ec703f2ae9439d7e4f5111eb6d9bf7531b498551a720d50b6c"
+    },
+    {
+      "path": "packages/core/src/http-eval-types.ts",
+      "bytes": 6698,
+      "sha256": "e7f279937a8c5a06d3ddc31a2dc2841f13653796a3051fed5809f6fa6234f5a9"
+    },
+    {
+      "path": "packages/core/src/index.ts",
+      "bytes": 681,
+      "sha256": "133cbd7cb81f66f67af3e54b65b69934cce6c236b5b6fb694c5b29915aa68bf2"
+    },
+    {
+      "path": "packages/core/src/provided-output-runs.ts",
+      "bytes": 23809,
+      "sha256": "1d4268df1886158630c19b7cbc040118cef4ee32b42bc60e2438c7dd2efdf38d"
+    },
+    {
+      "path": "tests/helpers/eval-composition-fixtures.mjs",
+      "bytes": 8677,
+      "sha256": "54a9a577ac91a0f4c76fed73c5d94cfef3aaec096b45104ae2386ebfdc22f463"
+    },
+    {
+      "path": "tests/fixtures/http-eval-v1-golden.json",
+      "bytes": 10748,
+      "sha256": "4b993b5721528669bdda81add41eed3e8d9cb708c5618dd28ff464727bc3e1be"
+    },
+    {
+      "path": "tests/unit/eval-composition.test.mjs",
+      "bytes": 10801,
+      "sha256": "09ba2d4b9f8ed6e8fe1f9b9d78db831336533ff61ed3cbcbf992fb80d8567894"
+    },
+    {
+      "path": "tests/unit/http-eval-composition.test.mjs",
+      "bytes": 14425,
+      "sha256": "af557fda793531cce6198ca435608c09b860e0fdfcdcd77672e72e63d31b642c"
+    },
+    {
+      "path": "tests/unit/http-eval-core.test.mjs",
+      "bytes": 29678,
+      "sha256": "165e65ca32550032f3d89c284f786885c4b64dce23993fad70d640166a0d2f9f"
+    },
+    {
+      "path": "tests/unit/http-eval-v1-compat.test.mjs",
+      "bytes": 5836,
+      "sha256": "0966f728f4413c35aea802ca8ed16edf11dbe2d86cd348c19ef33f19cc96ea91"
+    }
+  ],
+  "pureCheckReceipt": "pure-checks-2/receipt.json",
+  "distinctPureCases": 76,
+  "resolvedFindings": [
+    "Complete v2 member proof fields and exact item version identities are retained in set/HTTP snapshots.",
+    "New error class is erasable by the existing Node strip-only source harness.",
+    "Unknown draft family is rejected explicitly.",
+    "Unknown source arrays are descriptor-snapshotted before element enumeration.",
+    "Ledger status requires a string enum without coercion; valid v1 fingerprints remain exact."
+  ],
+  "reviewCoverage": [
+    "Strict item/set draft, preview, save, restore, native storage IDs and canonical complete budgets.",
+    "Explicit family matching across plan/start/ledger/event/execution/run tags; native request/response protocol unchanged.",
+    "Unique row/item scoring, retained overlapping memberships and all8 gate levels, with explicit v2 critical policy.",
+    "Historical compatibility values derive from immutable published parent rather than candidate roundtrips."
+  ],
+  "proofLimits": [
+    "Type stripping/VM preparation only; no TypeScript semantic compiler, server, SQL, browser, native target or model call.",
+    "The first74-pass source and33-case red source remain preserved separately; reruns do not add distinct cases."
+  ]
+}

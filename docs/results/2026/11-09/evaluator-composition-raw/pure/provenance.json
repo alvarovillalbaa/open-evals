@@ -1,0 +1,205 @@
+{
+  "schemaVersion": "eval-composition-pure-export-provenance-v1",
+  "entries": [
+    {
+      "path": "pure-checks-1/source.json",
+      "kind": "complete-original",
+      "original": {
+        "path": "pure-checks-1/source.json",
+        "bytes": 2586,
+        "sha256": "45d0d7e752df5e31b666591355cd58f7b1180338c5dea1a473570bc49280114e"
+      }
+    },
+    {
+      "path": "pure-checks-1/source-final.json",
+      "kind": "complete-original",
+      "original": {
+        "path": "pure-checks-1/source-final.json",
+        "bytes": 2586,
+        "sha256": "45d0d7e752df5e31b666591355cd58f7b1180338c5dea1a473570bc49280114e"
+      }
+    },
+    {
+      "path": "pure-checks-1/pure.stderr.txt",
+      "kind": "complete-original",
+      "original": {
+        "path": "pure-checks-1/pure.stderr.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "path": "pure-checks-1/pure.stdout.txt",
+      "kind": "complete-original",
+      "original": {
+        "path": "pure-checks-1/pure.stdout.txt",
+        "bytes": 19848,
+        "sha256": "f8f82377b792f519fd7514b1d324a4b236907280cf73684325c1089276ea6203"
+      }
+    },
+    {
+      "path": "pure-checks-1/receipt-projection.json",
+      "kind": "documented-receipt-projection",
+      "original": {
+        "path": "pure-checks-1/receipt.json",
+        "bytes": 8753,
+        "sha256": "a3ee823465f0a643374f65d33645cb4c9a9fe5a20ce7a7454630867412272b95"
+      }
+    },
+    {
+      "path": "pure-red-1/source.json",
+      "kind": "complete-original",
+      "original": {
+        "path": "pure-red-1/source.json",
+        "bytes": 2262,
+        "sha256": "21d01c63ec5fca56e0643bb7d6621018fc7d9efb239a3201bfa2edd2d9383e5e"
+      }
+    },
+    {
+      "path": "pure-red-1/source-final.json",
+      "kind": "complete-original",
+      "original": {
+        "path": "pure-red-1/source-final.json",
+        "bytes": 2262,
+        "sha256": "21d01c63ec5fca56e0643bb7d6621018fc7d9efb239a3201bfa2edd2d9383e5e"
+      }
+    },
+    {
+      "path": "pure-red-1/pure.stderr.txt",
+      "kind": "complete-original",
+      "original": {
+        "path": "pure-red-1/pure.stderr.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "path": "pure-red-1/pure.stdout.path-normalized.txt",
+      "kind": "path-normalized-complete-diagnostic-projection",
+      "original": {
+        "path": "pure-red-1/pure.stdout.txt",
+        "bytes": 11506,
+        "sha256": "7430ae9d6e0cd3077072f6fb0fedfba07517215ae9c5c1a02fe212558dbf92c0"
+      },
+      "normalization": {
+        "replacementLabel": "candidate-relative:/",
+        "replacementCounts": {
+          "fileUriPrefixes": 2,
+          "remainingAbsolutePrefixes": 2
+        },
+        "preserved": "All other bytes, assertions, failures, durations and TAP totals unchanged; not an unchanged original."
+      }
+    },
+    {
+      "path": "pure-red-1/receipt-projection.json",
+      "kind": "documented-receipt-projection",
+      "original": {
+        "path": "pure-red-1/receipt.json",
+        "bytes": 8523,
+        "sha256": "347b12a0226db41b4172380385b8be8d89c4d0536d89e476030133b938b9306b"
+      }
+    },
+    {
+      "path": "pure-checks-2/source.json",
+      "kind": "complete-original",
+      "original": {
+        "path": "pure-checks-2/source.json",
+        "bytes": 2586,
+        "sha256": "1a069cc7d36bbd590c78947c9cbe572d6f51c9673017a8e1585f30024b06acbf"
+      }
+    },
+    {
+      "path": "pure-checks-2/source-final.json",
+      "kind": "complete-original",
+      "original": {
+        "path": "pure-checks-2/source-final.json",
+        "bytes": 2586,
+        "sha256": "1a069cc7d36bbd590c78947c9cbe572d6f51c9673017a8e1585f30024b06acbf"
+      }
+    },
+    {
+      "path": "pure-checks-2/pure.stderr.txt",
+      "kind": "complete-original",
+      "original": {
+        "path": "pure-checks-2/pure.stderr.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "path": "pure-checks-2/pure.stdout.txt",
+      "kind": "complete-original",
+      "original": {
+        "path": "pure-checks-2/pure.stdout.txt",
+        "bytes": 20333,
+        "sha256": "6a7198d1853799455a1d0cfa20979437cb2c787c6dc393787fa6b048f0bfd44b"
+      }
+    },
+    {
+      "path": "pure-checks-2/receipt-projection.json",
+      "kind": "documented-receipt-projection",
+      "original": {
+        "path": "pure-checks-2/receipt.json",
+        "bytes": 16347,
+        "sha256": "a21a707f871c14ab7134005fee36be61469cba03c270d615832892ee5d008329"
+      }
+    },
+    {
+      "path": "v1-golden-baseline/receipt.json",
+      "kind": "complete-original",
+      "original": {
+        "path": "v1-golden-baseline/receipt.json",
+        "bytes": 2023,
+        "sha256": "ddbd3e57234534546921d2cfa37346e90696c602af8787b624bfcfb52900b57c"
+      }
+    },
+    {
+      "path": "v1-golden-baseline/parent-verification.json",
+      "kind": "complete-original",
+      "original": {
+        "path": "v1-golden-baseline/parent-verification.json",
+        "bytes": 1410,
+        "sha256": "d35e5ad2577ccd76e090cbe0b0b78f4762ef82da7be8144a0cb89d2ff76afdec"
+      }
+    },
+    {
+      "path": "v1-golden-baseline/stdout.txt",
+      "kind": "complete-original",
+      "original": {
+        "path": "v1-golden-baseline/stdout.txt",
+        "bytes": 10748,
+        "sha256": "4b993b5721528669bdda81add41eed3e8d9cb708c5618dd28ff464727bc3e1be"
+      }
+    },
+    {
+      "path": "v1-golden-baseline/stderr.txt",
+      "kind": "complete-original",
+      "original": {
+        "path": "v1-golden-baseline/stderr.txt",
+        "bytes": 284,
+        "sha256": "4c5aa0fdfe120ab08bf91b580ab9d8cd663dc88b436f382380cd0482cc914b9b"
+      }
+    },
+    {
+      "path": "peers/core-source-peer.json",
+      "kind": "complete-original",
+      "original": {
+        "path": "core-source-peer.json",
+        "bytes": 4269,
+        "sha256": "b05636ca61074018ee9df876d14ae8d148c773f78cc51afbad3baf83528ed5f5"
+      }
+    },
+    {
+      "path": "repairs/two-boundary-fixes.patch",
+      "kind": "derived-two-file-unified-diff",
+      "derivation": "pure-red-1/source to pure-checks-2/source; context lines retained; not an original stream or whole-repository patch.",
+      "files": [
+        "packages/core/src/eval-composition.ts",
+        "packages/core/src/http-eval-runs.ts"
+      ]
+    }
+  ],
+  "verifiedHistoricalSourceFiles": 46,
+  "finalSourceMatchesCurrentCandidate": true,
+  "privacyPolicy": "No local-user or package-manager absolute paths are exported. Private original receipts and failed stdout remain in the private task root."
+}

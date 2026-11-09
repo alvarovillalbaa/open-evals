@@ -1,0 +1,963 @@
+{
+  "acceptedSource": "894025656a7d264b3b2d573c90e67c40aba57fcf",
+  "verificationSource": "cdfd35b8076be3e75959a7a8d5f33f0ce3cfd341",
+  "expectedParent": "894025656a7d264b3b2d573c90e67c40aba57fcf",
+  "directParent": true,
+  "expectedParentTree": "9794779b04cae8a9a8490e8854d71dd0f25293ce",
+  "actualParentTree": "9794779b04cae8a9a8490e8854d71dd0f25293ce",
+  "verificationTree": "c75bebdda09abce560cc6b2f96ce6f7a27a0bf0e",
+  "runId": "42716305159",
+  "attempt": 1,
+  "protectedFiles": [
+    {
+      "path": ".github/workflows/eval-composition-checks.yml",
+      "bytes": 103616,
+      "sha256": "14bdb0d2da8d502c934cd4bd35a266dff33f6d768190757f965e537296f3a61b"
+    },
+    {
+      "path": "AGENTS.md",
+      "bytes": 915,
+      "sha256": "258170eca3c41433e585ee3af8c2277dcaa11e41876c1bacb30fc304663d2ece"
+    },
+    {
+      "path": "README.md",
+      "bytes": 13057,
+      "sha256": "b536dd933cbed4ac333d60c2000b278e48a906fd64212cb08f4f6b3ac663060f"
+    },
+    {
+      "path": "apps/web/app/(product)/evals/composition/composition-editor.tsx",
+      "bytes": 25186,
+      "sha256": "cfe457b833d695f4280a8f6715e7ed9413a62b96da3a4e05fbd2df76c6f2cd8e"
+    },
+    {
+      "path": "apps/web/app/(product)/evals/composition/composition-view.tsx",
+      "bytes": 4055,
+      "sha256": "d7e5dfdc0e7645f4e620c7ab0790140febe81b3f8358d8df23a67db7c3057b6a"
+    },
+    {
+      "path": "apps/web/app/(product)/evals/composition/error.tsx",
+      "bytes": 582,
+      "sha256": "7fc3713a2e3db0f8434520d8086e71e23d65b88f638755217460712ca9f18b6d"
+    },
+    {
+      "path": "apps/web/app/(product)/evals/composition/items/[itemId]/page.tsx",
+      "bytes": 1326,
+      "sha256": "c88488fc98ce06f5b90cda3f0aa9adc51a8452c6444ad02cc5498ed2bd417cee"
+    },
+    {
+      "path": "apps/web/app/(product)/evals/composition/items/[itemId]/versions/[versionId]/page.tsx",
+      "bytes": 1323,
+      "sha256": "5212546c96d16626eac61ee5b7ea3f89c50596c5751f63fd4187933501d6dd6a"
+    },
+    {
+      "path": "apps/web/app/(product)/evals/composition/loading.tsx",
+      "bytes": 163,
+      "sha256": "392d268389c378c284eef946092484b562761629684125796b8d94b4997e8efd"
+    },
+    {
+      "path": "apps/web/app/(product)/evals/composition/page.tsx",
+      "bytes": 3851,
+      "sha256": "b48f1be829d7e0e0547e03f0749681c75047bca56fc11e38ece60ef066e2a70f"
+    },
+    {
+      "path": "apps/web/app/(product)/evals/composition/sets/[setId]/page.tsx",
+      "bytes": 1317,
+      "sha256": "7adf56e7b8a8302c7a2db1c0beafc5a1879bc2e8da3c7114836ab738e3d17cc9"
+    },
+    {
+      "path": "apps/web/app/(product)/evals/composition/sets/[setId]/versions/[versionId]/page.tsx",
+      "bytes": 1315,
+      "sha256": "736cf52a8cb70dec4b8044394c0a70c8616902da62122535fc7cb2fb79222d76"
+    },
+    {
+      "path": "apps/web/app/(product)/evals/datasets/[datasetId]/page.tsx",
+      "bytes": 2970,
+      "sha256": "e5e9bc048cd19d6e22b08ac1eb1b1023fb6c1667ac2f31291e2c4a9e8699bf08"
+    },
+    {
+      "path": "apps/web/app/(product)/evals/datasets/[datasetId]/versions/[versionId]/page.tsx",
+      "bytes": 4887,
+      "sha256": "22377d1a72f24314ad47fc2cbd371ab914247b1507c6ab98e8c8eed883b4ade6"
+    },
+    {
+      "path": "apps/web/app/(product)/evals/datasets/custom-dataset-composer.tsx",
+      "bytes": 34102,
+      "sha256": "626a58759481f68b10d5f99a198f57d2243c7692e841817812f59b4d24ab120e"
+    },
+    {
+      "path": "apps/web/app/(product)/evals/datasets/error.tsx",
+      "bytes": 664,
+      "sha256": "144c5af5850a3409c0685f8fc8b3bf9392a14416ea4584db75912785ee65deb8"
+    },
+    {
+      "path": "apps/web/app/(product)/evals/datasets/loading.tsx",
+      "bytes": 325,
+      "sha256": "07d460400dfc9bdc92b4c40491836556b9e875a7984dc6a205b9a4067223e5b7"
+    },
+    {
+      "path": "apps/web/app/(product)/evals/datasets/page.tsx",
+      "bytes": 3037,
+      "sha256": "357625da56b0c56548a42642d5529eb5519d35af165f51397bc6fd0491f453c5"
+    },
+    {
+      "path": "apps/web/app/(product)/evals/page.tsx",
+      "bytes": 9506,
+      "sha256": "81a335af1dbec10be5c303bac30b8fe376274bcada3bcf9c3d320941be62bc3e"
+    },
+    {
+      "path": "apps/web/app/(product)/evals/plans/[planId]/page.tsx",
+      "bytes": 2342,
+      "sha256": "5ac334b00a7a0751c7a996d857e93cffb44d62a7a0dbe5063e1a438b6cbaed6e"
+    },
+    {
+      "path": "apps/web/app/(product)/evals/plans/[planId]/versions/[versionId]/page.tsx",
+      "bytes": 3084,
+      "sha256": "501d0701a0d8f8a8550e3ce47573732f9f9a77789125e9ad312234cd734508d2"
+    },
+    {
+      "path": "apps/web/app/(product)/evals/plans/error.tsx",
+      "bytes": 677,
+      "sha256": "5c433fdf74890530005b1586278c8ff040798624f0c5129be311e6fd421a2214"
+    },
+    {
+      "path": "apps/web/app/(product)/evals/plans/http-execution-controls.tsx",
+      "bytes": 11697,
+      "sha256": "f8145e6f5554922c34b4eb9f75a17a0453eb6a58bbd6bbdcbe1acc0901e24ac8"
+    },
+    {
+      "path": "apps/web/app/(product)/evals/plans/http-plan-composer.tsx",
+      "bytes": 32358,
+      "sha256": "bbbfabd0e747538a97b14670fb29d7a6bf5b340a734b108e48c84c9ca42f3d4e"
+    },
+    {
+      "path": "apps/web/app/(product)/evals/plans/http-target-view.tsx",
+      "bytes": 6421,
+      "sha256": "d4f62910c107f3f4ded4b8532e61115a11cc27d9f082ebe6d0550b756f159ecb"
+    },
+    {
+      "path": "apps/web/app/(product)/evals/plans/loading.tsx",
+      "bytes": 163,
+      "sha256": "5a9f64aa4342d6ed0b7f0b6e56d7c570cad47ad5e88a316e3923436b5bb72ed6"
+    },
+    {
+      "path": "apps/web/app/(product)/evals/plans/page.tsx",
+      "bytes": 3487,
+      "sha256": "9bd8e6165a96b8b97470532f1060268b17803ed4d2dbf6b2b58f6e83996bb554"
+    },
+    {
+      "path": "apps/web/app/(product)/evals/plans/runs/[runId]/page.tsx",
+      "bytes": 1844,
+      "sha256": "c40e31994bab302393bf22c7c846947a5c59c836c51c448e38991a3c1a9effbb"
+    },
+    {
+      "path": "apps/web/app/(product)/evals/run/[runId]/page.tsx",
+      "bytes": 7829,
+      "sha256": "fdcd8e2b1dbcf2726ce963d80959e0979b6d7912826ec922324914335bac41dd"
+    },
+    {
+      "path": "apps/web/app/(product)/evals/run/page.tsx",
+      "bytes": 1734,
+      "sha256": "a8f2eb4a4708e0662ef9bf8d55040cb50a945aa76e321a7a98b75c47145b4b62"
+    },
+    {
+      "path": "apps/web/app/(product)/evals/run/provided-output-composer.tsx",
+      "bytes": 25811,
+      "sha256": "3b940afb153b8b2bf83c5fa59d4ae14ade3e8546ae4d25a9284311311f3a0dbb"
+    },
+    {
+      "path": "apps/web/app/api/v1/custom-datasets/[datasetId]/route.ts",
+      "bytes": 709,
+      "sha256": "4253fe5259b72d613f2e6d7bb01396acb3114ce86c64fc4701d14b14d27df423"
+    },
+    {
+      "path": "apps/web/app/api/v1/custom-datasets/[datasetId]/versions/[versionId]/route.ts",
+      "bytes": 695,
+      "sha256": "4c427884b4cc2ab5b84855cc77385963e19856f291730e21d7989034fcf1a934"
+    },
+    {
+      "path": "apps/web/app/api/v1/custom-datasets/preview/route.ts",
+      "bytes": 501,
+      "sha256": "2c22db0e377f67bdfb2e0ab3b5cb6a53d3963e367e2357b33696bb41f19964a1"
+    },
+    {
+      "path": "apps/web/app/api/v1/custom-datasets/route.ts",
+      "bytes": 780,
+      "sha256": "0db852a0cfc409a146da996f267fa90ca6a2d76fa2196465e91d56cf72a6ff0f"
+    },
+    {
+      "path": "apps/web/app/api/v1/http-target-plans/[planId]/route.ts",
+      "bytes": 652,
+      "sha256": "a202777b5c677cdf8f212f94142451c27b49d90f22f0d387de683a41cec19628"
+    },
+    {
+      "path": "apps/web/app/api/v1/http-target-plans/[planId]/versions/[versionId]/route.ts",
+      "bytes": 759,
+      "sha256": "02aeb4f1102139a89b7d3dbd970f814972583a31477489e43d33a044588c2f0d"
+    },
+    {
+      "path": "apps/web/app/api/v1/http-target-plans/[planId]/versions/[versionId]/runs/route.ts",
+      "bytes": 1263,
+      "sha256": "9063ecd4c61cbb84d25ba52fdd2339303a856264b8505842737080b1a19c831d"
+    },
+    {
+      "path": "apps/web/app/api/v1/http-target-plans/preview/route.ts",
+      "bytes": 535,
+      "sha256": "caf5936a9a5187f923f4dd1256635487c2af8bf71cc303114711897f10055051"
+    },
+    {
+      "path": "apps/web/app/api/v1/http-target-plans/route.ts",
+      "bytes": 757,
+      "sha256": "05bffb5c76ce38ccd1ad33476eff16b139ebc1137ed9c13dfffd61663ea85a83"
+    },
+    {
+      "path": "apps/web/app/api/v1/http-target-plans/runs/[runId]/recover/route.ts",
+      "bytes": 656,
+      "sha256": "3561a3476ec0abb984b0e2bb43984a3b427b6783b3cdc4caceb117031dd63add"
+    },
+    {
+      "path": "apps/web/app/api/v1/http-target-plans/runs/[runId]/route.ts",
+      "bytes": 731,
+      "sha256": "7b56298d9f0ea7cc1e2244d12a9916f8fb8dac6086fd060602110c21ae51ed16"
+    },
+    {
+      "path": "apps/web/app/api/v1/provided-output-runs/[runId]/route.ts",
+      "bytes": 643,
+      "sha256": "afa9b0bda2a2295165a078217cb8c500bc88d31b50a516f72c991bb4a8c9e33c"
+    },
+    {
+      "path": "apps/web/app/api/v1/provided-output-runs/preview/route.ts",
+      "bytes": 542,
+      "sha256": "b56465ee79233b86aadcb13fda9ec000bbe112ec90df073a5d17ba39c1594964"
+    },
+    {
+      "path": "apps/web/app/api/v1/provided-output-runs/route.ts",
+      "bytes": 844,
+      "sha256": "5df2c398fde099e6cf139fbefff537d1d38391fb85c3146d2164e7eb1a3d146f"
+    },
+    {
+      "path": "apps/web/app/api/v1/provided-output-runs/sources/route.ts",
+      "bytes": 468,
+      "sha256": "3f0777ad67a3b7b90671883ffbe180ac1214146b8fd3938ffee4c2bb74a6faaa"
+    },
+    {
+      "path": "apps/web/app/api/v2/eval-items/[itemId]/route.ts",
+      "bytes": 652,
+      "sha256": "8958e0d1cc4462d33738842e314048113d80fb5e6a81a05c59a63f929ce3684e"
+    },
+    {
+      "path": "apps/web/app/api/v2/eval-items/[itemId]/versions/[versionId]/route.ts",
+      "bytes": 697,
+      "sha256": "78380866373544fcfa270c0de573215a4c871144e5b2b365850a7fa8afa2f262"
+    },
+    {
+      "path": "apps/web/app/api/v2/eval-items/preview/route.ts",
+      "bytes": 515,
+      "sha256": "8fba395166f01c46725198f9a198cc0415b9d2ffc397d38d2b4af960a212b401"
+    },
+    {
+      "path": "apps/web/app/api/v2/eval-items/route.ts",
+      "bytes": 785,
+      "sha256": "33f9dd66e74cb7203c3ae0738d279af904e624b5dc029232d62693876f852ff1"
+    },
+    {
+      "path": "apps/web/app/api/v2/eval-sets/[setId]/route.ts",
+      "bytes": 648,
+      "sha256": "353610da71f436f088b3bb7e8df84f0f5d07c98ea79a922a013286233aabe289"
+    },
+    {
+      "path": "apps/web/app/api/v2/eval-sets/[setId]/versions/[versionId]/route.ts",
+      "bytes": 693,
+      "sha256": "6f3d1126f3472d774a95aac443d730c6662d67bfcc69aacb87246c508ae68515"
+    },
+    {
+      "path": "apps/web/app/api/v2/eval-sets/preview/route.ts",
+      "bytes": 514,
+      "sha256": "1931dd8ac2fe88a17b2d7ce08f147d3ddfc8481ccabf8e279bf8ff58e575cbf1"
+    },
+    {
+      "path": "apps/web/app/api/v2/eval-sets/route.ts",
+      "bytes": 783,
+      "sha256": "54511e23d80811831e101e4beb96556d55125a3a4f4abe7334eb39beb8be87f6"
+    },
+    {
+      "path": "apps/web/lib/auth.ts",
+      "bytes": 7872,
+      "sha256": "32f35257f9dbe65cd5e40f9c5c6981ff27a54ef0dee955919a49e8bd88ed82e0"
+    },
+    {
+      "path": "apps/web/lib/custom-dataset-types.ts",
+      "bytes": 767,
+      "sha256": "21f283fb100e7c279bbd643748f94e31aeb37193968e826f6250f7da558456eb"
+    },
+    {
+      "path": "apps/web/lib/custom-datasets.ts",
+      "bytes": 7661,
+      "sha256": "7fa850c7bbb4f72c1d948e6e6f327ed4c471c2f95fddf3a0b635c81d9fcc3f92"
+    },
+    {
+      "path": "apps/web/lib/custom-eval-access.ts",
+      "bytes": 709,
+      "sha256": "b1a23a32a9052bf681736f723500fa816514bb83a7bee2c7f7afcb6216cf4473"
+    },
+    {
+      "path": "apps/web/lib/custom-evals.ts",
+      "bytes": 5461,
+      "sha256": "62b6610091b35da0567bdb179e6e85267062057f5040fc1cf54fd1c09f47b384"
+    },
+    {
+      "path": "apps/web/lib/eval-composition-types.ts",
+      "bytes": 1412,
+      "sha256": "8f2ab6a339f4d65cdd17c78119fde61579c4add99afec89919af0241b1600db7"
+    },
+    {
+      "path": "apps/web/lib/eval-composition.ts",
+      "bytes": 7588,
+      "sha256": "1df1151961357969aa5fe36b2b27dbd64f5e49608034b46df17e99fe3b0b277c"
+    },
+    {
+      "path": "apps/web/lib/http-target-client.ts",
+      "bytes": 1308,
+      "sha256": "76c90db612cf05bc7e75fd02808150415562708c31491508ed5e809572e6a6bb"
+    },
+    {
+      "path": "apps/web/lib/http-target-plans.ts",
+      "bytes": 11071,
+      "sha256": "92e13408b9713bd648b115978c1be42e0b60e48f3c8c2c2ae1d9d01648a97257"
+    },
+    {
+      "path": "apps/web/lib/http-target-runs.ts",
+      "bytes": 7979,
+      "sha256": "dcc3ee352dd1a10877b2326c7fd76240782866eb86c49e092a5d2f1d7c6be491"
+    },
+    {
+      "path": "apps/web/lib/http-target-types.ts",
+      "bytes": 463,
+      "sha256": "456d9abc48fda3a829fa728a77d102315d691bd29beaa919902f41927205030b"
+    },
+    {
+      "path": "apps/web/lib/instruction-request.ts",
+      "bytes": 2527,
+      "sha256": "97a8b508637e0080d7ffb8645c4866551945625744f6e76ab2645be3898d915a"
+    },
+    {
+      "path": "apps/web/lib/provided-output-runs.ts",
+      "bytes": 6550,
+      "sha256": "b10a42462cb29dc68637eb2d07f71e28bdb18b4694129942069dc12655d3e6ed"
+    },
+    {
+      "path": "apps/web/lib/provided-output-types.ts",
+      "bytes": 895,
+      "sha256": "fc01e8d6d827e94f86d28deb1e091a851f9cb7736997225e88823521747e939a"
+    },
+    {
+      "path": "apps/web/next.config.ts",
+      "bytes": 189,
+      "sha256": "e91b5a819615bab53990cc8e2c0fa20f4e14bc59e9d350943a23b0040d5b38ca"
+    },
+    {
+      "path": "apps/web/package.json",
+      "bytes": 1207,
+      "sha256": "8bf8eb6f8d4cb25279b80be1bc8cf088cbaa789409ace2f408b18c49f671e2c5"
+    },
+    {
+      "path": "apps/web/tsconfig.json",
+      "bytes": 480,
+      "sha256": "5a8e0f93163957c084d57d0950e5f4b202d075801793b642a89468af6d088673"
+    },
+    {
+      "path": "docs/custom-datasets.md",
+      "bytes": 3133,
+      "sha256": "453a1348cbd06abb9286ab1635ba4641d5ce05da01a705d9e08f2f38419541ec"
+    },
+    {
+      "path": "docs/evaluator-composition.md",
+      "bytes": 6945,
+      "sha256": "e293a6d4bc56ba624971538ba9512ade9742a78863b1ee7ebdd37a86258e9a3a"
+    },
+    {
+      "path": "docs/http-target-runs.md",
+      "bytes": 12124,
+      "sha256": "9b39f0cf7dd554fa22ba6c7a835ea0fbe1eb40ca98e271f9be6022fa2781014f"
+    },
+    {
+      "path": "docs/product-surface.md",
+      "bytes": 5034,
+      "sha256": "7219d3a62e437259ea4c652db6a9521b305e8ab7ad462ba87dda19d6f896df97"
+    },
+    {
+      "path": "docs/proposals/custom-datasets.md",
+      "bytes": 13029,
+      "sha256": "d32afb90a412d34348995b2a3a785e9e1cb58463ee2a0cc816a0268e79b34a48"
+    },
+    {
+      "path": "docs/proposals/evaluator-composition-checks.md",
+      "bytes": 2631,
+      "sha256": "d20409ea571b6dc63a7a3021ba5bff9af0711ad8b4c953a7a859ecae458afda0"
+    },
+    {
+      "path": "docs/proposals/http-target-runs-checks.md",
+      "bytes": 3250,
+      "sha256": "71abb6b9741c4c3714ded25f34ad62269e9a7c4d7ccba0e956b33de0e8b2a41d"
+    },
+    {
+      "path": "package.json",
+      "bytes": 2248,
+      "sha256": "1a10d0138fae69c7c297c80456d93d0824ed6c85b8f7f161ce5c75d6f5c8651e"
+    },
+    {
+      "path": "packages/adapters/package.json",
+      "bytes": 790,
+      "sha256": "8e40086e58b2ec795c2096d77afa2b0d6c677e7c8f8b296c0138af72b0b314c9"
+    },
+    {
+      "path": "packages/adapters/src/http-target.ts",
+      "bytes": 13927,
+      "sha256": "91f6bedc8d0a2a931e57e05ac68dc8095f42283e70bc513b611e8d00e4a5a0b9"
+    },
+    {
+      "path": "packages/adapters/src/index.ts",
+      "bytes": 208,
+      "sha256": "e34a7599d0819858ee2890e26d216aa51c1f16438ca3d5bdf6a3513b5296de74"
+    },
+    {
+      "path": "packages/adapters/src/targets.ts",
+      "bytes": 7130,
+      "sha256": "2a7dddc36d0223f01a4665a77289d04542cb698a99d7acbe20a9861f57a980ae"
+    },
+    {
+      "path": "packages/adapters/tsconfig.json",
+      "bytes": 160,
+      "sha256": "613f85d231267858d093958f5b6448f14337c3b11c9235bc7a32b9a097e51a00"
+    },
+    {
+      "path": "packages/core/package.json",
+      "bytes": 512,
+      "sha256": "5ffeec812bd1c17cbf8790ae632fda6e6413d19445fc5c8ec21324f34cec4c8b"
+    },
+    {
+      "path": "packages/core/src/custom-dataset-types.ts",
+      "bytes": 4069,
+      "sha256": "5353576aa44151b831c65fd71f03aad7fef282f6f8bf49d85cd02160cb882c15"
+    },
+    {
+      "path": "packages/core/src/custom-datasets.ts",
+      "bytes": 35107,
+      "sha256": "0ab19527f6be295cb92b922e05d7b245953afa29e11d9ea7d7a15f6f535b500a"
+    },
+    {
+      "path": "packages/core/src/custom-evals.ts",
+      "bytes": 8855,
+      "sha256": "20276d52b66ef0e1fca0efa85b0d10ea8bde3b3d5854cd160664d40628e5886d"
+    },
+    {
+      "path": "packages/core/src/eval-composition-types.ts",
+      "bytes": 9976,
+      "sha256": "9bf08ccd0976ec9822922adc53069806413a27e15b4a0d9556847def7c68690c"
+    },
+    {
+      "path": "packages/core/src/eval-composition.ts",
+      "bytes": 24175,
+      "sha256": "959f8266e9e20c063d5c0e3af8760318548863bfbe1ad910f5a527c0e6abf158"
+    },
+    {
+      "path": "packages/core/src/eval-engine.ts",
+      "bytes": 10877,
+      "sha256": "847d2e79dcb767acece965ab25cbed1acc38cbebabc95372d273f694669c28d3"
+    },
+    {
+      "path": "packages/core/src/hash.ts",
+      "bytes": 969,
+      "sha256": "14c6a74e885a8bbc11b71a80bf4b4e306d4c6feb1868eafe59684eaeee3c7ab0"
+    },
+    {
+      "path": "packages/core/src/http-eval-plans.ts",
+      "bytes": 29351,
+      "sha256": "9c454acc0c63c0b819aaff586ee25c34c47694d7d01e37b5bed3f70d852329d2"
+    },
+    {
+      "path": "packages/core/src/http-eval-runs.ts",
+      "bytes": 26842,
+      "sha256": "71a05c4f537599ec703f2ae9439d7e4f5111eb6d9bf7531b498551a720d50b6c"
+    },
+    {
+      "path": "packages/core/src/http-eval-types.ts",
+      "bytes": 6698,
+      "sha256": "e7f279937a8c5a06d3ddc31a2dc2841f13653796a3051fed5809f6fa6234f5a9"
+    },
+    {
+      "path": "packages/core/src/index.ts",
+      "bytes": 681,
+      "sha256": "133cbd7cb81f66f67af3e54b65b69934cce6c236b5b6fb694c5b29915aa68bf2"
+    },
+    {
+      "path": "packages/core/src/provided-output-runs.ts",
+      "bytes": 23809,
+      "sha256": "1d4268df1886158630c19b7cbc040118cef4ee32b42bc60e2438c7dd2efdf38d"
+    },
+    {
+      "path": "packages/core/src/provided-output-types.ts",
+      "bytes": 3455,
+      "sha256": "99b88738f66152d279ba1b7d540c7556cba26fbf779ff8982dcaf0ae61ffe18d"
+    },
+    {
+      "path": "packages/core/src/types.ts",
+      "bytes": 9194,
+      "sha256": "f033bfd60b1883dd8efd35768deb380cf92186df69089ffc29ad991ca97ac25f"
+    },
+    {
+      "path": "packages/core/tsconfig.json",
+      "bytes": 160,
+      "sha256": "613f85d231267858d093958f5b6448f14337c3b11c9235bc7a32b9a097e51a00"
+    },
+    {
+      "path": "packages/db/migrations/0001_init.sql",
+      "bytes": 14836,
+      "sha256": "5472b6946bec22c5cd56b6e671a2ae38503882e37ca8b3bea1b7ac0b7128043d"
+    },
+    {
+      "path": "packages/db/migrations/0002_hosted_integrations.sql",
+      "bytes": 4066,
+      "sha256": "0ab45c7cb5f653a094204e42c1d08725bfa26717ccef5581c90dd61f434cff5e"
+    },
+    {
+      "path": "packages/db/package.json",
+      "bytes": 600,
+      "sha256": "3d6ff2202d0aee127293f7b4298088e10c1b893b47528180e1a7a4098f837906"
+    },
+    {
+      "path": "packages/db/src/custom-dataset-types.ts",
+      "bytes": 3040,
+      "sha256": "e5e174634b6bd156935324cfb4e8528c26d9fe699a06ccacc5095c5ff73bcdb9"
+    },
+    {
+      "path": "packages/db/src/custom-datasets.ts",
+      "bytes": 32091,
+      "sha256": "3e11663f91107489443b5b37a19abdd1a4fa8170561c0d785a97f041b907347b"
+    },
+    {
+      "path": "packages/db/src/custom-evals.ts",
+      "bytes": 26003,
+      "sha256": "77045e8c69107d636c63fc72ae287bc273d62739dfbe038ff6419c4d8d224e9f"
+    },
+    {
+      "path": "packages/db/src/dataset-snapshots.ts",
+      "bytes": 9453,
+      "sha256": "93a3d5af3e508fc6e5e5aca6b05d8cba9be7db5347531695c956ffa8ca4c473c"
+    },
+    {
+      "path": "packages/db/src/eval-composition-types.ts",
+      "bytes": 4730,
+      "sha256": "6e4f1dae9291b00855f2851ce2286278246edbf4213a52b867786d55a49ac546"
+    },
+    {
+      "path": "packages/db/src/eval-composition.ts",
+      "bytes": 36006,
+      "sha256": "d690220c1f50f5ad593d6f3f43c33429222d7d962b73b2f03e5ca292a9615bbd"
+    },
+    {
+      "path": "packages/db/src/http-eval-plans.ts",
+      "bytes": 25079,
+      "sha256": "91f58276b0d8ba6ea037e52a19a91c20556062585a60d49e528292d81d1c4373"
+    },
+    {
+      "path": "packages/db/src/http-eval-runs.ts",
+      "bytes": 40226,
+      "sha256": "369596198a446cd463ff25af57d091d4a10b432efdab9682203f76cbd7149ac4"
+    },
+    {
+      "path": "packages/db/src/http-eval-types.ts",
+      "bytes": 14477,
+      "sha256": "fa13509b4c39b959d4913fee3cae50acb7991797c4cb3c4bb82901f0606c8dd1"
+    },
+    {
+      "path": "packages/db/src/index.ts",
+      "bytes": 1170,
+      "sha256": "44e44c6872ac26ea639b1186639e8297ed2245e144d6d80b03b3052f26879336"
+    },
+    {
+      "path": "packages/db/src/provided-output-runs.ts",
+      "bytes": 26748,
+      "sha256": "939d8105e1e01d0f4bad672b456586556e2a5c48146d52413439839228f20efa"
+    },
+    {
+      "path": "packages/db/src/schema.ts",
+      "bytes": 15945,
+      "sha256": "31a7e68d6fd8630e30fa56ae37eb5d1e54d1f560aff57e5b2e5f6d92c1b58442"
+    },
+    {
+      "path": "packages/db/src/service.ts",
+      "bytes": 46235,
+      "sha256": "f3d9120db54d97e22d2c97d75cf6c4be135db02fb208f64833a845e7caadad61"
+    },
+    {
+      "path": "packages/db/tsconfig.json",
+      "bytes": 160,
+      "sha256": "613f85d231267858d093958f5b6448f14337c3b11c9235bc7a32b9a097e51a00"
+    },
+    {
+      "path": "pnpm-lock.yaml",
+      "bytes": 214155,
+      "sha256": "77443b49cd42f85638d82f00bd0e9c510f3662cac777ee0082ffb103775702ea"
+    },
+    {
+      "path": "tests/e2e/custom-datasets.browser.config.ts",
+      "bytes": 1517,
+      "sha256": "a2c178567c728324ea765321f32ac88f2a81cc47ce028d8d171bbba85ddac4b6"
+    },
+    {
+      "path": "tests/e2e/custom-datasets.browser.fixture.ts",
+      "bytes": 21931,
+      "sha256": "71bb87f409b65352602709a8778a2ba854be13e91f1512fe68d96cba3d67ab1d"
+    },
+    {
+      "path": "tests/e2e/custom-datasets.browser.spec.ts",
+      "bytes": 25992,
+      "sha256": "5bc714f83a36354a84e438cbdc04367dd118e3eb7ad2daebc27994d183e951b1"
+    },
+    {
+      "path": "tests/e2e/eval-composition.browser.config.ts",
+      "bytes": 1448,
+      "sha256": "ebcf569d4873d08c6917315016232e8eadc97ac8b024bd387b8fdff6baff1608"
+    },
+    {
+      "path": "tests/e2e/eval-composition.browser.fixture.ts",
+      "bytes": 30164,
+      "sha256": "125eca524d156446671e62e8ba37d5dc3dd5c4375a4b095c568b5be21ec2de71"
+    },
+    {
+      "path": "tests/e2e/eval-composition.browser.preload.mjs",
+      "bytes": 15467,
+      "sha256": "16d79938f0dc00ca9c42c27895218f99aacf034c89db98ebdf6c203f54ce2ff6"
+    },
+    {
+      "path": "tests/e2e/eval-composition.browser.spec.ts",
+      "bytes": 32467,
+      "sha256": "ebfea489b99fe7f49ee44da04735bea0be98cd77148a6139c7825e1976e9a87a"
+    },
+    {
+      "path": "tests/e2e/http-target-plans.browser.config.ts",
+      "bytes": 1463,
+      "sha256": "361161476eb8e0d1489ce2fa0fc90a4c691d899e1fddea2391b1789340ee6fd2"
+    },
+    {
+      "path": "tests/e2e/http-target-plans.browser.fixture.ts",
+      "bytes": 18128,
+      "sha256": "6557ed7438aadeba1bd819afa08bf2065d48179aae605bfcf64e8a82742f24a8"
+    },
+    {
+      "path": "tests/e2e/http-target-plans.browser.spec.ts",
+      "bytes": 19327,
+      "sha256": "64d0943ed842faa716666bab25808bff67bdebabec538df78ebf7236be9e7092"
+    },
+    {
+      "path": "tests/fixtures/http-eval-v1-golden.json",
+      "bytes": 10748,
+      "sha256": "4b993b5721528669bdda81add41eed3e8d9cb708c5618dd28ff464727bc3e1be"
+    },
+    {
+      "path": "tests/helpers/eval-composition-fixtures.mjs",
+      "bytes": 8677,
+      "sha256": "54a9a577ac91a0f4c76fed73c5d94cfef3aaec096b45104ae2386ebfdc22f463"
+    },
+    {
+      "path": "tests/integration/custom-datasets.node.mjs",
+      "bytes": 41729,
+      "sha256": "808927cff1a8f4b0b00b608497e17a0b4651b9a88a1079c4b5cd5c5f396fa5de"
+    },
+    {
+      "path": "tests/integration/eval-composition.node.mjs",
+      "bytes": 50053,
+      "sha256": "a80aec2c3bde1a62e80b4569a0c068696b16098bdbc6e660569bb4885abf4562"
+    },
+    {
+      "path": "tests/integration/http-eval.node.mjs",
+      "bytes": 43624,
+      "sha256": "80b76954cfa4a0bf08661609450906d83bfbf1684adbcdd065695bc4dffdd80b"
+    },
+    {
+      "path": "tests/integration/provided-output-runs.node.mjs",
+      "bytes": 36742,
+      "sha256": "61c7a85aece15c68c4770c394c58f3d6b2d81eb8a5813069f259ee8cd50f58f7"
+    },
+    {
+      "path": "tests/unit/custom-datasets.test.mjs",
+      "bytes": 30662,
+      "sha256": "afb8cb1db0cc64a38a91212183e76c6f59dc5deaf52bc5da2ba1a92b761d0d83"
+    },
+    {
+      "path": "tests/unit/eval-composition-web.test.mjs",
+      "bytes": 52897,
+      "sha256": "0c99200db75a4a79a318dc8ee223221f1f1a573a5d41cd8fe10436c499309a85"
+    },
+    {
+      "path": "tests/unit/eval-composition.test.mjs",
+      "bytes": 10801,
+      "sha256": "09ba2d4b9f8ed6e8fe1f9b9d78db831336533ff61ed3cbcbf992fb80d8567894"
+    },
+    {
+      "path": "tests/unit/http-eval-composition.test.mjs",
+      "bytes": 14425,
+      "sha256": "af557fda793531cce6198ca435608c09b860e0fdfcdcd77672e72e63d31b642c"
+    },
+    {
+      "path": "tests/unit/http-eval-core.test.mjs",
+      "bytes": 29678,
+      "sha256": "165e65ca32550032f3d89c284f786885c4b64dce23993fad70d640166a0d2f9f"
+    },
+    {
+      "path": "tests/unit/http-eval-v1-compat.test.mjs",
+      "bytes": 5836,
+      "sha256": "0966f728f4413c35aea802ca8ed16edf11dbe2d86cd348c19ef33f19cc96ea91"
+    },
+    {
+      "path": "tests/unit/http-target-transport.test.mjs",
+      "bytes": 19270,
+      "sha256": "64c6d84c98ec008af0e2f5047afc60faf2c4318e41f0da2278b195b9d734f4c9"
+    },
+    {
+      "path": "tests/unit/http-target-web.test.mjs",
+      "bytes": 33590,
+      "sha256": "87b73210c6c9b36a4be4aebcf0ccb127f56ec778477ce6d3068141071c9842f2"
+    },
+    {
+      "path": "tsconfig.base.json",
+      "bytes": 496,
+      "sha256": "83cd41acf3c9532ed98e8d3c901d27ea5816acf60addc7fe26e89114836f6c92"
+    },
+    {
+      "path": "turbo.json",
+      "bytes": 341,
+      "sha256": "7caba17ef6c5a0da4f8090ec9a36e16cc243d7c6aa28cc051e2da39a7a5cf6c7"
+    }
+  ],
+  "reviewedChanges": [
+    [
+      "A",
+      ".github/workflows/eval-composition-checks.yml"
+    ],
+    [
+      "M",
+      "README.md"
+    ],
+    [
+      "A",
+      "apps/web/app/(product)/evals/composition/composition-editor.tsx"
+    ],
+    [
+      "A",
+      "apps/web/app/(product)/evals/composition/composition-view.tsx"
+    ],
+    [
+      "A",
+      "apps/web/app/(product)/evals/composition/error.tsx"
+    ],
+    [
+      "A",
+      "apps/web/app/(product)/evals/composition/items/[itemId]/page.tsx"
+    ],
+    [
+      "A",
+      "apps/web/app/(product)/evals/composition/items/[itemId]/versions/[versionId]/page.tsx"
+    ],
+    [
+      "A",
+      "apps/web/app/(product)/evals/composition/loading.tsx"
+    ],
+    [
+      "A",
+      "apps/web/app/(product)/evals/composition/page.tsx"
+    ],
+    [
+      "A",
+      "apps/web/app/(product)/evals/composition/sets/[setId]/page.tsx"
+    ],
+    [
+      "A",
+      "apps/web/app/(product)/evals/composition/sets/[setId]/versions/[versionId]/page.tsx"
+    ],
+    [
+      "M",
+      "apps/web/app/(product)/evals/page.tsx"
+    ],
+    [
+      "M",
+      "apps/web/app/(product)/evals/plans/http-execution-controls.tsx"
+    ],
+    [
+      "M",
+      "apps/web/app/(product)/evals/plans/http-plan-composer.tsx"
+    ],
+    [
+      "M",
+      "apps/web/app/(product)/evals/plans/http-target-view.tsx"
+    ],
+    [
+      "M",
+      "apps/web/app/(product)/evals/plans/page.tsx"
+    ],
+    [
+      "A",
+      "apps/web/app/api/v2/eval-items/[itemId]/route.ts"
+    ],
+    [
+      "A",
+      "apps/web/app/api/v2/eval-items/[itemId]/versions/[versionId]/route.ts"
+    ],
+    [
+      "A",
+      "apps/web/app/api/v2/eval-items/preview/route.ts"
+    ],
+    [
+      "A",
+      "apps/web/app/api/v2/eval-items/route.ts"
+    ],
+    [
+      "A",
+      "apps/web/app/api/v2/eval-sets/[setId]/route.ts"
+    ],
+    [
+      "A",
+      "apps/web/app/api/v2/eval-sets/[setId]/versions/[versionId]/route.ts"
+    ],
+    [
+      "A",
+      "apps/web/app/api/v2/eval-sets/preview/route.ts"
+    ],
+    [
+      "A",
+      "apps/web/app/api/v2/eval-sets/route.ts"
+    ],
+    [
+      "A",
+      "apps/web/lib/eval-composition-types.ts"
+    ],
+    [
+      "A",
+      "apps/web/lib/eval-composition.ts"
+    ],
+    [
+      "M",
+      "apps/web/lib/http-target-plans.ts"
+    ],
+    [
+      "M",
+      "apps/web/lib/http-target-runs.ts"
+    ],
+    [
+      "M",
+      "apps/web/lib/http-target-types.ts"
+    ],
+    [
+      "A",
+      "docs/evaluator-composition.md"
+    ],
+    [
+      "M",
+      "docs/product-surface.md"
+    ],
+    [
+      "A",
+      "docs/proposals/evaluator-composition-checks.md"
+    ],
+    [
+      "A",
+      "packages/core/src/eval-composition-types.ts"
+    ],
+    [
+      "A",
+      "packages/core/src/eval-composition.ts"
+    ],
+    [
+      "M",
+      "packages/core/src/http-eval-plans.ts"
+    ],
+    [
+      "M",
+      "packages/core/src/http-eval-runs.ts"
+    ],
+    [
+      "M",
+      "packages/core/src/http-eval-types.ts"
+    ],
+    [
+      "M",
+      "packages/core/src/index.ts"
+    ],
+    [
+      "A",
+      "packages/db/src/eval-composition-types.ts"
+    ],
+    [
+      "A",
+      "packages/db/src/eval-composition.ts"
+    ],
+    [
+      "M",
+      "packages/db/src/http-eval-plans.ts"
+    ],
+    [
+      "M",
+      "packages/db/src/http-eval-runs.ts"
+    ],
+    [
+      "M",
+      "packages/db/src/http-eval-types.ts"
+    ],
+    [
+      "M",
+      "packages/db/src/index.ts"
+    ],
+    [
+      "M",
+      "packages/db/src/service.ts"
+    ],
+    [
+      "A",
+      "tests/e2e/eval-composition.browser.config.ts"
+    ],
+    [
+      "A",
+      "tests/e2e/eval-composition.browser.fixture.ts"
+    ],
+    [
+      "A",
+      "tests/e2e/eval-composition.browser.preload.mjs"
+    ],
+    [
+      "A",
+      "tests/e2e/eval-composition.browser.spec.ts"
+    ],
+    [
+      "A",
+      "tests/fixtures/http-eval-v1-golden.json"
+    ],
+    [
+      "A",
+      "tests/helpers/eval-composition-fixtures.mjs"
+    ],
+    [
+      "A",
+      "tests/integration/eval-composition.node.mjs"
+    ],
+    [
+      "A",
+      "tests/unit/eval-composition-web.test.mjs"
+    ],
+    [
+      "A",
+      "tests/unit/eval-composition.test.mjs"
+    ],
+    [
+      "A",
+      "tests/unit/http-eval-composition.test.mjs"
+    ],
+    [
+      "M",
+      "tests/unit/http-eval-core.test.mjs"
+    ],
+    [
+      "A",
+      "tests/unit/http-eval-v1-compat.test.mjs"
+    ]
+  ]
+}

@@ -1,0 +1,118 @@
+{
+  "schemaVersion": "eval-composition-release-evidence-v1",
+  "checkedSource": "b3442e222aa380fe6fded1a08b5b378618ac9abc",
+  "checkedTree": "b0015492cfbd49d08382c7813127a47af26a2035",
+  "parent": "894025656a7d264b3b2d573c90e67c40aba57fcf",
+  "finalRun": {
+    "id": 42719068177,
+    "jobId": 129508066497,
+    "url": "https://github.com/alvarovillalbaa/open-evals/actions/runs/42719068177",
+    "status": "passed"
+  },
+  "distinctChecks": {
+    "core": 76,
+    "web": 24,
+    "postgres": 24,
+    "browser": 4,
+    "total": 128,
+    "repeatedAttemptsAddNoNewCases": true
+  },
+  "build": {
+    "status": "passed",
+    "command": "pnpm run build --force",
+    "returncode": 0,
+    "streams": {
+      "stdout": {
+        "file": "build-candidate.stdout.txt",
+        "bytes": 11120,
+        "sha256": "24daba6b72b82363bf8ef21b595554334a390c2a26b5f7c99b70cda4b9c2bc3b",
+        "complete": true,
+        "limitBytes": 4194304
+      },
+      "stderr": {
+        "file": "build-candidate.stderr.txt",
+        "bytes": 1374,
+        "sha256": "8edeb1b97829b7b13c2fb48ee999773b79a35e94781f16c1498b76e9ed486f93",
+        "complete": true,
+        "limitBytes": 4194304
+      }
+    },
+    "rawBuildStreamsRetrieved": false
+  },
+  "browser": {
+    "passed": 4,
+    "retries": 0,
+    "authoredDnsObservations": 2,
+    "authoredResponses": 2,
+    "unexpectedObservations": 0,
+    "uniqueRowItemResults": 6,
+    "gates": 20,
+    "replayAddsNoDispatch": true,
+    "nativeDnsSocketTlsChecked": false,
+    "actualExternalTargetCalls": 0
+  },
+  "groups": [
+    {
+      "directory": "pure",
+      "index": "pure/evidence-index.json",
+      "manifest": "pure/export-manifest.json",
+      "files": 24,
+      "bytes": 131220,
+      "manifestSha256": "f4b3dfc31691ab817ee36b5b6826e7dc4f88cbea5ed0e670f5955c26db5ceb92"
+    },
+    {
+      "directory": "ci-attempt-1",
+      "index": "ci-attempt-1/evidence-index.json",
+      "manifest": "ci-attempt-1/export-manifest.json",
+      "files": 18,
+      "bytes": 138532,
+      "manifestSha256": "5dd8af6babd9f23630b1f6c720fccf59a5cf76fdb4e2b9f11e6901879433abe2"
+    },
+    {
+      "directory": "ci-attempt-2",
+      "index": "ci-attempt-2/evidence-index.json",
+      "manifest": "ci-attempt-2/export-manifest.json",
+      "files": 22,
+      "bytes": 151634,
+      "manifestSha256": "fb08d73904887d1a43203cbb25ee92eac53c2d70df5dce833db6487411107286"
+    },
+    {
+      "directory": "ci-attempt-3",
+      "index": "ci-attempt-3/evidence-index.json",
+      "manifest": "ci-attempt-3/export-manifest.json",
+      "files": 22,
+      "bytes": 156565,
+      "manifestSha256": "fc5ad5dd07cd440ce9f20bff436583d47aea68d6887d9396184c769d206900fc"
+    },
+    {
+      "directory": "ci-attempt-4",
+      "index": "ci-attempt-4/evidence-index.json",
+      "manifest": "ci-attempt-4/export-manifest.json",
+      "files": 24,
+      "bytes": 194077,
+      "manifestSha256": "ec851501a2cb72a95cf33cb6b3307d393edb6bff384cad390780f04a94b82986"
+    },
+    {
+      "directory": "ci-attempt-5",
+      "index": "ci-attempt-5/evidence-index.json",
+      "manifest": "ci-attempt-5/export-manifest.json",
+      "files": 24,
+      "bytes": 180161,
+      "manifestSha256": "6be01ef85059e6b7aecbff3d648e382366a2c481d8d6f550054b223b197d36b6"
+    }
+  ],
+  "groupFileCount": 134,
+  "groupBytes": 952189,
+  "postCheckReleaseChanges": [
+    "Three status documents and this result/evidence packet",
+    "Retirement of the task temporary workflow"
+  ],
+  "proofLimits": [
+    "Final case counts bind checked source; earlier failures remain failures and repeated cases are not new coverage.",
+    "PURE group distinguishes exact originals from path-normalized or receipt projections with original hash provenance.",
+    "CI3 build stdout is a 4096-byte tail at offset2634 of6730; full-source hash is metadata only.",
+    "Raw captures retain their exact bytes, including captured whitespace and public runner paths.",
+    "Selected originals are reconstructed from hash-bound log frames; no full artifact ZIP, screenshot or trace archive was downloaded.",
+    "Production-app browser journeys use signed fixture sessions and disposable owner SQL with authored DNS/HTTPS dependencies. Native transport, hosted Auth/RLS, real-account, physical-device and live-production acceptance are separate."
+  ]
+}

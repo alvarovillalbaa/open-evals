@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "eval-composition-ci2-full-diagnostic-ranges-v1",
+  "source": "2344342ee0211f76aa6c93d7e92a8cb781ab1a8b",
+  "runId": "42715252378",
+  "jobId": "129494978383",
+  "transport": "structured commandDiagnostic base64 range frames in the retained raw job log; not ORIGINAL_CHUNK files",
+  "files": [
+    {
+      "file": "build-candidate.stdout.txt",
+      "label": "build-candidate",
+      "channel": "stdout",
+      "kind": "full",
+      "sourceBytes": 3553,
+      "sourceSha256": "2f94c305d59acab8d4526f4449ddeae78e1540c63f4903264aa89f680e5f0cf8",
+      "sourceStreamComplete": true,
+      "offset": 0,
+      "bytes": 3553,
+      "sha256": "2f94c305d59acab8d4526f4449ddeae78e1540c63f4903264aa89f680e5f0cf8",
+      "fullOriginalStreamProved": true
+    },
+    {
+      "file": "build-candidate.stderr.txt",
+      "label": "build-candidate",
+      "channel": "stderr",
+      "kind": "full",
+      "sourceBytes": 683,
+      "sourceSha256": "33a136f22550f2f89d8a758d552061671c48a03d1db20686d824ddfa382b4878",
+      "sourceStreamComplete": true,
+      "offset": 0,
+      "bytes": 683,
+      "sha256": "33a136f22550f2f89d8a758d552061671c48a03d1db20686d824ddfa382b4878",
+      "fullOriginalStreamProved": true
+    }
+  ],
+  "archiveRetrieved": false,
+  "proofLimits": "Both complete failed-build stdout/stderr ranges are hash-bound to command source metadata, offset0 and full length. This preserves the first observed compilation failure; it does not prove later compiler stages passed."
+}

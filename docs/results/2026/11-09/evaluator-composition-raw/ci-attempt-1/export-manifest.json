@@ -1,0 +1,139 @@
+{
+  "schemaVersion": "eval-composition-ci-export-manifest-v1",
+  "scope": "All files in this staged attempt except this manifest itself.",
+  "boundFileCount": 17,
+  "boundBytes": 133242,
+  "selectedOriginals": 12,
+  "selectedOriginalBytes": 103476,
+  "unchangedMetadataFiles": 4,
+  "files": [
+    {
+      "path": "cleanup.json",
+      "bytes": 660,
+      "sha256": "528b94ddc2a9cd05f465692027126d95454a121c8b5508981b31e2b2a313fe69",
+      "kind": "selected-complete-original",
+      "originalPath": "ci-run-1/originals/cleanup.json"
+    },
+    {
+      "path": "command-metadata.json",
+      "bytes": 17598,
+      "sha256": "c51076a436de484ce43099428ae99435264a33c5eb9095f523cedbd9c9c47448",
+      "kind": "existing-complete-audit-or-decoder-metadata",
+      "originalPath": "ci-run-1/reconstructed/command-metadata.json"
+    },
+    {
+      "path": "composition-postgres-cases.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "kind": "selected-complete-original",
+      "originalPath": "ci-run-1/originals/composition-postgres-cases.stderr.txt"
+    },
+    {
+      "path": "composition-postgres-cases.stdout.txt",
+      "bytes": 10603,
+      "sha256": "798fe1a19c217f63facf98f8cd5748fe70f87d7d21a8d678f5933a483c0040fe",
+      "kind": "selected-complete-original",
+      "originalPath": "ci-run-1/originals/composition-postgres-cases.stdout.txt"
+    },
+    {
+      "path": "core-cases.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "kind": "selected-complete-original",
+      "originalPath": "ci-run-1/originals/core-cases.stderr.txt"
+    },
+    {
+      "path": "core-cases.stdout.txt",
+      "bytes": 20348,
+      "sha256": "8a5e43688a035522e12ba1a2a4654e8a746a4913d0dd1efe6e0d11a77d0ef62f",
+      "kind": "selected-complete-original",
+      "originalPath": "ci-run-1/originals/core-cases.stdout.txt"
+    },
+    {
+      "path": "decoded-index.json",
+      "bytes": 1760,
+      "sha256": "854f55bf2d3936e824059ac60996eb786d880e9316f01c947f6b7440c7603082",
+      "kind": "existing-complete-audit-or-decoder-metadata",
+      "originalPath": "ci-run-1/decoded-index.json"
+    },
+    {
+      "path": "decoded-originals.json",
+      "bytes": 4267,
+      "sha256": "dcb4bdaaf496fb74d78b1f5bdc4022ac66b42aa232e465765f2f7e6da33279c9",
+      "kind": "existing-complete-audit-or-decoder-metadata",
+      "originalPath": "ci-run-1/reconstructed/decoded-originals.json"
+    },
+    {
+      "path": "evidence-index.json",
+      "bytes": 2952,
+      "sha256": "b41932cfc72c043a2b373c1abe0c7920960506fa826f0d2b17cb3390ff7f7cbd",
+      "kind": "derived-staging-index"
+    },
+    {
+      "path": "fixture-final-absence.json",
+      "bytes": 714,
+      "sha256": "76e85a37ec801d94f7ce766cf59b8d2abcab9fd5ac298076fbc92bfa4bc090a1",
+      "kind": "selected-complete-original",
+      "originalPath": "ci-run-1/originals/fixture-final-absence.json"
+    },
+    {
+      "path": "independent-audit.json",
+      "bytes": 3189,
+      "sha256": "b9b10ded49f57f4f08534babe6153233342d9cb21502c1b7b56b091a44d39e0c",
+      "kind": "existing-complete-audit-or-decoder-metadata",
+      "originalPath": "ci-run-1/independent-audit.json"
+    },
+    {
+      "path": "receipt.json",
+      "bytes": 4404,
+      "sha256": "5e49e2b526a50c34639e99dc2453bdda7556680e96adef03b531c30ffc6c4352",
+      "kind": "selected-complete-original",
+      "originalPath": "ci-run-1/originals/receipt.json"
+    },
+    {
+      "path": "source-final.json",
+      "bytes": 25535,
+      "sha256": "5464dff2e2787a6b0b4e1cc0aba0a4744070658738fc4935c2baa30fdd9e7e5f",
+      "kind": "selected-complete-original",
+      "originalPath": "ci-run-1/originals/source-final.json"
+    },
+    {
+      "path": "source.json",
+      "bytes": 30312,
+      "sha256": "635281f078498ec4cd7a7c7a7fa5d834768e580b088c952efc82430264879add",
+      "kind": "selected-complete-original",
+      "originalPath": "ci-run-1/originals/source.json"
+    },
+    {
+      "path": "unprotected-tracked-delta.json",
+      "bytes": 3812,
+      "sha256": "0912deb91c5274d0197b6270955234832ee9954157d0055f37cceb8c3cbd2cd3",
+      "kind": "selected-complete-original",
+      "originalPath": "ci-run-1/originals/unprotected-tracked-delta.json"
+    },
+    {
+      "path": "web-cases.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "kind": "selected-complete-original",
+      "originalPath": "ci-run-1/originals/web-cases.stderr.txt"
+    },
+    {
+      "path": "web-cases.stdout.txt",
+      "bytes": 7088,
+      "sha256": "09922356a735852513c08bd05aba4a3dafc7cef6f553ce8cc9f2d3b2dcdb2d48",
+      "kind": "selected-complete-original",
+      "originalPath": "ci-run-1/originals/web-cases.stdout.txt"
+    }
+  ],
+  "verification": {
+    "allCopiedFilesByteIdentical": true,
+    "allSelectedOriginalHashBindingsVerified": true,
+    "privacyMarkerMatches": [],
+    "publicRunnerPathOccurrences": 9,
+    "failedReceiptAndNoBuildBrowserConfirmed": true,
+    "noNormalizationNeeded": true
+  },
+  "artifactZipRetrieved": false,
+  "proofLimits": "Static byte/hash/privacy and existing metadata inspection only; no new decoder, app, test, compiler, SQL, browser, provider or Git execution."
+}

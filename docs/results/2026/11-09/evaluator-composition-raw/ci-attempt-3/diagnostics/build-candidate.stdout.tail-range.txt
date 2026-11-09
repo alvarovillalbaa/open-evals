@@ -1,0 +1,66 @@
+statistics:build: 
+@open-evals/statistics:build: > @open-evals/statistics@0.1.0 build /home/runner/work/open-evals/open-evals/packages/statistics
+@open-evals/statistics:build: > tsc -p tsconfig.json --noEmit
+@open-evals/statistics:build: 
+@open-evals/sdk:build: 
+@open-evals/sdk:build: > @open-evals/sdk@0.1.0 build /home/runner/work/open-evals/open-evals/packages/sdk
+@open-evals/sdk:build: > tsc -p tsconfig.json --noEmit
+@open-evals/sdk:build: 
+@open-evals/cli:build: cache bypass, force executing 056397873e2ca20b
+@open-evals/web:build: cache bypass, force executing c8ccc33790de301d
+@open-evals/cli:build: 
+@open-evals/web:build: 
+@open-evals/web:build: > @open-evals/web@0.1.0 build /home/runner/work/open-evals/open-evals/apps/web
+@open-evals/web:build: > next build
+@open-evals/web:build: 
+@open-evals/cli:build: > @open-evals/cli@0.1.0 build /home/runner/work/open-evals/open-evals/apps/cli
+@open-evals/cli:build: > tsc -p tsconfig.json --noEmit
+@open-evals/cli:build: 
+@open-evals/web:build: ⚠ No build cache found. Please configure build caching for faster rebuilds. Read more: https://nextjs.org/docs/messages/no-cache
+@open-evals/web:build: ▲ Next.js 16.2.9 (Turbopack)
+@open-evals/web:build: 
+@open-evals/web:build:   Creating an optimized production build ...
+@open-evals/web:build: Turbopack build encountered 1 warnings:
+@open-evals/web:build: ./apps/web/next.config.ts
+@open-evals/web:build: Encountered unexpected file in NFT list
+@open-evals/web:build: A file was traced that indicates that the whole project was traced unintentionally. Somewhere in the import trace below, there are:
+@open-evals/web:build: - filesystem operations (like path.join, path.resolve or fs.readFile), or
+@open-evals/web:build: - very dynamic requires (like require('./' + foo)).
+@open-evals/web:build: To resolve this, you can
+@open-evals/web:build: - remove them if possible, or
+@open-evals/web:build: - only use them in development, or
+@open-evals/web:build: - make sure they are statically scoped to some subfolder: path.join(process.cwd(), 'data', bar), or
+@open-evals/web:build: - add ignore comments: path.join(/*turbopackIgnore: true*/ process.cwd(), bar)
+@open-evals/web:build: 
+@open-evals/web:build: Import trace:
+@open-evals/web:build:   App Route:
+@open-evals/web:build:     ./apps/web/next.config.ts
+@open-evals/web:build:     ./packages/adapters/src/artifact-store.ts
+@open-evals/web:build:     ./packages/adapters/src/index.ts
+@open-evals/web:build:     ./apps/web/lib/http-target-runs.ts
+@open-evals/web:build:     ./apps/web/app/api/v1/http-target-plans/runs/[runId]/recover/route.ts
+@open-evals/web:build: 
+@open-evals/web:build: 
+@open-evals/web:build: ✓ Compiled successfully in 9.8s
+@open-evals/web:build:   Running TypeScript ...
+@open-evals/web:build: Failed to type check.
+@open-evals/web:build: 
+@open-evals/web:build: ./lib/http-target-plans.ts:130:23
+@open-evals/web:build: Type error: The inferred type of 'readHttpTargetPlanList' cannot be named without a reference to '@/node_modules/@open-evals/db/src/http-eval-types'. This is likely not portable. A type annotation is necessary.
+@open-evals/web:build: 
+@open-evals/web:build:   [90m128 |[0m }
+@open-evals/web:build:   [90m129 |[0m
+@open-evals/web:build: [31m[1m>[0m [90m130 |[0m [36mexport[0m [36masync[0m [36mfunction[0m readHttpTargetPlanList(auth: [33mRouteAuthContext[0m) {
+@open-evals/web:build:   [90m    |[0m                       [31m[1m^[0m
+@open-evals/web:build:   [90m131 |[0m   [36mconst[0m [list, sources] = [36mawait[0m [33mPromise[0m.all([listHttpEvalPlans(auth.workspaceId), listHtt...
+@open-evals/web:build:   [90m132 |[0m   [36mreturn[0m { list, sources, canWrite: httpTargetCanWrite(auth) };
+@open-evals/web:build:   [90m133 |[0m }
+@open-evals/web:build: Next.js build worker exited with code: 1 and signal: null
+@open-evals/web:build:  ELIFECYCLE  Command failed with exit code 1.
+
+ Tasks:    9 successful, 10 total
+Cached:    0 cached, 10 total
+  Time:    28.75s 
+Failed:    @open-evals/web#build
+
+ ELIFECYCLE  Command failed with exit code 1.

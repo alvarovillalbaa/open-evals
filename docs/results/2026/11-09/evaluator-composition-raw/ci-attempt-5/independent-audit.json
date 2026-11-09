@@ -1,0 +1,172 @@
+{
+  "schemaVersion": "eval-composition-ci5-independent-audit-v1",
+  "reviewer": "dataset_contract",
+  "status": "passed-and-independently-verified",
+  "source": "b3442e222aa380fe6fded1a08b5b378618ac9abc",
+  "tree": "b0015492cfbd49d08382c7813127a47af26a2035",
+  "runId": "42719068177",
+  "jobId": "129508066497",
+  "strictSuccessContractChecked": true,
+  "reconstruction": {
+    "directory": "ci-run-5/independent-reconstruction",
+    "selectedOriginals": 18,
+    "decodedBytes": 135479,
+    "allOffsetsSizesSha256Verified": true,
+    "allEqualSeparateRootDecodedOriginals": true,
+    "commandMetadataFrames": 35,
+    "allCommandsZeroExitAndCompleteEof": true,
+    "artifactZipRetrieved": false
+  },
+  "results": {
+    "distinctCases": 128,
+    "core": {
+      "tests": 76,
+      "pass": 76,
+      "fail": 0,
+      "skip": 0
+    },
+    "web": {
+      "tests": 24,
+      "pass": 24,
+      "fail": 0,
+      "skip": 0
+    },
+    "sql": {
+      "tests": 24,
+      "pass": 24,
+      "fail": 0,
+      "skip": 0
+    },
+    "build": {
+      "fullRootBuildPassed": true,
+      "commandExit": 0,
+      "rawBuildStreamsRetrieved": false
+    },
+    "browser": {
+      "tests": 4,
+      "pass": 4,
+      "fail": 0,
+      "retries": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "CP-BR01",
+          "status": "passed",
+          "retry": 0,
+          "workspaceCount": 1,
+          "actorCount": 1,
+          "dispatchClaims": 2,
+          "transportCalls": 2,
+          "afterCountsZero": 17,
+          "sourceExecutionChecked": true
+        },
+        {
+          "id": "CP-BR02",
+          "status": "passed",
+          "retry": 0,
+          "workspaceCount": 1,
+          "actorCount": 1,
+          "dispatchClaims": 0,
+          "transportCalls": 0,
+          "afterCountsZero": 17,
+          "sourceExecutionChecked": false
+        },
+        {
+          "id": "CP-BR03",
+          "status": "passed",
+          "retry": 0,
+          "workspaceCount": 1,
+          "actorCount": 1,
+          "dispatchClaims": 0,
+          "transportCalls": 0,
+          "afterCountsZero": 17,
+          "sourceExecutionChecked": false
+        },
+        {
+          "id": "CP-BR04",
+          "status": "passed",
+          "retry": 0,
+          "workspaceCount": 2,
+          "actorCount": 3,
+          "dispatchClaims": 0,
+          "transportCalls": 0,
+          "afterCountsZero": 17,
+          "sourceExecutionChecked": false
+        }
+      ]
+    },
+    "overall": "passed"
+  },
+  "compositionEvidence": {
+    "browserBr01NativeRows": 2,
+    "uniqueTargetRequests": 2,
+    "uniqueRowItemResults": 6,
+    "gates": 20,
+    "gateLevels": 8,
+    "storedWorkflowEvents": 5,
+    "overlappingMembershipsRetained": true,
+    "criticalZeroPercentScopesFailClosed": true,
+    "otherBrowserJourneysDoNotDispatch": true
+  },
+  "transport": {
+    "journalBytes": 2958,
+    "journalSha256": "a792b86ed162db304e1fa0e0b5c7c31662411324b28abfea1e68602c2f1dbced",
+    "entries": 5,
+    "preloadProcessCount": 1,
+    "preloadProcessId": 3079,
+    "authoredDnsObservations": 2,
+    "authoredRequestResponseObservations": 2,
+    "uniqueRows": 2,
+    "uniqueClaimTokens": 2,
+    "uniqueRequestFingerprints": 2,
+    "keysMatchCommittedClaim": true,
+    "idempotencyKeysMatch": true,
+    "unexpectedObservations": 0,
+    "bindingUnarmedAfterOwnedExit": true,
+    "productionCoordinatorWithAuthoredTransportChecked": true,
+    "nativeDnsSocketTlsChecked": false,
+    "actualExternalTargetCalls": 0
+  },
+  "sourceIntegrity": {
+    "protectedFilesBeforeAfterEqual": 144,
+    "expectedSourcesMatchFinalCiBindingsV6": 143,
+    "directParent": "894025656a7d264b3b2d573c90e67c40aba57fcf",
+    "workflow": {
+      "path": ".github/workflows/eval-composition-checks.yml",
+      "bytes": 103617,
+      "sha256": "0678c3e8fd27059309118a048168e9c589535657f62f325268c22d050860d8f7"
+    }
+  },
+  "lifecycle": {
+    "pid": 3079,
+    "pgid": 3079,
+    "startTicks": "13362",
+    "returncode": 143,
+    "stopMode": "graceful",
+    "pidAbsent": true,
+    "processGroupAbsent": true,
+    "portFree": true,
+    "serverStdoutBytesMetadataOnly": 116,
+    "serverStderrSelectedCompleteBytes": 0
+  },
+  "cleanup": {
+    "allFourFixtureOwnershipValidated": true,
+    "allFourAfterCountsZero": 17,
+    "allFourWorkspacesAndActorsAbsent": true,
+    "postSqlNativeTablesZero": 26,
+    "finalOwnedTablesZero": 26,
+    "databaseAbsent": true,
+    "validatedOwner": "postgres",
+    "validatedMarker": "open-evals-composition-v2-20261109-created-disposable-v1",
+    "clusterStopped": true,
+    "clusterAbsent": true
+  },
+  "proofLimits": [
+    "This peer independently decoded the existing raw log and reviewed data/source bindings only; no new test/app/compiler/build/SQL/browser/provider/Git execution.",
+    "The128 final checks include the76 previously local-passed pure cases; repeated attempts are not additional distinct cases.",
+    "Actual compiled production routes/coordinator and disposable SQL ran with authored DNS/HTTPS dependencies. Native DNS/socket/TLS and a real external target were not exercised.",
+    "The successful source-bound browser assertions establish six results, twenty gates and the critical zero-percent policy. Exact call/claim keys were independently matched through raw journal/fixture attachment evidence.",
+    "Other build/server stdout streams are metadata only. No artifact ZIP, screenshots or trace archive was retrieved.",
+    "Hosted auth-provider/RLS, production deployment/page, real-user and physical-device acceptance remain unverified."
+  ]
+}

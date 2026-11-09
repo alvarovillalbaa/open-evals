@@ -1,0 +1,264 @@
+TAP version 13
+# (node:32458) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:32458) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# Subtest: EC01 item native identity includes workspace, public aggregate and version with independent hash oracles
+ok 1 - EC01 item native identity includes workspace, public aggregate and version with independent hash oracles
+  ---
+  duration_ms: 13.670542
+  type: 'test'
+  ...
+# Subtest: EC02 semantic and record fingerprints preserve exact contains bytes and trusted timestamp metadata
+ok 2 - EC02 semantic and record fingerprints preserve exact contains bytes and trusted timestamp metadata
+  ---
+  duration_ms: 2.057875
+  type: 'test'
+  ...
+# Subtest: EC03 exact keys, public IDs, parent versions and PostgreSQL version bounds reject malformed drafts
+ok 3 - EC03 exact keys, public IDs, parent versions and PostgreSQL version bounds reject malformed drafts
+  ---
+  duration_ms: 0.476583
+  type: 'test'
+  ...
+# Subtest: EC04 descriptor-safe copying refuses getters and cycles without invoking caller code
+ok 4 - EC04 descriptor-safe copying refuses getters and cycles without invoking caller code
+  ---
+  duration_ms: 0.161416
+  type: 'test'
+  ...
+# Subtest: EC05 Unicode, NUL, blank text and byte/codepoint limits fail closed
+ok 5 - EC05 Unicode, NUL, blank text and byte/codepoint limits fail closed
+  ---
+  duration_ms: 3.765042
+  type: 'test'
+  ...
+# Subtest: EC06 preview accounts complete record bytes and never exposes a synthetic creation timestamp
+ok 6 - EC06 preview accounts complete record bytes and never exposes a synthetic creation timestamp
+  ---
+  duration_ms: 1.253709
+  type: 'test'
+  ...
+# Subtest: EC07 stale heads and altered preview fingerprints cannot save while appends preserve old names
+ok 7 - EC07 stale heads and altered preview fingerprints cannot save while appends preserve old names
+  ---
+  duration_ms: 2.818875
+  type: 'test'
+  ...
+# Subtest: EC08 set membership order freezes exact native identities and full public/provenance proofs
+ok 8 - EC08 set membership order freezes exact native identities and full public/provenance proofs
+  ---
+  duration_ms: 6.471
+  type: 'test'
+  ...
+# Subtest: EC09 source enumeration order does not replace the author's explicit member order
+ok 9 - EC09 source enumeration order does not replace the author's explicit member order
+  ---
+  duration_ms: 1.908209
+  type: 'test'
+  ...
+# Subtest: EC10 duplicate membership, changed fingerprints, absent and foreign source records are rejected
+ok 10 - EC10 duplicate membership, changed fingerprints, absent and foreign source records are rejected
+  ---
+  duration_ms: 2.569042
+  type: 'test'
+  ...
+# Subtest: EC11 identical configs under distinct version identities stay distinct and are not content-deduplicated
+ok 11 - EC11 identical configs under distinct version identities stay distinct and are not content-deduplicated
+  ---
+  duration_ms: 3.4015
+  type: 'test'
+  ...
+# Subtest: EC12 an old exact item remains valid after renamed heads and a set rename does not mutate old snapshots
+ok 12 - EC12 an old exact item remains valid after renamed heads and a set rename does not mutate old snapshots
+  ---
+  duration_ms: 7.903584
+  type: 'test'
+  ...
+# Subtest: EC13 stored-record corruption cannot be repaired by only recomputing its outer fingerprint
+ok 13 - EC13 stored-record corruption cannot be repaired by only recomputing its outer fingerprint
+  ---
+  duration_ms: 6.07375
+  type: 'test'
+  ...
+# Subtest: EC14 complete32-member resource records retain membership metadata and independent serialized size
+ok 14 - EC14 complete32-member resource records retain membership metadata and independent serialized size
+  ---
+  duration_ms: 58.868875
+  type: 'test'
+  ...
+# Subtest: EC15 raw outer JSON is checked before numbers can round or duplicate keys can disappear
+ok 15 - EC15 raw outer JSON is checked before numbers can round or duplicate keys can disappear
+  ---
+  duration_ms: 0.617167
+  type: 'test'
+  ...
+# Subtest: EC16 timestamp belongs to stored metadata while replay restoration preserves the original record exactly
+ok 16 - EC16 timestamp belongs to stored metadata while replay restoration preserves the original record exactly
+  ---
+  duration_ms: 1.017458
+  type: 'test'
+  ...
+# Subtest: EC17 unknown source-array element getters are rejected without invoking caller code
+not ok 17 - EC17 unknown source-array element getters are rejected without invoking caller code
+  ---
+  duration_ms: 2.268916
+  type: 'test'
+  location: 'candidate-relative:/tests/unit/eval-composition.test.mjs:90:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    the unknown source container must be inspected before any element access
+    
+    1 !== 0
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (candidate-relative:/tests/unit/eval-composition.test.mjs:94:10)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# (node:32459) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:32459) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# Subtest: EC-HTTP01 two real v2 sets share one exact item and retain memberships with six unique results and twenty gates
+ok 18 - EC-HTTP01 two real v2 sets share one exact item and retain memberships with six unique results and twenty gates
+  ---
+  duration_ms: 178.75075
+  type: 'test'
+  ...
+# Subtest: EC-HTTP02 equal configurations under different saved version identities remain two required evaluators
+ok 19 - EC-HTTP02 equal configurations under different saved version identities remain two required evaluators
+  ---
+  duration_ms: 83.884375
+  type: 'test'
+  ...
+# Subtest: EC-HTTP03 v2 refs are canonical across selected sets while membership order stays authored
+ok 20 - EC-HTTP03 v2 refs are canonical across selected sets while membership order stays authored
+  ---
+  duration_ms: 10.99075
+  type: 'test'
+  ...
+# Subtest: EC-HTTP04 explicit mixed saved v1/v2 refs resolve without changing immutable v1 source contracts
+ok 21 - EC-HTTP04 explicit mixed saved v1/v2 refs resolve without changing immutable v1 source contracts
+  ---
+  duration_ms: 5.787917
+  type: 'test'
+  ...
+# Subtest: EC-HTTP05 exact public tuple and fingerprint mismatches, duplicate refs and lost full proofs fail before work
+ok 22 - EC-HTTP05 exact public tuple and fingerprint mismatches, duplicate refs and lost full proofs fail before work
+  ---
+  duration_ms: 10.642458
+  type: 'test'
+  ...
+# Subtest: EC-HTTP06 contradictory valid snapshots of one version identity cannot deduplicate away changed intent
+ok 23 - EC-HTTP06 contradictory valid snapshots of one version identity cannot deduplicate away changed intent
+  ---
+  duration_ms: 4.34425
+  type: 'test'
+  ...
+# Subtest: EC-HTTP07 profile and version families cannot mix, and v2 append heads carry their explicit family
+ok 24 - EC-HTTP07 profile and version families cannot mix, and v2 append heads carry their explicit family
+  ---
+  duration_ms: 31.552167
+  type: 'test'
+  ...
+# Subtest: EC-HTTP08 v2 critical failures block every affected low-threshold scope while v1 policy remains unchanged
+ok 25 - EC-HTTP08 v2 critical failures block every affected low-threshold scope while v1 policy remains unchanged
+  ---
+  duration_ms: 208.3895
+  type: 'test'
+  ...
+# Subtest: EC-HTTP09 a shared v2 request sends each input once and excludes all references and evaluator configuration
+ok 26 - EC-HTTP09 a shared v2 request sends each input once and excludes all references and evaluator configuration
+  ---
+  duration_ms: 20.923041
+  type: 'test'
+  ...
+# Subtest: EC-HTTP10 running snapshots have no terminal gates and deadline recovery emits matching v2 uncertain events
+ok 27 - EC-HTTP10 running snapshots have no terminal gates and deadline recovery emits matching v2 uncertain events
+  ---
+  duration_ms: 123.366792
+  type: 'test'
+  ...
+# Subtest: EC-HTTP11 owner stop handles only never-claimed rows and immutable v2 events cannot wear v1 tags
+ok 28 - EC-HTTP11 owner stop handles only never-claimed rows and immutable v2 events cannot wear v1 tags
+  ---
+  duration_ms: 120.704583
+  type: 'test'
+  ...
+# Subtest: EC-HTTP12 all eight sets can retain32 memberships each with32 unique items and one target row
+ok 29 - EC-HTTP12 all eight sets can retain32 memberships each with32 unique items and one target row
+  ---
+  duration_ms: 2923.740041
+  type: 'test'
+  ...
+# Subtest: EC-HTTP13 simultaneous maximum coverage and complete output allowance fail preview before an oversized run
+ok 30 - EC-HTTP13 simultaneous maximum coverage and complete output allowance fail preview before an oversized run
+  ---
+  duration_ms: 534.782209
+  type: 'test'
+  ...
+# Subtest: EC-HTTP14 complete source budgets and actual large response values remain bound on readback
+ok 31 - EC-HTTP14 complete source budgets and actual large response values remain bound on readback
+  ---
+  duration_ms: 87.762167
+  type: 'test'
+  ...
+# Subtest: EC-HTTP15 unique-item, selected-set and row ceilings reject excess coverage without truncation
+ok 32 - EC-HTTP15 unique-item, selected-set and row ceilings reject excess coverage without truncation
+  ---
+  duration_ms: 64.806666
+  type: 'test'
+  ...
+# Subtest: EC-HTTP16 ledger row status must be a string enum for both strict profile families
+not ok 33 - EC-HTTP16 ledger row status must be a string enum for both strict profile families
+  ---
+  duration_ms: 203.535417
+  type: 'test'
+  location: 'candidate-relative:/tests/unit/http-eval-composition.test.mjs:111:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+    
+      [
+    +   'accepted',
+    +   'accepted'
+    -   'rejected',
+    -   'rejected'
+      ]
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    0: 'rejected'
+    1: 'rejected'
+  actual:
+    0: 'accepted'
+    1: 'accepted'
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (candidate-relative:/tests/unit/http-eval-composition.test.mjs:120:10)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+1..33
+# tests 33
+# suites 0
+# pass 31
+# fail 2
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 4763.84575

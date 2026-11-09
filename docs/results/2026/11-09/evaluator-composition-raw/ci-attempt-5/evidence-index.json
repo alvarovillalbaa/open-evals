@@ -1,0 +1,159 @@
+{
+  "schemaVersion": "eval-composition-ci-evidence-index-v1",
+  "status": "passed-staged-private-for-release-review",
+  "intendedCanonicalDirectory": "docs/results/2026/11-09/evaluator-composition-raw/ci-attempt-5",
+  "source": "b3442e222aa380fe6fded1a08b5b378618ac9abc",
+  "tree": "b0015492cfbd49d08382c7813127a47af26a2035",
+  "runId": "42719068177",
+  "jobId": "129508066497",
+  "jobIdBinding": "Recorded caller metadata; selected frames bind source/run, not the job ID.",
+  "selectedOriginals": {
+    "count": 18,
+    "bytes": 135479,
+    "manifest": "decoded-originals.json",
+    "handling": "Exact complete selected ORIGINAL_CHUNK files; root and independent decoder copies agree. Original JSON newline presence is preserved."
+  },
+  "metadata": {
+    "independentAudit": "independent-audit.json",
+    "strictReconstructionIndex": "decoded-originals.json",
+    "commandMetadata": "command-metadata.json",
+    "diagnosticRanges": "diagnostic-ranges.json",
+    "handling": "Four existing metadata files are byte-identical copies; historical relative locators are provenance, not public download links."
+  },
+  "results": {
+    "overall": "passed",
+    "distinctChecks": 128,
+    "core": {
+      "tests": 76,
+      "pass": 76,
+      "fail": 0
+    },
+    "web": {
+      "tests": 24,
+      "pass": 24,
+      "fail": 0
+    },
+    "sql": {
+      "tests": 24,
+      "pass": 24,
+      "fail": 0
+    },
+    "build": {
+      "fullRootBuildPassed": true,
+      "commandExit": 0,
+      "rawBuildStreamsRetrieved": false
+    },
+    "browser": {
+      "tests": 4,
+      "pass": 4,
+      "fail": 0,
+      "retries": 0,
+      "skipped": 0,
+      "passedIds": [
+        "CP-BR01",
+        "CP-BR02",
+        "CP-BR03",
+        "CP-BR04"
+      ]
+    }
+  },
+  "compositionEvidence": {
+    "rows": 2,
+    "targetRequests": 2,
+    "uniqueRowItemResults": 6,
+    "gates": 20,
+    "gateLevels": 8,
+    "retainedSetMemberships": 4,
+    "criticalZeroPercentScopeFailuresChecked": true,
+    "source": "Successful source-bound CP-BR01 assertions plus committed-claim journal and actual owned SQL cleanup attachments."
+  },
+  "browserCleanup": {
+    "workspaceCounts": [
+      1,
+      1,
+      1,
+      2
+    ],
+    "actorCounts": [
+      1,
+      1,
+      1,
+      3
+    ],
+    "allFourOwnershipValidated": true,
+    "allFourAfterCountsZero": 17,
+    "allFourWorkspacesAndActorsAbsent": true,
+    "dispatchClaims": [
+      2,
+      0,
+      0,
+      0
+    ],
+    "transportCalls": [
+      2,
+      0,
+      0,
+      0
+    ]
+  },
+  "transport": {
+    "journal": "transport-journal.jsonl",
+    "bytes": 2958,
+    "sha256": "a792b86ed162db304e1fa0e0b5c7c31662411324b28abfea1e68602c2f1dbced",
+    "entries": 5,
+    "preloadProcessCount": 1,
+    "authoredDnsObservations": 2,
+    "authoredRequestResponseObservations": 2,
+    "unexpectedObservations": 0,
+    "claimKeysAndRequestIdempotencyKeysMatch": true,
+    "unarmedAfterOwnedServerExit": true,
+    "productionCoordinatorWithAuthoredTransportChecked": true,
+    "nativeDnsSocketTlsChecked": false,
+    "actualExternalTargetCalls": 0
+  },
+  "application": {
+    "started": true,
+    "pid": 3079,
+    "startTicks": "13362",
+    "pgid": 3079,
+    "stopMode": "graceful",
+    "returncode": 143,
+    "pidAbsent": true,
+    "processGroupAbsent": true,
+    "portFree": true,
+    "stdoutBytesMetadataOnly": 116,
+    "stderrSelectedBytes": 0
+  },
+  "sourceIntegrity": {
+    "protectedBeforeAfterEqual": 144,
+    "sourcePinsMatchV6": 143
+  },
+  "cleanup": {
+    "postSqlTablesZero": 26,
+    "finalTablesZero": 26,
+    "databaseAbsent": true,
+    "clusterStopped": true,
+    "clusterAbsent": true,
+    "records": [
+      "postgres-fixture-absence.json",
+      "fixture-final-absence.json",
+      "cleanup.json",
+      "receipt.json"
+    ]
+  },
+  "privacy": {
+    "localUserOrPrivatePathMatches": 0,
+    "credentialMarkerMatches": 0,
+    "normalizedFiles": 0,
+    "publicRunnerPathOccurrences": 8,
+    "note": "Ephemeral public-CI paths remain unchanged; attachment locators are metadata."
+  },
+  "proofLimits": [
+    "128 final distinct checks passed on this exact source; prior attempts and local/CI repeats do not increase the count.",
+    "Browser journeys ran actual compiled production routes/coordinator and disposable SQL with authored DNS/HTTPS dependencies. No native DNS/socket/TLS or real external target was exercised.",
+    "Other build/server stdout streams are metadata only. No whole job log, historical source tree, dependency folder, artifact ZIP, screenshot or trace archive is included or claimed retrieved.",
+    "Signed fixture sessions and owner SQL do not prove hosted auth-provider/RLS, production page, real-user or physical-device acceptance."
+  ],
+  "artifactZipRetrieved": false,
+  "exportManifest": "export-manifest.json"
+}
