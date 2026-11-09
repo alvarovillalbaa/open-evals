@@ -20,7 +20,7 @@ function readSource(name) {
 const context = createContext({ TextEncoder, URL }, { codeGeneration: { strings: false, wasm: false } });
 const crypto = new SyntheticModule(["createHash"], function () { this.setExport("createHash", createHash); }, { context });
 const modules = new Map();
-for (const name of ["hash", "custom-evals", "eval-engine", "provided-output-runs", "http-eval-plans", "http-eval-runs"]) modules.set(`./${name}`, new SourceTextModule(stripTypeScriptTypes(readSource(name), { mode: "strip", sourceMap: false }), { context, identifier: `actual-core:${name}.ts` }));
+for (const name of ["hash", "custom-evals", "eval-engine", "provided-output-runs", "eval-composition", "http-eval-plans", "http-eval-runs"]) modules.set(`./${name}`, new SourceTextModule(stripTypeScriptTypes(readSource(name), { mode: "strip", sourceMap: false }), { context, identifier: `actual-core:${name}.ts` }));
 await modules.get("./http-eval-runs").link(specifier => { if (specifier === "node:crypto") return crypto; assert.ok(modules.has(specifier), `unexpected runtime import:${specifier}`); return modules.get(specifier); });
 await modules.get("./http-eval-runs").evaluate();
 const plans = modules.get("./http-eval-plans").namespace, runs = modules.get("./http-eval-runs").namespace, custom = modules.get("./custom-evals").namespace;

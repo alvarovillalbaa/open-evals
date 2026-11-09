@@ -2,18 +2,20 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import type { HttpEvalPlanVersionRecord, HttpEvalRunRecord, HttpEvalStartRequest } from "@open-evals/core";
+import type { AnyHttpEvalPlanVersionRecord as HttpEvalPlanVersionRecord, AnyHttpEvalRunRecord as HttpEvalRunRecord, AnyHttpEvalStartRequest as HttpEvalStartRequest } from "@open-evals/core";
 import { jsonObject, readHttpTargetResponse } from "@/lib/http-target-client";
 import { buttonClass, primaryClass, RunEvidence } from "./http-target-view";
 
 function runShape(value: unknown, plan: HttpEvalPlanVersionRecord, runId: string): value is HttpEvalRunRecord {
-  return jsonObject(value) && value.schemaVersion === "http-eval-run-record-v1" && value.workspaceId === plan.workspaceId
-    && jsonObject(value.plan) && value.plan.fingerprint === plan.fingerprint && jsonObject(value.ledger)
-    && value.ledger.publicRunId === runId && value.ledger.planVersionId === plan.storage.versionId
+  const suffix = plan.content.schemaVersion === "http-target-eval-v2" ? "v2" : "v1";
+  return jsonObject(value) && value.schemaVersion === `http-eval-run-record-${suffix}` && value.workspaceId === plan.workspaceId
+    && jsonObject(value.plan) && value.plan.schemaVersion === plan.schemaVersion && value.plan.fingerprint === plan.fingerprint && jsonObject(value.ledger)
+    && value.ledger.schemaVersion === `http-eval-run-ledger-${suffix}` && value.ledger.publicRunId === runId && value.ledger.planVersionId === plan.storage.versionId
     && value.ledger.planFingerprint === plan.fingerprint && Array.isArray(value.ledger.rows)
     && value.ledger.rows.length === plan.content.samples.length && typeof value.ledger.deadlineAt === "string"
     && typeof value.ledger.leaseExpiresAt === "string" && ["running", "completed", "failed", "interrupted", "outcome_unknown"].includes(String(value.ledger.status))
-    && Array.isArray(value.events) && jsonObject(value.execution) && Array.isArray(value.execution.results) && Array.isArray(value.execution.gates);
+    && Array.isArray(value.events) && value.events.every(event => jsonObject(event) && event.schemaVersion === `http-eval-row-event-${suffix}`)
+    && jsonObject(value.execution) && value.execution.schemaVersion === `http-eval-execution-${suffix}` && Array.isArray(value.execution.results) && Array.isArray(value.execution.gates);
 }
 
 export function HttpExecutionControls({ plan, canWrite, initialRecord }: {
@@ -45,7 +47,7 @@ export function HttpExecutionControls({ plan, canWrite, initialRecord }: {
     const token = begin("start"); let started = false;
     try {
       const request: HttpEvalStartRequest = pinned.current?.request ?? {
-        schemaVersion: "http-eval-start-v1", runId: crypto.randomUUID(), planVersionId: plan.storage.versionId,
+        schemaVersion: plan.content.schemaVersion === "http-target-eval-v2" ? "http-eval-start-v2" : "http-eval-start-v1", runId: crypto.randomUUID(), planVersionId: plan.storage.versionId,
         expectedPlanFingerprint: plan.fingerprint
       };
       pinned.current ??= { request, body: JSON.stringify(request) }; setIntent(request);

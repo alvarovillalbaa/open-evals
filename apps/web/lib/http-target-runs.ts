@@ -3,7 +3,7 @@ import {
   httpEvalPlanStorageIds, parseHttpEvalPlanVersionRecord, parseHttpEvalRunRecord,
   prepareHttpEvalStartRequest, recoverHttpEvalRun as recoverCoreRun, stopHttpEvalRun as stopCoreRun
 } from "@open-evals/core";
-import type { HttpEvalRunRecord } from "@open-evals/core";
+import type { AnyHttpEvalRunRecord as HttpEvalRunRecord } from "@open-evals/core";
 import { HttpTargetTransportError, invokePublicHttpTarget } from "@open-evals/adapters";
 import {
   claimHttpEvalRunRow, finalizeHttpEvalRunRow, getHttpEvalRun, listHttpEvalRuns,
