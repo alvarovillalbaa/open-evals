@@ -32,7 +32,7 @@ export class HttpTargetTransportError extends Error {
 interface Address { address: string; family: number }
 export interface HttpTargetTransportDependencies {
   lookupAll: (hostname: string) => Promise<readonly Address[]>;
-  request: (options: RequestOptions, callback: (response: IncomingMessage) => void) => ClientRequest;
+  request: (options: RequestOptions & { autoSelectFamily: false }, callback: (response: IncomingMessage) => void) => ClientRequest;
 }
 
 const MAX_REQUEST_BYTES = 1024 * 1024 + 8192;

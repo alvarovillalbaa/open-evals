@@ -289,7 +289,7 @@ test("HT-WEB13 native not-sent and unknown outcomes remain distinct with no inve
   const h = await harness(); let count = 0;
   h.state.native = async () => { throw new h.TransportError("http_target_aborted", count++ === 0 ? "not_sent" : "unknown"); };
   const result = await h.runs.executeHttpTargetPlan(h.auth(), h.draft.planId, h.draft.versionId, h.start());
-  assert.deepEqual(result.record.events.map(event => event.status), ["not_sent", "outcome_unknown"]);
+  assert.deepEqual(plain(result.record.events.map(event => event.status)), ["not_sent", "outcome_unknown"]);
   assert.equal(result.record.ledger.status, "outcome_unknown"); assert.equal(result.record.execution.results.length, 0);
   assert.equal(result.record.execution.gates.find(gate => gate.level === "run").passed, false);
 });
@@ -302,7 +302,7 @@ test("HT-WEB14 a deadline stops never-claimed rows and preserves an already-sent
   Object.assign(h.plan, corrected);
   h.state.native = async () => { h.advance(5000); throw new h.TransportError("http_target_aborted", "unknown"); };
   const result = await h.runs.executeHttpTargetPlan(h.auth(), h.draft.planId, h.draft.versionId, h.start());
-  assert.equal(h.state.calls.length, 1); assert.deepEqual(result.record.events.map(event => event.status), ["outcome_unknown", "not_sent", "not_sent"]);
+  assert.equal(h.state.calls.length, 1); assert.deepEqual(plain(result.record.events.map(event => event.status)), ["outcome_unknown", "not_sent", "not_sent"]);
   assert.equal(result.record.ledger.stopReason, "http_eval_deadline_exceeded"); assert.equal(result.record.execution.gates.find(gate => gate.level === "run").passed, false);
 });
 test("HT-WEB15 a finalize store failure cannot dispatch remaining rows or resend the committed claim [T2]", async () => {
