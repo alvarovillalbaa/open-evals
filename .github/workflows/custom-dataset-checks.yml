@@ -17,8 +17,8 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     env:
-      ROOT_ACCEPTED_SOURCE_SHA: b061e7a52943a4ff8bcd026f8804786ff82d934d
-      ROOT_EXPECTED_PARENT_SHA: b061e7a52943a4ff8bcd026f8804786ff82d934d
+      ROOT_ACCEPTED_SOURCE_SHA: 301cf02bede4b0dda7cfefb9bcfe9f2e07d3662d
+      ROOT_EXPECTED_PARENT_SHA: 301cf02bede4b0dda7cfefb9bcfe9f2e07d3662d
       TASK_DB: oe_custom_datasets_test_${{ github.run_id }}_${{ github.run_attempt }}
       OWNED_PORT: '65432'
     steps:
@@ -47,7 +47,7 @@ jobs:
           node-version: 24.22.2
           check-latest: false
           package-manager-cache: false
-      - name: Run custom and regression SQL checks, build once, then run five browser journeys
+      - name: Build once, then run five pending browser journeys
         shell: bash
         timeout-minutes: 18
         run: |
@@ -76,7 +76,7 @@ jobs:
           base_url = 'http://127.0.0.1:4173'
           auth_secret = 'authored_open_evals_custom_datasets_20261109_fixture_only'
           api_key_pepper = 'authored_custom_dataset_browser_pepper_20261109_fixture_only'
-          source_contract_frozen = True  # Root verified the final path delta and all 58 source pins.
+          source_contract_frozen = True  # Root and independent peer verified the R2 two-path delta and all 58 source pins.
           expected_sources = {
               "apps/web/app/(product)/evals/datasets/[datasetId]/page.tsx": {"bytes":2970,"sha256":"e5e9bc048cd19d6e22b08ac1eb1b1023fb6c1667ac2f31291e2c4a9e8699bf08"},
               "apps/web/app/(product)/evals/datasets/[datasetId]/versions/[versionId]/page.tsx": {"bytes":4887,"sha256":"22377d1a72f24314ad47fc2cbd371ab914247b1507c6ab98e8c8eed883b4ade6"},
@@ -109,7 +109,7 @@ jobs:
               "docs/proposals/custom-datasets.md": {"bytes":13029,"sha256":"d32afb90a412d34348995b2a3a785e9e1cb58463ee2a0cc816a0268e79b34a48"},
               "package.json": {"bytes":2248,"sha256":"1a10d0138fae69c7c297c80456d93d0824ed6c85b8f7f161ce5c75d6f5c8651e"},
               "packages/core/src/custom-dataset-types.ts": {"bytes":4069,"sha256":"5353576aa44151b831c65fd71f03aad7fef282f6f8bf49d85cd02160cb882c15"},
-              "packages/core/src/custom-datasets.ts": {"bytes":35092,"sha256":"4af04fc1a9f5faf3360b0ad9c7274a4ffb91db52fcabebe499ec41a074eeecbd"},
+              "packages/core/src/custom-datasets.ts": {"bytes":35100,"sha256":"baf170f191bc1ffd0b9b8b163f5722e1cc32c0880ff8dbcf5804aeee3236f84a"},
               "packages/core/src/custom-evals.ts": {"bytes":8855,"sha256":"20276d52b66ef0e1fca0efa85b0d10ea8bde3b3d5854cd160664d40628e5886d"},
               "packages/core/src/eval-engine.ts": {"bytes":10877,"sha256":"847d2e79dcb767acece965ab25cbed1acc38cbebabc95372d273f694669c28d3"},
               "packages/core/src/hash.ts": {"bytes":969,"sha256":"14c6a74e885a8bbc11b71a80bf4b4e306d4c6feb1868eafe59684eaeee3c7ab0"},
@@ -137,9 +137,8 @@ jobs:
               "tests/unit/custom-datasets.test.mjs": {"bytes":30662,"sha256":"afb8cb1db0cc64a38a91212183e76c6f59dc5deaf52bc5da2ba1a92b761d0d83"},
               "turbo.json": {"bytes":341,"sha256":"7caba17ef6c5a0da4f8090ec9a36e16cc243d7c6aa28cc051e2da39a7a5cf6c7"},
           }
-          custom_pg_case_ids, regression_case_ids = [], []
-          expected_custom_pg_ids = [f'CD-PG{index:02}' for index in range(1, 21)]
-          expected_regression_ids = [f'PO-PG{index:02}' for index in range(1, 15)]
+          prior_sql_proof = {'source': '301cf02bede4b0dda7cfefb9bcfe9f2e07d3662d', 'runId': 42670671269,
+              'newCaseCount': 20, 'regressionCaseCount': 14}
           pg_fixture_empty = None
           unprotected_delta = None
           log_bytes = 0
@@ -460,9 +459,9 @@ jobs:
               assert re.fullmatch(r'oe_custom_datasets_test_[0-9]+_[0-9]+', database)
               head = run('source-head', ['git', 'rev-parse', 'HEAD']).strip()
               parents = run('source-parents', ['git', 'rev-list', '--parents', '-n', '1', 'HEAD']).split()
-              assert head == os.environ['GITHUB_SHA'] and parents == [head, expected_parent], 'source must be one direct child of the accepted release'
+              assert head == os.environ['GITHUB_SHA'] and parents == [head, expected_parent], 'source must be one direct child of the SQL-verified R1 source'
               delta = run('source-delta', ['git', 'diff', '--name-status', '-z', '--no-renames', expected_parent, 'HEAD']).split('\0')
-              expected_delta = ["A",".github/workflows/custom-dataset-checks.yml","A","apps/web/app/(product)/evals/datasets/[datasetId]/page.tsx","A","apps/web/app/(product)/evals/datasets/[datasetId]/versions/[versionId]/page.tsx","A","apps/web/app/(product)/evals/datasets/custom-dataset-composer.tsx","A","apps/web/app/(product)/evals/datasets/error.tsx","A","apps/web/app/(product)/evals/datasets/loading.tsx","A","apps/web/app/(product)/evals/datasets/page.tsx","M","apps/web/app/(product)/evals/page.tsx","M","apps/web/app/(product)/evals/run/page.tsx","M","apps/web/app/(product)/evals/run/provided-output-composer.tsx","A","apps/web/app/api/v1/custom-datasets/[datasetId]/route.ts","A","apps/web/app/api/v1/custom-datasets/[datasetId]/versions/[versionId]/route.ts","A","apps/web/app/api/v1/custom-datasets/preview/route.ts","A","apps/web/app/api/v1/custom-datasets/route.ts","A","apps/web/lib/custom-dataset-types.ts","A","apps/web/lib/custom-datasets.ts","A","docs/custom-datasets.md","A","docs/proposals/custom-datasets.md","A","packages/core/src/custom-dataset-types.ts","A","packages/core/src/custom-datasets.ts","M","packages/core/src/index.ts","A","packages/db/src/custom-dataset-types.ts","A","packages/db/src/custom-datasets.ts","A","packages/db/src/dataset-snapshots.ts","M","packages/db/src/index.ts","M","packages/db/src/provided-output-runs.ts","M","packages/db/src/service.ts","A","tests/e2e/custom-datasets.browser.config.ts","A","tests/e2e/custom-datasets.browser.fixture.ts","A","tests/e2e/custom-datasets.browser.spec.ts","A","tests/integration/custom-datasets.node.mjs","M","tests/integration/provided-output-runs.node.mjs","A","tests/unit/custom-datasets.test.mjs",""]
+              expected_delta = ["M",".github/workflows/custom-dataset-checks.yml","M","packages/core/src/custom-datasets.ts",""]
               assert expected_delta and delta == expected_delta, 'only the reviewed custom-dataset source delta is admitted'
               assert not run('source-clean', ['git', 'status', '--porcelain=v1', '--untracked-files=no']).strip()
               protected = [".github/workflows/custom-dataset-checks.yml","apps/web/app/(product)/evals/datasets/[datasetId]/page.tsx","apps/web/app/(product)/evals/datasets/[datasetId]/versions/[versionId]/page.tsx","apps/web/app/(product)/evals/datasets/custom-dataset-composer.tsx","apps/web/app/(product)/evals/datasets/error.tsx","apps/web/app/(product)/evals/datasets/loading.tsx","apps/web/app/(product)/evals/datasets/page.tsx","apps/web/app/(product)/evals/page.tsx","apps/web/app/(product)/evals/run/[runId]/page.tsx","apps/web/app/(product)/evals/run/page.tsx","apps/web/app/(product)/evals/run/provided-output-composer.tsx","apps/web/app/api/v1/custom-datasets/[datasetId]/route.ts","apps/web/app/api/v1/custom-datasets/[datasetId]/versions/[versionId]/route.ts","apps/web/app/api/v1/custom-datasets/preview/route.ts","apps/web/app/api/v1/custom-datasets/route.ts","apps/web/app/api/v1/provided-output-runs/[runId]/route.ts","apps/web/app/api/v1/provided-output-runs/preview/route.ts","apps/web/app/api/v1/provided-output-runs/route.ts","apps/web/app/api/v1/provided-output-runs/sources/route.ts","apps/web/lib/auth.ts","apps/web/lib/custom-dataset-types.ts","apps/web/lib/custom-datasets.ts","apps/web/lib/custom-eval-access.ts","apps/web/lib/custom-evals.ts","apps/web/lib/instruction-request.ts","apps/web/lib/provided-output-runs.ts","apps/web/lib/provided-output-types.ts","apps/web/package.json","docs/custom-datasets.md","docs/proposals/custom-datasets.md","package.json","packages/core/src/custom-dataset-types.ts","packages/core/src/custom-datasets.ts","packages/core/src/custom-evals.ts","packages/core/src/eval-engine.ts","packages/core/src/hash.ts","packages/core/src/index.ts","packages/core/src/provided-output-runs.ts","packages/core/src/provided-output-types.ts","packages/core/src/types.ts","packages/db/migrations/0001_init.sql","packages/db/migrations/0002_hosted_integrations.sql","packages/db/package.json","packages/db/src/custom-dataset-types.ts","packages/db/src/custom-datasets.ts","packages/db/src/custom-evals.ts","packages/db/src/dataset-snapshots.ts","packages/db/src/index.ts","packages/db/src/provided-output-runs.ts","packages/db/src/schema.ts","packages/db/src/service.ts","pnpm-lock.yaml","tests/e2e/custom-datasets.browser.config.ts","tests/e2e/custom-datasets.browser.fixture.ts","tests/e2e/custom-datasets.browser.spec.ts","tests/integration/custom-datasets.node.mjs","tests/integration/provided-output-runs.node.mjs","tests/unit/custom-datasets.test.mjs","turbo.json"]
@@ -527,22 +526,6 @@ jobs:
               for number, name in [('0001', '0001_init.sql'), ('0002', '0002_hosted_integrations.sql')]:
                   run('migration-' + number, [str(pg_bin / 'psql'), '-X', '-v', 'ON_ERROR_STOP=1', '-d', database, '-f', 'packages/db/migrations/' + name], extra=pg)
               database_url = f"postgresql://postgres:authored_ephemeral_pg_fixture@127.0.0.1:{port}/{database}"
-              def postgres_cases(label, suite, environment, expected_ids, prefix):
-                  tap = run(label, ['node', '--import', 'tsx', '--test', '--test-reporter=tap', suite], 300, environment, True)
-                  ids = re.findall(r'^\s*ok \d+ - (' + re.escape(prefix) + r'\d{2})\b', tap, re.M)
-                  assert ids == expected_ids, label + '_exact_case_results_required'
-                  count = len(expected_ids)
-                  for total in [f'tests {count}', f'pass {count}', 'fail 0', 'cancelled 0', 'skipped 0', 'todo 0']:
-                      assert re.search(r'^# ' + total + r'\s*$', tap, re.M), label + '_TAP_total_missing:' + total
-                  assert not re.search(r'^\s*(?:not )?ok\b[^\n]*#\s*(?:SKIP|TODO)\b', tap, re.M | re.I)
-                  write(label + '.json', {'status': 'passed', 'ids': ids, 'tier': 'T3', 'actualPostgreSQL': True,
-                      'authProviderChecked': False, 'hostedRlsChecked': False})
-                  return ids
-              custom_pg_case_ids = postgres_cases('custom-dataset-postgres-cases', 'tests/integration/custom-datasets.node.mjs',
-                  {'CUSTOM_DATASET_TEST_ALLOW': 'local-disposable', 'CUSTOM_DATASET_TEST_DATABASE_URL': database_url}, expected_custom_pg_ids, 'CD-PG')
-              regression_case_ids = postgres_cases('provided-output-regression-cases', 'tests/integration/provided-output-runs.node.mjs',
-                  {'PROVIDED_OUTPUT_TEST_ALLOW': 'local-disposable', 'PROVIDED_OUTPUT_TEST_DATABASE_URL': database_url,
-                   'PROVIDED_OUTPUT_TEST_COHORT': 'open-evals-custom-datasets-20261109'}, expected_regression_ids, 'PO-PG')
               fixture_tables = ['users', 'workspaces', 'workspace_memberships', 'projects', 'project_api_keys',
                   'datasets', 'dataset_versions', 'dataset_rows', 'eval_sets', 'eval_set_versions', 'eval_items',
                   'eval_item_versions', 'eval_set_item_versions', 'run_plans', 'eval_runs', 'run_samples',
@@ -554,7 +537,7 @@ jobs:
               write('postgres-fixture-absence.json', {'database': database, 'tables': empty_counts,
                   'allEmpty': pg_fixture_empty})
               emit_original('postgres-fixture-absence.json', (evidence / 'postgres-fixture-absence.json').read_bytes(), 16384)
-              assert pg_fixture_empty, 'PostgreSQL test fixtures must be absent before the app build'
+              assert pg_fixture_empty, 'fresh owned PostgreSQL tables must be empty before the app build'
               # One normal root production Turbo build; no AUTH_MODE/DATABASE_URL pass-through or baseline replay.
               buildenv = {'NEXT_TELEMETRY_DISABLED': '1', 'FORCE_COLOR': '0'}
               run('build-candidate', [*pnpm, 'run', 'build', '--force'], 240, buildenv)
@@ -608,8 +591,9 @@ jobs:
                       'plans': 0, 'runs': 0, 'samples': 0, 'results': 0, 'gates': 0, 'runAudits': 0, 'evalSets': 0, 'evalItems': 0}
               assert report['stats']['expected'] == 5 and all(report['stats'][key] == 0 for key in ['unexpected', 'flaky', 'skipped'])
               if command_failure is not None: raise command_failure
-              write('cases.json', {'status': 'passed', 'tier': 'T3', 'customDatasetPostgresCaseIds': custom_pg_case_ids,
-                  'providedOutputRegressionCaseIds': regression_case_ids, 'browserCases': browser_results,
+              write('cases.json', {'status': 'passed', 'tier': 'T3', 'checkScope': 'build_and_five_browser_cases_only',
+                  'sqlSuitesInvoked': False, 'priorSqlProof': prior_sql_proof,
+                  'customDatasetPostgresCaseIds': [], 'providedOutputRegressionCaseIds': [], 'browserCases': browser_results,
                   'actualProductionApp': True, 'signedSessionFixture': True, 'hostedAuthProviderChecked': False,
                   'hostedRlsChecked': False, 'physicalDeviceChecked': False})
           except Exception as error:
@@ -702,16 +686,16 @@ jobs:
               result = {'schemaVersion': 'custom-dataset-checks-v1', 'status': 'passed' if passed else 'failed',
                   'acceptedSource': accepted, 'expectedParent': expected_parent, 'directParentSource': expected_parent,
                   'verificationSource': os.environ['GITHUB_SHA'], 'runId': os.environ['GITHUB_RUN_ID'],
-                  'attempt': os.environ['GITHUB_RUN_ATTEMPT'], 'customDatasetPostgresCaseCount': len(custom_pg_case_ids) if (evidence / 'custom-dataset-postgres-cases.json').exists() else None,
-                  'customDatasetPostgresCaseIds': custom_pg_case_ids,
-                  'providedOutputRegressionCaseCount': len(regression_case_ids) if (evidence / 'provided-output-regression-cases.json').exists() else None,
-                  'providedOutputRegressionCaseIds': regression_case_ids, 'pureCoreCasesInvoked': False,
+                  'attempt': os.environ['GITHUB_RUN_ATTEMPT'], 'checkScope': 'build_and_five_browser_cases_only',
+                  'sqlSuitesInvoked': False, 'priorSqlProof': prior_sql_proof,
+                  'customDatasetPostgresCaseCount': None, 'customDatasetPostgresCaseIds': [],
+                  'providedOutputRegressionCaseCount': None, 'providedOutputRegressionCaseIds': [], 'pureCoreCasesInvoked': False,
                   'postgresFixturesEmptyBeforeBuild': pg_fixture_empty, 'unprotectedTrackedDelta': unprotected_delta,
                   'browserCaseCount': 5 if passed else None, 'caseResults': browser_results, 'applicationServers': app_records,
                   'commandCount': len(commands), 'cleanup': cleanup, 'errors': errors,
-                  'limits': {'streamBytes': stream_limit, 'postgresSeconds': 300, 'browserSeconds': 480,
+                  'limits': {'streamBytes': stream_limit, 'browserSeconds': 480,
                       'softWorkSeconds': 840, 'stepMinutes': 18, 'jobMinutes': 20},
-                  'proofLimits': ['New custom-dataset owner-SQL cases, fourteen provided-output SQL regressions after the shared snapshot-loader change, one production build and five new Chromium journeys only. Signed HMAC fixtures are not hosted provider, membership/RLS, physical-device or live production acceptance. The separate thirty pure cases and old four browser cases are not invoked; no model call or paid provider.']}
+                  'proofLimits': ['R2 invokes one production build and five pending Chromium journeys against a fresh migrated owned database only. It invokes no SQL suite; priorSqlProof identifies the separate R1 source/run with twenty new and fourteen regression SQL passes. Signed HMAC fixtures are not hosted provider, membership/RLS, physical-device or live production acceptance. The thirty pure cases and old four browser cases are not invoked; no model call or paid provider.']}
               try: emit_original('cleanup.json', (evidence / 'cleanup.json').read_bytes(), 32768, final=True)
               except Exception as error:
                   result['status'] = 'failed'; result['errors'].append('cleanup_log_transport_failed:' + type(error).__name__)

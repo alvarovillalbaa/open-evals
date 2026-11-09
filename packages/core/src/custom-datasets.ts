@@ -57,7 +57,7 @@ function validUnicode(value: string): boolean {
   return true;
 }
 
-function text(value: unknown, maximum = CUSTOM_DATASET_LIMITS.identifierBytes, nonblank = true): string {
+function text(value: unknown, maximum: number = CUSTOM_DATASET_LIMITS.identifierBytes, nonblank = true): string {
   return typeof value === "string" && validUnicode(value) && byteLength(value) <= maximum && (!nonblank || value.trim().length > 0)
     ? value : invalid();
 }
