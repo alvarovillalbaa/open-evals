@@ -8,7 +8,7 @@ this increment adds no runner, dependency, broad configuration or CI change.
 | --- | --- | --- |
 | `unit/custom-evals.test.mjs` | T1, actual pure builder/parser/hash with authored DTOs | 20passes in the focused Node invocation |
 | `unit/custom-eval-access.test.mts` | T1, dependency-free permission decisions | 18passes in the same invocation |
-| `integration/custom-evals-store.node.mjs` | T3, real owned PostgreSQL/transaction/member seam | Authored and UNRUN |
+| `integration/custom-evals-store.node.mjs` | T3, real owned PostgreSQL/transaction/member seam | 12passes in the separate owned PostgreSQL CI invocation |
 
 The new unit sources extend the existing explicit Node-focused lane and do not
 match Vitest's `.test.ts` collection. Invoke with an existing compatible Node
@@ -30,6 +30,12 @@ It refuses application database URL fallbacks. Read its guards before any setup;
 fixture cleanup is part of a future successful result. Do not run it against a
 shared database. No T4/T5 data, production credential or production access
 authorization is involved. No browser/API/live-Auth proof is claimed by T1.
+
+The [actual PostgreSQL result](../docs/results/2026/11-09/custom-eval-postgres-checks.md)
+records observed cleanup, the preserved zero-job workflow failure and the archive
+readback limit. This is separate from the38T1invocation; no50-case run or all-green
+CI history is claimed. The frozen test's historical authored/UNRUN suite title
+is unchanged; actual current outcomes come from its twelve TAP results.
 
 See [the scope](../docs/proposals/custom-eval-set-checks.md) and
 [actual results](../docs/results/2026/11-09/custom-eval-checks.md).

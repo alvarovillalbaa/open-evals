@@ -126,9 +126,11 @@ invocations, preserving the failed first harness. Browser/hosted acceptance is
 separate, and the catalogue does not complete Harbor or campaign execution.
 
 The [custom evaluator checks](docs/results/2026/11-09/custom-eval-checks.md)
-record38pure-source passes. Twelve real PostgreSQL cases remain authored and
-unrun; HTTP/Auth, browser interaction and hosted persistence require separate
-proof. Existing closed instruction/campaign receipts retain their own sources.
+record38pure-source passes. [Twelve separate real PostgreSQL cases](docs/results/2026/11-09/custom-eval-postgres-checks.md)
+passed with observed database/cluster cleanup; full build/alias observations and
+preserved failures are in the [delivery record](docs/results/2026/11-09/custom-eval-delivery.md).
+HTTP/Auth, browser interaction, hosted persistence and archive readback require
+separate proof. Existing closed instruction/campaign receipts retain their own sources.
 
 ## Historical Versus Live Evals
 

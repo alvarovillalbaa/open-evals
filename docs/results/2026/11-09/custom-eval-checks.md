@@ -21,13 +21,16 @@ deadline and minimal environment. All five checked source/test files remain
 byte-exact after execution. The native focused command record and empty stderr
 remain private with digests in the JSON; stdout is public and unchanged.
 
-Twelve real PostgreSQL cases are authored, independently source-reviewed and
-UNRUN. Their guard requires an explicit, owner-marked loopback disposable
+Twelve real PostgreSQL cases were authored, independently source-reviewed and
+UNRUN at this focused invocation. Their guard requires an explicit, owner-marked loopback disposable
 database with unchanged repository migrations. No database was created,
 migrated, queried or modified for this result. A mock or static SQL review is
 not a persistence/locking/rollback pass. Browser interaction is also unverified.
 Source/whitespace peers are clear; full types/build, if available, have their
 own exact-source provider result. No prior closed acceptance packet was rerun.
+The later [PostgreSQL result](custom-eval-postgres-checks.md) and
+[delivery record](custom-eval-delivery.md) own their subsequent execution and
+build observations; they do not change this first T1result or its source bindings.
 
 The [implemented contract](../../../custom-evals.md) saves one critical contains
 evaluator and immutable membership. A dataset threshold below100does not waive

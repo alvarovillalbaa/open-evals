@@ -1,0 +1,712 @@
+{
+  "schemaVersion": "custom-eval-postgres-public-result-v1",
+  "profile": "owner-sql-tier3-real-postgresql",
+  "caseProfileStatus": "passed",
+  "cleanupStatus": "observed-removed",
+  "archiveReadbackStatus": "unverified",
+  "productContract": "../../../custom-evals.md",
+  "separateTier1Result": "custom-eval-checks.md",
+  "source": {
+    "verificationCommit": "a677e14d8a17097b5748bbedf08df715c17b87f3",
+    "acceptedApplicationCommit": "a8adcaa48e150cc94e68c189ab9d073435c503ac",
+    "directParentAndOnlyTwoAddedFilesAdmissionPassed": true,
+    "applicationCodeDependenciesMigrationsAndTestCasesChangedByVerification": false,
+    "verificationFiles": [
+      {
+        "path": ".github/workflows/custom-eval-postgres-checks.yml",
+        "bytes": 25935,
+        "sha256": "c66610e8574fa8dd73e144aebb38a0d285f42b858f0f705c3e26510c1ab07c90",
+        "sha": "2bd5b05fb64bd1d72d4ce64ba141b88822d280de",
+        "mode": "100644"
+      },
+      {
+        "path": "docs/proposals/custom-eval-postgres-checks.md",
+        "bytes": 8686,
+        "sha256": "18ed452f18dcf7a60f30ecaf153540c3c12c17d09dbaf38b7d23b652cc697730",
+        "sha": "b4b90a638db20dbf0c349d7a01af0bd7d1b506a7",
+        "mode": "100644"
+      }
+    ],
+    "postgresTest": {
+      "path": "tests/integration/custom-evals-store.node.mjs",
+      "bytes": 21971,
+      "sha256": "7110395af88acab953bcc78d4ccfbbf287dda38f48d42920b55515efb050f904"
+    },
+    "runtimeDbStoreSha256": "6262d5e3c03a3f66b62ca27f487e2eb808b94e62afa76a8570b7f6fee0585750"
+  },
+  "github": {
+    "runId": 42597640101,
+    "jobId": 129094101939,
+    "runAttempt": 1,
+    "runUrl": "https://github.com/alvarovillalbaa/open-evals/actions/runs/42597640101",
+    "jobUrl": "https://github.com/alvarovillalbaa/open-evals/actions/runs/42597640101/job/129094101939"
+  },
+  "guardedTools": {
+    "node": "24.22.2",
+    "pnpm": "10.14.0",
+    "postgresqlMajor": 16,
+    "guardsPassed": true,
+    "exactPostgresqlMinorOutputLocallyRecovered": false
+  },
+  "cases": {
+    "tier": 3,
+    "ids": [
+      "CE-PG01",
+      "CE-PG02",
+      "CE-PG03",
+      "CE-PG04",
+      "CE-PG05",
+      "CE-PG06",
+      "CE-PG07",
+      "CE-PG08",
+      "CE-PG09",
+      "CE-PG10",
+      "CE-PG11",
+      "CE-PG12"
+    ],
+    "counts": {
+      "tests": 12,
+      "suites": 1,
+      "pass": 12,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "reporterDurationMs": 10729.276548,
+    "commandStartedAt": "2026-11-09T10:01:49.963012+00:00",
+    "commandCompletedAt": "2026-11-09T10:02:00.728255+00:00",
+    "commandDeadlineSeconds": 300,
+    "historicalAuthoredUnrunSuiteTitleRetained": true
+  },
+  "capture": {
+    "commands": 23,
+    "commandsExitZero": 23,
+    "driverReportedCompleteCommandStreams": 46,
+    "originalTestStreamsRecoveredAndHashVerified": 2,
+    "otherCommandStreamsLocallyRecovered": 0,
+    "publicStdout": {
+      "path": "custom-eval-originals/postgres-cases.stdout.txt",
+      "bytes": 3436,
+      "sha256": "99d2d188d883d4e9916ba914cc7cf6c9d46c655ff1d9e4cf0be5e99eef665bac"
+    },
+    "emptyStderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "recoveredAndHashVerified": true,
+      "publicFileCreated": false
+    },
+    "recoveryMethod": "strip only provider timestamp prefixes between literal source-defined markers; byte and SHA256 match command-reported original stream fields",
+    "privateProviderJobLog": {
+      "retained": true,
+      "bytes": 83944,
+      "sha256": "ee9d14adfa5ee539e308e3323252ee9a0ab2f51336133442c37e32983075057a"
+    },
+    "commandReports": [
+      {
+        "label": "source-head",
+        "exitCode": 0,
+        "terminationReason": null,
+        "streams": {
+          "stdout": {
+            "reportedFile": "source-head.stdout.txt",
+            "bytes": 41,
+            "sha256": "4be9cf91730ad626462a704dc02fe82f22f962ad6192275d886093f8d38a457d",
+            "driverReportedComplete": true,
+            "limitBytes": 4194304,
+            "originalRecoveredAndHashVerified": false
+          },
+          "stderr": {
+            "reportedFile": "source-head.stderr.txt",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "driverReportedComplete": true,
+            "limitBytes": 4194304,
+            "originalRecoveredAndHashVerified": false
+          }
+        }
+      },
+      {
+        "label": "source-parents",
+        "exitCode": 0,
+        "terminationReason": null,
+        "streams": {
+          "stdout": {
+            "reportedFile": "source-parents.stdout.txt",
+            "bytes": 82,
+            "sha256": "1c40e3a7350b24772a6b84c1dbcb49c032f465380f38a38bcd292118b2574252",
+            "driverReportedComplete": true,
+            "limitBytes": 4194304,
+            "originalRecoveredAndHashVerified": false
+          },
+          "stderr": {
+            "reportedFile": "source-parents.stderr.txt",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "driverReportedComplete": true,
+            "limitBytes": 4194304,
+            "originalRecoveredAndHashVerified": false
+          }
+        }
+      },
+      {
+        "label": "source-delta",
+        "exitCode": 0,
+        "terminationReason": null,
+        "streams": {
+          "stdout": {
+            "reportedFile": "source-delta.stdout.txt",
+            "bytes": 100,
+            "sha256": "54dba7b21208267dccdf6bb2fe1f644d3e64f30655fa73c6b5e44f668d32399c",
+            "driverReportedComplete": true,
+            "limitBytes": 4194304,
+            "originalRecoveredAndHashVerified": false
+          },
+          "stderr": {
+            "reportedFile": "source-delta.stderr.txt",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "driverReportedComplete": true,
+            "limitBytes": 4194304,
+            "originalRecoveredAndHashVerified": false
+          }
+        }
+      },
+      {
+        "label": "source-clean",
+        "exitCode": 0,
+        "terminationReason": null,
+        "streams": {
+          "stdout": {
+            "reportedFile": "source-clean.stdout.txt",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "driverReportedComplete": true,
+            "limitBytes": 4194304,
+            "originalRecoveredAndHashVerified": false
+          },
+          "stderr": {
+            "reportedFile": "source-clean.stderr.txt",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "driverReportedComplete": true,
+            "limitBytes": 4194304,
+            "originalRecoveredAndHashVerified": false
+          }
+        }
+      },
+      {
+        "label": "node-version",
+        "exitCode": 0,
+        "terminationReason": null,
+        "streams": {
+          "stdout": {
+            "reportedFile": "node-version.stdout.txt",
+            "bytes": 9,
+            "sha256": "6a0cec2e157365c1a8ac6d1715733b7c3321a7c5565862a701ca71ef00359d04",
+            "driverReportedComplete": true,
+            "limitBytes": 4194304,
+            "originalRecoveredAndHashVerified": false
+          },
+          "stderr": {
+            "reportedFile": "node-version.stderr.txt",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "driverReportedComplete": true,
+            "limitBytes": 4194304,
+            "originalRecoveredAndHashVerified": false
+          }
+        }
+      },
+      {
+        "label": "install-pnpm",
+        "exitCode": 0,
+        "terminationReason": null,
+        "streams": {
+          "stdout": {
+            "reportedFile": "install-pnpm.stdout.txt",
+            "bytes": 23,
+            "sha256": "da13ab9d025b19c91553bc7d4c450975d3e4e36dd7c5fef6f223f8008ba39547",
+            "driverReportedComplete": true,
+            "limitBytes": 4194304,
+            "originalRecoveredAndHashVerified": false
+          },
+          "stderr": {
+            "reportedFile": "install-pnpm.stderr.txt",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "driverReportedComplete": true,
+            "limitBytes": 4194304,
+            "originalRecoveredAndHashVerified": false
+          }
+        }
+      },
+      {
+        "label": "pnpm-version",
+        "exitCode": 0,
+        "terminationReason": null,
+        "streams": {
+          "stdout": {
+            "reportedFile": "pnpm-version.stdout.txt",
+            "bytes": 8,
+            "sha256": "4013d43ed3646dbf7f17865d540d1baf819c1fb47a1f96caa1a755e906f2d9e6",
+            "driverReportedComplete": true,
+            "limitBytes": 4194304,
+            "originalRecoveredAndHashVerified": false
+          },
+          "stderr": {
+            "reportedFile": "pnpm-version.stderr.txt",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "driverReportedComplete": true,
+            "limitBytes": 4194304,
+            "originalRecoveredAndHashVerified": false
+          }
+        }
+      },
+      {
+        "label": "install-dependencies",
+        "exitCode": 0,
+        "terminationReason": null,
+        "streams": {
+          "stdout": {
+            "reportedFile": "install-dependencies.stdout.txt",
+            "bytes": 379,
+            "sha256": "2011274ffdf85993a3a893d8318833fdf22d6016617bd3120d17476df9367192",
+            "driverReportedComplete": true,
+            "limitBytes": 4194304,
+            "originalRecoveredAndHashVerified": false
+          },
+          "stderr": {
+            "reportedFile": "install-dependencies.stderr.txt",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "driverReportedComplete": true,
+            "limitBytes": 4194304,
+            "originalRecoveredAndHashVerified": false
+          }
+        }
+      },
+      {
+        "label": "source-after-install",
+        "exitCode": 0,
+        "terminationReason": null,
+        "streams": {
+          "stdout": {
+            "reportedFile": "source-after-install.stdout.txt",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "driverReportedComplete": true,
+            "limitBytes": 4194304,
+            "originalRecoveredAndHashVerified": false
+          },
+          "stderr": {
+            "reportedFile": "source-after-install.stderr.txt",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "driverReportedComplete": true,
+            "limitBytes": 4194304,
+            "originalRecoveredAndHashVerified": false
+          }
+        }
+      },
+      {
+        "label": "postgres-binary-version",
+        "exitCode": 0,
+        "terminationReason": null,
+        "streams": {
+          "stdout": {
+            "reportedFile": "postgres-binary-version.stdout.txt",
+            "bytes": 57,
+            "sha256": "d4c9b9bca29f7ce9083c8c785f314216d38a1aeb13e3f352ea9444b77f43b127",
+            "driverReportedComplete": true,
+            "limitBytes": 4194304,
+            "originalRecoveredAndHashVerified": false
+          },
+          "stderr": {
+            "reportedFile": "postgres-binary-version.stderr.txt",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "driverReportedComplete": true,
+            "limitBytes": 4194304,
+            "originalRecoveredAndHashVerified": false
+          }
+        }
+      },
+      {
+        "label": "cluster-init",
+        "exitCode": 0,
+        "terminationReason": null,
+        "streams": {
+          "stdout": {
+            "reportedFile": "cluster-init.stdout.txt",
+            "bytes": 921,
+            "sha256": "425f369cf898b2f66cc6a71ab301c5bb91919e2c706a4d77800f2d8abe4e8e28",
+            "driverReportedComplete": true,
+            "limitBytes": 4194304,
+            "originalRecoveredAndHashVerified": false
+          },
+          "stderr": {
+            "reportedFile": "cluster-init.stderr.txt",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "driverReportedComplete": true,
+            "limitBytes": 4194304,
+            "originalRecoveredAndHashVerified": false
+          }
+        }
+      },
+      {
+        "label": "cluster-start",
+        "exitCode": 0,
+        "terminationReason": null,
+        "streams": {
+          "stdout": {
+            "reportedFile": "cluster-start.stdout.txt",
+            "bytes": 52,
+            "sha256": "66afd0411ccc09366e99fdd99b85f21899c8d2d064f5835126859618802153ad",
+            "driverReportedComplete": true,
+            "limitBytes": 4194304,
+            "originalRecoveredAndHashVerified": false
+          },
+          "stderr": {
+            "reportedFile": "cluster-start.stderr.txt",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "driverReportedComplete": true,
+            "limitBytes": 4194304,
+            "originalRecoveredAndHashVerified": false
+          }
+        }
+      },
+      {
+        "label": "postgres-version",
+        "exitCode": 0,
+        "terminationReason": null,
+        "streams": {
+          "stdout": {
+            "reportedFile": "postgres-version.stdout.txt",
+            "bytes": 35,
+            "sha256": "965d082cf7d0c7c9cb31fca0366ecf88cf5f4f6b41a81aa5b92e7c29557872c2",
+            "driverReportedComplete": true,
+            "limitBytes": 4194304,
+            "originalRecoveredAndHashVerified": false
+          },
+          "stderr": {
+            "reportedFile": "postgres-version.stderr.txt",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "driverReportedComplete": true,
+            "limitBytes": 4194304,
+            "originalRecoveredAndHashVerified": false
+          }
+        }
+      },
+      {
+        "label": "database-before",
+        "exitCode": 0,
+        "terminationReason": null,
+        "streams": {
+          "stdout": {
+            "reportedFile": "database-before.stdout.txt",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "driverReportedComplete": true,
+            "limitBytes": 4194304,
+            "originalRecoveredAndHashVerified": false
+          },
+          "stderr": {
+            "reportedFile": "database-before.stderr.txt",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "driverReportedComplete": true,
+            "limitBytes": 4194304,
+            "originalRecoveredAndHashVerified": false
+          }
+        }
+      },
+      {
+        "label": "database-create",
+        "exitCode": 0,
+        "terminationReason": null,
+        "streams": {
+          "stdout": {
+            "reportedFile": "database-create.stdout.txt",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "driverReportedComplete": true,
+            "limitBytes": 4194304,
+            "originalRecoveredAndHashVerified": false
+          },
+          "stderr": {
+            "reportedFile": "database-create.stderr.txt",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "driverReportedComplete": true,
+            "limitBytes": 4194304,
+            "originalRecoveredAndHashVerified": false
+          }
+        }
+      },
+      {
+        "label": "database-marker",
+        "exitCode": 0,
+        "terminationReason": null,
+        "streams": {
+          "stdout": {
+            "reportedFile": "database-marker.stdout.txt",
+            "bytes": 8,
+            "sha256": "584e079f160fd37b8e1fa66c0823a151f4ed00beb8d43e0e2378ca994c21c128",
+            "driverReportedComplete": true,
+            "limitBytes": 4194304,
+            "originalRecoveredAndHashVerified": false
+          },
+          "stderr": {
+            "reportedFile": "database-marker.stderr.txt",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "driverReportedComplete": true,
+            "limitBytes": 4194304,
+            "originalRecoveredAndHashVerified": false
+          }
+        }
+      },
+      {
+        "label": "migration-0001",
+        "exitCode": 0,
+        "terminationReason": null,
+        "streams": {
+          "stdout": {
+            "reportedFile": "migration-0001.stdout.txt",
+            "bytes": 667,
+            "sha256": "fafc5eed819cc779152a191ca30165d64deb846a9625f6eddc8447dd30b9e09f",
+            "driverReportedComplete": true,
+            "limitBytes": 4194304,
+            "originalRecoveredAndHashVerified": false
+          },
+          "stderr": {
+            "reportedFile": "migration-0001.stderr.txt",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "driverReportedComplete": true,
+            "limitBytes": 4194304,
+            "originalRecoveredAndHashVerified": false
+          }
+        }
+      },
+      {
+        "label": "migration-0002",
+        "exitCode": 0,
+        "terminationReason": null,
+        "streams": {
+          "stdout": {
+            "reportedFile": "migration-0002.stdout.txt",
+            "bytes": 264,
+            "sha256": "a3119494883a15491fdf22a2f082ff021d2c039a53c2173d8780cf30502b4f2b",
+            "driverReportedComplete": true,
+            "limitBytes": 4194304,
+            "originalRecoveredAndHashVerified": false
+          },
+          "stderr": {
+            "reportedFile": "migration-0002.stderr.txt",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "driverReportedComplete": true,
+            "limitBytes": 4194304,
+            "originalRecoveredAndHashVerified": false
+          }
+        }
+      },
+      {
+        "label": "postgres-cases",
+        "exitCode": 0,
+        "terminationReason": null,
+        "streams": {
+          "stdout": {
+            "reportedFile": "postgres-cases.stdout.txt",
+            "bytes": 3436,
+            "sha256": "99d2d188d883d4e9916ba914cc7cf6c9d46c655ff1d9e4cf0be5e99eef665bac",
+            "driverReportedComplete": true,
+            "limitBytes": 4194304,
+            "originalRecoveredAndHashVerified": true
+          },
+          "stderr": {
+            "reportedFile": "postgres-cases.stderr.txt",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "driverReportedComplete": true,
+            "limitBytes": 4194304,
+            "originalRecoveredAndHashVerified": true
+          }
+        }
+      },
+      {
+        "label": "cleanup-inspect",
+        "exitCode": 0,
+        "terminationReason": null,
+        "streams": {
+          "stdout": {
+            "reportedFile": "cleanup-inspect.stdout.txt",
+            "bytes": 139,
+            "sha256": "54fbd76c2cd1d7dafeb14c1e4085539130691c921f89443e2c0b1d7ad3d9ce40",
+            "driverReportedComplete": true,
+            "limitBytes": 4194304,
+            "originalRecoveredAndHashVerified": false
+          },
+          "stderr": {
+            "reportedFile": "cleanup-inspect.stderr.txt",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "driverReportedComplete": true,
+            "limitBytes": 4194304,
+            "originalRecoveredAndHashVerified": false
+          }
+        }
+      },
+      {
+        "label": "cleanup-drop",
+        "exitCode": 0,
+        "terminationReason": null,
+        "streams": {
+          "stdout": {
+            "reportedFile": "cleanup-drop.stdout.txt",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "driverReportedComplete": true,
+            "limitBytes": 4194304,
+            "originalRecoveredAndHashVerified": false
+          },
+          "stderr": {
+            "reportedFile": "cleanup-drop.stderr.txt",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "driverReportedComplete": true,
+            "limitBytes": 4194304,
+            "originalRecoveredAndHashVerified": false
+          }
+        }
+      },
+      {
+        "label": "cleanup-absence",
+        "exitCode": 0,
+        "terminationReason": null,
+        "streams": {
+          "stdout": {
+            "reportedFile": "cleanup-absence.stdout.txt",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "driverReportedComplete": true,
+            "limitBytes": 4194304,
+            "originalRecoveredAndHashVerified": false
+          },
+          "stderr": {
+            "reportedFile": "cleanup-absence.stderr.txt",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "driverReportedComplete": true,
+            "limitBytes": 4194304,
+            "originalRecoveredAndHashVerified": false
+          }
+        }
+      },
+      {
+        "label": "cluster-stop",
+        "exitCode": 0,
+        "terminationReason": null,
+        "streams": {
+          "stdout": {
+            "reportedFile": "cluster-stop.stdout.txt",
+            "bytes": 56,
+            "sha256": "ca19178a35ab4153b75b494963b66ce8243e1b94c173107c87b44d09db23652d",
+            "driverReportedComplete": true,
+            "limitBytes": 4194304,
+            "originalRecoveredAndHashVerified": false
+          },
+          "stderr": {
+            "reportedFile": "cluster-stop.stderr.txt",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "driverReportedComplete": true,
+            "limitBytes": 4194304,
+            "originalRecoveredAndHashVerified": false
+          }
+        }
+      }
+    ]
+  },
+  "cleanup": {
+    "evidence": "executed-driver-receipt-in-provider-job-log",
+    "status": "removed",
+    "database": "oe_custom_evals_test_42597640101_1",
+    "validatedBeforeDrop": {
+      "name": "oe_custom_evals_test_42597640101_1",
+      "owner": "postgres",
+      "marker": "open-evals-custom-evals-20261109-created-disposable-v1"
+    },
+    "databaseAbsent": true,
+    "clusterStopped": true,
+    "serverLog": {
+      "file": "postgres-server.log",
+      "bytes": 2157,
+      "sha256": "c4c6d9f0b2c5f05313faeef12802a192dac95a7b5961bf320286c3175143bbe2",
+      "driverReportedComplete": true,
+      "originalLocallyRecoveredAndHashVerified": false
+    },
+    "removedCluster": {
+      "entries": 1000,
+      "fileBytes": 40229315,
+      "rootIdentity": [
+        66305,
+        9199256,
+        1001
+      ]
+    },
+    "clusterAbsent": true,
+    "invariantsPassed": [
+      "exact database owner and task marker before ordinary non-force drop",
+      "database absence after drop",
+      "server PID/start/UID/executable/data/socket/port identity before smart stop",
+      "PID and PID-file absence plus free port after stop",
+      "identity-bound UID-owned non-symlink regular tree checked before bounded removal"
+    ],
+    "serverLogLocallyRecovered": false,
+    "serverLogDigestIndependentlyVerified": false
+  },
+  "errors": [],
+  "artifact": {
+    "id": 13663154565,
+    "name": "custom-eval-postgres-42597640101-1",
+    "reportedBytes": 22955,
+    "reportedServiceDigest": "sha256:b0c38d38e88f7a6d00955fca0c1c5746f28158cc7102eb58c499c8b28957efbc",
+    "reportedExpiresAt": "2026-11-11T10:02:01Z",
+    "url": "https://github.com/alvarovillalbaa/open-evals/actions/runs/42597640101/artifacts/13663154565",
+    "connectorReturnedFileReference": true,
+    "localFetchSucceeded": false,
+    "zipBytesRead": false,
+    "extracted": false,
+    "archiveDigestIndependentlyVerified": false
+  },
+  "previousFailedVerification": {
+    "label": "W1",
+    "sourceCommit": "82d53bb929dd484e6f1887bd58683006bbd2f24d",
+    "runId": 42596693201,
+    "conclusion": "failure",
+    "jobs": 0,
+    "artifacts": 0,
+    "postgresqlCasesExecuted": 0,
+    "originalFailurePreserved": true,
+    "exactServerAnnotationObserved": false,
+    "documentedRunnerContextCompatibilityErrorCorrectedInR2": true
+  },
+  "tier1CasesReplayed": false,
+  "combinedFiftyCaseInvocation": false,
+  "notEstablished": [
+    "HTTP/API and real Auth behavior",
+    "hosted RLS and production database behavior",
+    "browser interaction and real-user acceptance",
+    "other CI workflows passing",
+    "all 46 original command streams or the server log locally retrieved and hash-verified",
+    "ZIP archive readback, extraction or independent digest verification",
+    "dataset/evaluator composition, Harbor or full-product acceptance"
+  ]
+}

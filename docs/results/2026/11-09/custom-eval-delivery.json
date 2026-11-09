@@ -1,0 +1,180 @@
+{
+  "schemaVersion": 1,
+  "repository": "alvarovillalbaa/open-evals",
+  "baseCommit": "3b47ab04fcc881550a766af0f5abccf582dbac77",
+  "runtimeCommit": "a8adcaa48e150cc94e68c189ab9d073435c503ac",
+  "runtimeTree": "99867126bc8a8395e1640f8e2f1617508555204d",
+  "runtimeFiles": 1303,
+  "runtimeBytes": 9319595,
+  "initialScopedPaths": {
+    "modified": 6,
+    "added": 21,
+    "total": 27
+  },
+  "focused": {
+    "receipt": "custom-eval-checks.json",
+    "cases": 38,
+    "coreCases": 20,
+    "accessCases": 18,
+    "invocations": 1,
+    "failed": 0,
+    "rerunAfterErasedTypingRepairs": false,
+    "allFiveCheckedInputsUnchanged": true
+  },
+  "postgresql": {
+    "receipt": "custom-eval-postgres-checks.json",
+    "verificationCommit": "a677e14d8a17097b5748bbedf08df715c17b87f3",
+    "applicationParent": "a8adcaa48e150cc94e68c189ab9d073435c503ac",
+    "runId": 42597640101,
+    "jobId": 129094101939,
+    "attempt": 1,
+    "cases": 12,
+    "passed": 12,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0,
+    "tier": 3,
+    "commandCount": 23,
+    "driverReportedCompleteStreams": 46,
+    "locallyRecoveredHashVerifiedTestStreams": 2,
+    "databaseAbsentObserved": true,
+    "ownedServerStoppedObserved": true,
+    "ownedClusterAbsentObserved": true,
+    "removedEntries": 1000,
+    "removedFileBytes": 40229315,
+    "archiveReadbackVerified": false
+  },
+  "noSingle50CaseInvocation": true,
+  "buildAttempts": [
+    {
+      "commit": "1726f09a7e18c6c2fdffb381d90793f4971fb8d6",
+      "tree": "e918b7842df80049b77f581a871a369de7059431",
+      "deploymentId": "dpl_9yBNhaSoc3fxp25gAcLT6XxdrkYS",
+      "state": "ERROR",
+      "code": "TS2551",
+      "source": "packages/db/src/custom-evals.ts",
+      "message": "mapped-array descriptor length inferred as a number",
+      "uncappedEventDictionaries": 81,
+      "uniqueEventDictionaries": 73,
+      "originals": {
+        "sourceRetained": true,
+        "bytes": 65255,
+        "sha256": "ae33ee0af19542c38b8a86e8157537fefd348d54ce318dc9cf90cec1626afb1d"
+      }
+    },
+    {
+      "commit": "27a3eb5514faac586dcc88e048e97e07cd441500",
+      "tree": "c611ce369c1cee5583c06ac24c26210bcb253223",
+      "deploymentId": "dpl_7cpZTM5jyZ2tt2SAQBynCdvwEYrZ",
+      "state": "ERROR",
+      "code": "TS2322",
+      "source": "packages/db/src/custom-evals.ts",
+      "message": "mapped-array return not assignable to PropertyDescriptorMap",
+      "uncappedEventDictionaries": 85,
+      "uniqueEventDictionaries": 77,
+      "originals": {
+        "events": 85,
+        "bytes": 71596,
+        "sha256": "7a61d1f8706eaf4b49d662b827b10d8451d69b5196007760cb542144038b7181",
+        "sourcePreserved": true
+      }
+    },
+    {
+      "commit": "a8adcaa48e150cc94e68c189ab9d073435c503ac",
+      "tree": "99867126bc8a8395e1640f8e2f1617508555204d",
+      "deploymentId": "dpl_8Ugcbd3zUiQkaeBdLHNji7hf5Tqw",
+      "state": "READY",
+      "target": "production",
+      "teamId": "team_JpdIsOJgYNpX0ywVZ54Zdb7m",
+      "projectId": "prj_FG3VAWXbwS6VRHq4Wd2B4vyIms4l",
+      "canonicalAlias": "https://open-evals-web.vercel.app",
+      "aliasIndependentlyMatched": true,
+      "createdAtMs": 1794216949096,
+      "buildingAtMs": 1794216950519,
+      "readyAtMs": 1794216980244,
+      "buildingToReadyMs": 29725,
+      "providerBuildSeconds": 20,
+      "nextVersion": "16.2.9",
+      "requestedNode": "24.x",
+      "actualNode": "unobserved in returned build logs/status",
+      "turboTasksSuccessful": 10,
+      "turboTasksTotal": 10,
+      "turboTasksCached": 6,
+      "nextCompiled": true,
+      "nextTypeScriptPhasePassed": true,
+      "generatedStaticPages": 37,
+      "reportedNoOutputWarnings": 3,
+      "uncappedTimeWindows": 5,
+      "rawEventDictionaries": 162,
+      "uniqueEventDictionaries": 150,
+      "retainedIdenticalDuplicates": 12,
+      "initialAllEventsResponse": 100,
+      "originals": {
+        "bytes": 117490,
+        "sha256": "4e6f72022fed97f460d8282a23409508b24d923c1f0ab7d2770fba907dbba7b2",
+        "acceptedSourceUnchanged": true
+      }
+    }
+  ],
+  "typingRepair": {
+    "currentStoreSha256": "6262d5e3c03a3f66b62ca27f487e2eb808b94e62afa76a8570b7f6fee0585750",
+    "change": "erased as object assertion widens generic inference; source inverse reproduces C1",
+    "runtimeGuardsChanged": false,
+    "checksDisabled": false,
+    "narrowStaticExpression": {
+      "compiler": "existing TypeScript7.0.2",
+      "exitCode": 0,
+      "scope": "descriptor expression only"
+    },
+    "nativeEmissionComparison": {
+      "state": "unverified",
+      "reason": "protected host rejected native addon TeamID; no fallback or equality claim"
+    }
+  },
+  "firstCiFailure": {
+    "commit": "82d53bb929dd484e6f1887bd58683006bbd2f24d",
+    "runId": 42596693201,
+    "state": "failure",
+    "jobs": 0,
+    "artifacts": 0,
+    "executedPostgresqlCases": 0,
+    "serverAnnotationRetrieved": false,
+    "documentedSourceIncompatibility": "runner context used in job-level env",
+    "correctedScope": "derive paths in Prepare step from RUNNER_TEMP and export through GITHUB_ENV",
+    "originals": {
+      "sourceFrozen": true,
+      "bytes": 62458,
+      "sha256": "84dfaf2ac07489386c10bfcf4f3327b4968c1ac3c9869a005fd6829788087921"
+    }
+  },
+  "sourceAcceptance": {
+    "expectedMainParent": "3b47ab04fcc881550a766af0f5abccf582dbac77",
+    "runtimeAcceptedAfterReadyAndAliasMatch": true,
+    "force": false,
+    "mainRuntimeReadbackMatched": true,
+    "receiptCleanupCommit": "see containing commit",
+    "temporaryWorkflowPresentInContainingTree": false,
+    "rejectedAndExecutedCiHistoriesRetained": true,
+    "branchDeletionAsserted": false,
+    "providerWorkflowDisableAsserted": false
+  },
+  "protectedBoundaries": {
+    "projectDependencyGraphChanged": false,
+    "schemaOrMigrationSourceChanged": false,
+    "existingAuthSourceOrGrantsChanged": false,
+    "newRoutes": "workspace-session plus existing role/scope; API keys and hosted local/demo ownership refused",
+    "productionDatabaseAccessed": false,
+    "modelCalls": 0,
+    "newAccounts": 0,
+    "paidPlanChanges": 0
+  },
+  "localSource": "bounded selected overlay, not a native Git checkout",
+  "notEstablished": [
+    "anonymous HTTP/body/assets or actual browser interaction",
+    "hosted Auth/database/RLS configuration and real-user/device acceptance",
+    "ZIP download/extraction/local digest verification and remaining raw stream readback",
+    "input/evaluator composition, Harbor, actual campaigns and approved production rollouts",
+    "OpenEvals or full portfolio completion"
+  ]
+}

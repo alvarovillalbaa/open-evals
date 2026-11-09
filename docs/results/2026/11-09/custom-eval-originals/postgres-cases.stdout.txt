@@ -1,0 +1,89 @@
+TAP version 13
+# Subtest: custom Eval Set persistence [tier3; authored UNRUN]
+    # Subtest: CE-PG01 saves and reloads the exact contract, membership and private-free audit
+    ok 1 - CE-PG01 saves and reloads the exact contract, membership and private-free audit
+      ---
+      duration_ms: 34.82811
+      type: 'test'
+      ...
+    # Subtest: CE-PG02 exact retries by another authorized actor preserve one version and one audit
+    ok 2 - CE-PG02 exact retries by another authorized actor preserve one version and one audit
+      ---
+      duration_ms: 16.257802
+      type: 'test'
+      ...
+    # Subtest: CE-PG03 reusing a version identity with changed intent conflicts without rewriting it
+    ok 3 - CE-PG03 reusing a version identity with changed intent conflicts without rewriting it
+      ---
+      duration_ms: 15.112922
+      type: 'test'
+      ...
+    # Subtest: CE-PG04 version two retains immutable version one and exact old retries
+    ok 4 - CE-PG04 version two retains immutable version one and exact old retries
+      ---
+      duration_ms: 24.637331
+      type: 'test'
+      ...
+    # Subtest: CE-PG05 stale heads and skipped version numbers conflict without adding members
+    ok 5 - CE-PG05 stale heads and skipped version numbers conflict without adding members
+      ---
+      duration_ms: 29.691319
+      type: 'test'
+      ...
+    # Subtest: CE-PG06 foreign workspace reads are absent and global set identity reuse is refused
+    ok 6 - CE-PG06 foreign workspace reads are absent and global set identity reuse is refused
+      ---
+      duration_ms: 13.315426
+      type: 'test'
+      ...
+    # Subtest: CE-PG07 existing global version and evaluator identities are not adopted by a new set
+    ok 7 - CE-PG07 existing global version and evaluator identities are not adopted by a new set
+      ---
+      duration_ms: 15.215724
+      type: 'test'
+      ...
+    # Subtest: CE-PG08 missing or altered persisted membership fails closed on reads and retries
+    ok 8 - CE-PG08 missing or altered persisted membership fails closed on reads and retries
+      ---
+      duration_ms: 17.994975
+      type: 'test'
+      ...
+    # Subtest: CE-PG09 tampered stored contracts are refused without repair or a second audit
+    ok 9 - CE-PG09 tampered stored contracts are refused without repair or a second audit
+      ---
+      duration_ms: 11.201336
+      type: 'test'
+      ...
+    # Subtest: CE-PG10 an actual audit failure rolls back parent, version, evaluator and membership writes
+    ok 10 - CE-PG10 an actual audit failure rolls back parent, version, evaluator and membership writes
+      ---
+      duration_ms: 17.966503
+      type: 'test'
+      ...
+    # Subtest: CE-PG11 history is bounded to twenty newest versions with an honest hasMore flag
+    ok 11 - CE-PG11 history is bounded to twenty newest versions with an honest hasMore flag
+      ---
+      duration_ms: 119.763574
+      type: 'test'
+      ...
+    # Subtest: CE-PG12 two writers blocked on the same actual workspace lock accept exactly one successor
+    ok 12 - CE-PG12 two writers blocked on the same actual workspace lock accept exactly one successor
+      ---
+      duration_ms: 67.336233
+      type: 'test'
+      ...
+    1..12
+ok 1 - custom Eval Set persistence [tier3; authored UNRUN]
+  ---
+  duration_ms: 587.138015
+  type: 'suite'
+  ...
+1..1
+# tests 12
+# suites 1
+# pass 12
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 10729.276548
