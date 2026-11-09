@@ -40,6 +40,28 @@ export async function loadScenarios(): Promise<LoadState<ScenarioCatalog>> {
   return loadAuthed((workspaceId) => listScenarios(workspaceId));
 }
 
+export interface EvalCatalog {
+  benchmarks: BenchmarkCatalog["benchmarks"];
+  datasets: BenchmarkCatalog["datasets"];
+  scenarios: ScenarioCatalog["suites"];
+  evalSets: ScenarioCatalog["evalSets"];
+}
+
+export async function loadEvals(): Promise<LoadState<EvalCatalog>> {
+  return loadAuthed(async (workspaceId) => {
+    const [benchmarks, scenarios] = await Promise.all([
+      listBenchmarks(workspaceId),
+      listScenarios(workspaceId)
+    ]);
+    return {
+      benchmarks: benchmarks.benchmarks,
+      datasets: benchmarks.datasets,
+      scenarios: scenarios.suites,
+      evalSets: scenarios.evalSets
+    };
+  });
+}
+
 export async function loadInstructions(): Promise<LoadState<InstructionCatalog>> {
   return loadAuthed(
     (workspaceId, auth) => listInstructions(workspaceId, auth.authKind === "api_key" ? auth.projectId : undefined),

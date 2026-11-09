@@ -5,15 +5,23 @@ Last updated: 2026-11-02
 `open-evals` is an MIT-licensed, provider-independent platform for two product functions:
 
 1. Evals
-2. Self-improvement of system prompt instructions
+2. Improve: self-improvement of system prompt instructions
 
-It is not an observability platform. It imports traces, spans, tool calls, prompt hashes, provider messages, and concise evaluator rationales only as evidence for eval rows, failure attribution, calibration, prompt optimization, and release decisions. It does not provide generic trace exploration, APM, uptime monitoring, infrastructure dashboards, or log search.
+Application SDKs send traces, spans, tool calls, prompt hashes, provider messages,
+and concise evaluator rationales as evidence for eval rows, failure attribution,
+calibration, prompt optimization, and release decisions. The product has exactly
+two areas, **Evals** and **Improve**. It has no standalone observability, APM,
+uptime, infrastructure dashboard or log-search area.
 
 ## What Works Locally
 
 - Deterministic evals without AI credentials.
-- OTLP/HTTP JSON and generic JSON/JSONL trace import.
-- Promptfoo, OpenAI export, Langfuse export, and DeepEval export adapters through executable fixture-compatible normalization paths.
+- TypeScript and Python SDK evidence delivery, with explicit TypeScript batching.
+- One Evals catalogue for persisted dataset inputs, scenario inputs and evaluator
+  definitions, with external benchmarks presented separately. IDs and versions
+  are retained without inferring parent membership from the old page layout.
+- Improve links composable, versioned instruction authoring and saved campaigns;
+  pending preparation requests remain distinct from actual campaign execution.
 - Immutable run plan and sample manifest resolution with stable row IDs.
 - Multi-field Eval Item output schemas, dynamic result columns, hierarchical gates, stop-policy primitives, calibration/statistics primitives, prompt release resolution, sticky A/B/n assignment, and rollback metadata.
 - Demo HTTP and MCP target adapters, TypeScript SDK, Python SDK, CLI, local artifact storage, and Docker Compose PostgreSQL.
@@ -28,7 +36,10 @@ pnpm setup:local
 pnpm dev
 ```
 
-Open `http://127.0.0.1:3216`. The product surface opens directly to `Runs`. The left sidebar contains `Runs`, `Benchmarks`, `Scenarios`, `Instructions`, and `Campaigns`.
+Open `http://127.0.0.1:3216`. The product opens at **Evals**. The same two-area
+navigation is available on desktop and narrow screens: Evals contains the
+catalogue, Runs and SDK connection; Improve contains Instructions and Campaigns.
+Old benchmark/scenario URLs redirect to the corresponding Evals sections.
 
 ## Hosted Setup
 
@@ -49,12 +60,18 @@ and the [hosted readiness receipt](docs/results/2026/10-28/hosted-readiness.md).
 Local mode works without Supabase Auth, but persistence routes and pages require
 PostgreSQL and do not synthesize workspace records when it is unavailable.
 
-Trace ingestion is available through:
+Send trace evidence through the application SDK:
+`new OpenEvalsClient({ endpoint, apiKey }).submitTrace(trace)`, or Python
+`OpenEvalsPythonClient(...).submit_trace(trace)`. Configure the service URL and
+server-held key explicitly. [SDK connection and privacy](docs/trace-ingestion.md)
+documents the real payload and response contracts; `/evals/sdk` provides the
+same starting point in the product. No public package installation is implied.
 
-- manual import at `/runs/import`
-- CLI: `open-evals ingest file --file traces.jsonl --endpoint http://127.0.0.1:3216`
-- MCP: set `OPEN_EVALS_URL` and use the `ingest_traces` tool
-- SDK: `new OpenEvalsClient({ endpoint, apiKey }).submitTrace(trace)`
+The manual trace form, CLI trace ingestion commands and MCP `ingest_traces`
+workflow are retired. Old `/runs/import` links redirect to SDK connection, and
+the unused OTLP ingestion route returns an authenticated 410. SDK single/batch
+transport, current access checks and stored evidence are preserved. Historical
+normalizer adapters remain source-level compatibility code, not upload workflows.
 
 ## Commands
 
@@ -92,6 +109,18 @@ pnpm doctor
 ## Eval Sets and Eval Items
 
 An Eval Item is an evaluator definition, not a dataset row. Eval Items can emit arbitrary strict output schemas: scores, labels, booleans, text, integers, numbers, and JSON. The seeded demo includes a multi-output judge with four score fields and two label fields, plus string-check, text-similarity, and trace-check items.
+
+The Evals catalogue keeps input collections, evaluators and external benchmarks
+distinct. Existing storage does not establish benchmark→dataset or
+scenario→evaluator-set membership, so the UI does not invent it. Harbor task
+import and execution are still unfinished. The catalogue is a resource browser;
+it does not add a run launcher or custom eval editor. See
+[the product contract and remaining work](docs/product-surface.md).
+
+The [focused product-surface receipt](docs/results/2026/11-09/product-surface-checks.md)
+records eight navigation and eleven actual-module protocol passes in focused
+invocations, preserving the failed first harness. Browser/hosted acceptance is
+separate, and the catalogue does not complete Harbor or campaign execution.
 
 ## Historical Versus Live Evals
 
@@ -184,7 +213,10 @@ Screenshots are intentionally left as placeholders for maintainers to capture fr
 
 ## Roadmap
 
-- Additional provider-specific pull APIs and webhook fixtures beyond Langfuse/OpenAI export/Promptfoo/DeepEval paths.
+- Harbor task identity, versioned artifacts and execution integration.
+- Custom eval authoring and explicit input/evaluator membership, followed by
+  campaign use of those pinned definitions.
+- Campaign execution and approved production A/B safety rollouts from Improve.
 - More benchmark importers behind license checks.
 - Structural optimization work orders backed by connected GitHub pull requests.
 - Optional large-scale analytics adapter behind a non-required interface.

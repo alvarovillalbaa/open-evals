@@ -1,0 +1,249 @@
+{
+  "schemaVersion": 1,
+  "baseCommit": "128796adec02a94192972d205c04d0131d7d05c7",
+  "baseTree": "ab38b6b56f92a5b92507f62120e1e1ce23f117ac",
+  "acceptedCases": {
+    "navigation": 8,
+    "protocol": 11,
+    "totalDistinct": 19,
+    "singleNineteenPassInvocation": false
+  },
+  "executions": [
+    {
+      "profile": "original navigation and protocol invocation",
+      "startedAt": "2026-11-09 07:51:08 UTC",
+      "completedAt": "2026-11-09 07:51:09 UTC",
+      "exitCode": 1,
+      "tests": 19,
+      "passed": 8,
+      "failed": 11,
+      "status": "failed",
+      "node": "26.8.2",
+      "failure": "Node stripTypeScriptTypes rejected transform mode before protocol application-module loading.",
+      "failedHarnessSha256": "7b8ed33247e1bb11c38b27803c2018610ef01b2d76019e5ee21bf2bb86a14208",
+      "acceptedCaseIds": [
+        "PN01",
+        "PN02",
+        "PN03",
+        "PN04",
+        "PN05",
+        "PN06",
+        "PN07",
+        "PN08"
+      ]
+    },
+    {
+      "profile": "repaired protocol invocation only",
+      "startedAt": "2026-11-09T08:00:35.434088+00:00",
+      "completedAt": "2026-11-09T08:00:38.546403+00:00",
+      "exitCode": 0,
+      "tests": 11,
+      "passed": 11,
+      "failed": 0,
+      "deadlineSeconds": 30,
+      "timedOut": false,
+      "node": "26.8.2",
+      "testTranspiler": {
+        "name": "native Next/SWC",
+        "version": "16.4.2",
+        "configuration": "Explicit existing OPEN_EVALS_TEST_SWC addon; no installation, fallback download or source rewriting."
+      },
+      "acceptedCaseIds": [
+        "SW01",
+        "SW02",
+        "SW03",
+        "SW04",
+        "SW05",
+        "SW06",
+        "SW07",
+        "SW08",
+        "SW09",
+        "SW10",
+        "SW11"
+      ]
+    },
+    {
+      "profile": "navigation at final Node-only .mts path",
+      "startedAt": "2026-11-09 08:15:00 UTC",
+      "completedAt": "2026-11-09 08:15:01 UTC",
+      "exitCode": 0,
+      "tests": 8,
+      "passed": 8,
+      "failed": 0,
+      "node": "26.8.2",
+      "reason": "Keep node:test outside the unchanged Vitest .test.ts collection; assertions unchanged.",
+      "acceptedCaseIds": [
+        "PN01",
+        "PN02",
+        "PN03",
+        "PN04",
+        "PN05",
+        "PN06",
+        "PN07",
+        "PN08"
+      ]
+    }
+  ],
+  "checkedSources": [
+    {
+      "path": "apps/cli/src/program.ts",
+      "bytes": 11842,
+      "gitBlob": "750b0886ad219bb32bc64fdbd287e033a5d6a5ab",
+      "sha256": "9490ccba5c621518eb418948bad50c9552a4ba26d73801d040ef9f623848c580",
+      "mode": "100644"
+    },
+    {
+      "path": "apps/web/app/api/v1/otlp/v1/traces/route.ts",
+      "bytes": 386,
+      "gitBlob": "2a67cd25dcde5709cd8604f4757337ad667762f1",
+      "sha256": "d57de0a6c15151fb1b4eae7c84060184eba0efc4bd165df8d1e0c4f3a27cb82c",
+      "mode": "100644"
+    },
+    {
+      "path": "apps/web/lib/product-navigation.ts",
+      "bytes": 1580,
+      "gitBlob": "4da90bbcd9592ace95d7668013b6d69a66d0c672",
+      "sha256": "db5cabb0c4f23931fb09f37723ef7493bf6900d8e0c3710d0509c0b10213b926",
+      "mode": "100644"
+    },
+    {
+      "path": "packages/mcp/src/index.ts",
+      "bytes": 1810,
+      "gitBlob": "42ac6773ebcbcec12db9eba17f9d6557f4cf3a6d",
+      "sha256": "241a7353a4e5bb20968be806e3226554966e3f17309b3bc83f84f44c83e26a86",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/product-navigation.test.mts",
+      "bytes": 4233,
+      "gitBlob": "a36cd9b5d7b4f305a7ac8bcb9346ccf9190751da",
+      "sha256": "76da53a754d1b1ae0176293af8e4ffdcfda61e6a5b9de20ca35ff4153e678ed8",
+      "mode": "100644"
+    },
+    {
+      "path": "tests/unit/sdk-workflow-surface.test.mjs",
+      "bytes": 13839,
+      "gitBlob": "f8575a3aa5a03f4ff1a9fd7502e8aab019d9506f",
+      "sha256": "fe2a0297527af9feae797d4a9c8a06aa391d192b18fbef37e7b7c2e69bca7576",
+      "mode": "100644"
+    }
+  ],
+  "rawOriginals": [
+    {
+      "file": "focused.stdout.txt",
+      "bytes": 15793,
+      "sha256": "3f49e6ac863c3ebca84280145352b5c864853e85e04d798abdf7c8be8b9ae7de"
+    },
+    {
+      "file": "focused.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "protocol-attempt-2.stdout.txt",
+      "bytes": 1485,
+      "sha256": "2a1d6c1ab5c5114e03b7ec97439b036c06d9f61347f97786a9c776368d48537c"
+    },
+    {
+      "file": "protocol-attempt-2.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "types.stdout.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "types.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "attempt-1/sdk-workflow-surface.test.mjs",
+      "bytes": 12828,
+      "sha256": "7b8ed33247e1bb11c38b27803c2018610ef01b2d76019e5ee21bf2bb86a14208"
+    },
+    {
+      "file": "navigation-mts.stdout.txt",
+      "bytes": 909,
+      "sha256": "17393ed9491ef96f3bf95760407dc97d01c220107074c5b4f58baf1ed5790a5b"
+    },
+    {
+      "file": "navigation-mts.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "types-mts.stdout.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "types-mts.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "attempt-1/product-navigation.test.ts",
+      "bytes": 4138,
+      "sha256": "9ce81dcf168b7afc5ea29cb3fff482acc78ff88f305f2e05c352030d992b0932"
+    }
+  ],
+  "failedHarnessOriginal": "product-surface-originals/harness-attempt-1.mjs.txt",
+  "originalRetention": "Whole raw outputs are retained privately because the first failure includes local source paths; no sanitized output is labelled an original.",
+  "sourceGuards": {
+    "immutableSelectedBaseVerified": true,
+    "completeBaseGitTreeRecomputed": true,
+    "baseFiles": 1270,
+    "baseDirectories": 318,
+    "checkedModulesUnchangedAfterExecution": true,
+    "applicationCodeUnchangedByHarnessRepair": true
+  },
+  "authoredBrowserCases": {
+    "ids": [
+      "OE-UI01",
+      "OE-UI02",
+      "OE-UI03"
+    ],
+    "status": "unexecuted",
+    "scope": "Desktop, narrow viewport and legacy redirects; no physical-touch proof."
+  },
+  "limits": [
+    "T1 navigation and T2 actual-module fixtures only; no real SDK transport, installed CLI bootstrap, production Auth, persistence or browser acceptance.",
+    "No existing55/58/71/53-check packet was rerun or relabelled.",
+    "Harbor tasks, custom eval authoring/membership, campaign execution and production rollout integration remain unfinished.",
+    "Provider build/delivery requires its own actual source-bound observation."
+  ],
+  "staticTypeProfiles": [
+    {
+      "status": "passed",
+      "exitCode": 0,
+      "compiler": "TypeScript7.0.2",
+      "nodeTypes": "26.6.5",
+      "scope": [
+        "apps/web/lib/product-navigation.ts",
+        "packages/mcp/src/index.ts",
+        "tests/unit/product-navigation.test.ts"
+      ],
+      "strict": true,
+      "skipLibCheck": false,
+      "noEmit": true,
+      "applicationBuild": false
+    },
+    {
+      "status": "passed",
+      "exitCode": 0,
+      "compiler": "TypeScript7.0.2",
+      "nodeTypes": "26.6.5",
+      "scope": [
+        "apps/web/lib/product-navigation.ts",
+        "tests/unit/product-navigation.test.mts"
+      ],
+      "strict": true,
+      "skipLibCheck": false,
+      "noEmit": true,
+      "applicationBuild": false
+    }
+  ]
+}

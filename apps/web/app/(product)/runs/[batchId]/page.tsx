@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { CheckCircle2, Rows3, XCircle } from "lucide-react";
-import { ImportAction, PageHeader, Panel, StateGate, Stat, Table } from "../../components";
+import { SdkAction, PageHeader, Panel, StateGate, Stat, Table } from "../../components";
 import { loadRunBatch } from "@/lib/loaders";
 
 export default async function RunBatchPage({ params }: { params: Promise<{ batchId: string }> }) {
@@ -9,7 +9,7 @@ export default async function RunBatchPage({ params }: { params: Promise<{ batch
   if (state.status === "ready" && !state.data) notFound();
   return (
     <div className="grid gap-5">
-      <PageHeader title="Run batch" eyebrow={batchId} actions={<ImportAction />} />
+      <PageHeader title="Run batch" eyebrow={batchId} actions={<SdkAction />} />
       <StateGate state={state}>
         {({ data }) => {
           if (!data) return null;

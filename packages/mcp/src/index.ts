@@ -16,9 +16,6 @@ export const tools = {
   async list_campaigns(): Promise<McpToolResult> {
     return text(await get("/api/v1/campaigns"));
   },
-  async ingest_traces(payload: unknown): Promise<McpToolResult> {
-    return text(await post("/api/v1/traces", payload));
-  },
   create_draft_run_plan(): McpToolResult {
     return text({ status: "requires_rows_eval_set_and_target", endpoint: "/api/v1/run-plans/resolve" });
   },
@@ -38,17 +35,6 @@ async function get(path: string) {
   const endpoint = serviceEndpoint();
   if (!endpoint) return { error: "OPEN_EVALS_URL_required" };
   const response = await fetch(`${endpoint}${path}`, { headers: authHeaders() });
-  return response.json();
-}
-
-async function post(path: string, payload: unknown) {
-  const endpoint = serviceEndpoint();
-  if (!endpoint) return { error: "OPEN_EVALS_URL_required" };
-  const response = await fetch(`${endpoint}${path}`, {
-    method: "POST",
-    headers: { "content-type": "application/json", ...authHeaders() },
-    body: JSON.stringify(payload)
-  });
   return response.json();
 }
 

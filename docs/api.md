@@ -1,10 +1,38 @@
 # API
 
-Versioned route handlers include:
+## SDK evidence transport
 
-- `POST /api/v1/traces`
-- `POST /api/v1/traces/batch`
-- `POST /api/v1/otlp/v1/traces`
+Application trace evidence is submitted through the
+[SDK workflow](trace-ingestion.md), documented in the product at `/evals/sdk`.
+The manual upload page redirects there; CLI `ingest file` / `ingest otlp` and
+MCP `ingest_traces` are retired.
+
+The existing SDK transport routes remain:
+
+| Route | Current consumer and behavior |
+| --- | --- |
+| `POST /api/v1/traces` | TypeScript `submitTrace` and Python `submit_trace`; normalizes supplied JSON evidence |
+| `POST /api/v1/traces/batch` | TypeScript `submitTraces` and buffered `flush`; normalizes the explicit JSON/JSONL payload |
+
+Both retain `requireRouteAuth("editor", "traces:write")`, authenticated
+workspace/project context, requested server-side redaction and existing
+persistence. SDKs send supplied payloads without client-side redaction; review
+them before transmission. Internal `manual_json` / `manual_file` source labels
+and existing records are preserved. These endpoints remain accessible to clients
+that satisfy existing authentication; the supported SDK workflow does not enforce
+technical SDK identity or change server authorization.
+
+`POST /api/v1/otlp/v1/traces` is retired. It retains the same
+`requireRouteAuth("editor", "traces:write")` check and existing auth-error handling.
+An authorized request receives HTTP 410 with `trace_import_retired` and guidance
+to `/evals/sdk`; the handler does not read the body or persist evidence. Neither
+inspected SDK calls this route. Existing OTLP records and the adapter library
+are preserved; this route is no longer an alternative ingestion workflow.
+
+## Evaluation and instruction routes
+
+Other versioned route handlers include:
+
 - `POST /api/v1/run-plans/resolve`
 - `GET /api/v1/eval-runs`
 - `POST /api/v1/eval-runs`

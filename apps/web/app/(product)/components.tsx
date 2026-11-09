@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { AlertTriangle, ArrowRight, Database, FilePlus2, Inbox, LogIn } from "lucide-react";
+import { AlertTriangle, ArrowRight, Code2, Database, Inbox, LogIn } from "lucide-react";
 import type { LoadState } from "@/lib/loaders";
 
 export function PageHeader({ title, eyebrow, actions }: { title: string; eyebrow?: string; actions?: ReactNode }) {
@@ -30,7 +30,7 @@ export function LinkButton({ href, children, primary = false }: { href: string; 
   );
 }
 
-export function StateGate<T>({ state, children }: { state: LoadState<T>; children: (state: Extract<LoadState<T>, { status: "ready" }>) => ReactNode }) {
+export function StateGate<T>({ state, children, accessDeniedTitle = "Instruction access unavailable", accessDeniedBody = "Your current role, key or scope does not allow these instructions." }: { state: LoadState<T>; children: (state: Extract<LoadState<T>, { status: "ready" }>) => ReactNode; accessDeniedTitle?: string; accessDeniedBody?: string }) {
   if (state.status === "ready") return children(state);
   if (state.status === "auth_required") {
     return (
@@ -48,7 +48,7 @@ export function StateGate<T>({ state, children }: { state: LoadState<T>; childre
     );
   }
   if (state.status === "access_denied") {
-    return <EmptyState title="Instruction access unavailable" body="Your current role, key or scope does not allow these instructions." />;
+    return <EmptyState title={accessDeniedTitle} body={accessDeniedBody} />;
   }
   return (
     <EmptyState
@@ -84,7 +84,7 @@ export function Stat({ label, value, tone = "neutral" }: { label: string; value:
 
 export function Panel({ title, icon, children, action }: { title: string; icon?: ReactNode; children: ReactNode; action?: ReactNode }) {
   return (
-    <section className="border border-border bg-panel">
+    <section className="min-w-0 border border-border bg-panel">
       <div className="flex min-h-11 items-center justify-between gap-3 border-b border-border px-3">
         <div className="flex items-center gap-2 text-sm font-semibold">
           {icon}
@@ -114,11 +114,11 @@ export function Notice({ children }: { children: ReactNode }) {
   );
 }
 
-export function ImportAction() {
+export function SdkAction() {
   return (
-    <LinkButton href="/runs/import" primary>
-      <FilePlus2 className="size-4" aria-hidden="true" />
-      Import traces
+    <LinkButton href="/evals/sdk" primary>
+      <Code2 className="size-4" aria-hidden="true" />
+      Connect SDK
     </LinkButton>
   );
 }

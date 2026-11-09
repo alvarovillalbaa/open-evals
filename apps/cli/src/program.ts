@@ -22,8 +22,6 @@ type CommandSpec = { flags: readonly ValueFlag[]; required?: readonly ValueFlag[
 const COMMON_FLAGS: readonly Flag[] = ["--endpoint", "--api-key", "--json", "--help"];
 const COMMANDS: Readonly<Record<string, CommandSpec>> = {
   doctor: { flags: [] },
-  "ingest file": { flags: ["--file"], required: ["--file"] },
-  "ingest otlp": { flags: ["--file"], required: ["--file"] },
   "eval run": { flags: ["--file"], required: ["--file"] },
   "scenario run": { flags: ["--file"], required: ["--file"] },
   "benchmark run": { flags: ["--file"], required: ["--file"] },
@@ -105,7 +103,6 @@ function parseArgs(args: readonly string[]): Parsed {
 const HELP = {
   commands: [
     "doctor",
-    "ingest file --file PATH", "ingest otlp --file PATH",
     "eval run --file PATH", "scenario run --file PATH", "benchmark run --file PATH", "benchmark list",
     "prompt create --file definition.json",
     "prompt preview --definition-id ID --file draft.json --out reviewed.json",
@@ -117,6 +114,7 @@ const HELP = {
   globalOptions: ["--endpoint URL", "--api-key KEY", "--json", "--help", "-h"],
   environment: ["OPEN_EVALS_URL", "OPEN_EVALS_API_KEY"],
   notes: [
+    "Send trace evidence through the SDK. See /evals/sdk on your configured OpenEvals service.",
     "Prompt push requires a reviewed artifact and the same configured endpoint. It does not preview again or activate a release.",
     "File output does not overwrite different existing contents. Retry uses the same stored IDs and reviewed input.",
     "Prompt diff is offline. Doctor checks configuration only and makes no health request."
@@ -192,12 +190,6 @@ export async function runCli(args: readonly string[], context: CliContext): Prom
           ...(flag("--project-id") ? { projectId: flag("--project-id")! } : {}),
           ...(flag("--session-id") ? { sessionId: flag("--session-id")! } : {})
         }));
-        break;
-      }
-      case "ingest file":
-      case "ingest otlp": {
-        const payload = await readLegacyFile(flag("--file")!);
-        output(await legacyJson(client.submitTraces(payload)));
         break;
       }
       case "eval run":

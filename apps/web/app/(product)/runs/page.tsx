@@ -1,13 +1,13 @@
 import Link from "next/link";
 import { ArrowRight, CheckCircle2, Hash, Rows3, XCircle } from "lucide-react";
-import { ImportAction, LinkButton, PageHeader, StateGate, Stat, Table, EmptyState } from "../components";
+import { SdkAction, LinkButton, PageHeader, StateGate, Stat, Table, EmptyState } from "../components";
 import { loadRunBatches } from "@/lib/loaders";
 
 export default async function RunsPage() {
   const state = await loadRunBatches();
   return (
     <div className="grid gap-5">
-      <PageHeader title="Runs" eyebrow="Evals" actions={<ImportAction />} />
+      <PageHeader title="Runs" eyebrow="Evals" actions={<SdkAction />} />
       <StateGate state={state}>
         {({ data }) => {
           const failed = data.reduce((sum, batch) => sum + batch.failedGateCount, 0);
@@ -64,10 +64,10 @@ export default async function RunsPage() {
                 <EmptyState
                   icon={<Rows3 className="size-5" aria-hidden="true" />}
                   title="No runs yet"
-                  body="Persisted run batches will appear after traces and eval run requests are ingested."
+                  body="Saved eval run plans and their execution results appear here. Connect the SDK to send execution evidence."
                   action={
-                    <LinkButton href="/runs/import" primary>
-                      Import traces
+                    <LinkButton href="/evals/sdk" primary>
+                      Connect SDK
                     </LinkButton>
                   }
                 />
