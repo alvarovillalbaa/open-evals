@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "custom-dataset-production-v1",
+  "observedAt": "2026-11-09 19:52:09 UTC",
+  "deployedSource": "3c170a9f32c852bd2de3fd3b75f4f409a569a2c6",
+  "checkedSource": "024f218228fd08d9566ed876d2a337168e182748",
+  "releaseTree": "d66d407f8e9a0c0e10e3765e560dc89d96589295",
+  "deployment": {
+    "id": "dpl_EopextzET3vmXMQAYmmFMiqaK3VE",
+    "url": "open-evals-q73xt8r8m-my-team-4f230354.vercel.app",
+    "state": "READY",
+    "target": "production",
+    "projectId": "prj_FG3VAWXbwS6VRHq4Wd2B4vyIms4l",
+    "gitRef": "main"
+  },
+  "canonicalAlias": {
+    "alias": "open-evals-web.vercel.app",
+    "deploymentId": "dpl_EopextzET3vmXMQAYmmFMiqaK3VE",
+    "url": "open-evals-q73xt8r8m-my-team-4f230354.vercel.app",
+    "projectId": "prj_FG3VAWXbwS6VRHq4Wd2B4vyIms4l",
+    "updatedAt": 1794253763004
+  },
+  "checkedApplicationAndTestsUnchanged": true,
+  "distinctPassedCases": 69,
+  "proofLimits": [
+    "READY and canonical alias are provider metadata observations, not a live browser page check.",
+    "CI used signed authored sessions and owner-SQL fixtures; hosted Auth, membership/RLS, devices and production data remain unverified.",
+    "The following documentation-only commit may publish this dated proof without changing the checked application or test source."
+  ]
+}
