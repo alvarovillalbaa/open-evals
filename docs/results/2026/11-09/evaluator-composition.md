@@ -60,6 +60,14 @@ retrieved. No artifact ZIP, screenshot or trace archive retrieval is claimed.
 Verification binds the QA source above. The subsequent release adds
 documentation/evidence and retires its temporary workflow; those changes are
 outside the checked runtime boundary. Native DNS/socket/TLS, actual external
-targets or models, hosted Auth/RLS, production-page and physical-device
+targets or models, hosted Auth/RLS, real-account production use and physical-device
 acceptance remain unverified. Signed fixtures and authored transport responses
 do not establish those separate acceptance gates.
+
+At 2026-11-09 23:33:55 UTC, release source
+[`6f7b4be`](https://github.com/alvarovillalbaa/open-evals/commit/6f7b4beaa819dd0ac9eda6b98ae8f360bd881837)
+was `READY` on Vercel and owned the [canonical URL](https://open-evals-web.vercel.app).
+An account-authorized request to `/evals/composition` returned HTTP 200 and
+rendered the workspace-access gate. This did not exercise production sign-in or
+authoring. The [dated deployment observation](evaluator-composition-production.json)
+records the exact deployment, source and limited HTTP proof separately from CI.

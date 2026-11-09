@@ -1,0 +1,84 @@
+{
+  "schemaVersion": "eval-composition-production-observation-v1",
+  "observedAtUtc": "2026-11-09T23:33:55Z",
+  "repository": "alvarovillalbaa/open-evals",
+  "checkedQa": {
+    "source": "b3442e222aa380fe6fded1a08b5b378618ac9abc",
+    "tree": "b0015492cfbd49d08382c7813127a47af26a2035",
+    "runId": 42719068177,
+    "jobId": 129508066497,
+    "distinctChecks": 128,
+    "fullBuild": "passed"
+  },
+  "release": {
+    "source": "6f7b4beaa819dd0ac9eda6b98ae8f360bd881837",
+    "tree": "7ae551e3d77d61ea8653eaf262db542d0257cf1d",
+    "parent": "b3442e222aa380fe6fded1a08b5b378618ac9abc",
+    "files": 1709,
+    "bytes": 12795599,
+    "mainReadbackMatched": true,
+    "temporaryWorkflowRetired": true
+  },
+  "applicationBoundary": {
+    "prefixes": [
+      "apps/",
+      "packages/",
+      "tests/"
+    ],
+    "files": 415,
+    "sha256": "784617150268dbdeef2a428ef642ddc2b8b38379740866520ea3e82727821698",
+    "algorithm": "SHA256 of UTF8 JSON array of {path,mode,type,sha,size}, sorted by UTF8 path bytes",
+    "releaseEqualsCheckedQa": true,
+    "postQaChanges": "status/result documentation, bounded evidence and task workflow retirement only"
+  },
+  "deployment": {
+    "id": "dpl_BY6p9a3XoUiAMBSZYnNzhAnyQggp",
+    "url": "https://open-evals-8laj6lcvm-my-team-4f230354.vercel.app",
+    "readyState": "READY",
+    "target": "production",
+    "githubCommitSha": "6f7b4beaa819dd0ac9eda6b98ae8f360bd881837",
+    "githubCommitRef": "main"
+  },
+  "alias": {
+    "hostname": "open-evals-web.vercel.app",
+    "projectId": "prj_FG3VAWXbwS6VRHq4Wd2B4vyIms4l",
+    "deploymentId": "dpl_BY6p9a3XoUiAMBSZYnNzhAnyQggp",
+    "matchesDeployment": true
+  },
+  "http": {
+    "status": 200,
+    "statusText": "OK",
+    "contentType": "text/html; charset=utf-8",
+    "matchedPath": "/evals/composition",
+    "date": "Mon, 09 Nov 2026 23:33:55 GMT",
+    "bytes": 20486,
+    "sha256": "cd0e662fe41c1711e99ba15c90883841a3a52f4c8b71882d76baabb7df119c81",
+    "title": "open-evals",
+    "markers": {
+      "Evals": true,
+      "Improve": true,
+      "Reusable": false,
+      "composition": true,
+      "Sign in": false,
+      "Workspace sign-in required": false,
+      "authentication_required": false
+    },
+    "accessMethod": "Vercel-account-authorized deployment fetch; may use temporary share access",
+    "browserChecked": false,
+    "hostedAccountFlowChecked": false,
+    "url": "https://open-evals-web.vercel.app/evals/composition",
+    "observedHeadings": [
+      "Compose evaluators",
+      "Evaluator composition unavailable"
+    ],
+    "observedState": "workspace-access gate",
+    "compositionEditorRendered": false
+  },
+  "proofLimits": [
+    "This dated observation binds release6f7b4be; a later metadata-only commit is not a new runtime verification.",
+    "Account-authorized Vercel fetch may use temporary share access; this is not an unauthenticated-public-access or browser claim.",
+    "The page rendered its workspace access gate; no production sign-in, workspace authoring, hosted Auth/RLS or real-account data flow was exercised.",
+    "CI target responses were authored DNS/HTTPS seams. Native DNS/socket/TLS, actual external targets/model calls and physical-device behavior remain unverified.",
+    "No full artifact ZIP, screenshot or trace archive was downloaded."
+  ]
+}
