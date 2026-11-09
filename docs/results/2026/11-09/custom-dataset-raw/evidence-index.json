@@ -1,0 +1,450 @@
+{
+  "schemaVersion": "custom-dataset-evidence-index-v1",
+  "checkedSource": "024f218228fd08d9566ed876d2a337168e182748",
+  "distinctPassedCases": {
+    "core": 30,
+    "customPostgres": 20,
+    "providedOutputRegression": 14,
+    "browser": 5,
+    "total": 69
+  },
+  "latestCi": {
+    "runId": 42685393224,
+    "jobId": 129390706450,
+    "status": "passed",
+    "buildReturncode": 0,
+    "browserCaseCount": 5,
+    "cleanup": "removed",
+    "artifactId": 13705050499,
+    "artifactBytes": 50718,
+    "artifactSha256": "b8d927f4849260ae3eb658dc780587f03f75caf49ac7b58d89d80640e058c171",
+    "artifactZipRetrieved": false
+  },
+  "coreCommands": {
+    "attempt1": {
+      "classification": "Documented projection; not an unchanged original command record",
+      "executableLabel": "node",
+      "runtimeVersion": "v26.8.2",
+      "args": [
+        "--experimental-vm-modules",
+        "--test",
+        "tests/unit/custom-datasets.test.mjs"
+      ],
+      "privateOriginalCommand": {
+        "bytes": 702,
+        "sha256": "272bb388fcfedcfee7492c442c192524e350143fb2ee05f6e4808662faf46827",
+        "exported": false,
+        "reason": "Original argv contains a local-only absolute executable path"
+      },
+      "startedAt": "2026-11-09T17:43:31.700314+00:00",
+      "completedAt": "2026-11-09T17:43:36.065689+00:00",
+      "wallSeconds": 4.365057875000275,
+      "exit": 0,
+      "complete": true,
+      "sourcesChangedDuringRun": []
+    },
+    "attempt2": {
+      "classification": "Documented projection; not an unchanged original command record",
+      "executableLabel": "node",
+      "runtimeVersion": "v26.8.2",
+      "args": [
+        "--experimental-vm-modules",
+        "--test",
+        "tests/unit/custom-datasets.test.mjs"
+      ],
+      "privateOriginalCommand": {
+        "bytes": 702,
+        "sha256": "02aec8a7939a93d2fb7f4e5ea567f07af9a262f793cc9f0ff9bcdcb346977c41",
+        "exported": false,
+        "reason": "Original argv contains a local-only absolute executable path"
+      },
+      "startedAt": "2026-11-09T18:28:43.373342+00:00",
+      "completedAt": "2026-11-09T18:28:47.651725+00:00",
+      "wallSeconds": 4.277847207999002,
+      "exit": 0,
+      "complete": true,
+      "sourcesChangedDuringRun": []
+    }
+  },
+  "files": [
+    {
+      "destination": "core-1/stdout.txt",
+      "bytes": 3949,
+      "sha256": "b53f3a063db26f730c5033d1cdf3c632d629812cb7e5015b6742d04890c8f907",
+      "complete": true,
+      "transport": "local-complete-original",
+      "path": "docs/results/2026/11-09/custom-dataset-raw/core-1/stdout.txt"
+    },
+    {
+      "destination": "core-1/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "complete": true,
+      "transport": "local-complete-original",
+      "path": "docs/results/2026/11-09/custom-dataset-raw/core-1/stderr.txt"
+    },
+    {
+      "destination": "ci-1/custom-dataset-postgres-cases.stdout.txt",
+      "bytes": 6087,
+      "sha256": "506c78bd8bd694454f6ba1848e3a8c053a6a1db082c00c81614343ca25c44540",
+      "complete": true,
+      "transport": "original-base64-chunks",
+      "path": "docs/results/2026/11-09/custom-dataset-raw/ci-1/custom-dataset-postgres-cases.stdout.txt"
+    },
+    {
+      "destination": "ci-1/custom-dataset-postgres-cases.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "complete": true,
+      "transport": "original-base64-chunks",
+      "path": "docs/results/2026/11-09/custom-dataset-raw/ci-1/custom-dataset-postgres-cases.stderr.txt"
+    },
+    {
+      "destination": "ci-1/provided-output-regression-cases.stdout.txt",
+      "bytes": 4101,
+      "sha256": "db1e8c0cda9dbb938651a1f87f7f25386f525879ea2558a4a67cfd0876cd8498",
+      "complete": true,
+      "transport": "original-base64-chunks",
+      "path": "docs/results/2026/11-09/custom-dataset-raw/ci-1/provided-output-regression-cases.stdout.txt"
+    },
+    {
+      "destination": "ci-1/provided-output-regression-cases.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "complete": true,
+      "transport": "original-base64-chunks",
+      "path": "docs/results/2026/11-09/custom-dataset-raw/ci-1/provided-output-regression-cases.stderr.txt"
+    },
+    {
+      "destination": "ci-1/postgres-fixture-absence.json",
+      "bytes": 590,
+      "sha256": "dd7abc5c0c21fda9cd26d9791de2c269fc1d43d1b2f9e7c59e0fde5ff8cbc9de",
+      "complete": true,
+      "transport": "original-base64-chunks",
+      "path": "docs/results/2026/11-09/custom-dataset-raw/ci-1/postgres-fixture-absence.json"
+    },
+    {
+      "destination": "ci-1/unprotected-tracked-delta.json",
+      "bytes": 3811,
+      "sha256": "6471f1fcb813b090ff8eb2f6ddae1547d08c7769a844f687afbfcabcd96febc9",
+      "complete": true,
+      "transport": "original-base64-chunks",
+      "path": "docs/results/2026/11-09/custom-dataset-raw/ci-1/unprotected-tracked-delta.json"
+    },
+    {
+      "destination": "ci-1/cleanup.json",
+      "bytes": 662,
+      "sha256": "b77c0e2ef8b7ce09b3ca75995890dfcc2b1d0ff8833723e062fdf5b0c4d3e231",
+      "complete": true,
+      "transport": "original-base64-chunks",
+      "path": "docs/results/2026/11-09/custom-dataset-raw/ci-1/cleanup.json"
+    },
+    {
+      "destination": "ci-1/build-candidate.stdout.txt",
+      "bytes": 2582,
+      "sha256": "a53142c2dc020f6d36d67a2929a5cea7922bbbeb5758fb59218ea7b255c88d54",
+      "complete": true,
+      "transport": "command-diagnostic-full",
+      "path": "docs/results/2026/11-09/custom-dataset-raw/ci-1/build-candidate.stdout.txt"
+    },
+    {
+      "destination": "ci-1/build-candidate.stderr.txt",
+      "bytes": 575,
+      "sha256": "77df1499d7e56674aeab42394d5b99bbf014c8e2ca203cc0f0d2affeabfd1f96",
+      "complete": true,
+      "transport": "command-diagnostic-full",
+      "path": "docs/results/2026/11-09/custom-dataset-raw/ci-1/build-candidate.stderr.txt"
+    },
+    {
+      "destination": "ci-1/receipt.json",
+      "bytes": 2822,
+      "sha256": "28a6b183919392b703077678964d93c59e4cfaa09b7919723fa720bd9a91c667",
+      "complete": true,
+      "transport": "decoded-final-receipt",
+      "path": "docs/results/2026/11-09/custom-dataset-raw/ci-1/receipt.json"
+    },
+    {
+      "destination": "core-2/stdout.txt",
+      "bytes": 3955,
+      "sha256": "2f1d46d30133d64cb2f229e783cc3ac9d932a16906d4e8c65fbee2ff9989c0aa",
+      "complete": true,
+      "transport": "local-complete-original",
+      "path": "docs/results/2026/11-09/custom-dataset-raw/core-2/stdout.txt"
+    },
+    {
+      "destination": "core-2/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "complete": true,
+      "transport": "local-complete-original",
+      "path": "docs/results/2026/11-09/custom-dataset-raw/core-2/stderr.txt"
+    },
+    {
+      "destination": "ci-2/provider-failure.json",
+      "bytes": 513,
+      "sha256": "b7a4c119eb63fc4abaa21dbc618fb867bf0d2d1b1314c826ec9defe46e586212",
+      "transport": "captured-provider-failure-record",
+      "path": "docs/results/2026/11-09/custom-dataset-raw/ci-2/provider-failure.json"
+    },
+    {
+      "destination": "ci-3/provider-failure.json",
+      "bytes": 513,
+      "sha256": "4467820095d07e340e25993334f3ad33ab5f332a637416761a02f90d1b0cee1e",
+      "transport": "captured-provider-failure-record",
+      "path": "docs/results/2026/11-09/custom-dataset-raw/ci-3/provider-failure.json"
+    },
+    {
+      "destination": "provider/github-actions-status-20261109.json",
+      "bytes": 6924,
+      "sha256": "be8a2e4ccde57b4cfdb37ee0a1d1d1ef095a098ffb812ac8f5735bfddedcaab0",
+      "transport": "captured-official-status-snapshot",
+      "path": "docs/results/2026/11-09/custom-dataset-raw/provider/github-actions-status-20261109.json"
+    },
+    {
+      "destination": "preview/qa-preview-build-39f217a.json",
+      "bytes": 82841,
+      "sha256": "bfc43df883f34ff0997cc2449ac77cdb0022731e8eaf98983e2c4334dc1b4c8a",
+      "transport": "captured-structured-preview-event-record",
+      "fullBuildStdoutClaimed": false,
+      "path": "docs/results/2026/11-09/custom-dataset-raw/preview/qa-preview-build-39f217a.json"
+    },
+    {
+      "destination": "preview/vercel-preview-failure-c765.json",
+      "bytes": 19883,
+      "sha256": "25512a87d26acbcad66432c0a545e421e97e2a3f1b9d659f4440a7ab64175bfe",
+      "transport": "captured-preview-failure-events",
+      "path": "docs/results/2026/11-09/custom-dataset-raw/preview/vercel-preview-failure-c765.json"
+    },
+    {
+      "destination": "preview/vercel-preview-failure-3d7245.json",
+      "bytes": 21929,
+      "sha256": "692f4ea5b9a717cb8e6884d5ff4e0105a695e297abe17c24be7ec88bce75526f",
+      "transport": "captured-preview-failure-events",
+      "path": "docs/results/2026/11-09/custom-dataset-raw/preview/vercel-preview-failure-3d7245.json"
+    },
+    {
+      "destination": "ci-4/postgres-fixture-absence.json",
+      "bytes": 590,
+      "sha256": "237c0fbd45b1d090740baf6db7918032e29b2d2fd29835d610e76b8a137e1fc0",
+      "complete": true,
+      "transport": "original-base64-chunks",
+      "path": "docs/results/2026/11-09/custom-dataset-raw/ci-4/postgres-fixture-absence.json"
+    },
+    {
+      "destination": "ci-4/browser-cases.stdout.txt",
+      "bytes": 14648,
+      "sha256": "de56f5ba9a4e889ddbcf416a6bf14cc4ce468d93581e7532e70d48c3ef657555",
+      "complete": true,
+      "transport": "original-base64-chunks",
+      "path": "docs/results/2026/11-09/custom-dataset-raw/ci-4/browser-cases.stdout.txt"
+    },
+    {
+      "destination": "ci-4/browser-cases.stderr.txt",
+      "bytes": 652,
+      "sha256": "e1048714e79a1656ac70535b1f106921cbe37ff345fb6f8ab2c28eb40a2b73a8",
+      "complete": true,
+      "transport": "original-base64-chunks",
+      "path": "docs/results/2026/11-09/custom-dataset-raw/ci-4/browser-cases.stderr.txt"
+    },
+    {
+      "destination": "ci-4/browser-report.json",
+      "bytes": 32399,
+      "sha256": "1647912fb30b8ef41a814e089f04ecdb3ddc768a4ed65f2812543eb1e93de9b4",
+      "complete": true,
+      "transport": "original-base64-chunks",
+      "path": "docs/results/2026/11-09/custom-dataset-raw/ci-4/browser-report.json"
+    },
+    {
+      "destination": "ci-4/unprotected-tracked-delta.json",
+      "bytes": 3811,
+      "sha256": "6471f1fcb813b090ff8eb2f6ddae1547d08c7769a844f687afbfcabcd96febc9",
+      "complete": true,
+      "transport": "original-base64-chunks",
+      "path": "docs/results/2026/11-09/custom-dataset-raw/ci-4/unprotected-tracked-delta.json"
+    },
+    {
+      "destination": "ci-4/cleanup.json",
+      "bytes": 662,
+      "sha256": "94bd994901c55ee54668464e972e0bc50001db70ce117a4172e386ee0c410938",
+      "complete": true,
+      "transport": "original-base64-chunks",
+      "path": "docs/results/2026/11-09/custom-dataset-raw/ci-4/cleanup.json"
+    },
+    {
+      "destination": "ci-4/receipt.json",
+      "bytes": 11127,
+      "sha256": "80eb19628a275b67d328e1ffe863790f592ee0315642030ea422d8a29902b517",
+      "transport": "decoded-receipt-or-metadata-record",
+      "path": "docs/results/2026/11-09/custom-dataset-raw/ci-4/receipt.json"
+    },
+    {
+      "destination": "ci-4/originals.json",
+      "bytes": 1519,
+      "sha256": "acba977524c8413cb9893534ff9e20ce977fa55aea72df1738a27d5294db1f41",
+      "transport": "decoded-receipt-or-metadata-record",
+      "path": "docs/results/2026/11-09/custom-dataset-raw/ci-4/originals.json"
+    },
+    {
+      "destination": "ci-5/postgres-fixture-absence.json",
+      "bytes": 590,
+      "sha256": "2d6cc1ac3e9cbd116b12df46683344ca7fc73081ec417741a1381e354671306d",
+      "complete": true,
+      "transport": "original-base64-chunks",
+      "path": "docs/results/2026/11-09/custom-dataset-raw/ci-5/postgres-fixture-absence.json"
+    },
+    {
+      "destination": "ci-5/browser-cases.stdout.txt",
+      "bytes": 4125,
+      "sha256": "e351112972fa3b0e48b97e45f09ef5290098cd56905b2f4814acc84c9469e1d0",
+      "complete": true,
+      "transport": "original-base64-chunks",
+      "path": "docs/results/2026/11-09/custom-dataset-raw/ci-5/browser-cases.stdout.txt"
+    },
+    {
+      "destination": "ci-5/browser-cases.stderr.txt",
+      "bytes": 326,
+      "sha256": "9e384045b6cada4aca2dd1c1b511850dfd2c0c835be6691dbd555f8d711b1ca9",
+      "complete": true,
+      "transport": "original-base64-chunks",
+      "path": "docs/results/2026/11-09/custom-dataset-raw/ci-5/browser-cases.stderr.txt"
+    },
+    {
+      "destination": "ci-5/browser-report.json",
+      "bytes": 21447,
+      "sha256": "c187fdf077e87accc8af00cdab3899f1c535ef1767265272a5562c3ef1ff5006",
+      "complete": true,
+      "transport": "original-base64-chunks",
+      "path": "docs/results/2026/11-09/custom-dataset-raw/ci-5/browser-report.json"
+    },
+    {
+      "destination": "ci-5/candidate.server.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "complete": true,
+      "transport": "original-base64-chunks",
+      "path": "docs/results/2026/11-09/custom-dataset-raw/ci-5/candidate.server.stderr.txt"
+    },
+    {
+      "destination": "ci-5/unprotected-tracked-delta.json",
+      "bytes": 3811,
+      "sha256": "6471f1fcb813b090ff8eb2f6ddae1547d08c7769a844f687afbfcabcd96febc9",
+      "complete": true,
+      "transport": "original-base64-chunks",
+      "path": "docs/results/2026/11-09/custom-dataset-raw/ci-5/unprotected-tracked-delta.json"
+    },
+    {
+      "destination": "ci-5/cleanup.json",
+      "bytes": 663,
+      "sha256": "e58da28314754bf444323ebfcab3a9952822fa4203da1c87be8ca7306dd5c82c",
+      "complete": true,
+      "transport": "original-base64-chunks",
+      "path": "docs/results/2026/11-09/custom-dataset-raw/ci-5/cleanup.json"
+    },
+    {
+      "destination": "ci-5/receipt.json",
+      "bytes": 11126,
+      "sha256": "ac07aa10c075b018116230b9fb2bf5a8310e6e641766370ec1625afec54a30fe",
+      "transport": "decoded-receipt-or-metadata-record",
+      "path": "docs/results/2026/11-09/custom-dataset-raw/ci-5/receipt.json"
+    },
+    {
+      "destination": "ci-5/originals.json",
+      "bytes": 1690,
+      "sha256": "f3ea599908c98bce7ec43baff40013f7a97e3c55bec95906a45ccc72d8586080",
+      "transport": "decoded-receipt-or-metadata-record",
+      "path": "docs/results/2026/11-09/custom-dataset-raw/ci-5/originals.json"
+    },
+    {
+      "destination": "ci-5/command-metadata.json",
+      "bytes": 18366,
+      "sha256": "9e253442bfb4314b2c53a1ddbfebfa4fcf474add7640e7b52fcd0d8c800009f5",
+      "transport": "decoded-original-command-metadata-not-stream-bytes",
+      "path": "docs/results/2026/11-09/custom-dataset-raw/ci-5/command-metadata.json"
+    },
+    {
+      "destination": "ci-6/postgres-fixture-absence.json",
+      "bytes": 590,
+      "sha256": "aaaf3e300ae62495a30ab5e36dbbd907049bbfc6bab1ea85b2909afd26197203",
+      "complete": true,
+      "transport": "original-base64-chunks",
+      "path": "docs/results/2026/11-09/custom-dataset-raw/ci-6/postgres-fixture-absence.json"
+    },
+    {
+      "destination": "ci-6/browser-cases.stdout.txt",
+      "bytes": 1039,
+      "sha256": "bf8aa959da7c7dd8207a83220e23a04f5e6de0f8862491ce43630280c504561e",
+      "complete": true,
+      "transport": "original-base64-chunks",
+      "path": "docs/results/2026/11-09/custom-dataset-raw/ci-6/browser-cases.stdout.txt"
+    },
+    {
+      "destination": "ci-6/browser-cases.stderr.txt",
+      "bytes": 163,
+      "sha256": "edfea614d5be3b8bae5df8c2a80cd84f28d0081ad00eb77232fdf3d1999d4dc3",
+      "complete": true,
+      "transport": "original-base64-chunks",
+      "path": "docs/results/2026/11-09/custom-dataset-raw/ci-6/browser-cases.stderr.txt"
+    },
+    {
+      "destination": "ci-6/browser-report.json",
+      "bytes": 18810,
+      "sha256": "fda6663c62594c60ea9ef3f54e85fb022024a084f4a38f29d34535db80fdb27f",
+      "complete": true,
+      "transport": "original-base64-chunks",
+      "path": "docs/results/2026/11-09/custom-dataset-raw/ci-6/browser-report.json"
+    },
+    {
+      "destination": "ci-6/candidate.server.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "complete": true,
+      "transport": "original-base64-chunks",
+      "path": "docs/results/2026/11-09/custom-dataset-raw/ci-6/candidate.server.stderr.txt"
+    },
+    {
+      "destination": "ci-6/unprotected-tracked-delta.json",
+      "bytes": 3811,
+      "sha256": "6471f1fcb813b090ff8eb2f6ddae1547d08c7769a844f687afbfcabcd96febc9",
+      "complete": true,
+      "transport": "original-base64-chunks",
+      "path": "docs/results/2026/11-09/custom-dataset-raw/ci-6/unprotected-tracked-delta.json"
+    },
+    {
+      "destination": "ci-6/cleanup.json",
+      "bytes": 663,
+      "sha256": "fe756b5f656a313b48ea537debddb28b7abe2bd824b5557bc8a4a8698917ce90",
+      "complete": true,
+      "transport": "original-base64-chunks",
+      "path": "docs/results/2026/11-09/custom-dataset-raw/ci-6/cleanup.json"
+    },
+    {
+      "destination": "ci-6/receipt.json",
+      "bytes": 11098,
+      "sha256": "64b7fcb0173ddc6f419a6683dc57add2a22eff6c4728a817906a67ad6a5b7ede",
+      "transport": "decoded-receipt-or-metadata-record",
+      "path": "docs/results/2026/11-09/custom-dataset-raw/ci-6/receipt.json"
+    },
+    {
+      "destination": "ci-6/originals.json",
+      "bytes": 1690,
+      "sha256": "5cf34f1f2935404dbcef057f12d6075fe62f6ddf6e225f314c5618cabb782e1f",
+      "transport": "decoded-receipt-or-metadata-record",
+      "path": "docs/results/2026/11-09/custom-dataset-raw/ci-6/originals.json"
+    },
+    {
+      "destination": "ci-6/command-metadata.json",
+      "bytes": 18360,
+      "sha256": "d6367433cb159aa8586a7d369c8f6603bec87192f6d2d5fbdbf1b3c5ae724339",
+      "transport": "decoded-original-command-metadata-not-stream-bytes",
+      "path": "docs/results/2026/11-09/custom-dataset-raw/ci-6/command-metadata.json"
+    }
+  ],
+  "proofLimits": [
+    "No hosted Auth-provider or RLS proof",
+    "No physical-device or live production page proof",
+    "No provider/model call",
+    "Selected complete originals and structured provider records are not a full artifact archive",
+    "Two local passes cover the same thirty core cases, not sixty distinct cases",
+    "SQL evidence remains bound to initial source 301cf02; later type annotations and the BigInt constructor repair were not SQL-replayed"
+  ]
+}

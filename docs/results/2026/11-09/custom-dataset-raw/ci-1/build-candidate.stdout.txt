@@ -1,0 +1,35 @@
+
+> open-evals@0.1.0 build /home/runner/work/open-evals/open-evals
+> turbo run build --filter=@open-evals/core --filter=@open-evals/adapters --filter=@open-evals/db --filter=@open-evals/sdk --filter=@open-evals/mcp --filter=@open-evals/statistics --filter=@open-evals/test-fixtures --filter=@open-evals/cli --filter=@open-evals/web --filter=@open-evals/workflows --force
+
+
+   • Packages in scope: @open-evals/adapters, @open-evals/cli, @open-evals/core, @open-evals/db, @open-evals/mcp, @open-evals/sdk, @open-evals/statistics, @open-evals/test-fixtures, @open-evals/web, @open-evals/workflows
+   • Running build in 10 packages
+   • Remote caching disabled
+
+@open-evals/db:build: cache bypass, force executing 557b880a430fd19a
+@open-evals/core:build: cache bypass, force executing b25d6fda0604d7ca
+@open-evals/core:build: 
+@open-evals/core:build: > @open-evals/core@0.1.0 build /home/runner/work/open-evals/open-evals/packages/core
+@open-evals/core:build: > tsc -p tsconfig.json --noEmit
+@open-evals/core:build: 
+@open-evals/db:build: 
+@open-evals/db:build: > @open-evals/db@0.1.0 build /home/runner/work/open-evals/open-evals/packages/db
+@open-evals/db:build: > tsc -p tsconfig.json --noEmit
+@open-evals/db:build: 
+@open-evals/core:build: src/custom-datasets.ts(80,30): error TS2345: Argument of type '24' is not assignable to parameter of type '512'.
+@open-evals/core:build: src/custom-datasets.ts(285,29): error TS2345: Argument of type '4096' is not assignable to parameter of type '512'.
+@open-evals/core:build: src/custom-datasets.ts(287,41): error TS2345: Argument of type '2097152' is not assignable to parameter of type '512'.
+@open-evals/core:build: src/custom-datasets.ts(308,160): error TS2345: Argument of type '4096' is not assignable to parameter of type '512'.
+@open-evals/core:build: src/custom-datasets.ts(345,39): error TS2345: Argument of type '4096' is not assignable to parameter of type '512'.
+@open-evals/core:build: src/custom-datasets.ts(396,30): error TS2345: Argument of type '4096' is not assignable to parameter of type '512'.
+@open-evals/core:build: src/custom-datasets.ts(409,90): error TS2345: Argument of type '4096' is not assignable to parameter of type '512'.
+@open-evals/core:build: src/custom-datasets.ts(428,29): error TS2345: Argument of type '4096' is not assignable to parameter of type '512'.
+@open-evals/core:build:  ELIFECYCLE  Command failed with exit code 2.
+
+ Tasks:    0 successful, 2 total
+Cached:    0 cached, 2 total
+  Time:    3.33s 
+Failed:    @open-evals/core#build
+
+ ELIFECYCLE  Command failed with exit code 2.

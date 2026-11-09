@@ -1,0 +1,10 @@
+
+Running 5 tests using 1 worker
+
+  ✓  1 [chromium-owned-production] › tests/e2e/custom-datasets.browser.spec.ts:102:1 › CD-BR01 desktop JSONL upload saves complete rows and explicitly scores the exact saved version (2.6s)
+  ✓  2 [chromium-owned-production] › tests/e2e/custom-datasets.browser.spec.ts:160:1 › CD-BR02 a lost committed save replays the identical request after a later dataset head (890ms)
+  ✓  3 [chromium-owned-production] › tests/e2e/custom-datasets.browser.spec.ts:201:1 › CD-BR03 stale-head refusal retains text until a visible head review and fresh append intent (1.5s)
+  ✓  4 [chromium-owned-production] › tests/e2e/custom-datasets.browser.spec.ts:239:1 › CD-BR04 explicit declarations, precision, duplicate keys and invalid files never create partial datasets (927ms)
+  ✓  5 [chromium-owned-production] › tests/e2e/custom-datasets.browser.spec.ts:264:1 › CD-BR05 narrow saved-data flow preserves viewer access and hides private metadata from valid project keys (1.3s)
+
+  5 passed (8.1s)

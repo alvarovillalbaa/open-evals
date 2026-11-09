@@ -1,0 +1,9 @@
+
+Attention:
+Turborepo now collects completely anonymous telemetry regarding usage.
+This information is used to shape the Turborepo roadmap and prioritize features.
+You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+https://turborepo.dev/docs/telemetry
+
+ ERROR  @open-evals/core#build: command (/home/runner/work/open-evals/open-evals/packages/core) /home/runner/work/_temp/open-evals-custom-datasets-tools/node_modules/.bin/pnpm run build exited (2)
+ ERROR  run failed: command  exited (2)

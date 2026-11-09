@@ -1,0 +1,27 @@
+{
+  "status": "removed",
+  "database": "oe_custom_datasets_test_42685393224_1",
+  "validatedBeforeDrop": {
+    "name": "oe_custom_datasets_test_42685393224_1",
+    "owner": "postgres",
+    "marker": "open-evals-custom-datasets-20261109-created-disposable-v1"
+  },
+  "databaseAbsent": true,
+  "clusterStopped": true,
+  "serverLog": {
+    "file": "postgres-server.log",
+    "bytes": 1692,
+    "sha256": "eaef33b450488b22f4d8955d6bec5822f345de25a976e5c43f2f31369de0a123",
+    "complete": true
+  },
+  "removedCluster": {
+    "entries": 1002,
+    "fileBytes": 40228980,
+    "rootIdentity": [
+      66305,
+      9213451,
+      1001
+    ]
+  },
+  "clusterAbsent": true
+}

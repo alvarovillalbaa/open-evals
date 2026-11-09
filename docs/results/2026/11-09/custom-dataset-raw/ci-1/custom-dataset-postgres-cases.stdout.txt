@@ -1,0 +1,137 @@
+TAP version 13
+# Subtest: custom dataset persistence [T3; owner SQL only]
+    # Subtest: CD-PG01 complete creation roundtrips references, presence, user metadata and one deterministic audit
+    ok 1 - CD-PG01 complete creation roundtrips references, presence, user metadata and one deterministic audit
+      ---
+      duration_ms: 65.611835
+      type: 'test'
+      ...
+    # Subtest: CD-PG02 append history retains more than twenty versions and exact old-version lookup
+    ok 2 - CD-PG02 append history retains more than twenty versions and exact old-version lookup
+      ---
+      duration_ms: 445.475655
+      type: 'test'
+      ...
+    # Subtest: CD-PG03 exact replay precedes the latest head even when a later version has become corrupt
+    ok 3 - CD-PG03 exact replay precedes the latest head even when a later version has become corrupt
+      ---
+      duration_ms: 48.903655
+      type: 'test'
+      ...
+    # Subtest: CD-PG04 reused public version identity rejects changed raw spelling, format and explicit defaults
+    ok 4 - CD-PG04 reused public version identity rejects changed raw spelling, format and explicit defaults
+      ---
+      duration_ms: 43.062862
+      type: 'test'
+      ...
+    # Subtest: CD-PG05 competing prepared heads use CAS and immutable names without partial versions
+    ok 5 - CD-PG05 competing prepared heads use CAS and immutable names without partial versions
+      ---
+      duration_ms: 51.54309
+      type: 'test'
+      ...
+    # Subtest: CD-PG06 equal public identities remain workspace-scoped across stored IDs, readback and scoring selection
+    ok 6 - CD-PG06 equal public identities remain workspace-scoped across stored IDs, readback and scoring selection
+      ---
+      duration_ms: 47.802744
+      type: 'test'
+      ...
+    # Subtest: CD-PG07 exactly one hundred rows persist while a new one-hundred-and-first row is refused intact
+    ok 7 - CD-PG07 exactly one hundred rows persist while a new one-hundred-and-first row is refused intact
+      ---
+      duration_ms: 137.826483
+      type: 'test'
+      ...
+    # Subtest: CD-PG08 the exact one-MiB complete snapshot boundary includes names, generated identities and wrappers
+    ok 8 - CD-PG08 the exact one-MiB complete snapshot boundary includes names, generated identities and wrappers
+      ---
+      duration_ms: 794.374543
+      type: 'test'
+      ...
+    # Subtest: CD-PG09 raw file numeric loss fails before any dataset, version, row or audit is written
+    ok 9 - CD-PG09 raw file numeric loss fails before any dataset, version, row or audit is written
+      ---
+      duration_ms: 17.264727
+      type: 'test'
+      ...
+    # Subtest: CD-PG10 changed JSONB numeric values are refused through both readers without repairing stored data
+    ok 10 - CD-PG10 changed JSONB numeric values are refused through both readers without repairing stored data
+      ---
+      duration_ms: 43.224874
+      type: 'test'
+      ...
+    # Subtest: CD-PG11 complete row content and identity corruption cannot pass either immutable reader
+    ok 11 - CD-PG11 complete row content and identity corruption cannot pass either immutable reader
+      ---
+      duration_ms: 63.360787
+      type: 'test'
+      ...
+    # Subtest: CD-PG12 missing and extra row membership is rejected rather than silently sampled or repaired
+    ok 12 - CD-PG12 missing and extra row membership is rejected rather than silently sampled or repaired
+      ---
+      duration_ms: 39.958147
+      type: 'test'
+      ...
+    # Subtest: CD-PG13 literal review-status types are checked even when forged manifest fingerprints are recomputed
+    ok 13 - CD-PG13 literal review-status types are checked even when forged manifest fingerprints are recomputed
+      ---
+      duration_ms: 33.28229
+      type: 'test'
+      ...
+    # Subtest: CD-PG14 missing, duplicate and changed audit projections fail closed independently of complete row storage
+    ok 14 - CD-PG14 missing, duplicate and changed audit projections fail closed independently of complete row storage
+      ---
+      duration_ms: 56.605655
+      type: 'test'
+      ...
+    # Subtest: CD-PG15 private namespace and kind markers are excluded while literal near-prefix legacy names remain visible
+    ok 15 - CD-PG15 private namespace and kind markers are excluded while literal near-prefix legacy names remain visible
+      ---
+      duration_ms: 55.952753
+      type: 'test'
+      ...
+    # Subtest: CD-PG16 own orphan manifests are conflicts without disclosing foreign orphan state through raw scoring IDs
+    ok 16 - CD-PG16 own orphan manifests are conflicts without disclosing foreign orphan state through raw scoring IDs
+      ---
+      duration_ms: 36.725855
+      type: 'test'
+      ...
+    # Subtest: CD-PG17 a real audit trigger failure rolls back dataset, version and every inserted row
+    ok 17 - CD-PG17 a real audit trigger failure rolls back dataset, version and every inserted row
+      ---
+      duration_ms: 39.093226
+      type: 'test'
+      ...
+    # Subtest: CD-PG18 positively blocked concurrent creators accept only one immutable initial version
+    ok 18 - CD-PG18 positively blocked concurrent creators accept only one immutable initial version
+      ---
+      duration_ms: 44.460094
+      type: 'test'
+      ...
+    # Subtest: CD-PG19 actual saved timestamps, names and profile kind remain integrity-bound through both readers
+    ok 19 - CD-PG19 actual saved timestamps, names and profile kind remain integrity-bound through both readers
+      ---
+      duration_ms: 49.951286
+      type: 'test'
+      ...
+    # Subtest: CD-PG20 saved custom versions feed actual-output scoring and frozen run replay survives source deletion
+    ok 20 - CD-PG20 saved custom versions feed actual-output scoring and frozen run replay survives source deletion
+      ---
+      duration_ms: 87.30959
+      type: 'test'
+      ...
+    1..20
+ok 1 - custom dataset persistence [T3; owner SQL only]
+  ---
+  duration_ms: 2470.535989
+  type: 'suite'
+  ...
+1..1
+# tests 20
+# suites 1
+# pass 20
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 12627.863868

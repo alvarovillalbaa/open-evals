@@ -1,0 +1,55 @@
+{
+  "source": "4abd751a893818f480ad31921d1591c2ee826462",
+  "runId": "42684297057",
+  "files": [
+    {
+      "file": "postgres-fixture-absence.json",
+      "bytes": 590,
+      "sha256": "2d6cc1ac3e9cbd116b12df46683344ca7fc73081ec417741a1381e354671306d",
+      "complete": true,
+      "transport": "original-base64-chunks"
+    },
+    {
+      "file": "browser-cases.stdout.txt",
+      "bytes": 4125,
+      "sha256": "e351112972fa3b0e48b97e45f09ef5290098cd56905b2f4814acc84c9469e1d0",
+      "complete": true,
+      "transport": "original-base64-chunks"
+    },
+    {
+      "file": "browser-cases.stderr.txt",
+      "bytes": 326,
+      "sha256": "9e384045b6cada4aca2dd1c1b511850dfd2c0c835be6691dbd555f8d711b1ca9",
+      "complete": true,
+      "transport": "original-base64-chunks"
+    },
+    {
+      "file": "browser-report.json",
+      "bytes": 21447,
+      "sha256": "c187fdf077e87accc8af00cdab3899f1c535ef1767265272a5562c3ef1ff5006",
+      "complete": true,
+      "transport": "original-base64-chunks"
+    },
+    {
+      "file": "candidate.server.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "complete": true,
+      "transport": "original-base64-chunks"
+    },
+    {
+      "file": "unprotected-tracked-delta.json",
+      "bytes": 3811,
+      "sha256": "6471f1fcb813b090ff8eb2f6ddae1547d08c7769a844f687afbfcabcd96febc9",
+      "complete": true,
+      "transport": "original-base64-chunks"
+    },
+    {
+      "file": "cleanup.json",
+      "bytes": 663,
+      "sha256": "e58da28314754bf444323ebfcab3a9952822fa4203da1c87be8ca7306dd5c82c",
+      "complete": true,
+      "transport": "original-base64-chunks"
+    }
+  ]
+}

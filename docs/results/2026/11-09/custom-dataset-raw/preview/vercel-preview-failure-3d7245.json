@@ -1,0 +1,848 @@
+{
+  "source": "3d7245ff46794dc15e5281af1102070220956587",
+  "deployment": "dpl_7W5TPw1SBvv9h6VoHU6ngWd6cjx8",
+  "events": [
+    {
+      "created": 1794248832421,
+      "date": 1794248832421,
+      "type": "stderr",
+      "text": "Error: [BUILD_UTILS_SPAWN_1] Command \"turbo run build\" exited with 1",
+      "level": "error",
+      "info": {
+        "type": "build",
+        "name": "bld_byzrbtpcs",
+        "entrypoint": "."
+      }
+    },
+    {
+      "created": 1794248832389,
+      "date": 1794248832389,
+      "type": "stderr",
+      "text": " ERROR  run failed: command  exited (1)",
+      "level": "error",
+      "info": {
+        "type": "build",
+        "name": "bld_byzrbtpcs",
+        "entrypoint": "."
+      }
+    },
+    {
+      "created": 1794248832389,
+      "date": 1794248832389,
+      "type": "stderr",
+      "text": " WARNING  no output files found for task @open-evals/db#build. Please check your `outputs` key in `turbo.json`",
+      "level": "error",
+      "info": {
+        "type": "build",
+        "name": "bld_byzrbtpcs",
+        "entrypoint": "."
+      }
+    },
+    {
+      "created": 1794248832384,
+      "date": 1794248832384,
+      "type": "stdout",
+      "text": "",
+      "info": {
+        "type": "build",
+        "name": "bld_byzrbtpcs",
+        "entrypoint": "."
+      }
+    },
+    {
+      "created": 1794248832384,
+      "date": 1794248832384,
+      "type": "stdout",
+      "text": " Failed:    @open-evals/web#build",
+      "info": {
+        "type": "build",
+        "name": "bld_byzrbtpcs",
+        "entrypoint": "."
+      }
+    },
+    {
+      "created": 1794248832384,
+      "date": 1794248832384,
+      "type": "stdout",
+      "text": "Summary:    /vercel/path0/.turbo/runs/3LshlMw9ZCBILIQ5uwUmZctYFh5.json",
+      "info": {
+        "type": "build",
+        "name": "bld_byzrbtpcs",
+        "entrypoint": "."
+      }
+    },
+    {
+      "created": 1794248832384,
+      "date": 1794248832384,
+      "type": "stdout",
+      "text": "   Time:    18.882s ",
+      "info": {
+        "type": "build",
+        "name": "bld_byzrbtpcs",
+        "entrypoint": "."
+      }
+    },
+    {
+      "created": 1794248832384,
+      "date": 1794248832384,
+      "type": "stdout",
+      "text": " Cached:    3 cached, 5 total",
+      "info": {
+        "type": "build",
+        "name": "bld_byzrbtpcs",
+        "entrypoint": "."
+      }
+    },
+    {
+      "created": 1794248832384,
+      "date": 1794248832384,
+      "type": "stdout",
+      "text": "  Tasks:    4 successful, 5 total",
+      "info": {
+        "type": "build",
+        "name": "bld_byzrbtpcs",
+        "entrypoint": "."
+      }
+    },
+    {
+      "created": 1794248832383,
+      "date": 1794248832383,
+      "type": "stdout",
+      "text": "",
+      "info": {
+        "type": "build",
+        "name": "bld_byzrbtpcs",
+        "entrypoint": "."
+      }
+    },
+    {
+      "created": 1794248832381,
+      "date": 1794248832381,
+      "type": "stderr",
+      "text": " ERROR  @open-evals/web#build: command (/vercel/path0/apps/web) /pnpm10/node_modules/.bin/pnpm run build exited (1)",
+      "level": "error",
+      "info": {
+        "type": "build",
+        "name": "bld_byzrbtpcs",
+        "entrypoint": "."
+      }
+    },
+    {
+      "created": 1794248832351,
+      "date": 1794248832351,
+      "type": "stdout",
+      "text": "@open-evals/web:build:  ELIFECYCLE  Command failed with exit code 1.",
+      "level": "error",
+      "info": {
+        "type": "build",
+        "name": "bld_byzrbtpcs",
+        "entrypoint": "."
+      }
+    },
+    {
+      "created": 1794248832290,
+      "date": 1794248832290,
+      "type": "stdout",
+      "text": "@open-evals/web:build: Next.js build worker exited with code: 1 and signal: null",
+      "info": {
+        "type": "build",
+        "name": "bld_byzrbtpcs",
+        "entrypoint": "."
+      }
+    },
+    {
+      "created": 1794248832232,
+      "date": 1794248832232,
+      "type": "stdout",
+      "text": "@open-evals/web:build:   \u001b[90m135 |\u001b[0m   \u001b[36mconst\u001b[0m signedExponent = match[\u001b[35m4\u001b[0m] ?? \u001b[32m\"0\"\u001b[0m;",
+      "info": {
+        "type": "build",
+        "name": "bld_byzrbtpcs",
+        "entrypoint": "."
+      }
+    },
+    {
+      "created": 1794248832232,
+      "date": 1794248832232,
+      "type": "stdout",
+      "text": "@open-evals/web:build:   \u001b[90m134 |\u001b[0m   coefficient = coefficient.slice(\u001b[35m0\u001b[0m, coefficient.length - trailing);",
+      "info": {
+        "type": "build",
+        "name": "bld_byzrbtpcs",
+        "entrypoint": "."
+      }
+    },
+    {
+      "created": 1794248832232,
+      "date": 1794248832232,
+      "type": "stdout",
+      "text": "@open-evals/web:build:   \u001b[90m133 |\u001b[0m   \u001b[36mconst\u001b[0m trailing = coefficient.length - coefficient.replace(\u001b[35m/0+$/\u001b[0m, \u001b[32m\"\"\u001b[0m).length;",
+      "info": {
+        "type": "build",
+        "name": "bld_byzrbtpcs",
+        "entrypoint": "."
+      }
+    },
+    {
+      "created": 1794248832232,
+      "date": 1794248832232,
+      "type": "stdout",
+      "text": "@open-evals/web:build:   \u001b[90m    |\u001b[0m                                                                           \u001b[31m\u001b[1m^\u001b[0m",
+      "info": {
+        "type": "build",
+        "name": "bld_byzrbtpcs",
+        "entrypoint": "."
+      }
+    },
+    {
+      "created": 1794248832232,
+      "date": 1794248832232,
+      "type": "stdout",
+      "text": "@open-evals/web:build: \u001b[31m\u001b[1m>\u001b[0m \u001b[90m132 |\u001b[0m   \u001b[36mif\u001b[0m (!coefficient) \u001b[36mreturn\u001b[0m { negative: \u001b[36mfalse\u001b[0m, coefficient: \u001b[32m\"0\"\u001b[0m, exponent: \u001b[35m0\u001b[0mn };",
+      "info": {
+        "type": "build",
+        "name": "bld_byzrbtpcs",
+        "entrypoint": "."
+      }
+    },
+    {
+      "created": 1794248832232,
+      "date": 1794248832232,
+      "type": "stdout",
+      "text": "@open-evals/web:build:   \u001b[90m131 |\u001b[0m   \u001b[90m// Zero needs no exponent allocation, including a long exponent supplied in the source.\u001b[0m",
+      "info": {
+        "type": "build",
+        "name": "bld_byzrbtpcs",
+        "entrypoint": "."
+      }
+    },
+    {
+      "created": 1794248832232,
+      "date": 1794248832232,
+      "type": "stdout",
+      "text": "@open-evals/web:build:   \u001b[90m130 |\u001b[0m   \u001b[36mlet\u001b[0m coefficient = \u001b[32m`\u001b[0m${match[\u001b[35m2\u001b[0m]\u001b[32m}\u001b[0m${match[\u001b[35m3\u001b[0m] ?? \u001b[32m\"\"\u001b[0m\u001b[32m}`\u001b[0m.replace(\u001b[35m/^0+/\u001b[0m, \u001b[32m\"\"\u001b[0m);",
+      "info": {
+        "type": "build",
+        "name": "bld_byzrbtpcs",
+        "entrypoint": "."
+      }
+    },
+    {
+      "created": 1794248832232,
+      "date": 1794248832232,
+      "type": "stdout",
+      "text": "@open-evals/web:build: ",
+      "info": {
+        "type": "build",
+        "name": "bld_byzrbtpcs",
+        "entrypoint": "."
+      }
+    },
+    {
+      "created": 1794248832232,
+      "date": 1794248832232,
+      "type": "stdout",
+      "text": "@open-evals/web:build: Type error: BigInt literals are not available when targeting lower than ES2020.",
+      "level": "error",
+      "info": {
+        "type": "build",
+        "name": "bld_byzrbtpcs",
+        "entrypoint": "."
+      }
+    },
+    {
+      "created": 1794248832232,
+      "date": 1794248832232,
+      "type": "stdout",
+      "text": "@open-evals/web:build: ../../packages/core/src/custom-datasets.ts:132:75",
+      "info": {
+        "type": "build",
+        "name": "bld_byzrbtpcs",
+        "entrypoint": "."
+      }
+    },
+    {
+      "created": 1794248832232,
+      "date": 1794248832232,
+      "type": "stdout",
+      "text": "@open-evals/web:build: ",
+      "info": {
+        "type": "build",
+        "name": "bld_byzrbtpcs",
+        "entrypoint": "."
+      }
+    },
+    {
+      "created": 1794248832232,
+      "date": 1794248832232,
+      "type": "stdout",
+      "text": "@open-evals/web:build: Failed to type check.",
+      "info": {
+        "type": "build",
+        "name": "bld_byzrbtpcs",
+        "entrypoint": "."
+      }
+    },
+    {
+      "created": 1794248825866,
+      "date": 1794248825866,
+      "type": "stdout",
+      "text": "@open-evals/web:build:   Running TypeScript ...",
+      "info": {
+        "type": "build",
+        "name": "bld_byzrbtpcs",
+        "entrypoint": "."
+      }
+    },
+    {
+      "created": 1794248825858,
+      "date": 1794248825858,
+      "type": "stdout",
+      "text": "@open-evals/web:build: ✓ Compiled successfully in 6.8s",
+      "info": {
+        "type": "build",
+        "name": "bld_byzrbtpcs",
+        "entrypoint": "."
+      }
+    },
+    {
+      "created": 1794248818727,
+      "date": 1794248818727,
+      "type": "stdout",
+      "text": "@open-evals/web:build:   Creating an optimized production build ...",
+      "info": {
+        "type": "build",
+        "name": "bld_byzrbtpcs",
+        "entrypoint": "."
+      }
+    },
+    {
+      "created": 1794248818685,
+      "date": 1794248818685,
+      "type": "stdout",
+      "text": "@open-evals/web:build: ",
+      "info": {
+        "type": "build",
+        "name": "bld_byzrbtpcs",
+        "entrypoint": "."
+      }
+    },
+    {
+      "created": 1794248818685,
+      "date": 1794248818685,
+      "type": "stdout",
+      "text": "@open-evals/web:build: ▲ Next.js 16.2.9 (Turbopack)",
+      "info": {
+        "type": "build",
+        "name": "bld_byzrbtpcs",
+        "entrypoint": "."
+      }
+    },
+    {
+      "created": 1794248818672,
+      "date": 1794248818672,
+      "type": "stdout",
+      "text": "@open-evals/web:build:   Applying modifyConfig from Vercel",
+      "info": {
+        "type": "build",
+        "name": "bld_byzrbtpcs",
+        "entrypoint": "."
+      }
+    },
+    {
+      "created": 1794248817871,
+      "date": 1794248817871,
+      "type": "stdout",
+      "text": "@open-evals/web:build: ",
+      "info": {
+        "type": "build",
+        "name": "bld_byzrbtpcs",
+        "entrypoint": "."
+      }
+    },
+    {
+      "created": 1794248817870,
+      "date": 1794248817870,
+      "type": "stdout",
+      "text": "@open-evals/web:build: > next build",
+      "info": {
+        "type": "build",
+        "name": "bld_byzrbtpcs",
+        "entrypoint": "."
+      }
+    },
+    {
+      "created": 1794248817870,
+      "date": 1794248817870,
+      "type": "stdout",
+      "text": "@open-evals/web:build: > @open-evals/web@0.1.0 build /vercel/path0/apps/web",
+      "info": {
+        "type": "build",
+        "name": "bld_byzrbtpcs",
+        "entrypoint": "."
+      }
+    },
+    {
+      "created": 1794248817870,
+      "date": 1794248817870,
+      "type": "stdout",
+      "text": "@open-evals/web:build: ",
+      "info": {
+        "type": "build",
+        "name": "bld_byzrbtpcs",
+        "entrypoint": "."
+      }
+    },
+    {
+      "created": 1794248817215,
+      "date": 1794248817215,
+      "type": "stdout",
+      "text": "@open-evals/web:build: cache miss, executing d587665d1a008e42",
+      "info": {
+        "type": "build",
+        "name": "bld_byzrbtpcs",
+        "entrypoint": "."
+      }
+    },
+    {
+      "created": 1794248814431,
+      "date": 1794248814431,
+      "type": "stdout",
+      "text": "@open-evals/db:build: ",
+      "info": {
+        "type": "build",
+        "name": "bld_byzrbtpcs",
+        "entrypoint": "."
+      }
+    },
+    {
+      "created": 1794248814431,
+      "date": 1794248814431,
+      "type": "stdout",
+      "text": "@open-evals/db:build: > tsc -p tsconfig.json --noEmit",
+      "info": {
+        "type": "build",
+        "name": "bld_byzrbtpcs",
+        "entrypoint": "."
+      }
+    },
+    {
+      "created": 1794248814431,
+      "date": 1794248814431,
+      "type": "stdout",
+      "text": "@open-evals/db:build: > @open-evals/db@0.1.0 build /vercel/path0/packages/db",
+      "info": {
+        "type": "build",
+        "name": "bld_byzrbtpcs",
+        "entrypoint": "."
+      }
+    },
+    {
+      "created": 1794248814431,
+      "date": 1794248814431,
+      "type": "stdout",
+      "text": "@open-evals/db:build: ",
+      "info": {
+        "type": "build",
+        "name": "bld_byzrbtpcs",
+        "entrypoint": "."
+      }
+    },
+    {
+      "created": 1794248813759,
+      "date": 1794248813759,
+      "type": "stdout",
+      "text": "@open-evals/workflows:build: ",
+      "info": {
+        "type": "build",
+        "name": "bld_byzrbtpcs",
+        "entrypoint": "."
+      }
+    },
+    {
+      "created": 1794248813759,
+      "date": 1794248813759,
+      "type": "stdout",
+      "text": "@open-evals/workflows:build: > tsc -p tsconfig.json --noEmit",
+      "info": {
+        "type": "build",
+        "name": "bld_byzrbtpcs",
+        "entrypoint": "."
+      }
+    },
+    {
+      "created": 1794248813758,
+      "date": 1794248813758,
+      "type": "stdout",
+      "text": "@open-evals/workflows:build: > @open-evals/workflows@0.1.0 build /vercel/path0/workflows",
+      "info": {
+        "type": "build",
+        "name": "bld_byzrbtpcs",
+        "entrypoint": "."
+      }
+    },
+    {
+      "created": 1794248813758,
+      "date": 1794248813758,
+      "type": "stdout",
+      "text": "@open-evals/workflows:build: ",
+      "info": {
+        "type": "build",
+        "name": "bld_byzrbtpcs",
+        "entrypoint": "."
+      }
+    },
+    {
+      "created": 1794248813758,
+      "date": 1794248813758,
+      "type": "stdout",
+      "text": "@open-evals/workflows:build: cache hit, replaying logs 05f6d45f5f9730a7",
+      "info": {
+        "type": "build",
+        "name": "bld_byzrbtpcs",
+        "entrypoint": "."
+      }
+    },
+    {
+      "created": 1794248813743,
+      "date": 1794248813743,
+      "type": "stdout",
+      "text": "@open-evals/adapters:build: ",
+      "info": {
+        "type": "build",
+        "name": "bld_byzrbtpcs",
+        "entrypoint": "."
+      }
+    },
+    {
+      "created": 1794248813743,
+      "date": 1794248813743,
+      "type": "stdout",
+      "text": "@open-evals/adapters:build: > tsc -p tsconfig.json --noEmit",
+      "info": {
+        "type": "build",
+        "name": "bld_byzrbtpcs",
+        "entrypoint": "."
+      }
+    },
+    {
+      "created": 1794248813742,
+      "date": 1794248813742,
+      "type": "stdout",
+      "text": "@open-evals/adapters:build: > @open-evals/adapters@0.1.0 build /vercel/path0/packages/adapters",
+      "info": {
+        "type": "build",
+        "name": "bld_byzrbtpcs",
+        "entrypoint": "."
+      }
+    },
+    {
+      "created": 1794248813742,
+      "date": 1794248813742,
+      "type": "stdout",
+      "text": "@open-evals/adapters:build: ",
+      "info": {
+        "type": "build",
+        "name": "bld_byzrbtpcs",
+        "entrypoint": "."
+      }
+    },
+    {
+      "created": 1794248813742,
+      "date": 1794248813742,
+      "type": "stdout",
+      "text": "@open-evals/adapters:build: cache hit, replaying logs 050657999d79f686",
+      "info": {
+        "type": "build",
+        "name": "bld_byzrbtpcs",
+        "entrypoint": "."
+      }
+    },
+    {
+      "created": 1794248813666,
+      "date": 1794248813666,
+      "type": "stdout",
+      "text": "@open-evals/core:build: ",
+      "info": {
+        "type": "build",
+        "name": "bld_byzrbtpcs",
+        "entrypoint": "."
+      }
+    },
+    {
+      "created": 1794248813666,
+      "date": 1794248813666,
+      "type": "stdout",
+      "text": "@open-evals/core:build: > tsc -p tsconfig.json --noEmit",
+      "info": {
+        "type": "build",
+        "name": "bld_byzrbtpcs",
+        "entrypoint": "."
+      }
+    },
+    {
+      "created": 1794248813666,
+      "date": 1794248813666,
+      "type": "stdout",
+      "text": "@open-evals/core:build: > @open-evals/core@0.1.0 build /vercel/path0/packages/core",
+      "info": {
+        "type": "build",
+        "name": "bld_byzrbtpcs",
+        "entrypoint": "."
+      }
+    },
+    {
+      "created": 1794248813666,
+      "date": 1794248813666,
+      "type": "stdout",
+      "text": "@open-evals/core:build: ",
+      "info": {
+        "type": "build",
+        "name": "bld_byzrbtpcs",
+        "entrypoint": "."
+      }
+    },
+    {
+      "created": 1794248813666,
+      "date": 1794248813666,
+      "type": "stdout",
+      "text": "@open-evals/core:build: cache hit, replaying logs a8151303ec8479b5",
+      "info": {
+        "type": "build",
+        "name": "bld_byzrbtpcs",
+        "entrypoint": "."
+      }
+    },
+    {
+      "created": 1794248813654,
+      "date": 1794248813654,
+      "type": "stdout",
+      "text": "@open-evals/db:build: cache miss, executing 18c79e69e4405100",
+      "info": {
+        "type": "build",
+        "name": "bld_byzrbtpcs",
+        "entrypoint": "."
+      }
+    },
+    {
+      "created": 1794248813572,
+      "date": 1794248813572,
+      "type": "stdout",
+      "text": "",
+      "info": {
+        "type": "build",
+        "name": "bld_byzrbtpcs",
+        "entrypoint": "."
+      }
+    },
+    {
+      "created": 1794248813572,
+      "date": 1794248813572,
+      "type": "stdout",
+      "text": "   • Remote caching enabled",
+      "info": {
+        "type": "build",
+        "name": "bld_byzrbtpcs",
+        "entrypoint": "."
+      }
+    },
+    {
+      "created": 1794248813572,
+      "date": 1794248813572,
+      "type": "stdout",
+      "text": "   • Running build in 1 packages",
+      "info": {
+        "type": "build",
+        "name": "bld_byzrbtpcs",
+        "entrypoint": "."
+      }
+    },
+    {
+      "created": 1794248813572,
+      "date": 1794248813572,
+      "type": "stdout",
+      "text": "   • Packages in scope: @open-evals/web",
+      "info": {
+        "type": "build",
+        "name": "bld_byzrbtpcs",
+        "entrypoint": "."
+      }
+    },
+    {
+      "created": 1794248813571,
+      "date": 1794248813571,
+      "type": "stdout",
+      "text": "",
+      "info": {
+        "type": "build",
+        "name": "bld_byzrbtpcs",
+        "entrypoint": "."
+      }
+    },
+    {
+      "created": 1794248813340,
+      "date": 1794248813340,
+      "type": "stdout",
+      "text": "Running \"turbo run build\"",
+      "info": {
+        "type": "build",
+        "name": "bld_byzrbtpcs",
+        "entrypoint": "."
+      }
+    },
+    {
+      "created": 1794248813339,
+      "date": 1794248813339,
+      "type": "stdout",
+      "text": "Detected Next.js version: 16.2.9",
+      "info": {
+        "type": "build",
+        "name": "bld_byzrbtpcs",
+        "entrypoint": "."
+      }
+    },
+    {
+      "created": 1794248813314,
+      "date": 1794248813314,
+      "type": "stdout",
+      "text": "Done in 1.1s using pnpm v10.14.0",
+      "info": {
+        "type": "build",
+        "name": "bld_byzrbtpcs",
+        "entrypoint": "."
+      }
+    },
+    {
+      "created": 1794248813255,
+      "date": 1794248813255,
+      "type": "stdout",
+      "text": "",
+      "info": {
+        "type": "build",
+        "name": "bld_byzrbtpcs",
+        "entrypoint": "."
+      }
+    },
+    {
+      "created": 1794248812711,
+      "date": 1794248812711,
+      "type": "stdout",
+      "text": "Scope: all 11 workspace projects",
+      "info": {
+        "type": "build",
+        "name": "bld_byzrbtpcs",
+        "entrypoint": "."
+      }
+    },
+    {
+      "created": 1794248810385,
+      "date": 1794248810385,
+      "type": "stdout",
+      "text": "Running \"install\" command: `pnpm install`...",
+      "info": {
+        "type": "build",
+        "name": "bld_byzrbtpcs",
+        "entrypoint": "."
+      }
+    },
+    {
+      "created": 1794248810382,
+      "date": 1794248810382,
+      "type": "stdout",
+      "text": "Detected `pnpm-lock.yaml` version 9 generated by pnpm@10.x from package.json#packageManager pnpm@10.14.0",
+      "info": {
+        "type": "build",
+        "name": "bld_byzrbtpcs",
+        "entrypoint": "."
+      }
+    },
+    {
+      "created": 1794248810162,
+      "date": 1794248810162,
+      "type": "stderr",
+      "text": "> Detected Turbo. Adjusting default settings...",
+      "info": {
+        "type": "build",
+        "name": "bld_byzrbtpcs",
+        "entrypoint": "."
+      }
+    },
+    {
+      "created": 1794248810027,
+      "date": 1794248810027,
+      "type": "stderr",
+      "text": "Vercel CLI 65.11.0",
+      "info": {
+        "type": "build",
+        "name": "bld_byzrbtpcs",
+        "entrypoint": "."
+      }
+    },
+    {
+      "created": 1794248810016,
+      "date": 1794248810016,
+      "type": "stdout",
+      "text": "Running \"vercel build\"",
+      "info": {
+        "type": "build",
+        "name": "bld_byzrbtpcs",
+        "entrypoint": "."
+      }
+    },
+    {
+      "created": 1794248809563,
+      "date": 1794248809563,
+      "type": "stdout",
+      "text": "Restored build cache from previous deployment (PsW5KJzSVw5WzYhhcvR6LtGmoTAJ)",
+      "info": {
+        "type": "build",
+        "name": "bld_byzrbtpcs",
+        "entrypoint": "."
+      }
+    },
+    {
+      "created": 1794248808297,
+      "date": 1794248808297,
+      "type": "stdout",
+      "text": "Cloning completed: 499.000ms",
+      "info": {
+        "type": "build",
+        "name": "bld_byzrbtpcs",
+        "entrypoint": "."
+      }
+    },
+    {
+      "created": 1794248807797,
+      "date": 1794248807797,
+      "type": "stdout",
+      "text": "Cloning github.com/alvarovillalbaa/open-evals (Branch: qa/open-evals-custom-datasets-20261109, Commit: 3d7245f)",
+      "info": {
+        "type": "build",
+        "name": "bld_byzrbtpcs",
+        "entrypoint": "."
+      }
+    },
+    {
+      "created": 1794248807682,
+      "date": 1794248807682,
+      "type": "stdout",
+      "text": "Build machine configuration: 4 cores, 8 GB (Standard Build Machine)",
+      "info": {
+        "type": "build",
+        "name": "bld_byzrbtpcs",
+        "entrypoint": "."
+      }
+    },
+    {
+      "created": 1794248807681,
+      "date": 1794248807681,
+      "type": "stdout",
+      "text": "Running build in Washington, D.C., USA (East) – iad1",
+      "info": {
+        "type": "build",
+        "name": "bld_byzrbtpcs",
+        "entrypoint": "."
+      }
+    }
+  ]
+}

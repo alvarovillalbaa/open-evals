@@ -1,0 +1,453 @@
+{
+  "config": {
+    "argv": [
+      "/opt/hostedtoolcache/node/24.22.2/x64/bin/node",
+      "/home/runner/work/open-evals/open-evals/node_modules/.pnpm/@playwright+test@1.61.1/node_modules/@playwright/test/cli.js",
+      "test",
+      "--config",
+      "tests/e2e/custom-datasets.browser.config.ts"
+    ],
+    "configFile": "/home/runner/work/open-evals/open-evals/tests/e2e/custom-datasets.browser.config.ts",
+    "rootDir": "/home/runner/work/open-evals/open-evals/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": true,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 420000,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/home/runner/work/_temp/open-evals-custom-datasets-browser-evidence/browser-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium-owned-production",
+        "name": "chromium-owned-production",
+        "testDir": "/home/runner/work/open-evals/open-evals/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "custom-datasets.browser.spec.ts"
+        ],
+        "timeout": 90000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/home/runner/work/_temp/open-evals-custom-datasets-browser-evidence/browser-report.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "custom-datasets.browser.spec.ts",
+      "file": "custom-datasets.browser.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "CD-BR01 desktop JSONL upload saves complete rows and explicitly scores the exact saved version",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-owned-production",
+              "projectName": "chromium-owned-production",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 1135,
+                  "error": {
+                    "message": "Error: response.json: Protocol error (Network.getResponseBody): No data found for resource with given identifier",
+                    "stack": "Error: response.json: Protocol error (Network.getResponseBody): No data found for resource with given identifier\n    at save (/home/runner/work/open-evals/open-evals/tests/e2e/custom-datasets.browser.spec.ts:45:34)\n    at /home/runner/work/open-evals/open-evals/tests/e2e/custom-datasets.browser.spec.ts:93:20",
+                    "location": {
+                      "file": "/home/runner/work/open-evals/open-evals/tests/e2e/custom-datasets.browser.spec.ts",
+                      "column": 34,
+                      "line": 45
+                    },
+                    "snippet": "  43 |   await page.getByRole(\"button\", { name: button, exact: true }).click();\n  44 |   const response = await pending; expect(response.status()).toBe(status);\n> 45 |   return { value: await response.json() as CustomDatasetSaveResult, response };\n     |                                  ^\n  46 | }\n  47 | async function refusePreview(page: Page, code: string) {\n  48 |   const pending = page.waitForResponse(isPost(`${endpoint}/preview`));"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/home/runner/work/open-evals/open-evals/tests/e2e/custom-datasets.browser.spec.ts",
+                        "column": 34,
+                        "line": 45
+                      },
+                      "message": "Error: response.json: Protocol error (Network.getResponseBody): No data found for resource with given identifier\n\n  43 |   await page.getByRole(\"button\", { name: button, exact: true }).click();\n  44 |   const response = await pending; expect(response.status()).toBe(status);\n> 45 |   return { value: await response.json() as CustomDatasetSaveResult, response };\n     |                                  ^\n  46 | }\n  47 | async function refusePreview(page: Page, code: string) {\n  48 |   const pending = page.waitForResponse(isPost(`${endpoint}/preview`));\n    at save (/home/runner/work/open-evals/open-evals/tests/e2e/custom-datasets.browser.spec.ts:45:34)\n    at /home/runner/work/open-evals/open-evals/tests/e2e/custom-datasets.browser.spec.ts:93:20"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T19:15:30.774Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/home/runner/work/_temp/open-evals-custom-datasets-browser-evidence/browser-output/custom-datasets.browser-CD-b3b7a-res-the-exact-saved-version-chromium-owned-production/test-failed-1.png"
+                    },
+                    {
+                      "name": "owned-fixture-cleanup",
+                      "contentType": "application/json",
+                      "body": "eyJzY2hlbWFWZXJzaW9uIjoiY3VzdG9tLWRhdGFzZXQtYnJvd3Nlci1jbGVhbnVwLXYxIiwic3RhdHVzIjoicmVtb3ZlZCIsIndvcmtzcGFjZUlkIjoiYzQ0Mjg5YTEtN2Y5ZC00OTVlLTkyNzctMmQ4ZDIyMDQyYjM1IiwiYWN0b3JDb3VudCI6MSwib3duZXJzaGlwVmFsaWRhdGVkIjp0cnVlLCJiZWZvcmUiOnsiZGF0YXNldHMiOjEsInZlcnNpb25zIjoxLCJyb3dzIjoyLCJkYXRhc2V0QXVkaXRzIjoxLCJwbGFucyI6MCwicnVucyI6MCwic2FtcGxlcyI6MCwicmVzdWx0cyI6MCwiZ2F0ZXMiOjAsInJ1bkF1ZGl0cyI6MCwiZXZhbFNldHMiOjAsImV2YWxJdGVtcyI6MH0sImFmdGVyIjp7ImRhdGFzZXRzIjowLCJ2ZXJzaW9ucyI6MCwicm93cyI6MCwiZGF0YXNldEF1ZGl0cyI6MCwicGxhbnMiOjAsInJ1bnMiOjAsInNhbXBsZXMiOjAsInJlc3VsdHMiOjAsImdhdGVzIjowLCJydW5BdWRpdHMiOjAsImV2YWxTZXRzIjowLCJldmFsSXRlbXMiOjB9LCJ3b3Jrc3BhY2VBYnNlbnQiOnRydWUsImFjdG9yc0Fic2VudCI6dHJ1ZX0="
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/home/runner/work/_temp/open-evals-custom-datasets-browser-evidence/browser-output/custom-datasets.browser-CD-b3b7a-res-the-exact-saved-version-chromium-owned-production/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/home/runner/work/_temp/open-evals-custom-datasets-browser-evidence/browser-output/custom-datasets.browser-CD-b3b7a-res-the-exact-saved-version-chromium-owned-production/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/home/runner/work/open-evals/open-evals/tests/e2e/custom-datasets.browser.spec.ts",
+                    "column": 34,
+                    "line": 45
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "f82fcb7bf7a86d4989d8-e58a1ed7d25e02caf31f",
+          "file": "custom-datasets.browser.spec.ts",
+          "line": 75,
+          "column": 1
+        },
+        {
+          "title": "CD-BR02 a lost committed save replays the identical request after a later dataset head",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-owned-production",
+              "projectName": "chromium-owned-production",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1327,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T19:15:32.696Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "lost-committed-save-identical-replay-after-later-head",
+                      "contentType": "application/json",
+                      "body": "eyJzY2hlbWFWZXJzaW9uIjoiY3VzdG9tLWRhdGFzZXQtYnJvd3Nlci1vYnNlcnZhdGlvbi12MSIsIndvcmtzcGFjZUlkIjoiMGUzY2Y3OWItODc0My00NmY2LWE4MWQtZmZkOWEzYjc5N2NiIiwiY291bnRzIjp7ImRhdGFzZXRzIjoxLCJ2ZXJzaW9ucyI6Miwicm93cyI6NCwiZGF0YXNldEF1ZGl0cyI6MiwicGxhbnMiOjAsInJ1bnMiOjAsInNhbXBsZXMiOjAsInJlc3VsdHMiOjAsImdhdGVzIjowLCJydW5BdWRpdHMiOjAsImV2YWxTZXRzIjowLCJldmFsSXRlbXMiOjB9LCJ2ZXJzaW9ucyI6W3siaWQiOiJjdXN0b21fZGF0YXNldF92ZXJzaW9uX2U5NjI2NjdhYTk1NWYzZDBlZDUyMGNhNjNjZGQxZjYyMjQ5OTBjNGFlZmM3NzE4MmM2NWJmNTAwZjBmMWMyZjAiLCJ2ZXJzaW9uIjoxLCJmaW5nZXJwcmludCI6ImI1NGRkNmVlOWJiNGJkZTc1ZmViZWQwMjJkZTczNjZmNThjOWI3MGM4MTkwM2M1ZDIwOTdkNjc1Y2EyYWU5NjEifSx7ImlkIjoiY3VzdG9tX2RhdGFzZXRfdmVyc2lvbl8wOTFjYTU3NjNiNTgyMDU4M2VmZGRlMTRiN2I3YmFhZWY2NDlhODBhODE2OTc4OTY3OTFiYTVmOWUyNmU5NTM2IiwidmVyc2lvbiI6MiwiZmluZ2VycHJpbnQiOiIxNGEzYWMyNDdkNGI0ZTFlZWQzMWQ5YTQyNWFjNmI4ZGY3ZTRkY2Y5Njg2ZWM3MzIyZjM5NjhmZTVhMTQ3ZGZlIn1dLCJhdWRpdFJlc291cmNlSWRzIjpbImN1c3RvbV9kYXRhc2V0X3ZlcnNpb25fMDkxY2E1NzYzYjU4MjA1ODNlZmRkZTE0YjdiN2JhYWVmNjQ5YTgwYTgxNjk3ODk2NzkxYmE1ZjllMjZlOTUzNiIsImN1c3RvbV9kYXRhc2V0X3ZlcnNpb25fZTk2MjY2N2FhOTU1ZjNkMGVkNTIwY2E2M2NkZDFmNjIyNDk5MGM0YWVmYzc3MTgyYzY1YmY1MDBmMGYxYzJmMCJdLCJydW5zIjpbXX0="
+                    },
+                    {
+                      "name": "owned-fixture-cleanup",
+                      "contentType": "application/json",
+                      "body": "eyJzY2hlbWFWZXJzaW9uIjoiY3VzdG9tLWRhdGFzZXQtYnJvd3Nlci1jbGVhbnVwLXYxIiwic3RhdHVzIjoicmVtb3ZlZCIsIndvcmtzcGFjZUlkIjoiMGUzY2Y3OWItODc0My00NmY2LWE4MWQtZmZkOWEzYjc5N2NiIiwiYWN0b3JDb3VudCI6MSwib3duZXJzaGlwVmFsaWRhdGVkIjp0cnVlLCJiZWZvcmUiOnsiZGF0YXNldHMiOjEsInZlcnNpb25zIjoyLCJyb3dzIjo0LCJkYXRhc2V0QXVkaXRzIjoyLCJwbGFucyI6MCwicnVucyI6MCwic2FtcGxlcyI6MCwicmVzdWx0cyI6MCwiZ2F0ZXMiOjAsInJ1bkF1ZGl0cyI6MCwiZXZhbFNldHMiOjAsImV2YWxJdGVtcyI6MH0sImFmdGVyIjp7ImRhdGFzZXRzIjowLCJ2ZXJzaW9ucyI6MCwicm93cyI6MCwiZGF0YXNldEF1ZGl0cyI6MCwicGxhbnMiOjAsInJ1bnMiOjAsInNhbXBsZXMiOjAsInJlc3VsdHMiOjAsImdhdGVzIjowLCJydW5BdWRpdHMiOjAsImV2YWxTZXRzIjowLCJldmFsSXRlbXMiOjB9LCJ3b3Jrc3BhY2VBYnNlbnQiOnRydWUsImFjdG9yc0Fic2VudCI6dHJ1ZX0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f82fcb7bf7a86d4989d8-a0ec28f2256476e936cf",
+          "file": "custom-datasets.browser.spec.ts",
+          "line": 134,
+          "column": 1
+        },
+        {
+          "title": "CD-BR03 stale-head refusal retains text until a visible head review and fresh append intent",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-owned-production",
+              "projectName": "chromium-owned-production",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 10339,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: 'Saved custom dataset', exact: true })\nExpected: visible\nTimeout: 10000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'Saved custom dataset', exact: true })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: 'Saved custom dataset', exact: true })\nExpected: visible\nTimeout: 10000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'Saved custom dataset', exact: true })\u001b[22m\n\n    at /home/runner/work/open-evals/open-evals/tests/e2e/custom-datasets.browser.spec.ts:170:90",
+                    "location": {
+                      "file": "/home/runner/work/open-evals/open-evals/tests/e2e/custom-datasets.browser.spec.ts",
+                      "column": 90,
+                      "line": 170
+                    },
+                    "snippet": "  168 |   const first = await owned.saveDataset(rows(\"initial-head\"), \"Authored stale-head dataset\");\n  169 |   const document = await page.goto(`${owned.baseUrl}/evals/datasets/${first.content.dataset.publicId}`); expect(document?.status()).toBe(200);\n> 170 |   await expect(page.getByRole(\"heading\", { name: \"Saved custom dataset\", exact: true })).toBeVisible();\n      |                                                                                          ^\n  171 |   await expect(name(page)).toHaveJSProperty(\"readOnly\", true);\n  172 |   const preserved = rows(\"preserved-client-draft\"); await source(page).fill(preserved);\n  173 |   const stale = await preview(page); expect(stale.draft.version).toBe(2); expect(stale.draft.expectedVersionId).toBe(first.content.version.publicId);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/home/runner/work/open-evals/open-evals/tests/e2e/custom-datasets.browser.spec.ts",
+                        "column": 90,
+                        "line": 170
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: 'Saved custom dataset', exact: true })\nExpected: visible\nTimeout: 10000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'Saved custom dataset', exact: true })\u001b[22m\n\n\n  168 |   const first = await owned.saveDataset(rows(\"initial-head\"), \"Authored stale-head dataset\");\n  169 |   const document = await page.goto(`${owned.baseUrl}/evals/datasets/${first.content.dataset.publicId}`); expect(document?.status()).toBe(200);\n> 170 |   await expect(page.getByRole(\"heading\", { name: \"Saved custom dataset\", exact: true })).toBeVisible();\n      |                                                                                          ^\n  171 |   await expect(name(page)).toHaveJSProperty(\"readOnly\", true);\n  172 |   const preserved = rows(\"preserved-client-draft\"); await source(page).fill(preserved);\n  173 |   const stale = await preview(page); expect(stale.draft.version).toBe(2); expect(stale.draft.expectedVersionId).toBe(first.content.version.publicId);\n    at /home/runner/work/open-evals/open-evals/tests/e2e/custom-datasets.browser.spec.ts:170:90"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T19:15:34.136Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/home/runner/work/_temp/open-evals-custom-datasets-browser-evidence/browser-output/custom-datasets.browser-CD-1f2de-iew-and-fresh-append-intent-chromium-owned-production/test-failed-1.png"
+                    },
+                    {
+                      "name": "owned-fixture-cleanup",
+                      "contentType": "application/json",
+                      "body": "eyJzY2hlbWFWZXJzaW9uIjoiY3VzdG9tLWRhdGFzZXQtYnJvd3Nlci1jbGVhbnVwLXYxIiwic3RhdHVzIjoicmVtb3ZlZCIsIndvcmtzcGFjZUlkIjoiNzdjMWNjYTAtZGM1YS00YWQwLWEzZGUtYzllMDFlMmViMWM2IiwiYWN0b3JDb3VudCI6MSwib3duZXJzaGlwVmFsaWRhdGVkIjp0cnVlLCJiZWZvcmUiOnsiZGF0YXNldHMiOjEsInZlcnNpb25zIjoxLCJyb3dzIjoyLCJkYXRhc2V0QXVkaXRzIjoxLCJwbGFucyI6MCwicnVucyI6MCwic2FtcGxlcyI6MCwicmVzdWx0cyI6MCwiZ2F0ZXMiOjAsInJ1bkF1ZGl0cyI6MCwiZXZhbFNldHMiOjAsImV2YWxJdGVtcyI6MH0sImFmdGVyIjp7ImRhdGFzZXRzIjowLCJ2ZXJzaW9ucyI6MCwicm93cyI6MCwiZGF0YXNldEF1ZGl0cyI6MCwicGxhbnMiOjAsInJ1bnMiOjAsInNhbXBsZXMiOjAsInJlc3VsdHMiOjAsImdhdGVzIjowLCJydW5BdWRpdHMiOjAsImV2YWxTZXRzIjowLCJldmFsSXRlbXMiOjB9LCJ3b3Jrc3BhY2VBYnNlbnQiOnRydWUsImFjdG9yc0Fic2VudCI6dHJ1ZX0="
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/home/runner/work/_temp/open-evals-custom-datasets-browser-evidence/browser-output/custom-datasets.browser-CD-1f2de-iew-and-fresh-append-intent-chromium-owned-production/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/home/runner/work/_temp/open-evals-custom-datasets-browser-evidence/browser-output/custom-datasets.browser-CD-1f2de-iew-and-fresh-append-intent-chromium-owned-production/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/home/runner/work/open-evals/open-evals/tests/e2e/custom-datasets.browser.spec.ts",
+                    "column": 90,
+                    "line": 170
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "f82fcb7bf7a86d4989d8-991182a6deea467c7133",
+          "file": "custom-datasets.browser.spec.ts",
+          "line": 167,
+          "column": 1
+        },
+        {
+          "title": "CD-BR04 explicit declarations, precision, duplicate keys and invalid files never create partial datasets",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-owned-production",
+              "projectName": "chromium-owned-production",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 1219,
+                  "error": {
+                    "message": "Error: response.json: Protocol error (Network.getResponseBody): No data found for resource with given identifier",
+                    "stack": "Error: response.json: Protocol error (Network.getResponseBody): No data found for resource with given identifier\n    at refusePreview (/home/runner/work/open-evals/open-evals/tests/e2e/custom-datasets.browser.spec.ts:51:32)\n    at /home/runner/work/open-evals/open-evals/tests/e2e/custom-datasets.browser.spec.ts:218:3",
+                    "location": {
+                      "file": "/home/runner/work/open-evals/open-evals/tests/e2e/custom-datasets.browser.spec.ts",
+                      "column": 32,
+                      "line": 51
+                    },
+                    "snippet": "  49 |   await page.getByRole(\"button\", { name: \"Preview complete dataset\", exact: true }).click();\n  50 |   const response = await pending; expect(response.status()).toBe(422);\n> 51 |   const value = await response.json(); expect(value.error).toBe(code);\n     |                                ^\n  52 |   await expect(page.getByRole(\"heading\", { name: \"Review and explicitly save\", exact: true })).toHaveCount(0);\n  53 |   return value;\n  54 | }"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/home/runner/work/open-evals/open-evals/tests/e2e/custom-datasets.browser.spec.ts",
+                        "column": 32,
+                        "line": 51
+                      },
+                      "message": "Error: response.json: Protocol error (Network.getResponseBody): No data found for resource with given identifier\n\n  49 |   await page.getByRole(\"button\", { name: \"Preview complete dataset\", exact: true }).click();\n  50 |   const response = await pending; expect(response.status()).toBe(422);\n> 51 |   const value = await response.json(); expect(value.error).toBe(code);\n     |                                ^\n  52 |   await expect(page.getByRole(\"heading\", { name: \"Review and explicitly save\", exact: true })).toHaveCount(0);\n  53 |   return value;\n  54 | }\n    at refusePreview (/home/runner/work/open-evals/open-evals/tests/e2e/custom-datasets.browser.spec.ts:51:32)\n    at /home/runner/work/open-evals/open-evals/tests/e2e/custom-datasets.browser.spec.ts:218:3"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T19:15:45.029Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/home/runner/work/_temp/open-evals-custom-datasets-browser-evidence/browser-output/custom-datasets.browser-CD-db60d-ver-create-partial-datasets-chromium-owned-production/test-failed-1.png"
+                    },
+                    {
+                      "name": "owned-fixture-cleanup",
+                      "contentType": "application/json",
+                      "body": "eyJzY2hlbWFWZXJzaW9uIjoiY3VzdG9tLWRhdGFzZXQtYnJvd3Nlci1jbGVhbnVwLXYxIiwic3RhdHVzIjoicmVtb3ZlZCIsIndvcmtzcGFjZUlkIjoiZGZkYWQ2MmItMzkzMy00NGVjLWFlY2UtNWZmMTI0YTg3NmQ5IiwiYWN0b3JDb3VudCI6MSwib3duZXJzaGlwVmFsaWRhdGVkIjp0cnVlLCJiZWZvcmUiOnsiZGF0YXNldHMiOjAsInZlcnNpb25zIjowLCJyb3dzIjowLCJkYXRhc2V0QXVkaXRzIjowLCJwbGFucyI6MCwicnVucyI6MCwic2FtcGxlcyI6MCwicmVzdWx0cyI6MCwiZ2F0ZXMiOjAsInJ1bkF1ZGl0cyI6MCwiZXZhbFNldHMiOjAsImV2YWxJdGVtcyI6MH0sImFmdGVyIjp7ImRhdGFzZXRzIjowLCJ2ZXJzaW9ucyI6MCwicm93cyI6MCwiZGF0YXNldEF1ZGl0cyI6MCwicGxhbnMiOjAsInJ1bnMiOjAsInNhbXBsZXMiOjAsInJlc3VsdHMiOjAsImdhdGVzIjowLCJydW5BdWRpdHMiOjAsImV2YWxTZXRzIjowLCJldmFsSXRlbXMiOjB9LCJ3b3Jrc3BhY2VBYnNlbnQiOnRydWUsImFjdG9yc0Fic2VudCI6dHJ1ZX0="
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/home/runner/work/_temp/open-evals-custom-datasets-browser-evidence/browser-output/custom-datasets.browser-CD-db60d-ver-create-partial-datasets-chromium-owned-production/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/home/runner/work/_temp/open-evals-custom-datasets-browser-evidence/browser-output/custom-datasets.browser-CD-db60d-ver-create-partial-datasets-chromium-owned-production/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/home/runner/work/open-evals/open-evals/tests/e2e/custom-datasets.browser.spec.ts",
+                    "column": 32,
+                    "line": 51
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "f82fcb7bf7a86d4989d8-5d2238ed017d9e9f964d",
+          "file": "custom-datasets.browser.spec.ts",
+          "line": 202,
+          "column": 1
+        },
+        {
+          "title": "CD-BR05 narrow saved-data flow preserves viewer access and hides private metadata from valid project keys",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-owned-production",
+              "projectName": "chromium-owned-production",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 11546,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: 'Saved custom dataset', exact: true })\nExpected: visible\nTimeout: 10000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'Saved custom dataset', exact: true })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: 'Saved custom dataset', exact: true })\nExpected: visible\nTimeout: 10000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'Saved custom dataset', exact: true })\u001b[22m\n\n    at /home/runner/work/open-evals/open-evals/tests/e2e/custom-datasets.browser.spec.ts:236:96",
+                    "location": {
+                      "file": "/home/runner/work/open-evals/open-evals/tests/e2e/custom-datasets.browser.spec.ts",
+                      "column": 96,
+                      "line": 236
+                    },
+                    "snippet": "  234 |   const viewer = await owned.viewerContext(browser); const viewerPage = await viewer.newPage();\n  235 |   const viewed = await viewerPage.goto(`${owned.baseUrl}/evals/datasets/${record.content.dataset.publicId}`); expect(viewed?.status()).toBe(200);\n> 236 |   await expect(viewerPage.getByRole(\"heading\", { name: \"Saved custom dataset\", exact: true })).toBeVisible();\n      |                                                                                                ^\n  237 |   const viewerPinned = await preview(viewerPage); expect(viewerPinned.draft.version).toBe(2);\n  238 |   await expect(viewerPage.getByRole(\"button\", { name: \"Save immutable version\", exact: true })).toBeDisabled();\n  239 |   const deniedViewer = await viewer.request.post(`${owned.baseUrl}${endpoint}`, { maxRedirects: 0, headers: { \"Content-Type\": \"application/json\" }, data: \"{\" });"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/home/runner/work/open-evals/open-evals/tests/e2e/custom-datasets.browser.spec.ts",
+                        "column": 96,
+                        "line": 236
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: 'Saved custom dataset', exact: true })\nExpected: visible\nTimeout: 10000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'Saved custom dataset', exact: true })\u001b[22m\n\n\n  234 |   const viewer = await owned.viewerContext(browser); const viewerPage = await viewer.newPage();\n  235 |   const viewed = await viewerPage.goto(`${owned.baseUrl}/evals/datasets/${record.content.dataset.publicId}`); expect(viewed?.status()).toBe(200);\n> 236 |   await expect(viewerPage.getByRole(\"heading\", { name: \"Saved custom dataset\", exact: true })).toBeVisible();\n      |                                                                                                ^\n  237 |   const viewerPinned = await preview(viewerPage); expect(viewerPinned.draft.version).toBe(2);\n  238 |   await expect(viewerPage.getByRole(\"button\", { name: \"Save immutable version\", exact: true })).toBeDisabled();\n  239 |   const deniedViewer = await viewer.request.post(`${owned.baseUrl}${endpoint}`, { maxRedirects: 0, headers: { \"Content-Type\": \"application/json\" }, data: \"{\" });\n    at /home/runner/work/open-evals/open-evals/tests/e2e/custom-datasets.browser.spec.ts:236:96"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T19:15:46.954Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/home/runner/work/_temp/open-evals-custom-datasets-browser-evidence/browser-output/custom-datasets.browser-CD-54ea6-ata-from-valid-project-keys-chromium-owned-production/test-failed-2.png"
+                    },
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/home/runner/work/_temp/open-evals-custom-datasets-browser-evidence/browser-output/custom-datasets.browser-CD-54ea6-ata-from-valid-project-keys-chromium-owned-production/test-failed-1.png"
+                    },
+                    {
+                      "name": "owned-fixture-cleanup",
+                      "contentType": "application/json",
+                      "body": "eyJzY2hlbWFWZXJzaW9uIjoiY3VzdG9tLWRhdGFzZXQtYnJvd3Nlci1jbGVhbnVwLXYxIiwic3RhdHVzIjoicmVtb3ZlZCIsIndvcmtzcGFjZUlkIjoiN2NhMTY2YWQtMmQwNC00MDdhLWIwN2QtMzVlNjAyNWFkYTJlIiwiYWN0b3JDb3VudCI6Miwib3duZXJzaGlwVmFsaWRhdGVkIjp0cnVlLCJiZWZvcmUiOnsiZGF0YXNldHMiOjIsInZlcnNpb25zIjoyLCJyb3dzIjozLCJkYXRhc2V0QXVkaXRzIjoxLCJwbGFucyI6MCwicnVucyI6MCwic2FtcGxlcyI6MCwicmVzdWx0cyI6MCwiZ2F0ZXMiOjAsInJ1bkF1ZGl0cyI6MCwiZXZhbFNldHMiOjAsImV2YWxJdGVtcyI6MH0sImFmdGVyIjp7ImRhdGFzZXRzIjowLCJ2ZXJzaW9ucyI6MCwicm93cyI6MCwiZGF0YXNldEF1ZGl0cyI6MCwicGxhbnMiOjAsInJ1bnMiOjAsInNhbXBsZXMiOjAsInJlc3VsdHMiOjAsImdhdGVzIjowLCJydW5BdWRpdHMiOjAsImV2YWxTZXRzIjowLCJldmFsSXRlbXMiOjB9LCJ3b3Jrc3BhY2VBYnNlbnQiOnRydWUsImFjdG9yc0Fic2VudCI6dHJ1ZX0="
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/home/runner/work/_temp/open-evals-custom-datasets-browser-evidence/browser-output/custom-datasets.browser-CD-54ea6-ata-from-valid-project-keys-chromium-owned-production/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/home/runner/work/_temp/open-evals-custom-datasets-browser-evidence/browser-output/custom-datasets.browser-CD-54ea6-ata-from-valid-project-keys-chromium-owned-production/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/home/runner/work/open-evals/open-evals/tests/e2e/custom-datasets.browser.spec.ts",
+                    "column": 96,
+                    "line": 236
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "f82fcb7bf7a86d4989d8-6b61bb8bf9ba0dfa2924",
+          "file": "custom-datasets.browser.spec.ts",
+          "line": 227,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-09T19:15:30.114Z",
+    "duration": 28653.949,
+    "expected": 1,
+    "skipped": 0,
+    "unexpected": 4,
+    "flaky": 0
+  }
+}

@@ -1,0 +1,41 @@
+(node:14208) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:14208) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+✔ CD01 complete preview preserves structured references, absent fields and explicit review declarations (16.17325ms)
+✔ CD02 JSONL with CRLF and one final terminator preserves data while raw text and format bind separate intent (2.491875ms)
+✔ CD03 malformed JSON and JSONL are refused without comments, trailing commas, scalar rows or skipped blank lines (1.208917ms)
+✔ CD04 duplicate decoded object keys are refused in nested metadata and escaped spellings with source positions (1.189709ms)
+✔ CD05 exact decimal values survive alternate spellings and representable integers beyond the safe-integer vocabulary (0.519666ms)
+✔ CD06 nested unsafe integers, close decimals, overflow and nonzero underflow fail before a preview exists (0.589ms)
+✔ CD07 long zero and leading-zero exponents are bounded without huge powers or exponent integers (18.146792ms)
+✔ CD08 invalid Unicode and NUL are refused in raw text, decoded values and decoded metadata keys (0.999917ms)
+✔ CD09 prototype-shaped metadata keys remain exact own data through preview, save and restoration (2.763792ms)
+✔ CD10 strict request identity rejects unknown fields, coercions, malformed UUIDs and invalid parent/version combinations (1.181417ms)
+✔ CD11 row review status is an explicit declaration, and outputs or missing required source fields cannot be silently remapped (1.210459ms)
+✔ CD12 canonical UTF-8 row-key order and unique keys preserve identity without locale or positional IDs (1.259625ms)
+✔ CD13 overpopulation is refused during root parsing before malformed extra rows or quadratic location scans (5.783042ms)
+✔ CD14 all one hundred complete rows retain their own stable stored identities (13.755ms)
+✔ CD15 the full one-MiB consumer snapshot boundary includes generated IDs, references and saved timestamp (430.046333ms)
+✔ CD16 legal near-node snapshots survive larger preview and record envelopes without reapplying domain limits to copies (3232.937041ms)
+✔ CD17 JSONL shares one aggregate node budget across rows instead of restarting its allowance (49.698ms)
+✔ CD18 final consumer depth is enforced while valid near-depth inputs roundtrip through record wrappers (3.67375ms)
+✔ CD19 trusted workspace, public dataset, version and row keys namespace full-length storage identities (1.435625ms)
+✔ CD20 every saved source field affects content while source spelling affects intent independently (6.476375ms)
+✔ CD21 raw UTF-8 digest and full versioned intent, preview, request and record preimages are explicit (2.400584ms)
+✔ CD22 append requires the exact prior head and immutable name, and pinned head-content drift changes preview (4.676ms)
+✔ CD23 frozen record restoration needs no latest-head lookup after constructing a later version (5.810459ms)
+✔ CD24 rehashing only an outer record cannot conceal source, identity, timestamp or row-content corruption (9.06125ms)
+✔ CD25 manifest and frozen-parent mutations are checked beyond the outer fingerprint (11.001667ms)
+✔ CD26 a maximum legal escaped name can be appended without an accidental small-manifest rejection (15.13025ms)
+✔ CD27 hostile direct-call containers and accessors are refused without invoking caller getters (1.721042ms)
+✔ CD28 the two-MiB request allowance includes the complete escaped outer save wrapper (182.5965ms)
+✔ CD29 preview reparsing refuses changed budget, source content, scope and invented saved-time fields (3.769084ms)
+✔ CD30 UTF-8 byte limits apply to identifiers and names instead of JavaScript character counts (1.45125ms)
+ℹ tests 30
+ℹ suites 0
+ℹ pass 30
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4187.447417

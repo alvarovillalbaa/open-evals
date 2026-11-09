@@ -1,0 +1,103 @@
+{
+  "schemaVersion": "custom-dataset-checks-v1",
+  "status": "failed",
+  "acceptedSource": "b061e7a52943a4ff8bcd026f8804786ff82d934d",
+  "expectedParent": "b061e7a52943a4ff8bcd026f8804786ff82d934d",
+  "directParentSource": "b061e7a52943a4ff8bcd026f8804786ff82d934d",
+  "verificationSource": "301cf02bede4b0dda7cfefb9bcfe9f2e07d3662d",
+  "runId": "42670671269",
+  "attempt": "1",
+  "customDatasetPostgresCaseCount": 20,
+  "customDatasetPostgresCaseIds": [
+    "CD-PG01",
+    "CD-PG02",
+    "CD-PG03",
+    "CD-PG04",
+    "CD-PG05",
+    "CD-PG06",
+    "CD-PG07",
+    "CD-PG08",
+    "CD-PG09",
+    "CD-PG10",
+    "CD-PG11",
+    "CD-PG12",
+    "CD-PG13",
+    "CD-PG14",
+    "CD-PG15",
+    "CD-PG16",
+    "CD-PG17",
+    "CD-PG18",
+    "CD-PG19",
+    "CD-PG20"
+  ],
+  "providedOutputRegressionCaseCount": 14,
+  "providedOutputRegressionCaseIds": [
+    "PO-PG01",
+    "PO-PG02",
+    "PO-PG03",
+    "PO-PG04",
+    "PO-PG05",
+    "PO-PG06",
+    "PO-PG07",
+    "PO-PG08",
+    "PO-PG09",
+    "PO-PG10",
+    "PO-PG11",
+    "PO-PG12",
+    "PO-PG13",
+    "PO-PG14"
+  ],
+  "pureCoreCasesInvoked": false,
+  "postgresFixturesEmptyBeforeBuild": true,
+  "unprotectedTrackedDelta": {
+    "file": "unprotected-tracked-delta.json",
+    "changeCount": 41,
+    "bytes": 3811,
+    "sha256": "6471f1fcb813b090ff8eb2f6ddae1547d08c7769a844f687afbfcabcd96febc9"
+  },
+  "browserCaseCount": null,
+  "caseResults": [],
+  "applicationServers": [],
+  "commandCount": 28,
+  "cleanup": {
+    "status": "removed",
+    "database": "oe_custom_datasets_test_42670671269_1",
+    "validatedBeforeDrop": {
+      "name": "oe_custom_datasets_test_42670671269_1",
+      "owner": "postgres",
+      "marker": "open-evals-custom-datasets-20261109-created-disposable-v1"
+    },
+    "databaseAbsent": true,
+    "clusterStopped": true,
+    "serverLog": {
+      "file": "postgres-server.log",
+      "bytes": 2583,
+      "sha256": "97ac68d0c57e1f7f86ae0c9915dc08bd6f84e22b4b66a83221e9082d7d6aaec6",
+      "complete": true
+    },
+    "removedCluster": {
+      "entries": 1001,
+      "fileBytes": 57006971,
+      "rootIdentity": [
+        2049,
+        9213453,
+        1001
+      ]
+    },
+    "clusterAbsent": true
+  },
+  "errors": [
+    "RuntimeError:build-candidate_failed"
+  ],
+  "limits": {
+    "streamBytes": 4194304,
+    "postgresSeconds": 300,
+    "browserSeconds": 480,
+    "softWorkSeconds": 840,
+    "stepMinutes": 18,
+    "jobMinutes": 20
+  },
+  "proofLimits": [
+    "New custom-dataset owner-SQL cases, fourteen provided-output SQL regressions after the shared snapshot-loader change, one production build and five new Chromium journeys only. Signed HMAC fixtures are not hosted provider, membership/RLS, physical-device or live production acceptance. The separate thirty pure cases and old four browser cases are not invoked; no model call or paid provider."
+  ]
+}

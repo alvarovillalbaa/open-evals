@@ -1,0 +1,362 @@
+{
+  "schemaVersion": "custom-dataset-checks-v1",
+  "status": "passed",
+  "acceptedSource": "4abd751a893818f480ad31921d1591c2ee826462",
+  "expectedParent": "4abd751a893818f480ad31921d1591c2ee826462",
+  "directParentSource": "4abd751a893818f480ad31921d1591c2ee826462",
+  "verificationSource": "024f218228fd08d9566ed876d2a337168e182748",
+  "runId": "42685393224",
+  "attempt": "1",
+  "checkScope": "build_and_five_browser_cases_only",
+  "sqlSuitesInvoked": false,
+  "priorSqlProof": {
+    "source": "301cf02bede4b0dda7cfefb9bcfe9f2e07d3662d",
+    "runId": 42670671269,
+    "newCaseCount": 20,
+    "regressionCaseCount": 14
+  },
+  "customDatasetPostgresCaseCount": null,
+  "customDatasetPostgresCaseIds": [],
+  "providedOutputRegressionCaseCount": null,
+  "providedOutputRegressionCaseIds": [],
+  "pureCoreCasesInvoked": false,
+  "postgresFixturesEmptyBeforeBuild": true,
+  "unprotectedTrackedDelta": {
+    "file": "unprotected-tracked-delta.json",
+    "changeCount": 41,
+    "bytes": 3811,
+    "sha256": "6471f1fcb813b090ff8eb2f6ddae1547d08c7769a844f687afbfcabcd96febc9"
+  },
+  "browserCaseCount": 5,
+  "caseResults": [
+    {
+      "id": "CD-BR01",
+      "title": "CD-BR01 desktop JSONL upload saves complete rows and explicitly scores the exact saved version",
+      "expectedStatus": "passed",
+      "status": "passed",
+      "resultCount": 1,
+      "cleanupAttachments": [
+        {
+          "bytes": 525,
+          "sha256": "d2bc658e6dc4561fa6a49252f6c3c17b845d82e52bbdc49f6893c458aa0177fd",
+          "value": {
+            "schemaVersion": "custom-dataset-browser-cleanup-v1",
+            "status": "removed",
+            "workspaceId": "184b8f1b-82b3-4a9f-b4d0-f2c58a3d1782",
+            "actorCount": 1,
+            "ownershipValidated": true,
+            "before": {
+              "datasets": 1,
+              "versions": 1,
+              "rows": 2,
+              "datasetAudits": 1,
+              "plans": 1,
+              "runs": 1,
+              "samples": 2,
+              "results": 2,
+              "gates": 11,
+              "runAudits": 1,
+              "evalSets": 1,
+              "evalItems": 1
+            },
+            "after": {
+              "datasets": 0,
+              "versions": 0,
+              "rows": 0,
+              "datasetAudits": 0,
+              "plans": 0,
+              "runs": 0,
+              "samples": 0,
+              "results": 0,
+              "gates": 0,
+              "runAudits": 0,
+              "evalSets": 0,
+              "evalItems": 0
+            },
+            "workspaceAbsent": true,
+            "actorsAbsent": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "CD-BR02",
+      "title": "CD-BR02 a lost committed save replays the identical request after a later dataset head",
+      "expectedStatus": "passed",
+      "status": "passed",
+      "resultCount": 1,
+      "cleanupAttachments": [
+        {
+          "bytes": 524,
+          "sha256": "fe852a541ad94a0b64fc630397e24181b0b1df5fade5b5045258b389cfc5abaa",
+          "value": {
+            "schemaVersion": "custom-dataset-browser-cleanup-v1",
+            "status": "removed",
+            "workspaceId": "1367284c-730f-43e1-a7cc-bde8dc15f5df",
+            "actorCount": 1,
+            "ownershipValidated": true,
+            "before": {
+              "datasets": 1,
+              "versions": 2,
+              "rows": 4,
+              "datasetAudits": 2,
+              "plans": 0,
+              "runs": 0,
+              "samples": 0,
+              "results": 0,
+              "gates": 0,
+              "runAudits": 0,
+              "evalSets": 0,
+              "evalItems": 0
+            },
+            "after": {
+              "datasets": 0,
+              "versions": 0,
+              "rows": 0,
+              "datasetAudits": 0,
+              "plans": 0,
+              "runs": 0,
+              "samples": 0,
+              "results": 0,
+              "gates": 0,
+              "runAudits": 0,
+              "evalSets": 0,
+              "evalItems": 0
+            },
+            "workspaceAbsent": true,
+            "actorsAbsent": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "CD-BR03",
+      "title": "CD-BR03 stale-head refusal retains text until a visible head review and fresh append intent",
+      "expectedStatus": "passed",
+      "status": "passed",
+      "resultCount": 1,
+      "cleanupAttachments": [
+        {
+          "bytes": 524,
+          "sha256": "60798fdaa9942845f737df5e263d2cbdfad12efea1734eb617c20ceaa6671748",
+          "value": {
+            "schemaVersion": "custom-dataset-browser-cleanup-v1",
+            "status": "removed",
+            "workspaceId": "9ee28919-2446-4ec6-a71f-93c52ffbfa7d",
+            "actorCount": 1,
+            "ownershipValidated": true,
+            "before": {
+              "datasets": 1,
+              "versions": 3,
+              "rows": 6,
+              "datasetAudits": 3,
+              "plans": 0,
+              "runs": 0,
+              "samples": 0,
+              "results": 0,
+              "gates": 0,
+              "runAudits": 0,
+              "evalSets": 0,
+              "evalItems": 0
+            },
+            "after": {
+              "datasets": 0,
+              "versions": 0,
+              "rows": 0,
+              "datasetAudits": 0,
+              "plans": 0,
+              "runs": 0,
+              "samples": 0,
+              "results": 0,
+              "gates": 0,
+              "runAudits": 0,
+              "evalSets": 0,
+              "evalItems": 0
+            },
+            "workspaceAbsent": true,
+            "actorsAbsent": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "CD-BR04",
+      "title": "CD-BR04 explicit declarations, precision, duplicate keys and invalid files never create partial datasets",
+      "expectedStatus": "passed",
+      "status": "passed",
+      "resultCount": 1,
+      "cleanupAttachments": [
+        {
+          "bytes": 524,
+          "sha256": "343288613cbbe96acb4e27b25071d5230c97f46a48294dc8ad16c2b63cf7bec0",
+          "value": {
+            "schemaVersion": "custom-dataset-browser-cleanup-v1",
+            "status": "removed",
+            "workspaceId": "3fd62f2a-41dd-45de-81dd-6db44d0977fc",
+            "actorCount": 1,
+            "ownershipValidated": true,
+            "before": {
+              "datasets": 0,
+              "versions": 0,
+              "rows": 0,
+              "datasetAudits": 0,
+              "plans": 0,
+              "runs": 0,
+              "samples": 0,
+              "results": 0,
+              "gates": 0,
+              "runAudits": 0,
+              "evalSets": 0,
+              "evalItems": 0
+            },
+            "after": {
+              "datasets": 0,
+              "versions": 0,
+              "rows": 0,
+              "datasetAudits": 0,
+              "plans": 0,
+              "runs": 0,
+              "samples": 0,
+              "results": 0,
+              "gates": 0,
+              "runAudits": 0,
+              "evalSets": 0,
+              "evalItems": 0
+            },
+            "workspaceAbsent": true,
+            "actorsAbsent": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "CD-BR05",
+      "title": "CD-BR05 narrow saved-data flow preserves viewer access and hides private metadata from valid project keys",
+      "expectedStatus": "passed",
+      "status": "passed",
+      "resultCount": 1,
+      "cleanupAttachments": [
+        {
+          "bytes": 524,
+          "sha256": "77fa116a805b9530264de534f1223752366ac47e4f4e365ef350b37edb62f5aa",
+          "value": {
+            "schemaVersion": "custom-dataset-browser-cleanup-v1",
+            "status": "removed",
+            "workspaceId": "46afce1b-ea09-49c9-a53a-f219e118b12b",
+            "actorCount": 2,
+            "ownershipValidated": true,
+            "before": {
+              "datasets": 2,
+              "versions": 2,
+              "rows": 3,
+              "datasetAudits": 1,
+              "plans": 0,
+              "runs": 0,
+              "samples": 0,
+              "results": 0,
+              "gates": 0,
+              "runAudits": 0,
+              "evalSets": 0,
+              "evalItems": 0
+            },
+            "after": {
+              "datasets": 0,
+              "versions": 0,
+              "rows": 0,
+              "datasetAudits": 0,
+              "plans": 0,
+              "runs": 0,
+              "samples": 0,
+              "results": 0,
+              "gates": 0,
+              "runAudits": 0,
+              "evalSets": 0,
+              "evalItems": 0
+            },
+            "workspaceAbsent": true,
+            "actorsAbsent": true
+          }
+        }
+      ]
+    }
+  ],
+  "applicationServers": [
+    {
+      "label": "candidate",
+      "argv": [
+        "node",
+        "/home/runner/work/open-evals/open-evals/apps/web/node_modules/next/dist/bin/next",
+        "start",
+        "--hostname",
+        "127.0.0.1",
+        "--port",
+        "4173"
+      ],
+      "identity": {
+        "pid": 3419,
+        "startTicks": "6028",
+        "uid": 1001,
+        "pgid": 3419,
+        "executable": "/opt/hostedtoolcache/node/24.22.2/x64/bin/node"
+      },
+      "returncode": 143,
+      "stopMode": "graceful",
+      "pidAbsent": true,
+      "processGroupAbsent": true,
+      "portFree": true,
+      "streams": {
+        "stdout": {
+          "file": "candidate.server.stdout.txt",
+          "bytes": 115,
+          "sha256": "ba25b9b7e2b48353b6b1d852f99a9cba43f0cbd543516eaa9cba7cc8e4145b6b",
+          "complete": true
+        },
+        "stderr": {
+          "file": "candidate.server.stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true
+        }
+      }
+    }
+  ],
+  "commandCount": 29,
+  "cleanup": {
+    "status": "removed",
+    "database": "oe_custom_datasets_test_42685393224_1",
+    "validatedBeforeDrop": {
+      "name": "oe_custom_datasets_test_42685393224_1",
+      "owner": "postgres",
+      "marker": "open-evals-custom-datasets-20261109-created-disposable-v1"
+    },
+    "databaseAbsent": true,
+    "clusterStopped": true,
+    "serverLog": {
+      "file": "postgres-server.log",
+      "bytes": 1692,
+      "sha256": "eaef33b450488b22f4d8955d6bec5822f345de25a976e5c43f2f31369de0a123",
+      "complete": true
+    },
+    "removedCluster": {
+      "entries": 1002,
+      "fileBytes": 40228980,
+      "rootIdentity": [
+        66305,
+        9213451,
+        1001
+      ]
+    },
+    "clusterAbsent": true
+  },
+  "errors": [],
+  "limits": {
+    "streamBytes": 4194304,
+    "browserSeconds": 480,
+    "softWorkSeconds": 840,
+    "stepMinutes": 18,
+    "jobMinutes": 20
+  },
+  "proofLimits": [
+    "This follow-up invokes one production build and five pending Chromium journeys against a fresh migrated owned database only. It invokes no SQL suite; priorSqlProof identifies the separate R1 source/run with twenty new and fourteen regression SQL passes. Signed HMAC fixtures are not hosted provider, membership/RLS, physical-device or live production acceptance. The thirty pure cases and old four browser cases are not invoked; no model call or paid provider."
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "source": "cad01a013a4184b7cc1462acc231c282376d676b",
+  "runId": 42672178266,
+  "status": "completed",
+  "conclusion": "failure",
+  "createdAt": "2026-11-09T18:13:47Z",
+  "updatedAt": "2026-11-09T18:14:41Z",
+  "attempt": 1,
+  "jobCount": 0,
+  "buildStarted": false,
+  "browserCasesStarted": 0,
+  "cause": "Internal server error. Correlation ID: 1f76290e-459d-40f8-9ba3-1a9501f315c1",
+  "causeSource": "https://github.com/alvarovillalbaa/open-evals/actions/runs/42672178266",
+  "artifactZipRetrieved": false
+}

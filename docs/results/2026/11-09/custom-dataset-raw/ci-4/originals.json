@@ -1,0 +1,50 @@
+{
+  "source": "d4e960069c431eeaae2a4c6f21364d2549bb42f2",
+  "runId": 42681449452,
+  "jobId": 129376764173,
+  "files": [
+    {
+      "file": "postgres-fixture-absence.json",
+      "bytes": 590,
+      "sha256": "237c0fbd45b1d090740baf6db7918032e29b2d2fd29835d610e76b8a137e1fc0",
+      "complete": true,
+      "transport": "original-base64-chunks"
+    },
+    {
+      "file": "browser-cases.stdout.txt",
+      "bytes": 14648,
+      "sha256": "de56f5ba9a4e889ddbcf416a6bf14cc4ce468d93581e7532e70d48c3ef657555",
+      "complete": true,
+      "transport": "original-base64-chunks"
+    },
+    {
+      "file": "browser-cases.stderr.txt",
+      "bytes": 652,
+      "sha256": "e1048714e79a1656ac70535b1f106921cbe37ff345fb6f8ab2c28eb40a2b73a8",
+      "complete": true,
+      "transport": "original-base64-chunks"
+    },
+    {
+      "file": "browser-report.json",
+      "bytes": 32399,
+      "sha256": "1647912fb30b8ef41a814e089f04ecdb3ddc768a4ed65f2812543eb1e93de9b4",
+      "complete": true,
+      "transport": "original-base64-chunks"
+    },
+    {
+      "file": "unprotected-tracked-delta.json",
+      "bytes": 3811,
+      "sha256": "6471f1fcb813b090ff8eb2f6ddae1547d08c7769a844f687afbfcabcd96febc9",
+      "complete": true,
+      "transport": "original-base64-chunks"
+    },
+    {
+      "file": "cleanup.json",
+      "bytes": 662,
+      "sha256": "94bd994901c55ee54668464e972e0bc50001db70ce117a4172e386ee0c410938",
+      "complete": true,
+      "transport": "original-base64-chunks"
+    }
+  ],
+  "artifactZipRetrieved": false
+}
