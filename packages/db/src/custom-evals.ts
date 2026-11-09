@@ -1,4 +1,5 @@
 import { createHash, randomUUID } from "node:crypto";
+import type { PoolClient } from "pg";
 import { queryRows, withTransaction } from "./service";
 
 export interface CustomEvalScope {
@@ -303,6 +304,38 @@ export async function getCustomEvalSet(workspaceId: string, setId: string): Prom
     const versions = rows.map((row) => validateStoredVersion(workspaceId, row));
     return { id: setId, name: rows[0].setName, versions: versions.slice(0, 20), hasMore: rows.length > 20 };
   });
+}
+
+export interface SavedCustomEvalVersion {
+  contract: CustomEvalSetContract;
+  members: Array<{ evalSetVersionId: string; evalItemVersionId: string; position: number;
+    weight: number; criticality: "critical"; itemFingerprint: string }>;
+}
+
+/** Resolve the selected immutable version, including history outside the display window. */
+export async function getCustomEvalSetVersion(workspaceId: string, versionId: string, client?: PoolClient): Promise<SavedCustomEvalVersion | undefined> {
+  identifier(workspaceId);
+  if (typeof versionId !== "string" || !UUID.test(versionId)) fail(422, "custom_eval_version_id_invalid");
+  const read = async (transaction: PoolClient): Promise<SavedCustomEvalVersion | undefined> => {
+    const locked = await transaction.query(
+      `select v.id from eval_set_versions v join eval_sets s on s.id = v.eval_set_id
+        where s.workspace_id = $1 and v.id = $2 for update of v, s`, [workspaceId, versionId]);
+    if (!locked.rows.length) return undefined;
+    // The version lock prevents new FK members; these locks freeze existing member/item data.
+    await transaction.query(`select m.eval_item_version_id from eval_set_item_versions m
+      join eval_item_versions i on i.id = m.eval_item_version_id join eval_items item on item.id = i.eval_item_id
+      where m.eval_set_version_id = $1 for share of m, i, item`, [versionId]);
+    const row = (await transaction.query<StoredVersion>(
+      `select ${VERSION_COLUMNS} from eval_set_versions v join eval_sets s on s.id = v.eval_set_id
+        where s.workspace_id = $1 and v.id = $2`, [workspaceId, versionId])).rows[0];
+    if (!row) fail(409, "custom_eval_storage_conflict");
+    const version = validateStoredVersion(workspaceId, row);
+    return { contract: version.contract, members: version.contract.itemVersions.map((member, position) => ({
+      evalSetVersionId: version.id, evalItemVersionId: member.item.id, position,
+      weight: member.weight, criticality: "critical", itemFingerprint: member.item.fingerprint
+    })) };
+  };
+  return storeOperation(() => client ? read(client) : withTransaction(read));
 }
 
 function validatePrepared(value: unknown): { draft: CustomEvalSetDraft; requestFingerprint: string; contract: CustomEvalSetContract } {

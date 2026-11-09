@@ -7,7 +7,7 @@ export default async function RunsPage() {
   const state = await loadRunBatches();
   return (
     <div className="grid gap-5">
-      <PageHeader title="Runs" eyebrow="Evals" actions={<SdkAction />} />
+      <PageHeader title="Runs" eyebrow="Evals" actions={<><LinkButton href="/evals/run">Supplied-output runs</LinkButton><SdkAction /></>} />
       <StateGate state={state}>
         {({ data }) => {
           const failed = data.reduce((sum, batch) => sum + batch.failedGateCount, 0);

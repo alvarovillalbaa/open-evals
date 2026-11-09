@@ -404,6 +404,7 @@ export async function listRunBatches(workspaceId: string): Promise<RunBatchSumma
         select count(*)::int as result_count from eval_results results where results.eval_run_id = eval_runs.id
       ) result_counts on true
       where run_plans.workspace_id = $1
+        and run_plans.resolved_plan ->> 'schemaVersion' is distinct from 'provided-output-run-record-v1'
       group by run_plans.id, run_plans.fingerprint
       order by min(eval_runs.created_at) desc nulls last, run_plans.created_at desc
     `,
@@ -462,6 +463,7 @@ export async function getRunBatch(workspaceId: string, batchId: string): Promise
       left join eval_results on eval_results.eval_run_id = eval_runs.id
       left join gate_results on gate_results.eval_run_id = eval_runs.id
       where run_plans.workspace_id = $1 and run_plans.id = $2
+        and run_plans.resolved_plan ->> 'schemaVersion' is distinct from 'provided-output-run-record-v1'
       group by run_plans.id, run_plans.fingerprint, run_plans.resolved_plan, run_plans.created_at
     `,
     [workspaceId, batchId]
@@ -917,18 +919,31 @@ export async function persistBenchmarkImport(workspaceId: string, result: Benchm
 export async function persistEvalRun(workspaceId: string, input: PersistedEvalRunInput) {
   const idempotencyKey = input.idempotencyKey ?? `eval_run:${input.plan.planFingerprint}`;
   return withTransaction(async (client) => {
+    // Serialize with the immutable profile writer before any legacy upsert can touch its rows.
+    await client.query("select id from workspaces where id = $1 for update", [workspaceId]);
+    const runId = `run_${shortHash(`${workspaceId}:${idempotencyKey}`, 20)}`;
+    const privatePlans = await client.query(`select id from run_plans
+      where resolved_plan ->> 'schemaVersion' = 'provided-output-run-record-v1' and
+        (id = $1 or fingerprint = $2 or id in (select run_plan_id from eval_runs
+          where id = $3 or (workspace_id = $4 and idempotency_key = $5)))`,
+      [input.plan.id, input.plan.planFingerprint, runId, workspaceId, idempotencyKey]);
+    if (privatePlans.rows.length || (input.plan as unknown as Record<string, unknown>).schemaVersion === "provided-output-run-record-v1") {
+      throw Object.assign(new Error("provided_output_legacy_collision"), { status: 409 });
+    }
     const planResult = await client.query<{ id: string }>(
       `
         insert into run_plans (id, workspace_id, resolved_plan, fingerprint)
         values ($1, $2, $3::jsonb, $4)
         on conflict (fingerprint) do update
         set resolved_plan = run_plans.resolved_plan
+         where run_plans.resolved_plan ->> 'schemaVersion' is distinct from 'provided-output-run-record-v1'
         returning id
       `,
       [input.plan.id, workspaceId, JSON.stringify(input.plan), input.plan.planFingerprint]
     );
+    // The conflict predicate also closes a cross-workspace insert race after the preflight read.
+    if (!planResult.rows.length) throw Object.assign(new Error("provided_output_legacy_collision"), { status: 409 });
     const runPlanId = planResult.rows[0]!.id;
-    const runId = `run_${shortHash(`${workspaceId}:${idempotencyKey}`, 20)}`;
     const runResult = await client.query<{ id: string }>(
       `
         insert into eval_runs (id, workspace_id, run_plan_id, status, idempotency_key)
