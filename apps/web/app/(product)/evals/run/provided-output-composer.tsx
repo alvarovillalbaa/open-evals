@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState, type FormEvent } from "react";
+import { useEffect, useId, useRef, useState, type FormEvent } from "react";
 import type { ProvidedOutputRunDraft, ProvidedOutputRunPlan, ProvidedOutputRunRecord, ProvidedOutputRunRequest } from "@open-evals/core";
 import type { ProvidedOutputHistoryView, ProvidedOutputInputsView, ProvidedOutputSourcesView } from "@/lib/provided-output-types";
 
@@ -110,6 +110,7 @@ export function ProvidedOutputComposer({ sources, history, canWrite }: {
   history: ProvidedOutputHistoryView;
   canWrite: boolean;
 }) {
+  const outputIdPrefix = useId();
   const [datasetVersionId, setDatasetVersionId] = useState("");
   const [evalSetVersionId, setEvalSetVersionId] = useState("");
   const [inputs, setInputs] = useState<ProvidedOutputInputsView>();
@@ -322,10 +323,10 @@ export function ProvidedOutputComposer({ sources, history, canWrite }: {
         </section>
         {inputs ? <section className="grid min-w-0 gap-4 border border-border bg-panel p-4" aria-labelledby="provided-output-heading">
           <div><h2 id="provided-output-heading" className="font-semibold">2. Supply actual outputs</h2><p className="mt-1 text-sm text-muted-foreground">{inputs.dataset.dataset.name} · {inputs.dataset.rows.length} complete rows. Outputs are associated with stored row IDs. Reference answers are visible for inspection and are never copied into actual outputs.</p><p className="mt-1 text-xs text-muted-foreground">Each output: up to 64 KiB UTF-8; all output text: up to 1 MiB. Empty actual text is valid and can fail the check.</p></div>
-          <ol className="grid min-w-0 gap-4">{inputs.dataset.rows.map(row => <li key={row.id} className="grid min-w-0 gap-3 border border-border p-3">
+          <ol className="grid min-w-0 gap-4">{inputs.dataset.rows.map((row, index) => <li key={row.id} className="grid min-w-0 gap-3 border border-border p-3">
             <div><h3 className="break-words text-sm font-semibold">{row.rowKey}</h3><p className="mt-1 break-all font-mono text-xs text-muted-foreground">Stored row ID: {row.id}</p></div>
             <details><summary className="cursor-pointer text-sm font-medium">Inspect complete saved input and references</summary><div className="mt-2 grid min-w-0 gap-2 text-xs"><p>Input</p><pre tabIndex={0} aria-label={`Saved input for ${row.rowKey}`} className="max-h-64 overflow-auto whitespace-pre-wrap break-words bg-muted p-3">{display(row.input)}</pre><p>Expected output {row.expectedOutput.present ? "(supplied reference)" : "(not supplied)"}</p>{row.expectedOutput.present ? <pre tabIndex={0} className="max-h-64 overflow-auto whitespace-pre-wrap break-words bg-muted p-3">{display(row.expectedOutput.value)}</pre> : null}<pre tabIndex={0} aria-label={`Saved context and metadata for ${row.rowKey}`} className="max-h-64 overflow-auto whitespace-pre-wrap break-words bg-muted p-3">{display({ context: row.context, history: row.history, traceFixture: row.traceFixture, metadata: row.metadata, reviewStatus: row.reviewStatus })}</pre></div></details>
-            <label className="grid min-w-0 gap-1 text-sm font-medium">Actual output for {row.rowKey}<textarea className={`${inputClass} min-h-28 resize-y font-mono`} maxLength={65536} value={Object.hasOwn(outputs, row.id) ? outputs[row.id] ?? "" : ""} readOnly={locked} onChange={event => editOutput(row.id, event.target.value)} /></label>
+            <div className="grid min-w-0 gap-1 text-sm font-medium"><label htmlFor={`${outputIdPrefix}-output-${index}`}>Actual output for {row.rowKey}</label><textarea id={`${outputIdPrefix}-output-${index}`} className={`${inputClass} min-h-28 resize-y font-mono`} maxLength={65536} value={Object.hasOwn(outputs, row.id) ? outputs[row.id] ?? "" : ""} readOnly={locked} onChange={event => editOutput(row.id, event.target.value)} /></div>
           </li>)}</ol>
           <div><button className={buttonClass} type="submit" disabled={locked}>{pending === "preview" ? "Preparing preview…" : "Preview pinned run"}</button></div>
         </section> : null}

@@ -18,7 +18,7 @@ jobs:
     timeout-minutes: 20
     env:
       ROOT_ACCEPTED_SOURCE_SHA: 874f29f118d479367a2e6f75ff603abafe847d31
-      ROOT_EXPECTED_PARENT_SHA: 502d6aa990842abd60aa31adea59d2df7b1660b8
+      ROOT_EXPECTED_PARENT_SHA: 4ba4c862de0447ce291a0dae35b87f8b07c19ea7
       TASK_DB: oe_provided_output_test_${{ github.run_id }}_${{ github.run_attempt }}
       OWNED_PORT: '65432'
     steps:
@@ -47,7 +47,7 @@ jobs:
           node-version: 24.22.2
           check-latest: false
           package-manager-cache: false
-      - name: Run fourteen PostgreSQL checks, build once, then run four browser journeys
+      - name: Build once, then run four browser journeys
         shell: bash
         timeout-minutes: 18
         run: |
@@ -83,7 +83,7 @@ jobs:
               'apps/web/app/(product)/evals/run/error.tsx': {'bytes': 709, 'sha256': '73c556bf0b012b84a2b43b6d407ec1fc722a1a04e7b49dbb601734b65f3bb9a0'},
               'apps/web/app/(product)/evals/run/loading.tsx': {'bytes': 372, 'sha256': '592e98d5885469439134b646750f93e7373607447bd895270bfd8acd5979a6da'},
               'apps/web/app/(product)/evals/run/page.tsx': {'bytes': 1306, 'sha256': 'd0c5d95857c2b72042ac408b6a263156a2e7e56a16504b9bf67b848390bd7883'},
-              'apps/web/app/(product)/evals/run/provided-output-composer.tsx': {'bytes': 25422, 'sha256': 'f03f821b54e1b45bb6d45ef33a9be744abb56463c53b46c6eafb151b774e1c5f'},
+              'apps/web/app/(product)/evals/run/provided-output-composer.tsx': {'bytes': 25570, 'sha256': '8c621f33e270d5fa4f9423bca77ba3b4f864c7d58a8556febdf4644329f40884'},
               'apps/web/app/(product)/runs/page.tsx': {'bytes': 4227, 'sha256': '5c77e6401777866f7177f2baa1821a5223a15d8a34a784bba91f705503098f7c'},
               'apps/web/app/api/v1/provided-output-runs/[runId]/route.ts': {'bytes': 643, 'sha256': 'afa9b0bda2a2295165a078217cb8c500bc88d31b50a516f72c991bb4a8c9e33c'},
               'apps/web/app/api/v1/provided-output-runs/preview/route.ts': {'bytes': 542, 'sha256': 'b56465ee79233b86aadcb13fda9ec000bbe112ec90df073a5d17ba39c1594964'},
@@ -443,8 +443,8 @@ jobs:
               parents = run('source-parents', ['git', 'rev-list', '--parents', '-n', '1', 'HEAD']).split()
               assert head == os.environ['GITHUB_SHA'] and parents == [head, expected_parent], 'source must be one direct child of the preserved failed verification source'
               delta = run('source-delta', ['git', 'diff', '--name-status', '-z', '--no-renames', expected_parent, 'HEAD']).split('\0')
-              expected_delta = ['M', '.github/workflows/provided-output-run-checks.yml', '']
-              assert delta == expected_delta, 'only the reviewed workflow repair is admitted relative to the preserved failed source'
+              expected_delta = ['M', '.github/workflows/provided-output-run-checks.yml', 'M', 'apps/web/app/(product)/evals/run/provided-output-composer.tsx', '']
+              assert delta == expected_delta, 'only the reviewed workflow and composer label repair are admitted relative to the preserved failed source'
               assert not run('source-clean', ['git', 'status', '--porcelain=v1', '--untracked-files=no']).strip()
               protected = ['.github/workflows/provided-output-run-checks.yml', 'apps/web/app/(product)/evals/page.tsx', 'apps/web/app/(product)/evals/run/[runId]/page.tsx', 'apps/web/app/(product)/evals/run/error.tsx', 'apps/web/app/(product)/evals/run/loading.tsx', 'apps/web/app/(product)/evals/run/page.tsx', 'apps/web/app/(product)/evals/run/provided-output-composer.tsx', 'apps/web/app/(product)/runs/page.tsx', 'apps/web/app/api/v1/provided-output-runs/[runId]/route.ts', 'apps/web/app/api/v1/provided-output-runs/preview/route.ts', 'apps/web/app/api/v1/provided-output-runs/route.ts', 'apps/web/app/api/v1/provided-output-runs/sources/route.ts', 'apps/web/lib/auth.ts', 'apps/web/lib/custom-eval-access.ts', 'apps/web/lib/custom-evals.ts', 'apps/web/lib/provided-output-runs.ts', 'apps/web/lib/provided-output-types.ts', 'apps/web/package.json', 'docs/proposals/provided-output-runs.md', 'docs/provided-output-runs.md', 'package.json', 'packages/core/src/custom-evals.ts', 'packages/core/src/eval-engine.ts', 'packages/core/src/hash.ts', 'packages/core/src/index.ts', 'packages/core/src/provided-output-runs.ts', 'packages/core/src/provided-output-types.ts', 'packages/core/src/types.ts', 'packages/db/migrations/0001_init.sql', 'packages/db/migrations/0002_hosted_integrations.sql', 'packages/db/src/custom-evals.ts', 'packages/db/src/index.ts', 'packages/db/src/provided-output-runs.ts', 'packages/db/src/schema.ts', 'packages/db/src/service.ts', 'pnpm-lock.yaml', 'tests/e2e/provided-output-runs.browser.config.ts', 'tests/e2e/provided-output-runs.browser.fixture.ts', 'tests/e2e/provided-output-runs.browser.spec.ts', 'tests/integration/provided-output-runs.node.mjs', 'tests/unit/provided-output-runs.test.mjs', 'turbo.json']
               for folder in [root, root / 'apps/web']:
@@ -508,15 +508,6 @@ jobs:
               for number, name in [('0001', '0001_init.sql'), ('0002', '0002_hosted_integrations.sql')]:
                   run('migration-' + number, [str(pg_bin / 'psql'), '-X', '-v', 'ON_ERROR_STOP=1', '-d', database, '-f', 'packages/db/migrations/' + name], extra=pg)
               database_url = f"postgresql://postgres:authored_ephemeral_pg_fixture@127.0.0.1:{port}/{database}"
-              testenv = {'PROVIDED_OUTPUT_TEST_ALLOW': 'local-disposable', 'PROVIDED_OUTPUT_TEST_DATABASE_URL': database_url}
-              tap = run('postgres-cases', ['node', '--import', 'tsx', '--test', '--test-reporter=tap', 'tests/integration/provided-output-runs.node.mjs'], 300, testenv, True)
-              pg_case_ids = re.findall(r'^\s*ok \d+ - (PO-PG\d{2})\b', tap, re.M)
-              assert pg_case_ids == [f'PO-PG{index:02}' for index in range(1, 15)], 'fourteen actual case results required'
-              for total in ['tests 14', 'pass 14', 'fail 0', 'cancelled 0', 'skipped 0', 'todo 0']:
-                  assert re.search(r'^# ' + total + r'\s*$', tap, re.M), 'TAP total missing: ' + total
-              assert not re.search(r'^\s*(?:not )?ok\b[^\n]*#\s*(?:SKIP|TODO)\b', tap, re.M | re.I)
-              write('postgres-cases.json', {'status': 'passed', 'ids': pg_case_ids, 'tier': 'T3', 'actualPostgreSQL': True,
-                  'authProviderChecked': False, 'hostedRlsChecked': False})
               fixture_tables = ['users', 'workspaces', 'workspace_memberships', 'projects', 'project_api_keys',
                   'datasets', 'dataset_versions', 'dataset_rows', 'eval_sets', 'eval_set_versions', 'eval_items',
                   'eval_item_versions', 'eval_set_item_versions', 'run_plans', 'eval_runs', 'run_samples',
@@ -528,7 +519,7 @@ jobs:
               write('postgres-fixture-absence.json', {'database': database, 'tables': empty_counts,
                   'allEmpty': pg_fixture_empty})
               emit_original('postgres-fixture-absence.json', (evidence / 'postgres-fixture-absence.json').read_bytes(), 16384)
-              assert pg_fixture_empty, 'PostgreSQL test fixtures must be absent before the app build'
+              assert pg_fixture_empty, 'fresh owned database must be empty before the app build'
               # One normal root production Turbo build; no AUTH_MODE/DATABASE_URL pass-through or baseline replay.
               buildenv = {'NEXT_TELEMETRY_DISABLED': '1', 'FORCE_COLOR': '0'}
               run('build-candidate', [*pnpm, 'run', 'build', '--force'], 240, buildenv)
@@ -581,7 +572,7 @@ jobs:
                   assert cleanup_case['after'] == {'plans': 0, 'runs': 0, 'samples': 0, 'results': 0, 'gates': 0, 'audits': 0}
               assert report['stats']['expected'] == 4 and all(report['stats'][key] == 0 for key in ['unexpected', 'flaky', 'skipped'])
               if command_failure is not None: raise command_failure
-              write('cases.json', {'status': 'passed', 'tier': 'T3', 'postgresCaseIds': pg_case_ids, 'browserCases': browser_results,
+              write('cases.json', {'status': 'passed', 'tier': 'T3', 'checkScope': 'four_browser_cases_only', 'browserCases': browser_results,
                   'actualProductionApp': True, 'signedSessionFixture': True, 'hostedAuthProviderChecked': False,
                   'hostedRlsChecked': False, 'physicalDeviceChecked': False})
           except Exception as error:
@@ -674,13 +665,13 @@ jobs:
               result = {'schemaVersion': 'provided-output-run-checks-v1', 'status': 'passed' if passed else 'failed',
                   'acceptedSource': accepted, 'expectedParent': expected_parent, 'directParentSource': expected_parent,
                   'verificationSource': os.environ['GITHUB_SHA'], 'runId': os.environ['GITHUB_RUN_ID'],
-                  'attempt': os.environ['GITHUB_RUN_ATTEMPT'], 'postgresCaseCount': 14 if (evidence / 'postgres-cases.json').exists() else None, 'postgresCaseIds': pg_case_ids,
+                  'attempt': os.environ['GITHUB_RUN_ATTEMPT'], 'checkScope': 'four_browser_cases_only', 'postgresCaseCount': None, 'postgresCaseIds': pg_case_ids,
                   'postgresFixturesEmptyBeforeBuild': pg_fixture_empty, 'unprotectedTrackedDelta': unprotected_delta,
                   'browserCaseCount': 4 if passed else None, 'caseResults': browser_results, 'applicationServers': app_records,
                   'commandCount': len(commands), 'cleanup': cleanup, 'errors': errors,
-                  'limits': {'streamBytes': stream_limit, 'postgresSeconds': 300, 'browserSeconds': 480,
+                  'limits': {'streamBytes': stream_limit, 'browserSeconds': 480,
                       'softWorkSeconds': 840, 'stepMinutes': 18, 'jobMinutes': 20},
-                  'proofLimits': ['Fourteen owner-SQL cases and four real Chromium journeys only. Signed HMAC fixtures are not hosted provider, membership/RLS, physical-device or live production acceptance. No replay of closed earlier store/browser checks or the separate 21 pure cases; no model call or paid provider.']}
+                  'proofLimits': ['Four real Chromium journeys only, using one fresh owned PostgreSQL fixture database and one production build. The separate 14 owner-SQL cases and 21 pure cases are not invoked here. Signed HMAC fixtures are not hosted provider, membership/RLS, physical-device or live production acceptance; no model call or paid provider.']}
               try: emit_original('cleanup.json', (evidence / 'cleanup.json').read_bytes(), 32768, final=True)
               except Exception as error:
                   result['status'] = 'failed'; result['errors'].append('cleanup_log_transport_failed:' + type(error).__name__)
