@@ -97,7 +97,7 @@ export function parsePublicHttpTargetEndpoint(value: unknown): URL {
   } else if (host.length > 253 || !host.includes(".") || host.endsWith(".")
     || !host.split(".").every(label => /^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?$/i.test(label))
     || /(?:^|\.)(?:localhost|local|internal|lan|home|onion|test|invalid|example)$/i.test(host)
-    || host.endsWith(".home.arpa")) return notPublic();
+    || host === "home.arpa" || host.endsWith(".home.arpa")) return notPublic();
   if (Buffer.byteLength(url.href) > 4096) return badInput();
   return url;
 }

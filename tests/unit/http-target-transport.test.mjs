@@ -110,7 +110,7 @@ async function rejects(invoke, request, code, outcome) {
 test("HT-NT01 endpoint validation requires public HTTPS and excludes credential/query/fragment variants [T2]", () => {
   for (const endpoint of ["http://target.example.com/", "file:///tmp/authored", "//target.example.com/", "https://user:pass@target.example.com/",
     "https://target.example.com:8443/", "https://target.example.com/?token=authored", "https://target.example.com/?", "https://target.example.com/#",
-    "https://localhost/", "https://host.local/", "https://host.internal/", "https://host.home.arpa/", "https://target.example.com./",
+    "https://localhost/", "https://host.local/", "https://host.internal/", "https://home.arpa/", "https://host.home.arpa/", "https://target.example.com./",
     " https://target.example.com/", "https://target.example.com/\n", "https://target.example.com/\\x", "https://target.example.com/\ud800"]) {
     assert.throws(() => native.parsePublicHttpTargetEndpoint(endpoint), error => error instanceof native.HttpTargetTransportError && error.outcome === "not_sent");
   }

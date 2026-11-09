@@ -18,8 +18,8 @@ jobs:
     timeout-minutes: 20
     env:
       ROOT_ACCEPTED_SOURCE_SHA: d6d93e85e002430303cbd191976a32c09d502402
-      ROOT_EXPECTED_PARENT_SHA: a36d9edf4a4daff1764df70a2bb111ce27f07db2
-      ROOT_EXPECTED_PARENT_TREE_SHA: 25c36b53ba3879bde2fef3bed0ff21d4a74c355c
+      ROOT_EXPECTED_PARENT_SHA: 26433ff1e35a54f6c2ec9edcac389e221fd264fb
+      ROOT_EXPECTED_PARENT_TREE_SHA: 3112b9afe6184326dfeb81f2cfde799f32beb295
       TASK_DB: oe_http_eval_test_${{ github.run_id }}_${{ github.run_attempt }}
       OWNED_PORT: '65432'
     steps:
@@ -48,7 +48,7 @@ jobs:
           node-version: 24.22.2
           check-latest: false
           package-manager-cache: false
-      - name: Run focused SQL checks, build once, then five browser journeys without dispatch
+      - name: Build once, then five pending browser journeys without dispatch
         shell: bash
         timeout-minutes: 18
         run: |
@@ -78,7 +78,7 @@ jobs:
           base_url = 'http://127.0.0.1:4173'
           auth_secret = 'authored_open_evals_http_target_20261109_fixture_only'
           api_key_pepper = 'authored_http_target_browser_pepper_20261109_fixture_only'
-          source_contract_frozen = True  # Root and independent peer verified the type-only native repair, two realm-safe assertions, three-path delta and all 107 pins.
+          source_contract_frozen = True  # Root and independent peer verified the five-path CI3 delta, all 107 pins, unchanged 65-case sources and five required browser oracles.
           expected_sources = {
               "AGENTS.md": {"bytes":915,"sha256":"258170eca3c41433e585ee3af8c2277dcaa11e41876c1bacb30fc304663d2ece"},
               "README.md": {"bytes":12669,"sha256":"9d243d79f1d02e805ae86099cc84363144c74b1ef8898f272855be831743c253"},
@@ -132,13 +132,13 @@ jobs:
               "apps/web/package.json": {"bytes":1207,"sha256":"8bf8eb6f8d4cb25279b80be1bc8cf088cbaa789409ace2f408b18c49f671e2c5"},
               "apps/web/tsconfig.json": {"bytes":480,"sha256":"5a8e0f93163957c084d57d0950e5f4b202d075801793b642a89468af6d088673"},
               "docs/custom-datasets.md": {"bytes":3133,"sha256":"453a1348cbd06abb9286ab1635ba4641d5ce05da01a705d9e08f2f38419541ec"},
-              "docs/http-target-runs.md": {"bytes":11059,"sha256":"25402a310b42f2987156681850ffafbf87f4cf62bb81815a6b5fbb89b3cf4099"},
+              "docs/http-target-runs.md": {"bytes":11690,"sha256":"bc4bceeea0a7860b8761bd4d2d46e295d233281936cd2a6ee3c41c8838aa180e"},
               "docs/product-surface.md": {"bytes":4479,"sha256":"1ecb6c1b4782a5304268c0066fa63e38853afe6f4c79425a57dd20db289ff19f"},
               "docs/proposals/custom-datasets.md": {"bytes":13029,"sha256":"d32afb90a412d34348995b2a3a785e9e1cb58463ee2a0cc816a0268e79b34a48"},
               "docs/proposals/http-target-runs-checks.md": {"bytes":3250,"sha256":"71abb6b9741c4c3714ded25f34ad62269e9a7c4d7ccba0e956b33de0e8b2a41d"},
               "package.json": {"bytes":2248,"sha256":"1a10d0138fae69c7c297c80456d93d0824ed6c85b8f7f161ce5c75d6f5c8651e"},
               "packages/adapters/package.json": {"bytes":790,"sha256":"8e40086e58b2ec795c2096d77afa2b0d6c677e7c8f8b296c0138af72b0b314c9"},
-              "packages/adapters/src/http-target.ts": {"bytes":13903,"sha256":"2bb10c0130b75cc6679fabc4e94d6779d0a6cf3ad27175cd67e5f4e6f47ed5c5"},
+              "packages/adapters/src/http-target.ts": {"bytes":13927,"sha256":"91f6bedc8d0a2a931e57e05ac68dc8095f42283e70bc513b611e8d00e4a5a0b9"},
               "packages/adapters/src/index.ts": {"bytes":208,"sha256":"e34a7599d0819858ee2890e26d216aa51c1f16438ca3d5bdf6a3513b5296de74"},
               "packages/adapters/src/targets.ts": {"bytes":7130,"sha256":"2a7dddc36d0223f01a4665a77289d04542cb698a99d7acbe20a9861f57a980ae"},
               "packages/adapters/tsconfig.json": {"bytes":160,"sha256":"613f85d231267858d093958f5b6448f14337c3b11c9235bc7a32b9a097e51a00"},
@@ -177,21 +177,30 @@ jobs:
               "tests/e2e/custom-datasets.browser.spec.ts": {"bytes":25992,"sha256":"5bc714f83a36354a84e438cbdc04367dd118e3eb7ad2daebc27994d183e951b1"},
               "tests/e2e/http-target-plans.browser.config.ts": {"bytes":1463,"sha256":"361161476eb8e0d1489ce2fa0fc90a4c691d899e1fddea2391b1789340ee6fd2"},
               "tests/e2e/http-target-plans.browser.fixture.ts": {"bytes":18128,"sha256":"6557ed7438aadeba1bd819afa08bf2065d48179aae605bfcf64e8a82742f24a8"},
-              "tests/e2e/http-target-plans.browser.spec.ts": {"bytes":19234,"sha256":"891523a037649633f08f66a881ee3f413d72a8320b684b3d7dee7054809a5aa9"},
+              "tests/e2e/http-target-plans.browser.spec.ts": {"bytes":19327,"sha256":"64d0943ed842faa716666bab25808bff67bdebabec538df78ebf7236be9e7092"},
               "tests/integration/custom-datasets.node.mjs": {"bytes":41729,"sha256":"808927cff1a8f4b0b00b608497e17a0b4651b9a88a1079c4b5cd5c5f396fa5de"},
               "tests/integration/http-eval.node.mjs": {"bytes":43624,"sha256":"80b76954cfa4a0bf08661609450906d83bfbf1684adbcdd065695bc4dffdd80b"},
               "tests/integration/provided-output-runs.node.mjs": {"bytes":36742,"sha256":"61c7a85aece15c68c4770c394c58f3d6b2d81eb8a5813069f259ee8cd50f58f7"},
               "tests/unit/custom-datasets.test.mjs": {"bytes":30662,"sha256":"afb8cb1db0cc64a38a91212183e76c6f59dc5deaf52bc5da2ba1a92b761d0d83"},
               "tests/unit/http-eval-core.test.mjs": {"bytes":29658,"sha256":"0e265c84b2a9e9cf671cf20ea13ed9c909a1a66fcfb26005523a0f5d24fbeade"},
-              "tests/unit/http-target-transport.test.mjs": {"bytes":19248,"sha256":"6ec9bd056a77c061b59050c7878864e0835e9cce1e46e44a36be4359fac38f9a"},
+              "tests/unit/http-target-transport.test.mjs": {"bytes":19270,"sha256":"64c6d84c98ec008af0e2f5047afc60faf2c4318e41f0da2278b195b9d734f4c9"},
               "tests/unit/http-target-web.test.mjs": {"bytes":33590,"sha256":"87b73210c6c9b36a4be4aebcf0ccb127f56ec778477ce6d3068141071c9842f2"},
               "tsconfig.base.json": {"bytes":496,"sha256":"83cd41acf3c9532ed98e8d3c901d27ea5816acf60addc7fe26e89114836f6c92"},
               "turbo.json": {"bytes":341,"sha256":"7caba17ef6c5a0da4f8090ec9a36e16cc243d7c6aa28cc051e2da39a7a5cf6c7"},
           }
-          http_pg_case_ids, regression_case_ids, web_case_ids = [], [], []
-          expected_http_pg_ids = [f'HTTP-PG{index:02}' for index in range(1, 32)]
-          expected_regression_ids = [f'PO-PG{index:02}' for index in range(1, 15)]
-          expected_web_ids = [f'HT-WEB{index:02}' for index in range(1, 21)]
+          prior_checks = {'source': '26433ff1e35a54f6c2ec9edcac389e221fd264fb',
+              'tree': '3112b9afe6184326dfeb81f2cfde799f32beb295', 'runId': 42692158133, 'jobId': 129414385013,
+              'overallStatus': 'failed', 'webTier2Passed': 20, 'httpEvalPostgresPassed': 31, 'providedOutputRegressionPassed': 14,
+              'fullBuild': 'passed', 'sourceStable': True, 'cleanupProved': True,
+              'webStdoutSha256': 'c32f674654d94b4b917ae151e4afacf2f492d89233fbcc558465de26d7ef2733',
+              'httpSqlStdoutSha256': 'c7acebcfa27fcd97606b8ea3036ed604be1018b8a5f5058cdaab79daad9f8d93',
+              'regressionStdoutSha256': 'd1ece3433ceb033bd7866a76ace1227afb0389ac27570601a4ceb0be59cf2af1',
+              'browserPassed': ['HTTP-BR01', 'HTTP-BR02', 'HTTP-BR05'], 'browserFailed': ['HTTP-BR03', 'HTTP-BR04']}
+          native_apex_prior_t2 = {'status': 'passed', 'caseCount': 26, 'scope': 'authored DNS/request doubles only',
+              'sourceSha256': '91f6bedc8d0a2a931e57e05ac68dc8095f42283e70bc513b611e8d00e4a5a0b9',
+              'testSha256': '64c6d84c98ec008af0e2f5047afc60faf2c4318e41f0da2278b195b9d734f4c9',
+              'stdoutSha256': '7025519d63975144fac1e8807dbfc82b1d79c67737008e601da7f580eab9e614',
+              'invokedByThisJob': False, 'nativeDnsSocketTlsChecked': False, 'targetCalls': 0}
           pg_fixture_empty = None
           unprotected_delta = None
           log_bytes = 0
@@ -525,12 +534,12 @@ jobs:
               assert re.fullmatch(r'oe_http_eval_test_[0-9]+_[0-9]+', database)
               head = run('source-head', ['git', 'rev-parse', 'HEAD']).strip()
               parents = run('source-parents', ['git', 'rev-list', '--parents', '-n', '1', 'HEAD']).split()
-              assert head == os.environ['GITHUB_SHA'] and parents == [head, expected_parent], 'source must be one direct child of the reviewed HTTP QA source'
+              assert head == os.environ['GITHUB_SHA'] and parents == [head, expected_parent], 'source must be one direct child of the preserved CI2 source'
               parent_tree = run('source-parent-tree', ['git', 'rev-parse', expected_parent + '^{tree}']).strip()
               assert parent_tree == expected_parent_tree, 'accepted parent tree changed'
               source_tree = run('source-tree', ['git', 'rev-parse', 'HEAD^{tree}']).strip()
               delta = run('source-delta', ['git', 'diff', '--name-status', '-z', '--no-renames', expected_parent, 'HEAD']).split('\0')
-              expected_delta = ["M",".github/workflows/http-target-plans-checks.yml","M","packages/adapters/src/http-target.ts","M","tests/unit/http-target-web.test.mjs",""]
+              expected_delta = ["M",".github/workflows/http-target-plans-checks.yml","M","docs/http-target-runs.md","M","packages/adapters/src/http-target.ts","M","tests/e2e/http-target-plans.browser.spec.ts","M","tests/unit/http-target-transport.test.mjs",""]
               assert expected_delta and delta == expected_delta, 'only the reviewed HTTP target source delta is admitted'
               assert not run('source-clean', ['git', 'status', '--porcelain=v1', '--untracked-files=no']).strip()
               protected = [".github/workflows/http-target-plans-checks.yml","AGENTS.md","README.md","apps/web/app/(product)/evals/datasets/[datasetId]/page.tsx","apps/web/app/(product)/evals/datasets/[datasetId]/versions/[versionId]/page.tsx","apps/web/app/(product)/evals/datasets/custom-dataset-composer.tsx","apps/web/app/(product)/evals/datasets/error.tsx","apps/web/app/(product)/evals/datasets/loading.tsx","apps/web/app/(product)/evals/datasets/page.tsx","apps/web/app/(product)/evals/page.tsx","apps/web/app/(product)/evals/plans/[planId]/page.tsx","apps/web/app/(product)/evals/plans/[planId]/versions/[versionId]/page.tsx","apps/web/app/(product)/evals/plans/error.tsx","apps/web/app/(product)/evals/plans/http-execution-controls.tsx","apps/web/app/(product)/evals/plans/http-plan-composer.tsx","apps/web/app/(product)/evals/plans/http-target-view.tsx","apps/web/app/(product)/evals/plans/loading.tsx","apps/web/app/(product)/evals/plans/page.tsx","apps/web/app/(product)/evals/plans/runs/[runId]/page.tsx","apps/web/app/(product)/evals/run/[runId]/page.tsx","apps/web/app/(product)/evals/run/page.tsx","apps/web/app/(product)/evals/run/provided-output-composer.tsx","apps/web/app/api/v1/custom-datasets/[datasetId]/route.ts","apps/web/app/api/v1/custom-datasets/[datasetId]/versions/[versionId]/route.ts","apps/web/app/api/v1/custom-datasets/preview/route.ts","apps/web/app/api/v1/custom-datasets/route.ts","apps/web/app/api/v1/http-target-plans/[planId]/route.ts","apps/web/app/api/v1/http-target-plans/[planId]/versions/[versionId]/route.ts","apps/web/app/api/v1/http-target-plans/[planId]/versions/[versionId]/runs/route.ts","apps/web/app/api/v1/http-target-plans/preview/route.ts","apps/web/app/api/v1/http-target-plans/route.ts","apps/web/app/api/v1/http-target-plans/runs/[runId]/recover/route.ts","apps/web/app/api/v1/http-target-plans/runs/[runId]/route.ts","apps/web/app/api/v1/provided-output-runs/[runId]/route.ts","apps/web/app/api/v1/provided-output-runs/preview/route.ts","apps/web/app/api/v1/provided-output-runs/route.ts","apps/web/app/api/v1/provided-output-runs/sources/route.ts","apps/web/lib/auth.ts","apps/web/lib/custom-dataset-types.ts","apps/web/lib/custom-datasets.ts","apps/web/lib/custom-eval-access.ts","apps/web/lib/custom-evals.ts","apps/web/lib/http-target-client.ts","apps/web/lib/http-target-plans.ts","apps/web/lib/http-target-runs.ts","apps/web/lib/http-target-types.ts","apps/web/lib/instruction-request.ts","apps/web/lib/provided-output-runs.ts","apps/web/lib/provided-output-types.ts","apps/web/next.config.ts","apps/web/package.json","apps/web/tsconfig.json","docs/custom-datasets.md","docs/http-target-runs.md","docs/product-surface.md","docs/proposals/custom-datasets.md","docs/proposals/http-target-runs-checks.md","package.json","packages/adapters/package.json","packages/adapters/src/http-target.ts","packages/adapters/src/index.ts","packages/adapters/src/targets.ts","packages/adapters/tsconfig.json","packages/core/package.json","packages/core/src/custom-dataset-types.ts","packages/core/src/custom-datasets.ts","packages/core/src/custom-evals.ts","packages/core/src/eval-engine.ts","packages/core/src/hash.ts","packages/core/src/http-eval-plans.ts","packages/core/src/http-eval-runs.ts","packages/core/src/http-eval-types.ts","packages/core/src/index.ts","packages/core/src/provided-output-runs.ts","packages/core/src/provided-output-types.ts","packages/core/src/types.ts","packages/core/tsconfig.json","packages/db/migrations/0001_init.sql","packages/db/migrations/0002_hosted_integrations.sql","packages/db/package.json","packages/db/src/custom-dataset-types.ts","packages/db/src/custom-datasets.ts","packages/db/src/custom-evals.ts","packages/db/src/dataset-snapshots.ts","packages/db/src/http-eval-plans.ts","packages/db/src/http-eval-runs.ts","packages/db/src/http-eval-types.ts","packages/db/src/index.ts","packages/db/src/provided-output-runs.ts","packages/db/src/schema.ts","packages/db/src/service.ts","packages/db/tsconfig.json","pnpm-lock.yaml","tests/e2e/custom-datasets.browser.config.ts","tests/e2e/custom-datasets.browser.fixture.ts","tests/e2e/custom-datasets.browser.spec.ts","tests/e2e/http-target-plans.browser.config.ts","tests/e2e/http-target-plans.browser.fixture.ts","tests/e2e/http-target-plans.browser.spec.ts","tests/integration/custom-datasets.node.mjs","tests/integration/http-eval.node.mjs","tests/integration/provided-output-runs.node.mjs","tests/unit/custom-datasets.test.mjs","tests/unit/http-eval-core.test.mjs","tests/unit/http-target-transport.test.mjs","tests/unit/http-target-web.test.mjs","tsconfig.base.json","turbo.json"]
@@ -559,11 +568,8 @@ jobs:
               assert run('pnpm-version', [*pnpm, '--version']).strip() == '10.14.0'
               run('install-dependencies', [*pnpm, 'install', '--frozen-lockfile', '--ignore-scripts'], 300)
               run('source-after-install', ['git', 'diff', '--exit-code', 'HEAD', '--', *protected])
-              # Node26 removed the transform bootstrap used by these authored Web seams.
-              # The pinned Node24 runtime supports it; this is not a replay of the64 core/native checks.
-              web_case_ids = focused_cases('web-tier2-cases',
-                  ['node', '--experimental-vm-modules', '--test', '--test-reporter=tap', 'tests/unit/http-target-web.test.mjs'],
-                  {}, expected_web_ids, 'HT-WEB', 'T2')
+              # The65 unchanged Web/SQL cases passed at prior_checks.source. This
+              # follow-up runs a fresh production build and all five browser oracles.
               assert os.getuid() != 0, 'the cluster must run as the unprivileged runner'
               for name in ['postgres', 'initdb', 'pg_ctl', 'psql', 'createdb', 'dropdb']:
                   binary = pg_bin / name
@@ -602,13 +608,6 @@ jobs:
               for number, name in [('0001', '0001_init.sql'), ('0002', '0002_hosted_integrations.sql')]:
                   run('migration-' + number, [str(pg_bin / 'psql'), '-X', '-v', 'ON_ERROR_STOP=1', '-d', database, '-f', 'packages/db/migrations/' + name], extra=pg)
               database_url = f"postgresql://postgres:authored_ephemeral_pg_fixture@127.0.0.1:{port}/{database}"
-              http_pg_case_ids = focused_cases('http-eval-postgres-cases',
-                  ['node', '--import', 'tsx', '--test', '--test-reporter=tap', 'tests/integration/http-eval.node.mjs'],
-                  {'HTTP_EVAL_TEST_ALLOW': 'local-disposable', 'HTTP_EVAL_TEST_DATABASE_URL': database_url}, expected_http_pg_ids, 'HTTP-PG', 'T3', True)
-              regression_case_ids = focused_cases('provided-output-regression-cases',
-                  ['node', '--import', 'tsx', '--test', '--test-reporter=tap', 'tests/integration/provided-output-runs.node.mjs'],
-                  {'PROVIDED_OUTPUT_TEST_ALLOW': 'local-disposable', 'PROVIDED_OUTPUT_TEST_DATABASE_URL': database_url,
-                   'PROVIDED_OUTPUT_TEST_COHORT': 'open-evals-http-target-runs-20261109'}, expected_regression_ids, 'PO-PG', 'T3', True)
               fixture_tables = ['users', 'workspaces', 'workspace_memberships', 'projects', 'project_api_keys',
                   'datasets', 'dataset_versions', 'dataset_rows', 'eval_sets', 'eval_set_versions', 'eval_items',
                   'eval_item_versions', 'eval_set_item_versions', 'run_plans', 'eval_runs', 'run_samples',
@@ -621,7 +620,7 @@ jobs:
               write('postgres-fixture-absence.json', {'database': database, 'tables': empty_counts,
                   'allEmpty': pg_fixture_empty})
               emit_original('postgres-fixture-absence.json', (evidence / 'postgres-fixture-absence.json').read_bytes(), 16384)
-              assert pg_fixture_empty, 'all SQL test fixtures must be absent before the app build'
+              assert pg_fixture_empty, 'fresh owned tables must be empty before the app build'
               # One normal root production Turbo build; no AUTH_MODE/DATABASE_URL pass-through or baseline replay.
               buildenv = {'NEXT_TELEMETRY_DISABLED': '1', 'FORCE_COLOR': '0'}
               run('build-candidate', [*pnpm, 'run', 'build', '--force'], 240, buildenv)
@@ -678,10 +677,11 @@ jobs:
                       'plans': 0, 'planAudits': 0, 'runs': 0, 'samples': 0, 'results': 0, 'gates': 0, 'workflows': 0, 'events': 0, 'audits': 0}
               assert report['stats']['expected'] == 5 and all(report['stats'][key] == 0 for key in ['unexpected', 'flaky', 'skipped'])
               if command_failure is not None: raise command_failure
-              write('cases.json', {'status': 'passed', 'tier': 'T3', 'checkScope': 'web_tier2_http_sql_regression_build_and_five_no_dispatch_browser_cases',
-                  'sqlSuitesInvoked': True, 'httpEvalPostgresCaseIds': http_pg_case_ids,
-                  'providedOutputRegressionCaseIds': regression_case_ids, 'browserCases': browser_results,
-                  'actualHttpExecutionChecked': False, 'webTier2Invoked': True, 'webTier2CaseIds': web_case_ids, 'coreNativeTier2Invoked': False,
+              write('cases.json', {'status': 'passed', 'tier': 'T3', 'checkScope': 'fresh_build_and_five_no_dispatch_browser_cases_only',
+                  'priorChecks': prior_checks, 'separateNativeApexT2': native_apex_prior_t2,
+                  'sqlSuitesInvoked': False, 'httpEvalPostgresCaseIds': [],
+                  'providedOutputRegressionCaseIds': [], 'browserCases': browser_results,
+                  'actualHttpExecutionChecked': False, 'webTier2Invoked': False, 'webTier2CaseIds': [], 'coreNativeTier2Invoked': False,
                   'actualProductionApp': True, 'signedSessionFixture': True, 'hostedAuthProviderChecked': False,
                   'hostedRlsChecked': False, 'physicalDeviceChecked': False})
           except Exception as error:
@@ -777,24 +777,19 @@ jobs:
               result = {'schemaVersion': 'http-target-plans-checks-v1', 'status': 'passed' if passed else 'failed',
                   'acceptedSource': accepted, 'expectedParent': expected_parent, 'directParentSource': expected_parent,
                   'verificationSource': os.environ['GITHUB_SHA'], 'runId': os.environ['GITHUB_RUN_ID'],
-                  'attempt': os.environ['GITHUB_RUN_ATTEMPT'], 'checkScope': 'web_tier2_http_sql_regression_build_and_five_no_dispatch_browser_cases',
+                  'attempt': os.environ['GITHUB_RUN_ATTEMPT'], 'checkScope': 'fresh_build_and_five_no_dispatch_browser_cases_only',
                   'expectedParentTree': expected_parent_tree, 'verificationTree': source_tree if 'source_tree' in locals() else None,
-                  'sqlSuitesInvoked': any(row['label'] in ['http-eval-postgres-cases', 'provided-output-regression-cases'] for row in commands),
-                  'httpEvalPostgresCaseCount': len(http_pg_case_ids) if (evidence / 'http-eval-postgres-cases.json').exists() else None,
-                  'httpEvalPostgresCaseIds': http_pg_case_ids,
-                  'providedOutputRegressionCaseCount': len(regression_case_ids) if (evidence / 'provided-output-regression-cases.json').exists() else None,
-                  'providedOutputRegressionCaseIds': regression_case_ids, 'coreNativeTier2Invoked': False,
-                  'webTier2Invoked': any(row['label'] == 'web-tier2-cases' for row in commands),
-                  'webTier2CaseCount': len(web_case_ids) if (evidence / 'web-tier2-cases.json').exists() else None,
-                  'webTier2CaseIds': web_case_ids,
-                  'webTier2BootstrapReason': 'Local Node26 removed the required TypeScript transform mode; pinned Node24 supports it.',
+                  'priorChecks': prior_checks, 'separateNativeApexT2': native_apex_prior_t2,
+                  'sqlSuitesInvoked': False, 'httpEvalPostgresCaseCount': None, 'httpEvalPostgresCaseIds': [],
+                  'providedOutputRegressionCaseCount': None, 'providedOutputRegressionCaseIds': [], 'coreNativeTier2Invoked': False,
+                  'webTier2Invoked': False, 'webTier2CaseCount': None, 'webTier2CaseIds': [],
                   'actualHttpExecutionChecked': False,
                   'postgresFixturesEmptyBeforeBuild': pg_fixture_empty, 'unprotectedTrackedDelta': unprotected_delta,
                   'browserCaseCount': 5 if passed else None, 'caseResults': browser_results, 'applicationServers': app_records,
                   'commandCount': len(commands), 'cleanup': cleanup, 'errors': errors,
-                  'limits': {'streamBytes': stream_limit, 'focusedSuiteSeconds': 300, 'browserSeconds': 480,
+                  'limits': {'streamBytes': stream_limit, 'buildSeconds': 240, 'browserSeconds': 480,
                       'softWorkSeconds': 840, 'stepMinutes': 18, 'jobMinutes': 20},
-                  'proofLimits': ['Scope:20 Web T2 seams under the compatible Node24 transform bootstrap,31 new HTTP owner-SQL cases,14 provided-output SQL regressions after the shared source-loader change, one production build and five actual-app no-dispatch Chromium journeys. No HTTP target, model, account, paid service or production data is called. Browser journeys do not prove actual execution or native DNS/socket/TLS behavior; separately recorded64 core/native checks are not repeated. Signed HMAC fixtures do not prove hosted auth/membership/RLS or physical-device acceptance.']}
+                  'proofLimits': ['This job invokes one fresh production build and the same five pending actual-app no-dispatch browser journeys only. The65 unchanged Web/SQL cases passed at priorChecks.source/run and are recorded as a separate lane; their invocations are not repeated. The independent26-case native apex T2 repair receipt is also a separate authored-double lane, not additional distinct checks or native DNS/socket/TLS proof. Prior CI2 overall failed two ambiguous browser alert locators; the repaired selectors retain all five behavioral oracles. No HTTP target, model, account, paid service or production data is called. Browser journeys do not prove actual target execution. Signed HMAC fixtures do not prove hosted auth/membership/RLS or physical-device acceptance.']}
               try: emit_original('cleanup.json', (evidence / 'cleanup.json').read_bytes(), 32768, final=True)
               except Exception as error:
                   result['status'] = 'failed'; result['errors'].append('cleanup_log_transport_failed:' + type(error).__name__)

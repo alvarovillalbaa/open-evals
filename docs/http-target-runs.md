@@ -2,8 +2,9 @@
 
 Last updated: 2026-11-09
 
-Implementation contract; pure and authored transport-seam checks passed on
-2026-11-09. Database, compiler, browser and native network acceptance remain pending.
+Implementation contract. Pure, transport-double, Web seam, SQL and build checks
+have passed at their recorded sources. Browser and native network acceptance
+remain pending.
 
 ## User flow and ownership
 
@@ -156,22 +157,29 @@ Authored pure checks cover parsing, fingerprints, coverage, gate aggregation,
 protocol validation and state transitions. Disposable PostgreSQL checks cover
 CAS/replay, reservation/claim races, atomic outcomes, unknown recovery, corruption
 and legacy isolation. Transport checks distinguish authored dependency seams
-from native DNS/socket/TLS assurance. Browser checks cover desktop/narrow plan
-authoring, explicit execution, output display, retries and recovery; simulated
-transport evidence is never relabelled as a live provider test.
+from native DNS/socket/TLS assurance. The five actual-app browser journeys cover
+desktop/narrow authoring, history, save recovery and access without target calls.
+Execution, output scoring and interrupted-run recovery currently have Web seam
+and owner-SQL coverage. Simulated transport evidence is never relabelled as a
+live provider or native execution test.
 
 No new migration, dependency, account, model call, paid plan or production
 configuration is proposed. The existing migrations already contain the storage
-tables. The dated local source-check receipt records38 pure cases and26 authored
-DNS/request-double transport cases passed, with all14 pinned sources unchanged.
+tables. The dated local source-check receipt records 38 pure cases and 26 authored
+DNS/request-double transport cases passed, with all 14 pinned sources unchanged.
 Those checks use the existing Node installation and do not prove native
 DNS/socket/TLS behavior, TypeScript compilation or an integrated application.
 The Web packet's first two local attempts failed during module loading: strip
-mode cannot lower parameter properties, and Node26 removed transform mode.
-The failed receipts remain preserved. The fixed packet requires the pinned
-Node24.22.2 CI runtime, whose exact official module documentation retains that
-capability; no Web acceptance pass is claimed yet. Database and browser packets
-remain unrun.
+mode cannot lower parameter properties, and Node 26 removed transform mode.
+The first CI run reached 18/20 Web passes before two cross-realm array comparisons
+failed. Normalizing only those JSON arrays preserved all value/order assertions.
+[Run 42692158133](https://github.com/alvarovillalbaa/open-evals/actions/runs/42692158133)
+at source26433ff then passed all 20 Web seams, 31 PostgreSQL cases, 14 regressions
+and a full production build. Its browser result remained 3/5 because two alert
+locators also matched the framework announcer; that failed run is preserved.
+The browser follow-up keeps every assertion and narrows only those locators.
+A separate native hostname regression failed before the apex repair, then all
+26 transport-double cases passed afterward; this repeats the existing scope.
 The predecessor dataset release independently passed its full CI build and all
 five browser journeys before integration; this HTTP increment was absent from
 those checks.
