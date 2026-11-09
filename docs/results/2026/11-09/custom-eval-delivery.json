@@ -114,7 +114,8 @@
         "bytes": 117490,
         "sha256": "4e6f72022fed97f460d8282a23409508b24d923c1f0ab7d2770fba907dbba7b2",
         "acceptedSourceUnchanged": true
-      }
+      },
+      "aliasMatchedObservedAt": "2026-11-09T09:37:07Z"
     }
   ],
   "typingRepair": {
@@ -153,7 +154,7 @@
     "runtimeAcceptedAfterReadyAndAliasMatch": true,
     "force": false,
     "mainRuntimeReadbackMatched": true,
-    "receiptCleanupCommit": "see containing commit",
+    "receiptCleanupCommit": "831c9f91c464b76ac3c3edfe2b5aba34eda25145",
     "temporaryWorkflowPresentInContainingTree": false,
     "rejectedAndExecutedCiHistoriesRetained": true,
     "branchDeletionAsserted": false,
@@ -176,5 +177,16 @@
     "ZIP download/extraction/local digest verification and remaining raw stream readback",
     "input/evaluator composition, Harbor, actual campaigns and approved production rollouts",
     "OpenEvals or full portfolio completion"
-  ]
+  ],
+  "laterMetadataOnlyDeploymentObservation": {
+    "observedAt": "2026-11-09T10:30:06Z",
+    "sourceCommit": "831c9f91c464b76ac3c3edfe2b5aba34eda25145",
+    "deploymentId": "dpl_EtCcShKKcPH2rLyFvjk6FhHXC3cK",
+    "readyState": "READY",
+    "canonicalAlias": "https://open-evals-web.vercel.app",
+    "aliasIndependentlyMatched": true,
+    "projectId": "prj_FG3VAWXbwS6VRHq4Wd2B4vyIms4l",
+    "applicationAndExecutableTestInputsEqualToRuntimeC3": true,
+    "currentFutureAliasNotAsserted": true
+  }
 }

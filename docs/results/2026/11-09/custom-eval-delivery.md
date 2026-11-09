@@ -1,11 +1,19 @@
 # Custom Eval Set delivery
 
 [Runtime source a8adcaa4](https://github.com/alvarovillalbaa/open-evals/tree/a8adcaa48e150cc94e68c189ab9d073435c503ac)
-is accepted on main and built in the existing
+was accepted into main and built in the existing
 [OpenEvals project](https://open-evals-web.vercel.app). Provider
-`dpl_8Ugcbd3zUiQkaeBdLHNji7hf5Tqw` is production READY; an independent canonical
-alias lookup matches its exact source and project. This is build/alias proof,
+`dpl_8Ugcbd3zUiQkaeBdLHNji7hf5Tqw` was observed production READY at acceptance;
+the independent canonical alias lookup at09:37UTC matched its exact source and
+project. This is build/alias proof,
 separate from anonymous HTTP/assets, browser and hosted Auth acceptance.
+
+At10:30UTC, after metadata/cleanup source
+`831c9f91c464b76ac3c3edfe2b5aba34eda25145` was published, its automatic production
+deployment `dpl_EtCcShKKcPH2rLyFvjk6FhHXC3cK` was independently observed READY
+at the canonical alias. Application and executable test inputs remain equal to
+accepted runtimea8adcaa4. These are dated snapshots; later metadata publication
+can receive another automatic build, without replaying the recorded checks.
 
 The [editor/API/store](../../../custom-evals.md) save a critical text-contains
 evaluator and explicit immutable one-item membership. They preserve version
