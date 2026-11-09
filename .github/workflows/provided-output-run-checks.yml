@@ -18,6 +18,7 @@ jobs:
     timeout-minutes: 20
     env:
       ROOT_ACCEPTED_SOURCE_SHA: 874f29f118d479367a2e6f75ff603abafe847d31
+      ROOT_EXPECTED_PARENT_SHA: 502d6aa990842abd60aa31adea59d2df7b1660b8
       TASK_DB: oe_provided_output_test_${{ github.run_id }}_${{ github.run_attempt }}
       OWNED_PORT: '65432'
     steps:
@@ -60,6 +61,7 @@ jobs:
           evidence = pathlib.Path(os.environ['EVIDENCE'])
           tools = pathlib.Path(os.environ['TOOL_ROOT'])
           accepted = os.environ['ROOT_ACCEPTED_SOURCE_SHA']
+          expected_parent = os.environ['ROOT_EXPECTED_PARENT_SHA']
           database = os.environ['TASK_DB']
           port = int(os.environ['OWNED_PORT'])
           pg_bin = pathlib.Path('/usr/lib/postgresql/16/bin')
@@ -120,6 +122,7 @@ jobs:
           }
           pg_case_ids = []
           pg_fixture_empty = None
+          unprotected_delta = None
           log_bytes = 0
           work_deadline = time.monotonic() + 14 * 60
           cleanup_phase = False
@@ -430,6 +433,7 @@ jobs:
           try:
               assert source_contract_frozen, 'reviewed_source_manifest_pending'
               assert re.fullmatch('[0-9a-f]{40}', accepted)
+              assert re.fullmatch('[0-9a-f]{40}', expected_parent)
               assert os.environ['GITHUB_REPOSITORY'] == 'alvarovillalbaa/open-evals'
               assert os.environ['GITHUB_REF'] == 'refs/heads/qa/open-evals-provided-output-20261109'
               assert os.environ['GITHUB_EVENT_NAME'] == 'push'
@@ -437,10 +441,10 @@ jobs:
               assert re.fullmatch(r'oe_provided_output_test_[0-9]+_[0-9]+', database)
               head = run('source-head', ['git', 'rev-parse', 'HEAD']).strip()
               parents = run('source-parents', ['git', 'rev-list', '--parents', '-n', '1', 'HEAD']).split()
-              assert head == os.environ['GITHUB_SHA'] and parents == [head, accepted], 'source must be one direct child of accepted application source'
-              delta = run('source-delta', ['git', 'diff', '--name-status', '-z', '--no-renames', accepted, 'HEAD']).split('\0')
-              expected_delta = ['A', '.github/workflows/provided-output-run-checks.yml', 'M', 'apps/web/app/(product)/evals/page.tsx', 'A', 'apps/web/app/(product)/evals/run/[runId]/page.tsx', 'A', 'apps/web/app/(product)/evals/run/error.tsx', 'A', 'apps/web/app/(product)/evals/run/loading.tsx', 'A', 'apps/web/app/(product)/evals/run/page.tsx', 'A', 'apps/web/app/(product)/evals/run/provided-output-composer.tsx', 'M', 'apps/web/app/(product)/runs/page.tsx', 'A', 'apps/web/app/api/v1/provided-output-runs/[runId]/route.ts', 'A', 'apps/web/app/api/v1/provided-output-runs/preview/route.ts', 'A', 'apps/web/app/api/v1/provided-output-runs/route.ts', 'A', 'apps/web/app/api/v1/provided-output-runs/sources/route.ts', 'A', 'apps/web/lib/provided-output-runs.ts', 'A', 'apps/web/lib/provided-output-types.ts', 'A', 'docs/proposals/provided-output-runs.md', 'A', 'docs/provided-output-runs.md', 'M', 'packages/core/src/index.ts', 'A', 'packages/core/src/provided-output-runs.ts', 'A', 'packages/core/src/provided-output-types.ts', 'M', 'packages/db/src/custom-evals.ts', 'M', 'packages/db/src/index.ts', 'A', 'packages/db/src/provided-output-runs.ts', 'M', 'packages/db/src/service.ts', 'A', 'tests/e2e/provided-output-runs.browser.config.ts', 'A', 'tests/e2e/provided-output-runs.browser.fixture.ts', 'A', 'tests/e2e/provided-output-runs.browser.spec.ts', 'A', 'tests/integration/provided-output-runs.node.mjs', 'A', 'tests/unit/provided-output-runs.test.mjs', '']
-              assert delta == expected_delta, 'only the reviewed feature, test, proposal and workflow paths are admitted'
+              assert head == os.environ['GITHUB_SHA'] and parents == [head, expected_parent], 'source must be one direct child of the preserved failed verification source'
+              delta = run('source-delta', ['git', 'diff', '--name-status', '-z', '--no-renames', expected_parent, 'HEAD']).split('\0')
+              expected_delta = ['M', '.github/workflows/provided-output-run-checks.yml', '']
+              assert delta == expected_delta, 'only the reviewed workflow repair is admitted relative to the preserved failed source'
               assert not run('source-clean', ['git', 'status', '--porcelain=v1', '--untracked-files=no']).strip()
               protected = ['.github/workflows/provided-output-run-checks.yml', 'apps/web/app/(product)/evals/page.tsx', 'apps/web/app/(product)/evals/run/[runId]/page.tsx', 'apps/web/app/(product)/evals/run/error.tsx', 'apps/web/app/(product)/evals/run/loading.tsx', 'apps/web/app/(product)/evals/run/page.tsx', 'apps/web/app/(product)/evals/run/provided-output-composer.tsx', 'apps/web/app/(product)/runs/page.tsx', 'apps/web/app/api/v1/provided-output-runs/[runId]/route.ts', 'apps/web/app/api/v1/provided-output-runs/preview/route.ts', 'apps/web/app/api/v1/provided-output-runs/route.ts', 'apps/web/app/api/v1/provided-output-runs/sources/route.ts', 'apps/web/lib/auth.ts', 'apps/web/lib/custom-eval-access.ts', 'apps/web/lib/custom-evals.ts', 'apps/web/lib/provided-output-runs.ts', 'apps/web/lib/provided-output-types.ts', 'apps/web/package.json', 'docs/proposals/provided-output-runs.md', 'docs/provided-output-runs.md', 'package.json', 'packages/core/src/custom-evals.ts', 'packages/core/src/eval-engine.ts', 'packages/core/src/hash.ts', 'packages/core/src/index.ts', 'packages/core/src/provided-output-runs.ts', 'packages/core/src/provided-output-types.ts', 'packages/core/src/types.ts', 'packages/db/migrations/0001_init.sql', 'packages/db/migrations/0002_hosted_integrations.sql', 'packages/db/src/custom-evals.ts', 'packages/db/src/index.ts', 'packages/db/src/provided-output-runs.ts', 'packages/db/src/schema.ts', 'packages/db/src/service.ts', 'pnpm-lock.yaml', 'tests/e2e/provided-output-runs.browser.config.ts', 'tests/e2e/provided-output-runs.browser.fixture.ts', 'tests/e2e/provided-output-runs.browser.spec.ts', 'tests/integration/provided-output-runs.node.mjs', 'tests/unit/provided-output-runs.test.mjs', 'turbo.json']
               for folder in [root, root / 'apps/web']:
@@ -452,7 +456,7 @@ jobs:
               for row in source:
                   if row['path'] in expected_sources:
                       assert {'bytes': row['bytes'], 'sha256': row['sha256']} == expected_sources[row['path']], 'reviewed source bytes changed'
-              write('source.json', {'acceptedSource': accepted, 'verificationSource': head, 'directParent': True,
+              write('source.json', {'acceptedSource': accepted, 'verificationSource': head, 'expectedParent': expected_parent, 'directParentSource': expected_parent, 'directParent': True,
                   'runId': os.environ['GITHUB_RUN_ID'], 'attempt': 1, 'protectedFiles': source,
                   'reviewedChanges': [expected_delta[index:index + 2] for index in range(0, len(expected_delta) - 1, 2)]})
               assert run('node-version', ['node', '--version']).strip() == 'v24.22.2'
@@ -465,7 +469,7 @@ jobs:
               pnpm = ['node', str(tools / 'node_modules/pnpm/bin/pnpm.cjs')]
               assert run('pnpm-version', [*pnpm, '--version']).strip() == '10.14.0'
               run('install-dependencies', [*pnpm, 'install', '--frozen-lockfile', '--ignore-scripts'], 300)
-              run('source-after-install', ['git', 'diff', '--exit-code', 'HEAD'])
+              run('source-after-install', ['git', 'diff', '--exit-code', 'HEAD', '--', *protected])
               assert os.getuid() != 0, 'the cluster must run as the unprivileged runner'
               for name in ['postgres', 'initdb', 'pg_ctl', 'psql', 'createdb', 'dropdb']:
                   binary = pg_bin / name
@@ -529,7 +533,7 @@ jobs:
               buildenv = {'NEXT_TELEMETRY_DISABLED': '1', 'FORCE_COLOR': '0'}
               run('build-candidate', [*pnpm, 'run', 'build', '--force'], 240, buildenv)
               prerender()
-              run('source-after-build', ['git', 'diff', '--exit-code', 'HEAD'])
+              run('source-after-build', ['git', 'diff', '--exit-code', 'HEAD', '--', *protected])
               start_app('candidate')
               browser_path = tools / 'playwright-browsers'
               assert not browser_path.exists()
@@ -651,15 +655,27 @@ jobs:
                   for row in source if 'source' in locals() else []:
                       assert capture_source(row['path']) == row, 'protected source changed'
                   if 'head' in locals():
-                      run('source-final', ['git', 'diff', '--exit-code', 'HEAD'])
+                      run('source-final', ['git', 'diff', '--exit-code', 'HEAD', '--', *protected])
+                      names = run('unprotected-tracked-names', ['git', 'diff', '--name-status', '-z', '--no-renames', 'HEAD']).split('\0')
+                      assert names[-1] == '' and (len(names) - 1) % 2 == 0
+                      changed = [{'status': names[index], 'path': names[index + 1]} for index in range(0, len(names) - 1, 2)]
+                      assert all(row['path'] not in protected for row in changed), 'protected tracked path changed'
+                      write('unprotected-tracked-delta.json', {'scope': 'outside_the_42_protected_paths', 'changes': changed,
+                          'protectedChecksPassed': True, 'classification': 'observed names only; not an application-source verification'})
+                      delta_bytes = (evidence / 'unprotected-tracked-delta.json').read_bytes()
+                      unprotected_delta = {'file': 'unprotected-tracked-delta.json', 'changeCount': len(changed),
+                          'bytes': len(delta_bytes), 'sha256': hashlib.sha256(delta_bytes).hexdigest()}
+                      if len(delta_bytes) <= 16384 and log_bytes + 3 * len(delta_bytes) + 2048 <= 224 * 1024:
+                          emit_original('unprotected-tracked-delta.json', delta_bytes, 16384)
               except Exception as error: errors.append('protected_source_changed:' + type(error).__name__)
               write('cleanup.json', cleanup)
               write('commands.json', commands)
               passed = not errors and (evidence / 'cases.json').exists() and cleanup['databaseAbsent'] is True and cleanup.get('clusterStopped') is True and cleanup.get('clusterAbsent') is True
               result = {'schemaVersion': 'provided-output-run-checks-v1', 'status': 'passed' if passed else 'failed',
-                  'acceptedSource': accepted, 'verificationSource': os.environ['GITHUB_SHA'], 'runId': os.environ['GITHUB_RUN_ID'],
+                  'acceptedSource': accepted, 'expectedParent': expected_parent, 'directParentSource': expected_parent,
+                  'verificationSource': os.environ['GITHUB_SHA'], 'runId': os.environ['GITHUB_RUN_ID'],
                   'attempt': os.environ['GITHUB_RUN_ATTEMPT'], 'postgresCaseCount': 14 if (evidence / 'postgres-cases.json').exists() else None, 'postgresCaseIds': pg_case_ids,
-                  'postgresFixturesEmptyBeforeBuild': pg_fixture_empty,
+                  'postgresFixturesEmptyBeforeBuild': pg_fixture_empty, 'unprotectedTrackedDelta': unprotected_delta,
                   'browserCaseCount': 4 if passed else None, 'caseResults': browser_results, 'applicationServers': app_records,
                   'commandCount': len(commands), 'cleanup': cleanup, 'errors': errors,
                   'limits': {'streamBytes': stream_limit, 'postgresSeconds': 300, 'browserSeconds': 480,
