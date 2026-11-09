@@ -1,0 +1,356 @@
+name: Custom Eval Set PostgreSQL checks
+
+on:
+  push:
+    branches: [qa/open-evals-custom-eval-postgres-20261109]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: open-evals-custom-eval-postgres-20261109
+  cancel-in-progress: false
+
+jobs:
+  postgres:
+    if: github.repository == 'alvarovillalbaa/open-evals' && github.event.repository.private == false && github.ref == 'refs/heads/qa/open-evals-custom-eval-postgres-20261109'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      ROOT_ACCEPTED_SOURCE_SHA: a8adcaa48e150cc94e68c189ab9d073435c503ac
+      EVIDENCE: ${{ runner.temp }}/open-evals-custom-pg-evidence
+      TOOL_ROOT: ${{ runner.temp }}/open-evals-custom-pg-tools
+      TASK_DB: oe_custom_evals_test_${{ github.run_id }}_${{ github.run_attempt }}
+      OWNED_PORT: '65432'
+    steps:
+      - name: Prepare evidence directory
+        shell: bash
+        run: |
+          set -euo pipefail
+          umask 077
+          test ! -e "$EVIDENCE"
+          mkdir -m 700 "$EVIDENCE"
+          printf '%s\n' 'Verification has not started; action or runner failures may prevent further receipts.' > "$EVIDENCE/startup.txt"
+      - name: Checkout immutable push source
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6, official repository commit
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 2
+          persist-credentials: false
+          submodules: false
+          lfs: false
+      - name: Node 24.22.2
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6, official repository commit
+        with:
+          node-version: 24.22.2
+          check-latest: false
+          package-manager-cache: false
+      - name: Verify source and run only the twelve PostgreSQL cases
+        shell: bash
+        timeout-minutes: 16
+        run: |
+          set -euo pipefail
+          umask 077
+          cat > "$EVIDENCE/driver.py" <<'PY'
+          import hashlib, json, os, pathlib, re, selectors, shutil, signal, socket, stat, subprocess, sys, time
+          from datetime import datetime, timezone
+
+          root = pathlib.Path(os.environ['GITHUB_WORKSPACE']).resolve()
+          evidence = pathlib.Path(os.environ['EVIDENCE'])
+          tools = pathlib.Path(os.environ['TOOL_ROOT'])
+          accepted = os.environ['ROOT_ACCEPTED_SOURCE_SHA']
+          database = os.environ['TASK_DB']
+          port = int(os.environ['OWNED_PORT'])
+          pg_bin = pathlib.Path('/usr/lib/postgresql/16/bin')
+          cluster = pathlib.Path(os.environ['RUNNER_TEMP']).resolve() / ('open-evals-custom-pg-cluster-' + os.environ['GITHUB_RUN_ID'] + '-' + os.environ['GITHUB_RUN_ATTEMPT'])
+          data_dir, socket_dir = cluster / 'data', cluster / 'socket'
+          cluster_ownership, server = None, None
+          marker = 'open-evals-custom-evals-20261109-created-disposable-v1'
+          stream_limit = 4 * 1024 * 1024
+          commands, errors = [], []
+          created, database_attempted = False, False
+          cleanup = {'status': 'not_created', 'databaseAbsent': None, 'clusterStopped': None, 'clusterAbsent': None}
+          safe = {key: os.environ[key] for key in ['PATH', 'HOME', 'RUNNER_TEMP'] if key in os.environ}
+          safe.update({'CI': 'true', 'TMPDIR': os.environ['RUNNER_TEMP'], 'NO_COLOR': '1'})
+          pg = {'PGHOST': '127.0.0.1', 'PGPORT': str(port), 'PGUSER': 'postgres',
+                'PGPASSWORD': 'authored_ephemeral_pg_fixture', 'PGDATABASE': 'postgres', 'PGCONNECT_TIMEOUT': '5',
+                'PGOPTIONS': '-c statement_timeout=10000 -c lock_timeout=7000'}
+
+          def write(name, value):
+              path = evidence / name
+              with path.open('x', encoding='utf-8') as handle:
+                  json.dump(value, handle, indent=2); handle.write('\n')
+
+          def port_is_free():
+              with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as probe:
+                  probe.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+                  probe.bind(('127.0.0.1', port))
+
+          def server_identity():
+              pid_path = data_dir / 'postmaster.pid'
+              meta = pid_path.lstat()
+              assert stat.S_ISREG(meta.st_mode) and meta.st_uid == os.getuid() and meta.st_size <= 4096
+              lines = pid_path.read_text().splitlines()
+              pid = int(lines[0])
+              assert pid > 1 and pathlib.Path(lines[1]).resolve() == data_dir and int(lines[3]) == port
+              assert pathlib.Path(lines[4]).resolve() == socket_dir and lines[5] == '127.0.0.1'
+              proc = pathlib.Path('/proc') / str(pid)
+              status = (proc / 'status').read_text()
+              assert re.search(r'^Uid:\s+' + str(os.getuid()) + r'\s+' + str(os.getuid()) + r'\s+' + str(os.getuid()) + r'\s+' + str(os.getuid()) + r'\s*$', status, re.M)
+              executable = (proc / 'exe').resolve()
+              assert executable == (pg_bin / 'postgres').resolve()
+              argv = (proc / 'cmdline').read_bytes().split(b'\0')
+              assert b'-D' in argv and argv[argv.index(b'-D') + 1].decode() == str(data_dir)
+              process_stat = (proc / 'stat').read_text()
+              start_ticks = process_stat[process_stat.rfind(')') + 2:].split()[19]
+              assert start_ticks.isdigit()
+              return {'pid': pid, 'startTicks': start_ticks, 'uid': os.getuid(), 'executable': str(executable),
+                      'dataDirectory': str(data_dir), 'socketDirectory': str(socket_dir), 'port': port, 'postmasterStartedAt': lines[2]}
+
+          def remove_owned_cluster():
+              assert cluster_ownership is not None
+              meta = cluster.lstat()
+              assert stat.S_ISDIR(meta.st_mode) and (meta.st_dev, meta.st_ino, meta.st_uid) == tuple(cluster_ownership['identity'])
+              assert json.loads((cluster / 'owner.json').read_text()) == cluster_ownership
+              count, size = 0, 0
+              for parent, directories, files in os.walk(cluster, followlinks=False):
+                  for name in directories + files:
+                      entry = (pathlib.Path(parent) / name).lstat()
+                      assert entry.st_uid == os.getuid() and entry.st_dev == meta.st_dev
+                      assert stat.S_ISREG(entry.st_mode) or stat.S_ISDIR(entry.st_mode)
+                      if stat.S_ISREG(entry.st_mode): assert entry.st_nlink == 1
+                      count += 1; size += entry.st_size if stat.S_ISREG(entry.st_mode) else 0
+                      assert count <= 5000 and size <= 256 * 1024 * 1024
+              shutil.rmtree(cluster)
+              assert not cluster.exists()
+              return {'entries': count, 'fileBytes': size, 'rootIdentity': cluster_ownership['identity']}
+
+          def run(label, argv, seconds=60, extra=None, show=False):
+              started = datetime.now(timezone.utc).isoformat()
+              paths = {key: evidence / f'{label}.{key}.txt' for key in ['stdout', 'stderr']}
+              handles = {key: path.open('xb') for key, path in paths.items()}
+              sizes = {key: 0 for key in paths}
+              complete = {key: False for key in paths}
+              reason, proc = None, None
+              try:
+                  proc = subprocess.Popen(argv, cwd=root, env={**safe, **(extra or {})}, stdin=subprocess.DEVNULL,
+                                          stdout=subprocess.PIPE, stderr=subprocess.PIPE, start_new_session=True)
+                  with selectors.DefaultSelector() as selector:
+                      selector.register(proc.stdout, selectors.EVENT_READ, 'stdout')
+                      selector.register(proc.stderr, selectors.EVENT_READ, 'stderr')
+                      deadline = time.monotonic() + seconds
+                      closing = None
+                      while selector.get_map():
+                          now = time.monotonic()
+                          if reason is None and now >= deadline: reason = 'deadline'
+                          if reason is not None and closing is None:
+                              if proc.poll() is None: os.killpg(proc.pid, signal.SIGKILL)
+                              closing = now + 3
+                          if closing is not None and now >= closing: break
+                          for key, _ in selector.select(.1):
+                              data = os.read(key.fileobj.fileno(), 65536)
+                              channel = key.data
+                              if not data:
+                                  complete[channel] = reason is None
+                                  selector.unregister(key.fileobj); continue
+                              remaining = stream_limit - sizes[channel]
+                              handles[channel].write(data[:remaining]); sizes[channel] += min(len(data), remaining)
+                              if len(data) > remaining: reason = 'output_limit'
+                  try: returncode = proc.wait(timeout=5)
+                  except subprocess.TimeoutExpired: returncode, reason = None, 'child_closure_unproved'
+              except Exception as error:
+                  reason = 'runner_' + type(error).__name__
+                  returncode = None if proc is None else proc.poll()
+                  if proc is not None and proc.poll() is None:
+                      os.killpg(proc.pid, signal.SIGKILL)
+                      try: returncode = proc.wait(timeout=5)
+                      except subprocess.TimeoutExpired: pass
+              finally:
+                  for handle in handles.values(): handle.close()
+                  if proc is not None:
+                      for stream in [proc.stdout, proc.stderr]:
+                          if stream is not None: stream.close()
+              row = {'label': label, 'argv': argv, 'cwd': str(root), 'environmentKeys': sorted({**safe, **(extra or {})}),
+                     'startedAt': started, 'finishedAt': datetime.now(timezone.utc).isoformat(), 'deadlineSeconds': seconds,
+                     'returncode': returncode, 'terminationReason': reason, 'streams': {}}
+              for channel, path in paths.items():
+                  data = path.read_bytes()
+                  row['streams'][channel] = {'file': path.name, 'bytes': len(data), 'sha256': hashlib.sha256(data).hexdigest(),
+                                             'complete': complete[channel], 'limitBytes': stream_limit}
+                  if show:
+                      print(f'BEGIN ORIGINAL {label} {channel} ({len(data)} bytes)', flush=True)
+                      sys.stdout.write(data.decode('utf-8', errors='replace')); sys.stdout.flush()
+                      print(f'\nEND ORIGINAL {label} {channel}', flush=True)
+              commands.append(row)
+              print(json.dumps({'command': row}), flush=True)
+              if returncode != 0 or reason or not all(complete.values()):
+                  raise RuntimeError(label + '_failed')
+              return paths['stdout'].read_text(encoding='utf-8')
+
+          try:
+              assert re.fullmatch('[0-9a-f]{40}', accepted), 'accepted_source_placeholder_must_be_filled'
+              assert os.environ['GITHUB_REPOSITORY'] == 'alvarovillalbaa/open-evals'
+              assert os.environ['GITHUB_REF'] == 'refs/heads/qa/open-evals-custom-eval-postgres-20261109'
+              assert os.environ['GITHUB_EVENT_NAME'] == 'push'
+              assert os.environ['GITHUB_RUN_ATTEMPT'] == '1', 'one initial job only; no rerun accepted'
+              assert re.fullmatch(r'oe_custom_evals_test_[0-9]+_[0-9]+', database)
+              head = run('source-head', ['git', 'rev-parse', 'HEAD']).strip()
+              parents = run('source-parents', ['git', 'rev-list', '--parents', '-n', '1', 'HEAD']).split()
+              assert head == os.environ['GITHUB_SHA'] and parents == [head, accepted], 'source must be one direct child of accepted application source'
+              delta = run('source-delta', ['git', 'diff', '--name-status', '-z', '--no-renames', accepted, 'HEAD']).split('\0')
+              assert delta == ['A', '.github/workflows/custom-eval-postgres-checks.yml', 'A', 'docs/proposals/custom-eval-postgres-checks.md', ''], 'only the workflow and proposal may be added'
+              assert not run('source-clean', ['git', 'status', '--porcelain=v1', '--untracked-files=no']).strip()
+              protected = ['package.json', 'pnpm-lock.yaml', 'packages/core/src/custom-evals.ts', 'packages/core/src/hash.ts',
+                           'packages/db/src/custom-evals.ts', 'packages/db/src/service.ts', 'packages/db/migrations/0001_init.sql',
+                           'packages/db/migrations/0002_hosted_integrations.sql', 'tests/integration/custom-evals-store.node.mjs']
+              source = [{'path': path, 'bytes': (root / path).stat().st_size, 'sha256': hashlib.sha256((root / path).read_bytes()).hexdigest()} for path in protected]
+              write('source.json', {'acceptedSource': accepted, 'verificationSource': head, 'directParent': True,
+                                   'runId': os.environ['GITHUB_RUN_ID'], 'attempt': 1, 'protectedFiles': source})
+              assert run('node-version', ['node', '--version']).strip() == 'v24.22.2'
+              assert not tools.exists(), 'tool directory must be fresh'
+              run('install-pnpm', ['npm', 'install', '--prefix', str(tools), '--ignore-scripts', '--no-audit', '--no-fund', '--package-lock=false', 'pnpm@10.14.0'], 180)
+              pnpm = ['node', str(tools / 'node_modules/pnpm/bin/pnpm.cjs')]
+              assert run('pnpm-version', [*pnpm, '--version']).strip() == '10.14.0'
+              run('install-dependencies', [*pnpm, 'install', '--frozen-lockfile', '--ignore-scripts', '--filter', 'open-evals', '--filter', '@open-evals/core', '--filter', '@open-evals/db'], 300)
+              run('source-after-install', ['git', 'diff', '--exit-code', 'HEAD', '--', *protected])
+              assert os.getuid() != 0, 'the cluster must run as the unprivileged runner'
+              for name in ['postgres', 'initdb', 'pg_ctl', 'psql', 'createdb', 'dropdb']:
+                  binary = pg_bin / name
+                  assert binary.is_file() and os.access(binary, os.X_OK), 'preinstalled PostgreSQL 16 tools required'
+              version = run('postgres-binary-version', [str(pg_bin / 'postgres'), '--version']).strip()
+              assert re.match(r'^postgres \(PostgreSQL\) 16\.', version), 'PostgreSQL 16 required'
+              port_is_free()
+              assert not cluster.exists(), 'cluster path must be fresh'
+              cluster.mkdir(mode=0o700)
+              meta = cluster.lstat()
+              cluster_ownership = {'cohort': 'open-evals-custom-evals-20261109', 'runId': os.environ['GITHUB_RUN_ID'],
+                                   'attempt': os.environ['GITHUB_RUN_ATTEMPT'], 'source': head,
+                                   'identity': [meta.st_dev, meta.st_ino, meta.st_uid]}
+              with (cluster / 'owner.json').open('x') as handle: json.dump(cluster_ownership, handle)
+              socket_dir.mkdir(mode=0o700)
+              password_file = cluster / 'fixture-password'
+              with password_file.open('x') as handle: handle.write('authored_ephemeral_pg_fixture\n')
+              run('cluster-init', [str(pg_bin / 'initdb'), '-D', str(data_dir), '--username=postgres', '--auth-local=trust',
+                                  '--auth-host=scram-sha-256', '--pwfile=' + str(password_file), '--encoding=UTF8', '--no-locale'])
+              password_file.unlink()
+              try:
+                  run('cluster-start', [str(pg_bin / 'pg_ctl'), '-D', str(data_dir), '-l', str(cluster / 'postgres-server.log'),
+                      '-w', '-t', '30', '-o', f'-c listen_addresses=127.0.0.1 -c port={port} -c unix_socket_directories={socket_dir} -c max_connections=20', 'start'])
+              finally:
+                  if (data_dir / 'postmaster.pid').exists(): server = server_identity()
+              assert server is not None, 'owned server identity required'
+              write('cluster.json', {'ownership': cluster_ownership, 'server': server, 'binaryVersion': version,
+                                     'runnerImageVersion': os.environ.get('ImageVersion')})
+              run('postgres-version', [str(pg_bin / 'psql'), '-X', '-A', '-t', '-v', 'ON_ERROR_STOP=1', '-c', 'show server_version'], extra=pg)
+              existing = run('database-before', [str(pg_bin / 'psql'), '-X', '-A', '-t', '-v', 'ON_ERROR_STOP=1', '-c', f"select datname from pg_database where datname = '{database}'"], extra=pg)
+              assert not existing.strip(), 'an existing database must never be reused'
+              database_attempted = True
+              run('database-create', [str(pg_bin / 'createdb'), '--maintenance-db=postgres', '--owner=postgres', '--template=template0', '--', database], extra=pg)
+              created = True
+              write('created.json', {'database': database, 'runId': os.environ['GITHUB_RUN_ID'], 'createdByCommand': 'database-create', 'createdCommandReturnedZero': True})
+              run('database-marker', [str(pg_bin / 'psql'), '-X', '-v', 'ON_ERROR_STOP=1', '-d', database, '-c', f'COMMENT ON DATABASE "{database}" IS \'{marker}\''], extra=pg)
+              for number, name in [('0001', '0001_init.sql'), ('0002', '0002_hosted_integrations.sql')]:
+                  run('migration-' + number, [str(pg_bin / 'psql'), '-X', '-v', 'ON_ERROR_STOP=1', '-d', database, '-f', 'packages/db/migrations/' + name], extra=pg)
+              testenv = {'CUSTOM_EVALS_TEST_ALLOW': 'local-disposable',
+                         'CUSTOM_EVALS_TEST_DATABASE_URL': f"postgresql://postgres:authored_ephemeral_pg_fixture@127.0.0.1:{pg['PGPORT']}/{database}"}
+              tap = run('postgres-cases', ['node', '--import', 'tsx', '--test', '--test-reporter=tap', 'tests/integration/custom-evals-store.node.mjs'], 300, testenv, True)
+              ids = re.findall(r'^\s*ok \d+ - (CE-PG\d{2})\b', tap, re.M)
+              assert ids == [f'CE-PG{index:02}' for index in range(1, 13)], 'twelve actual case results required'
+              for total in ['tests 12', 'pass 12', 'fail 0', 'cancelled 0', 'skipped 0', 'todo 0']:
+                  assert re.search(r'^# ' + total + r'\s*$', tap, re.M), 'TAP total missing: ' + total
+              assert not re.search(r'^\s*(?:not )?ok\b[^\n]*#\s*(?:SKIP|TODO)\b', tap, re.M | re.I)
+              write('cases.json', {'status': 'passed', 'ids': ids, 'tier': 'T3', 'actualPostgreSQL': True,
+                                   'authProviderChecked': False, 'hostedRlsChecked': False, 'browserChecked': False})
+          except Exception as error:
+              errors.append(type(error).__name__ + ':' + str(error))
+          finally:
+              try:
+                  if created:
+                      inspect = run('cleanup-inspect', [str(pg_bin / 'psql'), '-X', '-A', '-t', '-v', 'ON_ERROR_STOP=1', '-c',
+                        f"select json_build_object('name', datname, 'owner', pg_get_userbyid(datdba), 'marker', shobj_description(oid, 'pg_database')) from pg_database where datname = '{database}'"], extra=pg)
+                      observed = json.loads(inspect)
+                      assert observed == {'name': database, 'owner': 'postgres', 'marker': marker}, 'owned marker required before teardown'
+                      run('cleanup-drop', [str(pg_bin / 'dropdb'), '--maintenance-db=postgres', '--', database], extra=pg)
+                      remaining = run('cleanup-absence', [str(pg_bin / 'psql'), '-X', '-A', '-t', '-v', 'ON_ERROR_STOP=1', '-c', f"select datname from pg_database where datname = '{database}'"], extra=pg)
+                      assert not remaining.strip(), 'owned database absence must be proved'
+                      cleanup = {'status': 'database_removed', 'database': database, 'validatedBeforeDrop': observed, 'databaseAbsent': True}
+                  elif database_attempted:
+                      remaining = run('cleanup-unconfirmed-create', [str(pg_bin / 'psql'), '-X', '-A', '-t', '-v', 'ON_ERROR_STOP=1', '-c', f"select datname from pg_database where datname = '{database}'"], extra=pg)
+                      assert not remaining.strip(), 'unconfirmed database creation must not be adopted or removed'
+                      cleanup = {'status': 'not_created', 'databaseAbsent': True}
+                  else:
+                      cleanup = {'status': 'not_created', 'databaseAbsent': None}
+              except Exception as error:
+                  cleanup = {'status': 'unproved', 'database': database, 'databaseAbsent': None, 'error': type(error).__name__ + ':' + str(error)}
+                  errors.append('cleanup_unproved')
+              try:
+                  if cluster_ownership is not None:
+                      if server is not None:
+                          assert server_identity() == server, 'server identity changed before stop'
+                          run('cluster-stop', [str(pg_bin / 'pg_ctl'), '-D', str(data_dir), '-m', 'smart', '-w', '-t', '30', 'stop'])
+                          for attempt in range(50):
+                              if not pathlib.Path('/proc', str(server['pid'])).exists(): break
+                              time.sleep(.1)
+                          assert not pathlib.Path('/proc', str(server['pid'])).exists(), 'server PID absence unproved'
+                      assert not (data_dir / 'postmaster.pid').exists(), 'postmaster PID file remains'
+                      port_is_free()
+                      cleanup['clusterStopped'] = True
+                      log = cluster / 'postgres-server.log'
+                      if log.exists():
+                          fd = os.open(log, os.O_RDONLY | os.O_NOFOLLOW)
+                          try:
+                              before = os.fstat(fd)
+                              assert stat.S_ISREG(before.st_mode) and before.st_uid == os.getuid() and before.st_size <= stream_limit
+                              content = b''
+                              while len(content) <= stream_limit:
+                                  chunk = os.read(fd, 65536)
+                                  if not chunk: break
+                                  content += chunk
+                              after = os.fstat(fd)
+                              assert len(content) == before.st_size
+                              for key in ['st_dev', 'st_ino', 'st_mode', 'st_uid', 'st_nlink', 'st_size', 'st_mtime_ns', 'st_ctime_ns']:
+                                  assert getattr(after, key) == getattr(before, key), 'server log changed during capture'
+                              with (evidence / 'postgres-server.log').open('xb') as handle: handle.write(content)
+                              cleanup['serverLog'] = {'file': 'postgres-server.log', 'bytes': len(content), 'sha256': hashlib.sha256(content).hexdigest(), 'complete': True}
+                          finally: os.close(fd)
+                      assert not database_attempted or cleanup.get('databaseAbsent') is True, 'unproved database teardown; cluster data retained'
+                      cleanup['removedCluster'] = remove_owned_cluster()
+                      cleanup['clusterAbsent'] = True
+                      if cleanup.get('databaseAbsent') is True: cleanup['status'] = 'removed'
+                  else:
+                      cleanup['clusterStopped'], cleanup['clusterAbsent'] = None, None
+              except Exception as error:
+                  cleanup['clusterStopped'] = cleanup.get('clusterStopped')
+                  cleanup['clusterAbsent'] = False
+                  cleanup['clusterError'] = type(error).__name__ + ':' + str(error)
+                  errors.append('cluster_cleanup_unproved')
+              try:
+                  for row in source if 'source' in locals() else []:
+                      data = (root / row['path']).read_bytes()
+                      assert len(data) == row['bytes'] and hashlib.sha256(data).hexdigest() == row['sha256'], 'protected source changed'
+              except Exception as error: errors.append('protected_source_changed:' + type(error).__name__)
+              write('cleanup.json', cleanup)
+              write('commands.json', commands)
+              passed = not errors and (evidence / 'cases.json').exists() and cleanup['databaseAbsent'] is True and cleanup.get('clusterStopped') is True and cleanup.get('clusterAbsent') is True
+              result = {'schemaVersion': 'custom-eval-postgres-checks-v1', 'status': 'passed' if passed else 'failed',
+                        'acceptedSource': accepted, 'verificationSource': os.environ['GITHUB_SHA'], 'runId': os.environ['GITHUB_RUN_ID'],
+                        'attempt': os.environ['GITHUB_RUN_ATTEMPT'], 'caseCount': 12 if passed else None,
+                        'commandCount': len(commands), 'cleanup': cleanup, 'errors': errors,
+                        'limits': {'streamBytes': stream_limit, 'testSeconds': 300, 'jobMinutes': 20},
+                        'proofLimits': ['Twelve store cases only; no T1 replay, UI, hosted Auth/RLS, production database or model/provider call.']}
+              write('receipt.json', result)
+              print(json.dumps({'cleanup': cleanup, 'receipt': result}), flush=True)
+          sys.exit(0 if passed else 1)
+          PY
+          python3 "$EVIDENCE/driver.py"
+      - name: Retain bounded receipts and original streams
+        if: always()
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6, official repository commit
+        with:
+          name: custom-eval-postgres-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ env.EVIDENCE }}
+          retention-days: 2
+          if-no-files-found: error
+          compression-level: 6
+          overwrite: false
+          include-hidden-files: false
