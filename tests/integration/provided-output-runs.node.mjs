@@ -8,7 +8,11 @@ import { setTimeout as delay } from "node:timers/promises";
 // Deliberate invocation: node --import tsx --test tests/integration/provided-output-runs.node.mjs
 // External setup owns migrations 0001/0002, the database and the exact database COMMENT.
 // This file never creates, migrates or drops a database. It has no application URL fallback.
-const DATABASE_MARKER = "open-evals-provided-output-20261109-created-disposable-v1";
+const testCohort = process.env.PROVIDED_OUTPUT_TEST_COHORT;
+const customDatasetCohort = testCohort === "open-evals-custom-datasets-20261109";
+const DATABASE_MARKER = customDatasetCohort
+  ? "open-evals-custom-datasets-20261109-created-disposable-v1"
+  : "open-evals-provided-output-20261109-created-disposable-v1";
 const applicationName = `oe_provided_output_${randomUUID().replaceAll("-", "")}`;
 const environmentKeys = ["DATABASE_URL", "POSTGRES_URL", "SUPABASE_DB_URL", "DATABASE_SSL", "SUPABASE_DB_SSL"];
 const previousEnvironment = new Map(environmentKeys.map(key => [key, process.env[key]]));
@@ -17,12 +21,20 @@ let core, custom, store, customStore, service, legacyEngine, stableStringify, st
 
 function guardedUrl() {
   assert.equal(process.env.PROVIDED_OUTPUT_TEST_ALLOW, "local-disposable", "explicit disposable target required");
+  assert.ok(testCohort === undefined || customDatasetCohort, "unknown disposable verification cohort");
   let url;
   try { url = new URL(process.env.PROVIDED_OUTPUT_TEST_DATABASE_URL ?? ""); }
   catch { throw new Error("dedicated test database URL required"); }
   assert.ok(["postgres:", "postgresql:"].includes(url.protocol));
   assert.ok(["127.0.0.1", "localhost", "[::1]"].includes(url.hostname), "loopback URL required");
-  assert.match(url.pathname, /^\/oe_provided_output_test_[a-z0-9_]{1,38}$/, "dedicated database name required");
+  if (customDatasetCohort) {
+    assert.equal(url.hostname, "127.0.0.1");
+    assert.equal(url.port, "65432");
+    assert.equal(url.username, "postgres");
+    assert.match(url.pathname, /^\/oe_custom_datasets_test_[0-9]+_[0-9]+$/, "current owned database name required");
+  } else {
+    assert.match(url.pathname, /^\/oe_provided_output_test_[a-z0-9_]{1,38}$/, "dedicated database name required");
+  }
   assert.equal(url.search, "", "connection overrides forbidden"); assert.equal(url.hash, "", "fragments forbidden");
   databaseName = url.pathname.slice(1);
   return url.toString();

@@ -516,6 +516,15 @@ export async function listBenchmarks(workspaceId: string): Promise<BenchmarkCata
         from datasets
         left join dataset_versions on dataset_versions.dataset_id = datasets.id
         where datasets.workspace_id = $1
+          and datasets.kind <> 'custom-dataset-v1'
+          and left(datasets.id, length('custom_dataset_')) <> 'custom_dataset_'
+          and not exists (
+            select 1 from dataset_versions custom_version where custom_version.dataset_id = datasets.id and (
+              left(custom_version.id, length('custom_dataset_version_')) = 'custom_dataset_version_'
+              or exists (select 1 from dataset_rows custom_row where custom_row.dataset_version_id = custom_version.id
+                and left(custom_row.id, length('custom_dataset_row_')) = 'custom_dataset_row_')
+            )
+          )
         group by datasets.id
         order by datasets.name
       `,

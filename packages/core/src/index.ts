@@ -16,3 +16,4 @@ export * from "./demo";
 export * from "./campaign-preparation";
 export * from "./custom-evals";
 export * from "./provided-output-runs";
+export * from "./custom-datasets";

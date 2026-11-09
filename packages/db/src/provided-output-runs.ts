@@ -1,9 +1,10 @@
 import { createHash, randomUUID } from "node:crypto";
 import type { PoolClient } from "pg";
 import { getCustomEvalSetVersion, type SavedCustomEvalVersion } from "./custom-evals";
+import { loadCustomAwareDatasetSnapshot } from "./custom-datasets";
+import type { DatasetSnapshot } from "./dataset-snapshots";
 import { isDatabaseUnavailable, queryRows, withTransaction } from "./service";
 
-type Json = null | boolean | number | string | Json[] | { [key: string]: Json };
 export interface ProvidedOutputDraft {
   schemaVersion: "provided-output-run-draft-v1";
   runId: string; datasetVersionId: string; evalSetVersionId: string;
@@ -13,14 +14,7 @@ export interface ProvidedOutputRequest {
   schemaVersion: "provided-output-run-request-v1";
   draft: ProvidedOutputDraft; expectedPlanFingerprint: string;
 }
-export interface ProvidedOutputDatasetSnapshot {
-  dataset: { id: string; name: string; kind: string };
-  version: { id: string; datasetId: string; version: number; fingerprint: string; createdAt: string };
-  rows: Array<{ id: string; rowKey: string; input: Json; metadata: { [key: string]: Json };
-    expectedOutput: { present: boolean; value: Json }; context: { present: boolean; value: Json };
-    history: { present: boolean; value: Json }; traceFixture: { present: boolean; value: Json };
-    reviewStatus: "synthetic" | "reviewed" | "golden" }>;
-}
+export type ProvidedOutputDatasetSnapshot = DatasetSnapshot;
 export interface ProvidedOutputInputs { dataset: ProvidedOutputDatasetSnapshot; evalSet: SavedCustomEvalVersion }
 
 /** Structural boundary only: the trusted core callback owns the complete versioned record. */
@@ -161,50 +155,10 @@ async function workspace(client: PoolClient, workspaceId: string) {
   if (!(await client.query("select id from workspaces where id = $1 for update", [workspaceId])).rows.length) fail(404, "provided_output_not_found");
 }
 
-interface DatasetHead { datasetId: string; name: string; kind: string; id: string; version: number; fingerprint: string; createdAt: Date | string }
-interface RawRow { id: string; rowKey: string; input: string; expectedOutput: string | null; context: string | null;
-  history: string | null; traceFixture: string | null; metadata: string; reviewStatus: string }
 async function inputs(client: PoolClient, workspaceId: string, selection: { datasetVersionId: string; evalSetVersionId: string }): Promise<ProvidedOutputInputs | undefined> {
   identifier(selection.datasetVersionId); uuid(selection.evalSetVersionId);
-  const head = (await client.query<DatasetHead>(`select d.id as "datasetId", d.name, d.kind, v.id, v.version, v.fingerprint, v.created_at as "createdAt"
-    from dataset_versions v join datasets d on d.id = v.dataset_id
-    where d.workspace_id = $1 and v.id = $2 for update of v, d`, [workspaceId, selection.datasetVersionId])).rows[0];
-  if (!head) return undefined;
-  // An UPDATE lock on the FK parent also blocks new row inserts while this snapshot is prepared.
-  const locked = (await client.query<{ id: string }>(`select id from dataset_rows where dataset_version_id = $1
-    order by row_key collate "C", id collate "C" limit 101 for share`, [head.id])).rows;
-  if (!locked.length || locked.length > 100) fail(422, "provided_output_dataset_size");
-  const size = (await client.query<{ bytes: string }>(`select coalesce(sum(octet_length(id) + octet_length(row_key)
-    + octet_length(input::text) + coalesce(octet_length(expected_output::text), 0) + coalesce(octet_length(context::text), 0)
-    + coalesce(octet_length(history::text), 0) + coalesce(octet_length(trace_fixture::text), 0)
-    + octet_length(metadata::text) + octet_length(review_status)), 0)::text as bytes
-    from dataset_rows where dataset_version_id = $1`, [head.id])).rows[0];
-  // JSONB text contains formatting spaces; only the parsed canonical snapshot has the exact 1 MiB limit.
-  if (!size || BigInt(size.bytes) > BigInt(2 * SNAPSHOT_LIMIT)) fail(422, "provided_output_dataset_size");
-  const rawRows = (await client.query<RawRow>(`select id, row_key as "rowKey", input::text, expected_output::text as "expectedOutput",
-    context::text, history::text, trace_fixture::text as "traceFixture", metadata::text, review_status as "reviewStatus"
-    from dataset_rows where dataset_version_id = $1 order by row_key collate "C", id collate "C"`, [head.id])).rows;
-  if (rawRows.length !== locked.length) fail(409, "provided_output_storage_conflict");
-  const field = (value: string | null) => ({ present: value !== null, value: value === null ? null : JSON.parse(value) as Json });
-  const rows = rawRows.map(row => ({ id: row.id, rowKey: row.rowKey, input: JSON.parse(row.input) as Json,
-    expectedOutput: field(row.expectedOutput), context: field(row.context), history: field(row.history), traceFixture: field(row.traceFixture),
-    metadata: JSON.parse(row.metadata) as { [key: string]: Json }, reviewStatus: row.reviewStatus as "synthetic" | "reviewed" | "golden" }));
-  // Refuse JSON numbers that the pg/JavaScript boundary cannot represent without changing stored JSONB values.
-  const roundTrips = rows.map(row => ({ id: row.id, input: JSON.stringify(row.input), expected_output: row.expectedOutput.present ? JSON.stringify(row.expectedOutput.value) : null,
-    context: row.context.present ? JSON.stringify(row.context.value) : null, history: row.history.present ? JSON.stringify(row.history.value) : null,
-    trace_fixture: row.traceFixture.present ? JSON.stringify(row.traceFixture.value) : null, metadata: JSON.stringify(row.metadata) }));
-  const exact = (await client.query<{ count: number }>(`select count(*)::int as count from dataset_rows r
-    join jsonb_to_recordset($2::jsonb) as x(id text, input text, expected_output text, context text, history text, trace_fixture text, metadata text)
-      on x.id = r.id where r.dataset_version_id = $1 and r.input is not distinct from x.input::jsonb
-      and r.expected_output is not distinct from x.expected_output::jsonb and r.context is not distinct from x.context::jsonb
-      and r.history is not distinct from x.history::jsonb and r.trace_fixture is not distinct from x.trace_fixture::jsonb
-      and r.metadata is not distinct from x.metadata::jsonb`, [head.id, JSON.stringify(roundTrips)])).rows[0];
-  if (exact?.count !== rows.length) fail(422, "provided_output_dataset_precision");
-  const dataset: ProvidedOutputDatasetSnapshot = { dataset: { id: head.datasetId, name: head.name, kind: head.kind },
-    version: { id: head.id, datasetId: head.datasetId, version: head.version, fingerprint: head.fingerprint,
-      createdAt: head.createdAt instanceof Date ? head.createdAt.toISOString() : new Date(head.createdAt).toISOString() }, rows };
-  boundedJson(dataset, SNAPSHOT_LIMIT);
-  if (rows.some(row => !["synthetic", "reviewed", "golden"].includes(row.reviewStatus))) fail(422, "provided_output_dataset_invalid");
+  const dataset = await loadCustomAwareDatasetSnapshot(client, workspaceId, selection.datasetVersionId, fail);
+  if (!dataset) return undefined;
   const evalSet = await getCustomEvalSetVersion(workspaceId, selection.evalSetVersionId, client);
   return evalSet ? { dataset, evalSet } : undefined;
 }

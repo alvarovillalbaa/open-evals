@@ -105,13 +105,14 @@ function display(value: unknown) {
 
 type Pending = "sources" | "preview" | "run" | "recover";
 
-export function ProvidedOutputComposer({ sources, history, canWrite }: {
+export function ProvidedOutputComposer({ sources, history, canWrite, initialDatasetVersionId = "" }: {
   sources: ProvidedOutputSourcesView;
   history: ProvidedOutputHistoryView;
   canWrite: boolean;
+  initialDatasetVersionId?: string;
 }) {
   const outputIdPrefix = useId();
-  const [datasetVersionId, setDatasetVersionId] = useState("");
+  const [datasetVersionId, setDatasetVersionId] = useState(() => initialDatasetVersionId.trim() && !initialDatasetVersionId.includes("\0") && new TextEncoder().encode(initialDatasetVersionId).length <= 512 ? initialDatasetVersionId : "");
   const [evalSetVersionId, setEvalSetVersionId] = useState("");
   const [inputs, setInputs] = useState<ProvidedOutputInputsView>();
   const [outputs, setOutputs] = useState<Record<string, string>>({});

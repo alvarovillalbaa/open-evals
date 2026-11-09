@@ -44,7 +44,7 @@ export default async function EvalsPage() {
   const state = await loadEvals();
   return (
     <div className="grid min-w-0 gap-6">
-      <PageHeader title="Evals" actions={<><LinkButton href="/evals/run" primary>Score supplied outputs</LinkButton><LinkButton href="/runs">View runs</LinkButton><LinkButton href="/evals/custom">Custom Eval Sets</LinkButton><LinkButton href="/evals/sdk">Connect SDK <ArrowRight className="size-4" aria-hidden="true" /></LinkButton></>} />
+      <PageHeader title="Evals" actions={<><LinkButton href="/evals/run" primary>Score supplied outputs</LinkButton><LinkButton href="/evals/datasets">Custom datasets</LinkButton><LinkButton href="/runs">View runs</LinkButton><LinkButton href="/evals/custom">Custom Eval Sets</LinkButton><LinkButton href="/evals/sdk">Connect SDK <ArrowRight className="size-4" aria-hidden="true" /></LinkButton></>} />
       <p className="max-w-3xl text-sm leading-6 text-muted-foreground">Evaluation combines inputs with evaluators. Dataset and scenario versions supply the cases; Eval Items define what to check, and Eval Sets version those evaluator definitions together.</p>
       <StateGate state={state} accessDeniedTitle="Evals access unavailable" accessDeniedBody="Your current role, key or scope does not allow these evaluation resources.">
         {({ data }) => (
@@ -53,7 +53,7 @@ export default async function EvalsPage() {
               <a href="#datasets" className="hover:underline">Datasets</a><a href="#scenarios" className="hover:underline">Scenarios</a><a href="#eval-sets" className="hover:underline">Evaluators</a><a href="#benchmarks" className="hover:underline">External benchmarks</a><a href="#harbor" className="hover:underline">Harbor</a>
             </nav>
             <section id="datasets" aria-labelledby="dataset-heading" className="grid min-w-0 scroll-mt-6 gap-3">
-              <div><h2 id="dataset-heading" className="flex items-center gap-2 text-lg font-semibold"><Database className="size-4" aria-hidden="true" />Dataset inputs</h2><p className="mt-1 max-w-3xl text-sm leading-6 text-muted-foreground">Custom and imported datasets provide inputs, optional expected outputs and context. Inspect their saved version identities before using them in an eval.</p></div>
+              <div><h2 id="dataset-heading" className="flex items-center gap-2 text-lg font-semibold"><Database className="size-4" aria-hidden="true" />Dataset inputs</h2><p className="mt-1 max-w-3xl text-sm leading-6 text-muted-foreground">Imported datasets provide inputs, optional expected outputs and context. Create and inspect reusable custom inputs through Custom datasets. Inspect saved version identities before using them in an eval.</p></div>
               {data.datasets.length ? <div className="grid min-w-0 gap-3 md:grid-cols-2">{data.datasets.map((dataset) => (
                 <article className="grid min-w-0 content-start gap-3 border border-border bg-panel p-4" key={dataset.id}>
                   <div className="min-w-0"><h3 className="break-words font-medium">{dataset.name}</h3><p className="mt-1 break-all font-mono text-xs text-muted-foreground">{dataset.id}</p></div>
