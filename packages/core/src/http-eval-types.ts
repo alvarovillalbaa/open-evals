@@ -72,7 +72,7 @@ export interface ResolveHttpEvalPlanInput {
   workspaceId: string;
   draft: unknown;
   dataset: unknown;
-  evalSets: HttpEvalSetSource[];
+  evalSets: unknown[];
   head: HttpEvalPlanHead | null;
 }
 export interface PrepareHttpEvalPlanRecordInput extends Omit<ResolveHttpEvalPlanInput, "draft"> {

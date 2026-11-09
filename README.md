@@ -1,6 +1,6 @@
 # open-evals
 
-Last updated: 2026-11-02
+Last updated: 2026-11-09
 
 `open-evals` is an MIT-licensed, provider-independent platform for two product functions:
 
@@ -117,7 +117,12 @@ import and execution are still unfinished. The catalogue links a
 [custom Eval Set editor](docs/custom-evals.md): workspace sessions save a
 critical contains evaluator and explicit one-item membership as immutable
 versions, with retry recovery and stale-head conflicts. Saving does not launch
-an eval. Explicit input/evaluator composition remains unfinished. See
+an eval. The new [reusable evaluator composition](docs/evaluator-composition.md)
+flow saves independent contains items and ordered sets of exact item versions.
+Its explicit HTTP v2 profile retains overlapping memberships and scores each
+unique row/item pair once, with one target claim per input row. Existing v1
+sets and plans retain their original contracts. Pure checks pass; database,
+compiler and browser verification for this increment is pending. See
 [the product contract and remaining work](docs/product-surface.md).
 
 The [focused product-surface receipt](docs/results/2026/11-09/product-surface-checks.md)
