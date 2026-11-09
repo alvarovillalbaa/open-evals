@@ -5,7 +5,9 @@ type JsonValue = string | number | boolean | null | JsonValue[] | { [key: string
 type JsonRecord = Record<string, JsonValue>;
 
 // Recognize reserved identities even when a private record's JSON profile is corrupt.
-const HTTP_PRIVATE_PLAN = `(run_plans.resolved_plan ->> 'schemaVersion' is not distinct from 'http-target-eval-v1'
+const HTTP_PRIVATE_PLAN = `(coalesce(run_plans.resolved_plan ->> 'schemaVersion' in ('http-target-eval-v2','http-eval-plan-record-v2','http-eval-plan-storage-v2'),false)
+  or run_plans.resolved_plan #>> '{content,schemaVersion}' is not distinct from 'http-target-eval-v2'
+  or run_plans.resolved_plan ->> 'schemaVersion' is not distinct from 'http-target-eval-v1'
   or run_plans.resolved_plan ->> 'schemaVersion' is not distinct from 'http-eval-plan-record-v1'
   or run_plans.resolved_plan ->> 'schemaVersion' is not distinct from 'http-eval-plan-storage-v1'
   or run_plans.resolved_plan #>> '{content,schemaVersion}' is not distinct from 'http-target-eval-v1'
@@ -572,6 +574,16 @@ export async function listScenarios(workspaceId: string): Promise<ScenarioCatalo
         from eval_sets
         left join eval_set_versions on eval_set_versions.eval_set_id = eval_sets.id
         where eval_sets.workspace_id = $1
+          and left(eval_sets.id,length('custom_eval_set_v2_')) <> 'custom_eval_set_v2_'
+          and not exists (select 1 from eval_set_versions private_version
+            left join eval_set_item_versions private_member on private_member.eval_set_version_id=private_version.id
+            left join eval_item_versions private_item on private_item.id=private_member.eval_item_version_id
+            where private_version.eval_set_id=eval_sets.id and (
+              left(private_version.id,length('custom_eval_set_version_v2_'))='custom_eval_set_version_v2_'
+              or private_version.contract->>'schemaVersion' in ('custom-eval-set-storage-v2','custom-eval-set-record-v2','custom-eval-set-v2')
+              or left(private_item.id,length('custom_eval_item_version_v2_'))='custom_eval_item_version_v2_'
+              or left(private_item.eval_item_id,length('custom_eval_item_v2_'))='custom_eval_item_v2_'
+              or private_item.config->>'schemaVersion' in ('custom-eval-item-storage-v2','custom-eval-item-record-v2','custom-eval-item-v2')))
         group by eval_sets.id
         order by eval_sets.name
       `,
@@ -818,6 +830,26 @@ export async function persistTraceImport(workspaceId: string, result: ImportBatc
 
 export async function persistBenchmarkImport(workspaceId: string, result: BenchmarkImportLike) {
   return withTransaction(async (client) => {
+    // Protect standalone v2 identities before the import can create any row or append membership.
+    await client.query("select id from workspaces where id=$1 for update", [workspaceId]);
+    const sourceIds = [result.evalSet.setId,result.evalSet.id,...result.evalSet.itemVersions.flatMap(member => [member.item.itemId,member.item.id])];
+    const reserved = ["custom_eval_item_v2_","custom_eval_item_version_v2_","custom_eval_set_v2_","custom_eval_set_version_v2_"];
+    const profiles = ["custom-eval-item-storage-v2","custom-eval-item-record-v2","custom-eval-item-v2","custom-eval-set-storage-v2","custom-eval-set-record-v2","custom-eval-set-v2"];
+    const inputProfiles = [(result.evalSet as unknown as Record<string,unknown>).schemaVersion,
+      ...result.evalSet.itemVersions.flatMap(member => [(member.item as unknown as Record<string,unknown>).schemaVersion,member.item.config?.schemaVersion])];
+    if (sourceIds.some(id => typeof id === "string" && reserved.some(prefix => id.startsWith(prefix)))
+      || inputProfiles.some(profile => typeof profile === "string" && profiles.includes(profile))) {
+      throw Object.assign(new Error("eval_composition_identity_conflict"), { status:409,code:"eval_composition_identity_conflict" });
+    }
+    const owned = await client.query(`select p.id from eval_sets p left join eval_set_versions v on v.eval_set_id=p.id
+      where (p.id=any($1::text[]) or v.id=any($1::text[])) and (
+        left(p.id,length('custom_eval_set_v2_'))='custom_eval_set_v2_' or left(v.id,length('custom_eval_set_version_v2_'))='custom_eval_set_version_v2_'
+        or exists(select 1 from eval_set_versions x where x.eval_set_id=p.id and x.contract->>'schemaVersion' in ('custom-eval-set-storage-v2','custom-eval-set-record-v2','custom-eval-set-v2')))
+      union all select p.id from eval_items p left join eval_item_versions v on v.eval_item_id=p.id
+      where (p.id=any($1::text[]) or v.id=any($1::text[])) and (
+        left(p.id,length('custom_eval_item_v2_'))='custom_eval_item_v2_' or left(v.id,length('custom_eval_item_version_v2_'))='custom_eval_item_version_v2_'
+        or exists(select 1 from eval_item_versions x where x.eval_item_id=p.id and x.config->>'schemaVersion' in ('custom-eval-item-storage-v2','custom-eval-item-record-v2','custom-eval-item-v2'))) limit 1`, [sourceIds]);
+    if (owned.rows.length) throw Object.assign(new Error("eval_composition_identity_conflict"), { status:409,code:"eval_composition_identity_conflict" });
     await client.query(
       `
         insert into benchmarks (id, workspace_id, name, source, license)
@@ -957,7 +989,7 @@ export async function persistEvalRun(workspaceId: string, input: PersistedEvalRu
         where id = $3 or (workspace_id = $4 and idempotency_key = $5)))`,
       [input.plan.id, input.plan.planFingerprint, runId, workspaceId, idempotencyKey]);
     if (httpPlans.rows.length || input.plan.id.startsWith("http_eval_plan_")
-      || ["http-target-eval-v1", "http-eval-plan-record-v1", "http-eval-plan-storage-v1"].includes(String((input.plan as unknown as Record<string, unknown>).schemaVersion))) {
+      || ["http-target-eval-v1", "http-eval-plan-record-v1", "http-eval-plan-storage-v1", "http-target-eval-v2", "http-eval-plan-record-v2", "http-eval-plan-storage-v2"].includes(String((input.plan as unknown as Record<string, unknown>).schemaVersion))) {
       throw Object.assign(new Error("http_eval_legacy_collision"), { status: 409 });
     }
     const planResult = await client.query<{ id: string }>(
@@ -971,6 +1003,10 @@ export async function persistEvalRun(workspaceId: string, input: PersistedEvalRu
            and run_plans.resolved_plan ->> 'schemaVersion' is distinct from 'http-eval-plan-record-v1'
            and run_plans.resolved_plan ->> 'schemaVersion' is distinct from 'http-eval-plan-storage-v1'
            and run_plans.resolved_plan #>> '{content,schemaVersion}' is distinct from 'http-target-eval-v1'
+           and run_plans.resolved_plan ->> 'schemaVersion' is distinct from 'http-target-eval-v2'
+           and run_plans.resolved_plan ->> 'schemaVersion' is distinct from 'http-eval-plan-record-v2'
+           and run_plans.resolved_plan ->> 'schemaVersion' is distinct from 'http-eval-plan-storage-v2'
+           and run_plans.resolved_plan #>> '{content,schemaVersion}' is distinct from 'http-target-eval-v2'
            and left(run_plans.id, length('http_eval_plan_')) <> 'http_eval_plan_'
         returning id
       `,

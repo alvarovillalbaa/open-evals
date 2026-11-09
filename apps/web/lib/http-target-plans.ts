@@ -1,20 +1,22 @@
 import {
   httpEvalPlanHeadFromRecord, parseHttpEvalJson, parseHttpEvalPlanVersionRecord,
   prepareHttpEvalPlanDraft, prepareHttpEvalPlanSaveRequest, prepareHttpEvalPlanVersionRecord,
-  resolveHttpEvalPlanPreview
+  resolveHttpEvalPlanPreview, restoreCustomEvalSetVersionRecordV2, restoreCustomEvalItemVersionRecordV2
 } from "@open-evals/core";
+import type { HttpEvalPlanFamily, HttpEvalSetRef } from "@open-evals/core";
 import {
-  getHttpEvalPlan, getHttpEvalPlanHead, getHttpEvalPlanSources, getHttpEvalPlanVersion,
-  isDatabaseUnavailable, listHttpEvalPlans, listProvidedOutputSources, saveHttpEvalPlanVersion
+  getHttpEvalPlan, getHttpEvalPlanHead, getHttpEvalPlanSources, getHttpEvalPlanVersion, getCustomEvalSetVersionV2,
+  isDatabaseUnavailable, listHttpEvalPlans, listHttpEvalSources, saveHttpEvalPlanVersion
 } from "@open-evals/db";
 import type { RouteAuthContext } from "./auth";
 import { customEvalAccessAllowed } from "./custom-eval-access";
 import { requireCustomEvalAuth } from "./custom-evals";
-import type { HttpTargetPlanDetailView } from "./http-target-types";
+import type { HttpTargetPlanDetailView, HttpTargetPlanListView, HttpTargetPlanView, HttpTargetPlansView } from "./http-target-types";
 import type { LoadState } from "./loaders";
 
 const UUID = /^[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$/;
 const MAX_REQUEST_BYTES = 2 * 1024 * 1024;
+const compositionReaders = { restoreSet: restoreCustomEvalSetVersionRecordV2, restoreItem: restoreCustomEvalItemVersionRecordV2 };
 
 export class HttpTargetRequestError extends Error {
   constructor(readonly status: number, message: string) { super(message); this.name = "HttpTargetRequestError"; }
@@ -84,7 +86,7 @@ export function httpTargetErrorResponse(error: unknown): Response {
 export async function previewHttpTargetPlan(workspaceId: string, value: unknown) {
   const draft = prepareHttpEvalPlanDraft(value);
   const [sources, head] = await Promise.all([
-    getHttpEvalPlanSources(workspaceId, draft),
+    getHttpEvalPlanSources(workspaceId, draft, compositionReaders),
     getHttpEvalPlanHead(workspaceId, draft.planId, parseHttpEvalPlanVersionRecord)
   ]);
   if (!sources) throw new HttpTargetRequestError(404, "http_eval_sources_not_found");
@@ -94,12 +96,12 @@ export async function previewHttpTargetPlan(workspaceId: string, value: unknown)
 export async function saveHttpTargetPlan(auth: RouteAuthContext, value: unknown) {
   const request = prepareHttpEvalPlanSaveRequest(value);
   const result = await saveHttpEvalPlanVersion({ workspaceId: auth.workspaceId, actorId: auth.user.id }, request, {
-    prepare: prepareHttpEvalPlanVersionRecord, parse: parseHttpEvalPlanVersionRecord
+    prepare: prepareHttpEvalPlanVersionRecord, parse: parseHttpEvalPlanVersionRecord, ...compositionReaders
   });
   // A post-commit readback failure must retain an unknown client outcome for exact retry.
   try {
     const record = parseHttpEvalPlanVersionRecord(result.record);
-    if (record.workspaceId !== auth.workspaceId || record.content.draft.planId !== request.draft.planId
+    if (record.workspaceId !== auth.workspaceId || record.content.draft.schemaVersion !== request.draft.schemaVersion || record.content.draft.planId !== request.draft.planId
       || record.content.draft.versionId !== request.draft.versionId || record.previewFingerprint !== request.expectedPreviewFingerprint) throw new Error("identity");
     return { record, replayed: result.replayed };
   } catch { throw new HttpTargetRequestError(500, "http_eval_saved_plan_invalid"); }
@@ -121,12 +123,12 @@ export async function readHttpTargetPlanDetail(workspaceId: string, planId: stri
   const latest = detail.versions[0];
   if (!latest) throw new HttpTargetRequestError(500, "http_eval_head_invalid");
   const record = await readHttpTargetPlanVersion(workspaceId, planId, latest.versionId);
-  if (!record || record.fingerprint !== latest.fingerprint || record.storage.versionId !== latest.storageVersionId) throw new HttpTargetRequestError(500, "http_eval_head_invalid");
+  if (!record || record.fingerprint !== latest.fingerprint || record.storage.versionId !== latest.storageVersionId || record.content.schemaVersion !== latest.family) throw new HttpTargetRequestError(500, "http_eval_head_invalid");
   return { ...detail, head: httpEvalPlanHeadFromRecord(record), record };
 }
 
-export async function readHttpTargetPlanList(auth: RouteAuthContext) {
-  const [list, sources] = await Promise.all([listHttpEvalPlans(auth.workspaceId), listProvidedOutputSources(auth.workspaceId)]);
+export async function readHttpTargetPlanList(auth: RouteAuthContext): Promise<HttpTargetPlanListView> {
+  const [list, sources] = await Promise.all([listHttpEvalPlans(auth.workspaceId), listHttpEvalSources(auth.workspaceId)]);
   return { list, sources, canWrite: httpTargetCanWrite(auth) };
 }
 
@@ -146,10 +148,32 @@ export async function loadHttpTarget<T>(load: (auth: RouteAuthContext) => Promis
   }
 }
 
-export function loadHttpTargetPlans() { return loadHttpTarget(readHttpTargetPlanList); }
-export function loadHttpTargetPlan(planId: string) {
+export function loadHttpTargetPlans(requested?: { composition?: boolean; setId?: string; setVersionId?: string; copyPlanId?: string; copyVersionId?: string; sourceRequested?: boolean }): Promise<LoadState<HttpTargetPlansView>> {
   return loadHttpTarget(async auth => {
-    const [detail, sources] = await Promise.all([readHttpTargetPlanDetail(auth.workspaceId, planId), listProvidedOutputSources(auth.workspaceId)]);
+    const data = await readHttpTargetPlanList(auth);
+    const initialFamily: HttpEvalPlanFamily = requested?.composition ? "http-target-eval-v2" : "http-target-eval-v1";
+    let initialSetRefs: HttpEvalSetRef[] = [], initialDatasetId: string | undefined;
+    if (requested?.composition && requested.setId && requested.setVersionId && !requested.copyPlanId) {
+      if (UUID.test(requested.setId) && UUID.test(requested.setVersionId)) {
+        const stored = await getCustomEvalSetVersionV2(auth.workspaceId, requested.setId, requested.setVersionId, compositionReaders);
+        if (stored) {
+          const record = restoreCustomEvalSetVersionRecordV2(stored, auth.workspaceId);
+          initialSetRefs = [{ schemaVersion: "custom-eval-set-ref-v2", setId: record.draft.setId, versionId: record.draft.versionId, fingerprint: record.contract.fingerprint }];
+        }
+      }
+    } else if (requested?.composition && requested.copyPlanId && requested.copyVersionId && !requested.setId) {
+      const source = await readHttpTargetPlanVersion(auth.workspaceId, requested.copyPlanId, requested.copyVersionId);
+      if (source) {
+        initialDatasetId = source.content.draft.datasetVersionId;
+        initialSetRefs = source.content.schemaVersion === "http-target-eval-v2" ? source.content.draft.evalSetVersions : source.content.evalSets.map(set => ({ schemaVersion: "custom-eval-set-ref-v1", setId: set.contract.setId, versionId: set.contract.id, fingerprint: set.contract.fingerprint }));
+      }
+    }
+    return { ...data, initialFamily, initialSetRefs, initialDatasetId, requestedSourceUnavailable: Boolean(requested?.sourceRequested && initialSetRefs.length === 0) };
+  });
+}
+export function loadHttpTargetPlan(planId: string): Promise<LoadState<HttpTargetPlanView>> {
+  return loadHttpTarget(async auth => {
+    const [detail, sources] = await Promise.all([readHttpTargetPlanDetail(auth.workspaceId, planId), listHttpEvalSources(auth.workspaceId)]);
     return { detail, sources, canWrite: httpTargetCanWrite(auth) };
   });
 }

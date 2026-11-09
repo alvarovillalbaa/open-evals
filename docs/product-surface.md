@@ -4,9 +4,10 @@ The [owner's OpenEvals brief](https://app.notion.com/p/3b6a1ee8bd068037ac1dea74a
 explicitly asks for SDK-only trace workflows, a CLI, public developer/agent
 documentation, one Evals area, external benchmarks, Harbor tasks, scenarios,
 campaign algorithms and composable/versioned instructions with production A/B
-safety rollouts. The fresh connected response is an unverified22October edition
-with an unresolved embedded tweet; this document uses its explicit Features
-list. Repository AGENTS.md independently requires exactly Evals and Improve.
+safety rollouts. The retained connected observation returned a 22 October edition
+whose freshness was unverified, with an unresolved embedded tweet; this document
+uses its explicit Features list. Repository AGENTS.md independently requires
+exactly Evals and Improve.
 
 ## Current product surface
 
@@ -20,6 +21,10 @@ list. Repository AGENTS.md independently requires exactly Evals and Improve.
   one-item membership using immutable versions. Workspace sessions can inspect,
   edit, retry and recover saves; project keys and hosted demo ownership cannot
   acquire workspace authoring. [Exact contract](custom-evals.md).
+- `/evals/composition` defines reusable contains Eval Items and ordered sets of
+  exact saved item versions, with immutable history and save recovery. Two sets
+  can share the same check without cloning it. The versioned implementation and
+  its pending verification are in [the composition contract](evaluator-composition.md).
 - `/evals/datasets` authors complete JSON/JSONL datasets with explicit review
   declarations, immutable history and exact-version scoring links.
   [Dataset contract](custom-datasets.md).
@@ -27,6 +32,8 @@ list. Repository AGENTS.md independently requires exactly Evals and Improve.
   versions and a versioned public HTTP target into a named immutable plan.
   Preview, save and replay make no target call. Explicit execution uses durable
   row claims, stores actual responses and exposes uncertain-outcome recovery.
+  Explicit v2 plans retain overlapping set membership while scoring each unique
+  row/item pair once; existing v1 plans keep their original contract family.
   [HTTP contract and current proof limits](http-target-runs.md).
 - `/improve` leads to existing Instructions authoring and campaign history.
   Each section retains its own authenticated loader and access outcome. A saved
@@ -50,7 +57,7 @@ Authentication/database failures remain separate from a ready but empty workspac
 | Owner requirement | Remaining implementation |
 | --- | --- |
 | Evals contain Harbor tasks | Task identity/version/artifacts, task selection and actual Harbor execution integration |
-| Custom evals combine inputs and scoring | Saved datasets and immutable HTTP composition have recorded fixture checks; actual native execution and hosted acceptance remain unverified, alongside further target runtimes and evaluator types |
+| Custom evals combine inputs and scoring | Saved datasets and HTTP v1 retain their recorded fixture checks; reusable item/set v2 verification is pending. Actual native execution and hosted acceptance remain unverified, alongside further target runtimes and evaluator types |
 | Campaigns consume Evals and optimizer algorithms | Bind pinned eval definitions into actual approved campaign execution; current request preparation does not do this |
 | Improved instructions reach production with safe A/B rollout | Product approval, execution and release integration; existing primitives do not prove the complete flow |
 | Usable hosted app | Existing Auth/database/provider configuration and genuine current-source interaction acceptance |
