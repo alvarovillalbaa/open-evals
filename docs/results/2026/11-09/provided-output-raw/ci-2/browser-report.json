@@ -1,0 +1,369 @@
+{
+  "config": {
+    "argv": [
+      "/opt/hostedtoolcache/node/24.22.2/x64/bin/node",
+      "/home/runner/work/open-evals/open-evals/node_modules/.pnpm/@playwright+test@1.61.1/node_modules/@playwright/test/cli.js",
+      "test",
+      "--config",
+      "tests/e2e/provided-output-runs.browser.config.ts"
+    ],
+    "configFile": "/home/runner/work/open-evals/open-evals/tests/e2e/provided-output-runs.browser.config.ts",
+    "rootDir": "/home/runner/work/open-evals/open-evals/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": true,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 420000,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/home/runner/work/_temp/open-evals-provided-output-browser-evidence/browser-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium-owned-production",
+        "name": "chromium-owned-production",
+        "testDir": "/home/runner/work/open-evals/open-evals/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "provided-output-runs.browser.spec.ts"
+        ],
+        "timeout": 90000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/home/runner/work/_temp/open-evals-provided-output-browser-evidence/browser-report.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "provided-output-runs.browser.spec.ts",
+      "file": "provided-output-runs.browser.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "PO-BR01 desktop selects an older exact saved version and reloads all immutable scoring data",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-owned-production",
+              "projectName": "chromium-owned-production",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1974,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T13:21:27.837Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "desktop-exact-version-immutable-result",
+                      "contentType": "application/json",
+                      "body": "eyJzY2hlbWFWZXJzaW9uIjoicHJvdmlkZWQtb3V0cHV0LWJyb3dzZXItb2JzZXJ2YXRpb24tdjEiLCJ3b3Jrc3BhY2VJZCI6ImI0NWM0ZDlkLTBjZTMtNGQyMS1hMDQzLTMxNDU4YjRlMTRjZSIsImNvdW50cyI6eyJwbGFucyI6MSwicnVucyI6MSwic2FtcGxlcyI6MiwicmVzdWx0cyI6MiwiZ2F0ZXMiOjExLCJhdWRpdHMiOjF9LCJyZWNvcmRzIjpbeyJydW5JZCI6IjI3ZjA5MTE3LTdmNzgtNDIzMi1iMDBiLTM3N2E0ZDEzMWVlMCIsInBsYW5GaW5nZXJwcmludCI6IjExZjQ3MjEwMDllMDZhOWVlYTgyNmJiYTJjNDZmOTEyYjQ2ZDVkODMwZmMwZWM2ZDAxNDRmZDViMTUzNjE4ODIiLCJyZWNvcmRGaW5nZXJwcmludCI6IjgxMWEzNDViNzA1ZTU1MTcyYTdkZjBmMDU5NGNiYWMxOTdhMzU2ZGJlMDZmYTFhZGFmZGUyMWMzMjBjZDc3YTUiLCJkYXRhc2V0VmVyc2lvbklkIjoicHJvdmlkZWRfZGF0YXNldF82OWZkMTNkNi1iZTNiLTQ5NWEtODQ2NS01Yzg2NGE0NzRhNGFfdjEiLCJldmFsU2V0VmVyc2lvbklkIjoiYWI3MTc0ZTMtMjAzOC00YTUxLWJjZWEtMzViYjlmZDczMjhmIiwib3V0cHV0cyI6W3sicm93SWQiOiJwcm92aWRlZF9kYXRhc2V0XzY5ZmQxM2Q2LWJlM2ItNDk1YS04NDY1LTVjODY0YTQ3NGE0YV9hbHBoYSIsIm91dHB1dCI6IiAgQVBQUk9WRUQgYXV0aG9yZWQgYWxwaGEgcmVzcG9uc2Ug8J+nrVxuZXhhY3Qgc3BhY2VzICAifSx7InJvd0lkIjoicHJvdmlkZWRfZGF0YXNldF82OWZkMTNkNi1iZTNiLTQ5NWEtODQ2NS01Yzg2NGE0NzRhNGFfYmV0YSIsIm91dHB1dCI6IkFwcHJvdmVkIGJldGEgcmVzcG9uc2UifV0sImdhdGVMZXZlbHMiOlsiZmllbGQiLCJpdGVtX3JvdyIsInJvdyIsImRhdGFzZXQiLCJldmFsX3NldCIsInRhcmdldCIsImNyaXRpY2FsaXR5IiwicnVuIl19XSwiYXVkaXRSZXNvdXJjZUlkcyI6WyJwcm92aWRlZF9vdXRwdXRfcnVuX2I4ZTg3NTU2Njc2NjU1NTRmNjNjNGEwMGEwZmFlYmUwZGI2MjU1YzdkMGQ3MmI2NGY0YWU2MmVjZGU1N2QyZTUiXX0="
+                    },
+                    {
+                      "name": "owned-fixture-cleanup",
+                      "contentType": "application/json",
+                      "body": "eyJzY2hlbWFWZXJzaW9uIjoicHJvdmlkZWQtb3V0cHV0LWJyb3dzZXItY2xlYW51cC12MSIsInN0YXR1cyI6InJlbW92ZWQiLCJ3b3Jrc3BhY2VJZCI6ImI0NWM0ZDlkLTBjZTMtNGQyMS1hMDQzLTMxNDU4YjRlMTRjZSIsImFjdG9yQ291bnQiOjEsIm93bmVyc2hpcFZhbGlkYXRlZCI6dHJ1ZSwiYmVmb3JlIjp7InBsYW5zIjoxLCJydW5zIjoxLCJzYW1wbGVzIjoyLCJyZXN1bHRzIjoyLCJnYXRlcyI6MTEsImF1ZGl0cyI6MX0sImFmdGVyIjp7InBsYW5zIjowLCJydW5zIjowLCJzYW1wbGVzIjowLCJyZXN1bHRzIjowLCJnYXRlcyI6MCwiYXVkaXRzIjowfSwid29ya3NwYWNlQWJzZW50Ijp0cnVlLCJhY3RvcnNBYnNlbnQiOnRydWV9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "3229ac37ff91c793bfd2-8a15fdbbd4083db867cb",
+          "file": "provided-output-runs.browser.spec.ts",
+          "line": 90,
+          "column": 1
+        },
+        {
+          "title": "PO-BR02 a lost committed response retries the identical run after live source mutation without duplication",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-owned-production",
+              "projectName": "chromium-owned-production",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 10610,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveJSProperty\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByLabel('Actual output for Alpha', { exact: true })\nExpected: \u001b[32mtrue\u001b[39m\nTimeout: 10000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveJSProperty\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for getByLabel('Actual output for Alpha', { exact: true })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveJSProperty\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByLabel('Actual output for Alpha', { exact: true })\nExpected: \u001b[32mtrue\u001b[39m\nTimeout: 10000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveJSProperty\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for getByLabel('Actual output for Alpha', { exact: true })\u001b[22m\n\n    at /home/runner/work/open-evals/open-evals/tests/e2e/provided-output-runs.browser.spec.ts:161:39",
+                    "location": {
+                      "file": "/home/runner/work/open-evals/open-evals/tests/e2e/provided-output-runs.browser.spec.ts",
+                      "column": 39,
+                      "line": 161
+                    },
+                    "snippet": "  159 |   expect(first.replayed).toBe(false); expect(first.record.plan).toEqual(pinned);\n  160 |   await expect(page.locator('p[role=\"alert\"]')).toContainText(\"The run outcome is unknown.\");\n> 161 |   await expect(output(page, \"Alpha\")).toHaveJSProperty(\"readOnly\", true);\n      |                                       ^\n  162 |   await expect(datasetInput(page)).toHaveJSProperty(\"readOnly\", true);\n  163 |   await expect(page.getByRole(\"button\", { name: \"Load selected versions\", exact: true })).toBeDisabled();\n  164 |   await expectOneRun(owned, first.record);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/home/runner/work/open-evals/open-evals/tests/e2e/provided-output-runs.browser.spec.ts",
+                        "column": 39,
+                        "line": 161
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveJSProperty\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByLabel('Actual output for Alpha', { exact: true })\nExpected: \u001b[32mtrue\u001b[39m\nTimeout: 10000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveJSProperty\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for getByLabel('Actual output for Alpha', { exact: true })\u001b[22m\n\n\n  159 |   expect(first.replayed).toBe(false); expect(first.record.plan).toEqual(pinned);\n  160 |   await expect(page.locator('p[role=\"alert\"]')).toContainText(\"The run outcome is unknown.\");\n> 161 |   await expect(output(page, \"Alpha\")).toHaveJSProperty(\"readOnly\", true);\n      |                                       ^\n  162 |   await expect(datasetInput(page)).toHaveJSProperty(\"readOnly\", true);\n  163 |   await expect(page.getByRole(\"button\", { name: \"Load selected versions\", exact: true })).toBeDisabled();\n  164 |   await expectOneRun(owned, first.record);\n    at /home/runner/work/open-evals/open-evals/tests/e2e/provided-output-runs.browser.spec.ts:161:39"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T13:21:29.964Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/home/runner/work/_temp/open-evals-provided-output-browser-evidence/browser-output/provided-output-runs.brows-45976-utation-without-duplication-chromium-owned-production/test-failed-1.png"
+                    },
+                    {
+                      "name": "owned-fixture-cleanup",
+                      "contentType": "application/json",
+                      "body": "eyJzY2hlbWFWZXJzaW9uIjoicHJvdmlkZWQtb3V0cHV0LWJyb3dzZXItY2xlYW51cC12MSIsInN0YXR1cyI6InJlbW92ZWQiLCJ3b3Jrc3BhY2VJZCI6IjMwNDdlOGI1LTYwYzYtNGQwYi05ZGJlLTY3NmMwYmJjMTk0ZiIsImFjdG9yQ291bnQiOjEsIm93bmVyc2hpcFZhbGlkYXRlZCI6dHJ1ZSwiYmVmb3JlIjp7InBsYW5zIjoxLCJydW5zIjoxLCJzYW1wbGVzIjoyLCJyZXN1bHRzIjoyLCJnYXRlcyI6MTEsImF1ZGl0cyI6MX0sImFmdGVyIjp7InBsYW5zIjowLCJydW5zIjowLCJzYW1wbGVzIjowLCJyZXN1bHRzIjowLCJnYXRlcyI6MCwiYXVkaXRzIjowfSwid29ya3NwYWNlQWJzZW50Ijp0cnVlLCJhY3RvcnNBYnNlbnQiOnRydWV9"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/home/runner/work/_temp/open-evals-provided-output-browser-evidence/browser-output/provided-output-runs.brows-45976-utation-without-duplication-chromium-owned-production/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/home/runner/work/_temp/open-evals-provided-output-browser-evidence/browser-output/provided-output-runs.brows-45976-utation-without-duplication-chromium-owned-production/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/home/runner/work/open-evals/open-evals/tests/e2e/provided-output-runs.browser.spec.ts",
+                    "column": 39,
+                    "line": 161
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "3229ac37ff91c793bfd2-631ced513843e7e72271",
+          "file": "provided-output-runs.browser.spec.ts",
+          "line": 135,
+          "column": 1
+        },
+        {
+          "title": "PO-BR03 preview drift refuses the old intent and preserves outputs for an explicitly reviewed new run",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-owned-production",
+              "projectName": "chromium-owned-production",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 10958,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveValue\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByLabel('Actual output for Alpha', { exact: true })\nExpected: \u001b[32m\"approved retained alpha\"\u001b[39m\nTimeout: 10000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveValue\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for getByLabel('Actual output for Alpha', { exact: true })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveValue\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByLabel('Actual output for Alpha', { exact: true })\nExpected: \u001b[32m\"approved retained alpha\"\u001b[39m\nTimeout: 10000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveValue\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for getByLabel('Actual output for Alpha', { exact: true })\u001b[22m\n\n    at /home/runner/work/open-evals/open-evals/tests/e2e/provided-output-runs.browser.spec.ts:187:39",
+                    "location": {
+                      "file": "/home/runner/work/open-evals/open-evals/tests/e2e/provided-output-runs.browser.spec.ts",
+                      "column": 39,
+                      "line": 187
+                    },
+                    "snippet": "  185 |   expect(conflict.view).toEqual({ error: \"provided_output_preview_changed\" });\n  186 |   await expect(page.locator('p[role=\"alert\"]')).toContainText(\"The preview changed or this run ID conflicts with stored data.\");\n> 187 |   await expect(output(page, \"Alpha\")).toHaveValue(alpha); await expect(output(page, \"Beta\")).toHaveValue(beta);\n      |                                       ^\n  188 |   await expect(output(page, \"Alpha\")).toBeEditable();\n  189 |   await expect(page.getByRole(\"heading\", { name: \"3. Review and explicitly run\", exact: true })).toHaveCount(0);\n  190 |   await expectNoRuns(owned);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/home/runner/work/open-evals/open-evals/tests/e2e/provided-output-runs.browser.spec.ts",
+                        "column": 39,
+                        "line": 187
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveValue\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByLabel('Actual output for Alpha', { exact: true })\nExpected: \u001b[32m\"approved retained alpha\"\u001b[39m\nTimeout: 10000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveValue\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for getByLabel('Actual output for Alpha', { exact: true })\u001b[22m\n\n\n  185 |   expect(conflict.view).toEqual({ error: \"provided_output_preview_changed\" });\n  186 |   await expect(page.locator('p[role=\"alert\"]')).toContainText(\"The preview changed or this run ID conflicts with stored data.\");\n> 187 |   await expect(output(page, \"Alpha\")).toHaveValue(alpha); await expect(output(page, \"Beta\")).toHaveValue(beta);\n      |                                       ^\n  188 |   await expect(output(page, \"Alpha\")).toBeEditable();\n  189 |   await expect(page.getByRole(\"heading\", { name: \"3. Review and explicitly run\", exact: true })).toHaveCount(0);\n  190 |   await expectNoRuns(owned);\n    at /home/runner/work/open-evals/open-evals/tests/e2e/provided-output-runs.browser.spec.ts:187:39"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T13:21:41.000Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/home/runner/work/_temp/open-evals-provided-output-browser-evidence/browser-output/provided-output-runs.brows-58140-explicitly-reviewed-new-run-chromium-owned-production/test-failed-1.png"
+                    },
+                    {
+                      "name": "owned-fixture-cleanup",
+                      "contentType": "application/json",
+                      "body": "eyJzY2hlbWFWZXJzaW9uIjoicHJvdmlkZWQtb3V0cHV0LWJyb3dzZXItY2xlYW51cC12MSIsInN0YXR1cyI6InJlbW92ZWQiLCJ3b3Jrc3BhY2VJZCI6IjA5ODAyNTMzLTI2OTMtNGVlMi1hYTQyLTUyNjYwOTkwZTUyNyIsImFjdG9yQ291bnQiOjEsIm93bmVyc2hpcFZhbGlkYXRlZCI6dHJ1ZSwiYmVmb3JlIjp7InBsYW5zIjowLCJydW5zIjowLCJzYW1wbGVzIjowLCJyZXN1bHRzIjowLCJnYXRlcyI6MCwiYXVkaXRzIjowfSwiYWZ0ZXIiOnsicGxhbnMiOjAsInJ1bnMiOjAsInNhbXBsZXMiOjAsInJlc3VsdHMiOjAsImdhdGVzIjowLCJhdWRpdHMiOjB9LCJ3b3Jrc3BhY2VBYnNlbnQiOnRydWUsImFjdG9yc0Fic2VudCI6dHJ1ZX0="
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/home/runner/work/_temp/open-evals-provided-output-browser-evidence/browser-output/provided-output-runs.brows-58140-explicitly-reviewed-new-run-chromium-owned-production/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/home/runner/work/_temp/open-evals-provided-output-browser-evidence/browser-output/provided-output-runs.brows-58140-explicitly-reviewed-new-run-chromium-owned-production/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/home/runner/work/open-evals/open-evals/tests/e2e/provided-output-runs.browser.spec.ts",
+                    "column": 39,
+                    "line": 187
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "3229ac37ff91c793bfd2-20aa777b8c7a7d777821",
+          "file": "provided-output-runs.browser.spec.ts",
+          "line": 176,
+          "column": 1
+        },
+        {
+          "title": "PO-BR04 narrow validation, empty-output failure and workspace-session boundaries preserve private run data",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-owned-production",
+              "projectName": "chromium-owned-production",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 10934,
+                  "error": {
+                    "message": "TimeoutError: locator.fill: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByLabel('Actual output for Alpha', { exact: true })\u001b[22m\n",
+                    "stack": "TimeoutError: locator.fill: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByLabel('Actual output for Alpha', { exact: true })\u001b[22m\n\n    at /home/runner/work/open-evals/open-evals/tests/e2e/provided-output-runs.browser.spec.ts:229:31",
+                    "location": {
+                      "file": "/home/runner/work/open-evals/open-evals/tests/e2e/provided-output-runs.browser.spec.ts",
+                      "column": 31,
+                      "line": 229
+                    },
+                    "snippet": "  227 |   expect(previewPosts).toBe(0); expect(runPosts).toBe(0);\n  228 |   await expectNoRuns(owned);\n> 229 |   await output(page, \"Alpha\").fill(\"\"); await output(page, \"Beta\").fill(\"APPROVED narrow beta\");\n      |                               ^\n  230 |   const pinned = await preview(page);\n  231 |   expect(pinned.draft.outputs.find(row => row.rowId === owned.rowIds[0])?.output).toBe(\"\");\n  232 |   await layout(page); await expectNoRuns(owned); expect(runPosts).toBe(0);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/home/runner/work/open-evals/open-evals/tests/e2e/provided-output-runs.browser.spec.ts",
+                        "column": 31,
+                        "line": 229
+                      },
+                      "message": "TimeoutError: locator.fill: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByLabel('Actual output for Alpha', { exact: true })\u001b[22m\n\n\n  227 |   expect(previewPosts).toBe(0); expect(runPosts).toBe(0);\n  228 |   await expectNoRuns(owned);\n> 229 |   await output(page, \"Alpha\").fill(\"\"); await output(page, \"Beta\").fill(\"APPROVED narrow beta\");\n      |                               ^\n  230 |   const pinned = await preview(page);\n  231 |   expect(pinned.draft.outputs.find(row => row.rowId === owned.rowIds[0])?.output).toBe(\"\");\n  232 |   await layout(page); await expectNoRuns(owned); expect(runPosts).toBe(0);\n    at /home/runner/work/open-evals/open-evals/tests/e2e/provided-output-runs.browser.spec.ts:229:31"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T13:21:52.412Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/home/runner/work/_temp/open-evals-provided-output-browser-evidence/browser-output/provided-output-runs.brows-6765d-s-preserve-private-run-data-chromium-owned-production/test-failed-1.png"
+                    },
+                    {
+                      "name": "owned-fixture-cleanup",
+                      "contentType": "application/json",
+                      "body": "eyJzY2hlbWFWZXJzaW9uIjoicHJvdmlkZWQtb3V0cHV0LWJyb3dzZXItY2xlYW51cC12MSIsInN0YXR1cyI6InJlbW92ZWQiLCJ3b3Jrc3BhY2VJZCI6IjMzMGZlM2UzLTA3YTItNDU1My05Njk4LWQxOTU4ZjgzZmFiNyIsImFjdG9yQ291bnQiOjEsIm93bmVyc2hpcFZhbGlkYXRlZCI6dHJ1ZSwiYmVmb3JlIjp7InBsYW5zIjowLCJydW5zIjowLCJzYW1wbGVzIjowLCJyZXN1bHRzIjowLCJnYXRlcyI6MCwiYXVkaXRzIjowfSwiYWZ0ZXIiOnsicGxhbnMiOjAsInJ1bnMiOjAsInNhbXBsZXMiOjAsInJlc3VsdHMiOjAsImdhdGVzIjowLCJhdWRpdHMiOjB9LCJ3b3Jrc3BhY2VBYnNlbnQiOnRydWUsImFjdG9yc0Fic2VudCI6dHJ1ZX0="
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/home/runner/work/_temp/open-evals-provided-output-browser-evidence/browser-output/provided-output-runs.brows-6765d-s-preserve-private-run-data-chromium-owned-production/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/home/runner/work/_temp/open-evals-provided-output-browser-evidence/browser-output/provided-output-runs.brows-6765d-s-preserve-private-run-data-chromium-owned-production/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/home/runner/work/open-evals/open-evals/tests/e2e/provided-output-runs.browser.spec.ts",
+                    "column": 31,
+                    "line": 229
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "3229ac37ff91c793bfd2-4851c4b36b6b2e2a8d69",
+          "file": "provided-output-runs.browser.spec.ts",
+          "line": 212,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-09T13:21:27.400Z",
+    "duration": 36114.968,
+    "expected": 1,
+    "skipped": 0,
+    "unexpected": 3,
+    "flaky": 0
+  }
+}

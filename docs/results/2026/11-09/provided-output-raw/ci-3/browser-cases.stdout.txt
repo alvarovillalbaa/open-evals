@@ -1,0 +1,9 @@
+
+Running 4 tests using 1 worker
+
+  ✓  1 [chromium-owned-production] › tests/e2e/provided-output-runs.browser.spec.ts:90:1 › PO-BR01 desktop selects an older exact saved version and reloads all immutable scoring data (2.2s)
+  ✓  2 [chromium-owned-production] › tests/e2e/provided-output-runs.browser.spec.ts:135:1 › PO-BR02 a lost committed response retries the identical run after live source mutation without duplication (1.8s)
+  ✓  3 [chromium-owned-production] › tests/e2e/provided-output-runs.browser.spec.ts:176:1 › PO-BR03 preview drift refuses the old intent and preserves outputs for an explicitly reviewed new run (1.1s)
+  ✓  4 [chromium-owned-production] › tests/e2e/provided-output-runs.browser.spec.ts:212:1 › PO-BR04 narrow validation, empty-output failure and workspace-session boundaries preserve private run data (1.2s)
+
+  4 passed (7.1s)

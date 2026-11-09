@@ -1,0 +1,247 @@
+{
+  "schemaVersion": "provided-output-core-checks-v1",
+  "tier": "T1",
+  "status": "passed_after_preserved_failure",
+  "date": "2026-11-09",
+  "caseIdentity": {
+    "uniqueCases": 21,
+    "invocations": 2,
+    "caseIds": [
+      "PO01",
+      "PO02",
+      "PO03",
+      "PO04",
+      "PO05",
+      "PO06",
+      "PO07",
+      "PO08",
+      "PO09",
+      "PO10",
+      "PO11",
+      "PO12",
+      "PO13",
+      "PO14",
+      "PO15",
+      "PO16",
+      "PO17",
+      "PO18",
+      "PO19",
+      "PO20",
+      "PO21"
+    ],
+    "sameLiteralIdsAndTitles": true,
+    "note": "Two invocations of the same 21 case identities; not 42 distinct checks."
+  },
+  "command": {
+    "displayArgv": [
+      "node",
+      "--experimental-vm-modules",
+      "--test",
+      "tests/unit/provided-output-runs.test.mjs"
+    ],
+    "executablePath": "Retained privately; displayArgv normalizes the original executable path only.",
+    "runtimeVersion": "Not present in these command records."
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "failed",
+      "startedAt": "2026-11-09T12:58:55.432282+00:00",
+      "completedAt": "2026-11-09T12:58:56.003416+00:00",
+      "wallSeconds": 0.5704946250189096,
+      "nodeReportedDurationMs": 231.872916,
+      "exitCode": 1,
+      "commandRecordComplete": true,
+      "counts": {
+        "tests": 21,
+        "pass": 1,
+        "fail": 20,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "passedCaseIds": [
+        "PO09"
+      ],
+      "streams": {
+        "stdout": {
+          "bytes": 28678,
+          "sha256": "4d21230773cdd79a19fbf47e1dd5fc5028b1f2f6faffb1ae6dc15f88ad15e4de"
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "privateRecordDigests": {
+        "command": {
+          "bytes": 645,
+          "sha256": "258b1328d53f9e84ec36b5a76f2efe8d486ce2b339ade2d0bddfa807992f32cb"
+        },
+        "sourceManifest": {
+          "bytes": 968,
+          "sha256": "c278965f5bd10407b8ab635fd628b16f5af786434baa5736b7f9ede234c18604"
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "status": "passed",
+      "startedAt": "2026-11-09T13:03:36.938838+00:00",
+      "completedAt": "2026-11-09T13:03:48.685057+00:00",
+      "wallSeconds": 11.748498250031844,
+      "nodeReportedDurationMs": 11362.324,
+      "exitCode": 0,
+      "commandRecordComplete": true,
+      "counts": {
+        "tests": 21,
+        "pass": 21,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "passedCaseIds": [
+        "PO01",
+        "PO02",
+        "PO03",
+        "PO04",
+        "PO05",
+        "PO06",
+        "PO07",
+        "PO08",
+        "PO09",
+        "PO10",
+        "PO11",
+        "PO12",
+        "PO13",
+        "PO14",
+        "PO15",
+        "PO16",
+        "PO17",
+        "PO18",
+        "PO19",
+        "PO20",
+        "PO21"
+      ],
+      "streams": {
+        "stdout": {
+          "bytes": 2570,
+          "sha256": "6e833a7990925b888d00bb8f31ec60666ade95ad6db69c82a68c661d86d7dd28"
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "privateRecordDigests": {
+        "command": {
+          "bytes": 677,
+          "sha256": "8ce79d9709304e0b4cc69b8739f33f799487f1fb1f0a46a299cdfe28ddf297a7"
+        },
+        "sourceManifest": {
+          "bytes": 968,
+          "sha256": "416354853b273038f4639e232f9f39f4889d9e43773adb78e4675d62b29bdd70"
+        }
+      },
+      "sourcesChangedDuringRun": []
+    }
+  ],
+  "sourceBindings": [
+    {
+      "path": "packages/core/src/hash.ts",
+      "attempt1": {
+        "bytes": 969,
+        "sha256": "14c6a74e885a8bbc11b71a80bf4b4e306d4c6feb1868eafe59684eaeee3c7ab0"
+      },
+      "attempt2": {
+        "bytes": 969,
+        "sha256": "14c6a74e885a8bbc11b71a80bf4b4e306d4c6feb1868eafe59684eaeee3c7ab0"
+      }
+    },
+    {
+      "path": "packages/core/src/custom-evals.ts",
+      "attempt1": {
+        "bytes": 8855,
+        "sha256": "20276d52b66ef0e1fca0efa85b0d10ea8bde3b3d5854cd160664d40628e5886d"
+      },
+      "attempt2": {
+        "bytes": 8855,
+        "sha256": "20276d52b66ef0e1fca0efa85b0d10ea8bde3b3d5854cd160664d40628e5886d"
+      }
+    },
+    {
+      "path": "packages/core/src/eval-engine.ts",
+      "attempt1": {
+        "bytes": 10877,
+        "sha256": "847d2e79dcb767acece965ab25cbed1acc38cbebabc95372d273f694669c28d3"
+      },
+      "attempt2": {
+        "bytes": 10877,
+        "sha256": "847d2e79dcb767acece965ab25cbed1acc38cbebabc95372d273f694669c28d3"
+      }
+    },
+    {
+      "path": "packages/core/src/provided-output-runs.ts",
+      "attempt1": {
+        "bytes": 23797,
+        "sha256": "29d80b27159b101a70711f88e9016d7a7d0dcc50c971fbcf46a2a38d1f0f504d"
+      },
+      "attempt2": {
+        "bytes": 23809,
+        "sha256": "1d4268df1886158630c19b7cbc040118cef4ee32b42bc60e2438c7dd2efdf38d"
+      }
+    },
+    {
+      "path": "packages/core/src/provided-output-types.ts",
+      "attempt1": {
+        "bytes": 3455,
+        "sha256": "99b88738f66152d279ba1b7d540c7556cba26fbf779ff8982dcaf0ae61ffe18d"
+      },
+      "attempt2": {
+        "bytes": 3455,
+        "sha256": "99b88738f66152d279ba1b7d540c7556cba26fbf779ff8982dcaf0ae61ffe18d"
+      }
+    },
+    {
+      "path": "tests/unit/provided-output-runs.test.mjs",
+      "attempt1": {
+        "bytes": 22589,
+        "sha256": "f11cca18585ce4a4c6a76354eb926c00502df0d558a32d24469aa76a5cace87b"
+      },
+      "attempt2": {
+        "bytes": 22730,
+        "sha256": "0825a64cd62a32ec345cbec229ee2f88b68a486780eda37c391be42f188e28a4"
+      }
+    }
+  ],
+  "correction": {
+    "scope": [
+      "packages/core/src/provided-output-runs.ts",
+      "tests/unit/provided-output-runs.test.mjs"
+    ],
+    "cause": "The original UUID validator omitted one four-hex segment and rejected valid canonical UUID fixtures.",
+    "productionChange": "One regex line corrected from four segments to the canonical 8-4-4-4-12 shape.",
+    "testChange": "Two malformed four-segment negative inputs added inside existing PO04; all 21 literal IDs and titles retained.",
+    "changedBoundSources": 2,
+    "unchangedBoundSources": 4,
+    "failedAttemptGitCommit": null,
+    "sourceIdentity": "Frozen local source bodies, identified above; no pre-QA commit identity is asserted."
+  },
+  "retrieval": {
+    "publicRawCopies": false,
+    "privateRetained": [
+      "Both command records",
+      "Both six-file source manifests and exact source bodies",
+      "Both original stdout and stderr streams"
+    ],
+    "validation": "The receipt author independently checked retained stream/source byte lengths and SHA256 hashes and compared all 21 observed IDs and titles.",
+    "boundary": "Raw private originals are not bundled here or publicly retrievable from this receipt. Hashes identify the retained bytes; they do not make those bytes public."
+  },
+  "proofLimits": [
+    "Actual pure core modules, including actual hash.ts and Node crypto, executed through the built-in TypeScript eraser and VM module loader against bounded authored JSON.",
+    "The bound provided-output-types.ts file is type-only; this lane is not a TypeScript compile or application build.",
+    "Both stdout originals retain the experimental VM Modules and stripTypeScriptTypes warnings.",
+    "No database, HTTP, browser, Auth/RLS, model/provider, CI or production acceptance is established by these 21 T1 cases. Existing earlier check receipts were not replayed."
+  ]
+}

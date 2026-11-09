@@ -1,0 +1,267 @@
+{
+  "config": {
+    "argv": [
+      "/opt/hostedtoolcache/node/24.22.2/x64/bin/node",
+      "/home/runner/work/open-evals/open-evals/node_modules/.pnpm/@playwright+test@1.61.1/node_modules/@playwright/test/cli.js",
+      "test",
+      "--config",
+      "tests/e2e/provided-output-runs.browser.config.ts"
+    ],
+    "configFile": "/home/runner/work/open-evals/open-evals/tests/e2e/provided-output-runs.browser.config.ts",
+    "rootDir": "/home/runner/work/open-evals/open-evals/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": true,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 420000,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/home/runner/work/_temp/open-evals-provided-output-browser-evidence/browser-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium-owned-production",
+        "name": "chromium-owned-production",
+        "testDir": "/home/runner/work/open-evals/open-evals/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "provided-output-runs.browser.spec.ts"
+        ],
+        "timeout": 90000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/home/runner/work/_temp/open-evals-provided-output-browser-evidence/browser-report.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "provided-output-runs.browser.spec.ts",
+      "file": "provided-output-runs.browser.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "PO-BR01 desktop selects an older exact saved version and reloads all immutable scoring data",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-owned-production",
+              "projectName": "chromium-owned-production",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2184,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T13:30:37.954Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "desktop-exact-version-immutable-result",
+                      "contentType": "application/json",
+                      "body": "eyJzY2hlbWFWZXJzaW9uIjoicHJvdmlkZWQtb3V0cHV0LWJyb3dzZXItb2JzZXJ2YXRpb24tdjEiLCJ3b3Jrc3BhY2VJZCI6IjdiNDFlYmMzLTk3ZTQtNDdlNC1hNGFlLTcyYmVlMmM2YzE3NiIsImNvdW50cyI6eyJwbGFucyI6MSwicnVucyI6MSwic2FtcGxlcyI6MiwicmVzdWx0cyI6MiwiZ2F0ZXMiOjExLCJhdWRpdHMiOjF9LCJyZWNvcmRzIjpbeyJydW5JZCI6IjgyMDQ0MWFkLTRmN2QtNDgwOS1hNTk4LWU0ODg2ZGNlOWZjOSIsInBsYW5GaW5nZXJwcmludCI6IjQzNzJhMGRjYWEyZDI1ZTU3MzYzZWU4NmJkYWRiNTUyZWNjZDYwNzc1OTRiMDMzNzVhZDc2NzJhMGYwM2E5NDgiLCJyZWNvcmRGaW5nZXJwcmludCI6IjE1M2MxMzFhYTRjNWQxZmU0NzA0NTg3Y2UzOGZjNWFjZWJhYWVkM2VjZDEzMTM4MjdlMTQxOTRhNDI4MGY2YTMiLCJkYXRhc2V0VmVyc2lvbklkIjoicHJvdmlkZWRfZGF0YXNldF8wMDYxMDdjMC1mZGRjLTQ1MDItOTkyZi0zMTMxMzY4NGM0Y2ZfdjEiLCJldmFsU2V0VmVyc2lvbklkIjoiYmJlYmU0NzMtN2QzOC00YTc5LWFmMDAtZWZmZTdhOWMyMjk0Iiwib3V0cHV0cyI6W3sicm93SWQiOiJwcm92aWRlZF9kYXRhc2V0XzAwNjEwN2MwLWZkZGMtNDUwMi05OTJmLTMxMzEzNjg0YzRjZl9hbHBoYSIsIm91dHB1dCI6IiAgQVBQUk9WRUQgYXV0aG9yZWQgYWxwaGEgcmVzcG9uc2Ug8J+nrVxuZXhhY3Qgc3BhY2VzICAifSx7InJvd0lkIjoicHJvdmlkZWRfZGF0YXNldF8wMDYxMDdjMC1mZGRjLTQ1MDItOTkyZi0zMTMxMzY4NGM0Y2ZfYmV0YSIsIm91dHB1dCI6IkFwcHJvdmVkIGJldGEgcmVzcG9uc2UifV0sImdhdGVMZXZlbHMiOlsiZmllbGQiLCJpdGVtX3JvdyIsInJvdyIsImRhdGFzZXQiLCJldmFsX3NldCIsInRhcmdldCIsImNyaXRpY2FsaXR5IiwicnVuIl19XSwiYXVkaXRSZXNvdXJjZUlkcyI6WyJwcm92aWRlZF9vdXRwdXRfcnVuXzRlYmM3MWYxMGUwZWM1Zjk4MDAwZGY0ZDgxMzI4MjVlMTZjMGYyYmRjMTYxZmQ4YTQ4OWIzNmEwOTMxODBmYzEiXX0="
+                    },
+                    {
+                      "name": "owned-fixture-cleanup",
+                      "contentType": "application/json",
+                      "body": "eyJzY2hlbWFWZXJzaW9uIjoicHJvdmlkZWQtb3V0cHV0LWJyb3dzZXItY2xlYW51cC12MSIsInN0YXR1cyI6InJlbW92ZWQiLCJ3b3Jrc3BhY2VJZCI6IjdiNDFlYmMzLTk3ZTQtNDdlNC1hNGFlLTcyYmVlMmM2YzE3NiIsImFjdG9yQ291bnQiOjEsIm93bmVyc2hpcFZhbGlkYXRlZCI6dHJ1ZSwiYmVmb3JlIjp7InBsYW5zIjoxLCJydW5zIjoxLCJzYW1wbGVzIjoyLCJyZXN1bHRzIjoyLCJnYXRlcyI6MTEsImF1ZGl0cyI6MX0sImFmdGVyIjp7InBsYW5zIjowLCJydW5zIjowLCJzYW1wbGVzIjowLCJyZXN1bHRzIjowLCJnYXRlcyI6MCwiYXVkaXRzIjowfSwid29ya3NwYWNlQWJzZW50Ijp0cnVlLCJhY3RvcnNBYnNlbnQiOnRydWV9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "3229ac37ff91c793bfd2-8a15fdbbd4083db867cb",
+          "file": "provided-output-runs.browser.spec.ts",
+          "line": 90,
+          "column": 1
+        },
+        {
+          "title": "PO-BR02 a lost committed response retries the identical run after live source mutation without duplication",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-owned-production",
+              "projectName": "chromium-owned-production",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1812,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T13:30:40.323Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "lost-response-exact-retry-after-source-change",
+                      "contentType": "application/json",
+                      "body": "eyJzY2hlbWFWZXJzaW9uIjoicHJvdmlkZWQtb3V0cHV0LWJyb3dzZXItb2JzZXJ2YXRpb24tdjEiLCJ3b3Jrc3BhY2VJZCI6Ijg5ZGM2ZDU0LWRkMjEtNGU5ZS1iZTQ0LTExNjQ1NmU1ZjRmZCIsImNvdW50cyI6eyJwbGFucyI6MSwicnVucyI6MSwic2FtcGxlcyI6MiwicmVzdWx0cyI6MiwiZ2F0ZXMiOjExLCJhdWRpdHMiOjF9LCJyZWNvcmRzIjpbeyJydW5JZCI6ImE2ZWQ0YTgwLWNiYzEtNDIzZi1iOWRhLTk2ZTc4NmNlZWI0OSIsInBsYW5GaW5nZXJwcmludCI6ImMyZjQ3MTk3OTAxMmNhY2NhNDk1ZDAwZmY4MDdjZTYzMmFjZjI5MGY1MTU0MmY5NDI3MTQ3ODJmZDZjNmY2MmMiLCJyZWNvcmRGaW5nZXJwcmludCI6ImJmNjM5ZWU3NTY3MjdhNDBkOWNmMDY4YzVmODYyNzNhNjdkMmEzMzVhNWUxOTBmNWQ3MWYzZjMxMDlhZTRmY2EiLCJkYXRhc2V0VmVyc2lvbklkIjoicHJvdmlkZWRfZGF0YXNldF81MTk2ODM4OC0xNGI4LTRjYzAtOWJjYS01YzdkMmE2MjAwMWNfdjEiLCJldmFsU2V0VmVyc2lvbklkIjoiNTQ1ZmMzMzUtMDBhNS00YmQyLTlkNTgtMDc0N2QwNjVlYmRkIiwib3V0cHV0cyI6W3sicm93SWQiOiJwcm92aWRlZF9kYXRhc2V0XzUxOTY4Mzg4LTE0YjgtNGNjMC05YmNhLTVjN2QyYTYyMDAxY19hbHBoYSIsIm91dHB1dCI6ImFwcHJvdmVkIGFscGhhIGJlZm9yZSBtdXRhdGlvbiJ9LHsicm93SWQiOiJwcm92aWRlZF9kYXRhc2V0XzUxOTY4Mzg4LTE0YjgtNGNjMC05YmNhLTVjN2QyYTYyMDAxY19iZXRhIiwib3V0cHV0IjoiYXBwcm92ZWQgYmV0YSBiZWZvcmUgbXV0YXRpb24ifV0sImdhdGVMZXZlbHMiOlsiZmllbGQiLCJpdGVtX3JvdyIsInJvdyIsImRhdGFzZXQiLCJldmFsX3NldCIsInRhcmdldCIsImNyaXRpY2FsaXR5IiwicnVuIl19XSwiYXVkaXRSZXNvdXJjZUlkcyI6WyJwcm92aWRlZF9vdXRwdXRfcnVuXzg4NTI2ODZlNDU1Y2Y2ZDA0NjkyYzU0OTI3NDFhOTZiNmNmZDZkYzQwZTViNDI3NTI3Y2M3MmI4NjkwOThjZWEiXX0="
+                    },
+                    {
+                      "name": "owned-fixture-cleanup",
+                      "contentType": "application/json",
+                      "body": "eyJzY2hlbWFWZXJzaW9uIjoicHJvdmlkZWQtb3V0cHV0LWJyb3dzZXItY2xlYW51cC12MSIsInN0YXR1cyI6InJlbW92ZWQiLCJ3b3Jrc3BhY2VJZCI6Ijg5ZGM2ZDU0LWRkMjEtNGU5ZS1iZTQ0LTExNjQ1NmU1ZjRmZCIsImFjdG9yQ291bnQiOjEsIm93bmVyc2hpcFZhbGlkYXRlZCI6dHJ1ZSwiYmVmb3JlIjp7InBsYW5zIjoxLCJydW5zIjoxLCJzYW1wbGVzIjoyLCJyZXN1bHRzIjoyLCJnYXRlcyI6MTEsImF1ZGl0cyI6MX0sImFmdGVyIjp7InBsYW5zIjowLCJydW5zIjowLCJzYW1wbGVzIjowLCJyZXN1bHRzIjowLCJnYXRlcyI6MCwiYXVkaXRzIjowfSwid29ya3NwYWNlQWJzZW50Ijp0cnVlLCJhY3RvcnNBYnNlbnQiOnRydWV9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "3229ac37ff91c793bfd2-631ced513843e7e72271",
+          "file": "provided-output-runs.browser.spec.ts",
+          "line": 135,
+          "column": 1
+        },
+        {
+          "title": "PO-BR03 preview drift refuses the old intent and preserves outputs for an explicitly reviewed new run",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-owned-production",
+              "projectName": "chromium-owned-production",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1054,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T13:30:42.147Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "preview-drift-explicit-new-intent",
+                      "contentType": "application/json",
+                      "body": "eyJzY2hlbWFWZXJzaW9uIjoicHJvdmlkZWQtb3V0cHV0LWJyb3dzZXItb2JzZXJ2YXRpb24tdjEiLCJ3b3Jrc3BhY2VJZCI6Ijc5NDQxY2YzLThmODMtNGE2NC05MDE2LWM2M2I4MDJkOWUzMSIsImNvdW50cyI6eyJwbGFucyI6MSwicnVucyI6MSwic2FtcGxlcyI6MiwicmVzdWx0cyI6MiwiZ2F0ZXMiOjExLCJhdWRpdHMiOjF9LCJyZWNvcmRzIjpbeyJydW5JZCI6IjM5ZjMwOTdhLTFmMzItNDllYi1iY2M3LWI0ODM0OTFlN2MyZSIsInBsYW5GaW5nZXJwcmludCI6IjViZDI1MGI1YjJkYjQ0M2Q1MzU3YTM5ZGRkYTY3NDdhYTAzYzQ5ZjYyNjcwZjkyYjRiMDAwMTNhM2UxOGExYWQiLCJyZWNvcmRGaW5nZXJwcmludCI6ImRiOTUwYzBjMjQ2NDFhMWYzZGEyOTFkOWU2NWVlZTI5MDQ3NDc1NmI4MmE0MzE2YThiNDA4MGM0ODUyZGFlNjUiLCJkYXRhc2V0VmVyc2lvbklkIjoicHJvdmlkZWRfZGF0YXNldF9mY2ViZDEzNy00ZTg2LTQ3ZjUtODQ4My1hYzVkYmE1ZDViNDZfdjEiLCJldmFsU2V0VmVyc2lvbklkIjoiZjU5YjE0NTctZDI5YS00YTEwLWFmYzgtYWQ2YjBhOGEwN2I2Iiwib3V0cHV0cyI6W3sicm93SWQiOiJwcm92aWRlZF9kYXRhc2V0X2ZjZWJkMTM3LTRlODYtNDdmNS04NDgzLWFjNWRiYTVkNWI0Nl9hbHBoYSIsIm91dHB1dCI6ImFwcHJvdmVkIHJldGFpbmVkIGFscGhhIn0seyJyb3dJZCI6InByb3ZpZGVkX2RhdGFzZXRfZmNlYmQxMzctNGU4Ni00N2Y1LTg0ODMtYWM1ZGJhNWQ1YjQ2X2JldGEiLCJvdXRwdXQiOiJhcHByb3ZlZCByZXRhaW5lZCBiZXRhIn1dLCJnYXRlTGV2ZWxzIjpbImZpZWxkIiwiaXRlbV9yb3ciLCJyb3ciLCJkYXRhc2V0IiwiZXZhbF9zZXQiLCJ0YXJnZXQiLCJjcml0aWNhbGl0eSIsInJ1biJdfV0sImF1ZGl0UmVzb3VyY2VJZHMiOlsicHJvdmlkZWRfb3V0cHV0X3J1bl8xMzhhMDM2YzljNjExMTg2MTI1MTMzYjQxZTQ3YjhkYzJjNThjNzI0M2JlZTMyMDEwYTUyOTM4YWM2N2UyOWE2Il19"
+                    },
+                    {
+                      "name": "owned-fixture-cleanup",
+                      "contentType": "application/json",
+                      "body": "eyJzY2hlbWFWZXJzaW9uIjoicHJvdmlkZWQtb3V0cHV0LWJyb3dzZXItY2xlYW51cC12MSIsInN0YXR1cyI6InJlbW92ZWQiLCJ3b3Jrc3BhY2VJZCI6Ijc5NDQxY2YzLThmODMtNGE2NC05MDE2LWM2M2I4MDJkOWUzMSIsImFjdG9yQ291bnQiOjEsIm93bmVyc2hpcFZhbGlkYXRlZCI6dHJ1ZSwiYmVmb3JlIjp7InBsYW5zIjoxLCJydW5zIjoxLCJzYW1wbGVzIjoyLCJyZXN1bHRzIjoyLCJnYXRlcyI6MTEsImF1ZGl0cyI6MX0sImFmdGVyIjp7InBsYW5zIjowLCJydW5zIjowLCJzYW1wbGVzIjowLCJyZXN1bHRzIjowLCJnYXRlcyI6MCwiYXVkaXRzIjowfSwid29ya3NwYWNlQWJzZW50Ijp0cnVlLCJhY3RvcnNBYnNlbnQiOnRydWV9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "3229ac37ff91c793bfd2-20aa777b8c7a7d777821",
+          "file": "provided-output-runs.browser.spec.ts",
+          "line": 176,
+          "column": 1
+        },
+        {
+          "title": "PO-BR04 narrow validation, empty-output failure and workspace-session boundaries preserve private run data",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-owned-production",
+              "projectName": "chromium-owned-production",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1217,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T13:30:43.213Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "narrow-empty-output-gates-and-access-boundary",
+                      "contentType": "application/json",
+                      "body": "eyJzY2hlbWFWZXJzaW9uIjoicHJvdmlkZWQtb3V0cHV0LWJyb3dzZXItb2JzZXJ2YXRpb24tdjEiLCJ3b3Jrc3BhY2VJZCI6Ijg4NTRkZWU1LTk3MTktNDc3NS05NGE4LWVhY2U1NDFhOGFjZiIsImNvdW50cyI6eyJwbGFucyI6MSwicnVucyI6MSwic2FtcGxlcyI6MiwicmVzdWx0cyI6MiwiZ2F0ZXMiOjExLCJhdWRpdHMiOjF9LCJyZWNvcmRzIjpbeyJydW5JZCI6IjQ1YzNjZjZiLTBmZTItNGI3Ni05NDM1LWMwYmI0ZTI5MWNlOSIsInBsYW5GaW5nZXJwcmludCI6IjZkNDNhMDVlMDFmNTZkYjI1MWU5MGM5ZDBhYjU3ODNlZDEyMTkyNjc3YmQ0Y2U5ZTFmNjE5NTJhYmUzNTI0ZjciLCJyZWNvcmRGaW5nZXJwcmludCI6Ijk0NjRhMGIwYmJlZWZiNDE3MmRhYWNkMDY1YjIyODhhODRkM2VlNTJhYTYzNDk5ZWE1NmE5MTc0OWMyNTc5NzEiLCJkYXRhc2V0VmVyc2lvbklkIjoicHJvdmlkZWRfZGF0YXNldF8yZGM3NWE0YS1iNWZiLTRjZGEtYmIxZC0zMWMwNTU5OWZlM2ZfdjEiLCJldmFsU2V0VmVyc2lvbklkIjoiNDc3YTNhNTYtNGViNC00YTc5LWJjMDgtZmEyNTc3ZTgzZTM2Iiwib3V0cHV0cyI6W3sicm93SWQiOiJwcm92aWRlZF9kYXRhc2V0XzJkYzc1YTRhLWI1ZmItNGNkYS1iYjFkLTMxYzA1NTk5ZmUzZl9hbHBoYSIsIm91dHB1dCI6IiJ9LHsicm93SWQiOiJwcm92aWRlZF9kYXRhc2V0XzJkYzc1YTRhLWI1ZmItNGNkYS1iYjFkLTMxYzA1NTk5ZmUzZl9iZXRhIiwib3V0cHV0IjoiQVBQUk9WRUQgbmFycm93IGJldGEifV0sImdhdGVMZXZlbHMiOlsiZmllbGQiLCJpdGVtX3JvdyIsInJvdyIsImRhdGFzZXQiLCJldmFsX3NldCIsInRhcmdldCIsImNyaXRpY2FsaXR5IiwicnVuIl19XSwiYXVkaXRSZXNvdXJjZUlkcyI6WyJwcm92aWRlZF9vdXRwdXRfcnVuXzAzMzI0MTZkYzBlODJhNzA3ZjBiNGQyNjhiOTZhNTMwNDYyZTNkOGNiZTU2YzFjMjI3OTI1ZjQ1YTJhYjcwMzYiXX0="
+                    },
+                    {
+                      "name": "owned-fixture-cleanup",
+                      "contentType": "application/json",
+                      "body": "eyJzY2hlbWFWZXJzaW9uIjoicHJvdmlkZWQtb3V0cHV0LWJyb3dzZXItY2xlYW51cC12MSIsInN0YXR1cyI6InJlbW92ZWQiLCJ3b3Jrc3BhY2VJZCI6Ijg4NTRkZWU1LTk3MTktNDc3NS05NGE4LWVhY2U1NDFhOGFjZiIsImFjdG9yQ291bnQiOjIsIm93bmVyc2hpcFZhbGlkYXRlZCI6dHJ1ZSwiYmVmb3JlIjp7InBsYW5zIjoxLCJydW5zIjoxLCJzYW1wbGVzIjoyLCJyZXN1bHRzIjoyLCJnYXRlcyI6MTEsImF1ZGl0cyI6MX0sImFmdGVyIjp7InBsYW5zIjowLCJydW5zIjowLCJzYW1wbGVzIjowLCJyZXN1bHRzIjowLCJnYXRlcyI6MCwiYXVkaXRzIjowfSwid29ya3NwYWNlQWJzZW50Ijp0cnVlLCJhY3RvcnNBYnNlbnQiOnRydWV9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "3229ac37ff91c793bfd2-4851c4b36b6b2e2a8d69",
+          "file": "provided-output-runs.browser.spec.ts",
+          "line": 212,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-09T13:30:37.425Z",
+    "duration": 7080.577,
+    "expected": 4,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

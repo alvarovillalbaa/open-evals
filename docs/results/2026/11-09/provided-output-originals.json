@@ -1,0 +1,105 @@
+{
+  "schemaVersion": "provided-output-originals-v1",
+  "source": "Exact ORIGINAL_CHUNK base64 ranges emitted in the three GitHub job logs; every selected file independently reconstructed and byte/SHA256 verified.",
+  "files": [
+    {
+      "attempt": 1,
+      "path": "docs/results/2026/11-09/provided-output-raw/ci-1/cleanup.json",
+      "bytes": 107,
+      "sha256": "14ec35b010cb6f8a6cff628fa6d685d316e568668104d759719014e4f5939246"
+    },
+    {
+      "attempt": 2,
+      "path": "docs/results/2026/11-09/provided-output-raw/ci-2/postgres-cases.stdout.txt",
+      "bytes": 4100,
+      "sha256": "042797fdd26de4822ccc6fa6d580aedf3642a28dfb0e943f7e05da471923ddcb"
+    },
+    {
+      "attempt": 2,
+      "path": "docs/results/2026/11-09/provided-output-raw/ci-2/postgres-cases.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "attempt": 2,
+      "path": "docs/results/2026/11-09/provided-output-raw/ci-2/postgres-fixture-absence.json",
+      "bytes": 590,
+      "sha256": "b78161231d6732f1863913a89b28b63ebcd0876a497be566d1e16d4dd139c937"
+    },
+    {
+      "attempt": 2,
+      "path": "docs/results/2026/11-09/provided-output-raw/ci-2/browser-cases.stdout.txt",
+      "bytes": 10375,
+      "sha256": "465fb442f47b6484750c562501a08d812352bdec51ee81cb0daca3a9385b7fdf"
+    },
+    {
+      "attempt": 2,
+      "path": "docs/results/2026/11-09/provided-output-raw/ci-2/browser-cases.stderr.txt",
+      "bytes": 489,
+      "sha256": "069a6173189694d56ff57273462eafc5834e00ca5dbd894d15065f63a777de64"
+    },
+    {
+      "attempt": 2,
+      "path": "docs/results/2026/11-09/provided-output-raw/ci-2/browser-report.json",
+      "bytes": 24956,
+      "sha256": "415d2a9242a8e81c69164b5a39af155f1e997dc86eb36de3ee7f5503aa4e4689"
+    },
+    {
+      "attempt": 2,
+      "path": "docs/results/2026/11-09/provided-output-raw/ci-2/unprotected-tracked-delta.json",
+      "bytes": 3811,
+      "sha256": "b3d8712c526b217560b1432b44a01cb55136faa225a9d1290b992cf5af542a86"
+    },
+    {
+      "attempt": 2,
+      "path": "docs/results/2026/11-09/provided-output-raw/ci-2/cleanup.json",
+      "bytes": 663,
+      "sha256": "a4fba7c9915f2c259158419afa9ca4dfaff52a851a2471cf58bb21e8014b6b01"
+    },
+    {
+      "attempt": 3,
+      "path": "docs/results/2026/11-09/provided-output-raw/ci-3/postgres-fixture-absence.json",
+      "bytes": 590,
+      "sha256": "68ed94f199390f0c553cde3665979992045c666dd469532f5733f45526345e6a"
+    },
+    {
+      "attempt": 3,
+      "path": "docs/results/2026/11-09/provided-output-raw/ci-3/browser-cases.stdout.txt",
+      "bytes": 879,
+      "sha256": "0414060117041228e8a3804c783a1c290c541980ec5147899242d44b69a05bc1"
+    },
+    {
+      "attempt": 3,
+      "path": "docs/results/2026/11-09/provided-output-raw/ci-3/browser-cases.stderr.txt",
+      "bytes": 163,
+      "sha256": "e9a06f9811eebe4d17f68a3b586c9d4f5fd9a7b8d7547d750c11d785615db761"
+    },
+    {
+      "attempt": 3,
+      "path": "docs/results/2026/11-09/provided-output-raw/ci-3/browser-report.json",
+      "bytes": 15696,
+      "sha256": "6bfa07bfcd1ebda4fb2b2ed0754dae7fe5cff85f8005366061f0facdb8ca2f1d"
+    },
+    {
+      "attempt": 3,
+      "path": "docs/results/2026/11-09/provided-output-raw/ci-3/unprotected-tracked-delta.json",
+      "bytes": 3811,
+      "sha256": "b3d8712c526b217560b1432b44a01cb55136faa225a9d1290b992cf5af542a86"
+    },
+    {
+      "attempt": 3,
+      "path": "docs/results/2026/11-09/provided-output-raw/ci-3/cleanup.json",
+      "bytes": 663,
+      "sha256": "ead36a90efb9c689aec4d8687c07503b95b1dd8b5ad9d1456b30e744b6ec4aff"
+    }
+  ],
+  "count": 15,
+  "bytes": 66893,
+  "limits": [
+    "These are 15 selected complete originals, not the full artifact contents.",
+    "First-run failed source diffs were recovered only as labelled diagnostic tails; complete stdout remains artifact metadata/unread.",
+    "Local pure-test streams retain private absolute paths and are represented only by hashes in the separate core receipt.",
+    "Artifact ZIP bytes, screenshots, traces, raw app/build streams, HTTP bodies and headers were not downloaded or verified.",
+    "Public CI runner paths and authored disposable fixtures are preserved verbatim in these originals."
+  ]
+}

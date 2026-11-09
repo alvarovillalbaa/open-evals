@@ -1,0 +1,118 @@
+
+Running 4 tests using 1 worker
+
+  ✓  1 [chromium-owned-production] › tests/e2e/provided-output-runs.browser.spec.ts:90:1 › PO-BR01 desktop selects an older exact saved version and reloads all immutable scoring data (2.0s)
+  ✘  2 [chromium-owned-production] › tests/e2e/provided-output-runs.browser.spec.ts:135:1 › PO-BR02 a lost committed response retries the identical run after live source mutation without duplication (10.6s)
+  ✘  3 [chromium-owned-production] › tests/e2e/provided-output-runs.browser.spec.ts:176:1 › PO-BR03 preview drift refuses the old intent and preserves outputs for an explicitly reviewed new run (11.0s)
+  ✘  4 [chromium-owned-production] › tests/e2e/provided-output-runs.browser.spec.ts:212:1 › PO-BR04 narrow validation, empty-output failure and workspace-session boundaries preserve private run data (10.9s)
+
+
+  1) [chromium-owned-production] › tests/e2e/provided-output-runs.browser.spec.ts:135:1 › PO-BR02 a lost committed response retries the identical run after live source mutation without duplication 
+
+    Error: expect(locator).toHaveJSProperty(expected) failed
+
+    Locator: getByLabel('Actual output for Alpha', { exact: true })
+    Expected: true
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toHaveJSProperty" with timeout 10000ms
+      - waiting for getByLabel('Actual output for Alpha', { exact: true })
+
+
+      159 |   expect(first.replayed).toBe(false); expect(first.record.plan).toEqual(pinned);
+      160 |   await expect(page.locator('p[role="alert"]')).toContainText("The run outcome is unknown.");
+    > 161 |   await expect(output(page, "Alpha")).toHaveJSProperty("readOnly", true);
+          |                                       ^
+      162 |   await expect(datasetInput(page)).toHaveJSProperty("readOnly", true);
+      163 |   await expect(page.getByRole("button", { name: "Load selected versions", exact: true })).toBeDisabled();
+      164 |   await expectOneRun(owned, first.record);
+        at /home/runner/work/open-evals/open-evals/tests/e2e/provided-output-runs.browser.spec.ts:161:39
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../_temp/open-evals-provided-output-browser-evidence/browser-output/provided-output-runs.brows-45976-utation-without-duplication-chromium-owned-production/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../_temp/open-evals-provided-output-browser-evidence/browser-output/provided-output-runs.brows-45976-utation-without-duplication-chromium-owned-production/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../_temp/open-evals-provided-output-browser-evidence/browser-output/provided-output-runs.brows-45976-utation-without-duplication-chromium-owned-production/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace ../../_temp/open-evals-provided-output-browser-evidence/browser-output/provided-output-runs.brows-45976-utation-without-duplication-chromium-owned-production/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [chromium-owned-production] › tests/e2e/provided-output-runs.browser.spec.ts:176:1 › PO-BR03 preview drift refuses the old intent and preserves outputs for an explicitly reviewed new run 
+
+    Error: expect(locator).toHaveValue(expected) failed
+
+    Locator: getByLabel('Actual output for Alpha', { exact: true })
+    Expected: "approved retained alpha"
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toHaveValue" with timeout 10000ms
+      - waiting for getByLabel('Actual output for Alpha', { exact: true })
+
+
+      185 |   expect(conflict.view).toEqual({ error: "provided_output_preview_changed" });
+      186 |   await expect(page.locator('p[role="alert"]')).toContainText("The preview changed or this run ID conflicts with stored data.");
+    > 187 |   await expect(output(page, "Alpha")).toHaveValue(alpha); await expect(output(page, "Beta")).toHaveValue(beta);
+          |                                       ^
+      188 |   await expect(output(page, "Alpha")).toBeEditable();
+      189 |   await expect(page.getByRole("heading", { name: "3. Review and explicitly run", exact: true })).toHaveCount(0);
+      190 |   await expectNoRuns(owned);
+        at /home/runner/work/open-evals/open-evals/tests/e2e/provided-output-runs.browser.spec.ts:187:39
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../_temp/open-evals-provided-output-browser-evidence/browser-output/provided-output-runs.brows-58140-explicitly-reviewed-new-run-chromium-owned-production/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../_temp/open-evals-provided-output-browser-evidence/browser-output/provided-output-runs.brows-58140-explicitly-reviewed-new-run-chromium-owned-production/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../_temp/open-evals-provided-output-browser-evidence/browser-output/provided-output-runs.brows-58140-explicitly-reviewed-new-run-chromium-owned-production/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace ../../_temp/open-evals-provided-output-browser-evidence/browser-output/provided-output-runs.brows-58140-explicitly-reviewed-new-run-chromium-owned-production/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) [chromium-owned-production] › tests/e2e/provided-output-runs.browser.spec.ts:212:1 › PO-BR04 narrow validation, empty-output failure and workspace-session boundaries preserve private run data 
+
+    TimeoutError: locator.fill: Timeout 10000ms exceeded.
+    Call log:
+      - waiting for getByLabel('Actual output for Alpha', { exact: true })
+
+
+      227 |   expect(previewPosts).toBe(0); expect(runPosts).toBe(0);
+      228 |   await expectNoRuns(owned);
+    > 229 |   await output(page, "Alpha").fill(""); await output(page, "Beta").fill("APPROVED narrow beta");
+          |                               ^
+      230 |   const pinned = await preview(page);
+      231 |   expect(pinned.draft.outputs.find(row => row.rowId === owned.rowIds[0])?.output).toBe("");
+      232 |   await layout(page); await expectNoRuns(owned); expect(runPosts).toBe(0);
+        at /home/runner/work/open-evals/open-evals/tests/e2e/provided-output-runs.browser.spec.ts:229:31
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../_temp/open-evals-provided-output-browser-evidence/browser-output/provided-output-runs.brows-6765d-s-preserve-private-run-data-chromium-owned-production/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../_temp/open-evals-provided-output-browser-evidence/browser-output/provided-output-runs.brows-6765d-s-preserve-private-run-data-chromium-owned-production/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../_temp/open-evals-provided-output-browser-evidence/browser-output/provided-output-runs.brows-6765d-s-preserve-private-run-data-chromium-owned-production/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace ../../_temp/open-evals-provided-output-browser-evidence/browser-output/provided-output-runs.brows-6765d-s-preserve-private-run-data-chromium-owned-production/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3 failed
+    [chromium-owned-production] › tests/e2e/provided-output-runs.browser.spec.ts:135:1 › PO-BR02 a lost committed response retries the identical run after live source mutation without duplication 
+    [chromium-owned-production] › tests/e2e/provided-output-runs.browser.spec.ts:176:1 › PO-BR03 preview drift refuses the old intent and preserves outputs for an explicitly reviewed new run 
+    [chromium-owned-production] › tests/e2e/provided-output-runs.browser.spec.ts:212:1 › PO-BR04 narrow validation, empty-output failure and workspace-session boundaries preserve private run data 
+  1 passed (36.1s)

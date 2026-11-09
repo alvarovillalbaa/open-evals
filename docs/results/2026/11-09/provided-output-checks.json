@@ -1,0 +1,627 @@
+{
+  "schemaVersion": "provided-output-checks-v1",
+  "status": "scoped_checks_passed_after_preserved_failures",
+  "lastReleasedBase": "874f29f118d479367a2e6f75ff603abafe847d31",
+  "uniqueCases": {
+    "core": 21,
+    "postgres": 14,
+    "browser": 4,
+    "total": 39,
+    "note": "Passed across separate invocations and source-compatible UI-only repairs; not a single 39-case run or an all-green history."
+  },
+  "coreReceipt": "provided-output-core-checks.json",
+  "history": [
+    {
+      "source": "502d6aa990842abd60aa31adea59d2df7b1660b8",
+      "runId": 42623785367,
+      "jobId": 129182253745,
+      "url": "https://github.com/alvarovillalbaa/open-evals/actions/runs/42623785367",
+      "status": "failed",
+      "checkScope": "postgres_and_browser",
+      "postgresCaseCount": null,
+      "postgresCaseIds": [],
+      "browserResults": [],
+      "postgresFixturesEmptyBeforeBuild": null,
+      "applicationClosure": [],
+      "cleanup": {
+        "status": "not_created",
+        "databaseAbsent": null,
+        "clusterStopped": null,
+        "clusterAbsent": null
+      },
+      "errors": [
+        "RuntimeError:source-after-install_failed",
+        "protected_source_changed:RuntimeError"
+      ]
+    },
+    {
+      "source": "4ba4c862de0447ce291a0dae35b87f8b07c19ea7",
+      "runId": 42624618546,
+      "jobId": 129185069573,
+      "url": "https://github.com/alvarovillalbaa/open-evals/actions/runs/42624618546",
+      "status": "failed",
+      "checkScope": "postgres_and_browser",
+      "postgresCaseCount": 14,
+      "postgresCaseIds": [
+        "PO-PG01",
+        "PO-PG02",
+        "PO-PG03",
+        "PO-PG04",
+        "PO-PG05",
+        "PO-PG06",
+        "PO-PG07",
+        "PO-PG08",
+        "PO-PG09",
+        "PO-PG10",
+        "PO-PG11",
+        "PO-PG12",
+        "PO-PG13",
+        "PO-PG14"
+      ],
+      "browserResults": [
+        {
+          "id": "PO-BR01",
+          "status": "passed",
+          "resultCount": 1,
+          "cleanup": [
+            {
+              "schemaVersion": "provided-output-browser-cleanup-v1",
+              "status": "removed",
+              "workspaceId": "b45c4d9d-0ce3-4d21-a043-31458b4e14ce",
+              "actorCount": 1,
+              "ownershipValidated": true,
+              "before": {
+                "plans": 1,
+                "runs": 1,
+                "samples": 2,
+                "results": 2,
+                "gates": 11,
+                "audits": 1
+              },
+              "after": {
+                "plans": 0,
+                "runs": 0,
+                "samples": 0,
+                "results": 0,
+                "gates": 0,
+                "audits": 0
+              },
+              "workspaceAbsent": true,
+              "actorsAbsent": true
+            }
+          ]
+        },
+        {
+          "id": "PO-BR02",
+          "status": "failed",
+          "resultCount": 1,
+          "cleanup": [
+            {
+              "schemaVersion": "provided-output-browser-cleanup-v1",
+              "status": "removed",
+              "workspaceId": "3047e8b5-60c6-4d0b-9dbe-676c0bbc194f",
+              "actorCount": 1,
+              "ownershipValidated": true,
+              "before": {
+                "plans": 1,
+                "runs": 1,
+                "samples": 2,
+                "results": 2,
+                "gates": 11,
+                "audits": 1
+              },
+              "after": {
+                "plans": 0,
+                "runs": 0,
+                "samples": 0,
+                "results": 0,
+                "gates": 0,
+                "audits": 0
+              },
+              "workspaceAbsent": true,
+              "actorsAbsent": true
+            }
+          ]
+        },
+        {
+          "id": "PO-BR03",
+          "status": "failed",
+          "resultCount": 1,
+          "cleanup": [
+            {
+              "schemaVersion": "provided-output-browser-cleanup-v1",
+              "status": "removed",
+              "workspaceId": "09802533-2693-4ee2-aa42-52660990e527",
+              "actorCount": 1,
+              "ownershipValidated": true,
+              "before": {
+                "plans": 0,
+                "runs": 0,
+                "samples": 0,
+                "results": 0,
+                "gates": 0,
+                "audits": 0
+              },
+              "after": {
+                "plans": 0,
+                "runs": 0,
+                "samples": 0,
+                "results": 0,
+                "gates": 0,
+                "audits": 0
+              },
+              "workspaceAbsent": true,
+              "actorsAbsent": true
+            }
+          ]
+        },
+        {
+          "id": "PO-BR04",
+          "status": "failed",
+          "resultCount": 1,
+          "cleanup": [
+            {
+              "schemaVersion": "provided-output-browser-cleanup-v1",
+              "status": "removed",
+              "workspaceId": "330fe3e3-07a2-4553-9698-d1958f83fab7",
+              "actorCount": 1,
+              "ownershipValidated": true,
+              "before": {
+                "plans": 0,
+                "runs": 0,
+                "samples": 0,
+                "results": 0,
+                "gates": 0,
+                "audits": 0
+              },
+              "after": {
+                "plans": 0,
+                "runs": 0,
+                "samples": 0,
+                "results": 0,
+                "gates": 0,
+                "audits": 0
+              },
+              "workspaceAbsent": true,
+              "actorsAbsent": true
+            }
+          ]
+        }
+      ],
+      "postgresFixturesEmptyBeforeBuild": true,
+      "applicationClosure": [
+        {
+          "returncode": 143,
+          "stopMode": "graceful",
+          "pidAbsent": true,
+          "processGroupAbsent": true,
+          "portFree": true
+        }
+      ],
+      "cleanup": {
+        "status": "removed",
+        "database": "oe_provided_output_test_42624618546_1",
+        "validatedBeforeDrop": {
+          "name": "oe_provided_output_test_42624618546_1",
+          "owner": "postgres",
+          "marker": "open-evals-provided-output-20261109-created-disposable-v1"
+        },
+        "databaseAbsent": true,
+        "clusterStopped": true,
+        "serverLog": {
+          "file": "postgres-server.log",
+          "bytes": 2160,
+          "sha256": "a7ba27d45369b31555d7366c8c51c808e34acdf851013f57d8fb6b1d9a43cbb3",
+          "complete": true
+        },
+        "removedCluster": {
+          "entries": 1003,
+          "fileBytes": 57006664,
+          "rootIdentity": [
+            66305,
+            9213388,
+            1001
+          ]
+        },
+        "clusterAbsent": true
+      },
+      "errors": [
+        "AssertionError:"
+      ]
+    },
+    {
+      "source": "9459a95881e6a7d0cf4cf0f827ea361236b72df8",
+      "runId": 42625969206,
+      "jobId": 129189749280,
+      "url": "https://github.com/alvarovillalbaa/open-evals/actions/runs/42625969206",
+      "status": "passed",
+      "checkScope": "four_browser_cases_only",
+      "postgresCaseCount": null,
+      "postgresCaseIds": [],
+      "browserResults": [
+        {
+          "id": "PO-BR01",
+          "status": "passed",
+          "resultCount": 1,
+          "cleanup": [
+            {
+              "schemaVersion": "provided-output-browser-cleanup-v1",
+              "status": "removed",
+              "workspaceId": "7b41ebc3-97e4-47e4-a4ae-72bee2c6c176",
+              "actorCount": 1,
+              "ownershipValidated": true,
+              "before": {
+                "plans": 1,
+                "runs": 1,
+                "samples": 2,
+                "results": 2,
+                "gates": 11,
+                "audits": 1
+              },
+              "after": {
+                "plans": 0,
+                "runs": 0,
+                "samples": 0,
+                "results": 0,
+                "gates": 0,
+                "audits": 0
+              },
+              "workspaceAbsent": true,
+              "actorsAbsent": true
+            }
+          ]
+        },
+        {
+          "id": "PO-BR02",
+          "status": "passed",
+          "resultCount": 1,
+          "cleanup": [
+            {
+              "schemaVersion": "provided-output-browser-cleanup-v1",
+              "status": "removed",
+              "workspaceId": "89dc6d54-dd21-4e9e-be44-116456e5f4fd",
+              "actorCount": 1,
+              "ownershipValidated": true,
+              "before": {
+                "plans": 1,
+                "runs": 1,
+                "samples": 2,
+                "results": 2,
+                "gates": 11,
+                "audits": 1
+              },
+              "after": {
+                "plans": 0,
+                "runs": 0,
+                "samples": 0,
+                "results": 0,
+                "gates": 0,
+                "audits": 0
+              },
+              "workspaceAbsent": true,
+              "actorsAbsent": true
+            }
+          ]
+        },
+        {
+          "id": "PO-BR03",
+          "status": "passed",
+          "resultCount": 1,
+          "cleanup": [
+            {
+              "schemaVersion": "provided-output-browser-cleanup-v1",
+              "status": "removed",
+              "workspaceId": "79441cf3-8f83-4a64-9016-c63b802d9e31",
+              "actorCount": 1,
+              "ownershipValidated": true,
+              "before": {
+                "plans": 1,
+                "runs": 1,
+                "samples": 2,
+                "results": 2,
+                "gates": 11,
+                "audits": 1
+              },
+              "after": {
+                "plans": 0,
+                "runs": 0,
+                "samples": 0,
+                "results": 0,
+                "gates": 0,
+                "audits": 0
+              },
+              "workspaceAbsent": true,
+              "actorsAbsent": true
+            }
+          ]
+        },
+        {
+          "id": "PO-BR04",
+          "status": "passed",
+          "resultCount": 1,
+          "cleanup": [
+            {
+              "schemaVersion": "provided-output-browser-cleanup-v1",
+              "status": "removed",
+              "workspaceId": "8854dee5-9719-4775-94a8-eace541a8acf",
+              "actorCount": 2,
+              "ownershipValidated": true,
+              "before": {
+                "plans": 1,
+                "runs": 1,
+                "samples": 2,
+                "results": 2,
+                "gates": 11,
+                "audits": 1
+              },
+              "after": {
+                "plans": 0,
+                "runs": 0,
+                "samples": 0,
+                "results": 0,
+                "gates": 0,
+                "audits": 0
+              },
+              "workspaceAbsent": true,
+              "actorsAbsent": true
+            }
+          ]
+        }
+      ],
+      "postgresFixturesEmptyBeforeBuild": true,
+      "applicationClosure": [
+        {
+          "returncode": 143,
+          "stopMode": "graceful",
+          "pidAbsent": true,
+          "processGroupAbsent": true,
+          "portFree": true
+        }
+      ],
+      "cleanup": {
+        "status": "removed",
+        "database": "oe_provided_output_test_42625969206_1",
+        "validatedBeforeDrop": {
+          "name": "oe_provided_output_test_42625969206_1",
+          "owner": "postgres",
+          "marker": "open-evals-provided-output-20261109-created-disposable-v1"
+        },
+        "databaseAbsent": true,
+        "clusterStopped": true,
+        "serverLog": {
+          "file": "postgres-server.log",
+          "bytes": 1692,
+          "sha256": "4aa45b7205917b1b4e8f45178eaccd3d126803eb0e36b98f4050928873caf5e5",
+          "complete": true
+        },
+        "removedCluster": {
+          "entries": 1002,
+          "fileBytes": 40228981,
+          "rootIdentity": [
+            66305,
+            9213400,
+            1001
+          ]
+        },
+        "clusterAbsent": true
+      },
+      "errors": []
+    }
+  ],
+  "storeSource": "4ba4c862de0447ce291a0dae35b87f8b07c19ea7",
+  "browserSource": "9459a95881e6a7d0cf4cf0f827ea361236b72df8",
+  "browserStats": {
+    "startTime": "2026-11-09T13:30:37.425Z",
+    "duration": 7080.577,
+    "expected": 4,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "finalApplicationBindings": [
+    {
+      "path": "apps/web/app/(product)/evals/page.tsx",
+      "bytes": 9264,
+      "sha": "994ccaae8f5b10c48411d5279748c2e9aa45dd6b",
+      "sha256": "3c3cc282bbb136a22b25568879a01528f444f179c9bc707728a87fbe5d46d585"
+    },
+    {
+      "path": "apps/web/app/(product)/evals/run/[runId]/page.tsx",
+      "bytes": 7829,
+      "sha": "91888b9ab7e98b51ee1613301b2177a7796eebf1",
+      "sha256": "fdcd8e2b1dbcf2726ce963d80959e0979b6d7912826ec922324914335bac41dd"
+    },
+    {
+      "path": "apps/web/app/(product)/evals/run/error.tsx",
+      "bytes": 709,
+      "sha": "508f7b67010a1fa264d80d3c09c5375f275a6622",
+      "sha256": "73c556bf0b012b84a2b43b6d407ec1fc722a1a04e7b49dbb601734b65f3bb9a0"
+    },
+    {
+      "path": "apps/web/app/(product)/evals/run/loading.tsx",
+      "bytes": 372,
+      "sha": "fdea7cdb57dd41489e98a41a45ebdb80306f742a",
+      "sha256": "592e98d5885469439134b646750f93e7373607447bd895270bfd8acd5979a6da"
+    },
+    {
+      "path": "apps/web/app/(product)/evals/run/page.tsx",
+      "bytes": 1306,
+      "sha": "b15180043a1d3cd9850f48a75eb750cac3eda555",
+      "sha256": "d0c5d95857c2b72042ac408b6a263156a2e7e56a16504b9bf67b848390bd7883"
+    },
+    {
+      "path": "apps/web/app/(product)/evals/run/provided-output-composer.tsx",
+      "bytes": 25570,
+      "sha": "c2ff1b3867ec55407df0f68ce414417919aa34d1",
+      "sha256": "8c621f33e270d5fa4f9423bca77ba3b4f864c7d58a8556febdf4644329f40884"
+    },
+    {
+      "path": "apps/web/app/(product)/runs/page.tsx",
+      "bytes": 4227,
+      "sha": "151319f5213f1bea3be8439369a09575a2dda43f",
+      "sha256": "5c77e6401777866f7177f2baa1821a5223a15d8a34a784bba91f705503098f7c"
+    },
+    {
+      "path": "apps/web/app/api/v1/provided-output-runs/[runId]/route.ts",
+      "bytes": 643,
+      "sha": "7ac72e0c1447d9af3bd520d35e2e1e6a709c15cc",
+      "sha256": "afa9b0bda2a2295165a078217cb8c500bc88d31b50a516f72c991bb4a8c9e33c"
+    },
+    {
+      "path": "apps/web/app/api/v1/provided-output-runs/preview/route.ts",
+      "bytes": 542,
+      "sha": "cb657fd42df1ab9bc209d6162f20798804b137b8",
+      "sha256": "b56465ee79233b86aadcb13fda9ec000bbe112ec90df073a5d17ba39c1594964"
+    },
+    {
+      "path": "apps/web/app/api/v1/provided-output-runs/route.ts",
+      "bytes": 844,
+      "sha": "c7cec51338705fd7193319f80c4510ae1e8b3d0d",
+      "sha256": "5df2c398fde099e6cf139fbefff537d1d38391fb85c3146d2164e7eb1a3d146f"
+    },
+    {
+      "path": "apps/web/app/api/v1/provided-output-runs/sources/route.ts",
+      "bytes": 468,
+      "sha": "35dba213b523530e79c5ccb8ea86e0ea404ac128",
+      "sha256": "3f0777ad67a3b7b90671883ffbe180ac1214146b8fd3938ffee4c2bb74a6faaa"
+    },
+    {
+      "path": "apps/web/lib/provided-output-runs.ts",
+      "bytes": 6550,
+      "sha": "00392c69260a707ffc54af22b5d47a2d5f0ee7a6",
+      "sha256": "b10a42462cb29dc68637eb2d07f71e28bdb18b4694129942069dc12655d3e6ed"
+    },
+    {
+      "path": "apps/web/lib/provided-output-types.ts",
+      "bytes": 895,
+      "sha": "21458afd0070455106a8a56a9afb06d8e149f427",
+      "sha256": "fc01e8d6d827e94f86d28deb1e091a851f9cb7736997225e88823521747e939a"
+    },
+    {
+      "path": "docs/proposals/provided-output-runs.md",
+      "bytes": 5568,
+      "sha": "5f9265e2371c15d1ad7ab7e1e16859c4edcfe771",
+      "sha256": "3c75ab8f863bd17e42eb6332cdc19378c8056a1ff4d3f9887d9b5e8ee3c0aebf"
+    },
+    {
+      "path": "packages/core/src/index.ts",
+      "bytes": 541,
+      "sha": "6c27ffd6cffcd3a2a02309cc53b65ac493f65771",
+      "sha256": "b46e22ff6f1a65c345f9221bd891b720c5bedf94b68f2de083a1c46d5701c81d"
+    },
+    {
+      "path": "packages/core/src/provided-output-runs.ts",
+      "bytes": 23809,
+      "sha": "ff5b67524171437a56d03043013722dd83f3b170",
+      "sha256": "1d4268df1886158630c19b7cbc040118cef4ee32b42bc60e2438c7dd2efdf38d"
+    },
+    {
+      "path": "packages/core/src/provided-output-types.ts",
+      "bytes": 3455,
+      "sha": "ad7a6c9e0463082120558feff1032974f7bb8517",
+      "sha256": "99b88738f66152d279ba1b7d540c7556cba26fbf779ff8982dcaf0ae61ffe18d"
+    },
+    {
+      "path": "packages/db/src/custom-evals.ts",
+      "bytes": 26003,
+      "sha": "4e51acc862ef42479f094754d6af246b1fbf1db3",
+      "sha256": "77045e8c69107d636c63fc72ae287bc273d62739dfbe038ff6419c4d8d224e9f"
+    },
+    {
+      "path": "packages/db/src/index.ts",
+      "bytes": 356,
+      "sha": "393b791a44b5a8e9c9cfca8fc65e5ad72a76132f",
+      "sha256": "d188f0e470b05d99cbb4ddc1b48120075776e3a1f31a2a05135f7b47112ae20f"
+    },
+    {
+      "path": "packages/db/src/provided-output-runs.ts",
+      "bytes": 31775,
+      "sha": "031e25c00dc2cdcb916bca116471d62261d1b34f",
+      "sha256": "fe78426645ceefe3ed29e8b9e08d0d29cc57371d77c65a5cb9b73c8f7f5481f4"
+    },
+    {
+      "path": "packages/db/src/service.ts",
+      "bytes": 39170,
+      "sha": "e2dedece115e368e447bd1c07fb5d1e1240b3a25",
+      "sha256": "ddf1127c1b8b98dd09404d60beeb857775755c3d07e5b75fb233067447d28272"
+    },
+    {
+      "path": "tests/e2e/provided-output-runs.browser.config.ts",
+      "bytes": 1547,
+      "sha": "e02fa12c33c44e9ff179ec00cafb465b376109d8",
+      "sha256": "9c584ba011768bcd31beaa2ffb3fc8c27b61205864bd202f4597dce68271ba0d"
+    },
+    {
+      "path": "tests/e2e/provided-output-runs.browser.fixture.ts",
+      "bytes": 17622,
+      "sha": "67a8080ff641bdd14ecdaacc8039b6c82204a52a",
+      "sha256": "16455b8ede3debd1b8e2dfaaea7103e92bd6fbd8437b7fdcfbe49b3a15bab6f4"
+    },
+    {
+      "path": "tests/e2e/provided-output-runs.browser.spec.ts",
+      "bytes": 17756,
+      "sha": "7355cd83f493afd800f0bea953f6d57ddbc9890e",
+      "sha256": "59d51ef19a3ff50e2a0332f3ab5c1213b71b2723b73eb05f978b837b050bd08c"
+    },
+    {
+      "path": "tests/integration/provided-output-runs.node.mjs",
+      "bytes": 35854,
+      "sha": "4e4c4df872ccbdcfed8f28d8844f296f55dfbb83",
+      "sha256": "5a72d416c6626ed49975e841292f7baf7956d83622b78e8bc7b2eb2d77584482"
+    },
+    {
+      "path": "tests/unit/provided-output-runs.test.mjs",
+      "bytes": 22730,
+      "sha": "ac7aad15958e35853f1a283cecc2fa83a50231f7",
+      "sha256": "0825a64cd62a32ec345cbec229ee2f88b68a486780eda37c391be42f188e28a4"
+    },
+    {
+      "path": "docs/provided-output-runs.md",
+      "bytes": 3095,
+      "sha": "d7ca0b35ac622f5cb80b1c7e5bcca1a1412e0d74",
+      "sha256": "ee928373f77b6eb36f69cc8fdbbcfbce59508e313544cfca6dc5d84871144621"
+    }
+  ],
+  "artifacts": [
+    {
+      "id": 13676793968,
+      "name": "provided-output-run-42623785367-1",
+      "bytes": 28655,
+      "digest": "sha256:42d25132f768313c0b8ae8c81e40d2ba4342a63120e79d9c31e9a3e6689fcded",
+      "expiresAt": "2026-11-11T13:15:10Z",
+      "zipBytesVerified": false,
+      "url": "https://github.com/alvarovillalbaa/open-evals/actions/runs/42623785367/artifacts/13676793968"
+    },
+    {
+      "id": 13677862161,
+      "name": "provided-output-run-42624618546-1",
+      "bytes": 2109553,
+      "digest": "sha256:d9965b792e5d9b00bc8878aa9039002487ede2a2d1dcff2250688ead55d0f1fd",
+      "expiresAt": "2026-11-11T13:22:04Z",
+      "zipBytesVerified": false,
+      "url": "https://github.com/alvarovillalbaa/open-evals/actions/runs/42624618546/artifacts/13677862161"
+    },
+    {
+      "id": 13677519400,
+      "name": "provided-output-run-42625969206-1",
+      "bytes": 47163,
+      "digest": "sha256:08462da42b6d41077c2abdea7d9dbc79d01bc1aa12c5db023ea167a0240bdba9",
+      "expiresAt": "2026-11-11T13:30:45Z",
+      "zipBytesVerified": false,
+      "url": "https://github.com/alvarovillalbaa/open-evals/actions/runs/42625969206/artifacts/13677519400"
+    }
+  ],
+  "originalsManifest": "provided-output-originals.json",
+  "repairs": [
+    "Pure core UUID expression gained its missing segment; two malformed UUID assertions were added within PO04.",
+    "CI runtime source checks were restored to their intended protected paths; generated dependency launchers remain outside those paths and their changed names are recorded.",
+    "The composer uses explicit sibling label/htmlFor/textarea IDs. Existing four browser case bodies and assertions are byte-identical between failed and passed browser runs."
+  ],
+  "proofLimits": [
+    "No local installation, app server, database, heavy build or browser run; those operations used bounded public CI.",
+    "Fourteen owner-SQL cases are not hosted Auth/RLS checks; signed-session/browser fixtures are not real provider login or membership/RLS acceptance.",
+    "No model, judge, provider, paid plan, production data, new migration, production schema change or dependency/lockfile change. Existing migrations were applied only to disposable CI fixture databases.",
+    "ZIP contents, screenshots, traces, CI build stdout, raw server logs and HTTP bodies/headers remain unread. Selected exact originals are separately verified.",
+    "Full custom dataset authoring, provider/target and generic evaluator composition, Harbor, campaigns and rollouts remain outside this delivery."
+  ]
+}

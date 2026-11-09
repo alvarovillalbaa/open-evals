@@ -1,0 +1,2851 @@
+{
+  "schemaVersion": "provided-output-production-build-v1",
+  "recordedAt": "2026-11-09 17:04:08 UTC",
+  "source": "9459a95881e6a7d0cf4cf0f827ea361236b72df8",
+  "deployment": {
+    "id": "dpl_5KkVCbXmzzgQDnqSdhctW6R7a3eC",
+    "state": "READY",
+    "target": "production",
+    "url": "open-evals-jt42j0csr-my-team-4f230354.vercel.app",
+    "source": "9459a95881e6a7d0cf4cf0f827ea361236b72df8",
+    "createdAt": 1794231136467,
+    "buildingAt": 1794231137872,
+    "readyAt": 1794231180827,
+    "createdToReadyMs": 44360
+  },
+  "project": {
+    "id": "prj_FG3VAWXbwS6VRHq4Wd2B4vyIms4l",
+    "name": "open-evals-web",
+    "teamId": "team_JpdIsOJgYNpX0ywVZ54Zdb7m",
+    "nodeVersion": "24.x",
+    "ssoProtection": {
+      "enabled": true,
+      "deploymentType": "all_except_custom_domains"
+    }
+  },
+  "canonicalAlias": {
+    "alias": "open-evals-web.vercel.app",
+    "projectId": "prj_FG3VAWXbwS6VRHq4Wd2B4vyIms4l",
+    "deploymentId": "dpl_5KkVCbXmzzgQDnqSdhctW6R7a3eC"
+  },
+  "build": {
+    "nextVersion": "16.2.9",
+    "compiledSuccessfully": true,
+    "typeScriptCompleted": true,
+    "staticPages": 41,
+    "newComposerAndResultRoutes": "dynamic",
+    "providedOutputApis": 4,
+    "successfulTasks": 10,
+    "cachedTasks": 0,
+    "turboSeconds": 28.415,
+    "providerReportedSeconds": 32,
+    "warnings": [
+      " WARNING  no output files found for task @open-evals/adapters#build. Please check your `outputs` key in `turbo.json`",
+      " WARNING  no output files found for task @open-evals/cli#build. Please check your `outputs` key in `turbo.json`",
+      " WARNING  no output files found for task @open-evals/core#build. Please check your `outputs` key in `turbo.json`",
+      " WARNING  no output files found for task @open-evals/db#build. Please check your `outputs` key in `turbo.json`",
+      " WARNING  no output files found for task @open-evals/mcp#build. Please check your `outputs` key in `turbo.json`",
+      " WARNING  no output files found for task @open-evals/sdk#build. Please check your `outputs` key in `turbo.json`",
+      " WARNING  no output files found for task @open-evals/statistics#build. Please check your `outputs` key in `turbo.json`",
+      " WARNING  no output files found for task @open-evals/test-fixtures#build. Please check your `outputs` key in `turbo.json`",
+      " WARNING  no output files found for task @open-evals/workflows#build. Please check your `outputs` key in `turbo.json`"
+    ]
+  },
+  "eventCoverage": {
+    "initialResponseWasCappedAt": 99,
+    "timeWindows": [
+      {
+        "since": 1794231137000,
+        "until": 1794231158000,
+        "count": 80
+      },
+      {
+        "since": 1794231157000,
+        "until": 1794231172000,
+        "count": 87
+      },
+      {
+        "since": 1794231171000,
+        "until": 1794231182000,
+        "count": 81
+      }
+    ],
+    "allWindowsBelowCap": true,
+    "rawWindowRows": 248,
+    "wholeObjectUniqueRows": 163,
+    "duplicateRows": 85,
+    "deduplication": "Exact canonical whole-event JSON; original window multiplicity retained below."
+  },
+  "rawWindows": [
+    {
+      "since": 1794231137000,
+      "until": 1794231158000,
+      "events": [
+        {
+          "created": 1794231137562,
+          "date": 1794231137562,
+          "type": "stdout",
+          "text": "Running build in Washington, D.C., USA (East) – iad1",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231137563,
+          "date": 1794231137563,
+          "type": "stdout",
+          "text": "Build machine configuration: 4 cores, 8 GB (Standard Build Machine)",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231137702,
+          "date": 1794231137702,
+          "type": "stdout",
+          "text": "Cloning github.com/alvarovillalbaa/open-evals (Branch: 9459a95881e6a7d0cf4cf0f827ea361236b72df8, Commit: 9459a95)",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231138186,
+          "date": 1794231138186,
+          "type": "stdout",
+          "text": "Cloning completed: 484.000ms",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231139943,
+          "date": 1794231139943,
+          "type": "stdout",
+          "text": "Restored build cache from previous deployment (8x3wyDXRj9N6FuoQ18wok5uw2BJh)",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231140523,
+          "date": 1794231140523,
+          "type": "stdout",
+          "text": "Running \"vercel build\"",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231140534,
+          "date": 1794231140534,
+          "type": "stderr",
+          "text": "Vercel CLI 65.11.0",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231140668,
+          "date": 1794231140668,
+          "type": "stderr",
+          "text": "> Detected Turbo. Adjusting default settings...",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231140889,
+          "date": 1794231140889,
+          "type": "stdout",
+          "text": "Detected `pnpm-lock.yaml` version 9 generated by pnpm@10.x from package.json#packageManager pnpm@10.14.0",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231140893,
+          "date": 1794231140893,
+          "type": "stdout",
+          "text": "Running \"install\" command: `cd ../.. && corepack pnpm install --frozen-lockfile --ignore-scripts`...",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231142116,
+          "date": 1794231142116,
+          "type": "stdout",
+          "text": "Scope: all 11 workspace projects",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231142194,
+          "date": 1794231142194,
+          "type": "stdout",
+          "text": "Lockfile is up to date, resolution step is skipped",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231142345,
+          "date": 1794231142345,
+          "type": "stdout",
+          "text": "Already up to date",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231142662,
+          "date": 1794231142662,
+          "type": "stdout",
+          "text": "",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231142666,
+          "date": 1794231142666,
+          "type": "stdout",
+          "text": "Done in 976ms using pnpm v10.14.0",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231142688,
+          "date": 1794231142688,
+          "type": "stdout",
+          "text": "Detected Next.js version: 16.2.9",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231142688,
+          "date": 1794231142688,
+          "type": "stdout",
+          "text": "Running \"cd ../.. && corepack pnpm build\"",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231143132,
+          "date": 1794231143132,
+          "type": "stdout",
+          "text": "",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231143132,
+          "date": 1794231143132,
+          "type": "stdout",
+          "text": "> open-evals@0.1.0 build /vercel/path0",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231143132,
+          "date": 1794231143132,
+          "type": "stdout",
+          "text": "> turbo run build --filter=@open-evals/core --filter=@open-evals/adapters --filter=@open-evals/db --filter=@open-evals/sdk --filter=@open-evals/mcp --filter=@open-evals/statistics --filter=@open-evals/test-fixtures --filter=@open-evals/cli --filter=@open-evals/web --filter=@open-evals/workflows",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231143132,
+          "date": 1794231143132,
+          "type": "stdout",
+          "text": "",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231143419,
+          "date": 1794231143419,
+          "type": "stdout",
+          "text": "",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231143420,
+          "date": 1794231143420,
+          "type": "stdout",
+          "text": "   • Packages in scope: @open-evals/adapters, @open-evals/cli, @open-evals/core, @open-evals/db, @open-evals/mcp, @open-evals/sdk, @open-evals/statistics, @open-evals/test-fixtures, @open-evals/web, @open-evals/workflows",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231143420,
+          "date": 1794231143420,
+          "type": "stdout",
+          "text": "   • Running build in 10 packages",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231143420,
+          "date": 1794231143420,
+          "type": "stdout",
+          "text": "   • Remote caching enabled",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231143420,
+          "date": 1794231143420,
+          "type": "stdout",
+          "text": "",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231143556,
+          "date": 1794231143556,
+          "type": "stdout",
+          "text": "@open-evals/db:build: cache miss, executing c1ad2451a5668c36",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231143614,
+          "date": 1794231143614,
+          "type": "stdout",
+          "text": "@open-evals/core:build: cache miss, executing da90519cd453dfee",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231144094,
+          "date": 1794231144094,
+          "type": "stdout",
+          "text": "@open-evals/db:build: ",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231144095,
+          "date": 1794231144095,
+          "type": "stdout",
+          "text": "@open-evals/db:build: > @open-evals/db@0.1.0 build /vercel/path0/packages/db",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231144095,
+          "date": 1794231144095,
+          "type": "stdout",
+          "text": "@open-evals/db:build: > tsc -p tsconfig.json --noEmit",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231144095,
+          "date": 1794231144095,
+          "type": "stdout",
+          "text": "@open-evals/db:build: ",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231144113,
+          "date": 1794231144113,
+          "type": "stdout",
+          "text": "@open-evals/core:build: ",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231144113,
+          "date": 1794231144113,
+          "type": "stdout",
+          "text": "@open-evals/core:build: > @open-evals/core@0.1.0 build /vercel/path0/packages/core",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231144113,
+          "date": 1794231144113,
+          "type": "stdout",
+          "text": "@open-evals/core:build: > tsc -p tsconfig.json --noEmit",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231144113,
+          "date": 1794231144113,
+          "type": "stdout",
+          "text": "@open-evals/core:build: ",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231146372,
+          "date": 1794231146372,
+          "type": "stdout",
+          "text": "@open-evals/test-fixtures:build: cache miss, executing d76cf1679592a08a",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231146403,
+          "date": 1794231146403,
+          "type": "stdout",
+          "text": "@open-evals/workflows:build: cache miss, executing daf37dc26b320191",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231146405,
+          "date": 1794231146405,
+          "type": "stdout",
+          "text": "@open-evals/mcp:build: cache miss, executing 3609233376a2d505",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231146412,
+          "date": 1794231146412,
+          "type": "stdout",
+          "text": "@open-evals/statistics:build: cache miss, executing 2502ad1f26373ab6",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231146419,
+          "date": 1794231146419,
+          "type": "stdout",
+          "text": "@open-evals/sdk:build: cache miss, executing b79d8c16d75dc1fa",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231146437,
+          "date": 1794231146437,
+          "type": "stdout",
+          "text": "@open-evals/adapters:build: cache miss, executing 34683975c65a124c",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231147140,
+          "date": 1794231147140,
+          "type": "stdout",
+          "text": "@open-evals/mcp:build: ",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231147140,
+          "date": 1794231147140,
+          "type": "stdout",
+          "text": "@open-evals/mcp:build: > @open-evals/mcp@0.1.0 build /vercel/path0/packages/mcp",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231147141,
+          "date": 1794231147141,
+          "type": "stdout",
+          "text": "@open-evals/mcp:build: > tsc -p tsconfig.json --noEmit",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231147141,
+          "date": 1794231147141,
+          "type": "stdout",
+          "text": "@open-evals/mcp:build: ",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231147232,
+          "date": 1794231147232,
+          "type": "stdout",
+          "text": "@open-evals/sdk:build: ",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231147232,
+          "date": 1794231147232,
+          "type": "stdout",
+          "text": "@open-evals/sdk:build: > @open-evals/sdk@0.1.0 build /vercel/path0/packages/sdk",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231147232,
+          "date": 1794231147232,
+          "type": "stdout",
+          "text": "@open-evals/sdk:build: > tsc -p tsconfig.json --noEmit",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231147232,
+          "date": 1794231147232,
+          "type": "stdout",
+          "text": "@open-evals/sdk:build: ",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231147264,
+          "date": 1794231147264,
+          "type": "stdout",
+          "text": "@open-evals/statistics:build: ",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231147264,
+          "date": 1794231147264,
+          "type": "stdout",
+          "text": "@open-evals/statistics:build: > @open-evals/statistics@0.1.0 build /vercel/path0/packages/statistics",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231147264,
+          "date": 1794231147264,
+          "type": "stdout",
+          "text": "@open-evals/statistics:build: > tsc -p tsconfig.json --noEmit",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231147264,
+          "date": 1794231147264,
+          "type": "stdout",
+          "text": "@open-evals/statistics:build: ",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231147309,
+          "date": 1794231147309,
+          "type": "stdout",
+          "text": "@open-evals/test-fixtures:build: ",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231147309,
+          "date": 1794231147309,
+          "type": "stdout",
+          "text": "@open-evals/test-fixtures:build: > @open-evals/test-fixtures@0.1.0 build /vercel/path0/packages/test-fixtures",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231147309,
+          "date": 1794231147309,
+          "type": "stdout",
+          "text": "@open-evals/test-fixtures:build: > tsc -p tsconfig.json --noEmit",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231147309,
+          "date": 1794231147309,
+          "type": "stdout",
+          "text": "@open-evals/test-fixtures:build: ",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231147392,
+          "date": 1794231147392,
+          "type": "stdout",
+          "text": "@open-evals/adapters:build: ",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231147393,
+          "date": 1794231147393,
+          "type": "stdout",
+          "text": "@open-evals/adapters:build: > @open-evals/adapters@0.1.0 build /vercel/path0/packages/adapters",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231147393,
+          "date": 1794231147393,
+          "type": "stdout",
+          "text": "@open-evals/adapters:build: > tsc -p tsconfig.json --noEmit",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231147393,
+          "date": 1794231147393,
+          "type": "stdout",
+          "text": "@open-evals/adapters:build: ",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231147450,
+          "date": 1794231147450,
+          "type": "stdout",
+          "text": "@open-evals/workflows:build: ",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231147450,
+          "date": 1794231147450,
+          "type": "stdout",
+          "text": "@open-evals/workflows:build: > @open-evals/workflows@0.1.0 build /vercel/path0/workflows",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231147450,
+          "date": 1794231147450,
+          "type": "stdout",
+          "text": "@open-evals/workflows:build: > tsc -p tsconfig.json --noEmit",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231147451,
+          "date": 1794231147451,
+          "type": "stdout",
+          "text": "@open-evals/workflows:build: ",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231152631,
+          "date": 1794231152631,
+          "type": "stdout",
+          "text": "@open-evals/cli:build: cache miss, executing faae9a68ae655ded",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231152701,
+          "date": 1794231152701,
+          "type": "stdout",
+          "text": "@open-evals/web:build: cache miss, executing a3f4c2e44f64f8ff",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231153009,
+          "date": 1794231153009,
+          "type": "stdout",
+          "text": "@open-evals/cli:build: ",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231153009,
+          "date": 1794231153009,
+          "type": "stdout",
+          "text": "@open-evals/cli:build: > @open-evals/cli@0.1.0 build /vercel/path0/apps/cli",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231153009,
+          "date": 1794231153009,
+          "type": "stdout",
+          "text": "@open-evals/cli:build: > tsc -p tsconfig.json --noEmit",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231153009,
+          "date": 1794231153009,
+          "type": "stdout",
+          "text": "@open-evals/cli:build: ",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231153101,
+          "date": 1794231153101,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231153102,
+          "date": 1794231153102,
+          "type": "stdout",
+          "text": "@open-evals/web:build: > @open-evals/web@0.1.0 build /vercel/path0/apps/web",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231153102,
+          "date": 1794231153102,
+          "type": "stdout",
+          "text": "@open-evals/web:build: > next build",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231153102,
+          "date": 1794231153102,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231153993,
+          "date": 1794231153993,
+          "type": "stdout",
+          "text": "@open-evals/web:build:   Applying modifyConfig from Vercel",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231154012,
+          "date": 1794231154012,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ▲ Next.js 16.2.9 (Turbopack)",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231154012,
+          "date": 1794231154012,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231154065,
+          "date": 1794231154065,
+          "type": "stdout",
+          "text": "@open-evals/web:build:   Creating an optimized production build ...",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        }
+      ]
+    },
+    {
+      "since": 1794231157000,
+      "until": 1794231172000,
+      "events": [
+        {
+          "created": 1794231162769,
+          "date": 1794231162769,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ✓ Compiled successfully in 8.3s",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231162782,
+          "date": 1794231162782,
+          "type": "stdout",
+          "text": "@open-evals/web:build:   Running TypeScript ...",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231169739,
+          "date": 1794231169739,
+          "type": "stdout",
+          "text": "@open-evals/web:build:   Finished TypeScript in 7.0s ...",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231169743,
+          "date": 1794231169743,
+          "type": "stdout",
+          "text": "@open-evals/web:build:   Collecting page data using 3 workers ...",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231170539,
+          "date": 1794231170539,
+          "type": "stdout",
+          "text": "@open-evals/web:build:   Generating static pages using 3 workers (0/41) ...",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231170606,
+          "date": 1794231170606,
+          "type": "stdout",
+          "text": "@open-evals/web:build:   Generating static pages using 3 workers (10/41) \r",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231170773,
+          "date": 1794231170773,
+          "type": "stdout",
+          "text": "@open-evals/web:build:   Generating static pages using 3 workers (20/41) \r",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231170964,
+          "date": 1794231170964,
+          "type": "stdout",
+          "text": "@open-evals/web:build:   Generating static pages using 3 workers (30/41) \r",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231170982,
+          "date": 1794231170982,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ✓ Generating static pages using 3 workers (41/41) in 443ms",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231170995,
+          "date": 1794231170995,
+          "type": "stdout",
+          "text": "@open-evals/web:build:   Finalizing page optimization ...",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171172,
+          "date": 1794231171172,
+          "type": "stdout",
+          "text": "@open-evals/web:build:   Running onBuildComplete from Vercel",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171378,
+          "date": 1794231171378,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171383,
+          "date": 1794231171383,
+          "type": "stdout",
+          "text": "@open-evals/web:build: Route (app)",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171383,
+          "date": 1794231171383,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ┌ ○ /",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171383,
+          "date": 1794231171383,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ○ /_not-found",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171383,
+          "date": 1794231171383,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ƒ /api/v1/auth/github/callback",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171383,
+          "date": 1794231171383,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ƒ /api/v1/auth/github/start",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171383,
+          "date": 1794231171383,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ƒ /api/v1/auth/session",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171383,
+          "date": 1794231171383,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ƒ /api/v1/benchmarks",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171383,
+          "date": 1794231171383,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ƒ /api/v1/benchmarks/import",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171383,
+          "date": 1794231171383,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ƒ /api/v1/campaigns",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171383,
+          "date": 1794231171383,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ƒ /api/v1/eval-runs",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171383,
+          "date": 1794231171383,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ƒ /api/v1/eval-sets",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171383,
+          "date": 1794231171383,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ƒ /api/v1/eval-sets/[setId]",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171384,
+          "date": 1794231171384,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ƒ /api/v1/experiments/assign",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171384,
+          "date": 1794231171384,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ƒ /api/v1/instructions",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171384,
+          "date": 1794231171384,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ƒ /api/v1/instructions/[definitionId]",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171384,
+          "date": 1794231171384,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ƒ /api/v1/instructions/[definitionId]/campaign-requests",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171384,
+          "date": 1794231171384,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ƒ /api/v1/instructions/[definitionId]/campaign-requests/preview",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171384,
+          "date": 1794231171384,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ƒ /api/v1/instructions/[definitionId]/preview",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171384,
+          "date": 1794231171384,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ƒ /api/v1/instructions/[definitionId]/versions",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171384,
+          "date": 1794231171384,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ƒ /api/v1/optimizer/capabilities",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171384,
+          "date": 1794231171384,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ƒ /api/v1/otlp/v1/traces",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171384,
+          "date": 1794231171384,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ƒ /api/v1/prompts/resolve",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171384,
+          "date": 1794231171384,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ƒ /api/v1/provided-output-runs",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171384,
+          "date": 1794231171384,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ƒ /api/v1/provided-output-runs/[runId]",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171384,
+          "date": 1794231171384,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ƒ /api/v1/provided-output-runs/preview",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171384,
+          "date": 1794231171384,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ƒ /api/v1/provided-output-runs/sources",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171384,
+          "date": 1794231171384,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ƒ /api/v1/run-batches",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171384,
+          "date": 1794231171384,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ƒ /api/v1/run-batches/[batchId]",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171384,
+          "date": 1794231171384,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ƒ /api/v1/run-plans/resolve",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171384,
+          "date": 1794231171384,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ƒ /api/v1/scenarios",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171384,
+          "date": 1794231171384,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ƒ /api/v1/traces",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171384,
+          "date": 1794231171384,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ƒ /api/v1/traces/batch",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171385,
+          "date": 1794231171385,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ƒ /auth/callback",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171385,
+          "date": 1794231171385,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ○ /benchmarks",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171385,
+          "date": 1794231171385,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ○ /campaigns",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171385,
+          "date": 1794231171385,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ○ /evals",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171385,
+          "date": 1794231171385,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ƒ /evals/custom",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171385,
+          "date": 1794231171385,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ƒ /evals/custom/[setId]",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171385,
+          "date": 1794231171385,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ƒ /evals/run",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171385,
+          "date": 1794231171385,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ƒ /evals/run/[runId]",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171385,
+          "date": 1794231171385,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ○ /evals/sdk",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171385,
+          "date": 1794231171385,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ○ /improve",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171385,
+          "date": 1794231171385,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ○ /instructions",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171385,
+          "date": 1794231171385,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ƒ /instructions/[definitionId]",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171385,
+          "date": 1794231171385,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ○ /instructions/candidates",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171385,
+          "date": 1794231171385,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ○ /instructions/experiments",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171385,
+          "date": 1794231171385,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ○ /instructions/releases",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171385,
+          "date": 1794231171385,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ○ /login",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171385,
+          "date": 1794231171385,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ○ /runs",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171385,
+          "date": 1794231171385,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ƒ /runs/[batchId]",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171385,
+          "date": 1794231171385,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ○ /runs/import",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171386,
+          "date": 1794231171386,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ○ /scenarios",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171386,
+          "date": 1794231171386,
+          "type": "stdout",
+          "text": "@open-evals/web:build: └ ○ /signup",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171386,
+          "date": 1794231171386,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171386,
+          "date": 1794231171386,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171387,
+          "date": 1794231171387,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ƒ Proxy (Middleware)",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171387,
+          "date": 1794231171387,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171387,
+          "date": 1794231171387,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ○  (Static)   prerendered as static content",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171387,
+          "date": 1794231171387,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ƒ  (Dynamic)  server-rendered on demand",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171387,
+          "date": 1794231171387,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171697,
+          "date": 1794231171697,
+          "type": "stdout",
+          "text": "",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171697,
+          "date": 1794231171697,
+          "type": "stdout",
+          "text": "  Tasks:    10 successful, 10 total",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171698,
+          "date": 1794231171698,
+          "type": "stdout",
+          "text": " Cached:    0 cached, 10 total",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171698,
+          "date": 1794231171698,
+          "type": "stdout",
+          "text": "   Time:    28.415s ",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171698,
+          "date": 1794231171698,
+          "type": "stdout",
+          "text": "Summary:    /vercel/path0/.turbo/runs/3Ls7xuARNjidVq5186bjHlHEuw3.json",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171698,
+          "date": 1794231171698,
+          "type": "stdout",
+          "text": "",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171704,
+          "date": 1794231171704,
+          "type": "stderr",
+          "text": " WARNING  no output files found for task @open-evals/adapters#build. Please check your `outputs` key in `turbo.json`",
+          "level": "warning",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171704,
+          "date": 1794231171704,
+          "type": "stderr",
+          "text": " WARNING  no output files found for task @open-evals/cli#build. Please check your `outputs` key in `turbo.json`",
+          "level": "warning",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171704,
+          "date": 1794231171704,
+          "type": "stderr",
+          "text": " WARNING  no output files found for task @open-evals/core#build. Please check your `outputs` key in `turbo.json`",
+          "level": "warning",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171704,
+          "date": 1794231171704,
+          "type": "stderr",
+          "text": " WARNING  no output files found for task @open-evals/db#build. Please check your `outputs` key in `turbo.json`",
+          "level": "warning",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171704,
+          "date": 1794231171704,
+          "type": "stderr",
+          "text": " WARNING  no output files found for task @open-evals/mcp#build. Please check your `outputs` key in `turbo.json`",
+          "level": "warning",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171704,
+          "date": 1794231171704,
+          "type": "stderr",
+          "text": " WARNING  no output files found for task @open-evals/sdk#build. Please check your `outputs` key in `turbo.json`",
+          "level": "warning",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171705,
+          "date": 1794231171705,
+          "type": "stderr",
+          "text": " WARNING  no output files found for task @open-evals/statistics#build. Please check your `outputs` key in `turbo.json`",
+          "level": "warning",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171705,
+          "date": 1794231171705,
+          "type": "stderr",
+          "text": " WARNING  no output files found for task @open-evals/test-fixtures#build. Please check your `outputs` key in `turbo.json`",
+          "level": "warning",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171705,
+          "date": 1794231171705,
+          "type": "stderr",
+          "text": " WARNING  no output files found for task @open-evals/workflows#build. Please check your `outputs` key in `turbo.json`",
+          "level": "warning",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        }
+      ]
+    },
+    {
+      "since": 1794231171000,
+      "until": 1794231182000,
+      "events": [
+        {
+          "created": 1794231171172,
+          "date": 1794231171172,
+          "type": "stdout",
+          "text": "@open-evals/web:build:   Running onBuildComplete from Vercel",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171378,
+          "date": 1794231171378,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171383,
+          "date": 1794231171383,
+          "type": "stdout",
+          "text": "@open-evals/web:build: Route (app)",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171383,
+          "date": 1794231171383,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ┌ ○ /",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171383,
+          "date": 1794231171383,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ○ /_not-found",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171383,
+          "date": 1794231171383,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ƒ /api/v1/auth/github/callback",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171383,
+          "date": 1794231171383,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ƒ /api/v1/auth/github/start",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171383,
+          "date": 1794231171383,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ƒ /api/v1/auth/session",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171383,
+          "date": 1794231171383,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ƒ /api/v1/benchmarks",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171383,
+          "date": 1794231171383,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ƒ /api/v1/benchmarks/import",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171383,
+          "date": 1794231171383,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ƒ /api/v1/campaigns",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171383,
+          "date": 1794231171383,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ƒ /api/v1/eval-runs",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171383,
+          "date": 1794231171383,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ƒ /api/v1/eval-sets",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171383,
+          "date": 1794231171383,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ƒ /api/v1/eval-sets/[setId]",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171384,
+          "date": 1794231171384,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ƒ /api/v1/experiments/assign",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171384,
+          "date": 1794231171384,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ƒ /api/v1/instructions",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171384,
+          "date": 1794231171384,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ƒ /api/v1/instructions/[definitionId]",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171384,
+          "date": 1794231171384,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ƒ /api/v1/instructions/[definitionId]/campaign-requests",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171384,
+          "date": 1794231171384,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ƒ /api/v1/instructions/[definitionId]/campaign-requests/preview",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171384,
+          "date": 1794231171384,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ƒ /api/v1/instructions/[definitionId]/preview",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171384,
+          "date": 1794231171384,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ƒ /api/v1/instructions/[definitionId]/versions",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171384,
+          "date": 1794231171384,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ƒ /api/v1/optimizer/capabilities",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171384,
+          "date": 1794231171384,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ƒ /api/v1/otlp/v1/traces",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171384,
+          "date": 1794231171384,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ƒ /api/v1/prompts/resolve",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171384,
+          "date": 1794231171384,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ƒ /api/v1/provided-output-runs",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171384,
+          "date": 1794231171384,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ƒ /api/v1/provided-output-runs/[runId]",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171384,
+          "date": 1794231171384,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ƒ /api/v1/provided-output-runs/preview",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171384,
+          "date": 1794231171384,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ƒ /api/v1/provided-output-runs/sources",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171384,
+          "date": 1794231171384,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ƒ /api/v1/run-batches",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171384,
+          "date": 1794231171384,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ƒ /api/v1/run-batches/[batchId]",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171384,
+          "date": 1794231171384,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ƒ /api/v1/run-plans/resolve",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171384,
+          "date": 1794231171384,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ƒ /api/v1/scenarios",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171384,
+          "date": 1794231171384,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ƒ /api/v1/traces",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171384,
+          "date": 1794231171384,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ƒ /api/v1/traces/batch",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171385,
+          "date": 1794231171385,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ƒ /auth/callback",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171385,
+          "date": 1794231171385,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ○ /benchmarks",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171385,
+          "date": 1794231171385,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ○ /campaigns",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171385,
+          "date": 1794231171385,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ○ /evals",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171385,
+          "date": 1794231171385,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ƒ /evals/custom",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171385,
+          "date": 1794231171385,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ƒ /evals/custom/[setId]",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171385,
+          "date": 1794231171385,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ƒ /evals/run",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171385,
+          "date": 1794231171385,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ƒ /evals/run/[runId]",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171385,
+          "date": 1794231171385,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ○ /evals/sdk",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171385,
+          "date": 1794231171385,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ○ /improve",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171385,
+          "date": 1794231171385,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ○ /instructions",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171385,
+          "date": 1794231171385,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ƒ /instructions/[definitionId]",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171385,
+          "date": 1794231171385,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ○ /instructions/candidates",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171385,
+          "date": 1794231171385,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ○ /instructions/experiments",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171385,
+          "date": 1794231171385,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ○ /instructions/releases",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171385,
+          "date": 1794231171385,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ○ /login",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171385,
+          "date": 1794231171385,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ○ /runs",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171385,
+          "date": 1794231171385,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ƒ /runs/[batchId]",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171385,
+          "date": 1794231171385,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ○ /runs/import",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171386,
+          "date": 1794231171386,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ├ ○ /scenarios",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171386,
+          "date": 1794231171386,
+          "type": "stdout",
+          "text": "@open-evals/web:build: └ ○ /signup",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171386,
+          "date": 1794231171386,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171386,
+          "date": 1794231171386,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171387,
+          "date": 1794231171387,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ƒ Proxy (Middleware)",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171387,
+          "date": 1794231171387,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171387,
+          "date": 1794231171387,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ○  (Static)   prerendered as static content",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171387,
+          "date": 1794231171387,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ƒ  (Dynamic)  server-rendered on demand",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171387,
+          "date": 1794231171387,
+          "type": "stdout",
+          "text": "@open-evals/web:build: ",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171697,
+          "date": 1794231171697,
+          "type": "stdout",
+          "text": "",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171697,
+          "date": 1794231171697,
+          "type": "stdout",
+          "text": "  Tasks:    10 successful, 10 total",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171698,
+          "date": 1794231171698,
+          "type": "stdout",
+          "text": " Cached:    0 cached, 10 total",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171698,
+          "date": 1794231171698,
+          "type": "stdout",
+          "text": "   Time:    28.415s ",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171698,
+          "date": 1794231171698,
+          "type": "stdout",
+          "text": "Summary:    /vercel/path0/.turbo/runs/3Ls7xuARNjidVq5186bjHlHEuw3.json",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171698,
+          "date": 1794231171698,
+          "type": "stdout",
+          "text": "",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171704,
+          "date": 1794231171704,
+          "type": "stderr",
+          "text": " WARNING  no output files found for task @open-evals/adapters#build. Please check your `outputs` key in `turbo.json`",
+          "level": "warning",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171704,
+          "date": 1794231171704,
+          "type": "stderr",
+          "text": " WARNING  no output files found for task @open-evals/cli#build. Please check your `outputs` key in `turbo.json`",
+          "level": "warning",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171704,
+          "date": 1794231171704,
+          "type": "stderr",
+          "text": " WARNING  no output files found for task @open-evals/core#build. Please check your `outputs` key in `turbo.json`",
+          "level": "warning",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171704,
+          "date": 1794231171704,
+          "type": "stderr",
+          "text": " WARNING  no output files found for task @open-evals/db#build. Please check your `outputs` key in `turbo.json`",
+          "level": "warning",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171704,
+          "date": 1794231171704,
+          "type": "stderr",
+          "text": " WARNING  no output files found for task @open-evals/mcp#build. Please check your `outputs` key in `turbo.json`",
+          "level": "warning",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171704,
+          "date": 1794231171704,
+          "type": "stderr",
+          "text": " WARNING  no output files found for task @open-evals/sdk#build. Please check your `outputs` key in `turbo.json`",
+          "level": "warning",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171705,
+          "date": 1794231171705,
+          "type": "stderr",
+          "text": " WARNING  no output files found for task @open-evals/statistics#build. Please check your `outputs` key in `turbo.json`",
+          "level": "warning",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171705,
+          "date": 1794231171705,
+          "type": "stderr",
+          "text": " WARNING  no output files found for task @open-evals/test-fixtures#build. Please check your `outputs` key in `turbo.json`",
+          "level": "warning",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231171705,
+          "date": 1794231171705,
+          "type": "stderr",
+          "text": " WARNING  no output files found for task @open-evals/workflows#build. Please check your `outputs` key in `turbo.json`",
+          "level": "warning",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231172813,
+          "date": 1794231172813,
+          "type": "stderr",
+          "text": "Build Completed in /vercel/output [32s]",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231172842,
+          "date": 1794231172842,
+          "type": "stdout",
+          "text": "Deploying outputs...",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231180910,
+          "date": 1794231180910,
+          "type": "stdout",
+          "text": "Deployment completed",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        },
+        {
+          "created": 1794231180914,
+          "date": 1794231180914,
+          "type": "stdout",
+          "text": "Creating build cache...",
+          "info": {
+            "type": "build",
+            "name": "bld_1dnsxcgs3",
+            "entrypoint": "."
+          }
+        }
+      ]
+    }
+  ],
+  "proofLimits": [
+    "Provider READY/source/alias and build logs do not establish genuine hosted login, database, RLS or end-user acceptance.",
+    "The four Chromium scenarios used the separately recorded owned CI database/signed-session fixture.",
+    "Nine existing Turbo output warnings are retained; their task configuration was not changed.",
+    "No Auth, environment-secret, production schema, dependency or paid-plan setting changed."
+  ]
+}
