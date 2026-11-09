@@ -18,7 +18,7 @@ jobs:
     timeout-minutes: 20
     env:
       ROOT_ACCEPTED_SOURCE_SHA: 39f217a2f146991f7ed811b083126223825c6f7a
-      ROOT_EXPECTED_PARENT_SHA: 39f217a2f146991f7ed811b083126223825c6f7a
+      ROOT_EXPECTED_PARENT_SHA: d4e960069c431eeaae2a4c6f21364d2549bb42f2
       TASK_DB: oe_custom_datasets_test_${{ github.run_id }}_${{ github.run_attempt }}
       OWNED_PORT: '65432'
     steps:
@@ -76,7 +76,7 @@ jobs:
           base_url = 'http://127.0.0.1:4173'
           auth_secret = 'authored_open_evals_custom_datasets_20261109_fixture_only'
           api_key_pepper = 'authored_custom_dataset_browser_pepper_20261109_fixture_only'
-          source_contract_frozen = True  # Root and independent peer verified restoration and all 58 current QA source pins.
+          source_contract_frozen = True  # Root and independent peer verified the two-file browser repair, exact wrapper delta and all 58 source pins.
           expected_sources = {
               "apps/web/app/(product)/evals/datasets/[datasetId]/page.tsx": {"bytes":2970,"sha256":"e5e9bc048cd19d6e22b08ac1eb1b1023fb6c1667ac2f31291e2c4a9e8699bf08"},
               "apps/web/app/(product)/evals/datasets/[datasetId]/versions/[versionId]/page.tsx": {"bytes":4887,"sha256":"22377d1a72f24314ad47fc2cbd371ab914247b1507c6ab98e8c8eed883b4ade6"},
@@ -98,7 +98,7 @@ jobs:
               "apps/web/app/api/v1/provided-output-runs/sources/route.ts": {"bytes":468,"sha256":"3f0777ad67a3b7b90671883ffbe180ac1214146b8fd3938ffee4c2bb74a6faaa"},
               "apps/web/lib/auth.ts": {"bytes":7872,"sha256":"32f35257f9dbe65cd5e40f9c5c6981ff27a54ef0dee955919a49e8bd88ed82e0"},
               "apps/web/lib/custom-dataset-types.ts": {"bytes":767,"sha256":"21f283fb100e7c279bbd643748f94e31aeb37193968e826f6250f7da558456eb"},
-              "apps/web/lib/custom-datasets.ts": {"bytes":7436,"sha256":"463f0c754c2dff3a8b51d0d206c785869417612feb830e693ddf6e36baa40705"},
+              "apps/web/lib/custom-datasets.ts": {"bytes":7661,"sha256":"7fa850c7bbb4f72c1d948e6e6f327ed4c471c2f95fddf3a0b635c81d9fcc3f92"},
               "apps/web/lib/custom-eval-access.ts": {"bytes":709,"sha256":"b1a23a32a9052bf681736f723500fa816514bb83a7bee2c7f7afcb6216cf4473"},
               "apps/web/lib/custom-evals.ts": {"bytes":5461,"sha256":"62b6610091b35da0567bdb179e6e85267062057f5040fc1cf54fd1c09f47b384"},
               "apps/web/lib/instruction-request.ts": {"bytes":2527,"sha256":"97a8b508637e0080d7ffb8645c4866551945625744f6e76ab2645be3898d915a"},
@@ -131,7 +131,7 @@ jobs:
               "pnpm-lock.yaml": {"bytes":214155,"sha256":"77443b49cd42f85638d82f00bd0e9c510f3662cac777ee0082ffb103775702ea"},
               "tests/e2e/custom-datasets.browser.config.ts": {"bytes":1517,"sha256":"a2c178567c728324ea765321f32ac88f2a81cc47ce028d8d171bbba85ddac4b6"},
               "tests/e2e/custom-datasets.browser.fixture.ts": {"bytes":21931,"sha256":"71bb87f409b65352602709a8778a2ba854be13e91f1512fe68d96cba3d67ab1d"},
-              "tests/e2e/custom-datasets.browser.spec.ts": {"bytes":23795,"sha256":"0f044fc22483afdd88713385796d8a361195a9b8ad7911c6bebbea3ea1853ca2"},
+              "tests/e2e/custom-datasets.browser.spec.ts": {"bytes":25830,"sha256":"e1e9f54d0c0d6f7936b733275f5121340f9b9443f45419900eb2710f332e0337"},
               "tests/integration/custom-datasets.node.mjs": {"bytes":41729,"sha256":"808927cff1a8f4b0b00b608497e17a0b4651b9a88a1079c4b5cd5c5f396fa5de"},
               "tests/integration/provided-output-runs.node.mjs": {"bytes":36477,"sha256":"e63d7dbb5b3f3bd03bc19976decd594bde473653343d55a7205982d0bbe570dd"},
               "tests/unit/custom-datasets.test.mjs": {"bytes":30662,"sha256":"afb8cb1db0cc64a38a91212183e76c6f59dc5deaf52bc5da2ba1a92b761d0d83"},
@@ -405,6 +405,9 @@ jobs:
               app_records.append(record)
               app = None
               write(owned['label'] + '-server.json', record)
+              stderr_bytes = (evidence / record['streams']['stderr']['file']).read_bytes()
+              if len(stderr_bytes) <= 16384 and log_bytes + 3 * len(stderr_bytes) + 2048 <= 224 * 1024:
+                  emit_original(record['streams']['stderr']['file'], stderr_bytes, 16384)
 
           def capture_source(path):
               target = root / path
@@ -461,7 +464,7 @@ jobs:
               parents = run('source-parents', ['git', 'rev-list', '--parents', '-n', '1', 'HEAD']).split()
               assert head == os.environ['GITHUB_SHA'] and parents == [head, expected_parent], 'source must be one direct child of the compiled QA source'
               delta = run('source-delta', ['git', 'diff', '--name-status', '-z', '--no-renames', expected_parent, 'HEAD']).split('\0')
-              expected_delta = ["A",".github/workflows/custom-dataset-checks.yml",""]
+              expected_delta = ["M",".github/workflows/custom-dataset-checks.yml","M","apps/web/lib/custom-datasets.ts","M","tests/e2e/custom-datasets.browser.spec.ts",""]
               assert expected_delta and delta == expected_delta, 'only the reviewed custom-dataset source delta is admitted'
               assert not run('source-clean', ['git', 'status', '--porcelain=v1', '--untracked-files=no']).strip()
               protected = [".github/workflows/custom-dataset-checks.yml","apps/web/app/(product)/evals/datasets/[datasetId]/page.tsx","apps/web/app/(product)/evals/datasets/[datasetId]/versions/[versionId]/page.tsx","apps/web/app/(product)/evals/datasets/custom-dataset-composer.tsx","apps/web/app/(product)/evals/datasets/error.tsx","apps/web/app/(product)/evals/datasets/loading.tsx","apps/web/app/(product)/evals/datasets/page.tsx","apps/web/app/(product)/evals/page.tsx","apps/web/app/(product)/evals/run/[runId]/page.tsx","apps/web/app/(product)/evals/run/page.tsx","apps/web/app/(product)/evals/run/provided-output-composer.tsx","apps/web/app/api/v1/custom-datasets/[datasetId]/route.ts","apps/web/app/api/v1/custom-datasets/[datasetId]/versions/[versionId]/route.ts","apps/web/app/api/v1/custom-datasets/preview/route.ts","apps/web/app/api/v1/custom-datasets/route.ts","apps/web/app/api/v1/provided-output-runs/[runId]/route.ts","apps/web/app/api/v1/provided-output-runs/preview/route.ts","apps/web/app/api/v1/provided-output-runs/route.ts","apps/web/app/api/v1/provided-output-runs/sources/route.ts","apps/web/lib/auth.ts","apps/web/lib/custom-dataset-types.ts","apps/web/lib/custom-datasets.ts","apps/web/lib/custom-eval-access.ts","apps/web/lib/custom-evals.ts","apps/web/lib/instruction-request.ts","apps/web/lib/provided-output-runs.ts","apps/web/lib/provided-output-types.ts","apps/web/package.json","docs/custom-datasets.md","docs/proposals/custom-datasets.md","package.json","packages/core/src/custom-dataset-types.ts","packages/core/src/custom-datasets.ts","packages/core/src/custom-evals.ts","packages/core/src/eval-engine.ts","packages/core/src/hash.ts","packages/core/src/index.ts","packages/core/src/provided-output-runs.ts","packages/core/src/provided-output-types.ts","packages/core/src/types.ts","packages/db/migrations/0001_init.sql","packages/db/migrations/0002_hosted_integrations.sql","packages/db/package.json","packages/db/src/custom-dataset-types.ts","packages/db/src/custom-datasets.ts","packages/db/src/custom-evals.ts","packages/db/src/dataset-snapshots.ts","packages/db/src/index.ts","packages/db/src/provided-output-runs.ts","packages/db/src/schema.ts","packages/db/src/service.ts","pnpm-lock.yaml","tests/e2e/custom-datasets.browser.config.ts","tests/e2e/custom-datasets.browser.fixture.ts","tests/e2e/custom-datasets.browser.spec.ts","tests/integration/custom-datasets.node.mjs","tests/integration/provided-output-runs.node.mjs","tests/unit/custom-datasets.test.mjs","turbo.json"]

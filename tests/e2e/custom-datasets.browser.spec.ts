@@ -1,5 +1,5 @@
 import { createHash } from "node:crypto";
-import type { Page, Response } from "@playwright/test";
+import type { Page, Request, Route } from "@playwright/test";
 import type { CustomDatasetDraft, CustomDatasetPreview, CustomDatasetSaveResult, CustomDatasetVersionRecord, ProvidedOutputRunRecord } from "@open-evals/core";
 import { test, expect, emptyCounts, expectNoDatasetWrites, expectStored, type OwnedCustomDatasetFixture } from "./custom-datasets.browser.fixture";
 
@@ -9,7 +9,6 @@ const name = (page: Page) => page.getByLabel("Dataset name", { exact: true });
 const format = (page: Page) => page.getByLabel("Source format", { exact: true });
 const review = (page: Page) => page.getByLabel("Review declarations", { exact: true });
 const upload = (page: Page) => page.getByLabel("Upload JSON or JSONL", { exact: true });
-const isPost = (path: string) => (response: Response) => response.request().method() === "POST" && new URL(response.url()).pathname === path;
 const rows = (marker: string) => JSON.stringify([
   { rowKey: "Alpha", input: { prompt: `Authored alpha ${marker}` }, metadata: { marker, zero: 0, flag: false } },
   { rowKey: "Beta", input: { prompt: `Authored beta ${marker}` }, expectedOutput: "approved reference", context: null }
@@ -26,12 +25,42 @@ async function open(page: Page, owned: OwnedCustomDatasetFixture) {
 async function edit(page: Page, sourceText: string, datasetName: string) {
   await name(page).fill(datasetName); await format(page).selectOption("json"); await review(page).selectOption("synthetic"); await source(page).fill(sourceText);
 }
+// Capture the real response before delivering it unchanged to Chromium. Reading a
+// CDP body only after click completion can lose an already-consumed fetch resource.
+async function capturePost<T>(page: Page, path: string, action: () => Promise<unknown>) {
+  type Capture = { status: number; value: T; request: Request };
+  let complete!: (value: { captured?: Capture; error?: unknown }) => void;
+  const captured = new Promise<{ captured?: Capture; error?: unknown }>(resolve => { complete = resolve; });
+  const matches = (url: URL) => url.pathname === path;
+  let received = false;
+  const handler = async (route: Route) => {
+    if (route.request().method() !== "POST") { await route.fallback(); return; }
+    received = true;
+    try {
+      const response = await route.fetch({ maxRedirects: 0, maxRetries: 0, timeout: 20_000 });
+      const body = await response.body(); expect(body.length).toBeLessThanOrEqual(8 * 1024 * 1024 + 4096);
+      const value = JSON.parse(new TextDecoder("utf-8", { fatal: true }).decode(body)) as T;
+      await route.fulfill({ response, body });
+      complete({ captured: { status: response.status(), value, request: route.request() } });
+    } catch (error) { complete({ error }); await route.abort("failed").catch(() => undefined); }
+  };
+  await page.route(matches, handler);
+  try {
+    await action();
+    const result = await captured;
+    if (result.error) throw result.error;
+    expect(result.captured).toBeDefined();
+    return result.captured!;
+  } finally {
+    if (received) await captured;
+    await page.unroute(matches, handler);
+  }
+}
 async function preview(page: Page) {
-  const pending = page.waitForResponse(isPost(`${endpoint}/preview`));
-  await page.getByRole("button", { name: "Preview complete dataset", exact: true }).click();
-  const response = await pending; expect(response.status()).toBe(200);
-  const value = await response.json() as { preview: CustomDatasetPreview };
-  const draft = response.request().postDataJSON() as CustomDatasetDraft;
+  const response = await capturePost<{ preview: CustomDatasetPreview }>(page, `${endpoint}/preview`, () => page.getByRole("button", { name: "Preview complete dataset", exact: true }).click());
+  expect(response.status).toBe(200);
+  const value = response.value;
+  const draft = response.request.postDataJSON() as CustomDatasetDraft;
   expect(value.preview.schemaVersion).toBe("custom-dataset-preview-v1"); expect(value.preview.fingerprint).toMatch(/^[a-f0-9]{64}$/);
   expect(value.preview.intent.sourceDigest).toBe(createHash("sha256").update(draft.sourceText).digest("hex"));
   expect(value.preview.canonicalSnapshotBytes).toBeLessThanOrEqual(1048576);
@@ -39,16 +68,14 @@ async function preview(page: Page) {
   return { pinned: value.preview, draft };
 }
 async function save(page: Page, button = "Save immutable version", status = 201) {
-  const pending = page.waitForResponse(isPost(endpoint));
-  await page.getByRole("button", { name: button, exact: true }).click();
-  const response = await pending; expect(response.status()).toBe(status);
-  return { value: await response.json() as CustomDatasetSaveResult, response };
+  const response = await capturePost<CustomDatasetSaveResult>(page, endpoint, () => page.getByRole("button", { name: button, exact: true }).click());
+  expect(response.status).toBe(status);
+  return response;
 }
 async function refusePreview(page: Page, code: string) {
-  const pending = page.waitForResponse(isPost(`${endpoint}/preview`));
-  await page.getByRole("button", { name: "Preview complete dataset", exact: true }).click();
-  const response = await pending; expect(response.status()).toBe(422);
-  const value = await response.json(); expect(value.error).toBe(code);
+  const response = await capturePost<{ error: string; rowIndex?: number; line?: number; column?: number }>(page, `${endpoint}/preview`, () => page.getByRole("button", { name: "Preview complete dataset", exact: true }).click());
+  expect(response.status).toBe(422);
+  const value = response.value; expect(value.error).toBe(code);
   await expect(page.getByRole("heading", { name: "Review and explicitly save", exact: true })).toHaveCount(0);
   return value;
 }
@@ -92,7 +119,7 @@ test("CD-BR01 desktop JSONL upload saves complete rows and explicitly scores the
   await expectNoDatasetWrites(owned);
   const accepted = await save(page); expect(accepted.value.replayed).toBe(false);
   const record = accepted.value.record; expect(record.content).toEqual(pinned.content); expect(record.manifest.previewFingerprint).toBe(pinned.fingerprint);
-  expect(accepted.response.request().postDataJSON()).toEqual({ schemaVersion: "custom-dataset-save-v1", draft, expectedPreviewFingerprint: pinned.fingerprint });
+  expect(accepted.request.postDataJSON()).toEqual({ schemaVersion: "custom-dataset-save-v1", draft, expectedPreviewFingerprint: pinned.fingerprint });
   const stored = await expectStored(owned, record);
   expect(stored.counts).toEqual({ ...emptyCounts(), datasets: 1, versions: 1, rows: 2, datasetAudits: 1 });
   await openVersion(page, owned, record);
@@ -118,13 +145,12 @@ test("CD-BR01 desktop JSONL upload saves complete rows and explicitly scores the
     await expect(page.getByLabel(`Actual output for ${key}`, { exact: true })).toHaveValue("");
     await page.getByLabel(`Actual output for ${key}`, { exact: true }).fill(`APPROVED authored ${key}`);
   }
-  const runPreview = page.waitForResponse(isPost("/api/v1/provided-output-runs/preview"));
-  await page.getByRole("button", { name: "Preview pinned run", exact: true }).click(); expect((await runPreview).status()).toBe(200);
+  const runPreview = await capturePost<unknown>(page, "/api/v1/provided-output-runs/preview", () => page.getByRole("button", { name: "Preview pinned run", exact: true }).click());
+  expect(runPreview.status).toBe(200);
   expect((await owned.snapshot()).counts.runs).toBe(0);
-  const runPending = page.waitForResponse(isPost("/api/v1/provided-output-runs"));
-  await page.getByRole("button", { name: "Run deterministic checks", exact: true }).click();
-  const runResponse = await runPending; expect(runResponse.status()).toBe(201);
-  const result = (await runResponse.json()).record as ProvidedOutputRunRecord;
+  const runResponse = await capturePost<{ record: ProvidedOutputRunRecord }>(page, "/api/v1/provided-output-runs", () => page.getByRole("button", { name: "Run deterministic checks", exact: true }).click());
+  expect(runResponse.status).toBe(201);
+  const result = runResponse.value.record;
   expect(result.plan.dataset).toEqual(record.snapshot); expect(result.execution.gates.every(gate => gate.passed)).toBe(true);
   const scored = await owned.snapshot();
   expect(scored.counts).toEqual({ datasets: 1, versions: 1, rows: 2, datasetAudits: 1, plans: 1, runs: 1, samples: 2, results: 2, gates: 11, runAudits: 1, evalSets: 1, evalItems: 1 });
@@ -136,15 +162,22 @@ test("CD-BR02 a lost committed save replays the identical request after a later 
   const { pinned } = await preview(page); const bodies: string[] = [];
   let complete!: (value: { status?: number; value?: CustomDatasetSaveResult; error?: string }) => void;
   const committed = new Promise<{ status?: number; value?: CustomDatasetSaveResult; error?: string }>(resolve => { complete = resolve; });
+  let completeRetry!: (value: { status?: number; value?: CustomDatasetSaveResult; error?: string }) => void;
+  const retryResponse = new Promise<{ status?: number; value?: CustomDatasetSaveResult; error?: string }>(resolve => { completeRetry = resolve; });
   await page.route(`**${endpoint}`, async route => {
     if (route.request().method() !== "POST") { await route.continue(); return; }
     bodies.push(route.request().postData() ?? "");
-    if (bodies.length !== 1) { await route.continue(); return; }
+    const firstRequest = bodies.length === 1;
     try {
       const real = await route.fetch({ maxRedirects: 0, maxRetries: 0, timeout: 20_000 });
-      complete({ status: real.status(), value: await real.json() as CustomDatasetSaveResult });
-    } catch (error) { complete({ error: error instanceof Error ? error.name : "real_fetch_failed" }); }
-    finally { await route.abort("connectionreset"); }
+      const body = await real.body();
+      const value = JSON.parse(new TextDecoder("utf-8", { fatal: true }).decode(body)) as CustomDatasetSaveResult;
+      if (firstRequest) complete({ status: real.status(), value });
+      else { await route.fulfill({ response: real, body }); completeRetry({ status: real.status(), value }); }
+    } catch (error) {
+      (firstRequest ? complete : completeRetry)({ error: error instanceof Error ? error.name : "real_fetch_failed" });
+      if (!firstRequest) await route.abort("failed").catch(() => undefined);
+    } finally { if (firstRequest) await route.abort("connectionreset"); }
   });
   await page.getByRole("button", { name: "Save immutable version", exact: true }).click();
   const real = await committed; expect(real.error).toBeUndefined(); expect(real.status).toBe(201);
@@ -154,8 +187,9 @@ test("CD-BR02 a lost committed save replays the identical request after a later 
   await expect(upload(page)).toBeDisabled(); await expect(format(page)).toBeDisabled(); await expect(review(page)).toBeDisabled();
   await expectStored(owned, first);
   const later = await owned.append(first, rows("later-head-before-retry")); expect(later.content.version.version).toBe(2);
-  const retried = await save(page, "Retry unchanged save", 200);
-  expect(retried.value.replayed).toBe(true); expect(retried.value.record).toEqual(first);
+  await page.getByRole("button", { name: "Retry unchanged save", exact: true }).click();
+  const retried = await retryResponse; expect(retried.error).toBeUndefined(); expect(retried.status).toBe(200);
+  expect(retried.value!.replayed).toBe(true); expect(retried.value!.record).toEqual(first);
   expect(bodies).toHaveLength(2); expect(bodies[1]).toBe(bodies[0]);
   await expect(page.locator('p[role="status"]')).toContainText("Recovered the existing immutable version.");
   const stored = await expectStored(owned, first); await expectStored(owned, later);

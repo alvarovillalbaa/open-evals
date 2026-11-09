@@ -122,7 +122,10 @@ export function customDatasetErrorResponse(error: unknown): Response {
 async function loadCustomDataset<T>(load: (auth: RouteAuthContext) => Promise<T>): Promise<LoadState<T>> {
   try {
     const auth = await requireCustomEvalAuth("read");
-    return { status: "ready", auth, data: await load(auth) };
+    // Core snapshots deliberately use null-prototype JSON dictionaries. React client
+    // props require ordinary JSON objects; project only after strict domain validation.
+    const data = JSON.parse(JSON.stringify(await load(auth))) as T;
+    return { status: "ready", auth, data };
   } catch (error) {
     const status = error instanceof Error && "status" in error ? Number(error.status) : undefined;
     if (isDatabaseUnavailable(error) || status === 503) return { status: "database_unavailable", message: "database_unavailable" };
