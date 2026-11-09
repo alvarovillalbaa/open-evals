@@ -16,6 +16,10 @@ list. Repository AGENTS.md independently requires exactly Evals and Improve.
 - The catalogue does not infer membership from ID prefixes or page nesting.
   Existing benchmark/dataset and scenario/evaluator collections are independent.
   Dataset rows are inputs; Eval Items and Eval Sets define scoring, not inputs.
+- `/evals/custom` authors a critical text-contains evaluator and explicit
+  one-item membership using immutable versions. Workspace sessions can inspect,
+  edit, retry and recover saves; project keys and hosted demo ownership cannot
+  acquire workspace authoring. [Exact contract](custom-evals.md).
 - `/improve` leads to existing Instructions authoring and campaign history.
   Each section retains its own authenticated loader and access outcome. A saved
   preparation request is not a running campaign or approval decision.
@@ -29,8 +33,8 @@ list. Repository AGENTS.md independently requires exactly Evals and Improve.
   Single/batch SDK wires and stored evidence remain unchanged. Supported SDK
   workflow does not imply technical HTTP-client exclusivity.
 
-The catalogue exposes saved resources and version metadata. It does not add
-custom eval authoring, inferred resource relationships or a new execution path.
+The catalogue exposes saved resources and version metadata and links the custom
+evaluator editor. Saving does not infer input relationships or start execution.
 Authentication/database failures remain separate from a ready but empty workspace.
 
 ## Requirements still unfinished
@@ -38,7 +42,7 @@ Authentication/database failures remain separate from a ready but empty workspac
 | Owner requirement | Remaining implementation |
 | --- | --- |
 | Evals contain Harbor tasks | Task identity/version/artifacts, task selection and actual Harbor execution integration |
-| Custom evals combine inputs and scoring | Durable, explicit membership and authoring; preserve immutable source/run/sample identities |
+| Custom evals combine inputs and scoring | Saved one-item evaluator authoring is implemented; durable input/evaluator composition, further evaluator types and execution remain unfinished |
 | Campaigns consume Evals and optimizer algorithms | Bind pinned eval definitions into actual approved campaign execution; current request preparation does not do this |
 | Improved instructions reach production with safe A/B rollout | Product approval, execution and release integration; existing primitives do not prove the complete flow |
 | Usable hosted app | Existing Auth/database/provider configuration and genuine current-source interaction acceptance |
@@ -46,5 +50,6 @@ Authentication/database failures remain separate from a ready but empty workspac
 Composable/versioned instruction source and its previous accepted checks retain
 their original identities. This surface change does not replay or relabel those
 results. Public npm/PyPI, live providers/models and real Harbor tasks require
-their own proof. No new account, schema, permission, dependency, plan or payment
-is part of this change.
+their own proof. New custom-set routes apply the existing role/scope checks with
+a workspace-session boundary; existing grants/configuration are unchanged.
+No new account, schema, dependency, plan or payment is part of this change.

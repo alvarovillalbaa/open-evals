@@ -113,14 +113,22 @@ An Eval Item is an evaluator definition, not a dataset row. Eval Items can emit 
 The Evals catalogue keeps input collections, evaluators and external benchmarks
 distinct. Existing storage does not establish benchmark→dataset or
 scenario→evaluator-set membership, so the UI does not invent it. Harbor task
-import and execution are still unfinished. The catalogue is a resource browser;
-it does not add a run launcher or custom eval editor. See
+import and execution are still unfinished. The catalogue links a
+[custom Eval Set editor](docs/custom-evals.md): workspace sessions save a
+critical contains evaluator and explicit one-item membership as immutable
+versions, with retry recovery and stale-head conflicts. Saving does not launch
+an eval. Explicit input/evaluator composition remains unfinished. See
 [the product contract and remaining work](docs/product-surface.md).
 
 The [focused product-surface receipt](docs/results/2026/11-09/product-surface-checks.md)
 records eight navigation and eleven actual-module protocol passes in focused
 invocations, preserving the failed first harness. Browser/hosted acceptance is
 separate, and the catalogue does not complete Harbor or campaign execution.
+
+The [custom evaluator checks](docs/results/2026/11-09/custom-eval-checks.md)
+record38pure-source passes. Twelve real PostgreSQL cases remain authored and
+unrun; HTTP/Auth, browser interaction and hosted persistence require separate
+proof. Existing closed instruction/campaign receipts retain their own sources.
 
 ## Historical Versus Live Evals
 
@@ -214,8 +222,8 @@ Screenshots are intentionally left as placeholders for maintainers to capture fr
 ## Roadmap
 
 - Harbor task identity, versioned artifacts and execution integration.
-- Custom eval authoring and explicit input/evaluator membership, followed by
-  campaign use of those pinned definitions.
+- Further custom evaluators, explicit input/evaluator composition and actual
+  saved-definition execution, followed by campaign use of pinned definitions.
 - Campaign execution and approved production A/B safety rollouts from Improve.
 - More benchmark importers behind license checks.
 - Structural optimization work orders backed by connected GitHub pull requests.

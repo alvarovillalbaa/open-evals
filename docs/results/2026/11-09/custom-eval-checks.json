@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "baseCommit": "3b47ab04fcc881550a766af0f5abccf582dbac77",
+  "scopeDocument": "../../../proposals/custom-eval-set-checks.md",
+  "firstInvocation": true,
+  "profile": "actual-core-and-access-policy-tier1",
+  "nodeVersion": "26.8.2",
+  "transpiler": "existing native Next/SWC 16.4.2, read-only tool",
+  "applicationNextVersion": "16.2.9, unchanged",
+  "commandArgumentTail": [
+    "--experimental-vm-modules", "--test",
+    "tests/unit/custom-evals.test.mjs", "tests/unit/custom-eval-access.test.mts"
+  ],
+  "startedAt": "2026-11-09T09:10:30.212017+00:00",
+  "completedAt": "2026-11-09T09:10:30.722760+00:00",
+  "parentWallSeconds": 0.5102810830576345,
+  "testReporterDurationMs": 235.587833,
+  "deadlineSeconds": 30,
+  "exitCode": 0,
+  "timedOut": false,
+  "counts": { "tests": 38, "pass": 38, "fail": 0, "cancelled": 0, "skipped": 0, "todo": 0 },
+  "groups": [
+    { "ids": "CE01-CE20", "cases": 20, "tier": 1, "owner": "actual core builder/parser, actual hash and Node crypto" },
+    { "ids": "CEA01-CEA18", "cases": 18, "tier": 1, "owner": "actual dependency-free access decisions" }
+  ],
+  "checkedSourceBindings": [
+    { "path": "packages/core/src/custom-evals.ts", "bytes": 8855, "sha256": "20276d52b66ef0e1fca0efa85b0d10ea8bde3b3d5854cd160664d40628e5886d", "gitBlob": "07b8e07c302c01d9ac9e3ced02f91aea6592af15" },
+    { "path": "packages/core/src/hash.ts", "bytes": 969, "sha256": "14c6a74e885a8bbc11b71a80bf4b4e306d4c6feb1868eafe59684eaeee3c7ab0", "gitBlob": "140471745127c6e0e0a8a58cc79b245006c6ae89" },
+    { "path": "apps/web/lib/custom-eval-access.ts", "bytes": 709, "sha256": "b1a23a32a9052bf681736f723500fa816514bb83a7bee2c7f7afcb6216cf4473", "gitBlob": "f85661d9831557ae93223bf9a3de17b97160f2c7" },
+    { "path": "tests/unit/custom-evals.test.mjs", "bytes": 18217, "sha256": "73d339e3f24deb1b12a8f8c14c7d73db473f3d44c7df8b7f5f4059ff43f35f81", "gitBlob": "090c091e64dc90fcc86713b7242c0dd5d89a2a02" },
+    { "path": "tests/unit/custom-eval-access.test.mts", "bytes": 4856, "sha256": "d6186ed8f1a3f1791f3674b50f2b75dc31721d52a036ab5323c65a8a131f3a2b", "gitBlob": "fe935af45b56516490c9af17fc5b15059d50e195" }
+  ],
+  "originalOutputs": [
+    { "stream": "stdout", "publicPath": "custom-eval-originals/focused.stdout.txt", "bytes": 3689, "sha256": "1bc98609b384c35ae683f4410cdfda961103b1155d119f398871f051e859f038" },
+    { "stream": "stderr", "privateOriginalRetained": true, "bytes": 0, "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855" }
+  ],
+  "privateCommandRecord": { "bytes": 448, "sha256": "f1b9072df52bf9b9524be32eabac23859f9dd45eb149530cd82b0f3912c113b3", "containsActualExecutablePath": true },
+  "independentSourceReview": "core, DB, web and test sources reviewed; no runtime result inferred",
+  "postgresql": {
+    "source": "tests/integration/custom-evals-store.node.mjs",
+    "sourceSha256": "7110395af88acab953bcc78d4ccfbbf287dda38f48d42920b55515efb050f904",
+    "tier": 3,
+    "authoredIds": "CE-PG01-CE-PG12",
+    "authoredCases": 12,
+    "executedCases": 0,
+    "state": "authored-unrun",
+    "databaseCreatedOrUsed": false
+  },
+  "notEstablished": [
+    "actual PostgreSQL persistence, constraints, transactions, locking, rollback or concurrency",
+    "real Auth/provider, HTTP/API or browser behavior",
+    "full types/build at the time of this focused result",
+    "dataset/evaluator composition, Harbor, campaigns or production rollouts",
+    "hosted configuration, physical-device or full-product/portfolio acceptance"
+  ],
+  "noNewInstallDatabaseProviderModelCiAccountOrPaidPlan": true
+}

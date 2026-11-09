@@ -33,6 +33,9 @@ are preserved; this route is no longer an alternative ingestion workflow.
 
 Other versioned route handlers include:
 
+- `GET /api/v1/eval-sets`
+- `POST /api/v1/eval-sets`
+- `GET /api/v1/eval-sets/[setId]`
 - `POST /api/v1/run-plans/resolve`
 - `GET /api/v1/eval-runs`
 - `POST /api/v1/eval-runs`
@@ -44,6 +47,11 @@ Other versioned route handlers include:
 - `GET /api/v1/instructions/[definitionId]/campaign-requests?baselineVersionId=…[&requestId=…]`
 
 Additional CRUD/version routes are represented in the database schema and CLI surface and should be expanded with the same idempotency and RBAC rules.
+
+The [custom Eval Set contract](custom-evals.md) defines the new workspace-session
+authoring routes, immutable contains-check versions, exact retry/CAS behavior
+and bounded history. They neither launch an eval nor change an existing route's
+permissions. Project keys and hosted demo ownership cannot author these sets.
 
 Campaign request preparation uses the existing instruction access policy. It stores
 pending approval metadata and an audit event; it does not generate candidates,

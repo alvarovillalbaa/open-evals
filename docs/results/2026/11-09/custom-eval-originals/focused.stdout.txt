@@ -1,0 +1,48 @@
+✔ CEA01 workspace owner session can read and write with admin scope (0.980625ms)
+✔ CEA02 Supabase editor with evaluation scopes can read and write (0.123958ms)
+✔ CEA03 viewer workspace session can read with evals read scope (0.086834ms)
+✔ CEA04 viewer cannot write even with admin scope (0.081375ms)
+✔ CEA05 editor without evals write scope cannot write (0.080458ms)
+✔ CEA06 evals write scope does not silently grant read scope (0.073542ms)
+✔ CEA07 prompt and trace scopes do not grant eval reads (0.078166ms)
+✔ CEA08 project API keys cannot read workspace-owned custom sets (0.696209ms)
+✔ CEA09 project API keys cannot write workspace-owned custom sets (0.139542ms)
+✔ CEA10 admin API scope cannot override the workspace-session boundary (0.166959ms)
+✔ CEA11 hosted local ownership cannot read custom sets (0.085541ms)
+✔ CEA12 hosted local ownership cannot save custom sets (0.080958ms)
+✔ CEA13 local development ownership retains local authoring (0.135583ms)
+✔ CEA14 local development viewer still cannot write (0.071666ms)
+✔ CEA15 workspace administrator still needs the evaluation scope (0.134333ms)
+✔ CEA16 an editor write scope is sufficient for workspace-session authoring (0.07225ms)
+✔ CEA17 policy evaluation leaves supplied context and scopes unchanged (1.223583ms)
+✔ CEA18 API keys cannot acquire local-development ownership either (0.060083ms)
+(node:43098) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ CE01 a prepared first version contains exactly one existing-engine critical contains check (2.6945ms)
+✔ CE02 later versions preserve declared parent and request version without resolving a database head (0.838041ms)
+✔ CE03 all three fingerprints use the actual full SHA256 canonical preimages (0.439958ms)
+✔ CE04 name trimming and input key order are normalized but contains text is never normalized (0.724625ms)
+✔ CE05 member identities names and configured text bind item and contract fingerprints (0.482792ms)
+✔ CE06 dataset thresholds bind requests and set gates without changing the evaluator item (0.612292ms)
+✔ CE07 name limits count complete Unicode characters and exact UTF8 bytes (0.885ms)
+✔ CE08 the contains limit is 4096 UTF8 bytes including preserved surrounding whitespace (0.710708ms)
+✔ CE09 blank text NUL and lone surrogates are refused without stripping or replacement (0.418625ms)
+✔ CE10 the draft requires exactly its declared keys and primitive field types (0.49525ms)
+✔ CE11 all identities require lowercase canonical UUIDs (0.839792ms)
+✔ CE12 version bounds first-parent rules and self-parent refusal are explicit (0.536375ms)
+✔ CE13 thresholds reject coercion nonfinite values and values outside 0 through 100 (0.209792ms)
+✔ CE14 accessors symbols hidden keys and foreign prototypes cannot enter a draft (0.262292ms)
+✔ CE15 preparation and parsing leave frozen inputs untouched and return detached contracts (0.436458ms)
+✔ CE16 saved contracts roundtrip canonically regardless of property insertion order (0.69325ms)
+✔ CE17 unknown schemas missing keys extras and claimed fingerprints cannot be silently repaired (1.770333ms)
+✔ CE18 parsing verifies complete membership evaluator metadata gates and authoring context (3.8245ms)
+✔ CE19 recomputing valid digests does not authorize a different evaluator or membership (0.692417ms)
+✔ CE20 corrupt saved objects reject unsupported values without invoking accessors or leaking input (1.051417ms)
+ℹ tests 38
+ℹ suites 0
+ℹ pass 38
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 235.587833

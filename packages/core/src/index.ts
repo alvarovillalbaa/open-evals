@@ -14,3 +14,4 @@ export * from "./benchmarks";
 export * from "./approvals";
 export * from "./demo";
 export * from "./campaign-preparation";
+export * from "./custom-evals";
