@@ -50,7 +50,7 @@ Authentication/database failures remain separate from a ready but empty workspac
 | Owner requirement | Remaining implementation |
 | --- | --- |
 | Evals contain Harbor tasks | Task identity/version/artifacts, task selection and actual Harbor execution integration |
-| Custom evals combine inputs and scoring | Saved datasets and immutable HTTP composition have source implementations; integrated acceptance and native execution proof remain pending, alongside further target runtimes and evaluator types |
+| Custom evals combine inputs and scoring | Saved datasets and immutable HTTP composition have recorded fixture checks; actual native execution and hosted acceptance remain unverified, alongside further target runtimes and evaluator types |
 | Campaigns consume Evals and optimizer algorithms | Bind pinned eval definitions into actual approved campaign execution; current request preparation does not do this |
 | Improved instructions reach production with safe A/B rollout | Product approval, execution and release integration; existing primitives do not prove the complete flow |
 | Usable hosted app | Existing Auth/database/provider configuration and genuine current-source interaction acceptance |

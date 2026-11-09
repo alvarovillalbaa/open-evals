@@ -1,0 +1,365 @@
+{
+  "config": {
+    "argv": [
+      "/opt/hostedtoolcache/node/24.22.2/x64/bin/node",
+      "/home/runner/work/open-evals/open-evals/node_modules/.pnpm/@playwright+test@1.61.1/node_modules/@playwright/test/cli.js",
+      "test",
+      "--config",
+      "tests/e2e/http-target-plans.browser.config.ts"
+    ],
+    "configFile": "/home/runner/work/open-evals/open-evals/tests/e2e/http-target-plans.browser.config.ts",
+    "rootDir": "/home/runner/work/open-evals/open-evals/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": true,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 420000,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/home/runner/work/_temp/open-evals-http-target-browser-evidence/browser-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium-owned-production-no-dispatch",
+        "name": "chromium-owned-production-no-dispatch",
+        "testDir": "/home/runner/work/open-evals/open-evals/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "http-target-plans.browser.spec.ts"
+        ],
+        "timeout": 90000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/home/runner/work/_temp/open-evals-http-target-browser-evidence/browser-report.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "http-target-plans.browser.spec.ts",
+      "file": "http-target-plans.browser.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "HTTP-BR01 desktop complete preview, explicit immutable save and reload make no execution reservation",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-owned-production-no-dispatch",
+              "projectName": "chromium-owned-production-no-dispatch",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2057,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T20:24:43.688Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "owned-fixture-cleanup",
+                      "contentType": "application/json",
+                      "body": "eyJzY2hlbWFWZXJzaW9uIjoiaHR0cC1wbGFuLWJyb3dzZXItY2xlYW51cC12MSIsInN0YXR1cyI6InJlbW92ZWQiLCJ3b3Jrc3BhY2VDb3VudCI6MSwiYWN0b3JDb3VudCI6MSwib3duZXJzaGlwVmFsaWRhdGVkIjp0cnVlLCJiZWZvcmUiOnsiZGF0YXNldHMiOjEsInZlcnNpb25zIjoxLCJyb3dzIjoyLCJldmFsU2V0cyI6MiwiZXZhbEl0ZW1zIjoyLCJwbGFucyI6MSwicGxhbkF1ZGl0cyI6MSwicnVucyI6MCwic2FtcGxlcyI6MCwicmVzdWx0cyI6MCwiZ2F0ZXMiOjAsIndvcmtmbG93cyI6MCwiZXZlbnRzIjowLCJhdWRpdHMiOjR9LCJhZnRlciI6eyJkYXRhc2V0cyI6MCwidmVyc2lvbnMiOjAsInJvd3MiOjAsImV2YWxTZXRzIjowLCJldmFsSXRlbXMiOjAsInBsYW5zIjowLCJwbGFuQXVkaXRzIjowLCJydW5zIjowLCJzYW1wbGVzIjowLCJyZXN1bHRzIjowLCJnYXRlcyI6MCwid29ya2Zsb3dzIjowLCJldmVudHMiOjAsImF1ZGl0cyI6MH0sImRpc3BhdGNoQ2xhaW1zIjowLCJ3b3Jrc3BhY2VBYnNlbnQiOnRydWUsImFjdG9yc0Fic2VudCI6dHJ1ZSwiYWN0dWFsSHR0cEV4ZWN1dGlvbkNoZWNrZWQiOmZhbHNlfQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4ced31ddbf5166040992-4762a3403def66ce70bd",
+          "file": "http-target-plans.browser.spec.ts",
+          "line": 77,
+          "column": 1
+        },
+        {
+          "title": "HTTP-BR02 narrow Unicode and complete JSON preserve saved inputs and both evaluator versions",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-owned-production-no-dispatch",
+              "projectName": "chromium-owned-production-no-dispatch",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1166,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T20:24:46.272Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "owned-fixture-cleanup",
+                      "contentType": "application/json",
+                      "body": "eyJzY2hlbWFWZXJzaW9uIjoiaHR0cC1wbGFuLWJyb3dzZXItY2xlYW51cC12MSIsInN0YXR1cyI6InJlbW92ZWQiLCJ3b3Jrc3BhY2VDb3VudCI6MSwiYWN0b3JDb3VudCI6MSwib3duZXJzaGlwVmFsaWRhdGVkIjp0cnVlLCJiZWZvcmUiOnsiZGF0YXNldHMiOjEsInZlcnNpb25zIjoxLCJyb3dzIjoyLCJldmFsU2V0cyI6MiwiZXZhbEl0ZW1zIjoyLCJwbGFucyI6MSwicGxhbkF1ZGl0cyI6MSwicnVucyI6MCwic2FtcGxlcyI6MCwicmVzdWx0cyI6MCwiZ2F0ZXMiOjAsIndvcmtmbG93cyI6MCwiZXZlbnRzIjowLCJhdWRpdHMiOjR9LCJhZnRlciI6eyJkYXRhc2V0cyI6MCwidmVyc2lvbnMiOjAsInJvd3MiOjAsImV2YWxTZXRzIjowLCJldmFsSXRlbXMiOjAsInBsYW5zIjowLCJwbGFuQXVkaXRzIjowLCJydW5zIjowLCJzYW1wbGVzIjowLCJyZXN1bHRzIjowLCJnYXRlcyI6MCwid29ya2Zsb3dzIjowLCJldmVudHMiOjAsImF1ZGl0cyI6MH0sImRpc3BhdGNoQ2xhaW1zIjowLCJ3b3Jrc3BhY2VBYnNlbnQiOnRydWUsImFjdG9yc0Fic2VudCI6dHJ1ZSwiYWN0dWFsSHR0cEV4ZWN1dGlvbkNoZWNrZWQiOmZhbHNlfQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4ced31ddbf5166040992-d877e284243e69080489",
+          "file": "http-target-plans.browser.spec.ts",
+          "line": 89,
+          "column": 1
+        },
+        {
+          "title": "HTTP-BR03 actual stale-head conflict preserves fields and requires visible head review before version three",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-owned-production-no-dispatch",
+              "projectName": "chromium-owned-production-no-dispatch",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 926,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('alert')\nExpected substring: \u001b[32m\"Your text is preserved\"\u001b[39m\nError: strict mode violation: getByRole('alert') resolved to 2 elements:\n    1) <p role=\"alert\" class=\"text-sm text-danger\">This save conflicts with stored state. Your text …</p> aka getByText('This save conflicts with')\n    2) <div role=\"alert\" aria-live=\"assertive\" id=\"__next-route-announcer__\"></div> aka locator('[id=\"__next-route-announcer__\"]')\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('alert')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('alert')\nExpected substring: \u001b[32m\"Your text is preserved\"\u001b[39m\nError: strict mode violation: getByRole('alert') resolved to 2 elements:\n    1) <p role=\"alert\" class=\"text-sm text-danger\">This save conflicts with stored state. Your text …</p> aka getByText('This save conflicts with')\n    2) <div role=\"alert\" aria-live=\"assertive\" id=\"__next-route-announcer__\"></div> aka locator('[id=\"__next-route-announcer__\"]')\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('alert')\u001b[22m\n\n    at /home/runner/work/open-evals/open-evals/tests/e2e/http-target-plans.browser.spec.ts:105:41",
+                    "location": {
+                      "file": "/home/runner/work/open-evals/open-evals/tests/e2e/http-target-plans.browser.spec.ts",
+                      "column": 41,
+                      "line": 105
+                    },
+                    "snippet": "  103 |   const competing = await owned.savePlan({ ...first.content.draft, versionId: randomUUID(), version: 2, expectedVersionId: first.content.draft.versionId, name: \"Competing saved head\" });\n  104 |   const failed = await capturePost<{ error: string }>(page, API, () => page.getByRole(\"button\", { name: \"Save immutable plan without executing\", exact: true }).click()); expect(failed.status).toBe(409); expect(failed.value).toEqual({ error: \"http_eval_plan_stale\" });\n> 105 |   await expect(page.getByRole(\"alert\")).toContainText(\"Your text is preserved\"); await expect(page.getByLabel(\"Plan name\", { exact: true })).toHaveValue(\"Preserved authored version\"); await expect(page.getByLabel(\"Declared target version\", { exact: true })).toHaveValue(\"2\");\n      |                                         ^\n  106 |   await expect(page.getByRole(\"button\", { name: \"Preview plan without calling target\", exact: true })).toBeDisabled(); await page.getByRole(\"button\", { name: \"Reload current head\", exact: true }).click();\n  107 |   const review = page.getByRole(\"checkbox\", { name: /I reviewed the current head/ }); await expect(review).toBeVisible(); await expect(review).toBeDisabled(); await page.getByText(\"Inspect complete current head before another intent\", { exact: true }).click(); expect(JSON.parse(await page.getByLabel(\"Complete current saved plan head\", { exact: true }).innerText())).toEqual(competing); await review.check();\n  108 |   const next = await preview(page); expect(next.draft.version).toBe(3); expect(next.draft.expectedVersionId).toBe(competing.content.draft.versionId); expect(next.draft.versionId).not.toBe(stale.draft.versionId); expect(next.draft.name).toBe(\"Preserved authored version\"); expect(next.draft.target.targetVersion).toBe(\"2\");"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/home/runner/work/open-evals/open-evals/tests/e2e/http-target-plans.browser.spec.ts",
+                        "column": 41,
+                        "line": 105
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('alert')\nExpected substring: \u001b[32m\"Your text is preserved\"\u001b[39m\nError: strict mode violation: getByRole('alert') resolved to 2 elements:\n    1) <p role=\"alert\" class=\"text-sm text-danger\">This save conflicts with stored state. Your text …</p> aka getByText('This save conflicts with')\n    2) <div role=\"alert\" aria-live=\"assertive\" id=\"__next-route-announcer__\"></div> aka locator('[id=\"__next-route-announcer__\"]')\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('alert')\u001b[22m\n\n\n  103 |   const competing = await owned.savePlan({ ...first.content.draft, versionId: randomUUID(), version: 2, expectedVersionId: first.content.draft.versionId, name: \"Competing saved head\" });\n  104 |   const failed = await capturePost<{ error: string }>(page, API, () => page.getByRole(\"button\", { name: \"Save immutable plan without executing\", exact: true }).click()); expect(failed.status).toBe(409); expect(failed.value).toEqual({ error: \"http_eval_plan_stale\" });\n> 105 |   await expect(page.getByRole(\"alert\")).toContainText(\"Your text is preserved\"); await expect(page.getByLabel(\"Plan name\", { exact: true })).toHaveValue(\"Preserved authored version\"); await expect(page.getByLabel(\"Declared target version\", { exact: true })).toHaveValue(\"2\");\n      |                                         ^\n  106 |   await expect(page.getByRole(\"button\", { name: \"Preview plan without calling target\", exact: true })).toBeDisabled(); await page.getByRole(\"button\", { name: \"Reload current head\", exact: true }).click();\n  107 |   const review = page.getByRole(\"checkbox\", { name: /I reviewed the current head/ }); await expect(review).toBeVisible(); await expect(review).toBeDisabled(); await page.getByText(\"Inspect complete current head before another intent\", { exact: true }).click(); expect(JSON.parse(await page.getByLabel(\"Complete current saved plan head\", { exact: true }).innerText())).toEqual(competing); await review.check();\n  108 |   const next = await preview(page); expect(next.draft.version).toBe(3); expect(next.draft.expectedVersionId).toBe(competing.content.draft.versionId); expect(next.draft.versionId).not.toBe(stale.draft.versionId); expect(next.draft.name).toBe(\"Preserved authored version\"); expect(next.draft.target.targetVersion).toBe(\"2\");\n    at /home/runner/work/open-evals/open-evals/tests/e2e/http-target-plans.browser.spec.ts:105:41"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T20:24:47.449Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/home/runner/work/_temp/open-evals-http-target-browser-evidence/browser-output/http-target-plans.browser--9b09b-review-before-version-three-chromium-owned-production-no-dispatch/test-failed-1.png"
+                    },
+                    {
+                      "name": "owned-fixture-cleanup",
+                      "contentType": "application/json",
+                      "body": "eyJzY2hlbWFWZXJzaW9uIjoiaHR0cC1wbGFuLWJyb3dzZXItY2xlYW51cC12MSIsInN0YXR1cyI6InJlbW92ZWQiLCJ3b3Jrc3BhY2VDb3VudCI6MSwiYWN0b3JDb3VudCI6MSwib3duZXJzaGlwVmFsaWRhdGVkIjp0cnVlLCJiZWZvcmUiOnsiZGF0YXNldHMiOjEsInZlcnNpb25zIjoxLCJyb3dzIjoyLCJldmFsU2V0cyI6MiwiZXZhbEl0ZW1zIjoyLCJwbGFucyI6MiwicGxhbkF1ZGl0cyI6MiwicnVucyI6MCwic2FtcGxlcyI6MCwicmVzdWx0cyI6MCwiZ2F0ZXMiOjAsIndvcmtmbG93cyI6MCwiZXZlbnRzIjowLCJhdWRpdHMiOjV9LCJhZnRlciI6eyJkYXRhc2V0cyI6MCwidmVyc2lvbnMiOjAsInJvd3MiOjAsImV2YWxTZXRzIjowLCJldmFsSXRlbXMiOjAsInBsYW5zIjowLCJwbGFuQXVkaXRzIjowLCJydW5zIjowLCJzYW1wbGVzIjowLCJyZXN1bHRzIjowLCJnYXRlcyI6MCwid29ya2Zsb3dzIjowLCJldmVudHMiOjAsImF1ZGl0cyI6MH0sImRpc3BhdGNoQ2xhaW1zIjowLCJ3b3Jrc3BhY2VBYnNlbnQiOnRydWUsImFjdG9yc0Fic2VudCI6dHJ1ZSwiYWN0dWFsSHR0cEV4ZWN1dGlvbkNoZWNrZWQiOmZhbHNlfQ=="
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/home/runner/work/_temp/open-evals-http-target-browser-evidence/browser-output/http-target-plans.browser--9b09b-review-before-version-three-chromium-owned-production-no-dispatch/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/home/runner/work/_temp/open-evals-http-target-browser-evidence/browser-output/http-target-plans.browser--9b09b-review-before-version-three-chromium-owned-production-no-dispatch/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/home/runner/work/open-evals/open-evals/tests/e2e/http-target-plans.browser.spec.ts",
+                    "column": 41,
+                    "line": 105
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "4ced31ddbf5166040992-d5d5c47508594907677b",
+          "file": "http-target-plans.browser.spec.ts",
+          "line": 100,
+          "column": 1
+        },
+        {
+          "title": "HTTP-BR04 real committed save with a lost response retries the identical intent without duplication",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-owned-production-no-dispatch",
+              "projectName": "chromium-owned-production-no-dispatch",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 872,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('alert')\nExpected substring: \u001b[32m\"save outcome is unknown\"\u001b[39m\nError: strict mode violation: getByRole('alert') resolved to 2 elements:\n    1) <p role=\"alert\" class=\"text-sm text-danger\">The save outcome is unknown. Retry this unchanged…</p> aka getByText('The save outcome is unknown.')\n    2) <div role=\"alert\" aria-live=\"assertive\" id=\"__next-route-announcer__\"></div> aka locator('[id=\"__next-route-announcer__\"]')\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('alert')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('alert')\nExpected substring: \u001b[32m\"save outcome is unknown\"\u001b[39m\nError: strict mode violation: getByRole('alert') resolved to 2 elements:\n    1) <p role=\"alert\" class=\"text-sm text-danger\">The save outcome is unknown. Retry this unchanged…</p> aka getByText('The save outcome is unknown.')\n    2) <div role=\"alert\" aria-live=\"assertive\" id=\"__next-route-announcer__\"></div> aka locator('[id=\"__next-route-announcer__\"]')\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('alert')\u001b[22m\n\n    at /home/runner/work/open-evals/open-evals/tests/e2e/http-target-plans.browser.spec.ts:138:43",
+                    "location": {
+                      "file": "/home/runner/work/open-evals/open-evals/tests/e2e/http-target-plans.browser.spec.ts",
+                      "column": 43,
+                      "line": 138
+                    },
+                    "snippet": "  136 |     await page.getByRole(\"button\", { name: \"Save immutable plan without executing\", exact: true }).click();\n  137 |     const first = await firstResponse; expect(first.error).toBeUndefined(); expect(first.status).toBe(201); expect(first.value?.replayed).toBe(false); const committed = first.value!.record;\n> 138 |     await expect(page.getByRole(\"alert\")).toContainText(\"save outcome is unknown\");\n      |                                           ^\n  139 |     await expect(page.getByLabel(\"Plan name\", { exact: true })).toHaveAttribute(\"readonly\", \"\"); await stored(owned, committed, 1);\n  140 |     await page.getByRole(\"button\", { name: \"Retry identical plan save\", exact: true }).click(); const response = await retryResponse; expect(response.error).toBeUndefined(); expect(response.status).toBe(200); const value = response.value!; expect(value.replayed).toBe(true); expect(value.record).toEqual(committed);\n  141 |     expect(bodies).toHaveLength(2); expect(bodies[1]).toBe(bodies[0]); expect(JSON.parse(bodies[0]!)).toEqual({ schemaVersion: \"http-eval-plan-save-v1\", draft: p.draft, expectedPreviewFingerprint: p.fingerprint });"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/home/runner/work/open-evals/open-evals/tests/e2e/http-target-plans.browser.spec.ts",
+                        "column": 43,
+                        "line": 138
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('alert')\nExpected substring: \u001b[32m\"save outcome is unknown\"\u001b[39m\nError: strict mode violation: getByRole('alert') resolved to 2 elements:\n    1) <p role=\"alert\" class=\"text-sm text-danger\">The save outcome is unknown. Retry this unchanged…</p> aka getByText('The save outcome is unknown.')\n    2) <div role=\"alert\" aria-live=\"assertive\" id=\"__next-route-announcer__\"></div> aka locator('[id=\"__next-route-announcer__\"]')\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('alert')\u001b[22m\n\n\n  136 |     await page.getByRole(\"button\", { name: \"Save immutable plan without executing\", exact: true }).click();\n  137 |     const first = await firstResponse; expect(first.error).toBeUndefined(); expect(first.status).toBe(201); expect(first.value?.replayed).toBe(false); const committed = first.value!.record;\n> 138 |     await expect(page.getByRole(\"alert\")).toContainText(\"save outcome is unknown\");\n      |                                           ^\n  139 |     await expect(page.getByLabel(\"Plan name\", { exact: true })).toHaveAttribute(\"readonly\", \"\"); await stored(owned, committed, 1);\n  140 |     await page.getByRole(\"button\", { name: \"Retry identical plan save\", exact: true }).click(); const response = await retryResponse; expect(response.error).toBeUndefined(); expect(response.status).toBe(200); const value = response.value!; expect(value.replayed).toBe(true); expect(value.record).toEqual(committed);\n  141 |     expect(bodies).toHaveLength(2); expect(bodies[1]).toBe(bodies[0]); expect(JSON.parse(bodies[0]!)).toEqual({ schemaVersion: \"http-eval-plan-save-v1\", draft: p.draft, expectedPreviewFingerprint: p.fingerprint });\n    at /home/runner/work/open-evals/open-evals/tests/e2e/http-target-plans.browser.spec.ts:138:43"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T20:24:48.820Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/home/runner/work/_temp/open-evals-http-target-browser-evidence/browser-output/http-target-plans.browser--8f9a5--intent-without-duplication-chromium-owned-production-no-dispatch/test-failed-1.png"
+                    },
+                    {
+                      "name": "owned-fixture-cleanup",
+                      "contentType": "application/json",
+                      "body": "eyJzY2hlbWFWZXJzaW9uIjoiaHR0cC1wbGFuLWJyb3dzZXItY2xlYW51cC12MSIsInN0YXR1cyI6InJlbW92ZWQiLCJ3b3Jrc3BhY2VDb3VudCI6MSwiYWN0b3JDb3VudCI6MSwib3duZXJzaGlwVmFsaWRhdGVkIjp0cnVlLCJiZWZvcmUiOnsiZGF0YXNldHMiOjEsInZlcnNpb25zIjoxLCJyb3dzIjoyLCJldmFsU2V0cyI6MiwiZXZhbEl0ZW1zIjoyLCJwbGFucyI6MSwicGxhbkF1ZGl0cyI6MSwicnVucyI6MCwic2FtcGxlcyI6MCwicmVzdWx0cyI6MCwiZ2F0ZXMiOjAsIndvcmtmbG93cyI6MCwiZXZlbnRzIjowLCJhdWRpdHMiOjR9LCJhZnRlciI6eyJkYXRhc2V0cyI6MCwidmVyc2lvbnMiOjAsInJvd3MiOjAsImV2YWxTZXRzIjowLCJldmFsSXRlbXMiOjAsInBsYW5zIjowLCJwbGFuQXVkaXRzIjowLCJydW5zIjowLCJzYW1wbGVzIjowLCJyZXN1bHRzIjowLCJnYXRlcyI6MCwid29ya2Zsb3dzIjowLCJldmVudHMiOjAsImF1ZGl0cyI6MH0sImRpc3BhdGNoQ2xhaW1zIjowLCJ3b3Jrc3BhY2VBYnNlbnQiOnRydWUsImFjdG9yc0Fic2VudCI6dHJ1ZSwiYWN0dWFsSHR0cEV4ZWN1dGlvbkNoZWNrZWQiOmZhbHNlfQ=="
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/home/runner/work/_temp/open-evals-http-target-browser-evidence/browser-output/http-target-plans.browser--8f9a5--intent-without-duplication-chromium-owned-production-no-dispatch/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/home/runner/work/_temp/open-evals-http-target-browser-evidence/browser-output/http-target-plans.browser--8f9a5--intent-without-duplication-chromium-owned-production-no-dispatch/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/home/runner/work/open-evals/open-evals/tests/e2e/http-target-plans.browser.spec.ts",
+                    "column": 43,
+                    "line": 138
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "4ced31ddbf5166040992-2efb842b2ae450b5d3ea",
+          "file": "http-target-plans.browser.spec.ts",
+          "line": 114,
+          "column": 1
+        },
+        {
+          "title": "HTTP-BR05 viewer preview and read remain available while write, execution, recovery, keys and foreign scope are denied",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-owned-production-no-dispatch",
+              "projectName": "chromium-owned-production-no-dispatch",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1651,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T20:24:50.224Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "owned-fixture-cleanup",
+                      "contentType": "application/json",
+                      "body": "eyJzY2hlbWFWZXJzaW9uIjoiaHR0cC1wbGFuLWJyb3dzZXItY2xlYW51cC12MSIsInN0YXR1cyI6InJlbW92ZWQiLCJ3b3Jrc3BhY2VDb3VudCI6MiwiYWN0b3JDb3VudCI6Mywib3duZXJzaGlwVmFsaWRhdGVkIjp0cnVlLCJiZWZvcmUiOnsiZGF0YXNldHMiOjEsInZlcnNpb25zIjoxLCJyb3dzIjoyLCJldmFsU2V0cyI6MiwiZXZhbEl0ZW1zIjoyLCJwbGFucyI6MSwicGxhbkF1ZGl0cyI6MSwicnVucyI6MCwic2FtcGxlcyI6MCwicmVzdWx0cyI6MCwiZ2F0ZXMiOjAsIndvcmtmbG93cyI6MCwiZXZlbnRzIjowLCJhdWRpdHMiOjR9LCJhZnRlciI6eyJkYXRhc2V0cyI6MCwidmVyc2lvbnMiOjAsInJvd3MiOjAsImV2YWxTZXRzIjowLCJldmFsSXRlbXMiOjAsInBsYW5zIjowLCJwbGFuQXVkaXRzIjowLCJydW5zIjowLCJzYW1wbGVzIjowLCJyZXN1bHRzIjowLCJnYXRlcyI6MCwid29ya2Zsb3dzIjowLCJldmVudHMiOjAsImF1ZGl0cyI6MH0sImRpc3BhdGNoQ2xhaW1zIjowLCJ3b3Jrc3BhY2VBYnNlbnQiOnRydWUsImFjdG9yc0Fic2VudCI6dHJ1ZSwiYWN0dWFsSHR0cEV4ZWN1dGlvbkNoZWNrZWQiOmZhbHNlfQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4ced31ddbf5166040992-8e5d31e32b5a31f4f673",
+          "file": "http-target-plans.browser.spec.ts",
+          "line": 146,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-09T20:24:43.200Z",
+    "duration": 8801.166,
+    "expected": 3,
+    "skipped": 0,
+    "unexpected": 2,
+    "flaky": 0
+  }
+}

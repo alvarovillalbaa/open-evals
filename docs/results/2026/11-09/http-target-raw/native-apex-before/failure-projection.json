@@ -1,0 +1,60 @@
+{
+  "schemaVersion": "http-target-private-failure-projection-v1",
+  "exportKind": "metadata_projection",
+  "status": "failed",
+  "returncode": 1,
+  "expectedFailure": true,
+  "sourceReceipt": {
+    "relativePrivateFile": "native-apex-before/receipt.json",
+    "bytes": 1102,
+    "sha256": "3e0446b9f7469cbdf29ace286b471baa713266f3d5b6e69fa52efa112b2b412b",
+    "originalPublished": false
+  },
+  "argvProjection": [
+    "node",
+    "--experimental-vm-modules",
+    "--test",
+    "--test-reporter=tap",
+    "--test-name-pattern=^HT-NT01 ",
+    "tests/unit/http-target-transport.test.mjs"
+  ],
+  "tapCounts": {
+    "tests": 1,
+    "pass": 0,
+    "fail": 1,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "safeErrorCodes": [
+    "ERR_ASSERTION"
+  ],
+  "streams": {
+    "stdout": {
+      "bytes": 1416,
+      "sha256": "c2d0374026277f89de2a976233050e8ad9e50f294f747437ee1bd83a9f4e49c6",
+      "complete": true
+    },
+    "stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "complete": true
+    }
+  },
+  "rawStreamsPublished": false,
+  "rawStreamsRetainedPrivately": true,
+  "sourcesUnchanged": true,
+  "projectionNote": "Original failure output and absolute local command paths remain private. Only original sizes/hashes, safe error codes and status metadata are published; this is not an unchanged complete original.",
+  "sourceBindings": [
+    {
+      "path": "packages/adapters/src/http-target.ts",
+      "bytes": 13903,
+      "sha256": "2bb10c0130b75cc6679fabc4e94d6779d0a6cf3ad27175cd67e5f4e6f47ed5c5"
+    },
+    {
+      "path": "tests/unit/http-target-transport.test.mjs",
+      "bytes": 19270,
+      "sha256": "64c6d84c98ec008af0e2f5047afc60faf2c4318e41f0da2278b195b9d734f4c9"
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "source": "327fc6bd89a0c3a482018cb48a5e66d63b7c6315",
+  "runId": 42695238785,
+  "files": [
+    {
+      "file": "source.json",
+      "bytes": 19789,
+      "sha256": "24c8148c77e47e7c211df562902ba221f070a87bcd32495447feb9d4819fb61f",
+      "complete": true,
+      "transport": "original-base64-chunks"
+    },
+    {
+      "file": "postgres-fixture-absence.json",
+      "bytes": 659,
+      "sha256": "3b658e12d638a013db0cb7a3099200f7156809a482f6b53f3be898afd3fcc496",
+      "complete": true,
+      "transport": "original-base64-chunks"
+    },
+    {
+      "file": "browser-cases.stdout.txt",
+      "bytes": 1141,
+      "sha256": "b17bde1a052fa25f6b5b760730313ede2e5c13c09439949561eb8535039d9589",
+      "complete": true,
+      "transport": "original-base64-chunks"
+    },
+    {
+      "file": "browser-cases.stderr.txt",
+      "bytes": 163,
+      "sha256": "6d4007a21f8e9014241ad9b3cbbbff7f9303671f2d07cc518e092a5212647da2",
+      "complete": true,
+      "transport": "original-base64-chunks"
+    },
+    {
+      "file": "browser-report.json",
+      "bytes": 13032,
+      "sha256": "eb846e520489aa3b6677a9e362a33b153d5183268d157d3b34cb80b051b517da",
+      "complete": true,
+      "transport": "original-base64-chunks"
+    },
+    {
+      "file": "candidate.server.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "complete": true,
+      "transport": "original-base64-chunks"
+    },
+    {
+      "file": "source-final.json",
+      "bytes": 18945,
+      "sha256": "9030290385b734482a1069fd8f0fcf56acd55bb2323f5b71d85b627057e7c7c3",
+      "complete": true,
+      "transport": "original-base64-chunks"
+    },
+    {
+      "file": "unprotected-tracked-delta.json",
+      "bytes": 3812,
+      "sha256": "b18e9417b75d74e15dcf1d5a7f75d4e239679c410d41e69f0bc65017a8a1fc9b",
+      "complete": true,
+      "transport": "original-base64-chunks"
+    },
+    {
+      "file": "cleanup.json",
+      "bytes": 651,
+      "sha256": "422f7de337e4775a5465d0eff840f701224d5a4b21784ac8bfa08e33178f06db",
+      "complete": true,
+      "transport": "original-base64-chunks"
+    },
+    {
+      "file": "receipt.json",
+      "bytes": 13599,
+      "sha256": "6f46112e17805fd88b1cb42e96d1107a7b830026e9c688fb956416719a0d2d1e",
+      "complete": true,
+      "transport": "original-base64-chunks"
+    }
+  ]
+}

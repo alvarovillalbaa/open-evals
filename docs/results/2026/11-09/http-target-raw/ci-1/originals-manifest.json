@@ -1,0 +1,56 @@
+{
+  "source": "a36d9edf4a4daff1764df70a2bb111ce27f07db2",
+  "runId": 42690415106,
+  "jobId": 129408357190,
+  "files": [
+    {
+      "file": "source.json",
+      "bytes": 22861,
+      "sha256": "ded7121863727c0aca035ebf67a2dc0299bf5dd584a6aedcb289b66f6b5310a8",
+      "complete": true,
+      "transport": "original-base64-chunks"
+    },
+    {
+      "file": "web-tier2-cases.stdout.txt",
+      "bytes": 7148,
+      "sha256": "8ef8b1247eb1cd79ec735441b1111de3090326a70bbe41ecd40d56cb32167f20",
+      "complete": true,
+      "transport": "original-base64-chunks"
+    },
+    {
+      "file": "web-tier2-cases.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "complete": true,
+      "transport": "original-base64-chunks"
+    },
+    {
+      "file": "source-final.json",
+      "bytes": 18945,
+      "sha256": "80501f367807d57e8f5dd289f998d83e06369adaa204951b7a5e4001d21201ef",
+      "complete": true,
+      "transport": "original-base64-chunks"
+    },
+    {
+      "file": "unprotected-tracked-delta.json",
+      "bytes": 3812,
+      "sha256": "b18e9417b75d74e15dcf1d5a7f75d4e239679c410d41e69f0bc65017a8a1fc9b",
+      "complete": true,
+      "transport": "original-base64-chunks"
+    },
+    {
+      "file": "cleanup.json",
+      "bytes": 107,
+      "sha256": "14ec35b010cb6f8a6cff628fa6d685d316e568668104d759719014e4f5939246",
+      "complete": true,
+      "transport": "original-base64-chunks"
+    },
+    {
+      "file": "receipt.json",
+      "bytes": 2367,
+      "sha256": "acc418998f206dcfb8086d7b4e366479a3bcc3163a14987384e72e7f57b714c1",
+      "complete": true,
+      "transport": "original-base64-chunks"
+    }
+  ]
+}

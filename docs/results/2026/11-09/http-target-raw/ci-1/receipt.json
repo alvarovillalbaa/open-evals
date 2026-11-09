@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "http-target-plans-checks-v1",
+  "status": "failed",
+  "acceptedSource": "d6d93e85e002430303cbd191976a32c09d502402",
+  "expectedParent": "d6d93e85e002430303cbd191976a32c09d502402",
+  "directParentSource": "d6d93e85e002430303cbd191976a32c09d502402",
+  "verificationSource": "a36d9edf4a4daff1764df70a2bb111ce27f07db2",
+  "runId": "42690415106",
+  "attempt": "1",
+  "checkScope": "web_tier2_http_sql_regression_build_and_five_no_dispatch_browser_cases",
+  "expectedParentTree": "0fb1ff3f74d343f6d42dd61ba3cab90d92bcfc91",
+  "verificationTree": "25c36b53ba3879bde2fef3bed0ff21d4a74c355c",
+  "sqlSuitesInvoked": false,
+  "httpEvalPostgresCaseCount": null,
+  "httpEvalPostgresCaseIds": [],
+  "providedOutputRegressionCaseCount": null,
+  "providedOutputRegressionCaseIds": [],
+  "coreNativeTier2Invoked": false,
+  "webTier2Invoked": true,
+  "webTier2CaseCount": null,
+  "webTier2CaseIds": [],
+  "webTier2BootstrapReason": "Local Node26 removed the required TypeScript transform mode; pinned Node24 supports it.",
+  "actualHttpExecutionChecked": false,
+  "postgresFixturesEmptyBeforeBuild": null,
+  "unprotectedTrackedDelta": {
+    "file": "unprotected-tracked-delta.json",
+    "changeCount": 41,
+    "bytes": 3812,
+    "sha256": "b18e9417b75d74e15dcf1d5a7f75d4e239679c410d41e69f0bc65017a8a1fc9b"
+  },
+  "browserCaseCount": null,
+  "caseResults": [],
+  "applicationServers": [],
+  "commandCount": 14,
+  "cleanup": {
+    "status": "not_created",
+    "databaseAbsent": null,
+    "clusterStopped": null,
+    "clusterAbsent": null
+  },
+  "errors": [
+    "RuntimeError:web-tier2-cases_failed"
+  ],
+  "limits": {
+    "streamBytes": 4194304,
+    "focusedSuiteSeconds": 300,
+    "browserSeconds": 480,
+    "softWorkSeconds": 840,
+    "stepMinutes": 18,
+    "jobMinutes": 20
+  },
+  "proofLimits": [
+    "Scope:20 Web T2 seams under the compatible Node24 transform bootstrap,31 new HTTP owner-SQL cases,14 provided-output SQL regressions after the shared source-loader change, one production build and five actual-app no-dispatch Chromium journeys. No HTTP target, model, account, paid service or production data is called. Browser journeys do not prove actual execution or native DNS/socket/TLS behavior; separately recorded64 core/native checks are not repeated. Signed HMAC fixtures do not prove hosted auth/membership/RLS or physical-device acceptance."
+  ]
+}

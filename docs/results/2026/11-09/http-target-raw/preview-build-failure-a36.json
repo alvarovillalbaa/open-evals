@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "http-target-preview-build-failure-v1",
+  "source": "a36d9edf4a4daff1764df70a2bb111ce27f07db2",
+  "branch": "qa/open-evals-http-target-runs-20261109",
+  "projectId": "prj_FG3VAWXbwS6VRHq4Wd2B4vyIms4l",
+  "teamId": "team_JpdIsOJgYNpX0ywVZ54Zdb7m",
+  "deploymentId": "dpl_2Dwd5G7sz3nWh2ZP2AKEg24cns9P",
+  "deploymentState": "ERROR",
+  "errorCode": "lint_or_type_error",
+  "errorMessage": "Command \"turbo run build\" exited with 2",
+  "observation": "Read-only Vercel deployment metadata and build events; exact Git commit/ref matched before reading diagnostics.",
+  "diagnostics": [
+    {
+      "providerTimestampMs": 1794255050293,
+      "package": "@open-evals/adapters",
+      "file": "packages/adapters/src/http-target.ts",
+      "line": 187,
+      "column": 27,
+      "code": "TS2353",
+      "text": "@open-evals/adapters:build: src/http-target.ts(187,27): error TS2353: Object literal may only specify known properties, and 'autoSelectFamily' does not exist in type 'RequestOptions'."
+    }
+  ],
+  "failedTask": "@open-evals/adapters#build",
+  "scope": "Automatic QA preview build only. Web build, browser interaction, native target execution and production acceptance are not established by this observation.",
+  "actionsTaken": "No deployment creation, retry, provider configuration change, host HTTP request or browser action.",
+  "safeProjection": true
+}

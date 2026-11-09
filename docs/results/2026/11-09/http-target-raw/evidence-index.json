@@ -1,0 +1,558 @@
+{
+  "schemaVersion": "http-target-evidence-index-v1",
+  "implementationSource": {
+    "commit": "327fc6bd89a0c3a482018cb48a5e66d63b7c6315",
+    "tree": "bf495ea0d5d9e03bebb7910d3eb1d1e59b4b4a18"
+  },
+  "distinctCaseAccounting": {
+    "total": 134,
+    "formula": "38 + 26 + 20 + 31 + 14 + 5",
+    "lanes": [
+      {
+        "id": "core",
+        "distinctCases": 38,
+        "tier": "T1 actual core via isolated VM",
+        "passingEvidence": "local-source/core.stdout.txt",
+        "receipt": "local-source/receipt-projection.json"
+      },
+      {
+        "id": "native-transport",
+        "distinctCases": 26,
+        "tier": "T2 authored DNS/request doubles",
+        "passingEvidence": "native-apex-after/stdout.txt",
+        "receipt": "native-apex-after/receipt-projection.json"
+      },
+      {
+        "id": "web",
+        "distinctCases": 20,
+        "tier": "T2 authored DB/auth/clock/native seams under Node24",
+        "passingEvidence": "ci-2/web-tier2-cases.stdout.txt",
+        "receipt": "ci-2/receipt.json"
+      },
+      {
+        "id": "http-sql",
+        "distinctCases": 31,
+        "tier": "T3 disposable PostgreSQL",
+        "passingEvidence": "ci-2/http-eval-postgres-cases.stdout.txt",
+        "receipt": "ci-2/receipt.json"
+      },
+      {
+        "id": "provided-output-regression",
+        "distinctCases": 14,
+        "tier": "T3 disposable PostgreSQL regression",
+        "passingEvidence": "ci-2/provided-output-regression-cases.stdout.txt",
+        "receipt": "ci-2/receipt.json"
+      },
+      {
+        "id": "browser",
+        "distinctCases": 5,
+        "tier": "T3 actual-app Chromium, no dispatch",
+        "passingEvidence": "ci-3/browser-report.json",
+        "receipt": "ci-3/receipt.json"
+      }
+    ],
+    "note": "Passing evidence is source-bound across separate lanes; CI3 ran one fresh build and five browser cases, not134 new checks. The65 Web/SQL passes are accepted from CI2 unchanged source."
+  },
+  "repeatedAndNegativeEvidence": [
+    {
+      "id": "initial-native-pass",
+      "cases": 26,
+      "evidence": "local-source/transport.stdout.txt",
+      "additionalDistinctCases": 0
+    },
+    {
+      "id": "native-apex-regression-before",
+      "status": "failed",
+      "cases": 1,
+      "evidence": "native-apex-before/failure-projection.json",
+      "additionalDistinctCases": 0
+    },
+    {
+      "id": "native-apex-after",
+      "status": "passed",
+      "cases": 26,
+      "evidence": "native-apex-after/receipt-projection.json",
+      "additionalDistinctCases": 0,
+      "note": "Replays the26-case native-double scope after the apex regression; it is not26 new cases."
+    },
+    {
+      "id": "local-web-bootstrap-1",
+      "status": "failed",
+      "passed": 0,
+      "failed": 20,
+      "evidence": "local-web-1/failure-projection.json",
+      "additionalDistinctCases": 0
+    },
+    {
+      "id": "local-web-bootstrap-2",
+      "status": "failed",
+      "passed": 0,
+      "failed": 20,
+      "evidence": "local-web-2/failure-projection.json",
+      "additionalDistinctCases": 0
+    }
+  ],
+  "ciAttempts": [
+    {
+      "id": "ci-1",
+      "source": "a36d9edf4a4daff1764df70a2bb111ce27f07db2",
+      "runId": 42690415106,
+      "jobId": 129408357190,
+      "status": "failed",
+      "receipt": "ci-1/receipt.json",
+      "transportManifest": "ci-1/originals-manifest.json",
+      "commandMetadata": "ci-1/command-metadata.json",
+      "completeDecodedOriginalFiles": 7,
+      "completeDecodedOriginalBytes": 55240,
+      "protectedSourceBindings": 108,
+      "sourceStable": true,
+      "build": {
+        "status": "not_invoked",
+        "proof": "complete-return-code/EOF metadata; full build streams were not decoded or exported",
+        "rawBuildStreamsExported": false
+      },
+      "browser": {
+        "passed": 0,
+        "failed": 0,
+        "scope": "actual-app no-dispatch; no target execution"
+      },
+      "webT2Invoked": true,
+      "sqlSuitesInvoked": false,
+      "cleanup": "not_created",
+      "webT2Counts": {
+        "tests": 20,
+        "pass": 18,
+        "fail": 2,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      }
+    },
+    {
+      "id": "ci-2",
+      "source": "26433ff1e35a54f6c2ec9edcac389e221fd264fb",
+      "runId": 42692158133,
+      "jobId": 129414385013,
+      "status": "failed",
+      "receipt": "ci-2/receipt.json",
+      "transportManifest": "ci-2/originals-manifest.json",
+      "commandMetadata": "ci-2/command-metadata.json",
+      "completeDecodedOriginalFiles": 16,
+      "completeDecodedOriginalBytes": 115008,
+      "protectedSourceBindings": 108,
+      "sourceStable": true,
+      "build": {
+        "status": "passed",
+        "proof": "complete-return-code/EOF metadata; full build streams were not decoded or exported",
+        "rawBuildStreamsExported": false
+      },
+      "browser": {
+        "passed": 3,
+        "failed": 2,
+        "scope": "actual-app no-dispatch; no target execution"
+      },
+      "webT2Invoked": true,
+      "sqlSuitesInvoked": true,
+      "cleanup": "removed",
+      "acceptedPassingLanes": {
+        "webT2": 20,
+        "httpSql": 31,
+        "providedOutputRegression": 14
+      }
+    },
+    {
+      "id": "ci-3",
+      "source": "327fc6bd89a0c3a482018cb48a5e66d63b7c6315",
+      "runId": 42695238785,
+      "jobId": 129425215072,
+      "status": "passed",
+      "receipt": "ci-3/receipt.json",
+      "transportManifest": "ci-3/originals-manifest.json",
+      "commandMetadata": "ci-3/command-metadata.json",
+      "completeDecodedOriginalFiles": 10,
+      "completeDecodedOriginalBytes": 71791,
+      "protectedSourceBindings": 108,
+      "sourceStable": true,
+      "build": {
+        "status": "passed",
+        "proof": "complete-return-code/EOF metadata; full build streams were not decoded or exported",
+        "rawBuildStreamsExported": false
+      },
+      "browser": {
+        "passed": 5,
+        "failed": 0,
+        "scope": "actual-app no-dispatch; no target execution"
+      },
+      "webT2Invoked": false,
+      "sqlSuitesInvoked": false,
+      "cleanup": "removed",
+      "prior65Evidence": {
+        "source": "26433ff1e35a54f6c2ec9edcac389e221fd264fb",
+        "tree": "3112b9afe6184326dfeb81f2cfde799f32beb295",
+        "runId": 42692158133,
+        "jobId": 129414385013,
+        "overallStatus": "failed",
+        "webTier2Passed": 20,
+        "httpEvalPostgresPassed": 31,
+        "providedOutputRegressionPassed": 14,
+        "fullBuild": "passed",
+        "sourceStable": true,
+        "cleanupProved": true,
+        "webStdoutSha256": "c32f674654d94b4b917ae151e4afacf2f492d89233fbcc558465de26d7ef2733",
+        "httpSqlStdoutSha256": "c7acebcfa27fcd97606b8ea3036ed604be1018b8a5f5058cdaab79daad9f8d93",
+        "regressionStdoutSha256": "d1ece3433ceb033bd7866a76ace1227afb0389ac27570601a4ceb0be59cf2af1",
+        "browserPassed": [
+          "HTTP-BR01",
+          "HTTP-BR02",
+          "HTTP-BR05"
+        ],
+        "browserFailed": [
+          "HTTP-BR03",
+          "HTTP-BR04"
+        ]
+      },
+      "freshEmptyTableCount": 24
+    }
+  ],
+  "earlierPreviewBuildFailure": "preview-build-failure-a36.json",
+  "publicationKinds": {
+    "complete_original_stream": "Exact safe local passing stdout/stderr bytes.",
+    "complete_decoded_ci_original": "Exact complete selected original bytes reconstructed from bounded CI log frames.",
+    "command_projection": "Labeled local receipt projection omitting absolute executable paths.",
+    "metadata_projection": "Labeled private failure metadata; original output remains private.",
+    "command_metadata_projection": "Extracted CI return-code/EOF metadata; not full build output."
+  },
+  "proofLimits": [
+    "No artifact archive was retrieved or is claimed.",
+    "Full job logs, source-module snapshots, private local failure output and original local command receipts are not exported.",
+    "Transport T2 uses authored doubles; native DNS/socket/TLS assurance is not established.",
+    "Browser journeys do not execute HTTP targets. Signed HMAC fixtures do not establish hosted auth-provider/membership/RLS or physical-device acceptance.",
+    "Prior failed statuses are preserved. No model, paid service, account or production data is invoked by these checks."
+  ],
+  "files": [
+    {
+      "destination": "local-source/core.stdout.txt",
+      "kind": "complete_original_stream",
+      "bytes": 9653,
+      "sha256": "38da39059fb08833f607a5a5b3d3ab9f862630456999f7d5d2f481b1fc915f4d"
+    },
+    {
+      "destination": "local-source/core.stderr.txt",
+      "kind": "complete_original_stream",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "destination": "local-source/transport.stdout.txt",
+      "kind": "complete_original_stream",
+      "bytes": 6687,
+      "sha256": "a41e803dd80029409f8eb30f60ea0dd026b028f20b3f1652643b3721dfe6e467"
+    },
+    {
+      "destination": "local-source/transport.stderr.txt",
+      "kind": "complete_original_stream",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "destination": "local-source/source.json",
+      "kind": "relative_source_manifest",
+      "bytes": 2230,
+      "sha256": "6ff352d02b39abe66e1d9b2663ce6852962417a7efff0665eb56f085c837cbcc"
+    },
+    {
+      "destination": "local-web-1/source.json",
+      "kind": "relative_source_manifest",
+      "bytes": 3212,
+      "sha256": "c7c2bd6bc8b194a1c83db57e3fd26b946f04cf353996ef68a3f54140097fbc3a"
+    },
+    {
+      "destination": "local-web-2/source.json",
+      "kind": "relative_source_manifest",
+      "bytes": 3212,
+      "sha256": "66636e4f6bfdc4b38bee11b241e51a1b2213eaf270ba0ba54e06d7f767d50126"
+    },
+    {
+      "destination": "native-apex-after/stdout.txt",
+      "kind": "complete_original_stream",
+      "bytes": 6696,
+      "sha256": "7025519d63975144fac1e8807dbfc82b1d79c67737008e601da7f580eab9e614"
+    },
+    {
+      "destination": "native-apex-after/stderr.txt",
+      "kind": "complete_original_stream",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "destination": "ci-1/source.json",
+      "kind": "complete_decoded_ci_original",
+      "bytes": 22861,
+      "sha256": "ded7121863727c0aca035ebf67a2dc0299bf5dd584a6aedcb289b66f6b5310a8"
+    },
+    {
+      "destination": "ci-1/web-tier2-cases.stdout.txt",
+      "kind": "complete_decoded_ci_original",
+      "bytes": 7148,
+      "sha256": "8ef8b1247eb1cd79ec735441b1111de3090326a70bbe41ecd40d56cb32167f20"
+    },
+    {
+      "destination": "ci-1/web-tier2-cases.stderr.txt",
+      "kind": "complete_decoded_ci_original",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "destination": "ci-1/source-final.json",
+      "kind": "complete_decoded_ci_original",
+      "bytes": 18945,
+      "sha256": "80501f367807d57e8f5dd289f998d83e06369adaa204951b7a5e4001d21201ef"
+    },
+    {
+      "destination": "ci-1/unprotected-tracked-delta.json",
+      "kind": "complete_decoded_ci_original",
+      "bytes": 3812,
+      "sha256": "b18e9417b75d74e15dcf1d5a7f75d4e239679c410d41e69f0bc65017a8a1fc9b"
+    },
+    {
+      "destination": "ci-1/cleanup.json",
+      "kind": "complete_decoded_ci_original",
+      "bytes": 107,
+      "sha256": "14ec35b010cb6f8a6cff628fa6d685d316e568668104d759719014e4f5939246"
+    },
+    {
+      "destination": "ci-1/receipt.json",
+      "kind": "complete_decoded_ci_original",
+      "bytes": 2367,
+      "sha256": "acc418998f206dcfb8086d7b4e366479a3bcc3163a14987384e72e7f57b714c1"
+    },
+    {
+      "destination": "ci-1/originals-manifest.json",
+      "kind": "decoded_transport_manifest",
+      "bytes": 1685,
+      "sha256": "8568a9460b1ca714f9f1b4c697b4c0b257afe56d812eb711d1d9fde739a76ea1"
+    },
+    {
+      "destination": "ci-1/command-metadata.json",
+      "kind": "command_metadata_projection",
+      "bytes": 8878,
+      "sha256": "276df51e36101cdc90dd0a76d32f054185460d17f559148f3c8ef697e446e67f"
+    },
+    {
+      "destination": "ci-2/source.json",
+      "kind": "complete_decoded_ci_original",
+      "bytes": 19650,
+      "sha256": "c957aa4b807229f63a002a1b06bd94b96dc86690b4d0365e9eedf55093bb07da"
+    },
+    {
+      "destination": "ci-2/web-tier2-cases.stdout.txt",
+      "kind": "complete_decoded_ci_original",
+      "bytes": 5648,
+      "sha256": "c32f674654d94b4b917ae151e4afacf2f492d89233fbcc558465de26d7ef2733"
+    },
+    {
+      "destination": "ci-2/web-tier2-cases.stderr.txt",
+      "kind": "complete_decoded_ci_original",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "destination": "ci-2/http-eval-postgres-cases.stdout.txt",
+      "kind": "complete_decoded_ci_original",
+      "bytes": 9458,
+      "sha256": "c7acebcfa27fcd97606b8ea3036ed604be1018b8a5f5058cdaab79daad9f8d93"
+    },
+    {
+      "destination": "ci-2/http-eval-postgres-cases.stderr.txt",
+      "kind": "complete_decoded_ci_original",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "destination": "ci-2/provided-output-regression-cases.stdout.txt",
+      "kind": "complete_decoded_ci_original",
+      "bytes": 4101,
+      "sha256": "d1ece3433ceb033bd7866a76ace1227afb0389ac27570601a4ceb0be59cf2af1"
+    },
+    {
+      "destination": "ci-2/provided-output-regression-cases.stderr.txt",
+      "kind": "complete_decoded_ci_original",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "destination": "ci-2/postgres-fixture-absence.json",
+      "kind": "complete_decoded_ci_original",
+      "bytes": 659,
+      "sha256": "4b5e02f91f2ec9f2ad0d81e4aa8e000fcd1d5796b29d7c2e451061a899f838c6"
+    },
+    {
+      "destination": "ci-2/browser-cases.stdout.txt",
+      "kind": "complete_decoded_ci_original",
+      "bytes": 10034,
+      "sha256": "251f7a9a00d754d0145aa0ab61a801440e5b02a95dca50fcb6d39157b68bcfe6"
+    },
+    {
+      "destination": "ci-2/browser-cases.stderr.txt",
+      "kind": "complete_decoded_ci_original",
+      "bytes": 489,
+      "sha256": "d2d212087f3a1806e143e9b9fd387b3c735b7b1768a282ad3625a4f5a0bdf388"
+    },
+    {
+      "destination": "ci-2/browser-report.json",
+      "kind": "complete_decoded_ci_original",
+      "bytes": 28253,
+      "sha256": "2bb8fad491d5519710dcffebe4609c422f5bf7479085ec896fa7702da3e71ad3"
+    },
+    {
+      "destination": "ci-2/candidate.server.stderr.txt",
+      "kind": "complete_decoded_ci_original",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "destination": "ci-2/source-final.json",
+      "kind": "complete_decoded_ci_original",
+      "bytes": 18945,
+      "sha256": "7b9abd84bb53c93bcbadbd0cc25fcee758b03446bd712524d73c22702d1c0128"
+    },
+    {
+      "destination": "ci-2/unprotected-tracked-delta.json",
+      "kind": "complete_decoded_ci_original",
+      "bytes": 3812,
+      "sha256": "b18e9417b75d74e15dcf1d5a7f75d4e239679c410d41e69f0bc65017a8a1fc9b"
+    },
+    {
+      "destination": "ci-2/cleanup.json",
+      "kind": "complete_decoded_ci_original",
+      "bytes": 652,
+      "sha256": "d06e86cba75b3cd001a5657e4a9e46ec90274c15f29f2dea5c45752cd6f5868d"
+    },
+    {
+      "destination": "ci-2/receipt.json",
+      "kind": "complete_decoded_ci_original",
+      "bytes": 13307,
+      "sha256": "ca1bd25901951d27a01c9dabd83ee1e034a882525da139a12113192a146f660b"
+    },
+    {
+      "destination": "ci-2/originals-manifest.json",
+      "kind": "decoded_transport_manifest",
+      "bytes": 3792,
+      "sha256": "bd667bd99723a910fd9e11f6bb1df12ad38a91ff038a9bc6e0ccb3d5dc268114"
+    },
+    {
+      "destination": "ci-2/command-metadata.json",
+      "kind": "command_metadata_projection",
+      "bytes": 21546,
+      "sha256": "5e0d86ad4a009bbde0593ca22e6fc43ba9042646f756f887c278f46946bebc71"
+    },
+    {
+      "destination": "ci-3/source.json",
+      "kind": "complete_decoded_ci_original",
+      "bytes": 19789,
+      "sha256": "24c8148c77e47e7c211df562902ba221f070a87bcd32495447feb9d4819fb61f"
+    },
+    {
+      "destination": "ci-3/postgres-fixture-absence.json",
+      "kind": "complete_decoded_ci_original",
+      "bytes": 659,
+      "sha256": "3b658e12d638a013db0cb7a3099200f7156809a482f6b53f3be898afd3fcc496"
+    },
+    {
+      "destination": "ci-3/browser-cases.stdout.txt",
+      "kind": "complete_decoded_ci_original",
+      "bytes": 1141,
+      "sha256": "b17bde1a052fa25f6b5b760730313ede2e5c13c09439949561eb8535039d9589"
+    },
+    {
+      "destination": "ci-3/browser-cases.stderr.txt",
+      "kind": "complete_decoded_ci_original",
+      "bytes": 163,
+      "sha256": "6d4007a21f8e9014241ad9b3cbbbff7f9303671f2d07cc518e092a5212647da2"
+    },
+    {
+      "destination": "ci-3/browser-report.json",
+      "kind": "complete_decoded_ci_original",
+      "bytes": 13032,
+      "sha256": "eb846e520489aa3b6677a9e362a33b153d5183268d157d3b34cb80b051b517da"
+    },
+    {
+      "destination": "ci-3/candidate.server.stderr.txt",
+      "kind": "complete_decoded_ci_original",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "destination": "ci-3/source-final.json",
+      "kind": "complete_decoded_ci_original",
+      "bytes": 18945,
+      "sha256": "9030290385b734482a1069fd8f0fcf56acd55bb2323f5b71d85b627057e7c7c3"
+    },
+    {
+      "destination": "ci-3/unprotected-tracked-delta.json",
+      "kind": "complete_decoded_ci_original",
+      "bytes": 3812,
+      "sha256": "b18e9417b75d74e15dcf1d5a7f75d4e239679c410d41e69f0bc65017a8a1fc9b"
+    },
+    {
+      "destination": "ci-3/cleanup.json",
+      "kind": "complete_decoded_ci_original",
+      "bytes": 651,
+      "sha256": "422f7de337e4775a5465d0eff840f701224d5a4b21784ac8bfa08e33178f06db"
+    },
+    {
+      "destination": "ci-3/receipt.json",
+      "kind": "complete_decoded_ci_original",
+      "bytes": 13599,
+      "sha256": "6f46112e17805fd88b1cb42e96d1107a7b830026e9c688fb956416719a0d2d1e"
+    },
+    {
+      "destination": "ci-3/originals-manifest.json",
+      "kind": "decoded_transport_manifest",
+      "bytes": 2343,
+      "sha256": "75ef0de490a11ee3e3e5641a388d54bf31ae6c590067f539aeeb0c4088fecb0c"
+    },
+    {
+      "destination": "ci-3/command-metadata.json",
+      "kind": "command_metadata_projection",
+      "bytes": 19577,
+      "sha256": "e3b1ab46be3631ca61154ea3a4197b057e31201669212346d15852da05201e04"
+    },
+    {
+      "destination": "preview-build-failure-a36.json",
+      "kind": "curated_provider_failure_record",
+      "bytes": 1385,
+      "sha256": "613cc7846c35cd8b34d81bfed1994be032840b519d6990173af2f23351e2323c"
+    },
+    {
+      "destination": "local-source/receipt-projection.json",
+      "kind": "labeled_projection",
+      "bytes": 2783,
+      "sha256": "f24b77ad0c8e95a0f8048cdb8c13b8e49ad78d14827291a3140c5e2f1f4a3638"
+    },
+    {
+      "destination": "local-web-1/failure-projection.json",
+      "kind": "labeled_projection",
+      "bytes": 1473,
+      "sha256": "d0c9cb89a44961354db13c8e3891e1ac3dbdf7610df090e554e25e852ffff240"
+    },
+    {
+      "destination": "local-web-2/failure-projection.json",
+      "kind": "labeled_projection",
+      "bytes": 1461,
+      "sha256": "d9c6f6f5b1a34a680cf8a2190dcc04eb0505fc7107a511f3ac65188fc5e07906"
+    },
+    {
+      "destination": "native-apex-before/failure-projection.json",
+      "kind": "labeled_projection",
+      "bytes": 1771,
+      "sha256": "c69f3259ccf71093a167b1ed8c8b623f6901ea84b013663e578128efafb598e4"
+    },
+    {
+      "destination": "native-apex-after/receipt-projection.json",
+      "kind": "labeled_projection",
+      "bytes": 2241,
+      "sha256": "559675c438693c7127138dcaedd6b20d58149e46e52de6c40bf7455228d53423"
+    }
+  ]
+}

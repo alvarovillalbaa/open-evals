@@ -1,0 +1,287 @@
+{
+  "config": {
+    "argv": [
+      "/opt/hostedtoolcache/node/24.22.2/x64/bin/node",
+      "/home/runner/work/open-evals/open-evals/node_modules/.pnpm/@playwright+test@1.61.1/node_modules/@playwright/test/cli.js",
+      "test",
+      "--config",
+      "tests/e2e/http-target-plans.browser.config.ts"
+    ],
+    "configFile": "/home/runner/work/open-evals/open-evals/tests/e2e/http-target-plans.browser.config.ts",
+    "rootDir": "/home/runner/work/open-evals/open-evals/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": true,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 420000,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/home/runner/work/_temp/open-evals-http-target-browser-evidence/browser-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium-owned-production-no-dispatch",
+        "name": "chromium-owned-production-no-dispatch",
+        "testDir": "/home/runner/work/open-evals/open-evals/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "http-target-plans.browser.spec.ts"
+        ],
+        "timeout": 90000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/home/runner/work/_temp/open-evals-http-target-browser-evidence/browser-report.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "http-target-plans.browser.spec.ts",
+      "file": "http-target-plans.browser.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "HTTP-BR01 desktop complete preview, explicit immutable save and reload make no execution reservation",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-owned-production-no-dispatch",
+              "projectName": "chromium-owned-production-no-dispatch",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2456,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T20:41:39.815Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "owned-fixture-cleanup",
+                      "contentType": "application/json",
+                      "body": "eyJzY2hlbWFWZXJzaW9uIjoiaHR0cC1wbGFuLWJyb3dzZXItY2xlYW51cC12MSIsInN0YXR1cyI6InJlbW92ZWQiLCJ3b3Jrc3BhY2VDb3VudCI6MSwiYWN0b3JDb3VudCI6MSwib3duZXJzaGlwVmFsaWRhdGVkIjp0cnVlLCJiZWZvcmUiOnsiZGF0YXNldHMiOjEsInZlcnNpb25zIjoxLCJyb3dzIjoyLCJldmFsU2V0cyI6MiwiZXZhbEl0ZW1zIjoyLCJwbGFucyI6MSwicGxhbkF1ZGl0cyI6MSwicnVucyI6MCwic2FtcGxlcyI6MCwicmVzdWx0cyI6MCwiZ2F0ZXMiOjAsIndvcmtmbG93cyI6MCwiZXZlbnRzIjowLCJhdWRpdHMiOjR9LCJhZnRlciI6eyJkYXRhc2V0cyI6MCwidmVyc2lvbnMiOjAsInJvd3MiOjAsImV2YWxTZXRzIjowLCJldmFsSXRlbXMiOjAsInBsYW5zIjowLCJwbGFuQXVkaXRzIjowLCJydW5zIjowLCJzYW1wbGVzIjowLCJyZXN1bHRzIjowLCJnYXRlcyI6MCwid29ya2Zsb3dzIjowLCJldmVudHMiOjAsImF1ZGl0cyI6MH0sImRpc3BhdGNoQ2xhaW1zIjowLCJ3b3Jrc3BhY2VBYnNlbnQiOnRydWUsImFjdG9yc0Fic2VudCI6dHJ1ZSwiYWN0dWFsSHR0cEV4ZWN1dGlvbkNoZWNrZWQiOmZhbHNlfQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4ced31ddbf5166040992-4762a3403def66ce70bd",
+          "file": "http-target-plans.browser.spec.ts",
+          "line": 77,
+          "column": 1
+        },
+        {
+          "title": "HTTP-BR02 narrow Unicode and complete JSON preserve saved inputs and both evaluator versions",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-owned-production-no-dispatch",
+              "projectName": "chromium-owned-production-no-dispatch",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1304,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T20:41:42.455Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "owned-fixture-cleanup",
+                      "contentType": "application/json",
+                      "body": "eyJzY2hlbWFWZXJzaW9uIjoiaHR0cC1wbGFuLWJyb3dzZXItY2xlYW51cC12MSIsInN0YXR1cyI6InJlbW92ZWQiLCJ3b3Jrc3BhY2VDb3VudCI6MSwiYWN0b3JDb3VudCI6MSwib3duZXJzaGlwVmFsaWRhdGVkIjp0cnVlLCJiZWZvcmUiOnsiZGF0YXNldHMiOjEsInZlcnNpb25zIjoxLCJyb3dzIjoyLCJldmFsU2V0cyI6MiwiZXZhbEl0ZW1zIjoyLCJwbGFucyI6MSwicGxhbkF1ZGl0cyI6MSwicnVucyI6MCwic2FtcGxlcyI6MCwicmVzdWx0cyI6MCwiZ2F0ZXMiOjAsIndvcmtmbG93cyI6MCwiZXZlbnRzIjowLCJhdWRpdHMiOjR9LCJhZnRlciI6eyJkYXRhc2V0cyI6MCwidmVyc2lvbnMiOjAsInJvd3MiOjAsImV2YWxTZXRzIjowLCJldmFsSXRlbXMiOjAsInBsYW5zIjowLCJwbGFuQXVkaXRzIjowLCJydW5zIjowLCJzYW1wbGVzIjowLCJyZXN1bHRzIjowLCJnYXRlcyI6MCwid29ya2Zsb3dzIjowLCJldmVudHMiOjAsImF1ZGl0cyI6MH0sImRpc3BhdGNoQ2xhaW1zIjowLCJ3b3Jrc3BhY2VBYnNlbnQiOnRydWUsImFjdG9yc0Fic2VudCI6dHJ1ZSwiYWN0dWFsSHR0cEV4ZWN1dGlvbkNoZWNrZWQiOmZhbHNlfQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4ced31ddbf5166040992-d877e284243e69080489",
+          "file": "http-target-plans.browser.spec.ts",
+          "line": 89,
+          "column": 1
+        },
+        {
+          "title": "HTTP-BR03 actual stale-head conflict preserves fields and requires visible head review before version three",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-owned-production-no-dispatch",
+              "projectName": "chromium-owned-production-no-dispatch",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1861,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T20:41:43.775Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "owned-fixture-cleanup",
+                      "contentType": "application/json",
+                      "body": "eyJzY2hlbWFWZXJzaW9uIjoiaHR0cC1wbGFuLWJyb3dzZXItY2xlYW51cC12MSIsInN0YXR1cyI6InJlbW92ZWQiLCJ3b3Jrc3BhY2VDb3VudCI6MSwiYWN0b3JDb3VudCI6MSwib3duZXJzaGlwVmFsaWRhdGVkIjp0cnVlLCJiZWZvcmUiOnsiZGF0YXNldHMiOjEsInZlcnNpb25zIjoxLCJyb3dzIjoyLCJldmFsU2V0cyI6MiwiZXZhbEl0ZW1zIjoyLCJwbGFucyI6MywicGxhbkF1ZGl0cyI6MywicnVucyI6MCwic2FtcGxlcyI6MCwicmVzdWx0cyI6MCwiZ2F0ZXMiOjAsIndvcmtmbG93cyI6MCwiZXZlbnRzIjowLCJhdWRpdHMiOjZ9LCJhZnRlciI6eyJkYXRhc2V0cyI6MCwidmVyc2lvbnMiOjAsInJvd3MiOjAsImV2YWxTZXRzIjowLCJldmFsSXRlbXMiOjAsInBsYW5zIjowLCJwbGFuQXVkaXRzIjowLCJydW5zIjowLCJzYW1wbGVzIjowLCJyZXN1bHRzIjowLCJnYXRlcyI6MCwid29ya2Zsb3dzIjowLCJldmVudHMiOjAsImF1ZGl0cyI6MH0sImRpc3BhdGNoQ2xhaW1zIjowLCJ3b3Jrc3BhY2VBYnNlbnQiOnRydWUsImFjdG9yc0Fic2VudCI6dHJ1ZSwiYWN0dWFsSHR0cEV4ZWN1dGlvbkNoZWNrZWQiOmZhbHNlfQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4ced31ddbf5166040992-d5d5c47508594907677b",
+          "file": "http-target-plans.browser.spec.ts",
+          "line": 100,
+          "column": 1
+        },
+        {
+          "title": "HTTP-BR04 real committed save with a lost response retries the identical intent without duplication",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-owned-production-no-dispatch",
+              "projectName": "chromium-owned-production-no-dispatch",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1358,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T20:41:45.648Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "owned-fixture-cleanup",
+                      "contentType": "application/json",
+                      "body": "eyJzY2hlbWFWZXJzaW9uIjoiaHR0cC1wbGFuLWJyb3dzZXItY2xlYW51cC12MSIsInN0YXR1cyI6InJlbW92ZWQiLCJ3b3Jrc3BhY2VDb3VudCI6MSwiYWN0b3JDb3VudCI6MSwib3duZXJzaGlwVmFsaWRhdGVkIjp0cnVlLCJiZWZvcmUiOnsiZGF0YXNldHMiOjEsInZlcnNpb25zIjoxLCJyb3dzIjoyLCJldmFsU2V0cyI6MiwiZXZhbEl0ZW1zIjoyLCJwbGFucyI6MSwicGxhbkF1ZGl0cyI6MSwicnVucyI6MCwic2FtcGxlcyI6MCwicmVzdWx0cyI6MCwiZ2F0ZXMiOjAsIndvcmtmbG93cyI6MCwiZXZlbnRzIjowLCJhdWRpdHMiOjR9LCJhZnRlciI6eyJkYXRhc2V0cyI6MCwidmVyc2lvbnMiOjAsInJvd3MiOjAsImV2YWxTZXRzIjowLCJldmFsSXRlbXMiOjAsInBsYW5zIjowLCJwbGFuQXVkaXRzIjowLCJydW5zIjowLCJzYW1wbGVzIjowLCJyZXN1bHRzIjowLCJnYXRlcyI6MCwid29ya2Zsb3dzIjowLCJldmVudHMiOjAsImF1ZGl0cyI6MH0sImRpc3BhdGNoQ2xhaW1zIjowLCJ3b3Jrc3BhY2VBYnNlbnQiOnRydWUsImFjdG9yc0Fic2VudCI6dHJ1ZSwiYWN0dWFsSHR0cEV4ZWN1dGlvbkNoZWNrZWQiOmZhbHNlfQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4ced31ddbf5166040992-2efb842b2ae450b5d3ea",
+          "file": "http-target-plans.browser.spec.ts",
+          "line": 114,
+          "column": 1
+        },
+        {
+          "title": "HTTP-BR05 viewer preview and read remain available while write, execution, recovery, keys and foreign scope are denied",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-owned-production-no-dispatch",
+              "projectName": "chromium-owned-production-no-dispatch",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1386,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T20:41:47.017Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "owned-fixture-cleanup",
+                      "contentType": "application/json",
+                      "body": "eyJzY2hlbWFWZXJzaW9uIjoiaHR0cC1wbGFuLWJyb3dzZXItY2xlYW51cC12MSIsInN0YXR1cyI6InJlbW92ZWQiLCJ3b3Jrc3BhY2VDb3VudCI6MiwiYWN0b3JDb3VudCI6Mywib3duZXJzaGlwVmFsaWRhdGVkIjp0cnVlLCJiZWZvcmUiOnsiZGF0YXNldHMiOjEsInZlcnNpb25zIjoxLCJyb3dzIjoyLCJldmFsU2V0cyI6MiwiZXZhbEl0ZW1zIjoyLCJwbGFucyI6MSwicGxhbkF1ZGl0cyI6MSwicnVucyI6MCwic2FtcGxlcyI6MCwicmVzdWx0cyI6MCwiZ2F0ZXMiOjAsIndvcmtmbG93cyI6MCwiZXZlbnRzIjowLCJhdWRpdHMiOjR9LCJhZnRlciI6eyJkYXRhc2V0cyI6MCwidmVyc2lvbnMiOjAsInJvd3MiOjAsImV2YWxTZXRzIjowLCJldmFsSXRlbXMiOjAsInBsYW5zIjowLCJwbGFuQXVkaXRzIjowLCJydW5zIjowLCJzYW1wbGVzIjowLCJyZXN1bHRzIjowLCJnYXRlcyI6MCwid29ya2Zsb3dzIjowLCJldmVudHMiOjAsImF1ZGl0cyI6MH0sImRpc3BhdGNoQ2xhaW1zIjowLCJ3b3Jrc3BhY2VBYnNlbnQiOnRydWUsImFjdG9yc0Fic2VudCI6dHJ1ZSwiYWN0dWFsSHR0cEV4ZWN1dGlvbkNoZWNrZWQiOmZhbHNlfQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4ced31ddbf5166040992-8e5d31e32b5a31f4f673",
+          "file": "http-target-plans.browser.spec.ts",
+          "line": 146,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-09T20:41:39.196Z",
+    "duration": 9271.556,
+    "expected": 5,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

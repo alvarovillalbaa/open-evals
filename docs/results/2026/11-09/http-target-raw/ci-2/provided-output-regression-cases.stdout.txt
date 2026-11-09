@@ -1,0 +1,101 @@
+TAP version 13
+# Subtest: provided-output persistence [tier3; authored UNRUN]
+    # Subtest: PO-PG01 scoped catalogues and exact saved custom versions work beyond the latest twenty
+    ok 1 - PO-PG01 scoped catalogues and exact saved custom versions work beyond the latest twenty
+      ---
+      duration_ms: 586.825067
+      type: 'test'
+      ...
+    # Subtest: PO-PG02 complete ordered snapshots preserve SQL absence, JSON null and every source field
+    ok 2 - PO-PG02 complete ordered snapshots preserve SQL absence, JSON null and every source field
+      ---
+      duration_ms: 23.75103
+      type: 'test'
+      ...
+    # Subtest: PO-PG03 empty actual responses never fall back to saved expected answers and missing coverage writes nothing
+    ok 3 - PO-PG03 empty actual responses never fall back to saved expected answers and missing coverage writes nothing
+      ---
+      duration_ms: 57.293036
+      type: 'test'
+      ...
+    # Subtest: PO-PG04 all one hundred rows execute while an overflowing population is refused intact
+    ok 4 - PO-PG04 all one hundred rows execute while an overflowing population is refused intact
+      ---
+      duration_ms: 322.587453
+      type: 'test'
+      ...
+    # Subtest: PO-PG05 the canonical one-MiB snapshot boundary includes all saved-row structure
+    ok 5 - PO-PG05 the canonical one-MiB snapshot boundary includes all saved-row structure
+      ---
+      duration_ms: 580.530598
+      type: 'test'
+      ...
+    # Subtest: PO-PG06 exact lost-response retries replay one frozen record after source mutation and deletion
+    ok 6 - PO-PG06 exact lost-response retries replay one frozen record after source mutation and deletion
+      ---
+      duration_ms: 53.216692
+      type: 'test'
+      ...
+    # Subtest: PO-PG07 a changed request cannot reuse a committed public run identity
+    ok 7 - PO-PG07 a changed request cannot reuse a committed public run identity
+      ---
+      duration_ms: 50.547263
+      type: 'test'
+      ...
+    # Subtest: PO-PG08 preview drift in saved sources refuses a new run without writing its old plan
+    ok 8 - PO-PG08 preview drift in saved sources refuses a new run without writing its old plan
+      ---
+      duration_ms: 42.181596
+      type: 'test'
+      ...
+    # Subtest: PO-PG09 workspace-bound source selection, public IDs and retrieval never adopt foreign data
+    ok 9 - PO-PG09 workspace-bound source selection, public IDs and retrieval never adopt foreign data
+      ---
+      duration_ms: 63.929183
+      type: 'test'
+      ...
+    # Subtest: PO-PG10 exact JSONB numeric value loss is refused before hashing or persistence
+    ok 10 - PO-PG10 exact JSONB numeric value loss is refused before hashing or persistence
+      ---
+      duration_ms: 18.938714
+      type: 'test'
+      ...
+    # Subtest: PO-PG11 corrupt plan, sample, result, gate and audit projections fail closed without repair
+    ok 11 - PO-PG11 corrupt plan, sample, result, gate and audit projections fail closed without repair
+      ---
+      duration_ms: 277.811982
+      type: 'test'
+      ...
+    # Subtest: PO-PG12 legacy readers hide private envelopes and legacy writers cannot alter profile identities
+    ok 12 - PO-PG12 legacy readers hide private envelopes and legacy writers cannot alter profile identities
+      ---
+      duration_ms: 54.159535
+      type: 'test'
+      ...
+    # Subtest: PO-PG13 an actual audit trigger failure rolls back the complete run transaction
+    ok 13 - PO-PG13 an actual audit trigger failure rolls back the complete run transaction
+      ---
+      duration_ms: 108.921655
+      type: 'test'
+      ...
+    # Subtest: PO-PG14 positively blocked concurrent workspace writers accept one immutable intent
+    ok 14 - PO-PG14 positively blocked concurrent workspace writers accept one immutable intent
+      ---
+      duration_ms: 55.539624
+      type: 'test'
+      ...
+    1..14
+ok 1 - provided-output persistence [tier3; authored UNRUN]
+  ---
+  duration_ms: 2457.470254
+  type: 'suite'
+  ...
+1..1
+# tests 14
+# suites 1
+# pass 14
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 12582.079209

@@ -1,0 +1,182 @@
+TAP version 13
+# (node:2313) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:2313) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# Subtest: HT-WEB01 streamed JSON retains more than 4.5 MiB of Unicode without content length or truncation [T2]
+ok 1 - HT-WEB01 streamed JSON retains more than 4.5 MiB of Unicode without content length or truncation [T2]
+  ---
+  duration_ms: 167.508956
+  type: 'test'
+  ...
+# Subtest: HT-WEB02 the complete serialized envelope is bounded and cancellation stops delivery [T2]
+ok 2 - HT-WEB02 the complete serialized envelope is bounded and cancellation stops delivery [T2]
+  ---
+  duration_ms: 66.446451
+  type: 'test'
+  ...
+# Subtest: HT-WEB03 raw request parsing rejects duplicate fields, numeric loss, BOM and malformed UTF-8 [T2]
+ok 3 - HT-WEB03 raw request parsing rejects duplicate fields, numeric loss, BOM and malformed UTF-8 [T2]
+  ---
+  duration_ms: 27.028315
+  type: 'test'
+  ...
+# Subtest: HT-WEB04 streamed request size is enforced independently of declared length [T2]
+ok 4 - HT-WEB04 streamed request size is enforced independently of declared length [T2]
+  ---
+  duration_ms: 25.702305
+  type: 'test'
+  ...
+# Subtest: HT-WEB05 workspace API-key and hosted-local denial precede any POST body access [T2]
+ok 5 - HT-WEB05 workspace API-key and hosted-local denial precede any POST body access [T2]
+  ---
+  duration_ms: 23.581297
+  type: 'test'
+  ...
+# Subtest: HT-WEB06 a viewer previews exact sources but cannot save, execute or recover [T2]
+ok 6 - HT-WEB06 a viewer previews exact sources but cannot save, execute or recover [T2]
+  ---
+  duration_ms: 25.548763
+  type: 'test'
+  ...
+# Subtest: HT-WEB07 preview and immutable save invoke zero targets; client props are ordinary JSON with own metadata keys [T2]
+ok 7 - HT-WEB07 preview and immutable save invoke zero targets; client props are ordinary JSON with own metadata keys [T2]
+  ---
+  duration_ms: 42.828107
+  type: 'test'
+  ...
+# Subtest: HT-WEB08 an unsupported evaluator is refused by real core preview before any dispatch [T2]
+ok 8 - HT-WEB08 an unsupported evaluator is refused by real core preview before any dispatch [T2]
+  ---
+  duration_ms: 22.388578
+  type: 'test'
+  ...
+# Subtest: HT-WEB09 creator execution commits reservation and unique row claims before native seam calls [T2]
+ok 9 - HT-WEB09 creator execution commits reservation and unique row claims before native seam calls [T2]
+  ---
+  duration_ms: 193.84662
+  type: 'test'
+  ...
+# Subtest: HT-WEB10 identical execution replay and exact GET never redispatch or mutate recovery [T2]
+ok 10 - HT-WEB10 identical execution replay and exact GET never redispatch or mutate recovery [T2]
+  ---
+  duration_ms: 264.475156
+  type: 'test'
+  ...
+# Subtest: HT-WEB11 a path/start version mismatch is rejected before reservation or dispatch [T2]
+ok 11 - HT-WEB11 a path/start version mismatch is rejected before reservation or dispatch [T2]
+  ---
+  duration_ms: 21.115959
+  type: 'test'
+  ...
+# Subtest: HT-WEB12 invalid actual target JSON is recorded as failure and cannot pass gates [T2]
+ok 12 - HT-WEB12 invalid actual target JSON is recorded as failure and cannot pass gates [T2]
+  ---
+  duration_ms: 187.359187
+  type: 'test'
+  ...
+# Subtest: HT-WEB13 native not-sent and unknown outcomes remain distinct with no invented responses [T2]
+not ok 13 - HT-WEB13 native not-sent and unknown outcomes remain distinct with no invented responses [T2]
+  ---
+  duration_ms: 217.362308
+  type: 'test'
+  location: '/home/runner/work/open-evals/open-evals/tests/unit/http-target-web.test.mjs:288:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Values have same structure but are not reference-equal:
+    
+    [
+      'not_sent',
+      'outcome_unknown'
+    ]
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    0: 'not_sent'
+    1: 'outcome_unknown'
+  actual:
+    0: 'not_sent'
+    1: 'outcome_unknown'
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///home/runner/work/open-evals/open-evals/tests/unit/http-target-web.test.mjs:292:10)
+    async Test.run (node:internal/test_runner/test:1409:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: HT-WEB14 a deadline stops never-claimed rows and preserves an already-sent unknown outcome [T2]
+not ok 14 - HT-WEB14 a deadline stops never-claimed rows and preserves an already-sent unknown outcome [T2]
+  ---
+  duration_ms: 207.369625
+  type: 'test'
+  location: '/home/runner/work/open-evals/open-evals/tests/unit/http-target-web.test.mjs:296:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Values have same structure but are not reference-equal:
+    
+    [
+      'outcome_unknown',
+      'not_sent',
+      'not_sent'
+    ]
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    0: 'outcome_unknown'
+    1: 'not_sent'
+    2: 'not_sent'
+  actual:
+    0: 'outcome_unknown'
+    1: 'not_sent'
+    2: 'not_sent'
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///home/runner/work/open-evals/open-evals/tests/unit/http-target-web.test.mjs:305:49)
+    async Test.run (node:internal/test_runner/test:1409:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: HT-WEB15 a finalize store failure cannot dispatch remaining rows or resend the committed claim [T2]
+ok 15 - HT-WEB15 a finalize store failure cannot dispatch remaining rows or resend the committed claim [T2]
+  ---
+  duration_ms: 270.237354
+  type: 'test'
+  ...
+# Subtest: HT-WEB16 recovery is explicit and too-early recovery cannot silently dispatch or finalize [T2]
+ok 16 - HT-WEB16 recovery is explicit and too-early recovery cannot silently dispatch or finalize [T2]
+  ---
+  duration_ms: 157.350844
+  type: 'test'
+  ...
+# Subtest: HT-WEB17 the bounded worker pool waits for outcomes before claiming another batch [T2]
+ok 17 - HT-WEB17 the bounded worker pool waits for outcomes before claiming another batch [T2]
+  ---
+  duration_ms: 370.867459
+  type: 'test'
+  ...
+# Subtest: HT-WEB18 a same-ID POST during live coordination returns recorded claims without a second coordinator [T2]
+ok 18 - HT-WEB18 a same-ID POST during live coordination returns recorded claims without a second coordinator [T2]
+  ---
+  duration_ms: 258.823856
+  type: 'test'
+  ...
+# Subtest: HT-WEB19 invalid post-reservation readback stays an unknown outcome and never gains a replay coordinator [T2]
+ok 19 - HT-WEB19 invalid post-reservation readback stays an unknown outcome and never gains a replay coordinator [T2]
+  ---
+  duration_ms: 134.723642
+  type: 'test'
+  ...
+# Subtest: HT-WEB20 unexpected transport diagnostics become safe unknown events instead of escaping or being scored [T2]
+ok 20 - HT-WEB20 unexpected transport diagnostics become safe unknown events instead of escaping or being scored [T2]
+  ---
+  duration_ms: 186.67778
+  type: 'test'
+  ...
+1..20
+# tests 20
+# suites 0
+# pass 18
+# fail 2
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 2940.162912

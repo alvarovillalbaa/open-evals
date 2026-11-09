@@ -1,0 +1,169 @@
+TAP version 13
+# (node:25510) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:25510) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+# Subtest: HT-NT01 endpoint validation requires public HTTPS and excludes credential/query/fragment variants [T2]
+ok 1 - HT-NT01 endpoint validation requires public HTTPS and excludes credential/query/fragment variants [T2]
+  ---
+  duration_ms: 5.207167
+  type: 'test'
+  ...
+# Subtest: HT-NT02 IPv4 numeric URL spellings are normalized and cannot name a private destination [T2]
+ok 2 - HT-NT02 IPv4 numeric URL spellings are normalized and cannot name a private destination [T2]
+  ---
+  duration_ms: 0.878375
+  type: 'test'
+  ...
+# Subtest: HT-NT03 IPv4 policy denies private, metadata, shared, documentation and non-unicast ranges [T2]
+ok 3 - HT-NT03 IPv4 policy denies private, metadata, shared, documentation and non-unicast ranges [T2]
+  ---
+  duration_ms: 0.409458
+  type: 'test'
+  ...
+# Subtest: HT-NT04 IPv6 policy refuses local, mapped, scoped, transition and documentation destinations [T2]
+ok 4 - HT-NT04 IPv6 policy refuses local, mapped, scoped, transition and documentation destinations [T2]
+  ---
+  duration_ms: 0.742834
+  type: 'test'
+  ...
+# Subtest: HT-NT05 any nonpublic DNS answer rejects the entire inventory before request creation [T2]
+ok 5 - HT-NT05 any nonpublic DNS answer rejects the entire inventory before request creation [T2]
+  ---
+  duration_ms: 2.247334
+  type: 'test'
+  ...
+# Subtest: HT-NT06 empty, mismatched and excessive DNS inventories are refused without a request [T2]
+ok 6 - HT-NT06 empty, mismatched and excessive DNS inventories are refused without a request [T2]
+  ---
+  duration_ms: 0.353333
+  type: 'test'
+  ...
+# Subtest: HT-NT07 the fixed native request pins DNS while retaining TLS hostname checks and no shared agent [T2]
+ok 7 - HT-NT07 the fixed native request pins DNS while retaining TLS hostname checks and no shared agent [T2]
+  ---
+  duration_ms: 1.304584
+  type: 'test'
+  ...
+# Subtest: HT-NT08 a public literal uses that address without a DNS lookup [T2]
+ok 8 - HT-NT08 a public literal uses that address without a DNS lookup [T2]
+  ---
+  duration_ms: 0.241875
+  type: 'test'
+  ...
+# Subtest: HT-NT09 redirects never dispatch another request and retain unknown remote outcome [T2]
+ok 9 - HT-NT09 redirects never dispatch another request and retain unknown remote outcome [T2]
+  ---
+  duration_ms: 0.592542
+  type: 'test'
+  ...
+# Subtest: HT-NT10 unsuccessful HTTP status cannot be scored as a successful target output [T2]
+ok 10 - HT-NT10 unsuccessful HTTP status cannot be scored as a successful target output [T2]
+  ---
+  duration_ms: 0.530625
+  type: 'test'
+  ...
+# Subtest: HT-NT11 invalid media types, charsets, duplicate singleton headers and compressed bodies fail [T2]
+ok 11 - HT-NT11 invalid media types, charsets, duplicate singleton headers and compressed bodies fail [T2]
+  ---
+  duration_ms: 0.546334
+  type: 'test'
+  ...
+# Subtest: HT-NT12 invalid and excessive declared lengths fail before collecting target body chunks [T2]
+ok 12 - HT-NT12 invalid and excessive declared lengths fail before collecting target body chunks [T2]
+  ---
+  duration_ms: 0.827
+  type: 'test'
+  ...
+# Subtest: HT-NT13 streaming response bytes are bounded even without content length [T2]
+ok 13 - HT-NT13 streaming response bytes are bounded even without content length [T2]
+  ---
+  duration_ms: 0.105208
+  type: 'test'
+  ...
+# Subtest: HT-NT14 the exact response byte boundary is retained without truncation [T2]
+ok 14 - HT-NT14 the exact response byte boundary is retained without truncation [T2]
+  ---
+  duration_ms: 0.120666
+  type: 'test'
+  ...
+# Subtest: HT-NT15 malformed UTF-8 is refused rather than replaced [T2]
+ok 15 - HT-NT15 malformed UTF-8 is refused rather than replaced [T2]
+  ---
+  duration_ms: 0.111042
+  type: 'test'
+  ...
+# Subtest: HT-NT16 truncated length, aborted response and premature close retain uncertainty [T2]
+ok 16 - HT-NT16 truncated length, aborted response and premature close retain uncertainty [T2]
+  ---
+  duration_ms: 0.225708
+  type: 'test'
+  ...
+# Subtest: HT-NT17 empty, failed and non-buffer response streams are explicit failures [T2]
+ok 17 - HT-NT17 empty, failed and non-buffer response streams are explicit failures [T2]
+  ---
+  duration_ms: 0.202875
+  type: 'test'
+  ...
+# Subtest: HT-NT18 the total deadline includes DNS and prevents late dispatch [T2]
+ok 18 - HT-NT18 the total deadline includes DNS and prevents late dispatch [T2]
+  ---
+  duration_ms: 11.131667
+  type: 'test'
+  ...
+# Subtest: HT-NT19 a deadline after end records unknown outcome and closes its request [T2]
+ok 19 - HT-NT19 a deadline after end records unknown outcome and closes its request [T2]
+  ---
+  duration_ms: 11.363125
+  type: 'test'
+  ...
+# Subtest: HT-NT20 external cancellation distinguishes before-dispatch from already-dispatched calls [T2]
+ok 20 - HT-NT20 external cancellation distinguishes before-dispatch from already-dispatched calls [T2]
+  ---
+  duration_ms: 0.283667
+  type: 'test'
+  ...
+# Subtest: HT-NT21 hostile input containers/getters and unexpected transport options are refused [T2]
+ok 21 - HT-NT21 hostile input containers/getters and unexpected transport options are refused [T2]
+  ---
+  duration_ms: 0.105042
+  type: 'test'
+  ...
+# Subtest: HT-NT22 request bytes and Unicode are bounded before DNS or request creation [T2]
+ok 22 - HT-NT22 request bytes and Unicode are bounded before DNS or request creation [T2]
+  ---
+  duration_ms: 8.623917
+  type: 'test'
+  ...
+# Subtest: HT-NT23 invalid fingerprints and timeout bounds cannot reach a request [T2]
+ok 23 - HT-NT23 invalid fingerprints and timeout bounds cannot reach a request [T2]
+  ---
+  duration_ms: 0.199125
+  type: 'test'
+  ...
+# Subtest: HT-NT24 private network diagnostics are replaced by safe codes [T2]
+ok 24 - HT-NT24 private network diagnostics are replaced by safe codes [T2]
+  ---
+  duration_ms: 0.313583
+  type: 'test'
+  ...
+# Subtest: HT-NT25 requests resolve afresh and pin each call without a pooled connection [T2]
+ok 25 - HT-NT25 requests resolve afresh and pin each call without a pooled connection [T2]
+  ---
+  duration_ms: 0.189917
+  type: 'test'
+  ...
+# Subtest: HT-NT26 no real DNS lookup or native request was invoked by the authored transport packet [T2]
+ok 26 - HT-NT26 no real DNS lookup or native request was invoked by the authored transport packet [T2]
+  ---
+  duration_ms: 0.023458
+  type: 'test'
+  ...
+1..26
+# tests 26
+# suites 0
+# pass 26
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 132.445916

@@ -1,0 +1,27 @@
+{
+  "status": "removed",
+  "database": "oe_http_eval_test_42695238785_1",
+  "validatedBeforeDrop": {
+    "name": "oe_http_eval_test_42695238785_1",
+    "owner": "postgres",
+    "marker": "open-evals-http-target-runs-20261109-created-disposable-v1"
+  },
+  "databaseAbsent": true,
+  "clusterStopped": true,
+  "serverLog": {
+    "file": "postgres-server.log",
+    "bytes": 1688,
+    "sha256": "d499e483e9fdbb05997d03fe6557c1f33aecd356d55c0796891eb6013c4944d0",
+    "complete": true
+  },
+  "removedCluster": {
+    "entries": 1002,
+    "fileBytes": 40228969,
+    "rootIdentity": [
+      2049,
+      9213568,
+      1001
+    ]
+  },
+  "clusterAbsent": true
+}

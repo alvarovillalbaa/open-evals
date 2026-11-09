@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "http-target-private-failure-projection-v1",
+  "exportKind": "metadata_projection",
+  "status": "failed",
+  "returncode": 1,
+  "expectedFailure": false,
+  "sourceReceipt": {
+    "relativePrivateFile": "web-source-checks-1/receipt.json",
+    "bytes": 1204,
+    "sha256": "8ec2981251d328d1c6f1a926bf641eeb37efd3a82a11207047cfaefa89e97bc6",
+    "originalPublished": false
+  },
+  "argvProjection": [
+    "node",
+    "--experimental-vm-modules",
+    "--test",
+    "--test-reporter=tap",
+    "tests/unit/http-target-web.test.mjs"
+  ],
+  "tapCounts": {
+    "tests": 20,
+    "pass": 0,
+    "fail": 20,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "safeErrorCodes": [
+    "ERR_UNSUPPORTED_TYPESCRIPT_SYNTAX"
+  ],
+  "streams": {
+    "stdout": {
+      "file": "stdout.txt",
+      "bytes": 29941,
+      "sha256": "bf012dba49a1f3ef1bfec535809b4b762a6716b76dc5f0433fbd0ed58ba1cacd",
+      "complete": true
+    },
+    "stderr": {
+      "file": "stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "complete": true
+    }
+  },
+  "rawStreamsPublished": false,
+  "rawStreamsRetainedPrivately": true,
+  "sourcesUnchanged": true,
+  "projectionNote": "Original failure output and absolute local command paths remain private. Only original sizes/hashes, safe error codes and status metadata are published; this is not an unchanged complete original.",
+  "sourceBindingsFile": "source.json"
+}

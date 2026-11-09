@@ -1,0 +1,81 @@
+{
+  "scope": "all26 actual-adapter authored DNS/request-double cases after apex repair",
+  "status": "passed",
+  "returncode": 0,
+  "caseIds": [
+    "HT-NT01",
+    "HT-NT02",
+    "HT-NT03",
+    "HT-NT04",
+    "HT-NT05",
+    "HT-NT06",
+    "HT-NT07",
+    "HT-NT08",
+    "HT-NT09",
+    "HT-NT10",
+    "HT-NT11",
+    "HT-NT12",
+    "HT-NT13",
+    "HT-NT14",
+    "HT-NT15",
+    "HT-NT16",
+    "HT-NT17",
+    "HT-NT18",
+    "HT-NT19",
+    "HT-NT20",
+    "HT-NT21",
+    "HT-NT22",
+    "HT-NT23",
+    "HT-NT24",
+    "HT-NT25",
+    "HT-NT26"
+  ],
+  "sources": [
+    {
+      "path": "packages/adapters/src/http-target.ts",
+      "bytes": 13927,
+      "sha256": "91f6bedc8d0a2a931e57e05ac68dc8095f42283e70bc513b611e8d00e4a5a0b9"
+    },
+    {
+      "path": "tests/unit/http-target-transport.test.mjs",
+      "bytes": 19270,
+      "sha256": "64c6d84c98ec008af0e2f5047afc60faf2c4318e41f0da2278b195b9d734f4c9"
+    }
+  ],
+  "sourcesUnchanged": true,
+  "seconds": 0.1906261444091797,
+  "streams": {
+    "stdout": {
+      "bytes": 6696,
+      "sha256": "7025519d63975144fac1e8807dbfc82b1d79c67737008e601da7f580eab9e614",
+      "complete": true
+    },
+    "stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "complete": true
+    }
+  },
+  "proofLimits": [
+    "T2 authored DNS/request doubles; no native DNS/socket/TLS or target call.",
+    "Core plan validation already rejects the apex; no plan-flow bypass was established.",
+    "These26 replay the existing scope after the new regression; not26 additional distinct cases."
+  ],
+  "schemaVersion": "http-target-native-receipt-projection-v1",
+  "exportKind": "command_projection",
+  "sourceReceipt": {
+    "relativePrivateFile": "native-apex-after/receipt.json",
+    "bytes": 1751,
+    "sha256": "346b6db7213106a133f0884e0a9c7e1ff5bf75c2875f0d903b8c3419dbf0ac22",
+    "originalPublished": false
+  },
+  "argvProjection": [
+    "node",
+    "--experimental-vm-modules",
+    "--test",
+    "--test-reporter=tap",
+    "tests/unit/http-target-transport.test.mjs"
+  ],
+  "originalCommandExported": false,
+  "projectionNote": "The command is normalized to a relative node invocation. This is a labeled projection, not the original local receipt."
+}

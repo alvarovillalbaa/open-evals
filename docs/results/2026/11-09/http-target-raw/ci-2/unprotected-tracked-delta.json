@@ -1,0 +1,171 @@
+{
+  "scope": "outside_the_108_protected_paths",
+  "changes": [
+    {
+      "status": "M",
+      "path": "apps/cli/node_modules/.bin/eslint"
+    },
+    {
+      "status": "M",
+      "path": "apps/cli/node_modules/.bin/tsc"
+    },
+    {
+      "status": "M",
+      "path": "apps/cli/node_modules/.bin/tsserver"
+    },
+    {
+      "status": "M",
+      "path": "apps/cli/node_modules/.bin/tsx"
+    },
+    {
+      "status": "M",
+      "path": "apps/cli/node_modules/.bin/vitest"
+    },
+    {
+      "status": "M",
+      "path": "apps/web/node_modules/.bin/eslint"
+    },
+    {
+      "status": "M",
+      "path": "apps/web/node_modules/.bin/next"
+    },
+    {
+      "status": "M",
+      "path": "apps/web/node_modules/.bin/playwright"
+    },
+    {
+      "status": "M",
+      "path": "apps/web/node_modules/.bin/tsc"
+    },
+    {
+      "status": "M",
+      "path": "apps/web/node_modules/.bin/tsserver"
+    },
+    {
+      "status": "M",
+      "path": "apps/web/node_modules/.bin/vitest"
+    },
+    {
+      "status": "M",
+      "path": "packages/adapters/node_modules/.bin/tsc"
+    },
+    {
+      "status": "M",
+      "path": "packages/adapters/node_modules/.bin/tsserver"
+    },
+    {
+      "status": "M",
+      "path": "packages/adapters/node_modules/.bin/vitest"
+    },
+    {
+      "status": "M",
+      "path": "packages/core/node_modules/.bin/tsc"
+    },
+    {
+      "status": "M",
+      "path": "packages/core/node_modules/.bin/tsserver"
+    },
+    {
+      "status": "M",
+      "path": "packages/core/node_modules/.bin/vitest"
+    },
+    {
+      "status": "M",
+      "path": "packages/db/node_modules/.bin/drizzle-kit"
+    },
+    {
+      "status": "M",
+      "path": "packages/db/node_modules/.bin/tsc"
+    },
+    {
+      "status": "M",
+      "path": "packages/db/node_modules/.bin/tsserver"
+    },
+    {
+      "status": "M",
+      "path": "packages/db/node_modules/.bin/vitest"
+    },
+    {
+      "status": "M",
+      "path": "packages/mcp/node_modules/.bin/eslint"
+    },
+    {
+      "status": "M",
+      "path": "packages/mcp/node_modules/.bin/tsc"
+    },
+    {
+      "status": "M",
+      "path": "packages/mcp/node_modules/.bin/tsserver"
+    },
+    {
+      "status": "M",
+      "path": "packages/mcp/node_modules/.bin/vitest"
+    },
+    {
+      "status": "M",
+      "path": "packages/sdk/node_modules/.bin/eslint"
+    },
+    {
+      "status": "M",
+      "path": "packages/sdk/node_modules/.bin/tsc"
+    },
+    {
+      "status": "M",
+      "path": "packages/sdk/node_modules/.bin/tsserver"
+    },
+    {
+      "status": "M",
+      "path": "packages/sdk/node_modules/.bin/vitest"
+    },
+    {
+      "status": "M",
+      "path": "packages/statistics/node_modules/.bin/eslint"
+    },
+    {
+      "status": "M",
+      "path": "packages/statistics/node_modules/.bin/tsc"
+    },
+    {
+      "status": "M",
+      "path": "packages/statistics/node_modules/.bin/tsserver"
+    },
+    {
+      "status": "M",
+      "path": "packages/statistics/node_modules/.bin/vitest"
+    },
+    {
+      "status": "M",
+      "path": "packages/test-fixtures/node_modules/.bin/eslint"
+    },
+    {
+      "status": "M",
+      "path": "packages/test-fixtures/node_modules/.bin/tsc"
+    },
+    {
+      "status": "M",
+      "path": "packages/test-fixtures/node_modules/.bin/tsserver"
+    },
+    {
+      "status": "M",
+      "path": "packages/test-fixtures/node_modules/.bin/vitest"
+    },
+    {
+      "status": "M",
+      "path": "workflows/node_modules/.bin/eslint"
+    },
+    {
+      "status": "M",
+      "path": "workflows/node_modules/.bin/tsc"
+    },
+    {
+      "status": "M",
+      "path": "workflows/node_modules/.bin/tsserver"
+    },
+    {
+      "status": "M",
+      "path": "workflows/node_modules/.bin/vitest"
+    }
+  ],
+  "protectedChecksPassed": true,
+  "classification": "observed names only; not an application-source verification"
+}

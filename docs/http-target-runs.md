@@ -3,8 +3,8 @@
 Last updated: 2026-11-09
 
 Implementation contract. Pure, transport-double, Web seam, SQL and build checks
-have passed at their recorded sources. Browser and native network acceptance
-remain pending.
+have passed at their recorded sources, together with all five actual-app browser
+journeys. Native network and live hosted-account acceptance remain pending.
 
 ## User flow and ownership
 
@@ -177,7 +177,12 @@ failed. Normalizing only those JSON arrays preserved all value/order assertions.
 at source26433ff then passed all 20 Web seams, 31 PostgreSQL cases, 14 regressions
 and a full production build. Its browser result remained 3/5 because two alert
 locators also matched the framework announcer; that failed run is preserved.
-The browser follow-up keeps every assertion and narrows only those locators.
+The browser follow-up kept every assertion and narrowed only those locators.
+[Run 42695238785](https://github.com/alvarovillalbaa/open-evals/actions/runs/42695238785)
+at source327fc6b passed a fresh full build and all five actual-app browser
+journeys without retries or skipped cases. It did not repeat the 65 unchanged
+Web/database checks. The [dated result](results/2026/11-09/http-target-runs.md)
+records the separate sources and proof limits.
 A separate native hostname regression failed before the apex repair, then all
 26 transport-double cases passed afterward; this repeats the existing scope.
 The predecessor dataset release independently passed its full CI build and all

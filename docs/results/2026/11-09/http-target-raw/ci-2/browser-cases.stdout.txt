@@ -1,0 +1,90 @@
+
+Running 5 tests using 1 worker
+
+  ✓  1 [chromium-owned-production-no-dispatch] › tests/e2e/http-target-plans.browser.spec.ts:77:1 › HTTP-BR01 desktop complete preview, explicit immutable save and reload make no execution reservation (2.1s)
+  ✓  2 [chromium-owned-production-no-dispatch] › tests/e2e/http-target-plans.browser.spec.ts:89:1 › HTTP-BR02 narrow Unicode and complete JSON preserve saved inputs and both evaluator versions (1.2s)
+  ✘  3 [chromium-owned-production-no-dispatch] › tests/e2e/http-target-plans.browser.spec.ts:100:1 › HTTP-BR03 actual stale-head conflict preserves fields and requires visible head review before version three (926ms)
+  ✘  4 [chromium-owned-production-no-dispatch] › tests/e2e/http-target-plans.browser.spec.ts:114:1 › HTTP-BR04 real committed save with a lost response retries the identical intent without duplication (872ms)
+  ✓  5 [chromium-owned-production-no-dispatch] › tests/e2e/http-target-plans.browser.spec.ts:146:1 › HTTP-BR05 viewer preview and read remain available while write, execution, recovery, keys and foreign scope are denied (1.7s)
+
+
+  1) [chromium-owned-production-no-dispatch] › tests/e2e/http-target-plans.browser.spec.ts:100:1 › HTTP-BR03 actual stale-head conflict preserves fields and requires visible head review before version three 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: getByRole('alert')
+    Expected substring: "Your text is preserved"
+    Error: strict mode violation: getByRole('alert') resolved to 2 elements:
+        1) <p role="alert" class="text-sm text-danger">This save conflicts with stored state. Your text …</p> aka getByText('This save conflicts with')
+        2) <div role="alert" aria-live="assertive" id="__next-route-announcer__"></div> aka locator('[id="__next-route-announcer__"]')
+
+    Call log:
+      - Expect "toContainText" with timeout 10000ms
+      - waiting for getByRole('alert')
+
+
+      103 |   const competing = await owned.savePlan({ ...first.content.draft, versionId: randomUUID(), version: 2, expectedVersionId: first.content.draft.versionId, name: "Competing saved head" });
+      104 |   const failed = await capturePost<{ error: string }>(page, API, () => page.getByRole("button", { name: "Save immutable plan without executing", exact: true }).click()); expect(failed.status).toBe(409); expect(failed.value).toEqual({ error: "http_eval_plan_stale" });
+    > 105 |   await expect(page.getByRole("alert")).toContainText("Your text is preserved"); await expect(page.getByLabel("Plan name", { exact: true })).toHaveValue("Preserved authored version"); await expect(page.getByLabel("Declared target version", { exact: true })).toHaveValue("2");
+          |                                         ^
+      106 |   await expect(page.getByRole("button", { name: "Preview plan without calling target", exact: true })).toBeDisabled(); await page.getByRole("button", { name: "Reload current head", exact: true }).click();
+      107 |   const review = page.getByRole("checkbox", { name: /I reviewed the current head/ }); await expect(review).toBeVisible(); await expect(review).toBeDisabled(); await page.getByText("Inspect complete current head before another intent", { exact: true }).click(); expect(JSON.parse(await page.getByLabel("Complete current saved plan head", { exact: true }).innerText())).toEqual(competing); await review.check();
+      108 |   const next = await preview(page); expect(next.draft.version).toBe(3); expect(next.draft.expectedVersionId).toBe(competing.content.draft.versionId); expect(next.draft.versionId).not.toBe(stale.draft.versionId); expect(next.draft.name).toBe("Preserved authored version"); expect(next.draft.target.targetVersion).toBe("2");
+        at /home/runner/work/open-evals/open-evals/tests/e2e/http-target-plans.browser.spec.ts:105:41
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../_temp/open-evals-http-target-browser-evidence/browser-output/http-target-plans.browser--9b09b-review-before-version-three-chromium-owned-production-no-dispatch/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../_temp/open-evals-http-target-browser-evidence/browser-output/http-target-plans.browser--9b09b-review-before-version-three-chromium-owned-production-no-dispatch/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../_temp/open-evals-http-target-browser-evidence/browser-output/http-target-plans.browser--9b09b-review-before-version-three-chromium-owned-production-no-dispatch/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace ../../_temp/open-evals-http-target-browser-evidence/browser-output/http-target-plans.browser--9b09b-review-before-version-three-chromium-owned-production-no-dispatch/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [chromium-owned-production-no-dispatch] › tests/e2e/http-target-plans.browser.spec.ts:114:1 › HTTP-BR04 real committed save with a lost response retries the identical intent without duplication 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: getByRole('alert')
+    Expected substring: "save outcome is unknown"
+    Error: strict mode violation: getByRole('alert') resolved to 2 elements:
+        1) <p role="alert" class="text-sm text-danger">The save outcome is unknown. Retry this unchanged…</p> aka getByText('The save outcome is unknown.')
+        2) <div role="alert" aria-live="assertive" id="__next-route-announcer__"></div> aka locator('[id="__next-route-announcer__"]')
+
+    Call log:
+      - Expect "toContainText" with timeout 10000ms
+      - waiting for getByRole('alert')
+
+
+      136 |     await page.getByRole("button", { name: "Save immutable plan without executing", exact: true }).click();
+      137 |     const first = await firstResponse; expect(first.error).toBeUndefined(); expect(first.status).toBe(201); expect(first.value?.replayed).toBe(false); const committed = first.value!.record;
+    > 138 |     await expect(page.getByRole("alert")).toContainText("save outcome is unknown");
+          |                                           ^
+      139 |     await expect(page.getByLabel("Plan name", { exact: true })).toHaveAttribute("readonly", ""); await stored(owned, committed, 1);
+      140 |     await page.getByRole("button", { name: "Retry identical plan save", exact: true }).click(); const response = await retryResponse; expect(response.error).toBeUndefined(); expect(response.status).toBe(200); const value = response.value!; expect(value.replayed).toBe(true); expect(value.record).toEqual(committed);
+      141 |     expect(bodies).toHaveLength(2); expect(bodies[1]).toBe(bodies[0]); expect(JSON.parse(bodies[0]!)).toEqual({ schemaVersion: "http-eval-plan-save-v1", draft: p.draft, expectedPreviewFingerprint: p.fingerprint });
+        at /home/runner/work/open-evals/open-evals/tests/e2e/http-target-plans.browser.spec.ts:138:43
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../_temp/open-evals-http-target-browser-evidence/browser-output/http-target-plans.browser--8f9a5--intent-without-duplication-chromium-owned-production-no-dispatch/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../_temp/open-evals-http-target-browser-evidence/browser-output/http-target-plans.browser--8f9a5--intent-without-duplication-chromium-owned-production-no-dispatch/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../_temp/open-evals-http-target-browser-evidence/browser-output/http-target-plans.browser--8f9a5--intent-without-duplication-chromium-owned-production-no-dispatch/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace ../../_temp/open-evals-http-target-browser-evidence/browser-output/http-target-plans.browser--8f9a5--intent-without-duplication-chromium-owned-production-no-dispatch/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    [chromium-owned-production-no-dispatch] › tests/e2e/http-target-plans.browser.spec.ts:100:1 › HTTP-BR03 actual stale-head conflict preserves fields and requires visible head review before version three 
+    [chromium-owned-production-no-dispatch] › tests/e2e/http-target-plans.browser.spec.ts:114:1 › HTTP-BR04 real committed save with a lost response retries the identical intent without duplication 
+  3 passed (8.8s)

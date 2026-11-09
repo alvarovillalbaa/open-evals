@@ -1,0 +1,10 @@
+
+Running 5 tests using 1 worker
+
+  ✓  1 [chromium-owned-production-no-dispatch] › tests/e2e/http-target-plans.browser.spec.ts:77:1 › HTTP-BR01 desktop complete preview, explicit immutable save and reload make no execution reservation (2.5s)
+  ✓  2 [chromium-owned-production-no-dispatch] › tests/e2e/http-target-plans.browser.spec.ts:89:1 › HTTP-BR02 narrow Unicode and complete JSON preserve saved inputs and both evaluator versions (1.3s)
+  ✓  3 [chromium-owned-production-no-dispatch] › tests/e2e/http-target-plans.browser.spec.ts:100:1 › HTTP-BR03 actual stale-head conflict preserves fields and requires visible head review before version three (1.9s)
+  ✓  4 [chromium-owned-production-no-dispatch] › tests/e2e/http-target-plans.browser.spec.ts:114:1 › HTTP-BR04 real committed save with a lost response retries the identical intent without duplication (1.4s)
+  ✓  5 [chromium-owned-production-no-dispatch] › tests/e2e/http-target-plans.browser.spec.ts:146:1 › HTTP-BR05 viewer preview and read remain available while write, execution, recovery, keys and foreign scope are denied (1.4s)
+
+  5 passed (9.3s)

@@ -1,0 +1,464 @@
+{
+  "schemaVersion": "http-target-plans-checks-v1",
+  "status": "failed",
+  "acceptedSource": "d6d93e85e002430303cbd191976a32c09d502402",
+  "expectedParent": "a36d9edf4a4daff1764df70a2bb111ce27f07db2",
+  "directParentSource": "a36d9edf4a4daff1764df70a2bb111ce27f07db2",
+  "verificationSource": "26433ff1e35a54f6c2ec9edcac389e221fd264fb",
+  "runId": "42692158133",
+  "attempt": "1",
+  "checkScope": "web_tier2_http_sql_regression_build_and_five_no_dispatch_browser_cases",
+  "expectedParentTree": "25c36b53ba3879bde2fef3bed0ff21d4a74c355c",
+  "verificationTree": "3112b9afe6184326dfeb81f2cfde799f32beb295",
+  "sqlSuitesInvoked": true,
+  "httpEvalPostgresCaseCount": 31,
+  "httpEvalPostgresCaseIds": [
+    "HTTP-PG01",
+    "HTTP-PG02",
+    "HTTP-PG03",
+    "HTTP-PG04",
+    "HTTP-PG05",
+    "HTTP-PG06",
+    "HTTP-PG07",
+    "HTTP-PG08",
+    "HTTP-PG09",
+    "HTTP-PG10",
+    "HTTP-PG11",
+    "HTTP-PG12",
+    "HTTP-PG13",
+    "HTTP-PG14",
+    "HTTP-PG15",
+    "HTTP-PG16",
+    "HTTP-PG17",
+    "HTTP-PG18",
+    "HTTP-PG19",
+    "HTTP-PG20",
+    "HTTP-PG21",
+    "HTTP-PG22",
+    "HTTP-PG23",
+    "HTTP-PG24",
+    "HTTP-PG25",
+    "HTTP-PG26",
+    "HTTP-PG27",
+    "HTTP-PG28",
+    "HTTP-PG29",
+    "HTTP-PG30",
+    "HTTP-PG31"
+  ],
+  "providedOutputRegressionCaseCount": 14,
+  "providedOutputRegressionCaseIds": [
+    "PO-PG01",
+    "PO-PG02",
+    "PO-PG03",
+    "PO-PG04",
+    "PO-PG05",
+    "PO-PG06",
+    "PO-PG07",
+    "PO-PG08",
+    "PO-PG09",
+    "PO-PG10",
+    "PO-PG11",
+    "PO-PG12",
+    "PO-PG13",
+    "PO-PG14"
+  ],
+  "coreNativeTier2Invoked": false,
+  "webTier2Invoked": true,
+  "webTier2CaseCount": 20,
+  "webTier2CaseIds": [
+    "HT-WEB01",
+    "HT-WEB02",
+    "HT-WEB03",
+    "HT-WEB04",
+    "HT-WEB05",
+    "HT-WEB06",
+    "HT-WEB07",
+    "HT-WEB08",
+    "HT-WEB09",
+    "HT-WEB10",
+    "HT-WEB11",
+    "HT-WEB12",
+    "HT-WEB13",
+    "HT-WEB14",
+    "HT-WEB15",
+    "HT-WEB16",
+    "HT-WEB17",
+    "HT-WEB18",
+    "HT-WEB19",
+    "HT-WEB20"
+  ],
+  "webTier2BootstrapReason": "Local Node26 removed the required TypeScript transform mode; pinned Node24 supports it.",
+  "actualHttpExecutionChecked": false,
+  "postgresFixturesEmptyBeforeBuild": true,
+  "unprotectedTrackedDelta": {
+    "file": "unprotected-tracked-delta.json",
+    "changeCount": 41,
+    "bytes": 3812,
+    "sha256": "b18e9417b75d74e15dcf1d5a7f75d4e239679c410d41e69f0bc65017a8a1fc9b"
+  },
+  "browserCaseCount": null,
+  "caseResults": [
+    {
+      "id": "HTTP-BR01",
+      "title": "HTTP-BR01 desktop complete preview, explicit immutable save and reload make no execution reservation",
+      "expectedStatus": "passed",
+      "status": "passed",
+      "resultCount": 1,
+      "cleanupAttachments": [
+        {
+          "bytes": 577,
+          "sha256": "9b47037ed4d4558e6b46211ce0eb46bab545f185eaa0e23841a97ea6f731b739",
+          "value": {
+            "schemaVersion": "http-plan-browser-cleanup-v1",
+            "status": "removed",
+            "workspaceCount": 1,
+            "actorCount": 1,
+            "ownershipValidated": true,
+            "before": {
+              "datasets": 1,
+              "versions": 1,
+              "rows": 2,
+              "evalSets": 2,
+              "evalItems": 2,
+              "plans": 1,
+              "planAudits": 1,
+              "runs": 0,
+              "samples": 0,
+              "results": 0,
+              "gates": 0,
+              "workflows": 0,
+              "events": 0,
+              "audits": 4
+            },
+            "after": {
+              "datasets": 0,
+              "versions": 0,
+              "rows": 0,
+              "evalSets": 0,
+              "evalItems": 0,
+              "plans": 0,
+              "planAudits": 0,
+              "runs": 0,
+              "samples": 0,
+              "results": 0,
+              "gates": 0,
+              "workflows": 0,
+              "events": 0,
+              "audits": 0
+            },
+            "dispatchClaims": 0,
+            "workspaceAbsent": true,
+            "actorsAbsent": true,
+            "actualHttpExecutionChecked": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "HTTP-BR02",
+      "title": "HTTP-BR02 narrow Unicode and complete JSON preserve saved inputs and both evaluator versions",
+      "expectedStatus": "passed",
+      "status": "passed",
+      "resultCount": 1,
+      "cleanupAttachments": [
+        {
+          "bytes": 577,
+          "sha256": "9b47037ed4d4558e6b46211ce0eb46bab545f185eaa0e23841a97ea6f731b739",
+          "value": {
+            "schemaVersion": "http-plan-browser-cleanup-v1",
+            "status": "removed",
+            "workspaceCount": 1,
+            "actorCount": 1,
+            "ownershipValidated": true,
+            "before": {
+              "datasets": 1,
+              "versions": 1,
+              "rows": 2,
+              "evalSets": 2,
+              "evalItems": 2,
+              "plans": 1,
+              "planAudits": 1,
+              "runs": 0,
+              "samples": 0,
+              "results": 0,
+              "gates": 0,
+              "workflows": 0,
+              "events": 0,
+              "audits": 4
+            },
+            "after": {
+              "datasets": 0,
+              "versions": 0,
+              "rows": 0,
+              "evalSets": 0,
+              "evalItems": 0,
+              "plans": 0,
+              "planAudits": 0,
+              "runs": 0,
+              "samples": 0,
+              "results": 0,
+              "gates": 0,
+              "workflows": 0,
+              "events": 0,
+              "audits": 0
+            },
+            "dispatchClaims": 0,
+            "workspaceAbsent": true,
+            "actorsAbsent": true,
+            "actualHttpExecutionChecked": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "HTTP-BR03",
+      "title": "HTTP-BR03 actual stale-head conflict preserves fields and requires visible head review before version three",
+      "expectedStatus": "passed",
+      "status": "failed",
+      "resultCount": 1,
+      "cleanupAttachments": [
+        {
+          "bytes": 577,
+          "sha256": "4ff0821273c676a5245eea84eb10bc24d82253f17b521e395cd48ce0735d5046",
+          "value": {
+            "schemaVersion": "http-plan-browser-cleanup-v1",
+            "status": "removed",
+            "workspaceCount": 1,
+            "actorCount": 1,
+            "ownershipValidated": true,
+            "before": {
+              "datasets": 1,
+              "versions": 1,
+              "rows": 2,
+              "evalSets": 2,
+              "evalItems": 2,
+              "plans": 2,
+              "planAudits": 2,
+              "runs": 0,
+              "samples": 0,
+              "results": 0,
+              "gates": 0,
+              "workflows": 0,
+              "events": 0,
+              "audits": 5
+            },
+            "after": {
+              "datasets": 0,
+              "versions": 0,
+              "rows": 0,
+              "evalSets": 0,
+              "evalItems": 0,
+              "plans": 0,
+              "planAudits": 0,
+              "runs": 0,
+              "samples": 0,
+              "results": 0,
+              "gates": 0,
+              "workflows": 0,
+              "events": 0,
+              "audits": 0
+            },
+            "dispatchClaims": 0,
+            "workspaceAbsent": true,
+            "actorsAbsent": true,
+            "actualHttpExecutionChecked": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "HTTP-BR04",
+      "title": "HTTP-BR04 real committed save with a lost response retries the identical intent without duplication",
+      "expectedStatus": "passed",
+      "status": "failed",
+      "resultCount": 1,
+      "cleanupAttachments": [
+        {
+          "bytes": 577,
+          "sha256": "9b47037ed4d4558e6b46211ce0eb46bab545f185eaa0e23841a97ea6f731b739",
+          "value": {
+            "schemaVersion": "http-plan-browser-cleanup-v1",
+            "status": "removed",
+            "workspaceCount": 1,
+            "actorCount": 1,
+            "ownershipValidated": true,
+            "before": {
+              "datasets": 1,
+              "versions": 1,
+              "rows": 2,
+              "evalSets": 2,
+              "evalItems": 2,
+              "plans": 1,
+              "planAudits": 1,
+              "runs": 0,
+              "samples": 0,
+              "results": 0,
+              "gates": 0,
+              "workflows": 0,
+              "events": 0,
+              "audits": 4
+            },
+            "after": {
+              "datasets": 0,
+              "versions": 0,
+              "rows": 0,
+              "evalSets": 0,
+              "evalItems": 0,
+              "plans": 0,
+              "planAudits": 0,
+              "runs": 0,
+              "samples": 0,
+              "results": 0,
+              "gates": 0,
+              "workflows": 0,
+              "events": 0,
+              "audits": 0
+            },
+            "dispatchClaims": 0,
+            "workspaceAbsent": true,
+            "actorsAbsent": true,
+            "actualHttpExecutionChecked": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "HTTP-BR05",
+      "title": "HTTP-BR05 viewer preview and read remain available while write, execution, recovery, keys and foreign scope are denied",
+      "expectedStatus": "passed",
+      "status": "passed",
+      "resultCount": 1,
+      "cleanupAttachments": [
+        {
+          "bytes": 577,
+          "sha256": "69ae0eb4c08d3eb980dcdfa52921a45e30446077db724f91b0d26b244e1b9b14",
+          "value": {
+            "schemaVersion": "http-plan-browser-cleanup-v1",
+            "status": "removed",
+            "workspaceCount": 2,
+            "actorCount": 3,
+            "ownershipValidated": true,
+            "before": {
+              "datasets": 1,
+              "versions": 1,
+              "rows": 2,
+              "evalSets": 2,
+              "evalItems": 2,
+              "plans": 1,
+              "planAudits": 1,
+              "runs": 0,
+              "samples": 0,
+              "results": 0,
+              "gates": 0,
+              "workflows": 0,
+              "events": 0,
+              "audits": 4
+            },
+            "after": {
+              "datasets": 0,
+              "versions": 0,
+              "rows": 0,
+              "evalSets": 0,
+              "evalItems": 0,
+              "plans": 0,
+              "planAudits": 0,
+              "runs": 0,
+              "samples": 0,
+              "results": 0,
+              "gates": 0,
+              "workflows": 0,
+              "events": 0,
+              "audits": 0
+            },
+            "dispatchClaims": 0,
+            "workspaceAbsent": true,
+            "actorsAbsent": true,
+            "actualHttpExecutionChecked": false
+          }
+        }
+      ]
+    }
+  ],
+  "applicationServers": [
+    {
+      "label": "candidate",
+      "argv": [
+        "node",
+        "/home/runner/work/open-evals/open-evals/apps/web/node_modules/next/dist/bin/next",
+        "start",
+        "--hostname",
+        "127.0.0.1",
+        "--port",
+        "4173"
+      ],
+      "identity": {
+        "pid": 2865,
+        "startTicks": "21745",
+        "uid": 1001,
+        "pgid": 2865,
+        "executable": "/opt/hostedtoolcache/node/24.22.2/x64/bin/node"
+      },
+      "returncode": 143,
+      "stopMode": "graceful",
+      "pidAbsent": true,
+      "processGroupAbsent": true,
+      "portFree": true,
+      "streams": {
+        "stdout": {
+          "file": "candidate.server.stdout.txt",
+          "bytes": 115,
+          "sha256": "3c876d063f99d796abcd3b3f0d06f4bb0656b6ba5704e5c441526e22a81b5e4d",
+          "complete": true
+        },
+        "stderr": {
+          "file": "candidate.server.stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true
+        }
+      }
+    }
+  ],
+  "commandCount": 34,
+  "cleanup": {
+    "status": "removed",
+    "database": "oe_http_eval_test_42692158133_1",
+    "validatedBeforeDrop": {
+      "name": "oe_http_eval_test_42692158133_1",
+      "owner": "postgres",
+      "marker": "open-evals-http-target-runs-20261109-created-disposable-v1"
+    },
+    "databaseAbsent": true,
+    "clusterStopped": true,
+    "serverLog": {
+      "file": "postgres-server.log",
+      "bytes": 3190,
+      "sha256": "2f9b336f8bcb98818e04ce68c89f91e242a6278c60ea88776ab1fa5ea176ea62",
+      "complete": true
+    },
+    "removedCluster": {
+      "entries": 1004,
+      "fileBytes": 57081415,
+      "rootIdentity": [
+        66305,
+        9437185,
+        1001
+      ]
+    },
+    "clusterAbsent": true
+  },
+  "errors": [
+    "AssertionError:"
+  ],
+  "limits": {
+    "streamBytes": 4194304,
+    "focusedSuiteSeconds": 300,
+    "browserSeconds": 480,
+    "softWorkSeconds": 840,
+    "stepMinutes": 18,
+    "jobMinutes": 20
+  },
+  "proofLimits": [
+    "Scope:20 Web T2 seams under the compatible Node24 transform bootstrap,31 new HTTP owner-SQL cases,14 provided-output SQL regressions after the shared source-loader change, one production build and five actual-app no-dispatch Chromium journeys. No HTTP target, model, account, paid service or production data is called. Browser journeys do not prove actual execution or native DNS/socket/TLS behavior; separately recorded64 core/native checks are not repeated. Signed HMAC fixtures do not prove hosted auth/membership/RLS or physical-device acceptance."
+  ]
+}

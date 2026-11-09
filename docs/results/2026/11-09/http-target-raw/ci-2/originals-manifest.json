@@ -1,0 +1,119 @@
+{
+  "source": "26433ff1e35a54f6c2ec9edcac389e221fd264fb",
+  "runId": 42692158133,
+  "jobId": 129414385013,
+  "files": [
+    {
+      "file": "source.json",
+      "bytes": 19650,
+      "sha256": "c957aa4b807229f63a002a1b06bd94b96dc86690b4d0365e9eedf55093bb07da",
+      "complete": true,
+      "transport": "original-base64-chunks"
+    },
+    {
+      "file": "web-tier2-cases.stdout.txt",
+      "bytes": 5648,
+      "sha256": "c32f674654d94b4b917ae151e4afacf2f492d89233fbcc558465de26d7ef2733",
+      "complete": true,
+      "transport": "original-base64-chunks"
+    },
+    {
+      "file": "web-tier2-cases.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "complete": true,
+      "transport": "original-base64-chunks"
+    },
+    {
+      "file": "http-eval-postgres-cases.stdout.txt",
+      "bytes": 9458,
+      "sha256": "c7acebcfa27fcd97606b8ea3036ed604be1018b8a5f5058cdaab79daad9f8d93",
+      "complete": true,
+      "transport": "original-base64-chunks"
+    },
+    {
+      "file": "http-eval-postgres-cases.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "complete": true,
+      "transport": "original-base64-chunks"
+    },
+    {
+      "file": "provided-output-regression-cases.stdout.txt",
+      "bytes": 4101,
+      "sha256": "d1ece3433ceb033bd7866a76ace1227afb0389ac27570601a4ceb0be59cf2af1",
+      "complete": true,
+      "transport": "original-base64-chunks"
+    },
+    {
+      "file": "provided-output-regression-cases.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "complete": true,
+      "transport": "original-base64-chunks"
+    },
+    {
+      "file": "postgres-fixture-absence.json",
+      "bytes": 659,
+      "sha256": "4b5e02f91f2ec9f2ad0d81e4aa8e000fcd1d5796b29d7c2e451061a899f838c6",
+      "complete": true,
+      "transport": "original-base64-chunks"
+    },
+    {
+      "file": "browser-cases.stdout.txt",
+      "bytes": 10034,
+      "sha256": "251f7a9a00d754d0145aa0ab61a801440e5b02a95dca50fcb6d39157b68bcfe6",
+      "complete": true,
+      "transport": "original-base64-chunks"
+    },
+    {
+      "file": "browser-cases.stderr.txt",
+      "bytes": 489,
+      "sha256": "d2d212087f3a1806e143e9b9fd387b3c735b7b1768a282ad3625a4f5a0bdf388",
+      "complete": true,
+      "transport": "original-base64-chunks"
+    },
+    {
+      "file": "browser-report.json",
+      "bytes": 28253,
+      "sha256": "2bb8fad491d5519710dcffebe4609c422f5bf7479085ec896fa7702da3e71ad3",
+      "complete": true,
+      "transport": "original-base64-chunks"
+    },
+    {
+      "file": "candidate.server.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "complete": true,
+      "transport": "original-base64-chunks"
+    },
+    {
+      "file": "source-final.json",
+      "bytes": 18945,
+      "sha256": "7b9abd84bb53c93bcbadbd0cc25fcee758b03446bd712524d73c22702d1c0128",
+      "complete": true,
+      "transport": "original-base64-chunks"
+    },
+    {
+      "file": "unprotected-tracked-delta.json",
+      "bytes": 3812,
+      "sha256": "b18e9417b75d74e15dcf1d5a7f75d4e239679c410d41e69f0bc65017a8a1fc9b",
+      "complete": true,
+      "transport": "original-base64-chunks"
+    },
+    {
+      "file": "cleanup.json",
+      "bytes": 652,
+      "sha256": "d06e86cba75b3cd001a5657e4a9e46ec90274c15f29f2dea5c45752cd6f5868d",
+      "complete": true,
+      "transport": "original-base64-chunks"
+    },
+    {
+      "file": "receipt.json",
+      "bytes": 13307,
+      "sha256": "ca1bd25901951d27a01c9dabd83ee1e034a882525da139a12113192a146f660b",
+      "complete": true,
+      "transport": "original-base64-chunks"
+    }
+  ]
+}

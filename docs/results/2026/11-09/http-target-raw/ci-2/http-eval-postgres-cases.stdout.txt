@@ -1,0 +1,203 @@
+TAP version 13
+# Subtest: HTTP eval native persistence [T3; authored UNRUN]
+    # Subtest: HTTP-PG01 complete plan storage retains both evaluator memberships and source optional-field presence
+    ok 1 - HTTP-PG01 complete plan storage retains both evaluator memberships and source optional-field presence
+      ---
+      duration_ms: 223.036137
+      type: 'test'
+      ...
+    # Subtest: HTTP-PG02 history retains exact old versions and old save replay precedes a corrupt later head
+    ok 2 - HTTP-PG02 history retains exact old versions and old save replay precedes a corrupt later head
+      ---
+      duration_ms: 890.931416
+      type: 'test'
+      ...
+    # Subtest: HTTP-PG03 stale parent and changed reused identity cannot append partial plans
+    ok 3 - HTTP-PG03 stale parent and changed reused identity cannot append partial plans
+      ---
+      duration_ms: 107.952773
+      type: 'test'
+      ...
+    # Subtest: HTTP-PG04 workspace hashes isolate equal public identities and foreign frozen-source selections
+    ok 4 - HTTP-PG04 workspace hashes isolate equal public identities and foreign frozen-source selections
+      ---
+      duration_ms: 80.468792
+      type: 'test'
+      ...
+    # Subtest: HTTP-PG05 JSONB numeric changes that round to the old JavaScript value fail strict plan readback
+    ok 5 - HTTP-PG05 JSONB numeric changes that round to the old JavaScript value fail strict plan readback
+      ---
+      duration_ms: 50.241213
+      type: 'test'
+      ...
+    # Subtest: HTTP-PG06 legacy readers and writers exclude corrupt private plans but retain literal near-prefix legacy IDs
+    ok 6 - HTTP-PG06 legacy readers and writers exclude corrupt private plans but retain literal near-prefix legacy IDs
+      ---
+      duration_ms: 10399.695542
+      type: 'test'
+      ...
+    # Subtest: HTTP-PG07 a real owned audit trigger rolls back the entire plan save
+    ok 7 - HTTP-PG07 a real owned audit trigger rolls back the entire plan save
+      ---
+      duration_ms: 67.700419
+      type: 'test'
+      ...
+    # Subtest: HTTP-PG08 reservation atomically persists all pending samples, ledger, reservation event and audit
+    ok 8 - HTTP-PG08 reservation atomically persists all pending samples, ledger, reservation event and audit
+      ---
+      duration_ms: 174.525781
+      type: 'test'
+      ...
+    # Subtest: HTTP-PG09 one immutable plan supports many executions and repeated POST identity only reads existing state
+    ok 9 - HTTP-PG09 one immutable plan supports many executions and repeated POST identity only reads existing state
+      ---
+      duration_ms: 259.26326
+      type: 'test'
+      ...
+    # Subtest: HTTP-PG10 changed starts cannot reuse an execution identity or mutate its recorded intent
+    ok 10 - HTTP-PG10 changed starts cannot reuse an execution identity or mutate its recorded intent
+      ---
+      duration_ms: 204.090695
+      type: 'test'
+      ...
+    # Subtest: HTTP-PG11 a row claim is committed before work is returned and no second claim exposes another request
+    ok 11 - HTTP-PG11 a row claim is committed before work is returned and no second claim exposes another request
+      ---
+      duration_ms: 379.10537
+      type: 'test'
+      ...
+    # Subtest: HTTP-PG12 positively blocked concurrent claimants accept only one durable dispatch token
+    ok 12 - HTTP-PG12 positively blocked concurrent claimants accept only one durable dispatch token
+      ---
+      duration_ms: 460.642569
+      type: 'test'
+      ...
+    # Subtest: HTTP-PG13 configured concurrency limits the actual number of simultaneous pending SQL claims
+    ok 13 - HTTP-PG13 configured concurrency limits the actual number of simultaneous pending SQL claims
+      ---
+      duration_ms: 497.698672
+      type: 'test'
+      ...
+    # Subtest: HTTP-PG14 real stored responses produce a complete row-by-item matrix and all terminal gate levels
+    ok 14 - HTTP-PG14 real stored responses produce a complete row-by-item matrix and all terminal gate levels
+      ---
+      duration_ms: 961.896347
+      type: 'test'
+      ...
+    # Subtest: HTTP-PG15 identical finalization replays while changed raw spelling and a wrong token cannot overwrite evidence
+    ok 15 - HTTP-PG15 identical finalization replays while changed raw spelling and a wrong token cannot overwrite evidence
+      ---
+      duration_ms: 474.566271
+      type: 'test'
+      ...
+    # Subtest: HTTP-PG16 known not-sent and unknown transport errors remain distinct and cannot pass missing coverage
+    ok 16 - HTTP-PG16 known not-sent and unknown transport errors remain distinct and cannot pass missing coverage
+      ---
+      duration_ms: 656.904256
+      type: 'test'
+      ...
+    # Subtest: HTTP-PG17 deadline stop marks only pending rows and preserves an in-flight token for known late finalization
+    ok 17 - HTTP-PG17 deadline stop marks only pending rows and preserves an in-flight token for known late finalization
+      ---
+      duration_ms: 5492.471815
+      type: 'test'
+      ...
+    # Subtest: HTTP-PG18 explicit post-grace recovery preserves known rows, marks uncertainty and prevents late overwrite
+    ok 18 - HTTP-PG18 explicit post-grace recovery preserves known rows, marks uncertainty and prevents late overwrite
+      ---
+      duration_ms: 20522.341444
+      type: 'test'
+      ...
+    # Subtest: HTTP-PG19 invalid response envelopes fail closed while zero and false remain actual JSON output values
+    ok 19 - HTTP-PG19 invalid response envelopes fail closed while zero and false remain actual JSON output values
+      ---
+      duration_ms: 1284.05631
+      type: 'test'
+      ...
+    # Subtest: HTTP-PG20 native execution status, attempts and compact ledger corruption are refused without repair
+    ok 20 - HTTP-PG20 native execution status, attempts and compact ledger corruption are refused without repair
+      ---
+      duration_ms: 173.785977
+      type: 'test'
+      ...
+    # Subtest: HTTP-PG21 event JSONB precision loss is caught even when parsing would reproduce the old fingerprint
+    ok 21 - HTTP-PG21 event JSONB precision loss is caught even when parsing would reproduce the old fingerprint
+      ---
+      duration_ms: 361.385068
+      type: 'test'
+      ...
+    # Subtest: HTTP-PG22 samples, full evaluator projection and gate metadata must all match the frozen record
+    ok 22 - HTTP-PG22 samples, full evaluator projection and gate metadata must all match the frozen record
+      ---
+      duration_ms: 788.682203
+      type: 'test'
+      ...
+    # Subtest: HTTP-PG23 a real finalization event failure rolls back ledger, sample and every evaluator result
+    ok 23 - HTTP-PG23 a real finalization event failure rolls back ledger, sample and every evaluator result
+      ---
+      duration_ms: 439.210761
+      type: 'test'
+      ...
+    # Subtest: HTTP-PG24 positively blocked duplicate starts create one reservation and return one read-only replay
+    ok 24 - HTTP-PG24 positively blocked duplicate starts create one reservation and return one read-only replay
+      ---
+      duration_ms: 196.030883
+      type: 'test'
+      ...
+    # Subtest: HTTP-PG25 escaped valid names and target identifiers roundtrip above the old small request allowance
+    ok 25 - HTTP-PG25 escaped valid names and target identifiers roundtrip above the old small request allowance
+      ---
+      duration_ms: 65.678607
+      type: 'test'
+      ...
+    # Subtest: HTTP-PG26 partial own reservations are conflicts while foreign and clean absent identities remain undisclosed
+    ok 26 - HTTP-PG26 partial own reservations are conflicts while foreign and clean absent identities remain undisclosed
+      ---
+      duration_ms: 146.317137
+      type: 'test'
+      ...
+    # Subtest: HTTP-PG27 exact frozen plans remain executable and readable after live dataset and evaluator deletion
+    ok 27 - HTTP-PG27 exact frozen plans remain executable and readable after live dataset and evaluator deletion
+      ---
+      duration_ms: 673.928732
+      type: 'test'
+      ...
+    # Subtest: HTTP-PG28 the whole one-hundred-row population reserves intact and an added row never enters a saved plan
+    ok 28 - HTTP-PG28 the whole one-hundred-row population reserves intact and an added row never enters a saved plan
+      ---
+      duration_ms: 1977.299459
+      type: 'test'
+      ...
+    # Subtest: HTTP-PG29 a trusted callback regression cannot change any frozen outbound request projection
+    ok 29 - HTTP-PG29 a trusted callback regression cannot change any frozen outbound request projection
+      ---
+      duration_ms: 598.244213
+      type: 'test'
+      ...
+    # Subtest: HTTP-PG30 canonical near-one-MiB inputs and repeated large tiny-decimal outputs survive PostgreSQL expansion
+    ok 30 - HTTP-PG30 canonical near-one-MiB inputs and repeated large tiny-decimal outputs survive PostgreSQL expansion
+      ---
+      duration_ms: 74525.064666
+      type: 'test'
+      ...
+    # Subtest: HTTP-PG31 canonical storage envelopes reject metadata drift and noncanonical text without changing domain values
+    ok 31 - HTTP-PG31 canonical storage envelopes reject metadata drift and noncanonical text without changing domain values
+      ---
+      duration_ms: 52.557374
+      type: 'test'
+      ...
+    1..31
+ok 1 - HTTP eval native persistence [T3; authored UNRUN]
+  ---
+  duration_ms: 123418.10447
+  type: 'suite'
+  ...
+1..1
+# tests 31
+# suites 1
+# pass 31
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 133566.120949

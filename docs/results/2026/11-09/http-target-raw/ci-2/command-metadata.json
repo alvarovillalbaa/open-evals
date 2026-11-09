@@ -1,0 +1,719 @@
+{
+  "commands": [
+    {
+      "label": "source-head",
+      "returncode": 0,
+      "terminationReason": null,
+      "streams": {
+        "stdout": {
+          "file": "source-head.stdout.txt",
+          "bytes": 41,
+          "sha256": "bce2bb1d1e5e789908cef8b34bbf1db0ab89b52add1e6bbad692ef121d356a15",
+          "complete": true,
+          "limitBytes": 4194304
+        },
+        "stderr": {
+          "file": "source-head.stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "limitBytes": 4194304
+        }
+      }
+    },
+    {
+      "label": "source-parents",
+      "returncode": 0,
+      "terminationReason": null,
+      "streams": {
+        "stdout": {
+          "file": "source-parents.stdout.txt",
+          "bytes": 82,
+          "sha256": "be5d5b82972d495d0ff826b7cbd3be8bdef52374c6657d7e0783b31ce3f90a4c",
+          "complete": true,
+          "limitBytes": 4194304
+        },
+        "stderr": {
+          "file": "source-parents.stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "limitBytes": 4194304
+        }
+      }
+    },
+    {
+      "label": "source-parent-tree",
+      "returncode": 0,
+      "terminationReason": null,
+      "streams": {
+        "stdout": {
+          "file": "source-parent-tree.stdout.txt",
+          "bytes": 41,
+          "sha256": "5d883d249d8bba1d7948e354993bdd60d9deb5ab453fa3c7a2e5e4c45feb9e1a",
+          "complete": true,
+          "limitBytes": 4194304
+        },
+        "stderr": {
+          "file": "source-parent-tree.stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "limitBytes": 4194304
+        }
+      }
+    },
+    {
+      "label": "source-tree",
+      "returncode": 0,
+      "terminationReason": null,
+      "streams": {
+        "stdout": {
+          "file": "source-tree.stdout.txt",
+          "bytes": 41,
+          "sha256": "7ea6d53eeed3c7c36f3d965c6a78db4512a69be1cc1f049d5fdcfa9a3c1225d8",
+          "complete": true,
+          "limitBytes": 4194304
+        },
+        "stderr": {
+          "file": "source-tree.stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "limitBytes": 4194304
+        }
+      }
+    },
+    {
+      "label": "source-delta",
+      "returncode": 0,
+      "terminationReason": null,
+      "streams": {
+        "stdout": {
+          "file": "source-delta.stdout.txt",
+          "bytes": 126,
+          "sha256": "280e1e48caa26d2571d41c423d64b01f7a6dbad8beeb91b781d639f0273db6fb",
+          "complete": true,
+          "limitBytes": 4194304
+        },
+        "stderr": {
+          "file": "source-delta.stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "limitBytes": 4194304
+        }
+      }
+    },
+    {
+      "label": "source-clean",
+      "returncode": 0,
+      "terminationReason": null,
+      "streams": {
+        "stdout": {
+          "file": "source-clean.stdout.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "limitBytes": 4194304
+        },
+        "stderr": {
+          "file": "source-clean.stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "limitBytes": 4194304
+        }
+      }
+    },
+    {
+      "label": "node-version",
+      "returncode": 0,
+      "terminationReason": null,
+      "streams": {
+        "stdout": {
+          "file": "node-version.stdout.txt",
+          "bytes": 9,
+          "sha256": "6a0cec2e157365c1a8ac6d1715733b7c3321a7c5565862a701ca71ef00359d04",
+          "complete": true,
+          "limitBytes": 4194304
+        },
+        "stderr": {
+          "file": "node-version.stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "limitBytes": 4194304
+        }
+      }
+    },
+    {
+      "label": "install-pnpm",
+      "returncode": 0,
+      "terminationReason": null,
+      "streams": {
+        "stdout": {
+          "file": "install-pnpm.stdout.txt",
+          "bytes": 23,
+          "sha256": "da13ab9d025b19c91553bc7d4c450975d3e4e36dd7c5fef6f223f8008ba39547",
+          "complete": true,
+          "limitBytes": 4194304
+        },
+        "stderr": {
+          "file": "install-pnpm.stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "limitBytes": 4194304
+        }
+      }
+    },
+    {
+      "label": "pnpm-version",
+      "returncode": 0,
+      "terminationReason": null,
+      "streams": {
+        "stdout": {
+          "file": "pnpm-version.stdout.txt",
+          "bytes": 8,
+          "sha256": "4013d43ed3646dbf7f17865d540d1baf819c1fb47a1f96caa1a755e906f2d9e6",
+          "complete": true,
+          "limitBytes": 4194304
+        },
+        "stderr": {
+          "file": "pnpm-version.stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "limitBytes": 4194304
+        }
+      }
+    },
+    {
+      "label": "install-dependencies",
+      "returncode": 0,
+      "terminationReason": null,
+      "streams": {
+        "stdout": {
+          "file": "install-dependencies.stdout.txt",
+          "bytes": 806,
+          "sha256": "7afb8c91e8c76699358bad39875c31e683284f3fd6b98be005e58b2dac7b6c4d",
+          "complete": true,
+          "limitBytes": 4194304
+        },
+        "stderr": {
+          "file": "install-dependencies.stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "limitBytes": 4194304
+        }
+      }
+    },
+    {
+      "label": "source-after-install",
+      "returncode": 0,
+      "terminationReason": null,
+      "streams": {
+        "stdout": {
+          "file": "source-after-install.stdout.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "limitBytes": 4194304
+        },
+        "stderr": {
+          "file": "source-after-install.stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "limitBytes": 4194304
+        }
+      }
+    },
+    {
+      "label": "web-tier2-cases",
+      "returncode": 0,
+      "terminationReason": null,
+      "streams": {
+        "stdout": {
+          "file": "web-tier2-cases.stdout.txt",
+          "bytes": 5648,
+          "sha256": "c32f674654d94b4b917ae151e4afacf2f492d89233fbcc558465de26d7ef2733",
+          "complete": true,
+          "limitBytes": 4194304
+        },
+        "stderr": {
+          "file": "web-tier2-cases.stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "limitBytes": 4194304
+        }
+      }
+    },
+    {
+      "label": "postgres-binary-version",
+      "returncode": 0,
+      "terminationReason": null,
+      "streams": {
+        "stdout": {
+          "file": "postgres-binary-version.stdout.txt",
+          "bytes": 57,
+          "sha256": "d4c9b9bca29f7ce9083c8c785f314216d38a1aeb13e3f352ea9444b77f43b127",
+          "complete": true,
+          "limitBytes": 4194304
+        },
+        "stderr": {
+          "file": "postgres-binary-version.stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "limitBytes": 4194304
+        }
+      }
+    },
+    {
+      "label": "cluster-init",
+      "returncode": 0,
+      "terminationReason": null,
+      "streams": {
+        "stdout": {
+          "file": "cluster-init.stdout.txt",
+          "bytes": 925,
+          "sha256": "7df1f94b97ce0a4cc7a914147702644ee450547db02643963f488c3ad4a0beae",
+          "complete": true,
+          "limitBytes": 4194304
+        },
+        "stderr": {
+          "file": "cluster-init.stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "limitBytes": 4194304
+        }
+      }
+    },
+    {
+      "label": "cluster-start",
+      "returncode": 0,
+      "terminationReason": null,
+      "streams": {
+        "stdout": {
+          "file": "cluster-start.stdout.txt",
+          "bytes": 52,
+          "sha256": "66afd0411ccc09366e99fdd99b85f21899c8d2d064f5835126859618802153ad",
+          "complete": true,
+          "limitBytes": 4194304
+        },
+        "stderr": {
+          "file": "cluster-start.stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "limitBytes": 4194304
+        }
+      }
+    },
+    {
+      "label": "postgres-version",
+      "returncode": 0,
+      "terminationReason": null,
+      "streams": {
+        "stdout": {
+          "file": "postgres-version.stdout.txt",
+          "bytes": 35,
+          "sha256": "965d082cf7d0c7c9cb31fca0366ecf88cf5f4f6b41a81aa5b92e7c29557872c2",
+          "complete": true,
+          "limitBytes": 4194304
+        },
+        "stderr": {
+          "file": "postgres-version.stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "limitBytes": 4194304
+        }
+      }
+    },
+    {
+      "label": "database-before",
+      "returncode": 0,
+      "terminationReason": null,
+      "streams": {
+        "stdout": {
+          "file": "database-before.stdout.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "limitBytes": 4194304
+        },
+        "stderr": {
+          "file": "database-before.stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "limitBytes": 4194304
+        }
+      }
+    },
+    {
+      "label": "database-create",
+      "returncode": 0,
+      "terminationReason": null,
+      "streams": {
+        "stdout": {
+          "file": "database-create.stdout.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "limitBytes": 4194304
+        },
+        "stderr": {
+          "file": "database-create.stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "limitBytes": 4194304
+        }
+      }
+    },
+    {
+      "label": "database-marker",
+      "returncode": 0,
+      "terminationReason": null,
+      "streams": {
+        "stdout": {
+          "file": "database-marker.stdout.txt",
+          "bytes": 8,
+          "sha256": "584e079f160fd37b8e1fa66c0823a151f4ed00beb8d43e0e2378ca994c21c128",
+          "complete": true,
+          "limitBytes": 4194304
+        },
+        "stderr": {
+          "file": "database-marker.stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "limitBytes": 4194304
+        }
+      }
+    },
+    {
+      "label": "migration-0001",
+      "returncode": 0,
+      "terminationReason": null,
+      "streams": {
+        "stdout": {
+          "file": "migration-0001.stdout.txt",
+          "bytes": 667,
+          "sha256": "fafc5eed819cc779152a191ca30165d64deb846a9625f6eddc8447dd30b9e09f",
+          "complete": true,
+          "limitBytes": 4194304
+        },
+        "stderr": {
+          "file": "migration-0001.stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "limitBytes": 4194304
+        }
+      }
+    },
+    {
+      "label": "migration-0002",
+      "returncode": 0,
+      "terminationReason": null,
+      "streams": {
+        "stdout": {
+          "file": "migration-0002.stdout.txt",
+          "bytes": 264,
+          "sha256": "a3119494883a15491fdf22a2f082ff021d2c039a53c2173d8780cf30502b4f2b",
+          "complete": true,
+          "limitBytes": 4194304
+        },
+        "stderr": {
+          "file": "migration-0002.stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "limitBytes": 4194304
+        }
+      }
+    },
+    {
+      "label": "http-eval-postgres-cases",
+      "returncode": 0,
+      "terminationReason": null,
+      "streams": {
+        "stdout": {
+          "file": "http-eval-postgres-cases.stdout.txt",
+          "bytes": 9458,
+          "sha256": "c7acebcfa27fcd97606b8ea3036ed604be1018b8a5f5058cdaab79daad9f8d93",
+          "complete": true,
+          "limitBytes": 4194304
+        },
+        "stderr": {
+          "file": "http-eval-postgres-cases.stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "limitBytes": 4194304
+        }
+      }
+    },
+    {
+      "label": "provided-output-regression-cases",
+      "returncode": 0,
+      "terminationReason": null,
+      "streams": {
+        "stdout": {
+          "file": "provided-output-regression-cases.stdout.txt",
+          "bytes": 4101,
+          "sha256": "d1ece3433ceb033bd7866a76ace1227afb0389ac27570601a4ceb0be59cf2af1",
+          "complete": true,
+          "limitBytes": 4194304
+        },
+        "stderr": {
+          "file": "provided-output-regression-cases.stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "limitBytes": 4194304
+        }
+      }
+    },
+    {
+      "label": "postgres-fixture-empty",
+      "returncode": 0,
+      "terminationReason": null,
+      "streams": {
+        "stdout": {
+          "file": "postgres-fixture-empty.stdout.txt",
+          "bytes": 498,
+          "sha256": "744820470dc0958b887e78be5fb18a00ec81bb9247a1b08cfedb4df8078796b9",
+          "complete": true,
+          "limitBytes": 4194304
+        },
+        "stderr": {
+          "file": "postgres-fixture-empty.stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "limitBytes": 4194304
+        }
+      }
+    },
+    {
+      "label": "build-candidate",
+      "returncode": 0,
+      "terminationReason": null,
+      "streams": {
+        "stdout": {
+          "file": "build-candidate.stdout.txt",
+          "bytes": 10297,
+          "sha256": "852bfd13dc747dcb2443bd6bf1a84f6d830d567f57dff9cbb5ffdf6680b8584a",
+          "complete": true,
+          "limitBytes": 4194304
+        },
+        "stderr": {
+          "file": "build-candidate.stderr.txt",
+          "bytes": 1374,
+          "sha256": "8edeb1b97829b7b13c2fb48ee999773b79a35e94781f16c1498b76e9ed486f93",
+          "complete": true,
+          "limitBytes": 4194304
+        }
+      }
+    },
+    {
+      "label": "source-after-build",
+      "returncode": 0,
+      "terminationReason": null,
+      "streams": {
+        "stdout": {
+          "file": "source-after-build.stdout.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "limitBytes": 4194304
+        },
+        "stderr": {
+          "file": "source-after-build.stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "limitBytes": 4194304
+        }
+      }
+    },
+    {
+      "label": "install-chromium",
+      "returncode": 0,
+      "terminationReason": null,
+      "streams": {
+        "stdout": {
+          "file": "install-chromium.stdout.txt",
+          "bytes": 6906,
+          "sha256": "a5af85ab683e81a35b58fc9177276929b113f6586919940c5cc11cc7c3b389e2",
+          "complete": true,
+          "limitBytes": 4194304
+        },
+        "stderr": {
+          "file": "install-chromium.stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "limitBytes": 4194304
+        }
+      }
+    },
+    {
+      "label": "browser-cases",
+      "returncode": 1,
+      "terminationReason": null,
+      "streams": {
+        "stdout": {
+          "file": "browser-cases.stdout.txt",
+          "bytes": 10034,
+          "sha256": "251f7a9a00d754d0145aa0ab61a801440e5b02a95dca50fcb6d39157b68bcfe6",
+          "complete": true,
+          "limitBytes": 4194304
+        },
+        "stderr": {
+          "file": "browser-cases.stderr.txt",
+          "bytes": 489,
+          "sha256": "d2d212087f3a1806e143e9b9fd387b3c735b7b1768a282ad3625a4f5a0bdf388",
+          "complete": true,
+          "limitBytes": 4194304
+        }
+      }
+    },
+    {
+      "label": "cleanup-inspect",
+      "returncode": 0,
+      "terminationReason": null,
+      "streams": {
+        "stdout": {
+          "file": "cleanup-inspect.stdout.txt",
+          "bytes": 140,
+          "sha256": "9e2d5205ff5770255aa2e6faf4363f6914886d6ddcf92112c41f8b1f7bfe9f42",
+          "complete": true,
+          "limitBytes": 4194304
+        },
+        "stderr": {
+          "file": "cleanup-inspect.stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "limitBytes": 4194304
+        }
+      }
+    },
+    {
+      "label": "cleanup-drop",
+      "returncode": 0,
+      "terminationReason": null,
+      "streams": {
+        "stdout": {
+          "file": "cleanup-drop.stdout.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "limitBytes": 4194304
+        },
+        "stderr": {
+          "file": "cleanup-drop.stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "limitBytes": 4194304
+        }
+      }
+    },
+    {
+      "label": "cleanup-absence",
+      "returncode": 0,
+      "terminationReason": null,
+      "streams": {
+        "stdout": {
+          "file": "cleanup-absence.stdout.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "limitBytes": 4194304
+        },
+        "stderr": {
+          "file": "cleanup-absence.stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "limitBytes": 4194304
+        }
+      }
+    },
+    {
+      "label": "cluster-stop",
+      "returncode": 0,
+      "terminationReason": null,
+      "streams": {
+        "stdout": {
+          "file": "cluster-stop.stdout.txt",
+          "bytes": 56,
+          "sha256": "ca19178a35ab4153b75b494963b66ce8243e1b94c173107c87b44d09db23652d",
+          "complete": true,
+          "limitBytes": 4194304
+        },
+        "stderr": {
+          "file": "cluster-stop.stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "limitBytes": 4194304
+        }
+      }
+    },
+    {
+      "label": "source-final",
+      "returncode": 0,
+      "terminationReason": null,
+      "streams": {
+        "stdout": {
+          "file": "source-final.stdout.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "limitBytes": 4194304
+        },
+        "stderr": {
+          "file": "source-final.stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "limitBytes": 4194304
+        }
+      }
+    },
+    {
+      "label": "unprotected-tracked-names",
+      "returncode": 0,
+      "terminationReason": null,
+      "streams": {
+        "stdout": {
+          "file": "unprotected-tracked-names.stdout.txt",
+          "bytes": 1660,
+          "sha256": "bdf82533131b0b68cd7a5c5ac32bce5611826bbeadffeda1007dc440113dbc92",
+          "complete": true,
+          "limitBytes": 4194304
+        },
+        "stderr": {
+          "file": "unprotected-tracked-names.stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "complete": true,
+          "limitBytes": 4194304
+        }
+      }
+    }
+  ],
+  "classification": "original metadata, not untransported stream bytes"
+}

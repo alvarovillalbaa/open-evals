@@ -1,0 +1,241 @@
+TAP version 13
+# (node:22802) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:22802) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+# Subtest: HTTP01 preview freezes complete source presence, metadata, evaluator membership and hidden-reference policy
+ok 1 - HTTP01 preview freezes complete source presence, metadata, evaluator membership and hidden-reference policy
+  ---
+  duration_ms: 18.430541
+  type: 'test'
+  ...
+# Subtest: HTTP02 plan record identity/hash preimages include workspace and both public identities
+ok 2 - HTTP02 plan record identity/hash preimages include workspace and both public identities
+  ---
+  duration_ms: 8.2285
+  type: 'test'
+  ...
+# Subtest: HTTP03 saved plan versions allow reviewed rename but enforce exact parent and next number
+ok 3 - HTTP03 saved plan versions allow reviewed rename but enforce exact parent and next number
+  ---
+  duration_ms: 10.452625
+  type: 'test'
+  ...
+# Subtest: HTTP04 target, execution limits and references bind preview; stale preview cannot save
+ok 4 - HTTP04 target, execution limits and references bind preview; stale preview cannot save
+  ---
+  duration_ms: 7.0245
+  type: 'test'
+  ...
+# Subtest: HTTP05 source set order is canonical and duplicates, missing members and source mismatch fail
+ok 5 - HTTP05 source set order is canonical and duplicates, missing members and source mismatch fail
+  ---
+  duration_ms: 4.165791
+  type: 'test'
+  ...
+# Subtest: HTTP06 unavailable judge types cannot masquerade as the deterministic capability
+ok 6 - HTTP06 unavailable judge types cannot masquerade as the deterministic capability
+  ---
+  duration_ms: 0.637875
+  type: 'test'
+  ...
+# Subtest: HTTP07 exact draft keys, public identities and integer boundaries fail closed
+ok 7 - HTTP07 exact draft keys, public identities and integer boundaries fail closed
+  ---
+  duration_ms: 1.616667
+  type: 'test'
+  ...
+# Subtest: HTTP08 endpoint protocol excludes credentials/query/fragment/nondefault ports/IP literals
+ok 8 - HTTP08 endpoint protocol excludes credentials/query/fragment/nondefault ports/IP literals
+  ---
+  duration_ms: 1.504666
+  type: 'test'
+  ...
+# Subtest: HTTP09 descriptor inspection refuses getters without executing caller code
+ok 9 - HTTP09 descriptor inspection refuses getters without executing caller code
+  ---
+  duration_ms: 0.215875
+  type: 'test'
+  ...
+# Subtest: HTTP10 raw parser detects decoded duplicate keys and retains prototype-looking data keys
+ok 10 - HTTP10 raw parser detects decoded duplicate keys and retains prototype-looking data keys
+  ---
+  duration_ms: 0.496209
+  type: 'test'
+  ...
+# Subtest: HTTP11 raw decimal equivalence accepts canonical values and zero with a long exponent
+ok 11 - HTTP11 raw decimal equivalence accepts canonical values and zero with a long exponent
+  ---
+  duration_ms: 0.20075
+  type: 'test'
+  ...
+# Subtest: HTTP12 raw numeric parser refuses rounding, underflow and exponent overflow at any depth
+ok 12 - HTTP12 raw numeric parser refuses rounding, underflow and exponent overflow at any depth
+  ---
+  duration_ms: 0.146459
+  type: 'test'
+  ...
+# Subtest: HTTP13 Unicode, NUL, trailing syntax, depth and aggregate source byte limits are enforced
+ok 13 - HTTP13 Unicode, NUL, trailing syntax, depth and aggregate source byte limits are enforced
+  ---
+  duration_ms: 0.203917
+  type: 'test'
+  ...
+# Subtest: HTTP14 snapshot sizes and row/set maxima are validated before target work
+ok 14 - HTTP14 snapshot sizes and row/set maxima are validated before target work
+  ---
+  duration_ms: 10.969958
+  type: 'test'
+  ...
+# Subtest: HTTP15 record readers recompute snapshots even when an attacker rehashes the outer record
+ok 15 - HTTP15 record readers recompute snapshots even when an attacker rehashes the outer record
+  ---
+  duration_ms: 12.694584
+  type: 'test'
+  ...
+# Subtest: HTTP16 start intent binds exact saved storage version, workspace and plan fingerprint
+ok 16 - HTTP16 start intent binds exact saved storage version, workspace and plan fingerprint
+  ---
+  duration_ms: 8.972416
+  type: 'test'
+  ...
+# Subtest: HTTP17 outbound request contains input/present context and excludes all reference/evaluator fields
+ok 17 - HTTP17 outbound request contains input/present context and excludes all reference/evaluator fields
+  ---
+  duration_ms: 20.707167
+  type: 'test'
+  ...
+# Subtest: HTTP18 owner lease, concurrency, duplicate token and already-claimed rows cannot dispatch
+ok 18 - HTTP18 owner lease, concurrency, duplicate token and already-claimed rows cannot dispatch
+  ---
+  duration_ms: 64.07175
+  type: 'test'
+  ...
+# Subtest: HTTP19 deadline clips timeout and refuses a new dispatch inside the final 500ms
+ok 19 - HTTP19 deadline clips timeout and refuses a new dispatch inside the final 500ms
+  ---
+  duration_ms: 34.88275
+  type: 'test'
+  ...
+# Subtest: HTTP20 response echo, output presence and exact protocol fields are mandatory
+ok 20 - HTTP20 response echo, output presence and exact protocol fields are mandatory
+  ---
+  duration_ms: 0.284708
+  type: 'test'
+  ...
+# Subtest: HTTP21 raw response rejects numeric loss/duplicates and separately bounds normalized output
+ok 21 - HTTP21 raw response rejects numeric loss/duplicates and separately bounds normalized output
+  ---
+  duration_ms: 30.141208
+  type: 'test'
+  ...
+# Subtest: HTTP22 reported usage/cost are bounded and not inserted into local evaluator token accounting
+ok 22 - HTTP22 reported usage/cost are bounded and not inserted into local evaluator token accounting
+  ---
+  duration_ms: 27.442541
+  type: 'test'
+  ...
+# Subtest: HTTP23 one real response creates one result per distinct row+item and only declared fields
+ok 23 - HTTP23 one real response creates one result per distinct row+item and only declared fields
+  ---
+  duration_ms: 26.863709
+  type: 'test'
+  ...
+# Subtest: HTTP24 invalid target response finalizes a safe failed outcome without persisting remote HTML
+ok 24 - HTTP24 invalid target response finalizes a safe failed outcome without persisting remote HTML
+  ---
+  duration_ms: 26.436667
+  type: 'test'
+  ...
+# Subtest: HTTP25 transport uncertainty and known not-sent outcomes remain distinct
+ok 25 - HTTP25 transport uncertainty and known not-sent outcomes remain distinct
+  ---
+  duration_ms: 42.004541
+  type: 'test'
+  ...
+# Subtest: HTTP26 identical finalize replays but changed content or token cannot overwrite
+ok 26 - HTTP26 identical finalize replays but changed content or token cannot overwrite
+  ---
+  duration_ms: 47.402625
+  type: 'test'
+  ...
+# Subtest: HTTP27 partial execution retains results without persisting premature gates
+ok 27 - HTTP27 partial execution retains results without persisting premature gates
+  ---
+  duration_ms: 59.328375
+  type: 'test'
+  ...
+# Subtest: HTTP28 terminal gates cover all eight levels and use actual dataset and unique rows
+ok 28 - HTTP28 terminal gates cover all eight levels and use actual dataset and unique rows
+  ---
+  duration_ms: 83.602375
+  type: 'test'
+  ...
+# Subtest: HTTP29 multi-set pass rates are computed from actual row coverage, not result count
+ok 29 - HTTP29 multi-set pass rates are computed from actual row coverage, not result count
+  ---
+  duration_ms: 63.853583
+  type: 'test'
+  ...
+# Subtest: HTTP30 owner stop immediately marks only pending rows and blocks further dispatch
+ok 30 - HTTP30 owner stop immediately marks only pending rows and blocks further dispatch
+  ---
+  duration_ms: 57.918625
+  type: 'test'
+  ...
+# Subtest: HTTP31 recovery requires expiry, preserves completed evidence and never reclaims a call
+ok 31 - HTTP31 recovery requires expiry, preserves completed evidence and never reclaims a call
+  ---
+  duration_ms: 79.9135
+  type: 'test'
+  ...
+# Subtest: HTTP32 recovery marks never-claimed rows not_sent with no invented response or claim
+ok 32 - HTTP32 recovery marks never-claimed rows not_sent with no invented response or claim
+  ---
+  duration_ms: 27.575417
+  type: 'test'
+  ...
+# Subtest: HTTP33 readback detects missing, duplicate and tampered immutable row events
+ok 33 - HTTP33 readback detects missing, duplicate and tampered immutable row events
+  ---
+  duration_ms: 86.161041
+  type: 'test'
+  ...
+# Subtest: HTTP34 rehashed result/gate/ledger corruption cannot override recomputed execution
+ok 34 - HTTP34 rehashed result/gate/ledger corruption cannot override recomputed execution
+  ---
+  duration_ms: 113.934709
+  type: 'test'
+  ...
+# Subtest: HTTP35 run and row-item result identities remain workspace/run scoped and collision-free
+ok 35 - HTTP35 run and row-item result identities remain workspace/run scoped and collision-free
+  ---
+  duration_ms: 0.127417
+  type: 'test'
+  ...
+# Subtest: HTTP36 pure preview/read/replay code needs no ambient network capability
+ok 36 - HTTP36 pure preview/read/replay code needs no ambient network capability
+  ---
+  duration_ms: 93.165709
+  type: 'test'
+  ...
+# Subtest: HTTP37 full 100-row near-1MiB input and eight real saved sets fit the complete worst-case record allowance
+ok 37 - HTTP37 full 100-row near-1MiB input and eight real saved sets fit the complete worst-case record allowance
+  ---
+  duration_ms: 138.945917
+  type: 'test'
+  ...
+# Subtest: HTTP38 static endpoint rules match the native no-query/no-fragment and reserved-host boundary
+ok 38 - HTTP38 static endpoint rules match the native no-query/no-fragment and reserved-host boundary
+  ---
+  duration_ms: 2.054042
+  type: 'test'
+  ...
+1..38
+# tests 38
+# suites 0
+# pass 38
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1354.444
