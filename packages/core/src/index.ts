@@ -19,3 +19,4 @@ export * from "./provided-output-runs";
 export * from "./custom-datasets";
 export * from "./http-eval-plans";
 export * from "./http-eval-runs";
+export * from "./eval-composition";

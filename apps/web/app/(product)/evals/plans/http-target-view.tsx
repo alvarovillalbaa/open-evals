@@ -1,4 +1,4 @@
-import type { HttpEvalPlanContent, HttpEvalRunRecord } from "@open-evals/core";
+import type { AnyHttpEvalPlanContent as HttpEvalPlanContent, AnyHttpEvalRunRecord as HttpEvalRunRecord } from "@open-evals/core";
 
 export const inputClass = "w-full min-w-0 rounded-md border border-border bg-background px-3 py-2 text-sm disabled:opacity-60 read-only:bg-muted";
 export const buttonClass = "inline-flex min-h-9 items-center justify-center rounded-md border border-border px-3 py-2 text-sm font-medium disabled:cursor-not-allowed disabled:opacity-50";
@@ -12,6 +12,7 @@ export function PlanSnapshot({ content }: { content: HttpEvalPlanContent }) {
   return (
     <div className="grid min-w-0 gap-3">
       <p className="text-sm">{content.dataset.dataset.name}: all {content.dataset.rows.length} rows · {content.evalSets.length} saved evaluator sets · {content.items.length} distinct evaluator versions.</p>
+      {content.schemaVersion === "http-target-eval-v2" ? <><p className="text-sm">{content.dataset.rows.length * content.items.length} unique row/item results · at most {content.dataset.rows.length} target calls. Shared exact item versions retain every set membership and are checked once per row.</p><p className="text-sm text-muted-foreground">Every member is critical. A required critical failure blocks its dataset scope and every containing set even when its pass-rate threshold is 0%, and blocks the run.</p></> : null}
       <dl className="grid min-w-0 gap-2 text-sm">
         <div><dt className="font-medium">HTTP target</dt><dd className="break-all">{content.target.endpoint}</dd></div>
         <div><dt className="font-medium">Declared target identity and version</dt><dd className="break-all font-mono text-xs">{content.target.targetId} · {content.target.targetVersion}</dd></div>

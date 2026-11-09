@@ -1,77 +1,84 @@
 import type { PoolClient } from "pg";
 import { getCustomEvalSetVersion } from "./custom-evals";
+import { getCustomEvalSetVersionV2, listCustomEvalSetVersionsV2 } from "./eval-composition";
+import { listProvidedOutputSources } from "./provided-output-runs";
 import { loadCustomAwareDatasetSnapshot } from "./custom-datasets";
 import { queryRows, withTransaction } from "./service";
 import { HTTP_RECORD_LIMIT, httpBounded, httpClock, httpConflict, httpFail, httpFingerprint, httpHash,
   httpIso, httpKeys, httpObject, httpOperation, httpParseRaw, httpPlanIds, httpSame, httpStable, httpText, httpUuid,
-  httpWithoutFingerprint, httpWorkspace, type HttpEvalStoreHead,
+  httpWithoutFingerprint, httpWorkspace, httpProfileVersion, httpTag, type HttpEvalStoreHead,
+  type HttpEvalStoreDraft, type HttpEvalStoreSetRef, type HttpEvalStoreCompositionReaders, type HttpEvalStoreFamily,
   type HttpEvalStorePlan, type HttpEvalStorePlanCallbacks, type HttpEvalStoreSaveRequest } from "./http-eval-types";
 
 const VERSION_ID = /^http_eval_plan_version_[0-9a-f]{64}$/;
 // A canonical JSON string can double when quoted by JSONB; the fixed metadata index is <64 KiB.
 const STORAGE_LIMIT = 2 * HTTP_RECORD_LIMIT + 65536;
 const PRIVATE = `(left(id, length('http_eval_plan_')) = 'http_eval_plan_'
-  or resolved_plan ->> 'schemaVersion' in ('http-target-eval-v1', 'http-eval-plan-record-v1', 'http-eval-plan-storage-v1')
-  or resolved_plan #>> '{content,schemaVersion}' = 'http-target-eval-v1')`;
+  or resolved_plan ->> 'schemaVersion' in ('http-target-eval-v1', 'http-eval-plan-record-v1', 'http-eval-plan-storage-v1','http-target-eval-v2','http-eval-plan-record-v2','http-eval-plan-storage-v2')
+  or resolved_plan #>> '{content,schemaVersion}' in ('http-target-eval-v1','http-target-eval-v2'))`;
 export interface HttpEvalPlanSummary {
   planId: string; versionId: string; storageVersionId: string; version: number; name: string;
   fingerprint: string; createdAt: string;
+  family: HttpEvalStoreFamily;
 }
 function saveRequest(value: unknown): HttpEvalStoreSaveRequest {
   httpBounded(value, 2 * 1024 * 1024); const s = httpObject(value);
   httpKeys(s, ["schemaVersion", "draft", "expectedPreviewFingerprint"]);
-  if (s.schemaVersion !== "http-eval-plan-save-v1") httpFail(422, "http_eval_invalid");
+  if (s.schemaVersion !== "http-eval-plan-save-v1" && s.schemaVersion !== "http-eval-plan-save-v2") httpFail(422, "http_eval_invalid");
+  const version = httpProfileVersion(s as {schemaVersion:string});
   httpFingerprint(s.expectedPreviewFingerprint);
   const d = httpObject(s.draft);
-  httpKeys(d, ["schemaVersion", "planId", "versionId", "version", "expectedVersionId", "name", "datasetVersionId", "evalSetVersionIds", "target", "limits"]);
-  if (d.schemaVersion !== "http-eval-plan-draft-v1") httpFail(422, "http_eval_invalid");
+  httpKeys(d, ["schemaVersion", "planId", "versionId", "version", "expectedVersionId", "name", "datasetVersionId", version === 1 ? "evalSetVersionIds" : "evalSetVersions", "target", "limits"]);
+  if (d.schemaVersion !== httpTag("http-eval-plan-draft",version)) httpFail(422, "http_eval_invalid");
   httpUuid(d.planId); httpUuid(d.versionId); httpText(d.name, 4096); httpText(d.datasetVersionId);
   if (d.expectedVersionId !== null) httpUuid(d.expectedVersionId);
   if (!Number.isInteger(d.version) || Number(d.version) < 1 || Number(d.version) > 2_147_483_647
     || d.version === 1 && d.expectedVersionId !== null || Number(d.version) > 1 && d.expectedVersionId === null
-    || d.versionId === d.expectedVersionId || !Array.isArray(d.evalSetVersionIds) || !d.evalSetVersionIds.length || d.evalSetVersionIds.length > 8) httpFail(422, "http_eval_invalid");
-  for (const id of d.evalSetVersionIds) httpUuid(id);
-  if (new Set(d.evalSetVersionIds).size !== d.evalSetVersionIds.length) httpFail(422, "http_eval_invalid");
+    || d.versionId === d.expectedVersionId) httpFail(422, "http_eval_invalid");
+  selection(d);
   // Trusted core preparation validates the complete endpoint/capability/limit contract before insertion.
   return JSON.parse(JSON.stringify(value)) as HttpEvalStoreSaveRequest;
 }
 function requestFingerprint(workspaceId: string, request: HttpEvalStoreSaveRequest) {
-  return httpHash({ schemaVersion: "http-eval-plan-save-fingerprint-v1", workspaceId, request });
+  return httpHash({ schemaVersion: httpTag("http-eval-plan-save-fingerprint",httpProfileVersion(request)), workspaceId, request });
 }
 export function httpPlanHead(record: HttpEvalStorePlan): HttpEvalStoreHead {
   const d = record.content.draft;
-  return { planId: d.planId, versionId: d.versionId, version: d.version, name: d.name, fingerprint: record.fingerprint };
+  return { planId: d.planId, versionId: d.versionId, version: d.version, name: d.name, fingerprint: record.fingerprint,
+    ...(record.schemaVersion==="http-eval-plan-record-v2"?{profile:"http-target-eval-v2" as const}:{}) };
 }
 export function httpCanonicalPlan<P extends HttpEvalStorePlan>(value: unknown, workspaceId: string, parse: (value: unknown) => P): P {
   let r: P;
   try { httpBounded(value); r = parse(value); httpBounded(r); }
   catch { return httpConflict(); }
   const d = r.content.draft;
-  if (!httpSame(value, r) || r.schemaVersion !== "http-eval-plan-record-v1" || r.content.schemaVersion !== "http-target-eval-v1"
+  if (r.schemaVersion !== "http-eval-plan-record-v1" && r.schemaVersion !== "http-eval-plan-record-v2") httpConflict();
+  const version=httpProfileVersion(r);
+  if (!httpSame(value, r) || r.content.schemaVersion !== httpTag("http-target-eval",version) || d.schemaVersion !== httpTag("http-eval-plan-draft",version)
     || r.workspaceId !== workspaceId || !httpSame(r.storage, httpPlanIds(workspaceId, d.planId, d.versionId))
     || r.fingerprint !== httpHash(httpWithoutFingerprint(r)) || r.content.fingerprint !== httpHash(httpWithoutFingerprint(r.content))
-    || r.requestFingerprint !== requestFingerprint(workspaceId, { schemaVersion: "http-eval-plan-save-v1", draft: d, expectedPreviewFingerprint: r.previewFingerprint })) httpConflict();
+    || r.requestFingerprint !== requestFingerprint(workspaceId, { schemaVersion: httpTag("http-eval-plan-save",version), draft: d, expectedPreviewFingerprint: r.previewFingerprint })) httpConflict();
   httpIso(r.createdAt); httpUuid(d.planId); httpUuid(d.versionId);
   if (!Number.isInteger(d.version) || d.version < 1 || d.version > 2_147_483_647 || !r.content.samples.length || r.content.samples.length > 100
-    || !r.content.items.length || r.content.items.length > 32 || r.content.evalSets.length !== d.evalSetVersionIds.length) httpConflict();
+    || !r.content.items.length || r.content.items.length > 32 || r.content.evalSets.length !== (d.schemaVersion === "http-eval-plan-draft-v1" ? d.evalSetVersionIds.length : d.evalSetVersions.length)) httpConflict();
   if (r.head ? r.head.planId !== d.planId || r.head.versionId !== d.expectedVersionId || r.head.version + 1 !== d.version : d.expectedVersionId !== null || d.version !== 1) httpConflict();
   return r;
 }
 function auditMetadata(record: HttpEvalStorePlan) {
-  return { schemaVersion: "http-eval-plan-audit-v1", planId: record.content.draft.planId,
+  return { schemaVersion: httpTag("http-eval-plan-audit",httpProfileVersion(record)), planId: record.content.draft.planId,
     versionId: record.content.draft.versionId, storageVersionId: record.storage.versionId,
     requestFingerprint: record.requestFingerprint, recordFingerprint: record.fingerprint };
 }
 function planStorage(record: HttpEvalStorePlan) {
   const d=record.content.draft;
-  return {schemaVersion:"http-eval-plan-storage-v1",workspaceId:record.workspaceId,storage:record.storage,createdAt:record.createdAt,
-    content:{schemaVersion:"http-target-eval-v1",draft:{planId:d.planId,versionId:d.versionId,version:d.version,name:d.name}},
+  return {schemaVersion:httpTag("http-eval-plan-storage",httpProfileVersion(record)),workspaceId:record.workspaceId,storage:record.storage,createdAt:record.createdAt,
+    content:{schemaVersion:record.content.schemaVersion,draft:{planId:d.planId,versionId:d.versionId,version:d.version,name:d.name}},
     fingerprint:record.fingerprint,recordText:httpStable(record)};
 }
 function storedPlan<P extends HttpEvalStorePlan>(raw:unknown,workspaceId:string,parse:(value:unknown)=>P):P {
   const storage=httpObject(httpParseRaw(raw,STORAGE_LIMIT));
   try {httpKeys(storage,["schemaVersion","workspaceId","storage","createdAt","content","fingerprint","recordText"]);}catch{return httpConflict();}
-  if(storage.schemaVersion!=="http-eval-plan-storage-v1"||typeof storage.recordText!=="string"
+  if((storage.schemaVersion!=="http-eval-plan-storage-v1"&&storage.schemaVersion!=="http-eval-plan-storage-v2")||typeof storage.recordText!=="string"
     ||Buffer.byteLength(storage.recordText)>HTTP_RECORD_LIMIT)httpConflict();
   const record=httpCanonicalPlan(httpParseRaw(storage.recordText),workspaceId,parse);
   if(storage.recordText!==httpStable(record)||!httpSame(storage,planStorage(record)))httpConflict();
@@ -96,8 +103,9 @@ export async function httpReadPlan<P extends HttpEvalStorePlan>(client: PoolClie
     [workspaceId, row.id, JSON.stringify(planStorage(record))]);
   if (exact.rows.length !== 1) httpConflict();
   const audits = (await client.query<{ id: string; workspaceId: string; actor: string; action: string; type: string; resource: string;
-    hash: string; raw: string; createdAt: Date }>(`select id, workspace_id as "workspaceId", actor_user_id as actor, action,
-      resource_type as type, resource_id as resource, metadata_hash as hash, metadata::text as raw, created_at as "createdAt"
+    hash: string; raw: string | null; createdAt: Date }>(`select id, workspace_id as "workspaceId", actor_user_id as actor, action,
+      resource_type as type, resource_id as resource, metadata_hash as hash,
+      case when octet_length(metadata::text)<=16384 then metadata::text else null end as raw, created_at as "createdAt"
       from audit_events where id = $1 or (workspace_id = $2 and resource_id = $3 and
       (action = 'http_eval.plan.saved' or resource_type = 'http_eval_plan_version')) limit 2`, [record.storage.auditId, workspaceId, storageVersionId])).rows;
   if (audits.length !== 1) httpConflict();
@@ -125,30 +133,63 @@ async function readHead<P extends HttpEvalStorePlan>(client: PoolClient, workspa
   if (!VERSION_ID.test(rows[0].id)) httpConflict();
   const record = await httpReadPlan(client, workspaceId, rows[0].id, parse);
   if (!record || record.content.draft.planId !== planId) httpConflict();
+  const mixed=await client.query(`select id from run_plans where workspace_id=$1 and ${PRIVATE}
+    and (resolved_plan #>> '{content,draft,planId}'=$2 or resolved_plan #>> '{storage,planId}'=$3)
+    and resolved_plan #>> '{content,schemaVersion}' is distinct from $4 limit 1`,[workspaceId,planId,aggregateId,record.content.schemaVersion]);
+  if(mixed.rows.length) httpConflict();
   if (rows[1]) {
     const second = (await client.query<{ version: unknown }>(`select resolved_plan #> '{content,draft,version}' as version from run_plans where id = $1`, [rows[1].id])).rows[0];
     if (!second || second.version === record.content.draft.version) httpConflict();
   }
   return record;
 }
-export async function getHttpEvalPlanSources(workspaceId: string, selection: { datasetVersionId: string; evalSetVersionIds: string[] }) {
-  httpText(workspaceId); httpText(selection.datasetVersionId); httpBounded(selection, 2 * 1024 * 1024);
-  if (!Array.isArray(selection.evalSetVersionIds) || !selection.evalSetVersionIds.length || selection.evalSetVersionIds.length > 8
-    || new Set(selection.evalSetVersionIds).size !== selection.evalSetVersionIds.length) httpFail(422, "http_eval_invalid");
-  for (const id of selection.evalSetVersionIds) httpUuid(id);
-  const selected = { datasetVersionId: selection.datasetVersionId, evalSetVersionIds: [...selection.evalSetVersionIds] };
-  return httpOperation(() => withTransaction(async client => { await httpWorkspace(client, workspaceId); return sources(client, workspaceId, selected); }));
+type Selection = { datasetVersionId: string; evalSetVersionIds: string[] } | { schemaVersion: "http-eval-plan-draft-v2"; datasetVersionId: string; evalSetVersions: HttpEvalStoreSetRef[] };
+function selection(value: unknown): Selection {
+  const s=httpObject(value);httpBounded(s,2*1024*1024);httpText(s.datasetVersionId);
+  if(s.schemaVersion!==undefined&&s.schemaVersion!=="http-eval-plan-draft-v1"&&s.schemaVersion!=="http-eval-plan-draft-v2")httpFail(422,"http_eval_invalid");
+  if(s.schemaVersion!=="http-eval-plan-draft-v2"){
+    if(!Array.isArray(s.evalSetVersionIds)||!s.evalSetVersionIds.length||s.evalSetVersionIds.length>8||new Set(s.evalSetVersionIds).size!==s.evalSetVersionIds.length)httpFail(422,"http_eval_invalid");
+    for(const id of s.evalSetVersionIds)httpUuid(id);
+    return {datasetVersionId:s.datasetVersionId as string,evalSetVersionIds:[...s.evalSetVersionIds] as string[]};
+  }
+  if(!Array.isArray(s.evalSetVersions)||!s.evalSetVersions.length||s.evalSetVersions.length>8)httpFail(422,"http_eval_invalid");
+  const seen=new Set<string>();const refs=s.evalSetVersions.map(value=>{const r=httpObject(value);httpKeys(r,["schemaVersion","setId","versionId","fingerprint"]);
+    if(r.schemaVersion!=="custom-eval-set-ref-v1"&&r.schemaVersion!=="custom-eval-set-ref-v2")httpFail(422,"http_eval_invalid");
+    httpUuid(r.setId);httpUuid(r.versionId);httpFingerprint(r.fingerprint);const key=`${r.schemaVersion}:${r.setId}:${r.versionId}`;
+    if(seen.has(key))httpFail(422,"http_eval_invalid");seen.add(key);return {...r} as unknown as HttpEvalStoreSetRef;
+  });return {schemaVersion:"http-eval-plan-draft-v2",datasetVersionId:s.datasetVersionId as string,evalSetVersions:refs};
 }
-async function sources(client: PoolClient, workspaceId: string, selection: { datasetVersionId: string; evalSetVersionIds: string[] }) {
-  const dataset = await loadCustomAwareDatasetSnapshot(client, workspaceId, selection.datasetVersionId, httpFail);
+export async function getHttpEvalPlanSources(workspaceId: string, value: Selection | HttpEvalStoreDraft, readers?: HttpEvalStoreCompositionReaders) {
+  httpText(workspaceId);const selected=selection(value);
+  return httpOperation(() => withTransaction(async client => { await httpWorkspace(client, workspaceId); return sources(client, workspaceId, selected,readers); }));
+}
+async function sources(client: PoolClient, workspaceId: string, selected: Selection | HttpEvalStoreDraft, readers?: Partial<HttpEvalStoreCompositionReaders>) {
+  const dataset = await loadCustomAwareDatasetSnapshot(client, workspaceId, selected.datasetVersionId, httpFail);
   if (!dataset) return undefined;
-  const evalSets = [];
-  for (const id of selection.evalSetVersionIds) {
-    const saved = await getCustomEvalSetVersion(workspaceId, id, client);
-    if (!saved) return undefined;
-    evalSets.push(saved);
+  const evalSets: HttpEvalStorePlan["content"]["evalSets"] = [];
+  if("evalSetVersionIds" in selected){
+    for (const id of selected.evalSetVersionIds) {const saved = await getCustomEvalSetVersion(workspaceId,id,client);if(!saved)return undefined;evalSets.push(saved);}
+  }else for(const ref of selected.evalSetVersions){
+    if(ref.schemaVersion==="custom-eval-set-ref-v1"){
+      const saved=await getCustomEvalSetVersion(workspaceId,ref.versionId,client);if(!saved)return undefined;
+      if(saved.contract.setId!==ref.setId||saved.contract.fingerprint!==ref.fingerprint)httpFail(409,"http_eval_source_conflict");
+      evalSets.push({ref,contract:saved.contract,members:saved.members,sourceRecordFingerprint:null});
+    }else{
+      if(typeof readers?.restoreSet!=="function"||typeof readers?.restoreItem!=="function")httpFail(422,"http_eval_callbacks_required");
+      const saved=await getCustomEvalSetVersionV2(workspaceId,ref.setId,ref.versionId,{restoreSet:readers.restoreSet,restoreItem:readers.restoreItem},client);
+      if(!saved)return undefined;if(saved.contract.fingerprint!==ref.fingerprint)httpFail(409,"http_eval_source_conflict");
+      evalSets.push({ref,contract:saved.contract,members:saved.members,sourceRecordFingerprint:saved.fingerprint});
+    }
   }
   return { dataset, evalSets };
+}
+/** Two independently bounded metadata lanes; immutable v1 supplied-output selectors are unchanged. */
+export async function listHttpEvalSources(workspaceId:string){
+  const [v1,v2]=await Promise.all([listProvidedOutputSources(workspaceId),listCustomEvalSetVersionsV2(workspaceId)]);
+  const evalSets:Array<{ref:HttpEvalStoreSetRef;name:string;version:number}>=[
+    ...v1.evalSets.map(row=>({ref:{schemaVersion:"custom-eval-set-ref-v1" as const,setId:row.setId,versionId:row.versionId,fingerprint:row.fingerprint},name:row.name,version:row.version})),
+    ...v2.versions.map(row=>({ref:{schemaVersion:"custom-eval-set-ref-v2" as const,setId:row.setId,versionId:row.versionId,fingerprint:row.contractFingerprint},name:row.name,version:row.version}))];
+  return {datasets:v1.datasets,datasetsHasMore:v1.datasetsHasMore,evalSets,evalSetsHasMore:v1.evalSetsHasMore||v2.hasMore};
 }
 export async function getHttpEvalPlanHead<P extends HttpEvalStorePlan>(workspaceId: string, planId: string, parse: (value: unknown) => P): Promise<HttpEvalStoreHead | null> {
   httpText(workspaceId); httpUuid(planId);
@@ -174,8 +215,9 @@ export async function saveHttpEvalPlanVersion<P extends HttpEvalStorePlan>(scope
     const replay = await httpReadPlan(client, workspaceId, ids.versionId, parse);
     if (replay) { if (replay.requestFingerprint !== expected) httpConflict(); return { record: replay, replayed: true }; }
     const prior = await readHead(client, workspaceId, req.draft.planId, parse), head = prior ? httpPlanHead(prior) : null;
+    if(prior&&httpProfileVersion(prior)!==httpProfileVersion(req))httpFail(409,"http_eval_plan_family_conflict");
     if (head ? head.versionId !== req.draft.expectedVersionId || head.version + 1 !== req.draft.version : req.draft.expectedVersionId !== null || req.draft.version !== 1) httpFail(409, "http_eval_plan_stale");
-    const selected = await sources(client, workspaceId, req.draft);
+    const selected = await sources(client, workspaceId, req.draft,callbacks);
     if (!selected) httpFail(404, "http_eval_not_found");
     const record = httpCanonicalPlan(prepare({ workspaceId, request: req, ...selected, head, createdAt: await httpClock(client) }), workspaceId, parse);
     if (record.requestFingerprint !== expected || record.previewFingerprint !== req.expectedPreviewFingerprint || !httpSame(record.content.draft, req.draft)
@@ -195,18 +237,22 @@ export async function saveHttpEvalPlanVersion<P extends HttpEvalStorePlan>(scope
   }));
 }
 interface SummaryRow { id: string; planId: string; versionId: string; version: number; name: string; fingerprint: string; createdAt: Date;
-  recordFingerprint: string; recordCreatedAt: string; storageVersionId: string; storagePlanId: string }
-const SUMMARY = `id, resolved_plan #>> '{content,draft,planId}' as "planId", resolved_plan #>> '{content,draft,versionId}' as "versionId",
-  resolved_plan #> '{content,draft,version}' as version, resolved_plan #>> '{content,draft,name}' as name, fingerprint, created_at as "createdAt",
-  resolved_plan ->> 'fingerprint' as "recordFingerprint", resolved_plan ->> 'createdAt' as "recordCreatedAt",
-  resolved_plan #>> '{storage,versionId}' as "storageVersionId", resolved_plan #>> '{storage,planId}' as "storagePlanId"`;
+  recordFingerprint: string; recordCreatedAt: string; storageVersionId: string; storagePlanId: string; family:HttpEvalStoreFamily; storageSchema:string }
+const summaryColumn=(expression:string,maximum:number)=>`case when octet_length((${expression})::text)<=${maximum} then ${expression} else null end`;
+const SUMMARY = `${summaryColumn("id",256)} as id, ${summaryColumn("resolved_plan #>> '{content,draft,planId}'",36)} as "planId", ${summaryColumn("resolved_plan #>> '{content,draft,versionId}'",36)} as "versionId",
+  ${summaryColumn("resolved_plan #> '{content,draft,version}'",16)} as version, ${summaryColumn("resolved_plan #>> '{content,draft,name}'",4096)} as name,
+  ${summaryColumn("fingerprint",64)} as fingerprint, created_at as "createdAt",
+  ${summaryColumn("resolved_plan ->> 'fingerprint'",64)} as "recordFingerprint", ${summaryColumn("resolved_plan ->> 'createdAt'",24)} as "recordCreatedAt",
+  ${summaryColumn("resolved_plan #>> '{storage,versionId}'",256)} as "storageVersionId", ${summaryColumn("resolved_plan #>> '{storage,planId}'",256)} as "storagePlanId",
+  ${summaryColumn("resolved_plan #>> '{content,schemaVersion}'",64)} as family,${summaryColumn("resolved_plan->>'schemaVersion'",64)} as "storageSchema"`;
 function summary(workspaceId: string, row: SummaryRow): HttpEvalPlanSummary {
   try { httpUuid(row.planId); httpUuid(row.versionId); httpText(row.name, 4096); httpFingerprint(row.fingerprint);
     const ids = httpPlanIds(workspaceId, row.planId, row.versionId);
     if (row.id !== ids.versionId || row.storageVersionId !== ids.versionId || row.storagePlanId !== ids.planId
       || row.recordFingerprint !== row.fingerprint || row.recordCreatedAt !== httpIso(row.createdAt)
-      || !Number.isInteger(row.version) || row.version < 1 || row.version > 2_147_483_647) httpConflict();
-    return { planId: row.planId, versionId: row.versionId, storageVersionId: row.id, version: row.version, name: row.name, fingerprint: row.fingerprint, createdAt: httpIso(row.createdAt) };
+      || !Number.isInteger(row.version) || row.version < 1 || row.version > 2_147_483_647
+      || (row.family!=="http-target-eval-v1"&&row.family!=="http-target-eval-v2")||row.storageSchema!==httpTag("http-eval-plan-storage",httpProfileVersion({schemaVersion:row.family}))) httpConflict();
+    return { planId: row.planId, versionId: row.versionId, storageVersionId: row.id, version: row.version, name: row.name, fingerprint: row.fingerprint, createdAt: httpIso(row.createdAt),family:row.family };
   } catch { return httpConflict(); }
 }
 /** Bounded metadata catalogue; exact version/head readers perform full snapshot and audit parity. */
@@ -230,7 +276,7 @@ export async function getHttpEvalPlan(workspaceId: string, planId: string): Prom
       [workspaceId, planId, httpPlanIds(workspaceId, planId, planId).planId]);
     if (!rows.length) return undefined;
     const versions = rows.slice(0,20).map(row => summary(workspaceId,row));
-    if (versions.some(row => row.planId !== planId) || new Set(versions.map(row=>row.version)).size !== versions.length) httpConflict();
+    if (versions.some(row => row.planId !== planId||row.family!==versions[0].family) || new Set(versions.map(row=>row.version)).size !== versions.length) httpConflict();
     return { planId, versions, hasMore: rows.length > 20 };
   });
 }
