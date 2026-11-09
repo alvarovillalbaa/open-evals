@@ -1,0 +1,408 @@
+{
+  "config": {
+    "argv": [
+      "/opt/hostedtoolcache/node/24.22.2/x64/bin/node",
+      "/home/runner/work/open-evals/open-evals/node_modules/.pnpm/@playwright+test@1.61.1/node_modules/@playwright/test/cli.js",
+      "test",
+      "--config",
+      "tests/e2e/custom-evals.browser.config.ts"
+    ],
+    "configFile": "/home/runner/work/open-evals/open-evals/tests/e2e/custom-evals.browser.config.ts",
+    "rootDir": "/home/runner/work/open-evals/open-evals/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": true,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 420000,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/home/runner/work/_temp/open-evals-custom-browser-evidence/browser-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium-owned-production",
+        "name": "chromium-owned-production",
+        "testDir": "/home/runner/work/open-evals/open-evals/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "custom-evals.browser.spec.ts"
+        ],
+        "timeout": 90000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/home/runner/work/_temp/open-evals-custom-browser-evidence/browser-report.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "custom-evals.browser.spec.ts",
+      "file": "custom-evals.browser.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "CE-BR01 desktop creates versions and reloads immutable history through the real app",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-owned-production",
+              "projectName": "chromium-owned-production",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 10953,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveValue\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByLabel('Text the output must contain', { exact: true })\nExpected: \u001b[32m\"  DESKTOP_FIRST_REQUIRED_TEXT\u001b[39m\n\u001b[32mKeep exact spaces.  \"\u001b[39m\nTimeout: 10000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveValue\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for getByLabel('Text the output must contain', { exact: true })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveValue\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByLabel('Text the output must contain', { exact: true })\nExpected: \u001b[32m\"  DESKTOP_FIRST_REQUIRED_TEXT\u001b[39m\n\u001b[32mKeep exact spaces.  \"\u001b[39m\nTimeout: 10000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveValue\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for getByLabel('Text the output must contain', { exact: true })\u001b[22m\n\n    at /home/runner/work/open-evals/open-evals/tests/e2e/custom-evals.browser.spec.ts:70:37",
+                    "location": {
+                      "file": "/home/runner/work/open-evals/open-evals/tests/e2e/custom-evals.browser.spec.ts",
+                      "column": 37,
+                      "line": 70
+                    },
+                    "snippet": "  68 |   await page.reload();\n  69 |   await expect(nameInput(page)).toHaveValue(\"Desktop first check\");\n> 70 |   await expect(containsInput(page)).toHaveValue(firstText);\n     |                                     ^\n  71 |   await expect(thresholdInput(page)).toHaveValue(\"80\");\n  72 |\n  73 |   const secondText = \"DESKTOP_SECOND_REQUIRED_TEXT\";"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/home/runner/work/open-evals/open-evals/tests/e2e/custom-evals.browser.spec.ts",
+                        "column": 37,
+                        "line": 70
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveValue\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByLabel('Text the output must contain', { exact: true })\nExpected: \u001b[32m\"  DESKTOP_FIRST_REQUIRED_TEXT\u001b[39m\n\u001b[32mKeep exact spaces.  \"\u001b[39m\nTimeout: 10000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveValue\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for getByLabel('Text the output must contain', { exact: true })\u001b[22m\n\n\n  68 |   await page.reload();\n  69 |   await expect(nameInput(page)).toHaveValue(\"Desktop first check\");\n> 70 |   await expect(containsInput(page)).toHaveValue(firstText);\n     |                                     ^\n  71 |   await expect(thresholdInput(page)).toHaveValue(\"80\");\n  72 |\n  73 |   const secondText = \"DESKTOP_SECOND_REQUIRED_TEXT\";\n    at /home/runner/work/open-evals/open-evals/tests/e2e/custom-evals.browser.spec.ts:70:37"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T11:11:00.779Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/home/runner/work/_temp/open-evals-custom-browser-evidence/browser-output/custom-evals.browser-CE-BR-9c47f-istory-through-the-real-app-chromium-owned-production/test-failed-1.png"
+                    },
+                    {
+                      "name": "owned-fixture-cleanup",
+                      "contentType": "application/json",
+                      "body": "ewogICJzY2hlbWFWZXJzaW9uIjogImN1c3RvbS1ldmFsLWJyb3dzZXItY2xlYW51cC12MSIsCiAgInN0YXR1cyI6ICJyZW1vdmVkIiwKICAid29ya3NwYWNlSWQiOiAiNGI2MGM2M2MtYjVkZi00Yzc5LWEwM2EtZWQyMzAxMjg4NWNlIiwKICAiYWN0b3JDb3VudCI6IDEsCiAgIm93bmVyc2hpcFZhbGlkYXRlZCI6IHRydWUsCiAgImJlZm9yZSI6IHsKICAgICJzZXRzIjogMSwKICAgICJ2ZXJzaW9ucyI6IDEsCiAgICAiaXRlbXMiOiAxLAogICAgIml0ZW1WZXJzaW9ucyI6IDEsCiAgICAibWVtYmVycyI6IDEsCiAgICAiYXVkaXRzIjogMQogIH0sCiAgImFmdGVyIjogewogICAgInNldHMiOiAwLAogICAgInZlcnNpb25zIjogMCwKICAgICJpdGVtcyI6IDAsCiAgICAiaXRlbVZlcnNpb25zIjogMCwKICAgICJtZW1iZXJzIjogMCwKICAgICJhdWRpdHMiOiAwCiAgfSwKICAid29ya3NwYWNlQWJzZW50IjogdHJ1ZSwKICAiYWN0b3JzQWJzZW50IjogdHJ1ZQp9"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/home/runner/work/_temp/open-evals-custom-browser-evidence/browser-output/custom-evals.browser-CE-BR-9c47f-istory-through-the-real-app-chromium-owned-production/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/home/runner/work/_temp/open-evals-custom-browser-evidence/browser-output/custom-evals.browser-CE-BR-9c47f-istory-through-the-real-app-chromium-owned-production/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/home/runner/work/open-evals/open-evals/tests/e2e/custom-evals.browser.spec.ts",
+                    "column": 37,
+                    "line": 70
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "b1d6dacb010c37b42b4b-00c49318cd1754e5ee7f",
+          "file": "custom-evals.browser.spec.ts",
+          "line": 57,
+          "column": 1
+        },
+        {
+          "title": "CE-BR02 a committed POST response is lost and an identical UI retry creates no duplicates",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-owned-production",
+              "projectName": "chromium-owned-production",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 628,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('alert')\nExpected substring: \u001b[32m\"The save outcome is unknown.\"\u001b[39m\nError: strict mode violation: getByRole('alert') resolved to 2 elements:\n    1) <p role=\"alert\" class=\"text-sm text-danger\">The save outcome is unknown. Retry this unchanged…</p> aka getByText('The save outcome is unknown.')\n    2) <div role=\"alert\" aria-live=\"assertive\" id=\"__next-route-announcer__\"></div> aka locator('[id=\"__next-route-announcer__\"]')\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('alert')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('alert')\nExpected substring: \u001b[32m\"The save outcome is unknown.\"\u001b[39m\nError: strict mode violation: getByRole('alert') resolved to 2 elements:\n    1) <p role=\"alert\" class=\"text-sm text-danger\">The save outcome is unknown. Retry this unchanged…</p> aka getByText('The save outcome is unknown.')\n    2) <div role=\"alert\" aria-live=\"assertive\" id=\"__next-route-announcer__\"></div> aka locator('[id=\"__next-route-announcer__\"]')\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('alert')\u001b[22m\n\n    at /home/runner/work/open-evals/open-evals/tests/e2e/custom-evals.browser.spec.ts:124:41",
+                    "location": {
+                      "file": "/home/runner/work/open-evals/open-evals/tests/e2e/custom-evals.browser.spec.ts",
+                      "column": 41,
+                      "line": 124
+                    },
+                    "snippet": "  122 |   expect(first.view?.replayed).toBe(false);\n  123 |   const saved = first.view!;\n> 124 |   await expect(page.getByRole(\"alert\")).toContainText(\"The save outcome is unknown.\");\n      |                                         ^\n  125 |   await expect(nameInput(page)).toHaveJSProperty(\"readOnly\", true);\n  126 |   await expect(containsInput(page)).toHaveJSProperty(\"readOnly\", true);\n  127 |   await expect(thresholdInput(page)).toHaveJSProperty(\"readOnly\", true);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/home/runner/work/open-evals/open-evals/tests/e2e/custom-evals.browser.spec.ts",
+                        "column": 41,
+                        "line": 124
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('alert')\nExpected substring: \u001b[32m\"The save outcome is unknown.\"\u001b[39m\nError: strict mode violation: getByRole('alert') resolved to 2 elements:\n    1) <p role=\"alert\" class=\"text-sm text-danger\">The save outcome is unknown. Retry this unchanged…</p> aka getByText('The save outcome is unknown.')\n    2) <div role=\"alert\" aria-live=\"assertive\" id=\"__next-route-announcer__\"></div> aka locator('[id=\"__next-route-announcer__\"]')\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('alert')\u001b[22m\n\n\n  122 |   expect(first.view?.replayed).toBe(false);\n  123 |   const saved = first.view!;\n> 124 |   await expect(page.getByRole(\"alert\")).toContainText(\"The save outcome is unknown.\");\n      |                                         ^\n  125 |   await expect(nameInput(page)).toHaveJSProperty(\"readOnly\", true);\n  126 |   await expect(containsInput(page)).toHaveJSProperty(\"readOnly\", true);\n  127 |   await expect(thresholdInput(page)).toHaveJSProperty(\"readOnly\", true);\n    at /home/runner/work/open-evals/open-evals/tests/e2e/custom-evals.browser.spec.ts:124:41"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T11:11:12.332Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/home/runner/work/_temp/open-evals-custom-browser-evidence/browser-output/custom-evals.browser-CE-BR-0543a-retry-creates-no-duplicates-chromium-owned-production/test-failed-1.png"
+                    },
+                    {
+                      "name": "owned-fixture-cleanup",
+                      "contentType": "application/json",
+                      "body": "ewogICJzY2hlbWFWZXJzaW9uIjogImN1c3RvbS1ldmFsLWJyb3dzZXItY2xlYW51cC12MSIsCiAgInN0YXR1cyI6ICJyZW1vdmVkIiwKICAid29ya3NwYWNlSWQiOiAiYTdiZjdjYzEtM2Q1Ny00ZTAyLWJhNTYtZTEyNjFlZDNiYWJmIiwKICAiYWN0b3JDb3VudCI6IDEsCiAgIm93bmVyc2hpcFZhbGlkYXRlZCI6IHRydWUsCiAgImJlZm9yZSI6IHsKICAgICJzZXRzIjogMSwKICAgICJ2ZXJzaW9ucyI6IDEsCiAgICAiaXRlbXMiOiAxLAogICAgIml0ZW1WZXJzaW9ucyI6IDEsCiAgICAibWVtYmVycyI6IDEsCiAgICAiYXVkaXRzIjogMQogIH0sCiAgImFmdGVyIjogewogICAgInNldHMiOiAwLAogICAgInZlcnNpb25zIjogMCwKICAgICJpdGVtcyI6IDAsCiAgICAiaXRlbVZlcnNpb25zIjogMCwKICAgICJtZW1iZXJzIjogMCwKICAgICJhdWRpdHMiOiAwCiAgfSwKICAid29ya3NwYWNlQWJzZW50IjogdHJ1ZSwKICAiYWN0b3JzQWJzZW50IjogdHJ1ZQp9"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/home/runner/work/_temp/open-evals-custom-browser-evidence/browser-output/custom-evals.browser-CE-BR-0543a-retry-creates-no-duplicates-chromium-owned-production/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/home/runner/work/_temp/open-evals-custom-browser-evidence/browser-output/custom-evals.browser-CE-BR-0543a-retry-creates-no-duplicates-chromium-owned-production/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/home/runner/work/open-evals/open-evals/tests/e2e/custom-evals.browser.spec.ts",
+                    "column": 41,
+                    "line": 124
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "b1d6dacb010c37b42b4b-e40aa9aff1ebc7ef9302",
+          "file": "custom-evals.browser.spec.ts",
+          "line": 97,
+          "column": 1
+        },
+        {
+          "title": "CE-BR03 a stale second writer retains its draft and explicitly reviews the loaded head before saving",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-owned-production",
+              "projectName": "chromium-owned-production",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 11029,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveValue\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByLabel('Text the output must contain', { exact: true })\nExpected: \u001b[32m\"BR03_ORIGINAL_TEXT\"\u001b[39m\nTimeout: 10000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveValue\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for getByLabel('Text the output must contain', { exact: true })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveValue\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByLabel('Text the output must contain', { exact: true })\nExpected: \u001b[32m\"BR03_ORIGINAL_TEXT\"\u001b[39m\nTimeout: 10000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveValue\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for getByLabel('Text the output must contain', { exact: true })\u001b[22m\n\n    at /home/runner/work/open-evals/open-evals/tests/e2e/custom-evals.browser.spec.ts:157:42",
+                    "location": {
+                      "file": "/home/runner/work/open-evals/open-evals/tests/e2e/custom-evals.browser.spec.ts",
+                      "column": 42,
+                      "line": 157
+                    },
+                    "snippet": "  155 |   const stalePage = await peer.context.newPage();\n  156 |   await stalePage.goto(`${owned.baseUrl}/evals/custom/${first.id}`);\n> 157 |   await expect(containsInput(stalePage)).toHaveValue(\"BR03_ORIGINAL_TEXT\");\n      |                                          ^\n  158 |   await fill(stalePage, \"Retained second-writer draft\", \"BR03_RETAINED_DRAFT_TEXT\", 63);\n  159 |\n  160 |   await fill(page, \"First writer accepted head\", \"BR03_ACCEPTED_HEAD_TEXT\", 85);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/home/runner/work/open-evals/open-evals/tests/e2e/custom-evals.browser.spec.ts",
+                        "column": 42,
+                        "line": 157
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveValue\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByLabel('Text the output must contain', { exact: true })\nExpected: \u001b[32m\"BR03_ORIGINAL_TEXT\"\u001b[39m\nTimeout: 10000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveValue\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for getByLabel('Text the output must contain', { exact: true })\u001b[22m\n\n\n  155 |   const stalePage = await peer.context.newPage();\n  156 |   await stalePage.goto(`${owned.baseUrl}/evals/custom/${first.id}`);\n> 157 |   await expect(containsInput(stalePage)).toHaveValue(\"BR03_ORIGINAL_TEXT\");\n      |                                          ^\n  158 |   await fill(stalePage, \"Retained second-writer draft\", \"BR03_RETAINED_DRAFT_TEXT\", 63);\n  159 |\n  160 |   await fill(page, \"First writer accepted head\", \"BR03_ACCEPTED_HEAD_TEXT\", 85);\n    at /home/runner/work/open-evals/open-evals/tests/e2e/custom-evals.browser.spec.ts:157:42"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T11:11:13.476Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/home/runner/work/_temp/open-evals-custom-browser-evidence/browser-output/custom-evals.browser-CE-BR-6607e-e-loaded-head-before-saving-chromium-owned-production/test-failed-1.png"
+                    },
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/home/runner/work/_temp/open-evals-custom-browser-evidence/browser-output/custom-evals.browser-CE-BR-6607e-e-loaded-head-before-saving-chromium-owned-production/test-failed-2.png"
+                    },
+                    {
+                      "name": "owned-fixture-cleanup",
+                      "contentType": "application/json",
+                      "body": "ewogICJzY2hlbWFWZXJzaW9uIjogImN1c3RvbS1ldmFsLWJyb3dzZXItY2xlYW51cC12MSIsCiAgInN0YXR1cyI6ICJyZW1vdmVkIiwKICAid29ya3NwYWNlSWQiOiAiNTExYjkyNDUtZGNlMi00Y2Q2LWFkYTAtYjgyZmQ5YzExMGVlIiwKICAiYWN0b3JDb3VudCI6IDIsCiAgIm93bmVyc2hpcFZhbGlkYXRlZCI6IHRydWUsCiAgImJlZm9yZSI6IHsKICAgICJzZXRzIjogMSwKICAgICJ2ZXJzaW9ucyI6IDEsCiAgICAiaXRlbXMiOiAxLAogICAgIml0ZW1WZXJzaW9ucyI6IDEsCiAgICAibWVtYmVycyI6IDEsCiAgICAiYXVkaXRzIjogMQogIH0sCiAgImFmdGVyIjogewogICAgInNldHMiOiAwLAogICAgInZlcnNpb25zIjogMCwKICAgICJpdGVtcyI6IDAsCiAgICAiaXRlbVZlcnNpb25zIjogMCwKICAgICJtZW1iZXJzIjogMCwKICAgICJhdWRpdHMiOiAwCiAgfSwKICAid29ya3NwYWNlQWJzZW50IjogdHJ1ZSwKICAiYWN0b3JzQWJzZW50IjogdHJ1ZQp9"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/home/runner/work/_temp/open-evals-custom-browser-evidence/browser-output/custom-evals.browser-CE-BR-6607e-e-loaded-head-before-saving-chromium-owned-production/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/home/runner/work/_temp/open-evals-custom-browser-evidence/browser-output/custom-evals.browser-CE-BR-6607e-e-loaded-head-before-saving-chromium-owned-production/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/home/runner/work/open-evals/open-evals/tests/e2e/custom-evals.browser.spec.ts",
+                    "column": 42,
+                    "line": 157
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "b1d6dacb010c37b42b4b-1a5f10fea2d4626dcb00",
+          "file": "custom-evals.browser.spec.ts",
+          "line": 148,
+          "column": 1
+        },
+        {
+          "title": "CE-BR04 a 390x844 viewport validates fields and saves then reloads without horizontal clipping",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-owned-production",
+              "projectName": "chromium-owned-production",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 717,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('alert')\nExpected substring: \u001b[32m\"Enter a name, up to 4,096 bytes of nonblank text\"\u001b[39m\nError: strict mode violation: getByRole('alert') resolved to 2 elements:\n    1) <p role=\"alert\" class=\"text-sm text-danger\">Enter a name, up to 4,096 bytes of nonblank text,…</p> aka getByText('Enter a name, up to 4,096')\n    2) <div role=\"alert\" aria-live=\"assertive\" id=\"__next-route-announcer__\"></div> aka locator('[id=\"__next-route-announcer__\"]')\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('alert')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('alert')\nExpected substring: \u001b[32m\"Enter a name, up to 4,096 bytes of nonblank text\"\u001b[39m\nError: strict mode violation: getByRole('alert') resolved to 2 elements:\n    1) <p role=\"alert\" class=\"text-sm text-danger\">Enter a name, up to 4,096 bytes of nonblank text,…</p> aka getByText('Enter a name, up to 4,096')\n    2) <div role=\"alert\" aria-live=\"assertive\" id=\"__next-route-announcer__\"></div> aka locator('[id=\"__next-route-announcer__\"]')\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('alert')\u001b[22m\n\n    at /home/runner/work/open-evals/open-evals/tests/e2e/custom-evals.browser.spec.ts:218:41",
+                    "location": {
+                      "file": "/home/runner/work/open-evals/open-evals/tests/e2e/custom-evals.browser.spec.ts",
+                      "column": 41,
+                      "line": 218
+                    },
+                    "snippet": "  216 |   await fill(page, \"   \", \"   \", 100);\n  217 |   await page.getByRole(\"button\", { name: \"Save Eval Set\", exact: true }).click();\n> 218 |   await expect(page.getByRole(\"alert\")).toContainText(\"Enter a name, up to 4,096 bytes of nonblank text\");\n      |                                         ^\n  219 |   await fill(page, \"Narrow validation check\", \"é\".repeat(2049), 75);\n  220 |   await page.getByRole(\"button\", { name: \"Save Eval Set\", exact: true }).click();\n  221 |   await expect(page.getByRole(\"alert\")).toContainText(\"Enter a name, up to 4,096 bytes of nonblank text\");"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/home/runner/work/open-evals/open-evals/tests/e2e/custom-evals.browser.spec.ts",
+                        "column": 41,
+                        "line": 218
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('alert')\nExpected substring: \u001b[32m\"Enter a name, up to 4,096 bytes of nonblank text\"\u001b[39m\nError: strict mode violation: getByRole('alert') resolved to 2 elements:\n    1) <p role=\"alert\" class=\"text-sm text-danger\">Enter a name, up to 4,096 bytes of nonblank text,…</p> aka getByText('Enter a name, up to 4,096')\n    2) <div role=\"alert\" aria-live=\"assertive\" id=\"__next-route-announcer__\"></div> aka locator('[id=\"__next-route-announcer__\"]')\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('alert')\u001b[22m\n\n\n  216 |   await fill(page, \"   \", \"   \", 100);\n  217 |   await page.getByRole(\"button\", { name: \"Save Eval Set\", exact: true }).click();\n> 218 |   await expect(page.getByRole(\"alert\")).toContainText(\"Enter a name, up to 4,096 bytes of nonblank text\");\n      |                                         ^\n  219 |   await fill(page, \"Narrow validation check\", \"é\".repeat(2049), 75);\n  220 |   await page.getByRole(\"button\", { name: \"Save Eval Set\", exact: true }).click();\n  221 |   await expect(page.getByRole(\"alert\")).toContainText(\"Enter a name, up to 4,096 bytes of nonblank text\");\n    at /home/runner/work/open-evals/open-evals/tests/e2e/custom-evals.browser.spec.ts:218:41"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T11:11:25.033Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/home/runner/work/_temp/open-evals-custom-browser-evidence/browser-output/custom-evals.browser-CE-BR-4b5a4-without-horizontal-clipping-chromium-owned-production/test-failed-1.png"
+                    },
+                    {
+                      "name": "owned-fixture-cleanup",
+                      "contentType": "application/json",
+                      "body": "ewogICJzY2hlbWFWZXJzaW9uIjogImN1c3RvbS1ldmFsLWJyb3dzZXItY2xlYW51cC12MSIsCiAgInN0YXR1cyI6ICJyZW1vdmVkIiwKICAid29ya3NwYWNlSWQiOiAiNmZiZWYxYmMtYzAzZi00MDdiLTkxOGItNTRiYjJkZGNjZjY4IiwKICAiYWN0b3JDb3VudCI6IDEsCiAgIm93bmVyc2hpcFZhbGlkYXRlZCI6IHRydWUsCiAgImJlZm9yZSI6IHsKICAgICJzZXRzIjogMCwKICAgICJ2ZXJzaW9ucyI6IDAsCiAgICAiaXRlbXMiOiAwLAogICAgIml0ZW1WZXJzaW9ucyI6IDAsCiAgICAibWVtYmVycyI6IDAsCiAgICAiYXVkaXRzIjogMAogIH0sCiAgImFmdGVyIjogewogICAgInNldHMiOiAwLAogICAgInZlcnNpb25zIjogMCwKICAgICJpdGVtcyI6IDAsCiAgICAiaXRlbVZlcnNpb25zIjogMCwKICAgICJtZW1iZXJzIjogMCwKICAgICJhdWRpdHMiOiAwCiAgfSwKICAid29ya3NwYWNlQWJzZW50IjogdHJ1ZSwKICAiYWN0b3JzQWJzZW50IjogdHJ1ZQp9"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/home/runner/work/_temp/open-evals-custom-browser-evidence/browser-output/custom-evals.browser-CE-BR-4b5a4-without-horizontal-clipping-chromium-owned-production/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/home/runner/work/_temp/open-evals-custom-browser-evidence/browser-output/custom-evals.browser-CE-BR-4b5a4-without-horizontal-clipping-chromium-owned-production/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/home/runner/work/open-evals/open-evals/tests/e2e/custom-evals.browser.spec.ts",
+                    "column": 41,
+                    "line": 218
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "b1d6dacb010c37b42b4b-0545d252eff0c96ee06d",
+          "file": "custom-evals.browser.spec.ts",
+          "line": 208,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-09T11:11:00.294Z",
+    "duration": 25633.042,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 4,
+    "flaky": 0
+  }
+}

@@ -1,0 +1,9 @@
+
+Running 4 tests using 1 worker
+
+  ✓  1 [chromium-owned-production] › tests/e2e/custom-evals.browser.spec.ts:58:1 › CE-BR01 desktop creates versions and reloads immutable history through the real app (1.4s)
+  ✓  2 [chromium-owned-production] › tests/e2e/custom-evals.browser.spec.ts:98:1 › CE-BR02 a committed POST response is lost and an identical UI retry creates no duplicates (973ms)
+  ✓  3 [chromium-owned-production] › tests/e2e/custom-evals.browser.spec.ts:149:1 › CE-BR03 a stale second writer retains its draft and explicitly reviews the loaded head before saving (1.6s)
+  ✓  4 [chromium-owned-production] › tests/e2e/custom-evals.browser.spec.ts:209:1 › CE-BR04 a 390x844 viewport validates fields and saves then reloads without horizontal clipping (1.5s)
+
+  4 passed (7.7s)

@@ -1,0 +1,169 @@
+
+Running 4 tests using 1 worker
+
+  ✘  1 [chromium-owned-production] › tests/e2e/custom-evals.browser.spec.ts:57:1 › CE-BR01 desktop creates versions and reloads immutable history through the real app (11.0s)
+  ✘  2 [chromium-owned-production] › tests/e2e/custom-evals.browser.spec.ts:97:1 › CE-BR02 a committed POST response is lost and an identical UI retry creates no duplicates (628ms)
+  ✘  3 [chromium-owned-production] › tests/e2e/custom-evals.browser.spec.ts:148:1 › CE-BR03 a stale second writer retains its draft and explicitly reviews the loaded head before saving (11.0s)
+  ✘  4 [chromium-owned-production] › tests/e2e/custom-evals.browser.spec.ts:208:1 › CE-BR04 a 390x844 viewport validates fields and saves then reloads without horizontal clipping (717ms)
+
+
+  1) [chromium-owned-production] › tests/e2e/custom-evals.browser.spec.ts:57:1 › CE-BR01 desktop creates versions and reloads immutable history through the real app 
+
+    Error: expect(locator).toHaveValue(expected) failed
+
+    Locator: getByLabel('Text the output must contain', { exact: true })
+    Expected: "  DESKTOP_FIRST_REQUIRED_TEXT
+    Keep exact spaces.  "
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toHaveValue" with timeout 10000ms
+      - waiting for getByLabel('Text the output must contain', { exact: true })
+
+
+      68 |   await page.reload();
+      69 |   await expect(nameInput(page)).toHaveValue("Desktop first check");
+    > 70 |   await expect(containsInput(page)).toHaveValue(firstText);
+         |                                     ^
+      71 |   await expect(thresholdInput(page)).toHaveValue("80");
+      72 |
+      73 |   const secondText = "DESKTOP_SECOND_REQUIRED_TEXT";
+        at /home/runner/work/open-evals/open-evals/tests/e2e/custom-evals.browser.spec.ts:70:37
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../_temp/open-evals-custom-browser-evidence/browser-output/custom-evals.browser-CE-BR-9c47f-istory-through-the-real-app-chromium-owned-production/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../_temp/open-evals-custom-browser-evidence/browser-output/custom-evals.browser-CE-BR-9c47f-istory-through-the-real-app-chromium-owned-production/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../_temp/open-evals-custom-browser-evidence/browser-output/custom-evals.browser-CE-BR-9c47f-istory-through-the-real-app-chromium-owned-production/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace ../../_temp/open-evals-custom-browser-evidence/browser-output/custom-evals.browser-CE-BR-9c47f-istory-through-the-real-app-chromium-owned-production/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [chromium-owned-production] › tests/e2e/custom-evals.browser.spec.ts:97:1 › CE-BR02 a committed POST response is lost and an identical UI retry creates no duplicates 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: getByRole('alert')
+    Expected substring: "The save outcome is unknown."
+    Error: strict mode violation: getByRole('alert') resolved to 2 elements:
+        1) <p role="alert" class="text-sm text-danger">The save outcome is unknown. Retry this unchanged…</p> aka getByText('The save outcome is unknown.')
+        2) <div role="alert" aria-live="assertive" id="__next-route-announcer__"></div> aka locator('[id="__next-route-announcer__"]')
+
+    Call log:
+      - Expect "toContainText" with timeout 10000ms
+      - waiting for getByRole('alert')
+
+
+      122 |   expect(first.view?.replayed).toBe(false);
+      123 |   const saved = first.view!;
+    > 124 |   await expect(page.getByRole("alert")).toContainText("The save outcome is unknown.");
+          |                                         ^
+      125 |   await expect(nameInput(page)).toHaveJSProperty("readOnly", true);
+      126 |   await expect(containsInput(page)).toHaveJSProperty("readOnly", true);
+      127 |   await expect(thresholdInput(page)).toHaveJSProperty("readOnly", true);
+        at /home/runner/work/open-evals/open-evals/tests/e2e/custom-evals.browser.spec.ts:124:41
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../_temp/open-evals-custom-browser-evidence/browser-output/custom-evals.browser-CE-BR-0543a-retry-creates-no-duplicates-chromium-owned-production/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../_temp/open-evals-custom-browser-evidence/browser-output/custom-evals.browser-CE-BR-0543a-retry-creates-no-duplicates-chromium-owned-production/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../_temp/open-evals-custom-browser-evidence/browser-output/custom-evals.browser-CE-BR-0543a-retry-creates-no-duplicates-chromium-owned-production/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace ../../_temp/open-evals-custom-browser-evidence/browser-output/custom-evals.browser-CE-BR-0543a-retry-creates-no-duplicates-chromium-owned-production/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) [chromium-owned-production] › tests/e2e/custom-evals.browser.spec.ts:148:1 › CE-BR03 a stale second writer retains its draft and explicitly reviews the loaded head before saving 
+
+    Error: expect(locator).toHaveValue(expected) failed
+
+    Locator: getByLabel('Text the output must contain', { exact: true })
+    Expected: "BR03_ORIGINAL_TEXT"
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toHaveValue" with timeout 10000ms
+      - waiting for getByLabel('Text the output must contain', { exact: true })
+
+
+      155 |   const stalePage = await peer.context.newPage();
+      156 |   await stalePage.goto(`${owned.baseUrl}/evals/custom/${first.id}`);
+    > 157 |   await expect(containsInput(stalePage)).toHaveValue("BR03_ORIGINAL_TEXT");
+          |                                          ^
+      158 |   await fill(stalePage, "Retained second-writer draft", "BR03_RETAINED_DRAFT_TEXT", 63);
+      159 |
+      160 |   await fill(page, "First writer accepted head", "BR03_ACCEPTED_HEAD_TEXT", 85);
+        at /home/runner/work/open-evals/open-evals/tests/e2e/custom-evals.browser.spec.ts:157:42
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../_temp/open-evals-custom-browser-evidence/browser-output/custom-evals.browser-CE-BR-6607e-e-loaded-head-before-saving-chromium-owned-production/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../_temp/open-evals-custom-browser-evidence/browser-output/custom-evals.browser-CE-BR-6607e-e-loaded-head-before-saving-chromium-owned-production/test-failed-2.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../_temp/open-evals-custom-browser-evidence/browser-output/custom-evals.browser-CE-BR-6607e-e-loaded-head-before-saving-chromium-owned-production/error-context.md
+
+    attachment #5: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../_temp/open-evals-custom-browser-evidence/browser-output/custom-evals.browser-CE-BR-6607e-e-loaded-head-before-saving-chromium-owned-production/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace ../../_temp/open-evals-custom-browser-evidence/browser-output/custom-evals.browser-CE-BR-6607e-e-loaded-head-before-saving-chromium-owned-production/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) [chromium-owned-production] › tests/e2e/custom-evals.browser.spec.ts:208:1 › CE-BR04 a 390x844 viewport validates fields and saves then reloads without horizontal clipping 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: getByRole('alert')
+    Expected substring: "Enter a name, up to 4,096 bytes of nonblank text"
+    Error: strict mode violation: getByRole('alert') resolved to 2 elements:
+        1) <p role="alert" class="text-sm text-danger">Enter a name, up to 4,096 bytes of nonblank text,…</p> aka getByText('Enter a name, up to 4,096')
+        2) <div role="alert" aria-live="assertive" id="__next-route-announcer__"></div> aka locator('[id="__next-route-announcer__"]')
+
+    Call log:
+      - Expect "toContainText" with timeout 10000ms
+      - waiting for getByRole('alert')
+
+
+      216 |   await fill(page, "   ", "   ", 100);
+      217 |   await page.getByRole("button", { name: "Save Eval Set", exact: true }).click();
+    > 218 |   await expect(page.getByRole("alert")).toContainText("Enter a name, up to 4,096 bytes of nonblank text");
+          |                                         ^
+      219 |   await fill(page, "Narrow validation check", "é".repeat(2049), 75);
+      220 |   await page.getByRole("button", { name: "Save Eval Set", exact: true }).click();
+      221 |   await expect(page.getByRole("alert")).toContainText("Enter a name, up to 4,096 bytes of nonblank text");
+        at /home/runner/work/open-evals/open-evals/tests/e2e/custom-evals.browser.spec.ts:218:41
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../_temp/open-evals-custom-browser-evidence/browser-output/custom-evals.browser-CE-BR-4b5a4-without-horizontal-clipping-chromium-owned-production/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../_temp/open-evals-custom-browser-evidence/browser-output/custom-evals.browser-CE-BR-4b5a4-without-horizontal-clipping-chromium-owned-production/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../_temp/open-evals-custom-browser-evidence/browser-output/custom-evals.browser-CE-BR-4b5a4-without-horizontal-clipping-chromium-owned-production/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace ../../_temp/open-evals-custom-browser-evidence/browser-output/custom-evals.browser-CE-BR-4b5a4-without-horizontal-clipping-chromium-owned-production/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4 failed
+    [chromium-owned-production] › tests/e2e/custom-evals.browser.spec.ts:57:1 › CE-BR01 desktop creates versions and reloads immutable history through the real app 
+    [chromium-owned-production] › tests/e2e/custom-evals.browser.spec.ts:97:1 › CE-BR02 a committed POST response is lost and an identical UI retry creates no duplicates 
+    [chromium-owned-production] › tests/e2e/custom-evals.browser.spec.ts:148:1 › CE-BR03 a stale second writer retains its draft and explicitly reviews the loaded head before saving 
+    [chromium-owned-production] › tests/e2e/custom-evals.browser.spec.ts:208:1 › CE-BR04 a 390x844 viewport validates fields and saves then reloads without horizontal clipping 

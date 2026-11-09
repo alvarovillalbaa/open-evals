@@ -10,7 +10,7 @@ an explicitly invoked production-app configuration; it adds no dependency.
 | `unit/custom-evals.test.mjs` | T1, actual pure builder/parser/hash with authored DTOs | 20passes in the focused Node invocation |
 | `unit/custom-eval-access.test.mts` | T1, dependency-free permission decisions | 18passes in the same invocation |
 | `integration/custom-evals-store.node.mjs` | T3, real owned PostgreSQL/transaction/member seam | 12passes in the separate owned PostgreSQL CI invocation |
-| `e2e/custom-evals.browser.spec.ts` | T3, real production app, signed-session HTTP and owned PostgreSQL | First four-case run failed; corrected source awaits its separate run |
+| `e2e/custom-evals.browser.spec.ts` | T3, real production app, signed-session HTTP and owned PostgreSQL | Four passes in corrected run42608186016; first run remains four failures |
 
 The new unit sources extend the existing explicit Node-focused lane and do not
 match Vitest's `.test.ts` collection. Invoke with an existing compatible Node
@@ -50,3 +50,9 @@ verifier against the fixture's server and secret; they do not establish Supabase
 login, production authorization, RLS, real-user or physical-device acceptance.
 The 390×844 journey is a narrow viewport, not a touch-device claim. No T4/T5
 access, production data, model calls or account enrollment is included.
+
+The [actual browser results](../docs/results/2026/11-09/custom-eval-browser-checks.md)
+retain both runs, the real rendering regression, immutable versions, exact retry,
+stale-head recovery and narrow-layout acceptance. These four passes are separate
+from the earlier 38 T1 and 12 store cases; the first four browser failures remain
+failed. Selected originals from each run are retained with byte/hash bindings.

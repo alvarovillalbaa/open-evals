@@ -1,0 +1,33 @@
+{
+  "api": {
+    "url": "http://127.0.0.1:4173/api/v1/eval-sets",
+    "status": 200,
+    "bodyFile": "candidate-api.body",
+    "bodyBytes": 11,
+    "bodySha256": "f8fed6f4934be9d5e9ad6ec21d77c211237d465f99991e3c490ea9aa04cd6522",
+    "headersFile": "candidate-api.headers",
+    "headersBytes": 224,
+    "headersSha256": "6a2dd353d5b773ded213fccc66e188d61b1bd25d9ac58b7d03a34003a1d18f5c",
+    "cookieSha256": "03a7da226f1f32fc6c62ef998f358cbacdb58c72bfb63c7c27f89afe34203a41",
+    "redirectsFollowed": 0
+  },
+  "list": {
+    "url": "http://127.0.0.1:4173/evals/custom",
+    "status": 200,
+    "bodyFile": "candidate-list.body",
+    "bodyBytes": 20304,
+    "bodySha256": "ad6ec5f2f602f4e168a14e3b2dddb8e094e1a7580db0669d8a3cee01b5ba9d4d",
+    "headersFile": "candidate-list.headers",
+    "headersBytes": 318,
+    "headersSha256": "e0aa6aa19aa64f157c973ae41432356edb42aa52eebb370b5dc25e470ace6c0a",
+    "cookieSha256": "03a7da226f1f32fc6c62ef998f358cbacdb58c72bfb63c7c27f89afe34203a41",
+    "redirectsFollowed": 0
+  },
+  "apiValue": {
+    "sets": []
+  },
+  "workspaceId": "cf019d5a-5797-48b8-8171-8a45ac824cce",
+  "sameSignedCookie": true,
+  "deniedCopyPresent": false,
+  "createHeadingPresent": true
+}

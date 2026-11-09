@@ -1,0 +1,267 @@
+{
+  "config": {
+    "argv": [
+      "/opt/hostedtoolcache/node/24.22.2/x64/bin/node",
+      "/home/runner/work/open-evals/open-evals/node_modules/.pnpm/@playwright+test@1.61.1/node_modules/@playwright/test/cli.js",
+      "test",
+      "--config",
+      "tests/e2e/custom-evals.browser.config.ts"
+    ],
+    "configFile": "/home/runner/work/open-evals/open-evals/tests/e2e/custom-evals.browser.config.ts",
+    "rootDir": "/home/runner/work/open-evals/open-evals/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": true,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 420000,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/home/runner/work/_temp/open-evals-custom-browser-evidence/browser-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium-owned-production",
+        "name": "chromium-owned-production",
+        "testDir": "/home/runner/work/open-evals/open-evals/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "custom-evals.browser.spec.ts"
+        ],
+        "timeout": 90000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/home/runner/work/_temp/open-evals-custom-browser-evidence/browser-report.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "custom-evals.browser.spec.ts",
+      "file": "custom-evals.browser.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "CE-BR01 desktop creates versions and reloads immutable history through the real app",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-owned-production",
+              "projectName": "chromium-owned-production",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1355,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T11:21:28.376Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "desktop-persistence",
+                      "contentType": "application/json",
+                      "body": "ewogICJzY2hlbWFWZXJzaW9uIjogImN1c3RvbS1ldmFsLWJyb3dzZXItcGVyc2lzdGVuY2UtdjEiLAogICJ3b3Jrc3BhY2VJZCI6ICJiY2RlODg2Mi00NDBkLTRmYzEtODhiNy02ZGI0Yjk5MTdlMTEiLAogICJjb3VudHMiOiB7CiAgICAic2V0cyI6IDEsCiAgICAidmVyc2lvbnMiOiAyLAogICAgIml0ZW1zIjogMSwKICAgICJpdGVtVmVyc2lvbnMiOiAyLAogICAgIm1lbWJlcnMiOiAyLAogICAgImF1ZGl0cyI6IDIKICB9LAogICJ2ZXJzaW9ucyI6IFsKICAgIHsKICAgICAgImlkIjogIjA5M2RmMmQxLTFkYzctNGQzNy1hZWFiLWIyZTNlODZiZDQyZCIsCiAgICAgICJ2ZXJzaW9uIjogMSwKICAgICAgImZpbmdlcnByaW50IjogIjQ4OTA1NWVjYjVmYmZkMTc3ZDRlODcwOTAzNTlhZGRlMTQzZmFmNTQ2YjJiNDgwZDgzYWNkYzYxMGMwMjMxOTIiCiAgICB9LAogICAgewogICAgICAiaWQiOiAiMWFkOThmMGUtYzUwYi00ZmEwLWJjNGQtMWFlOThlZmYyOTE1IiwKICAgICAgInZlcnNpb24iOiAyLAogICAgICAiZmluZ2VycHJpbnQiOiAiY2Y5Mzc5NzM3MDU5YTBmMTY3ZjNjOTk5ZjE0MDYzNmQyZDlmZDI2OWQyNjNlNGI5Mjk5MDVkNTJlNTkwNzA3NyIKICAgIH0KICBdLAogICJhdWRpdHMiOiBbCiAgICB7CiAgICAgICJ2ZXJzaW9uSWQiOiAiMDkzZGYyZDEtMWRjNy00ZDM3LWFlYWItYjJlM2U4NmJkNDJkIiwKICAgICAgImFjdG9ySWQiOiAiMDhlZDhjNDUtYzM0Zi00YTE3LTk4MTEtYzhiMDZiM2RmZGQwIgogICAgfSwKICAgIHsKICAgICAgInZlcnNpb25JZCI6ICIxYWQ5OGYwZS1jNTBiLTRmYTAtYmM0ZC0xYWU5OGVmZjI5MTUiLAogICAgICAiYWN0b3JJZCI6ICIwOGVkOGM0NS1jMzRmLTRhMTctOTgxMS1jOGIwNmIzZGZkZDAiCiAgICB9CiAgXQp9"
+                    },
+                    {
+                      "name": "owned-fixture-cleanup",
+                      "contentType": "application/json",
+                      "body": "ewogICJzY2hlbWFWZXJzaW9uIjogImN1c3RvbS1ldmFsLWJyb3dzZXItY2xlYW51cC12MSIsCiAgInN0YXR1cyI6ICJyZW1vdmVkIiwKICAid29ya3NwYWNlSWQiOiAiYmNkZTg4NjItNDQwZC00ZmMxLTg4YjctNmRiNGI5OTE3ZTExIiwKICAiYWN0b3JDb3VudCI6IDEsCiAgIm93bmVyc2hpcFZhbGlkYXRlZCI6IHRydWUsCiAgImJlZm9yZSI6IHsKICAgICJzZXRzIjogMSwKICAgICJ2ZXJzaW9ucyI6IDIsCiAgICAiaXRlbXMiOiAxLAogICAgIml0ZW1WZXJzaW9ucyI6IDIsCiAgICAibWVtYmVycyI6IDIsCiAgICAiYXVkaXRzIjogMgogIH0sCiAgImFmdGVyIjogewogICAgInNldHMiOiAwLAogICAgInZlcnNpb25zIjogMCwKICAgICJpdGVtcyI6IDAsCiAgICAiaXRlbVZlcnNpb25zIjogMCwKICAgICJtZW1iZXJzIjogMCwKICAgICJhdWRpdHMiOiAwCiAgfSwKICAid29ya3NwYWNlQWJzZW50IjogdHJ1ZSwKICAiYWN0b3JzQWJzZW50IjogdHJ1ZQp9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b1d6dacb010c37b42b4b-00c49318cd1754e5ee7f",
+          "file": "custom-evals.browser.spec.ts",
+          "line": 58,
+          "column": 1
+        },
+        {
+          "title": "CE-BR02 a committed POST response is lost and an identical UI retry creates no duplicates",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-owned-production",
+              "projectName": "chromium-owned-production",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 973,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T11:21:31.379Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "lost-response-identical-retry-persistence",
+                      "contentType": "application/json",
+                      "body": "ewogICJzY2hlbWFWZXJzaW9uIjogImN1c3RvbS1ldmFsLWJyb3dzZXItcGVyc2lzdGVuY2UtdjEiLAogICJ3b3Jrc3BhY2VJZCI6ICI4NDVlZmEwMi1mMjFjLTRjMzMtOTQyNC00MjhhOWNlY2ZjYzkiLAogICJjb3VudHMiOiB7CiAgICAic2V0cyI6IDEsCiAgICAidmVyc2lvbnMiOiAxLAogICAgIml0ZW1zIjogMSwKICAgICJpdGVtVmVyc2lvbnMiOiAxLAogICAgIm1lbWJlcnMiOiAxLAogICAgImF1ZGl0cyI6IDEKICB9LAogICJ2ZXJzaW9ucyI6IFsKICAgIHsKICAgICAgImlkIjogIjU2NmZmMGIyLWQ2NzQtNGEzOS05NzZjLTI4ZjFiYTI3ZmM1ZiIsCiAgICAgICJ2ZXJzaW9uIjogMSwKICAgICAgImZpbmdlcnByaW50IjogIjYyNzNhNzRiYWRmOWZhMmQ2ZjgwNjI0ZmYwMWE4OWY4MmQzOTc2NDkxOGE2Yjc5NmI4MzEyNjVjY2I1ZDM4ZGQiCiAgICB9CiAgXSwKICAiYXVkaXRzIjogWwogICAgewogICAgICAidmVyc2lvbklkIjogIjU2NmZmMGIyLWQ2NzQtNGEzOS05NzZjLTI4ZjFiYTI3ZmM1ZiIsCiAgICAgICJhY3RvcklkIjogIjBkMTVjMjkwLTJjMTAtNGUwZC04ZGFmLTBhZmQyMTUzN2JkOSIKICAgIH0KICBdCn0="
+                    },
+                    {
+                      "name": "owned-fixture-cleanup",
+                      "contentType": "application/json",
+                      "body": "ewogICJzY2hlbWFWZXJzaW9uIjogImN1c3RvbS1ldmFsLWJyb3dzZXItY2xlYW51cC12MSIsCiAgInN0YXR1cyI6ICJyZW1vdmVkIiwKICAid29ya3NwYWNlSWQiOiAiODQ1ZWZhMDItZjIxYy00YzMzLTk0MjQtNDI4YTljZWNmY2M5IiwKICAiYWN0b3JDb3VudCI6IDEsCiAgIm93bmVyc2hpcFZhbGlkYXRlZCI6IHRydWUsCiAgImJlZm9yZSI6IHsKICAgICJzZXRzIjogMSwKICAgICJ2ZXJzaW9ucyI6IDEsCiAgICAiaXRlbXMiOiAxLAogICAgIml0ZW1WZXJzaW9ucyI6IDEsCiAgICAibWVtYmVycyI6IDEsCiAgICAiYXVkaXRzIjogMQogIH0sCiAgImFmdGVyIjogewogICAgInNldHMiOiAwLAogICAgInZlcnNpb25zIjogMCwKICAgICJpdGVtcyI6IDAsCiAgICAiaXRlbVZlcnNpb25zIjogMCwKICAgICJtZW1iZXJzIjogMCwKICAgICJhdWRpdHMiOiAwCiAgfSwKICAid29ya3NwYWNlQWJzZW50IjogdHJ1ZSwKICAiYWN0b3JzQWJzZW50IjogdHJ1ZQp9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b1d6dacb010c37b42b4b-e40aa9aff1ebc7ef9302",
+          "file": "custom-evals.browser.spec.ts",
+          "line": 98,
+          "column": 1
+        },
+        {
+          "title": "CE-BR03 a stale second writer retains its draft and explicitly reviews the loaded head before saving",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-owned-production",
+              "projectName": "chromium-owned-production",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1566,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T11:21:32.367Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "stale-head-reviewed-save-persistence",
+                      "contentType": "application/json",
+                      "body": "ewogICJzY2hlbWFWZXJzaW9uIjogImN1c3RvbS1ldmFsLWJyb3dzZXItcGVyc2lzdGVuY2UtdjEiLAogICJ3b3Jrc3BhY2VJZCI6ICJmYTQwN2U4YS01M2I3LTQwODYtYjU1NS01ODRhMWU2NjI5ZTIiLAogICJjb3VudHMiOiB7CiAgICAic2V0cyI6IDEsCiAgICAidmVyc2lvbnMiOiAzLAogICAgIml0ZW1zIjogMSwKICAgICJpdGVtVmVyc2lvbnMiOiAzLAogICAgIm1lbWJlcnMiOiAzLAogICAgImF1ZGl0cyI6IDMKICB9LAogICJ2ZXJzaW9ucyI6IFsKICAgIHsKICAgICAgImlkIjogIjU3YWMxNDZlLTM1MmQtNDMzOC1iYzdmLTYyZjRjMDJlNDhhOCIsCiAgICAgICJ2ZXJzaW9uIjogMSwKICAgICAgImZpbmdlcnByaW50IjogIjQ4ZmYwMGM0ODg0MTBlMTdiNzVhMjY1MWNiOGQ3ODkzMGRhMDgyMDY1MTIxODA4YjczMDNmZmFmMTI5MzQ3OTgiCiAgICB9LAogICAgewogICAgICAiaWQiOiAiYTAwY2YwYTItYjYyOC00M2ZmLWE2NWYtMzgyNzM3ZGUyNjk4IiwKICAgICAgInZlcnNpb24iOiAyLAogICAgICAiZmluZ2VycHJpbnQiOiAiNTdhZWFmMTlkOWFhOWMyYjU4ZDFiYzNiYjIyNzk1NTY2M2UxZGU2ZmUyODQ1NTVlZGYxN2YzMmU1MzNmMjVlMiIKICAgIH0sCiAgICB7CiAgICAgICJpZCI6ICJlZTU3MmMyYi01ZDk1LTQ4M2EtYTcxZS0yZjFlZDZhMjQ5YjkiLAogICAgICAidmVyc2lvbiI6IDMsCiAgICAgICJmaW5nZXJwcmludCI6ICJmNmM4NmEyZTJhYjg4MTcyNjFkZjI5MmQyZTUwMWIzZmE1ODgyNjNhNDJjODI1MDczZTk1NGY4NGNmMDkyOGE4IgogICAgfQogIF0sCiAgImF1ZGl0cyI6IFsKICAgIHsKICAgICAgInZlcnNpb25JZCI6ICI1N2FjMTQ2ZS0zNTJkLTQzMzgtYmM3Zi02MmY0YzAyZTQ4YTgiLAogICAgICAiYWN0b3JJZCI6ICI5ZWM1NzhmMi0wOGIxLTQyYzQtYmQ2MC04NDljZWY3NzQ2YzIiCiAgICB9LAogICAgewogICAgICAidmVyc2lvbklkIjogImEwMGNmMGEyLWI2MjgtNDNmZi1hNjVmLTM4MjczN2RlMjY5OCIsCiAgICAgICJhY3RvcklkIjogIjllYzU3OGYyLTA4YjEtNDJjNC1iZDYwLTg0OWNlZjc3NDZjMiIKICAgIH0sCiAgICB7CiAgICAgICJ2ZXJzaW9uSWQiOiAiZWU1NzJjMmItNWQ5NS00ODNhLWE3MWUtMmYxZWQ2YTI0OWI5IiwKICAgICAgImFjdG9ySWQiOiAiYzNkOGMzNTktZDhhMS00ZWVmLWEyYzktZDdkY2RkODM0NzQ0IgogICAgfQogIF0KfQ=="
+                    },
+                    {
+                      "name": "owned-fixture-cleanup",
+                      "contentType": "application/json",
+                      "body": "ewogICJzY2hlbWFWZXJzaW9uIjogImN1c3RvbS1ldmFsLWJyb3dzZXItY2xlYW51cC12MSIsCiAgInN0YXR1cyI6ICJyZW1vdmVkIiwKICAid29ya3NwYWNlSWQiOiAiZmE0MDdlOGEtNTNiNy00MDg2LWI1NTUtNTg0YTFlNjYyOWUyIiwKICAiYWN0b3JDb3VudCI6IDIsCiAgIm93bmVyc2hpcFZhbGlkYXRlZCI6IHRydWUsCiAgImJlZm9yZSI6IHsKICAgICJzZXRzIjogMSwKICAgICJ2ZXJzaW9ucyI6IDMsCiAgICAiaXRlbXMiOiAxLAogICAgIml0ZW1WZXJzaW9ucyI6IDMsCiAgICAibWVtYmVycyI6IDMsCiAgICAiYXVkaXRzIjogMwogIH0sCiAgImFmdGVyIjogewogICAgInNldHMiOiAwLAogICAgInZlcnNpb25zIjogMCwKICAgICJpdGVtcyI6IDAsCiAgICAiaXRlbVZlcnNpb25zIjogMCwKICAgICJtZW1iZXJzIjogMCwKICAgICJhdWRpdHMiOiAwCiAgfSwKICAid29ya3NwYWNlQWJzZW50IjogdHJ1ZSwKICAiYWN0b3JzQWJzZW50IjogdHJ1ZQp9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b1d6dacb010c37b42b4b-1a5f10fea2d4626dcb00",
+          "file": "custom-evals.browser.spec.ts",
+          "line": 149,
+          "column": 1
+        },
+        {
+          "title": "CE-BR04 a 390x844 viewport validates fields and saves then reloads without horizontal clipping",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium-owned-production",
+              "projectName": "chromium-owned-production",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1518,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T11:21:33.944Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "narrow-validation-persistence",
+                      "contentType": "application/json",
+                      "body": "ewogICJzY2hlbWFWZXJzaW9uIjogImN1c3RvbS1ldmFsLWJyb3dzZXItcGVyc2lzdGVuY2UtdjEiLAogICJ3b3Jrc3BhY2VJZCI6ICI5MjhiYTMxNS0yYzFlLTQ4ZDctOTYzNy04N2U0MGU5ZmM3ZWQiLAogICJjb3VudHMiOiB7CiAgICAic2V0cyI6IDEsCiAgICAidmVyc2lvbnMiOiAxLAogICAgIml0ZW1zIjogMSwKICAgICJpdGVtVmVyc2lvbnMiOiAxLAogICAgIm1lbWJlcnMiOiAxLAogICAgImF1ZGl0cyI6IDEKICB9LAogICJ2ZXJzaW9ucyI6IFsKICAgIHsKICAgICAgImlkIjogImQ3NzFmZDk5LTBmMzktNDUxMy1iNmQxLTNjNmNiYzI2NzNlZCIsCiAgICAgICJ2ZXJzaW9uIjogMSwKICAgICAgImZpbmdlcnByaW50IjogImVjYTFiZDBiZjliYjdhNTljZmM5OTkzZmM4NWUxMjdmM2NlOWQ2YzUxNzVkZGU3YjdmMGJlZjlmZmRmNTBmZTIiCiAgICB9CiAgXSwKICAiYXVkaXRzIjogWwogICAgewogICAgICAidmVyc2lvbklkIjogImQ3NzFmZDk5LTBmMzktNDUxMy1iNmQxLTNjNmNiYzI2NzNlZCIsCiAgICAgICJhY3RvcklkIjogImJmNDlhNDNlLWIyODgtNGM5MS1hODVlLTNlMDIxOTZmYzE4OSIKICAgIH0KICBdCn0="
+                    },
+                    {
+                      "name": "owned-fixture-cleanup",
+                      "contentType": "application/json",
+                      "body": "ewogICJzY2hlbWFWZXJzaW9uIjogImN1c3RvbS1ldmFsLWJyb3dzZXItY2xlYW51cC12MSIsCiAgInN0YXR1cyI6ICJyZW1vdmVkIiwKICAid29ya3NwYWNlSWQiOiAiOTI4YmEzMTUtMmMxZS00OGQ3LTk2MzctODdlNDBlOWZjN2VkIiwKICAiYWN0b3JDb3VudCI6IDEsCiAgIm93bmVyc2hpcFZhbGlkYXRlZCI6IHRydWUsCiAgImJlZm9yZSI6IHsKICAgICJzZXRzIjogMSwKICAgICJ2ZXJzaW9ucyI6IDEsCiAgICAiaXRlbXMiOiAxLAogICAgIml0ZW1WZXJzaW9ucyI6IDEsCiAgICAibWVtYmVycyI6IDEsCiAgICAiYXVkaXRzIjogMQogIH0sCiAgImFmdGVyIjogewogICAgInNldHMiOiAwLAogICAgInZlcnNpb25zIjogMCwKICAgICJpdGVtcyI6IDAsCiAgICAiaXRlbVZlcnNpb25zIjogMCwKICAgICJtZW1iZXJzIjogMCwKICAgICJhdWRpdHMiOiAwCiAgfSwKICAid29ya3NwYWNlQWJzZW50IjogdHJ1ZSwKICAiYWN0b3JzQWJzZW50IjogdHJ1ZQp9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b1d6dacb010c37b42b4b-0545d252eff0c96ee06d",
+          "file": "custom-evals.browser.spec.ts",
+          "line": 209,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-09T11:21:27.823Z",
+    "duration": 7709.3060000000005,
+    "expected": 4,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

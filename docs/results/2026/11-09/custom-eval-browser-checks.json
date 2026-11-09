@@ -1,0 +1,1147 @@
+{
+  "schemaVersion": "custom-eval-browser-public-result-v1",
+  "verificationStatus": "passed-after-preserved-first-failure",
+  "tier": 3,
+  "productionDeliveryStatus": "ready-build-and-alias-observed-at-dated-checked-source",
+  "realUserAcceptanceStatus": "pending",
+  "productContract": "../../../custom-evals.md",
+  "separateResultsNotRerun": [
+    "custom-eval-checks.md",
+    "custom-eval-postgres-checks.md"
+  ],
+  "applicationFix": {
+    "path": "apps/web/app/(product)/evals/custom/page.tsx",
+    "behavior": "await connection() before the list loader so signed-session reads render per request",
+    "sameApplicationPageInBothBrowserAttempts": true,
+    "sha256": "687e3a1ae9cf38bbcb6ce7fa10163efb5efa97bd42e68c150bea610d3b57415e"
+  },
+  "correctionsAfterFirstFailure": {
+    "textarea": "within the real editor form, anchored label prefix accommodates SSR textarea value text",
+    "feedback": "form-scoped alert and status roles exclude the Next route announcer",
+    "shutdown": "intentional graceful SIGTERM may return 143 only with the driver-owned shutdown and closure checks",
+    "caseNamesAndSubstantiveAssertionsRetained": true,
+    "applicationOrAuthCodeChangedBetweenAttempts": false,
+    "firstSpecSha256": "287ffb2bc4e835eb9d78129d7018fb59cddad685785ab75881674ea24693208c",
+    "correctedSpecSha256": "18e090487ee5257740ed6893d2143474915786a27474b4bc96c51302334e4710"
+  },
+  "attempts": [
+    {
+      "label": "first",
+      "verificationSource": "329997c59d2fa84ac72e3ae0591c10c8c0966fb3",
+      "acceptedBase": "5b4a0eb847ad484dad15d364655e99e9665dda6c",
+      "sourceTree": "f7387f9ff0539745918f5f406e1a7be570990ad5",
+      "sourceFiles": [
+        {
+          "path": ".github/workflows/custom-eval-browser-checks.yml",
+          "bytes": 47988,
+          "mode": "100644",
+          "sha": "62cbbce85ddbe70a31fd8825b4566dab8d65da99",
+          "sha256": "0ac0b3ffaf8ef46fc2eee0d9d66930d7bef03c4a5d4dbbb11ef284d6ae976e5d",
+          "status": "A"
+        },
+        {
+          "path": "apps/web/app/(product)/evals/custom/page.tsx",
+          "bytes": 2115,
+          "mode": "100644",
+          "sha": "4af4cffb252ab21ad7829b9cec9cc5e535982221",
+          "sha256": "687e3a1ae9cf38bbcb6ce7fa10163efb5efa97bd42e68c150bea610d3b57415e",
+          "status": "M"
+        },
+        {
+          "path": "docs/proposals/custom-eval-browser-checks.md",
+          "bytes": 8986,
+          "mode": "100644",
+          "sha": "60333dfb0bab0bf0b39234f9b1c58b361cc624b4",
+          "sha256": "dd864ec2b0e135884cea96303a11e2d28bbdde161a47fed3316769c85a404a50",
+          "status": "A"
+        },
+        {
+          "path": "tests/e2e/custom-evals.browser.config.ts",
+          "bytes": 1673,
+          "mode": "100644",
+          "sha": "8be807374016e5408a4f4b6a736f0d9acd21b4d9",
+          "sha256": "1a1905d1a865d7dcb6ccf7b3758250f5183116ca1c260cf5d4a3f2f842309040",
+          "status": "A"
+        },
+        {
+          "path": "tests/e2e/custom-evals.browser.fixture.ts",
+          "bytes": 13961,
+          "mode": "100644",
+          "sha": "07c4d9a21cdd6f202ff868868cd4c8964c2580d7",
+          "sha256": "2ecc6c3470687fd5521211b7fe83a330f2c5b26480323b24dbf65eed7467b32f",
+          "status": "A"
+        },
+        {
+          "path": "tests/e2e/custom-evals.browser.spec.ts",
+          "bytes": 14948,
+          "mode": "100644",
+          "sha": "07338058dabcaf4b4e5e7bec931192e697df5f12",
+          "sha256": "287ffb2bc4e835eb9d78129d7018fb59cddad685785ab75881674ea24693208c",
+          "status": "A"
+        },
+        {
+          "path": "tests/README.md",
+          "bytes": 3168,
+          "mode": "100644",
+          "sha": "a01f999c42a5a9727e771a881c4605decd7ea05c",
+          "sha256": "cb3bb3f7cecf30bb826c919b486277838284c1642cb665e6cf7ed8bf00f53bfc",
+          "status": "M"
+        }
+      ],
+      "run": {
+        "id": 42606774042,
+        "jobId": 129124666165,
+        "attempt": 1,
+        "event": "push",
+        "conclusion": "failure",
+        "url": "https://github.com/alvarovillalbaa/open-evals/actions/runs/42606774042"
+      },
+      "driverStatus": "failed",
+      "driverErrors": [
+        "application_exit_143",
+        "AssertionError:",
+        "application_exit_143"
+      ],
+      "browser": {
+        "stats": {
+          "startTime": "2026-11-09T11:11:00.294Z",
+          "duration": 25633.042,
+          "expected": 0,
+          "skipped": 0,
+          "unexpected": 4,
+          "flaky": 0
+        },
+        "cases": [
+          {
+            "id": "CE-BR01",
+            "title": "CE-BR01 desktop creates versions and reloads immutable history through the real app",
+            "status": "failed",
+            "resultCount": 1,
+            "retry": 0,
+            "durationMs": 10953,
+            "startedAt": "2026-11-09T11:11:00.779Z",
+            "persistenceAttachments": [],
+            "fixtureCleanup": {
+              "schemaVersion": "custom-eval-browser-cleanup-v1",
+              "status": "removed",
+              "workspaceId": "4b60c63c-b5df-4c79-a03a-ed23012885ce",
+              "actorCount": 1,
+              "ownershipValidated": true,
+              "before": {
+                "sets": 1,
+                "versions": 1,
+                "items": 1,
+                "itemVersions": 1,
+                "members": 1,
+                "audits": 1
+              },
+              "after": {
+                "sets": 0,
+                "versions": 0,
+                "items": 0,
+                "itemVersions": 0,
+                "members": 0,
+                "audits": 0
+              },
+              "workspaceAbsent": true,
+              "actorsAbsent": true
+            }
+          },
+          {
+            "id": "CE-BR02",
+            "title": "CE-BR02 a committed POST response is lost and an identical UI retry creates no duplicates",
+            "status": "failed",
+            "resultCount": 1,
+            "retry": 0,
+            "durationMs": 628,
+            "startedAt": "2026-11-09T11:11:12.332Z",
+            "persistenceAttachments": [],
+            "fixtureCleanup": {
+              "schemaVersion": "custom-eval-browser-cleanup-v1",
+              "status": "removed",
+              "workspaceId": "a7bf7cc1-3d57-4e02-ba56-e1261ed3babf",
+              "actorCount": 1,
+              "ownershipValidated": true,
+              "before": {
+                "sets": 1,
+                "versions": 1,
+                "items": 1,
+                "itemVersions": 1,
+                "members": 1,
+                "audits": 1
+              },
+              "after": {
+                "sets": 0,
+                "versions": 0,
+                "items": 0,
+                "itemVersions": 0,
+                "members": 0,
+                "audits": 0
+              },
+              "workspaceAbsent": true,
+              "actorsAbsent": true
+            }
+          },
+          {
+            "id": "CE-BR03",
+            "title": "CE-BR03 a stale second writer retains its draft and explicitly reviews the loaded head before saving",
+            "status": "failed",
+            "resultCount": 1,
+            "retry": 0,
+            "durationMs": 11029,
+            "startedAt": "2026-11-09T11:11:13.476Z",
+            "persistenceAttachments": [],
+            "fixtureCleanup": {
+              "schemaVersion": "custom-eval-browser-cleanup-v1",
+              "status": "removed",
+              "workspaceId": "511b9245-dce2-4cd6-ada0-b82fd9c110ee",
+              "actorCount": 2,
+              "ownershipValidated": true,
+              "before": {
+                "sets": 1,
+                "versions": 1,
+                "items": 1,
+                "itemVersions": 1,
+                "members": 1,
+                "audits": 1
+              },
+              "after": {
+                "sets": 0,
+                "versions": 0,
+                "items": 0,
+                "itemVersions": 0,
+                "members": 0,
+                "audits": 0
+              },
+              "workspaceAbsent": true,
+              "actorsAbsent": true
+            }
+          },
+          {
+            "id": "CE-BR04",
+            "title": "CE-BR04 a 390x844 viewport validates fields and saves then reloads without horizontal clipping",
+            "status": "failed",
+            "resultCount": 1,
+            "retry": 0,
+            "durationMs": 717,
+            "startedAt": "2026-11-09T11:11:25.033Z",
+            "persistenceAttachments": [],
+            "fixtureCleanup": {
+              "schemaVersion": "custom-eval-browser-cleanup-v1",
+              "status": "removed",
+              "workspaceId": "6fbef1bc-c03f-407b-918b-54bb2ddccf68",
+              "actorCount": 1,
+              "ownershipValidated": true,
+              "before": {
+                "sets": 0,
+                "versions": 0,
+                "items": 0,
+                "itemVersions": 0,
+                "members": 0,
+                "audits": 0
+              },
+              "after": {
+                "sets": 0,
+                "versions": 0,
+                "items": 0,
+                "itemVersions": 0,
+                "members": 0,
+                "audits": 0
+              },
+              "workspaceAbsent": true,
+              "actorsAbsent": true
+            }
+          }
+        ],
+        "retriesObserved": 0,
+        "workers": 1,
+        "globalReportErrors": []
+      },
+      "httpComparison": {
+        "baseline": {
+          "apiStatus": 200,
+          "listStatus": 200,
+          "sameSignedCookieWithinApiListPair": true,
+          "workspaceId": "cf019d5a-5797-48b8-8171-8a45ac824cce",
+          "apiValue": {
+            "sets": []
+          },
+          "deniedCopyPresent": true,
+          "createHeadingPresent": false,
+          "rawBodiesAndHeadersLocallyRead": false,
+          "reportedBodyAndHeaderDigests": {
+            "api": {
+              "bodyFile": "baseline-api.body",
+              "bodyBytes": 11,
+              "bodySha256": "f8fed6f4934be9d5e9ad6ec21d77c211237d465f99991e3c490ea9aa04cd6522",
+              "headersFile": "baseline-api.headers",
+              "headersBytes": 224,
+              "headersSha256": "a6f7f459250838ea18312d973986b04e84b44bd26ff536e42adf3715b348fc11",
+              "redirectsFollowed": 0
+            },
+            "list": {
+              "bodyFile": "baseline-list.body",
+              "bodyBytes": 17951,
+              "bodySha256": "965107e4b0fa02e8f08c038cef8a943c5a55cae2caa4f6d72359e48c2673ae0b",
+              "headersFile": "baseline-list.headers",
+              "headersBytes": 386,
+              "headersSha256": "f026997106f60a70f401b29112d36a18450a276e1d66788e75a33e206adfa37f",
+              "redirectsFollowed": 0
+            }
+          }
+        },
+        "candidate": {
+          "apiStatus": 200,
+          "listStatus": 200,
+          "sameSignedCookieWithinApiListPair": true,
+          "workspaceId": "cf019d5a-5797-48b8-8171-8a45ac824cce",
+          "apiValue": {
+            "sets": []
+          },
+          "deniedCopyPresent": false,
+          "createHeadingPresent": true,
+          "rawBodiesAndHeadersLocallyRead": false,
+          "reportedBodyAndHeaderDigests": {
+            "api": {
+              "bodyFile": "candidate-api.body",
+              "bodyBytes": 11,
+              "bodySha256": "f8fed6f4934be9d5e9ad6ec21d77c211237d465f99991e3c490ea9aa04cd6522",
+              "headersFile": "candidate-api.headers",
+              "headersBytes": 224,
+              "headersSha256": "6a2dd353d5b773ded213fccc66e188d61b1bd25d9ac58b7d03a34003a1d18f5c",
+              "redirectsFollowed": 0
+            },
+            "list": {
+              "bodyFile": "candidate-list.body",
+              "bodyBytes": 20304,
+              "bodySha256": "ad6ec5f2f602f4e168a14e3b2dddb8e094e1a7580db0669d8a3cee01b5ba9d4d",
+              "headersFile": "candidate-list.headers",
+              "headersBytes": 318,
+              "headersSha256": "e0aa6aa19aa64f157c973ae41432356edb42aa52eebb370b5dc25e470ace6c0a",
+              "redirectsFollowed": 0
+            }
+          }
+        },
+        "sameWorkspaceAcrossBuilds": true,
+        "cookieIdentityClaimIsWithinEachProbeOnly": true
+      },
+      "cleanup": {
+        "status": "removed",
+        "database": "oe_custom_browser_test_42606774042_1",
+        "validatedBeforeDrop": {
+          "name": "oe_custom_browser_test_42606774042_1",
+          "owner": "postgres",
+          "marker": "open-evals-custom-browser-20261109-created-disposable-v1"
+        },
+        "databaseAbsent": true,
+        "clusterStopped": true,
+        "serverLog": {
+          "file": "postgres-server.log",
+          "bytes": 1691,
+          "sha256": "cf3ceb8ab0a852f7e5ab39cec6fcfa52a51b0f78e31ad6f56f3e699c33db7d03",
+          "driverReportedComplete": true,
+          "locallyRead": false,
+          "digestIndependentlyVerified": false
+        },
+        "removedCluster": {
+          "entries": 1004,
+          "fileBytes": 40229092,
+          "rootIdentity": [
+            66305,
+            9213349,
+            1001
+          ]
+        },
+        "clusterAbsent": true
+      },
+      "applicationServerStops": [
+        {
+          "label": "baseline",
+          "observedExitCode": 143,
+          "stopMode": "graceful",
+          "uid": 1001,
+          "pidAbsent": true,
+          "processGroupAbsent": true,
+          "portFree": true,
+          "streams": {
+            "stdout": {
+              "file": "baseline.server.stdout.txt",
+              "bytes": 116,
+              "sha256": "73be76791a65ce53810e4416464ed4bfdcae5ec19882d6ec9eab690d3a35adea",
+              "driverReportedComplete": true,
+              "locallyRead": false
+            },
+            "stderr": {
+              "file": "baseline.server.stderr.txt",
+              "bytes": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "driverReportedComplete": true,
+              "locallyRead": false
+            }
+          }
+        },
+        {
+          "label": "candidate",
+          "observedExitCode": 143,
+          "stopMode": "graceful",
+          "uid": 1001,
+          "pidAbsent": true,
+          "processGroupAbsent": true,
+          "portFree": true,
+          "streams": {
+            "stdout": {
+              "file": "candidate.server.stdout.txt",
+              "bytes": 115,
+              "sha256": "1fb622e16c2c36c495c10203bf838012aaf856063bb6830b7f8ac0338ab73210",
+              "driverReportedComplete": true,
+              "locallyRead": false
+            },
+            "stderr": {
+              "file": "candidate.server.stderr.txt",
+              "bytes": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "driverReportedComplete": true,
+              "locallyRead": false
+            }
+          }
+        }
+      ],
+      "commandMetadata": {
+        "commands": 32,
+        "zeroExitCommands": 31,
+        "nonzeroExits": [
+          {
+            "label": "browser-cases",
+            "exitCode": 1
+          }
+        ],
+        "driverReportedCompleteStreams": 64,
+        "allOriginalCommandStreamsLocallyRead": false
+      },
+      "privateProviderJobLog": {
+        "retained": true,
+        "bytes": 243060,
+        "sha256": "2daa27003df800175c0319d27425bd2c5350893a63c37540956070736c249f1c"
+      },
+      "selectedOriginals": [
+        {
+          "path": "custom-eval-browser-originals/first/baseline-http.json",
+          "file": "baseline-http.json",
+          "bytes": 1196,
+          "sha256": "0ede01b4344b821a35d71ebdd48175a53463773d0a45662bc6cbb8834172583b",
+          "recoveredAndHashVerified": true
+        },
+        {
+          "path": "custom-eval-browser-originals/first/candidate-http.json",
+          "file": "candidate-http.json",
+          "bytes": 1200,
+          "sha256": "dee8695162a369e48d59502da7eb6453d7626bfcbc8c81658b7b60846adfd6ef",
+          "recoveredAndHashVerified": true
+        },
+        {
+          "path": "custom-eval-browser-originals/first/browser-cases.stdout.txt",
+          "file": "browser-cases.stdout.txt",
+          "bytes": 14329,
+          "sha256": "9d65e7a709b9f077b88f7658e223d8093f1cb95a89a08bf6464a3259c9be98f9",
+          "recoveredAndHashVerified": true
+        },
+        {
+          "path": "custom-eval-browser-originals/first/browser-cases.stderr.txt",
+          "file": "browser-cases.stderr.txt",
+          "bytes": 652,
+          "sha256": "f007ab906671e7daac7ac86f958c3ae7737f9feeeff7d2f26ed42af0cce0a8fb",
+          "recoveredAndHashVerified": true
+        },
+        {
+          "path": "custom-eval-browser-originals/first/browser-report.json",
+          "file": "browser-report.json",
+          "bytes": 31288,
+          "sha256": "14c8692087484571896cda8b0e2b6aa2eb74c5b6432d73761f56aecb52815766",
+          "recoveredAndHashVerified": true
+        },
+        {
+          "path": "custom-eval-browser-originals/first/cleanup.json",
+          "file": "cleanup.json",
+          "bytes": 660,
+          "sha256": "e3e4aa0f248ef28246b2adfbcda735de8ceb553c7b9eb0d7d12dadcf5aa66785",
+          "recoveredAndHashVerified": true
+        }
+      ],
+      "artifact": {
+        "id": 13668611290,
+        "name": "custom-eval-browser-42606774042-1",
+        "reportedBytes": 2361025,
+        "reportedServiceDigest": "sha256:92c81462ee77a4ad89cffc25bee6c89053f6e13882d5ef411785df082d9f0860",
+        "reportedExpiresAt": "2026-11-11T11:11:26Z",
+        "url": "https://github.com/alvarovillalbaa/open-evals/actions/runs/42606774042/artifacts/13668611290",
+        "zipLocallyRead": false,
+        "archiveDigestIndependentlyVerified": false
+      }
+    },
+    {
+      "label": "corrected",
+      "verificationSource": "b69fd83c3cab008b6bc6a3b2459828b82f73da98",
+      "acceptedBase": "5b4a0eb847ad484dad15d364655e99e9665dda6c",
+      "sourceTree": "759f60b39dda96b6e97003ad4cd7fafa8b809dba",
+      "sourceFiles": [
+        {
+          "path": ".github/workflows/custom-eval-browser-checks.yml",
+          "bytes": 48140,
+          "mode": "100644",
+          "sha": "f2502bb157b755d1a9ba7cf541c32015df9051be",
+          "sha256": "6d8fb1a357111941e16991187a683343b2463b97b31cc58dfb4fab900e2ee41b",
+          "status": "A"
+        },
+        {
+          "path": "apps/web/app/(product)/evals/custom/page.tsx",
+          "bytes": 2115,
+          "mode": "100644",
+          "sha": "4af4cffb252ab21ad7829b9cec9cc5e535982221",
+          "sha256": "687e3a1ae9cf38bbcb6ce7fa10163efb5efa97bd42e68c150bea610d3b57415e",
+          "status": "M"
+        },
+        {
+          "path": "docs/proposals/custom-eval-browser-checks.md",
+          "bytes": 11776,
+          "mode": "100644",
+          "sha": "afdcd1616c641e00d39032f654983a5231e81b98",
+          "sha256": "33b336cc84266b25587668e0fdbaa1dfcaf5823ac8a480b29086163923242cc0",
+          "status": "A"
+        },
+        {
+          "path": "tests/e2e/custom-evals.browser.config.ts",
+          "bytes": 1673,
+          "mode": "100644",
+          "sha": "8be807374016e5408a4f4b6a736f0d9acd21b4d9",
+          "sha256": "1a1905d1a865d7dcb6ccf7b3758250f5183116ca1c260cf5d4a3f2f842309040",
+          "status": "A"
+        },
+        {
+          "path": "tests/e2e/custom-evals.browser.fixture.ts",
+          "bytes": 13961,
+          "mode": "100644",
+          "sha": "07c4d9a21cdd6f202ff868868cd4c8964c2580d7",
+          "sha256": "2ecc6c3470687fd5521211b7fe83a330f2c5b26480323b24dbf65eed7467b32f",
+          "status": "A"
+        },
+        {
+          "path": "tests/e2e/custom-evals.browser.spec.ts",
+          "bytes": 15154,
+          "mode": "100644",
+          "sha": "ce6bcfdca829143b084e1f30cfd8e0f38716cc6f",
+          "sha256": "18e090487ee5257740ed6893d2143474915786a27474b4bc96c51302334e4710",
+          "status": "A"
+        },
+        {
+          "path": "tests/README.md",
+          "bytes": 3187,
+          "mode": "100644",
+          "sha": "5a299ef3b81668d398624f12a92b54f2b7412131",
+          "sha256": "0bd3baf84ee161e5771923bb02d8951cef2058496c68c631000da9935d39b905",
+          "status": "M"
+        }
+      ],
+      "run": {
+        "id": 42608186016,
+        "jobId": 129129427062,
+        "attempt": 1,
+        "event": "push",
+        "conclusion": "success",
+        "url": "https://github.com/alvarovillalbaa/open-evals/actions/runs/42608186016"
+      },
+      "driverStatus": "passed",
+      "driverErrors": [],
+      "browser": {
+        "stats": {
+          "startTime": "2026-11-09T11:21:27.823Z",
+          "duration": 7709.3060000000005,
+          "expected": 4,
+          "skipped": 0,
+          "unexpected": 0,
+          "flaky": 0
+        },
+        "cases": [
+          {
+            "id": "CE-BR01",
+            "title": "CE-BR01 desktop creates versions and reloads immutable history through the real app",
+            "status": "passed",
+            "resultCount": 1,
+            "retry": 0,
+            "durationMs": 1355,
+            "startedAt": "2026-11-09T11:21:28.376Z",
+            "persistenceAttachments": [
+              {
+                "name": "desktop-persistence",
+                "value": {
+                  "schemaVersion": "custom-eval-browser-persistence-v1",
+                  "workspaceId": "bcde8862-440d-4fc1-88b7-6db4b9917e11",
+                  "counts": {
+                    "sets": 1,
+                    "versions": 2,
+                    "items": 1,
+                    "itemVersions": 2,
+                    "members": 2,
+                    "audits": 2
+                  },
+                  "versions": [
+                    {
+                      "id": "093df2d1-1dc7-4d37-aeab-b2e3e86bd42d",
+                      "version": 1,
+                      "fingerprint": "489055ecb5fbfd177d4e87090359adde143faf546b2b480d83acdc610c023192"
+                    },
+                    {
+                      "id": "1ad98f0e-c50b-4fa0-bc4d-1ae98eff2915",
+                      "version": 2,
+                      "fingerprint": "cf9379737059a0f167f3c999f140636d2d9fd269d263e4b929905d52e5907077"
+                    }
+                  ],
+                  "audits": [
+                    {
+                      "versionId": "093df2d1-1dc7-4d37-aeab-b2e3e86bd42d",
+                      "actorId": "08ed8c45-c34f-4a17-9811-c8b06b3dfdd0"
+                    },
+                    {
+                      "versionId": "1ad98f0e-c50b-4fa0-bc4d-1ae98eff2915",
+                      "actorId": "08ed8c45-c34f-4a17-9811-c8b06b3dfdd0"
+                    }
+                  ]
+                }
+              }
+            ],
+            "fixtureCleanup": {
+              "schemaVersion": "custom-eval-browser-cleanup-v1",
+              "status": "removed",
+              "workspaceId": "bcde8862-440d-4fc1-88b7-6db4b9917e11",
+              "actorCount": 1,
+              "ownershipValidated": true,
+              "before": {
+                "sets": 1,
+                "versions": 2,
+                "items": 1,
+                "itemVersions": 2,
+                "members": 2,
+                "audits": 2
+              },
+              "after": {
+                "sets": 0,
+                "versions": 0,
+                "items": 0,
+                "itemVersions": 0,
+                "members": 0,
+                "audits": 0
+              },
+              "workspaceAbsent": true,
+              "actorsAbsent": true
+            }
+          },
+          {
+            "id": "CE-BR02",
+            "title": "CE-BR02 a committed POST response is lost and an identical UI retry creates no duplicates",
+            "status": "passed",
+            "resultCount": 1,
+            "retry": 0,
+            "durationMs": 973,
+            "startedAt": "2026-11-09T11:21:31.379Z",
+            "persistenceAttachments": [
+              {
+                "name": "lost-response-identical-retry-persistence",
+                "value": {
+                  "schemaVersion": "custom-eval-browser-persistence-v1",
+                  "workspaceId": "845efa02-f21c-4c33-9424-428a9cecfcc9",
+                  "counts": {
+                    "sets": 1,
+                    "versions": 1,
+                    "items": 1,
+                    "itemVersions": 1,
+                    "members": 1,
+                    "audits": 1
+                  },
+                  "versions": [
+                    {
+                      "id": "566ff0b2-d674-4a39-976c-28f1ba27fc5f",
+                      "version": 1,
+                      "fingerprint": "6273a74badf9fa2d6f80624ff01a89f82d39764918a6b796b831265ccb5d38dd"
+                    }
+                  ],
+                  "audits": [
+                    {
+                      "versionId": "566ff0b2-d674-4a39-976c-28f1ba27fc5f",
+                      "actorId": "0d15c290-2c10-4e0d-8daf-0afd21537bd9"
+                    }
+                  ]
+                }
+              }
+            ],
+            "fixtureCleanup": {
+              "schemaVersion": "custom-eval-browser-cleanup-v1",
+              "status": "removed",
+              "workspaceId": "845efa02-f21c-4c33-9424-428a9cecfcc9",
+              "actorCount": 1,
+              "ownershipValidated": true,
+              "before": {
+                "sets": 1,
+                "versions": 1,
+                "items": 1,
+                "itemVersions": 1,
+                "members": 1,
+                "audits": 1
+              },
+              "after": {
+                "sets": 0,
+                "versions": 0,
+                "items": 0,
+                "itemVersions": 0,
+                "members": 0,
+                "audits": 0
+              },
+              "workspaceAbsent": true,
+              "actorsAbsent": true
+            }
+          },
+          {
+            "id": "CE-BR03",
+            "title": "CE-BR03 a stale second writer retains its draft and explicitly reviews the loaded head before saving",
+            "status": "passed",
+            "resultCount": 1,
+            "retry": 0,
+            "durationMs": 1566,
+            "startedAt": "2026-11-09T11:21:32.367Z",
+            "persistenceAttachments": [
+              {
+                "name": "stale-head-reviewed-save-persistence",
+                "value": {
+                  "schemaVersion": "custom-eval-browser-persistence-v1",
+                  "workspaceId": "fa407e8a-53b7-4086-b555-584a1e6629e2",
+                  "counts": {
+                    "sets": 1,
+                    "versions": 3,
+                    "items": 1,
+                    "itemVersions": 3,
+                    "members": 3,
+                    "audits": 3
+                  },
+                  "versions": [
+                    {
+                      "id": "57ac146e-352d-4338-bc7f-62f4c02e48a8",
+                      "version": 1,
+                      "fingerprint": "48ff00c488410e17b75a2651cb8d78930da082065121808b7303ffaf12934798"
+                    },
+                    {
+                      "id": "a00cf0a2-b628-43ff-a65f-382737de2698",
+                      "version": 2,
+                      "fingerprint": "57aeaf19d9aa9c2b58d1bc3bb227955663e1de6fe284555edf17f32e533f25e2"
+                    },
+                    {
+                      "id": "ee572c2b-5d95-483a-a71e-2f1ed6a249b9",
+                      "version": 3,
+                      "fingerprint": "f6c86a2e2ab8817261df292d2e501b3fa588263a42c825073e954f84cf0928a8"
+                    }
+                  ],
+                  "audits": [
+                    {
+                      "versionId": "57ac146e-352d-4338-bc7f-62f4c02e48a8",
+                      "actorId": "9ec578f2-08b1-42c4-bd60-849cef7746c2"
+                    },
+                    {
+                      "versionId": "a00cf0a2-b628-43ff-a65f-382737de2698",
+                      "actorId": "9ec578f2-08b1-42c4-bd60-849cef7746c2"
+                    },
+                    {
+                      "versionId": "ee572c2b-5d95-483a-a71e-2f1ed6a249b9",
+                      "actorId": "c3d8c359-d8a1-4eef-a2c9-d7dcdd834744"
+                    }
+                  ]
+                }
+              }
+            ],
+            "fixtureCleanup": {
+              "schemaVersion": "custom-eval-browser-cleanup-v1",
+              "status": "removed",
+              "workspaceId": "fa407e8a-53b7-4086-b555-584a1e6629e2",
+              "actorCount": 2,
+              "ownershipValidated": true,
+              "before": {
+                "sets": 1,
+                "versions": 3,
+                "items": 1,
+                "itemVersions": 3,
+                "members": 3,
+                "audits": 3
+              },
+              "after": {
+                "sets": 0,
+                "versions": 0,
+                "items": 0,
+                "itemVersions": 0,
+                "members": 0,
+                "audits": 0
+              },
+              "workspaceAbsent": true,
+              "actorsAbsent": true
+            }
+          },
+          {
+            "id": "CE-BR04",
+            "title": "CE-BR04 a 390x844 viewport validates fields and saves then reloads without horizontal clipping",
+            "status": "passed",
+            "resultCount": 1,
+            "retry": 0,
+            "durationMs": 1518,
+            "startedAt": "2026-11-09T11:21:33.944Z",
+            "persistenceAttachments": [
+              {
+                "name": "narrow-validation-persistence",
+                "value": {
+                  "schemaVersion": "custom-eval-browser-persistence-v1",
+                  "workspaceId": "928ba315-2c1e-48d7-9637-87e40e9fc7ed",
+                  "counts": {
+                    "sets": 1,
+                    "versions": 1,
+                    "items": 1,
+                    "itemVersions": 1,
+                    "members": 1,
+                    "audits": 1
+                  },
+                  "versions": [
+                    {
+                      "id": "d771fd99-0f39-4513-b6d1-3c6cbc2673ed",
+                      "version": 1,
+                      "fingerprint": "eca1bd0bf9bb7a59cfc9993fc85e127f3ce9d6c5175dde7b7f0bef9ffdf50fe2"
+                    }
+                  ],
+                  "audits": [
+                    {
+                      "versionId": "d771fd99-0f39-4513-b6d1-3c6cbc2673ed",
+                      "actorId": "bf49a43e-b288-4c91-a85e-3e02196fc189"
+                    }
+                  ]
+                }
+              }
+            ],
+            "fixtureCleanup": {
+              "schemaVersion": "custom-eval-browser-cleanup-v1",
+              "status": "removed",
+              "workspaceId": "928ba315-2c1e-48d7-9637-87e40e9fc7ed",
+              "actorCount": 1,
+              "ownershipValidated": true,
+              "before": {
+                "sets": 1,
+                "versions": 1,
+                "items": 1,
+                "itemVersions": 1,
+                "members": 1,
+                "audits": 1
+              },
+              "after": {
+                "sets": 0,
+                "versions": 0,
+                "items": 0,
+                "itemVersions": 0,
+                "members": 0,
+                "audits": 0
+              },
+              "workspaceAbsent": true,
+              "actorsAbsent": true
+            }
+          }
+        ],
+        "retriesObserved": 0,
+        "workers": 1,
+        "globalReportErrors": []
+      },
+      "httpComparison": {
+        "baseline": {
+          "apiStatus": 200,
+          "listStatus": 200,
+          "sameSignedCookieWithinApiListPair": true,
+          "workspaceId": "f3c64437-f269-42cf-84ec-f0d0397aeac1",
+          "apiValue": {
+            "sets": []
+          },
+          "deniedCopyPresent": true,
+          "createHeadingPresent": false,
+          "rawBodiesAndHeadersLocallyRead": false,
+          "reportedBodyAndHeaderDigests": {
+            "api": {
+              "bodyFile": "baseline-api.body",
+              "bodyBytes": 11,
+              "bodySha256": "f8fed6f4934be9d5e9ad6ec21d77c211237d465f99991e3c490ea9aa04cd6522",
+              "headersFile": "baseline-api.headers",
+              "headersBytes": 224,
+              "headersSha256": "f793b46b334c2d574756df0264c7fddadce626d8e68ce8f55653b7845f9c5073",
+              "redirectsFollowed": 0
+            },
+            "list": {
+              "bodyFile": "baseline-list.body",
+              "bodyBytes": 17951,
+              "bodySha256": "9407f0772fbd8b1941faed30049bd933e96e66f9e586e0f5837e8bb09a8debd9",
+              "headersFile": "baseline-list.headers",
+              "headersBytes": 385,
+              "headersSha256": "61115f718e924248cf4210062797fb7328ac6595e6c61b28cf9d3fc28105c5eb",
+              "redirectsFollowed": 0
+            }
+          }
+        },
+        "candidate": {
+          "apiStatus": 200,
+          "listStatus": 200,
+          "sameSignedCookieWithinApiListPair": true,
+          "workspaceId": "f3c64437-f269-42cf-84ec-f0d0397aeac1",
+          "apiValue": {
+            "sets": []
+          },
+          "deniedCopyPresent": false,
+          "createHeadingPresent": true,
+          "rawBodiesAndHeadersLocallyRead": false,
+          "reportedBodyAndHeaderDigests": {
+            "api": {
+              "bodyFile": "candidate-api.body",
+              "bodyBytes": 11,
+              "bodySha256": "f8fed6f4934be9d5e9ad6ec21d77c211237d465f99991e3c490ea9aa04cd6522",
+              "headersFile": "candidate-api.headers",
+              "headersBytes": 224,
+              "headersSha256": "5e8071b0d7b2c9083db0db7533b6ae0b54109b857abf015914afc76576185b9e",
+              "redirectsFollowed": 0
+            },
+            "list": {
+              "bodyFile": "candidate-list.body",
+              "bodyBytes": 20304,
+              "bodySha256": "3f8a06bd818dcf8ac26291e05a1e32a3a56f1a13fa2ee29532b72210e9edfd7e",
+              "headersFile": "candidate-list.headers",
+              "headersBytes": 318,
+              "headersSha256": "b0a75d18caefa3ff7b0a148c2ab9b0f6f9b01038140294fae225d73fa3825f7f",
+              "redirectsFollowed": 0
+            }
+          }
+        },
+        "sameWorkspaceAcrossBuilds": true,
+        "cookieIdentityClaimIsWithinEachProbeOnly": true
+      },
+      "cleanup": {
+        "status": "removed",
+        "database": "oe_custom_browser_test_42608186016_1",
+        "validatedBeforeDrop": {
+          "name": "oe_custom_browser_test_42608186016_1",
+          "owner": "postgres",
+          "marker": "open-evals-custom-browser-20261109-created-disposable-v1"
+        },
+        "databaseAbsent": true,
+        "clusterStopped": true,
+        "serverLog": {
+          "file": "postgres-server.log",
+          "bytes": 1691,
+          "sha256": "b9986f6164d969b508751452fab3eaab469fe695575ef3d8de35881f0c8fe514",
+          "driverReportedComplete": true,
+          "locallyRead": false,
+          "digestIndependentlyVerified": false
+        },
+        "removedCluster": {
+          "entries": 1004,
+          "fileBytes": 40229092,
+          "rootIdentity": [
+            2049,
+            9213351,
+            1001
+          ]
+        },
+        "clusterAbsent": true
+      },
+      "applicationServerStops": [
+        {
+          "label": "baseline",
+          "observedExitCode": 143,
+          "stopMode": "graceful",
+          "uid": 1001,
+          "pidAbsent": true,
+          "processGroupAbsent": true,
+          "portFree": true,
+          "streams": {
+            "stdout": {
+              "file": "baseline.server.stdout.txt",
+              "bytes": 116,
+              "sha256": "c4b76c9e45c7f2cc4bd733288a84944b08b11b4eb536d7912d407109257d7d71",
+              "driverReportedComplete": true,
+              "locallyRead": false
+            },
+            "stderr": {
+              "file": "baseline.server.stderr.txt",
+              "bytes": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "driverReportedComplete": true,
+              "locallyRead": false
+            }
+          }
+        },
+        {
+          "label": "candidate",
+          "observedExitCode": 143,
+          "stopMode": "graceful",
+          "uid": 1001,
+          "pidAbsent": true,
+          "processGroupAbsent": true,
+          "portFree": true,
+          "streams": {
+            "stdout": {
+              "file": "candidate.server.stdout.txt",
+              "bytes": 116,
+              "sha256": "9584507f3a186b11c7a8ba0360e8410144b8c6fb0163962e12381bca429635ef",
+              "driverReportedComplete": true,
+              "locallyRead": false
+            },
+            "stderr": {
+              "file": "candidate.server.stderr.txt",
+              "bytes": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "driverReportedComplete": true,
+              "locallyRead": false
+            }
+          }
+        }
+      ],
+      "commandMetadata": {
+        "commands": 32,
+        "zeroExitCommands": 32,
+        "nonzeroExits": [],
+        "driverReportedCompleteStreams": 64,
+        "allOriginalCommandStreamsLocallyRead": false
+      },
+      "privateProviderJobLog": {
+        "retained": true,
+        "bytes": 163967,
+        "sha256": "a263d65edeba655f1f30e8761ff0f5bdc6b27ad5255d80d5be5d95d2dfa0af87"
+      },
+      "selectedOriginals": [
+        {
+          "path": "custom-eval-browser-originals/corrected/baseline-http.json",
+          "file": "baseline-http.json",
+          "bytes": 1196,
+          "sha256": "2c34117f4629d59383d12a07d66f6ddabb9979c57fa0216e883c2c19f38a579f",
+          "recoveredAndHashVerified": true
+        },
+        {
+          "path": "custom-eval-browser-originals/corrected/candidate-http.json",
+          "file": "candidate-http.json",
+          "bytes": 1200,
+          "sha256": "8789b2d86c529d1e1acfc1bf6f1d0e468ee39e0087fab877f112c3455d242ff9",
+          "recoveredAndHashVerified": true
+        },
+        {
+          "path": "custom-eval-browser-originals/corrected/browser-cases.stdout.txt",
+          "file": "browser-cases.stdout.txt",
+          "bytes": 809,
+          "sha256": "e1e1e0255405174a9a010ded665c2f8f5281da34a82762566378bbdeb6a8fe82",
+          "recoveredAndHashVerified": true
+        },
+        {
+          "path": "custom-eval-browser-originals/corrected/browser-cases.stderr.txt",
+          "file": "browser-cases.stderr.txt",
+          "bytes": 163,
+          "sha256": "6dd61d629ccc4357f99567a265a7c36bbc30a40ba8075dc249b242536c61859d",
+          "recoveredAndHashVerified": true
+        },
+        {
+          "path": "custom-eval-browser-originals/corrected/browser-report.json",
+          "file": "browser-report.json",
+          "bytes": 15272,
+          "sha256": "ff881ac0ed4e81ec0fae2c4db29e5d9e23d5040d8d47f3b0d0ffe7f2ca38365d",
+          "recoveredAndHashVerified": true
+        },
+        {
+          "path": "custom-eval-browser-originals/corrected/cleanup.json",
+          "file": "cleanup.json",
+          "bytes": 659,
+          "sha256": "28e34e13ae2a20fe0cca67feefe2e90126d84d5bf51f0f3bd222c2fad909a7d1",
+          "recoveredAndHashVerified": true
+        }
+      ],
+      "artifact": {
+        "id": 13668049189,
+        "name": "custom-eval-browser-42608186016-1",
+        "reportedBytes": 59764,
+        "reportedServiceDigest": "sha256:d9c961e871417d31819467d2816adf80d1fdd27bd25ff117297e34040489e0b4",
+        "reportedExpiresAt": "2026-11-11T11:21:36Z",
+        "url": "https://github.com/alvarovillalbaa/open-evals/actions/runs/42608186016/artifacts/13668049189",
+        "zipLocallyRead": false,
+        "archiveDigestIndependentlyVerified": false
+      }
+    }
+  ],
+  "retrieval": {
+    "selectedOriginalsPerRun": 6,
+    "selectedOriginalCount": 12,
+    "selectedOriginalBytes": 68624,
+    "allSelectedOriginalsRecoveredAndHashVerified": true,
+    "method": "recover exact source-delimited job-log original blocks; compare byte length and SHA256 with emitted original metadata",
+    "rawHttpBodiesAndHeadersLocallyRead": false,
+    "rawApplicationAndPostgresqlServerStreamsLocallyRead": false,
+    "screenshotsAndTracesLocallyRead": false,
+    "artifactZipBytesLocallyRead": false,
+    "rawCiBuildStreamsLocallyRead": false,
+    "productionBuildProviderEventWindowsRecordedSeparately": true
+  },
+  "rawEvidenceWhitespace": {
+    "path": "custom-eval-browser-originals/first/browser-cases.stdout.txt",
+    "reportedTrailingWhitespaceLines": 8,
+    "originalBytesAndHashPreserved": true,
+    "blanketAllDiffCleanClaim": false,
+    "sourceAndAuthoredDocsUseSeparateScopedChecks": true
+  },
+  "proofLimits": [
+    "four Chromium journeys against the owned production-mode app and PostgreSQL only",
+    "signed HMAC fixtures are not Supabase/provider login or hosted membership/RLS proof",
+    "390x844 viewport is not physical touch/device proof",
+    "no single invocation or replay combining the earlier 38 T1 and 12 store cases",
+    "raw selected JSON report records do not establish local readback of referenced HTML, server logs, traces or ZIP bytes",
+    "dataset/evaluator composition, Harbor and full-product acceptance remain separate",
+    "production observation is dated READY/build/alias evidence only, not live hosted browser/HTTP/Auth/DB acceptance or a later alias guarantee",
+    "main acceptance and temporary workflow-ref retirement were pending at the observation"
+  ],
+  "mainAcceptanceStatus": "pending-at-observation",
+  "temporaryWorkflowRefRetirementStatus": "pending-at-observation",
+  "productionBuildObservation": {
+    "record": "custom-eval-browser-production-build.json",
+    "bytes": 71622,
+    "sha256": "e3e1a5f2282e980024c33d80b1240e59504e25895a7c5af3feb997689c43b123",
+    "observedAt": "2026-11-09T11:27:44Z",
+    "projectId": "prj_FG3VAWXbwS6VRHq4Wd2B4vyIms4l",
+    "deploymentId": "dpl_FjDQoisyt3kUpTS7aAcP9TAcCfF5",
+    "readyState": "READY",
+    "source": "b69fd83c3cab008b6bc6a3b2459828b82f73da98",
+    "alias": "open-evals-web.vercel.app",
+    "aliasDeploymentId": "dpl_FjDQoisyt3kUpTS7aAcP9TAcCfF5",
+    "canonicalAliasMatched": true,
+    "createdAt": 1794223593341,
+    "buildingAt": 1794223594280,
+    "readyAt": 1794223619969,
+    "buildingToReadyMilliseconds": 25689,
+    "events": {
+      "initialCappedCount": 99,
+      "windowCounts": [
+        82,
+        72,
+        2
+      ],
+      "rawWindowEvents": 156,
+      "uniqueEvents": 144,
+      "duplicateEvents": 12
+    },
+    "build": {
+      "successfulTasks": 10,
+      "cachedTasks": 9,
+      "totalTasks": 10,
+      "turboReportedSeconds": 14.271,
+      "providerBuildSeconds": 17,
+      "next": "16.2.9",
+      "typescriptFinished": true,
+      "staticPageCount": 37,
+      "customListDynamic": true,
+      "customDetailDynamic": true
+    },
+    "limits": [
+      "READY/build/alias observation only; no current anonymous or signed-in hosted browser/HTTP/Auth/DB/RLS or physical device acceptance."
+    ],
+    "initialCappedObservationRetained": true,
+    "notALaterAliasGuarantee": true,
+    "liveHostedBrowserAuthDatabaseAcceptanceEstablished": false
+  }
+}

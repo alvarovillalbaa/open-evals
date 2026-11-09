@@ -59,6 +59,9 @@ ownership relation, so project keys cannot acquire workspace authorship through
 this API. No existing route grant, role, provider setting or configuration is
 changed. Request bodies cannot supply the trusted workspace or actor.
 
+The list waits for the incoming request before loading workspace/session state.
+Its `connection()` boundary keeps those reads out of production prerendering.
+
 | Endpoint | Result |
 | --- | --- |
 | `GET /api/v1/eval-sets` | Up to100actual custom-set summaries; imported benchmark sets are separate |
@@ -94,6 +97,9 @@ later form. Loading saved versions is read-only; it does not cancel or roll back
 an already started save. Client response checks reject mismatched intent rather
 than silently reshaping it.
 
-[Focused verification](results/2026/11-09/custom-eval-checks.md) separates actual
-pure-source results from authored PostgreSQL cases and unverified HTTP/Auth/UI
-behavior. Hosted database/Auth configuration remains a separate existing gate.
+[Focused verification](results/2026/11-09/custom-eval-checks.md) records 38 pure
+checks, and [PostgreSQL verification](results/2026/11-09/custom-eval-postgres-checks.md)
+records 12 separate real-store cases. [Browser verification](results/2026/11-09/custom-eval-browser-checks.md)
+records four production-app journeys with authored signed sessions and an owned
+database, including the preserved failed first run and corrected acceptance.
+Hosted provider login, database/Auth configuration and RLS remain separate gates.
