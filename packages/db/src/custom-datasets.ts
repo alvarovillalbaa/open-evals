@@ -29,8 +29,8 @@ const MANIFEST_LIMIT = 128 * 1024;
 const STATUSES = ["synthetic", "reviewed", "golden"];
 type Reject = () => never;
 function fail(status: number, code: string): never { throw new CustomDatasetStoreError(status, code); }
-const conflict = (): never => fail(409, "custom_dataset_storage_conflict");
-const invalid = (): never => fail(422, "custom_dataset_invalid");
+const conflict: Reject = (): never => fail(409, "custom_dataset_storage_conflict");
+const invalid: Reject = (): never => fail(422, "custom_dataset_invalid");
 function stable(value: unknown): string {
   if (value === null || typeof value !== "object") return JSON.stringify(value);
   if (Array.isArray(value)) return `[${value.map(stable).join(",")}]`;
