@@ -459,7 +459,7 @@ function sameJson(value: unknown, expected: unknown): boolean {
     if (expected === null || typeof expected !== "object") return value === expected;
     if (Array.isArray(expected)) {
       if (!Array.isArray(value) || Object.getPrototypeOf(value) !== Array.prototype) return false;
-      const descriptors: PropertyDescriptorMap = Object.getOwnPropertyDescriptors(value);
+      const descriptors = Object.getOwnPropertyDescriptors(value as object);
       const keys = Reflect.ownKeys(descriptors).filter((key) => key !== "length");
       return descriptors.length.value === expected.length && keys.length === expected.length
         && expected.every((item, index) => {
