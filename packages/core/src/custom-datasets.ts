@@ -129,7 +129,7 @@ function decimal(token: string): Decimal {
   if (!match) return invalid("custom_dataset_source_invalid");
   let coefficient = `${match[2]}${match[3] ?? ""}`.replace(/^0+/, "");
   // Zero needs no exponent allocation, including a long exponent supplied in the source.
-  if (!coefficient) return { negative: false, coefficient: "0", exponent: 0n };
+  if (!coefficient) return { negative: false, coefficient: "0", exponent: BigInt(0) };
   const trailing = coefficient.length - coefficient.replace(/0+$/, "").length;
   coefficient = coefficient.slice(0, coefficient.length - trailing);
   const signedExponent = match[4] ?? "0";
