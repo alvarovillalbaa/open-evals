@@ -1,9 +1,11 @@
 import Link from "next/link";
+import { connection } from "next/server";
 import { LinkButton, PageHeader, StateGate } from "../../components";
 import { loadCustomEvalList } from "@/lib/custom-evals";
 import { CustomEvalEditor } from "./custom-eval-editor";
 
 export default async function CustomEvalsPage() {
+  await connection();
   const state = await loadCustomEvalList();
   return (
     <div className="grid min-w-0 gap-6">
