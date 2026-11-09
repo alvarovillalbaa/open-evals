@@ -17,3 +17,5 @@ export * from "./campaign-preparation";
 export * from "./custom-evals";
 export * from "./provided-output-runs";
 export * from "./custom-datasets";
+export * from "./http-eval-plans";
+export * from "./http-eval-runs";

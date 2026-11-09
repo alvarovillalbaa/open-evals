@@ -44,7 +44,7 @@ export default async function EvalsPage() {
   const state = await loadEvals();
   return (
     <div className="grid min-w-0 gap-6">
-      <PageHeader title="Evals" actions={<><LinkButton href="/evals/run" primary>Score supplied outputs</LinkButton><LinkButton href="/evals/datasets">Custom datasets</LinkButton><LinkButton href="/runs">View runs</LinkButton><LinkButton href="/evals/custom">Custom Eval Sets</LinkButton><LinkButton href="/evals/sdk">Connect SDK <ArrowRight className="size-4" aria-hidden="true" /></LinkButton></>} />
+      <PageHeader title="Evals" actions={<><LinkButton href="/evals/plans" primary>HTTP eval plans</LinkButton><LinkButton href="/evals/run">Score supplied outputs</LinkButton><LinkButton href="/evals/datasets">Custom datasets</LinkButton><LinkButton href="/runs">View runs</LinkButton><LinkButton href="/evals/custom">Custom Eval Sets</LinkButton><LinkButton href="/evals/sdk">Connect SDK <ArrowRight className="size-4" aria-hidden="true" /></LinkButton></>} />
       <p className="max-w-3xl text-sm leading-6 text-muted-foreground">Evaluation combines inputs with evaluators. Dataset and scenario versions supply the cases; Eval Items define what to check, and Eval Sets version those evaluator definitions together.</p>
       <StateGate state={state} accessDeniedTitle="Evals access unavailable" accessDeniedBody="Your current role, key or scope does not allow these evaluation resources.">
         {({ data }) => (

@@ -9,3 +9,12 @@ export * from "./prompt-authoring";
 export * from "./custom-evals";
 export * from "./provided-output-runs";
 export * from "./custom-datasets";
+export { HttpEvalStoreError } from "./http-eval-types";
+export type { HttpEvalStorePlan, HttpEvalStoreRun, HttpEvalStoreLedger, HttpEvalStoreRowEvent,
+  HttpEvalStorePlanCallbacks, HttpEvalStoreRunCallbacks } from "./http-eval-types";
+export { getHttpEvalPlanSources, getHttpEvalPlanHead, getHttpEvalPlanVersion, saveHttpEvalPlanVersion,
+  listHttpEvalPlans, getHttpEvalPlan } from "./http-eval-plans";
+export type { HttpEvalPlanSummary } from "./http-eval-plans";
+export { reserveHttpEvalRun, claimHttpEvalRunRow, finalizeHttpEvalRunRow, stopHttpEvalRun,
+  recoverHttpEvalRun, getHttpEvalRun, listHttpEvalRuns } from "./http-eval-runs";
+export type { HttpEvalRunSummary, HttpEvalFinalizeIntent } from "./http-eval-runs";

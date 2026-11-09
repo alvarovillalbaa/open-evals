@@ -18,6 +18,15 @@ export interface DatasetSnapshotHead {
 export type DatasetSnapshotFailure = (status: number, code: string) => never;
 
 const SNAPSHOT_LIMIT = 1024 * 1024;
+// A canonical finite IEEE754 token has <=17 significant digits and exponent
+// magnitude <=324. Even a conservative 343-byte expanded decimal is <64x a
+// token of six bytes; shorter tokens have smaller expansions (<64x too).
+// JSONB separator spaces cost at most 2x their canonical delimiters, while
+// string/key escaping and raw identity bytes do not exceed canonical JSON.
+// Therefore this bounds legitimate JSON.stringify-authored complete snapshots.
+// Arbitrary SQL numerics with excessive trailing scale can still be refused.
+// Exact per-value JSONB equality and the complete 1-MiB canonical limit follow.
+const SNAPSHOT_WIRE_LIMIT = 64 * SNAPSHOT_LIMIT;
 interface RawRow {
   id: string; rowKey: string; input: string; expectedOutput: string | null; context: string | null;
   history: string | null; traceFixture: string | null; metadata: string; reviewStatus: string;
@@ -97,8 +106,7 @@ export async function loadDatasetSnapshot(
     + coalesce(octet_length(history::text), 0) + coalesce(octet_length(trace_fixture::text), 0)
     + octet_length(metadata::text) + octet_length(review_status)), 0)::text as bytes
     from dataset_rows where dataset_version_id = $1`, [head.id])).rows[0];
-  // JSONB formatting spaces are a coarse bound; the complete canonical snapshot has the exact limit.
-  if (!size || BigInt(size.bytes) > BigInt(2 * SNAPSHOT_LIMIT)) fail(422, "provided_output_dataset_size");
+  if (!size || BigInt(size.bytes) > BigInt(SNAPSHOT_WIRE_LIMIT)) fail(422, "provided_output_dataset_size");
   const rawRows = (await client.query<RawRow>(`select id, row_key as "rowKey", input::text, expected_output::text as "expectedOutput",
     context::text, history::text, trace_fixture::text as "traceFixture", metadata::text, review_status as "reviewStatus"
     from dataset_rows where dataset_version_id = $1 order by row_key collate "C", id collate "C"`, [head.id])).rows;

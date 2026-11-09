@@ -4,6 +4,17 @@ import { Pool, type PoolClient, type QueryResultRow } from "pg";
 type JsonValue = string | number | boolean | null | JsonValue[] | { [key: string]: JsonValue };
 type JsonRecord = Record<string, JsonValue>;
 
+// Recognize reserved identities even when a private record's JSON profile is corrupt.
+const HTTP_PRIVATE_PLAN = `(run_plans.resolved_plan ->> 'schemaVersion' is not distinct from 'http-target-eval-v1'
+  or run_plans.resolved_plan ->> 'schemaVersion' is not distinct from 'http-eval-plan-record-v1'
+  or run_plans.resolved_plan ->> 'schemaVersion' is not distinct from 'http-eval-plan-storage-v1'
+  or run_plans.resolved_plan #>> '{content,schemaVersion}' is not distinct from 'http-target-eval-v1'
+  or left(run_plans.id, length('http_eval_plan_')) = 'http_eval_plan_'
+  or exists (select 1 from eval_runs http_run where http_run.run_plan_id = run_plans.id and
+    (left(http_run.id, length('http_eval_run_')) = 'http_eval_run_'
+      or exists (select 1 from run_samples http_sample where http_sample.eval_run_id = http_run.id
+        and left(http_sample.id, length('http_eval_sample_')) = 'http_eval_sample_'))))`;
+
 export type WorkspaceRole = "owner" | "admin" | "editor" | "viewer";
 
 export interface HostedUserInput {
@@ -405,6 +416,7 @@ export async function listRunBatches(workspaceId: string): Promise<RunBatchSumma
       ) result_counts on true
       where run_plans.workspace_id = $1
         and run_plans.resolved_plan ->> 'schemaVersion' is distinct from 'provided-output-run-record-v1'
+        and not ${HTTP_PRIVATE_PLAN}
       group by run_plans.id, run_plans.fingerprint
       order by min(eval_runs.created_at) desc nulls last, run_plans.created_at desc
     `,
@@ -464,6 +476,7 @@ export async function getRunBatch(workspaceId: string, batchId: string): Promise
       left join gate_results on gate_results.eval_run_id = eval_runs.id
       where run_plans.workspace_id = $1 and run_plans.id = $2
         and run_plans.resolved_plan ->> 'schemaVersion' is distinct from 'provided-output-run-record-v1'
+        and not ${HTTP_PRIVATE_PLAN}
       group by run_plans.id, run_plans.fingerprint, run_plans.resolved_plan, run_plans.created_at
     `,
     [workspaceId, batchId]
@@ -939,6 +952,14 @@ export async function persistEvalRun(workspaceId: string, input: PersistedEvalRu
     if (privatePlans.rows.length || (input.plan as unknown as Record<string, unknown>).schemaVersion === "provided-output-run-record-v1") {
       throw Object.assign(new Error("provided_output_legacy_collision"), { status: 409 });
     }
+    const httpPlans = await client.query(`select id from run_plans where ${HTTP_PRIVATE_PLAN} and
+      (id = $1 or fingerprint = $2 or id in (select run_plan_id from eval_runs
+        where id = $3 or (workspace_id = $4 and idempotency_key = $5)))`,
+      [input.plan.id, input.plan.planFingerprint, runId, workspaceId, idempotencyKey]);
+    if (httpPlans.rows.length || input.plan.id.startsWith("http_eval_plan_")
+      || ["http-target-eval-v1", "http-eval-plan-record-v1", "http-eval-plan-storage-v1"].includes(String((input.plan as unknown as Record<string, unknown>).schemaVersion))) {
+      throw Object.assign(new Error("http_eval_legacy_collision"), { status: 409 });
+    }
     const planResult = await client.query<{ id: string }>(
       `
         insert into run_plans (id, workspace_id, resolved_plan, fingerprint)
@@ -946,6 +967,11 @@ export async function persistEvalRun(workspaceId: string, input: PersistedEvalRu
         on conflict (fingerprint) do update
         set resolved_plan = run_plans.resolved_plan
          where run_plans.resolved_plan ->> 'schemaVersion' is distinct from 'provided-output-run-record-v1'
+           and run_plans.resolved_plan ->> 'schemaVersion' is distinct from 'http-target-eval-v1'
+           and run_plans.resolved_plan ->> 'schemaVersion' is distinct from 'http-eval-plan-record-v1'
+           and run_plans.resolved_plan ->> 'schemaVersion' is distinct from 'http-eval-plan-storage-v1'
+           and run_plans.resolved_plan #>> '{content,schemaVersion}' is distinct from 'http-target-eval-v1'
+           and left(run_plans.id, length('http_eval_plan_')) <> 'http_eval_plan_'
         returning id
       `,
       [input.plan.id, workspaceId, JSON.stringify(input.plan), input.plan.planFingerprint]

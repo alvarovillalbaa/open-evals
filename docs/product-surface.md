@@ -20,6 +20,14 @@ list. Repository AGENTS.md independently requires exactly Evals and Improve.
   one-item membership using immutable versions. Workspace sessions can inspect,
   edit, retry and recover saves; project keys and hosted demo ownership cannot
   acquire workspace authoring. [Exact contract](custom-evals.md).
+- `/evals/datasets` authors complete JSON/JSONL datasets with explicit review
+  declarations, immutable history and exact-version scoring links.
+  [Dataset contract](custom-datasets.md).
+- `/evals/plans` composes an exact dataset version, saved text-contains evaluator
+  versions and a versioned public HTTP target into a named immutable plan.
+  Preview, save and replay make no target call. Explicit execution uses durable
+  row claims, stores actual responses and exposes uncertain-outcome recovery.
+  [HTTP contract and current proof limits](http-target-runs.md).
 - `/improve` leads to existing Instructions authoring and campaign history.
   Each section retains its own authenticated loader and access outcome. A saved
   preparation request is not a running campaign or approval decision.
@@ -42,7 +50,7 @@ Authentication/database failures remain separate from a ready but empty workspac
 | Owner requirement | Remaining implementation |
 | --- | --- |
 | Evals contain Harbor tasks | Task identity/version/artifacts, task selection and actual Harbor execution integration |
-| Custom evals combine inputs and scoring | Saved one-item evaluator authoring is implemented; durable input/evaluator composition, further evaluator types and execution remain unfinished |
+| Custom evals combine inputs and scoring | Saved datasets and immutable HTTP composition have source implementations; integrated acceptance and native execution proof remain pending, alongside further target runtimes and evaluator types |
 | Campaigns consume Evals and optimizer algorithms | Bind pinned eval definitions into actual approved campaign execution; current request preparation does not do this |
 | Improved instructions reach production with safe A/B rollout | Product approval, execution and release integration; existing primitives do not prove the complete flow |
 | Usable hosted app | Existing Auth/database/provider configuration and genuine current-source interaction acceptance |

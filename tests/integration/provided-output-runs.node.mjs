@@ -10,7 +10,10 @@ import { setTimeout as delay } from "node:timers/promises";
 // This file never creates, migrates or drops a database. It has no application URL fallback.
 const testCohort = process.env.PROVIDED_OUTPUT_TEST_COHORT;
 const customDatasetCohort = testCohort === "open-evals-custom-datasets-20261109";
-const DATABASE_MARKER = customDatasetCohort
+const httpTargetCohort = testCohort === "open-evals-http-target-runs-20261109";
+const DATABASE_MARKER = httpTargetCohort
+  ? "open-evals-http-target-runs-20261109-created-disposable-v1"
+  : customDatasetCohort
   ? "open-evals-custom-datasets-20261109-created-disposable-v1"
   : "open-evals-provided-output-20261109-created-disposable-v1";
 const applicationName = `oe_provided_output_${randomUUID().replaceAll("-", "")}`;
@@ -21,17 +24,17 @@ let core, custom, store, customStore, service, legacyEngine, stableStringify, st
 
 function guardedUrl() {
   assert.equal(process.env.PROVIDED_OUTPUT_TEST_ALLOW, "local-disposable", "explicit disposable target required");
-  assert.ok(testCohort === undefined || customDatasetCohort, "unknown disposable verification cohort");
+  assert.ok(testCohort === undefined || customDatasetCohort || httpTargetCohort, "unknown disposable verification cohort");
   let url;
   try { url = new URL(process.env.PROVIDED_OUTPUT_TEST_DATABASE_URL ?? ""); }
   catch { throw new Error("dedicated test database URL required"); }
   assert.ok(["postgres:", "postgresql:"].includes(url.protocol));
   assert.ok(["127.0.0.1", "localhost", "[::1]"].includes(url.hostname), "loopback URL required");
-  if (customDatasetCohort) {
+  if (customDatasetCohort || httpTargetCohort) {
     assert.equal(url.hostname, "127.0.0.1");
     assert.equal(url.port, "65432");
     assert.equal(url.username, "postgres");
-    assert.match(url.pathname, /^\/oe_custom_datasets_test_[0-9]+_[0-9]+$/, "current owned database name required");
+    assert.match(url.pathname, httpTargetCohort ? /^\/oe_http_eval_test_[0-9]+_[0-9]+$/ : /^\/oe_custom_datasets_test_[0-9]+_[0-9]+$/, "current owned database name required");
   } else {
     assert.match(url.pathname, /^\/oe_provided_output_test_[a-z0-9_]{1,38}$/, "dedicated database name required");
   }
