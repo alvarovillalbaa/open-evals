@@ -17,8 +17,8 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     env:
-      ROOT_ACCEPTED_SOURCE_SHA: 301cf02bede4b0dda7cfefb9bcfe9f2e07d3662d
-      ROOT_EXPECTED_PARENT_SHA: 301cf02bede4b0dda7cfefb9bcfe9f2e07d3662d
+      ROOT_ACCEPTED_SOURCE_SHA: cad01a013a4184b7cc1462acc231c282376d676b
+      ROOT_EXPECTED_PARENT_SHA: cad01a013a4184b7cc1462acc231c282376d676b
       TASK_DB: oe_custom_datasets_test_${{ github.run_id }}_${{ github.run_attempt }}
       OWNED_PORT: '65432'
     steps:
@@ -76,7 +76,7 @@ jobs:
           base_url = 'http://127.0.0.1:4173'
           auth_secret = 'authored_open_evals_custom_datasets_20261109_fixture_only'
           api_key_pepper = 'authored_custom_dataset_browser_pepper_20261109_fixture_only'
-          source_contract_frozen = True  # Root and independent peer verified the R2 two-path delta and all 58 source pins.
+          source_contract_frozen = True  # Root and independent peer verified the workflow-only retry and unchanged 58 pins.
           expected_sources = {
               "apps/web/app/(product)/evals/datasets/[datasetId]/page.tsx": {"bytes":2970,"sha256":"e5e9bc048cd19d6e22b08ac1eb1b1023fb6c1667ac2f31291e2c4a9e8699bf08"},
               "apps/web/app/(product)/evals/datasets/[datasetId]/versions/[versionId]/page.tsx": {"bytes":4887,"sha256":"22377d1a72f24314ad47fc2cbd371ab914247b1507c6ab98e8c8eed883b4ade6"},
@@ -459,9 +459,9 @@ jobs:
               assert re.fullmatch(r'oe_custom_datasets_test_[0-9]+_[0-9]+', database)
               head = run('source-head', ['git', 'rev-parse', 'HEAD']).strip()
               parents = run('source-parents', ['git', 'rev-list', '--parents', '-n', '1', 'HEAD']).split()
-              assert head == os.environ['GITHUB_SHA'] and parents == [head, expected_parent], 'source must be one direct child of the SQL-verified R1 source'
+              assert head == os.environ['GITHUB_SHA'] and parents == [head, expected_parent], 'source must be one direct child of the preserved pre-job failure source'
               delta = run('source-delta', ['git', 'diff', '--name-status', '-z', '--no-renames', expected_parent, 'HEAD']).split('\0')
-              expected_delta = ["M",".github/workflows/custom-dataset-checks.yml","M","packages/core/src/custom-datasets.ts",""]
+              expected_delta = ["M",".github/workflows/custom-dataset-checks.yml",""]
               assert expected_delta and delta == expected_delta, 'only the reviewed custom-dataset source delta is admitted'
               assert not run('source-clean', ['git', 'status', '--porcelain=v1', '--untracked-files=no']).strip()
               protected = [".github/workflows/custom-dataset-checks.yml","apps/web/app/(product)/evals/datasets/[datasetId]/page.tsx","apps/web/app/(product)/evals/datasets/[datasetId]/versions/[versionId]/page.tsx","apps/web/app/(product)/evals/datasets/custom-dataset-composer.tsx","apps/web/app/(product)/evals/datasets/error.tsx","apps/web/app/(product)/evals/datasets/loading.tsx","apps/web/app/(product)/evals/datasets/page.tsx","apps/web/app/(product)/evals/page.tsx","apps/web/app/(product)/evals/run/[runId]/page.tsx","apps/web/app/(product)/evals/run/page.tsx","apps/web/app/(product)/evals/run/provided-output-composer.tsx","apps/web/app/api/v1/custom-datasets/[datasetId]/route.ts","apps/web/app/api/v1/custom-datasets/[datasetId]/versions/[versionId]/route.ts","apps/web/app/api/v1/custom-datasets/preview/route.ts","apps/web/app/api/v1/custom-datasets/route.ts","apps/web/app/api/v1/provided-output-runs/[runId]/route.ts","apps/web/app/api/v1/provided-output-runs/preview/route.ts","apps/web/app/api/v1/provided-output-runs/route.ts","apps/web/app/api/v1/provided-output-runs/sources/route.ts","apps/web/lib/auth.ts","apps/web/lib/custom-dataset-types.ts","apps/web/lib/custom-datasets.ts","apps/web/lib/custom-eval-access.ts","apps/web/lib/custom-evals.ts","apps/web/lib/instruction-request.ts","apps/web/lib/provided-output-runs.ts","apps/web/lib/provided-output-types.ts","apps/web/package.json","docs/custom-datasets.md","docs/proposals/custom-datasets.md","package.json","packages/core/src/custom-dataset-types.ts","packages/core/src/custom-datasets.ts","packages/core/src/custom-evals.ts","packages/core/src/eval-engine.ts","packages/core/src/hash.ts","packages/core/src/index.ts","packages/core/src/provided-output-runs.ts","packages/core/src/provided-output-types.ts","packages/core/src/types.ts","packages/db/migrations/0001_init.sql","packages/db/migrations/0002_hosted_integrations.sql","packages/db/package.json","packages/db/src/custom-dataset-types.ts","packages/db/src/custom-datasets.ts","packages/db/src/custom-evals.ts","packages/db/src/dataset-snapshots.ts","packages/db/src/index.ts","packages/db/src/provided-output-runs.ts","packages/db/src/schema.ts","packages/db/src/service.ts","pnpm-lock.yaml","tests/e2e/custom-datasets.browser.config.ts","tests/e2e/custom-datasets.browser.fixture.ts","tests/e2e/custom-datasets.browser.spec.ts","tests/integration/custom-datasets.node.mjs","tests/integration/provided-output-runs.node.mjs","tests/unit/custom-datasets.test.mjs","turbo.json"]
@@ -695,7 +695,7 @@ jobs:
                   'commandCount': len(commands), 'cleanup': cleanup, 'errors': errors,
                   'limits': {'streamBytes': stream_limit, 'browserSeconds': 480,
                       'softWorkSeconds': 840, 'stepMinutes': 18, 'jobMinutes': 20},
-                  'proofLimits': ['R2 invokes one production build and five pending Chromium journeys against a fresh migrated owned database only. It invokes no SQL suite; priorSqlProof identifies the separate R1 source/run with twenty new and fourteen regression SQL passes. Signed HMAC fixtures are not hosted provider, membership/RLS, physical-device or live production acceptance. The thirty pure cases and old four browser cases are not invoked; no model call or paid provider.']}
+                  'proofLimits': ['This follow-up invokes one production build and five pending Chromium journeys against a fresh migrated owned database only. It invokes no SQL suite; priorSqlProof identifies the separate R1 source/run with twenty new and fourteen regression SQL passes. Signed HMAC fixtures are not hosted provider, membership/RLS, physical-device or live production acceptance. The thirty pure cases and old four browser cases are not invoked; no model call or paid provider.']}
               try: emit_original('cleanup.json', (evidence / 'cleanup.json').read_bytes(), 32768, final=True)
               except Exception as error:
                   result['status'] = 'failed'; result['errors'].append('cleanup_log_transport_failed:' + type(error).__name__)
