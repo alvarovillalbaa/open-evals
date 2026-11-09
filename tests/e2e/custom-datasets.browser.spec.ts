@@ -203,8 +203,11 @@ test("CD-BR03 stale-head refusal retains text until a visible head review and fr
   const document = await page.goto(`${owned.baseUrl}/evals/datasets/${first.content.dataset.publicId}`); expect(document?.status()).toBe(200);
   await expect(page.getByRole("heading", { name: "Saved custom dataset", exact: true })).toBeVisible();
   await expect(name(page)).toHaveJSProperty("readOnly", true);
+  await expect(review(page)).toHaveValue("per-row");
   const preserved = rows("preserved-client-draft"); await source(page).fill(preserved);
+  await review(page).selectOption("synthetic");
   const stale = await preview(page); expect(stale.draft.version).toBe(2); expect(stale.draft.expectedVersionId).toBe(first.content.version.publicId);
+  expect(stale.draft.defaultReviewStatus).toBe("synthetic");
   const second = await owned.append(first, rows("other-writer-saved-head"));
   const rejected = await save(page, "Save immutable version", 409);
   expect(rejected.value).toEqual({ error: "custom_dataset_version_conflict" });
