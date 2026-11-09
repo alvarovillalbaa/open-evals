@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "http-target-production-v1",
+  "observedAt": "2026-11-09 21:02:59 UTC",
+  "deployedSource": "367b88e505ab19d7b57a258c0815deee5b7cfafd",
+  "checkedSource": "327fc6bd89a0c3a482018cb48a5e66d63b7c6315",
+  "releaseTree": "8cb7a2e01db5aa1ccb8dbed9a2f6389a2d1350ea",
+  "deployment": {
+    "id": "dpl_HxBhqT4tftJCmvjr2XaAyDtdBb62",
+    "url": "open-evals-jau24kfuf-my-team-4f230354.vercel.app",
+    "state": "READY",
+    "target": "production",
+    "projectId": "prj_FG3VAWXbwS6VRHq4Wd2B4vyIms4l",
+    "gitRef": "main"
+  },
+  "canonicalAlias": {
+    "alias": "open-evals-web.vercel.app",
+    "deploymentId": "dpl_HxBhqT4tftJCmvjr2XaAyDtdBb62",
+    "url": "open-evals-jau24kfuf-my-team-4f230354.vercel.app",
+    "projectId": "prj_FG3VAWXbwS6VRHq4Wd2B4vyIms4l",
+    "updatedAt": 1794258100293
+  },
+  "applicationAndTestsIdenticalToCheckedSource": true,
+  "distinctChecks": 134,
+  "checkLanes": {
+    "core": 38,
+    "transportDoubles": 26,
+    "webSeams": 20,
+    "httpPostgres": 31,
+    "regressions": 14,
+    "browserNoDispatch": 5
+  },
+  "proofLimits": [
+    "Deployment READY and canonical alias are provider metadata observations, not live page or hosted-account tests.",
+    "No real HTTP target, native DNS/socket/TLS or durable execution UI acceptance is claimed.",
+    "Signed test sessions and owner-SQL fixtures do not prove hosted sign-in, provisioning, RLS or physical-device behavior.",
+    "A following documentation-only commit may publish this dated proof without changing application or test source."
+  ]
+}
