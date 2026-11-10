@@ -65,7 +65,9 @@ Send trace evidence through the application SDK:
 `OpenEvalsPythonClient(...).submit_trace(trace)`. Configure the service URL and
 server-held key explicitly. [SDK connection and privacy](docs/trace-ingestion.md)
 documents the real payload and response contracts; `/evals/sdk` provides the
-same starting point in the product. No public package installation is implied.
+same starting point in the product. Install the Python SDK independently from source with
+`python3 -m pip install ./python/open_evals_sdk`; see the [package guide](python/open_evals_sdk/README.md).
+No public registry publication is implied.
 
 The manual trace form, CLI trace ingestion commands and MCP `ingest_traces`
 workflow are retired. Old `/runs/import` links redirect to SDK connection, and
