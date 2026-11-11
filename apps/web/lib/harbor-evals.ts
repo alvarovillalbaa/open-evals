@@ -104,6 +104,18 @@ export function harborErrorResponse(error:unknown) {
   return harborResponse({error:code},status);
 }
 export function checkHarborOrigin(request:Request) {
+  const site=request.headers.get('sec-fetch-site');
+  if(site && !['same-origin','none'].includes(site)) throw new InstructionRequestError(403,'harbor_origin_forbidden');
   const origin=request.headers.get('origin');
-  if(origin && origin!==new URL(request.url).origin) throw new InstructionRequestError(403,'harbor_origin_forbidden');
+  if(!origin)return;
+  // Next may normalize the internal URL hostname. Compare the browser origin
+  // with the actual requested authority; do not trust forwarded-host input.
+  const url=new URL(request.url),host=request.headers.get('host');
+  let expected=url.origin;
+  if(host) {
+    if(/[\s/\\@,?#]/.test(host)) throw new InstructionRequestError(403,'harbor_origin_forbidden');
+    try { expected=new URL(url.protocol+'//'+host).origin; }
+    catch { throw new InstructionRequestError(403,'harbor_origin_forbidden'); }
+  }
+  if(origin!==expected) throw new InstructionRequestError(403,'harbor_origin_forbidden');
 }

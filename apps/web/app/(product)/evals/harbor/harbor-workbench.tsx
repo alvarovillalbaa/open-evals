@@ -29,6 +29,7 @@ function message(error:unknown) {
   const code=error instanceof Error?error.message:'';
   if(code==='authentication_required')return 'Sign in to your workspace to use Harbor tasks.';
   if(code==='database_unavailable')return 'The workspace database is unavailable. Your unsaved draft is still here.';
+  if(code==='harbor_origin_forbidden')return 'The request address could not be verified. Your unsaved draft is still here.';
   if(code==='harbor_task_head_changed')return 'A newer task version was saved. Keep your draft, then inspect the latest version before making a new one.';
   if(code==='harbor_workspace_session_required')return 'Use a workspace session to author tasks and plans. Project keys can read and run their own plans.';
   return /^[a-zA-Z0-9_:.-]{1,160}$/.test(code)?code.replaceAll('_',' '):'The response is unconfirmed. Keep this draft and check saved history before starting another action.';
@@ -62,7 +63,7 @@ export function HarborWorkbench() {
     if(edit){setBundle(result.task.bundle);setTaskName(result.task.name);setTaskIdentity({taskId:result.task.taskId,versionId:crypto.randomUUID(),version:result.task.version+1,expectedVersionId:result.task.versionId});setTaskPreview(undefined);}
   }
   return <div className="grid min-w-0 gap-6">
-    <div aria-live="polite" className="min-w-0">{busy?<p role="status" className="text-sm text-muted-foreground">Working…</p>:null}{error?<p role="alert" className="break-words text-sm text-danger">{error} <a className="underline" href="/login">Sign in</a></p>:null}{notice?<p role="status" className="text-sm">{notice}</p>:null}</div>
+    <div aria-live="polite" className="min-w-0">{busy?<p role="status" className="text-sm text-muted-foreground">Working…</p>:null}{error?<p role="alert" className="break-words text-sm text-danger">{error}{error.startsWith('Sign in to your workspace')?<a className="ml-1 underline" href="/login">Sign in</a>:null}</p>:null}{notice?<p role="status" className="text-sm">{notice}</p>:null}</div>
     {!catalog?<div className="grid gap-3 border border-border p-4"><p className="text-sm">Load your saved tasks, plans and projects.</p><button className={button} disabled={busy} onClick={()=>void perform(refreshCatalog)}>Load workspace</button></div>:<>
       {!writable?<p className="border border-border bg-muted p-3 text-sm">Read-only access. A workspace editor can save tasks and plans.</p>:null}
       <div className="grid min-w-0 items-start gap-6 xl:grid-cols-2">
