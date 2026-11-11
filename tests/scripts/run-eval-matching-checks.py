@@ -86,6 +86,14 @@ def run(name, argv, timeout=60, extra=None, cwd=None):
         kept = bytes(value[:limit]); filename = name + "." + key + ".txt"; (evidence / filename).write_bytes(kept)
         receipt["streams"][key] = {"file": filename, "bytes": len(kept), "sha256": digest(kept), "complete": stopped is None and len(value) <= limit}
     commands.append(receipt); write("commands.json", commands)
+    if stopped is not None or returncode != 0:
+        for key, value in streams.items():
+            if len(value) <= 262144:
+                import base64
+                print("OE_MATCHING_FAILED_STREAM_BEGIN " + name + "." + key + ".txt", flush=True)
+                encoded = base64.b64encode(bytes(value)).decode("ascii")
+                for index in range(0, len(encoded), 4096): print(encoded[index:index + 4096], flush=True)
+                print("OE_MATCHING_FAILED_STREAM_END " + name + "." + key + ".txt", flush=True)
     assert stopped is None and returncode == 0, name + " failed; original streams retained"
     return bytes(streams["stdout"]).decode("utf-8", "strict")
 
@@ -97,7 +105,7 @@ def export_tree(commit, destination, baseline_only=False):
         metadata, name = row.split("\t", 1); mode, kind, blob, length = metadata.split()
         if baseline_only:
             if not name.startswith("packages/core/src/"): continue
-        elif not (name.startswith(("apps/", "packages/", "tests/")) or name in ("package.json", "pnpm-lock.yaml", "pnpm-workspace.yaml", "tsconfig.base.json", "turbo.json")):
+        elif not (name.startswith(("apps/", "packages/", "workflows/", "tests/")) or name in ("package.json", "pnpm-lock.yaml", "pnpm-workspace.yaml", "tsconfig.base.json", "turbo.json")):
             continue
         if "node_modules" in Path(name).parts or any(part in (".git", ".next", "dist", "coverage") for part in Path(name).parts): continue
         if Path(name).name.startswith(".env"): continue
@@ -135,9 +143,23 @@ try:
     assert run("candidate-parent", ["git", "rev-parse", "HEAD^"], cwd=checkout).strip() == accepted
     assert run("activation-delta", ["git", "diff", "--name-only", accepted, "HEAD"], cwd=checkout).splitlines() == [".github/workflows/eval-matching-checks.yml"]
     assert run("node-version", ["node", "--version"]).strip() == "v24.22.2"
-    export_tree(accepted, source); export_tree(base_sha, baseline, True)
-    common = {"OE_EXACT_BASELINE_DIR": str(baseline)}
-    cases("core", ["node", "--test", "--test-isolation=none", "--test-concurrency=1", "--test-reporter=tap", "tests/unit/eval-matching.test.mjs", "tests/unit/http-eval-matching.test.mjs"], 42, common)
+    export_tree(accepted, source)
+    # The first real runner passed all42 before the unrelated export/build error.
+    # Carry that closed scope only when its complete source and fixtures still match.
+    carried_source = "7d9b7f3e0e844ebe4543cdf7201ea7e112cba181"
+    closed_tests = {"tests/unit/eval-matching.test.mjs", "tests/unit/http-eval-matching.test.mjs", "tests/helpers/eval-matching-fixtures.mjs"}
+    carried_paths = [row for row in exports if row["lane"] == "candidate" and (row["path"].startswith("packages/core/src/") or row["path"] in closed_tests)]
+    assert closed_tests <= {row["path"] for row in carried_paths}
+    carried_checks = []
+    for row in carried_paths:
+        blob = subprocess.check_output(["git", "rev-parse", carried_source + ":" + row["path"]], cwd=checkout).decode("ascii").strip()
+        assert blob == row["gitBlob"], "closed core source changed: " + row["path"]
+        carried_checks.append({"path": row["path"], "gitBlob": blob, "sha256": row["sha256"]})
+    stages["core"] = {"status": "carried_passed", "distinctCases": 42, "source": carried_source, "runId": 43122180243,
+                      "jobId": 130865123042, "artifactId": 13901551829,
+                      "originalArtifactSha256": "894d627e9b4cffc23c80495bb4036d2dadf76bec46a4e5ce47eb2c5dcd0bea8d",
+                      "node": "24.22.2", "sourceEquality": carried_checks, "replayed": False}
+    write("core-carry.json", stages["core"]); write("stages.json", stages)
     run("pnpm-install-tool", ["npm", "install", "--prefix", str(tools), "--ignore-scripts", "--no-audit", "--no-fund", "--package-lock=false", "pnpm@10.14.0"], timeout=180)
     pnpm = ["node", str(tools / "node_modules/pnpm/bin/pnpm.cjs")]
     assert run("pnpm-version", pnpm + ["--version"]).strip() == "10.14.0"

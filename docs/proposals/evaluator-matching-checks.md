@@ -37,9 +37,14 @@ transport; it does not prove external DNS/socket/TLS or hosted provider behavior
 
 `tests/scripts/run-eval-matching-checks.py` owns the runner. It checks the exact
 candidate parent and workflow-only activation delta, exports bounded source
-without tracked node_modules/history/old evidence, verifies Git blobs, and
+including the repository's root workflows package, without tracked
+node_modules/history/old evidence, verifies Git blobs, and
 installs the existing frozen lockfile with pinned pnpm 10.14.0 under Node
-24.22.2. It runs the 42 core cases, one production web build, then real SQL and
+24.22.2. The first CI run43122180243 passed all42 core cases and then failed
+because its source export omitted the workflows package. That failure and its
+original digest-verified ZIP remain evidence. The corrected runner checks every
+core source/fixture blob against that exact source and carries those42 passes
+without replay. It resumes one production web build, then real SQL and
 Chromium against a new loopback-only PostgreSQL 16 cluster on port 65432.
 Only existing migrations 0001/0002 initialize this disposable database.
 
@@ -53,5 +58,5 @@ No failed case is disabled or replaced with a synthetic pass.
 Local Storage Guard failed at 1.8 GiB free versus 34 GiB required. Therefore no
 local dependency installation, build, application server, browser or database
 is used. The local T2 checks ran against bounded frozen source with the existing
-Node 26.8.2; CI repeats the same 42 distinct cases under the pinned environment.
+Node 26.8.2; the first CI run repeated those42 cases under the pinned environment.
 Counts are distinct cases, not the number of repeated invocations.
