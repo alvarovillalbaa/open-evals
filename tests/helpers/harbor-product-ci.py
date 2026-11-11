@@ -118,7 +118,14 @@ for _ in range(60):
 else:raise RuntimeError('server_not_ready')
 run('api',['node','--import','tsx','tests/integration/harbor-api.mjs'],300,repo)
 run('chromium-install',[pnpm,'exec','playwright','install','chromium'],180,repo)
-run('browser',[pnpm,'exec','playwright','test','--config','tests/integration/harbor-browser.config.mjs'],240,repo)
+try:
+    run('browser',[pnpm,'exec','playwright','test','--config','tests/integration/harbor-browser.config.mjs'],240,repo)
+finally:
+    error_files=list((work/'browser-output').rglob('error-context.md'))
+    assert len(error_files)<=8
+    for index,file in enumerate(error_files):
+        data=file.read_bytes();assert len(data)<=131072
+        (proof/f'browser-error-context-{index}.md').write_bytes(data)
 after=[]
 for row in copies:
     data=(repo/row['path']).read_bytes();current={**row,'bytes':len(data),'sha256':hashlib.sha256(data).hexdigest()};after.append(current)
