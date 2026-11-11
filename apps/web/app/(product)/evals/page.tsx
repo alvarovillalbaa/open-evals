@@ -95,7 +95,8 @@ export default async function EvalsPage() {
       </StateGate>
       <section id="harbor" aria-labelledby="harbor-heading" className="scroll-mt-6 border border-border bg-muted p-4">
         <h2 id="harbor-heading" className="font-semibold">Harbor</h2>
-        <p className="mt-2 max-w-3xl text-sm leading-6 text-muted-foreground">Harbor support is not available in this application. A task catalog and execution adapter have not been connected.</p>
+        <p className="mt-2 max-w-3xl text-sm leading-6 text-muted-foreground">Save exact task versions, share them with a selected project, and execute Harbor locally through the CLI. Native rewards and interrupted claims remain bound to their saved source.</p>
+        <div className="mt-3"><LinkButton href="/evals/harbor">Open Harbor tasks</LinkButton></div>
       </section>
     </div>
   );

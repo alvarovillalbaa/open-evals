@@ -1,0 +1,56 @@
+{
+  "schemaVersion": "harbor-native-report-v1",
+  "executionId": "7d1f8feb-56c7-4d2f-88b6-674865d1b115",
+  "bundleFingerprint": "0c3392b7c01b704a4eced6753f220828fa9f7631c739cfdc9ad0e63b97e7cf32",
+  "runtime": "harbor/0.25.0",
+  "agent": {
+    "name": "oracle",
+    "model": null,
+    "kind": "reference"
+  },
+  "providerEnvironmentNames": [],
+  "timeoutSeconds": 180,
+  "executed": true,
+  "outcome": "completed",
+  "resourceCleanupVerified": false,
+  "reportAuthority": "local-runner",
+  "workDirectoryRetained": true,
+  "dockerTransport": "local_unix",
+  "nativeTrialName": "oe-harbor-7d1f8feb-56c7-4d2f-88b6-674865d1b115",
+  "dockerProject": "oe-harbor-7d1f8feb-56c7-4d2f-88b6-674865d1b115__env",
+  "process": {
+    "exitCode": 0,
+    "interruption": null,
+    "streams": {
+      "stdout": {
+        "bytes": 468,
+        "sha256": "92ad3fe5173c6c2dec72b18b496f5029b0d4c2eb606749ad67549ab46e103242",
+        "complete": true,
+        "retainedBytes": 468
+      },
+      "stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "complete": true,
+        "retainedBytes": 0
+      }
+    },
+    "processGroupsIndependentlyVerified": false
+  },
+  "nativeTrialId": "a29b4ae3-db06-4afc-b5ac-8941331dc6ee",
+  "nativeResultSha256": "14919f0605174f921ac07bdc8c500bf8a8f69a509ba66ef8311d6a300f88ec69",
+  "nativeChecksum": "b96e45e8de7919d3f4fcf360e0186027d828225e00d04c9b3495fb24881e6e26",
+  "nativeAgent": {
+    "name": "oracle",
+    "version": "1.0.0",
+    "model": null
+  },
+  "startedAt": "2026-11-11T14:43:03.625Z",
+  "finishedAt": "2026-11-11T14:43:21.461Z",
+  "exceptionType": null,
+  "nativeRewardValid": true,
+  "rewards": {
+    "reward": 1.0
+  },
+  "stagedTaskRemoved": true
+}

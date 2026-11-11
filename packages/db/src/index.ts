@@ -19,3 +19,4 @@ export { reserveHttpEvalRun, claimHttpEvalRunRow, finalizeHttpEvalRunRow, stopHt
   recoverHttpEvalRun, getHttpEvalRun, listHttpEvalRuns } from "./http-eval-runs";
 export type { HttpEvalRunSummary, HttpEvalFinalizeIntent } from "./http-eval-runs";
 export * from "./eval-composition";
+export * from "./harbor-evals";

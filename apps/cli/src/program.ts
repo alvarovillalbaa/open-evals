@@ -1,6 +1,7 @@
 import { readFile } from "node:fs/promises";
 import type { JsonValue } from "@open-evals/core";
 import { OpenEvalsClient, OpenEvalsHttpError, normalizePromptEndpoint } from "@open-evals/sdk";
+import { runHarborCli } from "./harbor";
 import {
   PromptFileError, diffPromptDetails, makePromptReviewFile, readPromptDefinitionFile,
   readPromptDetailFile, readPromptDraftFile, readPromptReviewFile, writePromptJsonFile
@@ -124,6 +125,7 @@ const HELP = {
 
 /** The executable supplies process streams; this module neither runs a command nor changes exitCode on import. */
 export async function runCli(args: readonly string[], context: CliContext): Promise<number> {
+  if (args[0] === "harbor") return runHarborCli(args.slice(1), context);
   const jsonErrors = args.includes("--json");
   let client: OpenEvalsClient | undefined;
   try {

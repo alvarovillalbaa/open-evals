@@ -5,7 +5,9 @@ type JsonValue = string | number | boolean | null | JsonValue[] | { [key: string
 type JsonRecord = Record<string, JsonValue>;
 
 // Recognize reserved identities even when a private record's JSON profile is corrupt.
-const HTTP_PRIVATE_PLAN = `(coalesce(run_plans.resolved_plan ->> 'schemaVersion' in ('http-target-eval-v2','http-eval-plan-record-v2','http-eval-plan-storage-v2'),false)
+const HTTP_PRIVATE_PLAN = `(left(run_plans.id,length('harbor_'))='harbor_'
+  or coalesce(run_plans.resolved_plan->>'schemaVersion' in ('harbor-plan-v1','harbor-run-v1'),false)
+  or coalesce(run_plans.resolved_plan ->> 'schemaVersion' in ('http-target-eval-v2','http-eval-plan-record-v2','http-eval-plan-storage-v2'),false)
   or run_plans.resolved_plan #>> '{content,schemaVersion}' is not distinct from 'http-target-eval-v2'
   or run_plans.resolved_plan ->> 'schemaVersion' is not distinct from 'http-target-eval-v1'
   or run_plans.resolved_plan ->> 'schemaVersion' is not distinct from 'http-eval-plan-record-v1'
@@ -560,6 +562,9 @@ export async function listScenarios(workspaceId: string): Promise<ScenarioCatalo
         from scenario_suites
         left join scenario_versions on scenario_versions.suite_id = scenario_suites.id
         where scenario_suites.workspace_id = $1
+          and left(scenario_suites.id,length('harbor_')) <> 'harbor_'
+          and not exists (select 1 from scenario_versions private_harbor where private_harbor.suite_id=scenario_suites.id
+            and (left(private_harbor.id,length('harbor_'))='harbor_' or private_harbor.scenario->>'schemaVersion'='harbor-task-version-v1'))
         group by scenario_suites.id
         order by scenario_suites.name
       `,
@@ -988,7 +993,8 @@ export async function persistEvalRun(workspaceId: string, input: PersistedEvalRu
       (id = $1 or fingerprint = $2 or id in (select run_plan_id from eval_runs
         where id = $3 or (workspace_id = $4 and idempotency_key = $5)))`,
       [input.plan.id, input.plan.planFingerprint, runId, workspaceId, idempotencyKey]);
-    if (httpPlans.rows.length || input.plan.id.startsWith("http_eval_plan_")
+    if (httpPlans.rows.length || input.plan.id.startsWith("http_eval_plan_") || input.plan.id.startsWith("harbor_")
+      || ["harbor-plan-v1","harbor-run-v1"].includes(String((input.plan as unknown as Record<string,unknown>).schemaVersion))
       || ["http-target-eval-v1", "http-eval-plan-record-v1", "http-eval-plan-storage-v1", "http-target-eval-v2", "http-eval-plan-record-v2", "http-eval-plan-storage-v2"].includes(String((input.plan as unknown as Record<string, unknown>).schemaVersion))) {
       throw Object.assign(new Error("http_eval_legacy_collision"), { status: 409 });
     }
@@ -999,6 +1005,9 @@ export async function persistEvalRun(workspaceId: string, input: PersistedEvalRu
         on conflict (fingerprint) do update
         set resolved_plan = run_plans.resolved_plan
          where run_plans.resolved_plan ->> 'schemaVersion' is distinct from 'provided-output-run-record-v1'
+           and left(run_plans.id,length('harbor_')) <> 'harbor_'
+           and run_plans.resolved_plan->>'schemaVersion' is distinct from 'harbor-plan-v1'
+           and run_plans.resolved_plan->>'schemaVersion' is distinct from 'harbor-run-v1'
            and run_plans.resolved_plan ->> 'schemaVersion' is distinct from 'http-target-eval-v1'
            and run_plans.resolved_plan ->> 'schemaVersion' is distinct from 'http-eval-plan-record-v1'
            and run_plans.resolved_plan ->> 'schemaVersion' is distinct from 'http-eval-plan-storage-v1'

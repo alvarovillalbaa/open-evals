@@ -3,6 +3,7 @@ import type { InstructionDetailDTO, PromptDraftInput, PromptDraftPreview } from 
 import { PromptClient, type CreatePromptDefinitionInput, type CreatePromptDefinitionResult, type PromptRequestOptions,
   type PromptResolution, type PromptResolveInput, type PromptSaveResult } from "./prompts";
 export * from "./prompts";
+export * from "./harbor";
 
 export interface OpenEvalsSdkOptions {
   endpoint?: string;

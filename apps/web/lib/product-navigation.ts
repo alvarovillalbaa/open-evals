@@ -8,6 +8,7 @@ export const productAreas = [
     id: "evals", href: "/evals", label: "Evals",
     items: [
       { href: "/evals", label: "Catalogue" },
+      { href: "/evals/harbor", label: "Harbor tasks" },
       { href: "/runs", label: "Runs" },
       { href: "/evals/sdk", label: "Connect SDK" }
     ]
