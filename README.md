@@ -101,6 +101,7 @@ pnpm doctor
 - `packages/statistics`: statistics exports.
 - `packages/test-fixtures`: deterministic demo fixtures.
 - `python/open_evals_optimizers`: optional Python optimizer engines and SDK.
+- `python/open_evals_harbor`: separately installed, pinned local Harbor task runner.
 - `workflows`: Vercel Workflow-compatible workflow entry definitions.
 - `agent`: Eve agent instructions and approval metadata.
 - `docs`: architecture, contracts, privacy, deployment, and reference notes.
@@ -112,8 +113,12 @@ An Eval Item is an evaluator definition, not a dataset row. Eval Items can emit 
 
 The Evals catalogue keeps input collections, evaluators and external benchmarks
 distinct. Existing storage does not establish benchmark→dataset or
-scenario→evaluator-set membership, so the UI does not invent it. Harbor task
-import and execution are still unfinished. The catalogue links a
+scenario→evaluator-set membership, so the UI does not invent it.
+[Harbor tasks](docs/runbooks/harbor-tasks.md) have immutable source versions,
+project-bound plans, explicit local CLI execution and bounded saved native
+reward reports. The initial profile is Harbor0.25.0/schema1.4 with one Linux
+Dockerfile task and shared verifier; broader profiles and hosted acceptance
+remain separate. The catalogue also links a
 [custom Eval Set editor](docs/custom-evals.md): workspace sessions save a
 critical contains evaluator and explicit one-item membership as immutable
 versions, with retry recovery and stale-head conflicts. Saving does not launch
@@ -131,7 +136,7 @@ Native DNS/socket/TLS and hosted Auth/RLS acceptance remain unverified. See
 The [focused product-surface receipt](docs/results/2026/11-09/product-surface-checks.md)
 records eight navigation and eleven actual-module protocol passes in focused
 invocations, preserving the failed first harness. Browser/hosted acceptance is
-separate, and the catalogue does not complete Harbor or campaign execution.
+separate; this historical catalogue receipt does not prove native task or campaign execution.
 
 The [custom evaluator checks](docs/results/2026/11-09/custom-eval-checks.md)
 record38pure-source passes. [Twelve separate real PostgreSQL cases](docs/results/2026/11-09/custom-eval-postgres-checks.md)
@@ -231,7 +236,7 @@ Screenshots are intentionally left as placeholders for maintainers to capture fr
 
 ## Roadmap
 
-- Harbor task identity, versioned artifacts and execution integration.
+- Further Harbor execution profiles, provider/model performance and hosted acceptance.
 - Further evaluator kinds and target runtimes, followed by campaign use of
   pinned saved definitions. Native network and hosted acceptance remain
   separate verification gates.

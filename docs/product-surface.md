@@ -31,6 +31,13 @@ exactly Evals and Improve.
 - `/evals/datasets` authors complete JSON/JSONL datasets with explicit review
   declarations, immutable history and exact-version scoring links.
   [Dataset contract](custom-datasets.md).
+- `/evals/harbor` versions bounded task source, selects exact versions into a
+  project-bound immutable plan and shows saved native results. Execution is
+  explicit through the CLI and separately installed Harbor0.25.0 runtime.
+  Once-only claims, identical completion replay and interruption closure use
+  the existing SQL tables, with private namespaces fenced from legacy readers
+  and writers. Initial profile: schema1.4, one Linux Dockerfile task, shared
+  verifier. [Contract, commands and proof limits](runbooks/harbor-tasks.md).
 - `/evals/plans` composes an exact dataset version, saved text-contains evaluator
   versions and a versioned public HTTP target into a named immutable plan.
   Preview, save and replay make no target call. Explicit execution uses durable
@@ -59,7 +66,7 @@ Authentication/database failures remain separate from a ready but empty workspac
 
 | Owner requirement | Remaining implementation |
 | --- | --- |
-| Evals contain Harbor tasks | Task identity/version/artifacts, task selection and actual Harbor execution integration |
+| Broader Harbor profiles and provider performance | Extend the initial pinned single-task Docker/shared-verifier profile; native authored reference checks do not establish provider/model performance or hosted acceptance |
 | Further custom evaluator kinds and targets | Extend the verified saved-composition/HTTP profile with additional evaluator types and target runtimes; native network execution and hosted acceptance remain unverified |
 | Campaigns consume Evals and optimizer algorithms | Bind pinned eval definitions into actual approved campaign execution; current request preparation does not do this |
 | Improved instructions reach production with safe A/B rollout | Product approval, execution and release integration; existing primitives do not prove the complete flow |
@@ -67,7 +74,7 @@ Authentication/database failures remain separate from a ready but empty workspac
 
 Composable/versioned instruction source and its previous accepted checks retain
 their original identities. This surface change does not replay or relabel those
-results. Public npm/PyPI, live providers/models and real Harbor tasks require
-their own proof. New custom-set routes apply the existing role/scope checks with
+results. Public npm/PyPI, live providers/models, broader Harbor profiles and
+hosted task acceptance require their own proof. New custom-set routes apply the existing role/scope checks with
 a workspace-session boundary; existing grants/configuration are unchanged.
 No new account, schema, dependency, plan or payment is part of this change.

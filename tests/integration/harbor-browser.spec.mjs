@@ -27,10 +27,11 @@ async function dispose(context,suffix='') {
   try {
     await Promise.allSettled(observation.pending);
     const page=observation.page;
+    if(page.isClosed()){await writeFile(join(process.env.HARBOR_PROOF,'browser-'+id+'-diagnostics.json'),JSON.stringify({pageClosedBeforeCapture:true,pageErrors:observation.errors,responses:observation.responses})+'\n');return;}
     await writeFile(join(process.env.HARBOR_PROOF,'browser-'+id+'-diagnostics.json'),JSON.stringify({url:page.url(),pageErrors:observation.errors,
-      responses:observation.responses,alerts:await page.getByRole('alert').allTextContents(),body:(await page.locator('body').innerText()).slice(0,20000)},null,2)+'\n');
+      responses:observation.responses,alerts:await page.getByRole('alert').allTextContents(),selects:await page.locator('select').evaluateAll(elements=>elements.map(element=>({value:element.value,options:[...element.options].map(option=>({label:option.label,value:option.value,selected:option.selected}))}))),body:(await page.locator('body').innerText()).slice(0,20000)},null,2)+'\n');
     await page.screenshot({path:join(process.env.HARBOR_PROOF,'browser-'+id+'-last.png'),fullPage:true});
-  } finally {await context.close();}
+  } finally {if(!observation.page.isClosed())await context.close();}
 }
 async function snapshot(page,id){expect(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth+1)).toBe(true);await page.screenshot({path:join(process.env.HARBOR_PROOF,'browser-'+id+'.png'),fullPage:true});}
 test('HB-B01 desktop imports, saves and versions authored task bytes',async({browser})=>{
@@ -47,7 +48,10 @@ test('HB-B01 desktop imports, saves and versions authored task bytes',async({bro
 test('HB-B02 narrow screen selects exact versions and persists a shared plan',async({browser})=>{
   const {context,page,errors}=await surface(browser,390);
   try {
-    await page.goto(fixture.endpoint+'/evals/harbor');await page.getByLabel('Plan name',{exact:true}).fill('Browser plan');await page.getByLabel('Project',{exact:true}).selectOption(fixture.projectId);
+    await page.goto(fixture.endpoint+'/evals/harbor');await page.getByLabel('Plan name',{exact:true}).fill('Browser plan');
+    const project=page.getByLabel('Project',{exact:true});
+    await expect(project.locator('option').filter({hasText:/^Authored project · test$/})).toHaveAttribute('value',fixture.projectId);
+    await project.selectOption({label:'Authored project · test'});
     await page.getByLabel(/Browser task revised · v2/).check();await page.getByLabel('Harbor agent',{exact:true}).fill('oracle');await page.getByLabel(/Share the selected task source/).check();
     await page.getByRole('button',{name:'Preview plan',exact:true}).click();await expect(page.getByLabel('Plan preview')).toBeVisible();
     const response=page.waitForResponse(r=>r.url()===fixture.endpoint+'/api/v1/harbor'&&r.request().method()==='POST'&&r.request().postDataJSON().action==='plan.save');
@@ -72,7 +76,7 @@ test('HB-B04 narrow failure preserves a draft and viewer access stays read-only'
   try {
     await page.goto(fixture.endpoint+'/evals/harbor');await page.getByLabel('Task bundle',{exact:true}).setInputFiles(sourceBundle);await page.getByLabel('Task name',{exact:true}).fill('Draft survives failure');
     await page.route('**/api/v1/harbor',async route=>{if(route.request().method()==='POST'&&route.request().postDataJSON().action==='task.preview')return route.fulfill({status:503,contentType:'application/json',body:JSON.stringify({error:'database_unavailable'})});return route.continue();});
-    await page.getByRole('button',{name:'Preview task',exact:true}).click();await expect(page.getByRole('alert')).toContainText('Your unsaved draft is still here.');await expect(page.getByLabel('Task name',{exact:true})).toHaveValue('Draft survives failure');await expect(page.getByRole('button',{name:'Save task version',exact:true})).toHaveCount(0);
+    await page.getByRole('button',{name:'Preview task',exact:true}).click();await expect(page.getByRole('alert').filter({hasText:'The workspace database is unavailable.'})).toContainText('Your unsaved draft is still here.');await expect(page.getByLabel('Task name',{exact:true})).toHaveValue('Draft survives failure');await expect(page.getByRole('button',{name:'Save task version',exact:true})).toHaveCount(0);
     const rows=await fixture.sql('select count(*)::int as count from scenario_versions v join scenario_suites s on s.id=v.suite_id where s.workspace_id=$1',[fixture.workspaceId]);expect(rows[0].count).toBe(2);await snapshot(page,'HB-B04');expect(errors).toEqual([]);
   } finally {await dispose(context);}
   const viewer=await surface(browser,390,fixture.cookies.viewer);
