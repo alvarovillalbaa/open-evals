@@ -106,7 +106,6 @@ run('harbor-install',[python,'-m','pip','install','--no-input','--no-cache-dir',
 installation=json.loads((proof/'pip-install.json').read_text());harbor=next(item for item in installation['install'] if item['metadata']['name'].lower()=='harbor')
 assert harbor['metadata']['version']=='0.25.0' and harbor['download_info']['archive_info']['hashes']['sha256']=='51923ac567fc57b03279e93468b105f689628bcac2cd3d541d4e44aa5c0ec309'
 run('fixture-image',['docker','pull','ubuntu@sha256:fe81560990fae86dc4743202b2cb4d3df98d0bcf949173cecef15ce1127ef852'],120)
-run('chromium-install',[pnpm,'exec','playwright','install','--with-deps','chromium'],240,repo)
 (work/'test-environment.json').write_text(json.dumps(env)+'\n')
 server=start('server',['node',str(repo/'apps/web/node_modules/next/dist/bin/next'),'start','--hostname','127.0.0.1','--port','3291'],repo/'apps/web')
 for _ in range(60):
@@ -118,6 +117,7 @@ for _ in range(60):
     time.sleep(0.5)
 else:raise RuntimeError('server_not_ready')
 run('api',['node','--import','tsx','tests/integration/harbor-api.mjs'],300,repo)
+run('chromium-install',[pnpm,'exec','playwright','install','chromium'],180,repo)
 run('browser',[pnpm,'exec','playwright','test','--config','tests/integration/harbor-browser.config.mjs'],240,repo)
 after=[]
 for row in copies:

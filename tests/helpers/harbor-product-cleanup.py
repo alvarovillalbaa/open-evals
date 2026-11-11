@@ -99,7 +99,8 @@ try:
     remaining=live_work_processes();report['remainingWorkArgvProcesses']=[{'pid':pid,'pgid':group} for pid,group,_ in remaining]
     assert not remaining
     handles=subprocess.run(['sudo','-n','lsof','-nP','-t','+D',str(work)],stdout=subprocess.PIPE,stderr=subprocess.PIPE,timeout=30)
-    report['openHandleCheck']={'exitCode':handles.returncode,'stdoutBytes':len(handles.stdout),'stderrBytes':len(handles.stderr)}
+    report['openHandleCheck']={'exitCode':handles.returncode,'stdoutBytes':len(handles.stdout),'stderrBytes':len(handles.stderr),
+        'pids':[int(value) for value in handles.stdout.decode().split() if re.fullmatch('[0-9]+',value)]}
     report['noOpenHandlesVerified']=handles.returncode==1 and not handles.stdout and not handles.stderr
     assert report['noOpenHandlesVerified']
     identity=json.loads((proof/'work-identity.json').read_text());info=work.lstat()
