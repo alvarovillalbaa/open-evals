@@ -8,9 +8,9 @@ export default async function HttpPlansPage({ searchParams }: { searchParams: Pr
   await connection();
   const params = await searchParams;
   const bounded = (key: string) => typeof params[key] === "string" && params[key].length <= 36 ? params[key] : undefined;
-  const state = await loadHttpTargetPlans({ composition: params.family === "composition", setId: bounded("setId"), setVersionId: bounded("setVersionId"), copyPlanId: bounded("copyPlanId"), copyVersionId: bounded("copyVersionId"), sourceRequested: ["setId", "setVersionId", "copyPlanId", "copyVersionId"].some(key => params[key] !== undefined) });
+  const state = await loadHttpTargetPlans({ composition: params.family === "composition", matching: params.family === "matching", setId: bounded("setId"), setVersionId: bounded("setVersionId"), copyPlanId: bounded("copyPlanId"), copyVersionId: bounded("copyVersionId"), sourceRequested: ["setId", "setVersionId", "copyPlanId", "copyVersionId"].some(key => params[key] !== undefined) });
   return <div className="grid min-w-0 gap-6">
-    <PageHeader title="HTTP eval plans" actions={<><LinkButton href="/evals">Back to Evals</LinkButton><LinkButton href="/evals/plans?family=composition">New reusable-composition plan</LinkButton><LinkButton href="/evals/plans">New single-check plan</LinkButton></>} />
+    <PageHeader title="HTTP eval plans" actions={<><LinkButton href="/evals">Back to Evals</LinkButton><LinkButton href="/evals/plans?family=matching">New matching plan</LinkButton><LinkButton href="/evals/plans?family=composition">New reusable-composition plan</LinkButton><LinkButton href="/evals/plans">New single-check plan</LinkButton></>} />
     <p className="max-w-3xl text-sm leading-6 text-muted-foreground">Save exact dataset, evaluator and HTTP target versions together. Preview and save make no calls. Execute a saved plan only when you explicitly choose to send its frozen inputs.</p>
     <StateGate state={state} accessDeniedTitle="HTTP eval plans unavailable" accessDeniedBody="A workspace session with evaluation access is required.">{({ data }) => <>
       {data.requestedSourceUnavailable ? <p role="alert" className="text-sm text-danger">The requested saved source is unavailable in this workspace. No current version was substituted. Choose an accessible exact source before previewing.</p> : null}

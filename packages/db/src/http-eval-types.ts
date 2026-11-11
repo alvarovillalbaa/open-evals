@@ -1,3 +1,4 @@
+import type { EvalMatchingSetRecord, MatchingSourceRecord } from "./eval-matching-types";
 import { createHash } from "node:crypto";
 import type { PoolClient } from "pg";
 import type { DatasetJson, DatasetSnapshot } from "./dataset-snapshots";
@@ -13,22 +14,25 @@ export interface HttpEvalStoreDraftV1 {
   target: { targetId: string; targetVersion: string; endpoint: string; timeoutMs: number };
   limits: { concurrency: number; maxDurationSeconds: number };
 }
-export interface HttpEvalStoreSetRef { schemaVersion: "custom-eval-set-ref-v1" | "custom-eval-set-ref-v2"; setId: string; versionId: string; fingerprint: string }
+export interface HttpEvalStoreSetRef { schemaVersion: "custom-eval-set-ref-v1" | "custom-eval-set-ref-v2" | "custom-eval-set-ref-v3"; setId: string; versionId: string; fingerprint: string }
 export interface HttpEvalStoreDraftV2 extends Omit<HttpEvalStoreDraftV1,"schemaVersion"|"evalSetVersionIds"> {
   schemaVersion: "http-eval-plan-draft-v2"; evalSetVersions: HttpEvalStoreSetRef[];
 }
-export type HttpEvalStoreDraft = HttpEvalStoreDraftV1 | HttpEvalStoreDraftV2;
-export type HttpEvalStoreFamily = "http-target-eval-v1" | "http-target-eval-v2";
+export interface HttpEvalStoreDraftV3 extends Omit<HttpEvalStoreDraftV2,"schemaVersion"> { schemaVersion: "http-eval-plan-draft-v3" }
+export type HttpEvalStoreDraft = HttpEvalStoreDraftV1 | HttpEvalStoreDraftV2 | HttpEvalStoreDraftV3;
+export type HttpEvalStoreFamily = "http-target-eval-v1" | "http-target-eval-v2" | "http-target-eval-v3";
 export interface HttpEvalStoreCompositionReaders {
   restoreSet: EvalCompositionRestore<EvalCompositionSetRecord>;
   restoreItem: EvalCompositionRestore<EvalCompositionItemRecord>;
+  restoreSetV3?: EvalCompositionRestore<EvalMatchingSetRecord>;
+  restoreMatchingItem?: EvalCompositionRestore<MatchingSourceRecord>;
 }
 export interface HttpEvalStoreSaveRequest {
-  schemaVersion: "http-eval-plan-save-v1" | "http-eval-plan-save-v2"; draft: HttpEvalStoreDraft; expectedPreviewFingerprint: string;
+  schemaVersion: "http-eval-plan-save-v1" | "http-eval-plan-save-v2" | "http-eval-plan-save-v3"; draft: HttpEvalStoreDraft; expectedPreviewFingerprint: string;
 }
-export interface HttpEvalStoreHead { planId: string; versionId: string; version: number; name: string; fingerprint: string; profile?: "http-target-eval-v2" }
+export interface HttpEvalStoreHead { planId: string; versionId: string; version: number; name: string; fingerprint: string; profile?: "http-target-eval-v2" | "http-target-eval-v3" }
 export interface HttpEvalStorePlan {
-  schemaVersion: "http-eval-plan-record-v1" | "http-eval-plan-record-v2"; workspaceId: string;
+  schemaVersion: "http-eval-plan-record-v1" | "http-eval-plan-record-v2" | "http-eval-plan-record-v3"; workspaceId: string;
   storage: { planId: string; versionId: string; auditId: string };
   createdAt: string; head: HttpEvalStoreHead | null;
   content: {
@@ -49,14 +53,16 @@ export interface HttpEvalStorePlanCallbacks<P extends HttpEvalStorePlan> {
   parse(value: unknown): P;
   restoreSet?: HttpEvalStoreCompositionReaders["restoreSet"];
   restoreItem?: HttpEvalStoreCompositionReaders["restoreItem"];
+  restoreSetV3?: HttpEvalStoreCompositionReaders["restoreSetV3"];
+  restoreMatchingItem?: HttpEvalStoreCompositionReaders["restoreMatchingItem"];
 }
 export interface HttpEvalStoreStartRequest {
-  schemaVersion: "http-eval-start-v1" | "http-eval-start-v2"; runId: string; planVersionId: string; expectedPlanFingerprint: string;
+  schemaVersion: "http-eval-start-v1" | "http-eval-start-v2" | "http-eval-start-v3"; runId: string; planVersionId: string; expectedPlanFingerprint: string;
 }
 export interface HttpEvalStoreClaim { rowId: string; claimToken: string; claimedAt: string; requestFingerprint: string }
 export type HttpEvalStoreRowStatus = "pending" | "claimed" | "succeeded" | "failed" | "outcome_unknown" | "not_sent";
 export interface HttpEvalStoreLedger {
-  schemaVersion: "http-eval-run-ledger-v1" | "http-eval-run-ledger-v2"; workspaceId: string; publicRunId: string;
+  schemaVersion: "http-eval-run-ledger-v1" | "http-eval-run-ledger-v2" | "http-eval-run-ledger-v3"; workspaceId: string; publicRunId: string;
   runId: string; workflowId: string; planVersionId: string; planFingerprint: string; requestFingerprint: string;
   leaseToken: string; startedAt: string; deadlineAt: string; leaseExpiresAt: string;
   stopReason: string | null;
@@ -66,7 +72,7 @@ export interface HttpEvalStoreLedger {
   fingerprint: string;
 }
 export interface HttpEvalStoreRowEvent {
-  schemaVersion: "http-eval-row-event-v1" | "http-eval-row-event-v2"; id: string; workspaceId: string; publicRunId: string;
+  schemaVersion: "http-eval-row-event-v1" | "http-eval-row-event-v2" | "http-eval-row-event-v3"; id: string; workspaceId: string; publicRunId: string;
   rowId: string; claim: HttpEvalStoreClaim | null; status: "succeeded" | "failed" | "outcome_unknown" | "not_sent";
   completedAt: string;
   response: { schemaVersion: "http-json-target-response-v1"; requestFingerprint: string; output: DatasetJson;
@@ -75,9 +81,9 @@ export interface HttpEvalStoreRowEvent {
 }
 export interface HttpEvalStoreCall { endpoint: string; timeoutMs: number; body: string; requestFingerprint: string; idempotencyKey: string }
 export interface HttpEvalStoreRun<P extends HttpEvalStorePlan = HttpEvalStorePlan> {
-  schemaVersion: "http-eval-run-record-v1" | "http-eval-run-record-v2"; workspaceId: string; plan: P;
+  schemaVersion: "http-eval-run-record-v1" | "http-eval-run-record-v2" | "http-eval-run-record-v3"; workspaceId: string; plan: P;
   ledger: HttpEvalStoreLedger; events: HttpEvalStoreRowEvent[];
-  execution: { schemaVersion: "http-eval-execution-v1" | "http-eval-execution-v2"; results: unknown[]; gates: unknown[]; fingerprint: string };
+  execution: { schemaVersion: "http-eval-execution-v1" | "http-eval-execution-v2" | "http-eval-execution-v3"; results: unknown[]; gates: unknown[]; fingerprint: string };
   fingerprint: string;
 }
 export interface HttpEvalStoreRunCallbacks<P extends HttpEvalStorePlan, R extends HttpEvalStoreRun<P>> {
@@ -108,12 +114,13 @@ export function httpStable(value: unknown): string {
   return `{${Object.keys(row).sort().map(key => `${JSON.stringify(key)}:${httpStable(row[key])}`).join(",")}}`;
 }
 export const httpHash = (value: unknown) => createHash("sha256").update(httpStable(value)).digest("hex");
-export function httpProfileVersion(value: { schemaVersion: string }): 1 | 2 {
+export function httpProfileVersion(value: { schemaVersion: string }): 1 | 2 | 3 {
   if (value.schemaVersion.endsWith("-v1")) return 1;
   if (value.schemaVersion.endsWith("-v2")) return 2;
+  if (value.schemaVersion.endsWith("-v3")) return 3;
   return httpConflict();
 }
-export function httpTag<T extends string>(base: T, version: 1 | 2): `${T}-v1` | `${T}-v2` { return `${base}-v${version}`; }
+export function httpTag<T extends string>(base: T, version: 1 | 2 | 3): `${T}-v1` | `${T}-v2` | `${T}-v3` { return `${base}-v${version}`; }
 export const httpSame = (a: unknown, b: unknown) => httpStable(a) === httpStable(b);
 export const httpWithoutFingerprint = (value: unknown) => Object.fromEntries(Object.entries(httpObject(value)).filter(([key]) => key !== "fingerprint"));
 export function httpObject(value: unknown): Record<string, unknown> {

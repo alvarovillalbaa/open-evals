@@ -7,7 +7,7 @@ import { jsonObject, readHttpTargetResponse } from "@/lib/http-target-client";
 import { buttonClass, primaryClass, RunEvidence } from "./http-target-view";
 
 function runShape(value: unknown, plan: HttpEvalPlanVersionRecord, runId: string): value is HttpEvalRunRecord {
-  const suffix = plan.content.schemaVersion === "http-target-eval-v2" ? "v2" : "v1";
+  const suffix = plan.content.schemaVersion.slice(-2);
   return jsonObject(value) && value.schemaVersion === `http-eval-run-record-${suffix}` && value.workspaceId === plan.workspaceId
     && jsonObject(value.plan) && value.plan.schemaVersion === plan.schemaVersion && value.plan.fingerprint === plan.fingerprint && jsonObject(value.ledger)
     && value.ledger.schemaVersion === `http-eval-run-ledger-${suffix}` && value.ledger.publicRunId === runId && value.ledger.planVersionId === plan.storage.versionId
@@ -47,7 +47,7 @@ export function HttpExecutionControls({ plan, canWrite, initialRecord }: {
     const token = begin("start"); let started = false;
     try {
       const request: HttpEvalStartRequest = pinned.current?.request ?? {
-        schemaVersion: plan.content.schemaVersion === "http-target-eval-v2" ? "http-eval-start-v2" : "http-eval-start-v1", runId: crypto.randomUUID(), planVersionId: plan.storage.versionId,
+        schemaVersion: plan.content.schemaVersion === "http-target-eval-v3" ? "http-eval-start-v3" : plan.content.schemaVersion === "http-target-eval-v2" ? "http-eval-start-v2" : "http-eval-start-v1", runId: crypto.randomUUID(), planVersionId: plan.storage.versionId,
         expectedPlanFingerprint: plan.fingerprint
       };
       pinned.current ??= { request, body: JSON.stringify(request) }; setIntent(request);

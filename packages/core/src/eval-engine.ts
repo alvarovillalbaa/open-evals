@@ -12,6 +12,7 @@ import type {
   StopPolicy
 } from "./types";
 import { stableHash, stableRowId } from "./hash";
+import { exactTextMatches, parseCustomEvalItemContractV3 } from "./eval-matching";
 
 export const defaultStopPolicy: StopPolicy = {
   warmupRows: 30,
@@ -113,7 +114,11 @@ export function runDeterministicEval(item: EvalItemVersion, sample: RunSample): 
   const expected = text(sample.expectedOutput);
   const actual = text(sample.output);
   let fields: EvalFieldResult[];
-  if (item.type === "string_check") {
+  if (item.type === "exact_match") {
+    const definition = parseCustomEvalItemContractV3(item);
+    const passed = exactTextMatches(sample.output, definition.config.expected);
+    fields = [{ key: "matches_expected", value: passed, passed, decision: passed ? "pass" : "hard_fail" }];
+  } else if (item.type === "string_check") {
     const needle = String(item.config["contains"] ?? expected);
     const passed = actual.toLowerCase().includes(needle.toLowerCase());
     fields = [{ key: "contains_expected", value: passed, passed, decision: passed ? "pass" : "hard_fail" }];

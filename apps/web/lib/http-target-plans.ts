@@ -1,11 +1,12 @@
 import {
   httpEvalPlanHeadFromRecord, parseHttpEvalJson, parseHttpEvalPlanVersionRecord,
   prepareHttpEvalPlanDraft, prepareHttpEvalPlanSaveRequest, prepareHttpEvalPlanVersionRecord,
-  resolveHttpEvalPlanPreview, restoreCustomEvalSetVersionRecordV2, restoreCustomEvalItemVersionRecordV2
+  resolveHttpEvalPlanPreview, restoreCustomEvalSetVersionRecordV2, restoreCustomEvalItemVersionRecordV2,
+  restoreCustomEvalSetVersionRecordV3, restoreMatchingEvalItemVersionRecord
 } from "@open-evals/core";
-import type { HttpEvalPlanFamily, HttpEvalSetRef } from "@open-evals/core";
+import type { HttpEvalPlanFamily, MatchingHttpEvalSetRef as HttpEvalSetRef } from "@open-evals/core";
 import {
-  getHttpEvalPlan, getHttpEvalPlanHead, getHttpEvalPlanSources, getHttpEvalPlanVersion, getCustomEvalSetVersionV2,
+  getHttpEvalPlan, getHttpEvalPlanHead, getHttpEvalPlanSources, getHttpEvalPlanVersion, getCustomEvalSetVersionV2, getCustomEvalSetVersionV3,
   isDatabaseUnavailable, listHttpEvalPlans, listHttpEvalSources, saveHttpEvalPlanVersion
 } from "@open-evals/db";
 import type { RouteAuthContext } from "./auth";
@@ -16,7 +17,7 @@ import type { LoadState } from "./loaders";
 
 const UUID = /^[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$/;
 const MAX_REQUEST_BYTES = 2 * 1024 * 1024;
-const compositionReaders = { restoreSet: restoreCustomEvalSetVersionRecordV2, restoreItem: restoreCustomEvalItemVersionRecordV2 };
+const compositionReaders = { restoreSet: restoreCustomEvalSetVersionRecordV2, restoreItem: restoreCustomEvalItemVersionRecordV2, restoreSetV3: restoreCustomEvalSetVersionRecordV3, restoreMatchingItem: restoreMatchingEvalItemVersionRecord };
 
 export class HttpTargetRequestError extends Error {
   constructor(readonly status: number, message: string) { super(message); this.name = "HttpTargetRequestError"; }
@@ -148,24 +149,26 @@ export async function loadHttpTarget<T>(load: (auth: RouteAuthContext) => Promis
   }
 }
 
-export function loadHttpTargetPlans(requested?: { composition?: boolean; setId?: string; setVersionId?: string; copyPlanId?: string; copyVersionId?: string; sourceRequested?: boolean }): Promise<LoadState<HttpTargetPlansView>> {
+export function loadHttpTargetPlans(requested?: { composition?: boolean; matching?: boolean; setId?: string; setVersionId?: string; copyPlanId?: string; copyVersionId?: string; sourceRequested?: boolean }): Promise<LoadState<HttpTargetPlansView>> {
   return loadHttpTarget(async auth => {
     const data = await readHttpTargetPlanList(auth);
-    const initialFamily: HttpEvalPlanFamily = requested?.composition ? "http-target-eval-v2" : "http-target-eval-v1";
+    const initialFamily: HttpEvalPlanFamily = requested?.matching ? "http-target-eval-v3" : requested?.composition ? "http-target-eval-v2" : "http-target-eval-v1";
     let initialSetRefs: HttpEvalSetRef[] = [], initialDatasetId: string | undefined;
-    if (requested?.composition && requested.setId && requested.setVersionId && !requested.copyPlanId) {
+    if ((requested?.composition || requested?.matching) && requested.setId && requested.setVersionId && !requested.copyPlanId) {
       if (UUID.test(requested.setId) && UUID.test(requested.setVersionId)) {
-        const stored = await getCustomEvalSetVersionV2(auth.workspaceId, requested.setId, requested.setVersionId, compositionReaders);
+        const stored = requested?.matching
+          ? await getCustomEvalSetVersionV3(auth.workspaceId, requested.setId, requested.setVersionId, { restoreSet: restoreCustomEvalSetVersionRecordV3, restoreItem: restoreMatchingEvalItemVersionRecord })
+          : await getCustomEvalSetVersionV2(auth.workspaceId, requested.setId, requested.setVersionId, compositionReaders);
         if (stored) {
-          const record = restoreCustomEvalSetVersionRecordV2(stored, auth.workspaceId);
-          initialSetRefs = [{ schemaVersion: "custom-eval-set-ref-v2", setId: record.draft.setId, versionId: record.draft.versionId, fingerprint: record.contract.fingerprint }];
+          const record = stored.schemaVersion === "custom-eval-set-record-v3" ? restoreCustomEvalSetVersionRecordV3(stored, auth.workspaceId) : restoreCustomEvalSetVersionRecordV2(stored, auth.workspaceId);
+          initialSetRefs = [{ schemaVersion: requested?.matching ? "custom-eval-set-ref-v3" : "custom-eval-set-ref-v2", setId: record.draft.setId, versionId: record.draft.versionId, fingerprint: record.contract.fingerprint }];
         }
       }
-    } else if (requested?.composition && requested.copyPlanId && requested.copyVersionId && !requested.setId) {
+    } else if ((requested?.composition || requested?.matching) && requested.copyPlanId && requested.copyVersionId && !requested.setId) {
       const source = await readHttpTargetPlanVersion(auth.workspaceId, requested.copyPlanId, requested.copyVersionId);
-      if (source) {
+      if (source && (requested?.matching || source.content.schemaVersion !== "http-target-eval-v3")) {
         initialDatasetId = source.content.draft.datasetVersionId;
-        initialSetRefs = source.content.schemaVersion === "http-target-eval-v2" ? source.content.draft.evalSetVersions : source.content.evalSets.map(set => ({ schemaVersion: "custom-eval-set-ref-v1", setId: set.contract.setId, versionId: set.contract.id, fingerprint: set.contract.fingerprint }));
+        initialSetRefs = source.content.schemaVersion !== "http-target-eval-v1" ? source.content.draft.evalSetVersions : source.content.evalSets.map(set => ({ schemaVersion: "custom-eval-set-ref-v1", setId: set.contract.setId, versionId: set.contract.id, fingerprint: set.contract.fingerprint }));
       }
     }
     return { ...data, initialFamily, initialSetRefs, initialDatasetId, requestedSourceUnavailable: Boolean(requested?.sourceRequested && initialSetRefs.length === 0) };

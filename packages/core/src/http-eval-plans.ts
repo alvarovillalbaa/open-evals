@@ -1,8 +1,10 @@
 import { stableHash, stableStringify } from "./hash";
 import { parseProvidedOutputDatasetSnapshot, parseProvidedOutputEvalSetSource } from "./provided-output-runs";
-import type { JsonValue } from "./types";
+import type { JsonValue, EvalItemVersion } from "./types";
 import type { HttpEvalPlanHead, ResolveHttpEvalPlanInput, PrepareHttpEvalPlanRecordInput } from "./http-eval-types";
-import type { AnyHttpEvalPlanDraft as HttpEvalPlanDraft, AnyHttpEvalPlanSaveRequest as HttpEvalPlanSaveRequest, AnyHttpEvalPlanContent as HttpEvalPlanContent, AnyHttpEvalPlanPreview as HttpEvalPlanPreview, AnyHttpEvalPlanVersionRecord as HttpEvalPlanVersionRecord, AnyHttpEvalPlanHead, HttpEvalSetRef, HttpEvalResolvedSetV2, HttpEvalPlanFamily } from "./eval-composition-types";
+import type { AnyHttpEvalPlanDraft as HttpEvalPlanDraft, AnyHttpEvalPlanSaveRequest as HttpEvalPlanSaveRequest, AnyHttpEvalPlanContent as HttpEvalPlanContent, AnyHttpEvalPlanPreview as HttpEvalPlanPreview, AnyHttpEvalPlanVersionRecord as HttpEvalPlanVersionRecord, AnyHttpEvalPlanHead, HttpEvalPlanFamily } from "./eval-composition-types";
+import { parseCustomEvalSetContractV3, parseCustomEvalItemContractV3 } from "./eval-matching";
+import type { MatchingHttpEvalSetRef as HttpEvalSetRef, MatchingHttpEvalResolvedSet as HttpEvalResolvedSetV2 } from "./eval-matching-types";
 import { parseCustomEvalSetContractV2 } from "./eval-composition";
 export type * from "./http-eval-types";
 
@@ -110,19 +112,28 @@ const profileTagsV2 = {
   ledger: "http-eval-run-ledger-v2", rowEvent: "http-eval-row-event-v2", rowEventStorage: "http-eval-row-event-storage-v2",
   execution: "http-eval-execution-v2", runRecord: "http-eval-run-record-v2", thresholds: "http-eval-thresholds-v2"
 } as const;
-export function httpEvalProfileTags(profile: unknown): typeof profileTagsV1 | typeof profileTagsV2 {
+const profileTagsV3 = {
+  draft: "http-eval-plan-draft-v3", save: "http-eval-plan-save-v3", preview: "http-eval-plan-preview-v3",
+  content: "http-target-eval-v3", planRecord: "http-eval-plan-record-v3", planStorage: "http-eval-plan-storage-v3",
+  saveFingerprint: "http-eval-plan-save-fingerprint-v3", start: "http-eval-start-v3", startFingerprint: "http-eval-start-fingerprint-v3",
+  ledger: "http-eval-run-ledger-v3", rowEvent: "http-eval-row-event-v3", rowEventStorage: "http-eval-row-event-storage-v3",
+  execution: "http-eval-execution-v3", runRecord: "http-eval-run-record-v3", thresholds: "http-eval-thresholds-v3"
+} as const;
+export function httpEvalProfileTags(profile: unknown): typeof profileTagsV1 | typeof profileTagsV2 | typeof profileTagsV3 {
   if (profile === "http-target-eval-v1") return profileTagsV1;
   if (profile === "http-target-eval-v2") return profileTagsV2;
+  if (profile === "http-target-eval-v3") return profileTagsV3;
   return httpEvalFail("http_eval_profile_invalid");
 }
 export function httpEvalDraftFamily(draft: HttpEvalPlanDraft): HttpEvalPlanFamily {
   if (draft.schemaVersion === "http-eval-plan-draft-v1") return "http-target-eval-v1";
   if (draft.schemaVersion === "http-eval-plan-draft-v2") return "http-target-eval-v2";
+  if (draft.schemaVersion === "http-eval-plan-draft-v3") return "http-target-eval-v3";
   return httpEvalFail("http_eval_profile_invalid");
 }
 export function prepareHttpEvalSetRef(value: unknown): HttpEvalSetRef {
   const s = httpEvalObject(copyHttpEvalJson(value, HTTP_EVAL_LIMITS.requestBytes), ["schemaVersion", "setId", "versionId", "fingerprint"]);
-  if (s.schemaVersion !== "custom-eval-set-ref-v1" && s.schemaVersion !== "custom-eval-set-ref-v2") return httpEvalFail();
+  if (s.schemaVersion !== "custom-eval-set-ref-v1" && s.schemaVersion !== "custom-eval-set-ref-v2" && s.schemaVersion !== "custom-eval-set-ref-v3") return httpEvalFail();
   return { schemaVersion: s.schemaVersion, setId: httpEvalUuid(s.setId), versionId: httpEvalUuid(s.versionId), fingerprint: httpEvalDigest(s.fingerprint) };
 }
 function refKey(ref: HttpEvalSetRef): string { return ref.schemaVersion + "/" + ref.setId + "/" + ref.versionId; }
@@ -133,20 +144,21 @@ function compositionSet(value: unknown, workspaceId: string): HttpEvalResolvedSe
     if (source.contract.setId !== ref.setId || source.contract.id !== ref.versionId || source.contract.fingerprint !== ref.fingerprint || s.sourceRecordFingerprint !== null) return httpEvalFail("http_eval_sources_invalid");
     return { ref, ...source, sourceRecordFingerprint: null };
   }
-  const contract = parseCustomEvalSetContractV2(s.contract, workspaceId);
+  const contract = ref.schemaVersion === "custom-eval-set-ref-v3" ? parseCustomEvalSetContractV3(s.contract, workspaceId) : parseCustomEvalSetContractV2(s.contract, workspaceId);
   if (contract.authoring.setId !== ref.setId || contract.authoring.versionId !== ref.versionId || contract.fingerprint !== ref.fingerprint || !httpEvalSame(contract.memberProofs, s.members)) return httpEvalFail("http_eval_sources_invalid");
-  return { ref, contract, members: contract.memberProofs, sourceRecordFingerprint: httpEvalDigest(s.sourceRecordFingerprint) };
+  return { ref, contract, members: contract.memberProofs, sourceRecordFingerprint: httpEvalDigest(s.sourceRecordFingerprint) } as HttpEvalResolvedSetV2;
 }
 export function prepareHttpEvalPlanDraft(value: unknown): HttpEvalPlanDraft {
   const copied = copyHttpEvalJson(value, HTTP_EVAL_LIMITS.requestBytes), tag = copied && typeof copied === "object" && !Array.isArray(copied) ? copied.schemaVersion : null;
-  if (tag !== "http-eval-plan-draft-v1" && tag !== "http-eval-plan-draft-v2") return httpEvalFail();
+  if (tag !== "http-eval-plan-draft-v1" && tag !== "http-eval-plan-draft-v2" && tag !== "http-eval-plan-draft-v3") return httpEvalFail();
   const selectionKey = tag === "http-eval-plan-draft-v1" ? "evalSetVersionIds" : "evalSetVersions";
   const s = httpEvalObject(copied, ["schemaVersion", "planId", "versionId", "version", "expectedVersionId", "name", "datasetVersionId", selectionKey, "target", "limits"]), selection = s[selectionKey];
   if (!Array.isArray(selection) || !selection.length || selection.length > HTTP_EVAL_LIMITS.sets) return httpEvalFail();
   const version = httpEvalInteger(s.version, 1, 2147483647), expectedVersionId = s.expectedVersionId === null ? null : httpEvalUuid(s.expectedVersionId), versionId = httpEvalUuid(s.versionId);
   if ((version === 1) !== (expectedVersionId === null) || expectedVersionId === versionId) return httpEvalFail();
   const ids = tag === "http-eval-plan-draft-v1" ? selection.map(httpEvalUuid).sort() : [];
-  const refs = tag === "http-eval-plan-draft-v2" ? selection.map(prepareHttpEvalSetRef).sort((a, b) => refKey(a) < refKey(b) ? -1 : refKey(a) > refKey(b) ? 1 : 0) : [];
+  const refs = tag !== "http-eval-plan-draft-v1" ? selection.map(prepareHttpEvalSetRef).sort((a, b) => refKey(a) < refKey(b) ? -1 : refKey(a) > refKey(b) ? 1 : 0) : [];
+  if (tag === "http-eval-plan-draft-v2" && refs.some(ref => ref.schemaVersion === "custom-eval-set-ref-v3")) return httpEvalFail("http_eval_profile_invalid");
   if (new Set(tag === "http-eval-plan-draft-v1" ? ids : refs.map(refKey)).size !== selection.length) return httpEvalFail();
   const target = httpEvalObject(s.target, ["targetId", "targetVersion", "endpoint", "timeoutMs"]), limits = httpEvalObject(s.limits, ["concurrency", "maxDurationSeconds"]);
   const endpoint = httpEvalText(target.endpoint, 4096); let url: URL; try { url = new URL(endpoint); } catch { return httpEvalFail("http_eval_endpoint_invalid"); }
@@ -158,17 +170,18 @@ export function prepareHttpEvalPlanDraft(value: unknown): HttpEvalPlanDraft {
     name: httpEvalText(s.name, 4096).trim(), datasetVersionId: httpEvalText(s.datasetVersionId),
     target: { targetId: httpEvalText(target.targetId), targetVersion: httpEvalText(target.targetVersion), endpoint, timeoutMs: httpEvalInteger(target.timeoutMs, 500, 10000) },
     limits: { concurrency: httpEvalInteger(limits.concurrency, 1, 4), maxDurationSeconds: httpEvalInteger(limits.maxDurationSeconds, 5, 120) } };
-  return tag === "http-eval-plan-draft-v1" ? { schemaVersion: tag, ...common, evalSetVersionIds: ids } : { schemaVersion: tag, ...common, evalSetVersions: refs };
+  return tag === "http-eval-plan-draft-v1" ? { schemaVersion: tag, ...common, evalSetVersionIds: ids } : { schemaVersion: tag, ...common, evalSetVersions: refs } as HttpEvalPlanDraft;
 }
 export function prepareHttpEvalPlanSaveRequest(value: unknown): HttpEvalPlanSaveRequest {
   const s = httpEvalObject(copyHttpEvalJson(value, HTTP_EVAL_LIMITS.requestBytes), ["schemaVersion", "draft", "expectedPreviewFingerprint"]);
   const draft = prepareHttpEvalPlanDraft(s.draft), expectedPreviewFingerprint = httpEvalDigest(s.expectedPreviewFingerprint);
   if (draft.schemaVersion === "http-eval-plan-draft-v1" && s.schemaVersion === "http-eval-plan-save-v1") return { schemaVersion: s.schemaVersion, draft, expectedPreviewFingerprint };
   if (draft.schemaVersion === "http-eval-plan-draft-v2" && s.schemaVersion === "http-eval-plan-save-v2") return { schemaVersion: s.schemaVersion, draft, expectedPreviewFingerprint };
+  if (draft.schemaVersion === "http-eval-plan-draft-v3" && s.schemaVersion === "http-eval-plan-save-v3") return { schemaVersion: s.schemaVersion, draft, expectedPreviewFingerprint };
   return httpEvalFail("http_eval_profile_invalid");
 }
 function head(value: unknown, family: HttpEvalPlanFamily): AnyHttpEvalPlanHead | null {
-  if (value === null) return null; const s = httpEvalObject(copyHttpEvalJson(value), ["planId", "versionId", "version", "name", "fingerprint", ...(family === "http-target-eval-v2" ? ["profile"] : [])]);
+  if (value === null) return null; const s = httpEvalObject(copyHttpEvalJson(value), ["planId", "versionId", "version", "name", "fingerprint", ...(family !== "http-target-eval-v1" ? ["profile"] : [])]);
   const base = { planId: httpEvalUuid(s.planId), versionId: httpEvalUuid(s.versionId), version: httpEvalInteger(s.version, 1, 2147483647), name: httpEvalText(s.name, 4096), fingerprint: httpEvalDigest(s.fingerprint) };
   if (family === "http-target-eval-v1") return base;
   if (s.profile !== family) return httpEvalFail("http_eval_profile_invalid");
@@ -182,6 +195,13 @@ export function httpEvalPlanRequestFingerprint(workspaceId: string, request: unk
   const parsed = prepareHttpEvalPlanSaveRequest(request);
   return httpEvalHash({ schemaVersion: httpEvalProfileTags(httpEvalDraftFamily(parsed.draft)).saveFingerprint, workspaceId: httpEvalText(workspaceId), request: parsed });
 }
+
+export function httpEvalFieldKey(item: EvalItemVersion): "contains_expected" | "matches_expected" { return item.type === "exact_match" ? "matches_expected" : "contains_expected"; }
+export function httpEvalEvaluator(item: EvalItemVersion): string { return item.type === "exact_match" ? "literal_exact_text_v1" : "case_insensitive_contains_v1"; }
+export function httpEvalRationale(item: EvalItemVersion, passed: boolean): string {
+  return item.type === "exact_match" ? passed ? "Output matches the configured text exactly." : "Output differs from the configured text."
+    : passed ? "Configured text is present." : "Configured text is absent.";
+}
 function recordAllowance(content: HttpEvalPlanContent, workspaceId: string, parent: HttpEvalPlanHead | null): number {
   const tags = httpEvalProfileTags(content.schemaVersion);
   // Internal byte scaffold, never returned as domain data. Each field bounds the actual
@@ -193,13 +213,13 @@ function recordAllowance(content: HttpEvalPlanContent, workspaceId: string, pare
   const ledger = { schemaVersion: tags.ledger, workspaceId, publicRunId: uuid, runId, workflowId: `http_eval_workflow_${fp}`, planVersionId: plan.storage.versionId, planFingerprint: fp, requestFingerprint: fp, leaseToken: uuid, startedAt: time, deadlineAt: time, leaseExpiresAt: time, stopReason: "http_target_" + "x".repeat(100), status: "outcome_unknown", rows: sampleIds.map(rowId => ({ rowId, status: "outcome_unknown", claim: claim(rowId), eventId: `http_eval_event_${fp}`, eventFingerprint: fp })), fingerprint: fp };
   const events = sampleIds.map(rowId => ({ schemaVersion: tags.rowEvent, id: `http_eval_event_${fp}`, workspaceId, publicRunId: uuid, rowId, claim: claim(rowId), status: "outcome_unknown", completedAt: time,
     response: { schemaVersion: "http-json-target-response-v1", requestFingerprint: fp, output: "", usage: { inputTokens: 1000000000, outputTokens: 1000000000, totalTokens: 1000000000 }, costUsd: "x".repeat(32) }, rawResponseHash: fp, errorCode: "http_target_" + "x".repeat(100), fingerprint: fp }));
-  const results = sampleIds.flatMap(rowId => content.items.map(item => ({ id: resultId(rowId, item.id), rowId, evalItemVersionId: item.id, originalOutput: { contains_expected: false }, fields: [{ key: "contains_expected", value: false, passed: false, decision: "hard_fail" }], conciseRationale: "Configured text is present.", evidenceRefs: [`http_eval_event_${fp}`], evaluatorVersion: item.fingerprint, provider: "local", model: "case_insensitive_contains_v1", sourceOutputFingerprint: fp, fingerprint: fp })));
+  const results = sampleIds.flatMap(rowId => content.items.map(item => ({ id: resultId(rowId, item.id), rowId, evalItemVersionId: item.id, originalOutput: { [httpEvalFieldKey(item)]: false }, fields: [{ key: httpEvalFieldKey(item), value: false, passed: false, decision: "hard_fail" }], conciseRationale: httpEvalRationale(item, true), evidenceRefs: [`http_eval_event_${fp}`], evaluatorVersion: item.fingerprint, provider: "local", model: httpEvalEvaluator(item), sourceOutputFingerprint: fp, fingerprint: fp })));
   const gates: unknown[] = [];
   function gate(level: string, scopeId: string, rows: string[], items: string[]) {
     gates.push({ id: `http_eval_gate_${fp}`, runId, level, scopeId, score: "x".repeat(32), passed: false, decision: "hard_fail", thresholdVersion: tags.thresholds + ":" + fp, formula: "x".repeat(160),
       reasons: ["coverage_incomplete", "threshold_failed", "critical_evaluator_failed"], failedCriticalComponents: items, sourceResultIds: rows.flatMap(rowId => items.map(itemId => resultId(rowId, itemId))).sort(), fingerprint: fp });
   }
-  for (const rowId of sampleIds) { for (const itemId of itemIds) { gate("field", `${rowId}/${itemId}/contains_expected`, [rowId], [itemId]); gate("item_row", `${rowId}/${itemId}`, [rowId], [itemId]); } gate("row", rowId, [rowId], itemIds); }
+  for (const rowId of sampleIds) { for (const itemId of itemIds) { gate("field", `${rowId}/${itemId}/${httpEvalFieldKey(content.items.find(item => item.id === itemId)!)}`, [rowId], [itemId]); gate("item_row", `${rowId}/${itemId}`, [rowId], [itemId]); } gate("row", rowId, [rowId], itemIds); }
   gate("dataset", content.dataset.version.id, sampleIds, itemIds);
   for (const set of content.evalSets) gate("eval_set", set.contract.id, sampleIds, set.members.map(m => m.evalItemVersionId));
   gate("target", content.target.fingerprint, sampleIds, itemIds); gate("criticality", "critical", sampleIds, itemIds); gate("run", runId, sampleIds, itemIds);
@@ -230,19 +250,22 @@ export function resolveHttpEvalPlanPreview(input: ResolveHttpEvalPlanInput): Htt
   const distinct = new Map<string, HttpEvalPlanContent["items"][number]>();
   for (const set of evalSets) for (const member of set.contract.itemVersions) {
     const item = member.item;
-    if (item.type !== "string_check" || typeof item.config.contains !== "string" || !item.config.contains.trim() || member.weight !== 1 || member.criticality !== "critical" || item.outputSchema.fields.length !== 1 || item.outputSchema.fields[0]?.key !== "contains_expected" || item.outputSchema.fields[0]?.type !== "boolean") return httpEvalFail("http_eval_evaluator_unavailable");
+    const exact = family === "http-target-eval-v3" && item.type === "exact_match";
+    if (exact) { try { parseCustomEvalItemContractV3(item, workspaceId); } catch { return httpEvalFail("http_eval_evaluator_unavailable"); } }
+    if (!exact && (item.type !== "string_check" || typeof item.config.contains !== "string" || !item.config.contains.trim())
+      || member.weight !== 1 || member.criticality !== "critical" || item.outputSchema.fields.length !== 1 || item.outputSchema.fields[0]?.key !== httpEvalFieldKey(item) || item.outputSchema.fields[0]?.type !== "boolean") return httpEvalFail("http_eval_evaluator_unavailable");
     const old = distinct.get(item.id); if (old && !httpEvalSame(old, item)) return httpEvalFail("http_eval_evaluator_conflict"); distinct.set(item.id, item);
   }
   const items = [...distinct.values()].sort((a, b) => a.id < b.id ? -1 : a.id > b.id ? 1 : 0); if (!items.length || items.length > HTTP_EVAL_LIMITS.items) return httpEvalFail();
   const samples = dataset.rows.map(row => ({ rowId: "http_eval_row_" + httpEvalHash({ datasetVersionId: dataset.version.id, datasetRowId: row.id, fingerprint: httpEvalHash(row) }), datasetRowId: row.id, rowKey: row.rowKey, fingerprint: httpEvalHash(row) }));
   const base = { schemaVersion: tags.content, draft, dataset, datasetFingerprint: httpEvalHash(dataset), evalSets, items, samples,
     target: { ...draft.target, protocol: "http-json-target-v1" as const, fingerprint: httpEvalHash({ protocol: "http-json-target-v1", ...draft.target }) },
-    policy: { evaluator: "case_insensitive_contains_v1" as const, expectedOutputVisibility: "hidden" as const, maxTargetCalls: samples.length, maxJudgeCalls: 0 as const, codeVersion: tags.content } };
+    policy: { evaluator: family === "http-target-eval-v3" ? "text_matching_v3" as const : "case_insensitive_contains_v1" as const, expectedOutputVisibility: "hidden" as const, maxTargetCalls: samples.length, maxJudgeCalls: 0 as const, codeVersion: tags.content } };
   const content = { ...base, fingerprint: httpEvalHash(base) } as HttpEvalPlanContent;
   const recordByteAllowance = recordAllowance(content, workspaceId, parent);
   if (recordByteAllowance > HTTP_EVAL_LIMITS.recordBytes) return httpEvalFail("http_eval_record_allowance_exceeded");
   const preview = { schemaVersion: tags.preview, workspaceId, draft, head: parent, content, recordByteAllowance,
-    ...(draft.schemaVersion === "http-eval-plan-draft-v2" ? { counts: { rowCount: samples.length, evalSetCount: evalSets.length, uniqueItemCount: items.length, resultPairs: samples.length * items.length, targetCalls: samples.length } } : {}) };
+    ...(draft.schemaVersion !== "http-eval-plan-draft-v1" ? { counts: { rowCount: samples.length, evalSetCount: evalSets.length, uniqueItemCount: items.length, resultPairs: samples.length * items.length, targetCalls: samples.length } } : {}) };
   return { ...preview, fingerprint: httpEvalHash(preview) } as HttpEvalPlanPreview;
 }
 export function parseHttpEvalPlanPreview(value: unknown): HttpEvalPlanPreview {
@@ -267,5 +290,5 @@ export function parseHttpEvalPlanVersionRecord(value: unknown): HttpEvalPlanVers
 }
 export function httpEvalPlanHeadFromRecord(value: unknown): AnyHttpEvalPlanHead {
   const r = parseHttpEvalPlanVersionRecord(value), d = r.content.draft, base = { planId: d.planId, versionId: d.versionId, version: d.version, name: d.name, fingerprint: r.fingerprint };
-  return r.content.schemaVersion === "http-target-eval-v2" ? { ...base, profile: "http-target-eval-v2" } : base;
+  return r.content.schemaVersion === "http-target-eval-v1" ? base : { ...base, profile: r.content.schemaVersion };
 }

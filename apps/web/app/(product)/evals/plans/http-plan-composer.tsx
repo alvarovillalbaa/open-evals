@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useId, useRef, useState, type FormEvent } from "react";
-import type { AnyHttpEvalPlanDraft as HttpEvalPlanDraft, AnyHttpEvalPlanHead as HttpEvalPlanHead, AnyHttpEvalPlanPreview as HttpEvalPlanPreview, AnyHttpEvalPlanSaveRequest as HttpEvalPlanSaveRequest, AnyHttpEvalPlanVersionRecord as HttpEvalPlanVersionRecord, HttpEvalPlanFamily, HttpEvalSetRef } from "@open-evals/core";
+import type { AnyHttpEvalPlanDraft as HttpEvalPlanDraft, AnyHttpEvalPlanHead as HttpEvalPlanHead, AnyHttpEvalPlanPreview as HttpEvalPlanPreview, AnyHttpEvalPlanSaveRequest as HttpEvalPlanSaveRequest, AnyHttpEvalPlanVersionRecord as HttpEvalPlanVersionRecord, HttpEvalPlanFamily, MatchingHttpEvalSetRef as HttpEvalSetRef } from "@open-evals/core";
 import { jsonObject, readHttpTargetResponse } from "@/lib/http-target-client";
 import type { HttpTargetSourcesView } from "@/lib/http-target-types";
 import { buttonClass, CompleteJson, inputClass, PlanSnapshot, primaryClass } from "./http-target-view";
@@ -12,7 +12,7 @@ const uuid = /^[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}$/;
 type Pending = "preview" | "save" | "recover" | "head";
 const refKey = (ref: HttpEvalSetRef) => `${ref.schemaVersion}/${ref.setId}/${ref.versionId}`;
 function refShape(value: unknown): value is HttpEvalSetRef {
-  return jsonObject(value) && Object.keys(value).length === 4 && ["custom-eval-set-ref-v1", "custom-eval-set-ref-v2"].includes(String(value.schemaVersion))
+  return jsonObject(value) && Object.keys(value).length === 4 && ["custom-eval-set-ref-v1", "custom-eval-set-ref-v2", "custom-eval-set-ref-v3"].includes(String(value.schemaVersion))
     && typeof value.setId === "string" && uuid.test(value.setId) && typeof value.versionId === "string" && uuid.test(value.versionId)
     && typeof value.fingerprint === "string" && hash.test(value.fingerprint);
 }
@@ -38,10 +38,10 @@ function sameDraft(value: unknown, draft: HttpEvalPlanDraft): value is HttpEvalP
 }
 
 function previewShape(value: unknown, draft: HttpEvalPlanDraft): value is HttpEvalPlanPreview {
-  const v2 = draft.schemaVersion === "http-eval-plan-draft-v2";
-  return jsonObject(value) && value.schemaVersion === (v2 ? "http-eval-plan-preview-v2" : "http-eval-plan-preview-v1") && typeof value.workspaceId === "string"
+  const v2 = draft.schemaVersion !== "http-eval-plan-draft-v1", suffix = draft.schemaVersion.slice(-2);
+  return jsonObject(value) && value.schemaVersion === `http-eval-plan-preview-${suffix}` && typeof value.workspaceId === "string"
     && typeof value.fingerprint === "string" && hash.test(value.fingerprint) && sameDraft(value.draft, draft)
-    && jsonObject(value.content) && value.content.schemaVersion === (v2 ? "http-target-eval-v2" : "http-target-eval-v1") && sameDraft(value.content.draft, draft)
+    && jsonObject(value.content) && value.content.schemaVersion === `http-target-eval-${suffix}` && sameDraft(value.content.draft, draft)
     && jsonObject(value.content.dataset) && Array.isArray(value.content.dataset.rows) && value.content.dataset.rows.length >= 1
     && value.content.dataset.rows.length <= 100 && Array.isArray(value.content.evalSets) && value.content.evalSets.length === (draft.schemaVersion === "http-eval-plan-draft-v1" ? draft.evalSetVersionIds.length : draft.evalSetVersions.length)
     && Array.isArray(value.content.items) && value.content.items.length >= 1 && value.content.items.length <= 32
@@ -50,21 +50,21 @@ function previewShape(value: unknown, draft: HttpEvalPlanDraft): value is HttpEv
 }
 
 function recordShape(value: unknown, draft: HttpEvalPlanDraft, workspaceId?: string, previewFingerprint?: string): value is HttpEvalPlanVersionRecord {
-  return jsonObject(value) && value.schemaVersion === (draft.schemaVersion === "http-eval-plan-draft-v2" ? "http-eval-plan-record-v2" : "http-eval-plan-record-v1") && typeof value.workspaceId === "string"
-    && (!workspaceId || value.workspaceId === workspaceId) && jsonObject(value.content) && value.content.schemaVersion === (draft.schemaVersion === "http-eval-plan-draft-v2" ? "http-target-eval-v2" : "http-target-eval-v1") && sameDraft(value.content.draft, draft)
+  return jsonObject(value) && value.schemaVersion === `http-eval-plan-record-${draft.schemaVersion.slice(-2)}` && typeof value.workspaceId === "string"
+    && (!workspaceId || value.workspaceId === workspaceId) && jsonObject(value.content) && value.content.schemaVersion === `http-target-eval-${draft.schemaVersion.slice(-2)}` && sameDraft(value.content.draft, draft)
     && typeof value.fingerprint === "string" && hash.test(value.fingerprint) && typeof value.previewFingerprint === "string"
     && hash.test(value.previewFingerprint) && (!previewFingerprint || value.previewFingerprint === previewFingerprint)
     && typeof value.createdAt === "string" && jsonObject(value.storage);
 }
 
 function headRecordShape(value: unknown, head: HttpEvalPlanHead, family: HttpEvalPlanFamily): value is HttpEvalPlanVersionRecord {
-  const v2 = family === "http-target-eval-v2";
-  if (!jsonObject(value) || value.schemaVersion !== (v2 ? "http-eval-plan-record-v2" : "http-eval-plan-record-v1") || value.fingerprint !== head.fingerprint
+  const v2 = family !== "http-target-eval-v1", suffix = family.slice(-2);
+  if (!jsonObject(value) || value.schemaVersion !== `http-eval-plan-record-${suffix}` || value.fingerprint !== head.fingerprint
     || !jsonObject(value.content) || value.content.schemaVersion !== family || !jsonObject(value.content.draft)
-    || (v2 ? !("profile" in head) || head.profile !== "http-target-eval-v2" : "profile" in head)) return false;
+    || (v2 ? !("profile" in head) || head.profile !== family : "profile" in head)) return false;
   const draft = value.content.draft;
   return draft.planId === head.planId && draft.versionId === head.versionId && draft.version === head.version
-    && draft.name === head.name && jsonObject(draft.target) && jsonObject(draft.limits) && (v2 ? draft.schemaVersion === "http-eval-plan-draft-v2" && Array.isArray(draft.evalSetVersions) : draft.schemaVersion === "http-eval-plan-draft-v1" && Array.isArray(draft.evalSetVersionIds));
+    && draft.name === head.name && jsonObject(draft.target) && jsonObject(draft.limits) && (v2 ? draft.schemaVersion === `http-eval-plan-draft-${suffix}` && Array.isArray(draft.evalSetVersions) : draft.schemaVersion === "http-eval-plan-draft-v1" && Array.isArray(draft.evalSetVersionIds));
 }
 
 function headShape(value: unknown): value is HttpEvalPlanHead {
@@ -83,7 +83,7 @@ export function HttpPlanComposer({ canWrite, sources, initialHead = null, initia
   initialDatasetId?: string;
 }) {
   const prefix = useId(), initial = initialRecord?.content.draft;
-  const family = initialRecord?.content.schemaVersion ?? initialFamily, isComposition = family === "http-target-eval-v2";
+  const family = initialRecord?.content.schemaVersion ?? initialFamily, isComposition = family !== "http-target-eval-v1", isMatching = family === "http-target-eval-v3";
   const [head, setHead] = useState(initialHead);
   const [name, setName] = useState(initial?.name ?? "");
   const [datasetId, setDatasetId] = useState(initial?.datasetVersionId ?? initialDatasetId ?? "");
@@ -136,8 +136,8 @@ export function HttpPlanComposer({ canWrite, sources, initialHead = null, initia
       target: { targetId, targetVersion, endpoint: new URL(endpoint).href, timeoutMs: Number(timeoutMs) },
       limits: { concurrency: Number(concurrency), maxDurationSeconds: Number(duration) }
     };
-    const value: HttpEvalPlanDraft = isComposition ? { schemaVersion: "http-eval-plan-draft-v2", ...common, evalSetVersions: parsedRefs(setIds) } : { schemaVersion: "http-eval-plan-draft-v1", ...common, evalSetVersionIds: ids };
-    if (new TextEncoder().encode(JSON.stringify({ schemaVersion: isComposition ? "http-eval-plan-save-v2" : "http-eval-plan-save-v1", draft: value, expectedPreviewFingerprint: "0".repeat(64) })).length > 2 * 1024 * 1024) throw new Error("request_limit");
+    const value: HttpEvalPlanDraft = isComposition ? { schemaVersion: isMatching ? "http-eval-plan-draft-v3" : "http-eval-plan-draft-v2", ...common, evalSetVersions: parsedRefs(setIds) } : { schemaVersion: "http-eval-plan-draft-v1", ...common, evalSetVersionIds: ids };
+    if (new TextEncoder().encode(JSON.stringify({ schemaVersion: isMatching ? "http-eval-plan-save-v3" : isComposition ? "http-eval-plan-save-v2" : "http-eval-plan-save-v1", draft: value, expectedPreviewFingerprint: "0".repeat(64) })).length > 2 * 1024 * 1024) throw new Error("request_limit");
     planIdentity.current = value.planId; pinnedDraft.current = value;
     return value;
   }
@@ -171,7 +171,7 @@ export function HttpPlanComposer({ canWrite, sources, initialHead = null, initia
     const token = begin("save"); let started = false;
     try {
       const intent = pinnedRequest.current ?? (() => {
-        const request: HttpEvalPlanSaveRequest = plan.draft.schemaVersion === "http-eval-plan-draft-v2" ? { schemaVersion: "http-eval-plan-save-v2", draft: plan.draft, expectedPreviewFingerprint: plan.fingerprint } : { schemaVersion: "http-eval-plan-save-v1", draft: plan.draft, expectedPreviewFingerprint: plan.fingerprint };
+        const request = { schemaVersion: `http-eval-plan-save-${plan.draft.schemaVersion.slice(-2)}`, draft: plan.draft, expectedPreviewFingerprint: plan.fingerprint } as HttpEvalPlanSaveRequest;
         return { request, body: JSON.stringify(request) };
       })();
       pinnedRequest.current = intent;
@@ -250,15 +250,15 @@ export function HttpPlanComposer({ canWrite, sources, initialHead = null, initia
     <form onSubmit={previewPlan} className="grid min-w-0 gap-4 border border-border bg-panel p-4" aria-busy={Boolean(pending)}>
       <h2 className="font-semibold">{head ? `Prepare plan version ${head.version + 1}` : "Create an HTTP eval plan"}</h2>
       <p className="text-sm text-muted-foreground">Select exact saved inputs and 1–8 custom evaluator-set versions. This profile supports configured text-contains evaluators. Saving is separate from executing a target.</p>
-      <p className="text-sm font-medium">{isComposition ? "Reusable evaluator composition plan" : "Single-check evaluator plan"}. This plan family is fixed after its first save.</p>
-      {!isComposition ? <p className="text-sm text-muted-foreground"><Link href={initialRecord ? `/evals/plans?family=composition&copyPlanId=${initialRecord.content.draft.planId}&copyVersionId=${initialRecord.content.draft.versionId}` : "/evals/plans?family=composition"} className="underline">Create a separate reusable-composition plan</Link>. Earlier saved plans and their exact source contracts remain unchanged.</p> : <p className="text-sm text-muted-foreground"><Link href="/evals/composition" className="underline">Author reusable items and sets</Link>. Every critical member must pass its containing set and dataset scope even at a 0% pass-rate threshold.</p>}
+      <p className="text-sm font-medium">{isMatching ? "Contains and exact matching plan" : isComposition ? "Reusable evaluator composition plan" : "Single-check evaluator plan"}. This plan family is fixed after its first save.</p>
+      {!isComposition ? <p className="text-sm text-muted-foreground"><Link href={initialRecord ? `/evals/plans?family=composition&copyPlanId=${initialRecord.content.draft.planId}&copyVersionId=${initialRecord.content.draft.versionId}` : "/evals/plans?family=composition"} className="underline">Create a separate reusable-composition plan</Link>. Earlier saved plans and their exact source contracts remain unchanged.</p> : <p className="text-sm text-muted-foreground"><Link href={isMatching ? "/evals/matching" : "/evals/composition"} className="underline">Author reusable items and sets</Link>. Every critical member must pass its containing set and dataset scope even at a 0% pass-rate threshold.</p>}
       <div className="grid min-w-0 gap-1 text-sm font-medium"><label htmlFor={`${prefix}-name`}>Plan name</label><input id={`${prefix}-name`} className={inputClass} value={name} readOnly={locked} onChange={event => edit(setName, event.target.value)} required /></div>
       <div className="grid min-w-0 gap-1 text-sm font-medium"><label htmlFor={`${prefix}-recent-dataset`}>Recent saved dataset versions</label><select id={`${prefix}-recent-dataset`} className={inputClass} value={sources.datasets.some(source => source.versionId === datasetId) ? datasetId : ""} disabled={locked} onChange={event => edit(setDatasetId, event.target.value)}><option value="">Choose a saved version or enter its exact ID below</option>{sources.datasets.map(source => <option key={source.versionId} value={source.versionId}>{source.name} · version {source.version}</option>)}</select></div>
       <div className="grid min-w-0 gap-1 text-sm font-medium"><label htmlFor={`${prefix}-dataset`}>Exact dataset version ID</label><input id={`${prefix}-dataset`} className={`${inputClass} font-mono text-xs`} value={datasetId} readOnly={locked} onChange={event => edit(setDatasetId, event.target.value)} required /></div>
       <p className="text-xs text-muted-foreground"><Link href="/evals/datasets" className="underline underline-offset-4">Inspect saved custom datasets</Link>. Keep the exact stored version ID.</p>
       <div className="grid min-w-0 gap-1 text-sm font-medium"><label htmlFor={`${prefix}-sets`}>{isComposition ? "Exact evaluator-set references (JSON)" : "Exact custom evaluator-set version IDs, one per line"}</label><textarea id={`${prefix}-sets`} className={`${inputClass} min-h-28 resize-y font-mono text-xs`} value={setIds} readOnly={locked} onChange={event => edit(setSetIds, event.target.value)} required /></div>
-      <div className="grid min-w-0 gap-1 text-sm font-medium"><label htmlFor={`${prefix}-add-set`}>Add a recent saved custom evaluator version</label><select id={`${prefix}-add-set`} className={inputClass} value="" disabled={locked} onChange={event => addSet(event.target.value)}><option value="">Choose a saved evaluator version to add</option>{sources.evalSets.filter(source => isComposition || source.ref.schemaVersion === "custom-eval-set-ref-v1").map(source => <option key={refKey(source.ref)} value={isComposition ? refKey(source.ref) : source.ref.versionId} disabled={isComposition ? selectedRefs.some(ref => refKey(ref) === refKey(source.ref)) : setIds.split(/\s+/).includes(source.ref.versionId)}>{source.name} · version {source.version}{isComposition ? source.ref.schemaVersion === "custom-eval-set-ref-v2" ? " · reusable items" : " · single check" : ""}</option>)}</select></div>
-      {isComposition && selectedRefs.length ? <ol className="grid min-w-0 gap-2" aria-label="Selected exact evaluator sets">{selectedRefs.map(ref => <li key={refKey(ref)} className="min-w-0 border border-border p-3"><Link className="break-all text-sm underline" href={ref.schemaVersion === "custom-eval-set-ref-v2" ? `/evals/composition/sets/${ref.setId}/versions/${ref.versionId}` : `/evals/custom/${ref.setId}`}>{ref.schemaVersion === "custom-eval-set-ref-v2" ? "Exact set version" : "Set history"}: {sources.evalSets.find(source => refKey(source.ref) === refKey(ref))?.name ?? "Saved set"} · {ref.versionId}</Link>{ref.schemaVersion === "custom-eval-set-ref-v1" ? <p className="text-xs text-muted-foreground">This link opens set history. Inspect the selected exact legacy version in the complete plan preview; the current head is not substituted.</p> : null}<p className="break-all font-mono text-xs">{ref.fingerprint}</p><button type="button" className={buttonClass} disabled={locked} onClick={() => edit(setSetIds, JSON.stringify(selectedRefs.filter(value => refKey(value) !== refKey(ref)), null, 2))}>Remove saved set {ref.versionId}</button></li>)}</ol> : null}
+      <div className="grid min-w-0 gap-1 text-sm font-medium"><label htmlFor={`${prefix}-add-set`}>Add a recent saved custom evaluator version</label><select id={`${prefix}-add-set`} className={inputClass} value="" disabled={locked} onChange={event => addSet(event.target.value)}><option value="">Choose a saved evaluator version to add</option>{sources.evalSets.filter(source => isMatching || isComposition && source.ref.schemaVersion !== "custom-eval-set-ref-v3" || source.ref.schemaVersion === "custom-eval-set-ref-v1").map(source => <option key={refKey(source.ref)} value={isComposition ? refKey(source.ref) : source.ref.versionId} disabled={isComposition ? selectedRefs.some(ref => refKey(ref) === refKey(source.ref)) : setIds.split(/\s+/).includes(source.ref.versionId)}>{source.name} · version {source.version}{isComposition ? source.ref.schemaVersion === "custom-eval-set-ref-v3" ? " · mixed matching" : source.ref.schemaVersion === "custom-eval-set-ref-v2" ? " · reusable items" : " · single check" : ""}</option>)}</select></div>
+      {isComposition && selectedRefs.length ? <ol className="grid min-w-0 gap-2" aria-label="Selected exact evaluator sets">{selectedRefs.map(ref => <li key={refKey(ref)} className="min-w-0 border border-border p-3"><Link className="break-all text-sm underline" href={ref.schemaVersion === "custom-eval-set-ref-v3" ? `/evals/matching/sets/${ref.setId}/versions/${ref.versionId}` : ref.schemaVersion === "custom-eval-set-ref-v2" ? `/evals/composition/sets/${ref.setId}/versions/${ref.versionId}` : `/evals/custom/${ref.setId}`}>{ref.schemaVersion !== "custom-eval-set-ref-v1" ? "Exact set version" : "Set history"}: {sources.evalSets.find(source => refKey(source.ref) === refKey(ref))?.name ?? "Saved set"} · {ref.versionId}</Link>{ref.schemaVersion === "custom-eval-set-ref-v1" ? <p className="text-xs text-muted-foreground">This link opens set history. Inspect the selected exact legacy version in the complete plan preview; the current head is not substituted.</p> : null}<p className="break-all font-mono text-xs">{ref.fingerprint}</p><button type="button" className={buttonClass} disabled={locked} onClick={() => edit(setSetIds, JSON.stringify(selectedRefs.filter(value => refKey(value) !== refKey(ref)), null, 2))}>Remove saved set {ref.versionId}</button></li>)}</ol> : null}
       <p className="text-xs text-muted-foreground"><Link href="/evals/custom" className="underline underline-offset-4">Inspect saved custom evaluators</Link>. Every membership and threshold is pinned in the preview.</p>
       {sources.datasetsHasMore || sources.evalSetsHasMore ? <p className="text-xs text-muted-foreground">The selectors list up to 100 dataset versions and 100 set versions per family. Earlier versions remain available through their exact saved references.</p> : null}
       <div className="grid min-w-0 gap-4 md:grid-cols-2">{([["target-id", "Target identity", targetId, setTargetId], ["target-version", "Declared target version", targetVersion, setTargetVersion]] as const).map(([id, label, value, setter]) => <div className="grid min-w-0 gap-1 text-sm font-medium" key={id}><label htmlFor={`${prefix}-${id}`}>{label}</label><input id={`${prefix}-${id}`} className={inputClass} value={value} readOnly={locked} onChange={event => edit(setter, event.target.value)} required /></div>)}</div>

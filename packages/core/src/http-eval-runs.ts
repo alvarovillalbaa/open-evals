@@ -1,5 +1,6 @@
+import { exactTextMatches } from "./eval-matching";
 import { stableStringify, textHash } from "./hash";
-import { HTTP_EVAL_LIMITS, httpEvalProfileTags, copyHttpEvalJson, parseHttpEvalJson, parseHttpEvalPlanVersionRecord, httpEvalBytes, httpEvalDigest, httpEvalFail, httpEvalHash, httpEvalInteger, httpEvalObject, httpEvalSame, httpEvalText, httpEvalTimestamp, httpEvalUuid } from "./http-eval-plans";
+import { HTTP_EVAL_LIMITS, httpEvalProfileTags, httpEvalFieldKey, httpEvalEvaluator, httpEvalRationale, copyHttpEvalJson, parseHttpEvalJson, parseHttpEvalPlanVersionRecord, httpEvalBytes, httpEvalDigest, httpEvalFail, httpEvalHash, httpEvalInteger, httpEvalObject, httpEvalSame, httpEvalText, httpEvalTimestamp, httpEvalUuid } from "./http-eval-plans";
 import type { GateResult, JsonValue } from "./types";
 import type { HttpEvalLedgerRow, HttpEvalResult, HttpEvalCallBody, HttpEvalCallRequest, HttpEvalTargetResponse, CreateHttpEvalLedgerInput, ClaimHttpEvalRowInput, FinalizeHttpEvalRowInput, RecoverHttpEvalRunInput, StopHttpEvalRunInput } from "./http-eval-types";
 import type { AnyHttpEvalStartRequest as HttpEvalStartRequest, AnyHttpEvalPlanVersionRecord as HttpEvalPlanVersionRecord, AnyHttpEvalRunLedger as HttpEvalRunLedger, AnyHttpEvalRowEvent as HttpEvalRowEvent, AnyHttpEvalExecution as HttpEvalExecution, AnyHttpEvalRunRecord as HttpEvalRunRecord, AnyHttpEvalFinalizedRow as HttpEvalFinalizedRow } from "./eval-composition-types";
@@ -9,7 +10,7 @@ const plus = (date: string, ms: number): string => new Date(Date.parse(date) + m
 const safeError = (value: unknown): string => typeof value === "string" && /^(?:http_eval|http_target)_[a-z0-9_]{1,100}$/.test(value) ? value : httpEvalFail("http_eval_error_code_invalid");
 export function prepareHttpEvalStartRequest(value: unknown): HttpEvalStartRequest {
   const s = httpEvalObject(copyHttpEvalJson(value, HTTP_EVAL_LIMITS.requestBytes), ["schemaVersion", "runId", "planVersionId", "expectedPlanFingerprint"]);
-  if (s.schemaVersion !== "http-eval-start-v1" && s.schemaVersion !== "http-eval-start-v2" || typeof s.planVersionId !== "string" || !/^http_eval_plan_version_[0-9a-f]{64}$/.test(s.planVersionId)) return httpEvalFail();
+  if (s.schemaVersion !== "http-eval-start-v1" && s.schemaVersion !== "http-eval-start-v2" && s.schemaVersion !== "http-eval-start-v3" || typeof s.planVersionId !== "string" || !/^http_eval_plan_version_[0-9a-f]{64}$/.test(s.planVersionId)) return httpEvalFail();
   return { schemaVersion: s.schemaVersion, runId: httpEvalUuid(s.runId), planVersionId: s.planVersionId, expectedPlanFingerprint: httpEvalDigest(s.expectedPlanFingerprint) };
 }
 export function httpEvalRunStorageIds(workspaceId: string, runId: string) {
@@ -21,7 +22,7 @@ export function httpEvalRowEventId(workspaceId: string, runId: string, rowId: st
 export function httpEvalResultId(workspaceId: string, runId: string, rowId: string, evalItemVersionId: string): string { return `http_eval_result_${httpEvalHash({ workspaceId: httpEvalText(workspaceId), runId: httpEvalUuid(runId), rowId: httpEvalText(rowId), evalItemVersionId: httpEvalText(evalItemVersionId) })}`; }
 export function httpEvalGateId(workspaceId: string, runId: string, level: string, scopeId: string): string { return `http_eval_gate_${httpEvalHash({ workspaceId: httpEvalText(workspaceId), runId: httpEvalUuid(runId), level: httpEvalText(level), scopeId: httpEvalText(scopeId, 4096) })}`; }
 export function httpEvalStartFingerprint(workspaceId: string, request: unknown): string {
-  const parsed = prepareHttpEvalStartRequest(request), tags = httpEvalProfileTags(parsed.schemaVersion === "http-eval-start-v1" ? "http-target-eval-v1" : "http-target-eval-v2");
+  const parsed = prepareHttpEvalStartRequest(request), tags = httpEvalProfileTags(parsed.schemaVersion.replace("http-eval-start-", "http-target-eval-"));
   return httpEvalHash({ schemaVersion: tags.startFingerprint, workspaceId: httpEvalText(workspaceId), request: parsed });
 }
 function runStatus(rows: HttpEvalLedgerRow[], stopReason: string | null): HttpEvalRunLedger["status"] {
@@ -104,11 +105,11 @@ function structuredResponse(value: unknown, requestFingerprint: string): HttpEva
 function rowResults(plan: HttpEvalPlanVersionRecord, publicRunId: string, event: HttpEvalRowEvent): HttpEvalResult[] {
   if (event.status !== "succeeded" || !event.response) return [];
   const actual = typeof event.response.output === "string" ? event.response.output : stableStringify(event.response.output);
-  return plan.content.items.map(item => { const passed = actual.toLowerCase().includes((item.config.contains as string).toLowerCase());
+  return plan.content.items.map(item => { const passed = item.type === "exact_match" ? exactTextMatches(event.response!.output, item.config.expected) : actual.toLowerCase().includes((item.config.contains as string).toLowerCase());
     return seal({ id: httpEvalResultId(plan.workspaceId, publicRunId, event.rowId, item.id), rowId: event.rowId, evalItemVersionId: item.id,
-      originalOutput: { contains_expected: passed }, fields: [{ key: "contains_expected", value: passed, passed, decision: passed ? "pass" as const : "hard_fail" as const }],
-      conciseRationale: passed ? "Configured text is present." : "Configured text is absent.", evidenceRefs: [event.id], evaluatorVersion: item.fingerprint,
-      provider: "local", model: "case_insensitive_contains_v1", sourceOutputFingerprint: httpEvalHash(event.response!.output) });
+      originalOutput: { [httpEvalFieldKey(item)]: passed }, fields: [{ key: httpEvalFieldKey(item), value: passed, passed, decision: passed ? "pass" as const : "hard_fail" as const }],
+      conciseRationale: httpEvalRationale(item, passed), evidenceRefs: [event.id], evaluatorVersion: item.fingerprint,
+      provider: "local", model: httpEvalEvaluator(item), sourceOutputFingerprint: httpEvalHash(event.response!.output) });
   });
 }
 function applyEvent(ledger: HttpEvalRunLedger, event: HttpEvalRowEvent): HttpEvalRunLedger {
@@ -130,7 +131,7 @@ export function finalizeHttpEvalRow(input: FinalizeHttpEvalRowInput): HttpEvalFi
   return { ledger: applyEvent(ledger, event), event, results: rowResults(plan, ledger.publicRunId, event) };
 }
 function unsentEvent(ledger: HttpEvalRunLedger, row: HttpEvalLedgerRow, now: string, recovering: boolean, reason: string): HttpEvalRowEvent {
-  return seal({ schemaVersion: httpEvalProfileTags(ledger.schemaVersion === "http-eval-run-ledger-v1" ? "http-target-eval-v1" : "http-target-eval-v2").rowEvent, id: httpEvalRowEventId(ledger.workspaceId, ledger.publicRunId, row.rowId), workspaceId: ledger.workspaceId, publicRunId: ledger.publicRunId, rowId: row.rowId, claim: row.claim,
+  return seal({ schemaVersion: httpEvalProfileTags(ledger.schemaVersion.replace("http-eval-run-ledger-", "http-target-eval-")).rowEvent, id: httpEvalRowEventId(ledger.workspaceId, ledger.publicRunId, row.rowId), workspaceId: ledger.workspaceId, publicRunId: ledger.publicRunId, rowId: row.rowId, claim: row.claim,
     status: recovering && row.status === "claimed" ? "outcome_unknown" as const : "not_sent" as const, completedAt: now, response: null, rawResponseHash: null, errorCode: reason });
 }
 export function recoverHttpEvalRun(input: RecoverHttpEvalRunInput) {
@@ -168,7 +169,7 @@ export function buildHttpEvalExecution(input: { plan: unknown; ledger: unknown; 
     const selected = scopeRows.flatMap(rowId => scopeItems.map(itemId => resultByPair.get(`${rowId}/${itemId}`))), existing = selected.filter((r): r is HttpEvalResult => r !== undefined), complete = selected.length > 0 && existing.length === selected.length;
     const passedRows = scopeRows.filter(rowId => scopeItems.every(itemId => resultByPair.get(`${rowId}/${itemId}`)?.fields.every(f => f.passed === true))).length;
     const score = scopeRows.length ? passedRows * 100 / scopeRows.length : 0, failed = existing.filter(r => r.fields.some(f => f.decision === "hard_fail")).map(r => r.evalItemVersionId), critical = [...new Set(failed)].sort();
-    const authoritative = plan.content.schemaVersion === "http-target-eval-v2" || level === "target" || level === "criticality" || level === "run";
+    const authoritative = plan.content.schemaVersion !== "http-target-eval-v1" || level === "target" || level === "criticality" || level === "run";
     const passed = complete && score >= threshold && (!authoritative || critical.length === 0);
     const base = { id: httpEvalGateId(ledger.workspaceId, ledger.publicRunId, level, scopeId), runId: ledger.runId, level, scopeId, score, passed,
       decision: passed ? "pass" as const : critical.length || !complete ? "hard_fail" as const : "soft_fail" as const,
@@ -177,7 +178,7 @@ export function buildHttpEvalExecution(input: { plan: unknown; ledger: unknown; 
     const result = seal(base); gates.push(result); return result;
   }
   for (const rowId of rowIds) {
-    for (const itemId of itemIds) { gate("field", `${rowId}/${itemId}/contains_expected`, [rowId], [itemId], 100, "declared boolean contains_expected is true; missing is hard failure"); gate("item_row", `${rowId}/${itemId}`, [rowId], [itemId], 100, "all declared gating fields pass for this unique row and evaluator version"); }
+    for (const itemId of itemIds) { const key = httpEvalFieldKey(plan.content.items.find(item => item.id === itemId)!); gate("field", `${rowId}/${itemId}/${key}`, [rowId], [itemId], 100, `declared boolean ${key} is true; missing is hard failure`); gate("item_row", `${rowId}/${itemId}`, [rowId], [itemId], 100, "all declared gating fields pass for this unique row and evaluator version"); }
     gate("row", rowId, [rowId], itemIds, Math.max(...plan.content.evalSets.map(s => s.contract.gates.rowThreshold)), "one row across all unique required evaluator versions; all critical members pass");
   }
   const datasetThreshold = Math.max(...plan.content.evalSets.map(s => s.contract.gates.datasetPassRateThreshold));

@@ -28,6 +28,10 @@ exactly Evals and Improve.
   execution with disposable SQL and authored transport responses. See
   [the composition contract](evaluator-composition.md) and
   [source-bound result](results/2026/11-09/evaluator-composition.md).
+- `/evals/matching` adds literal exact checks and mixed saved contains/exact sets.
+  The separate HTTP v3 family pins every membership and scores shared checks
+  once per row. Its build, SQL and browser qualification is pending; see
+  [the matching contract](evaluator-matching.md) and [focused scope](proposals/evaluator-matching-checks.md).
 - `/evals/datasets` authors complete JSON/JSONL datasets with explicit review
   declarations, immutable history and exact-version scoring links.
   [Dataset contract](custom-datasets.md).

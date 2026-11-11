@@ -1,4 +1,4 @@
-import type { AnyHttpEvalPlanHead as HttpEvalPlanHead, AnyHttpEvalPlanVersionRecord, HttpEvalPlanFamily, HttpEvalSetRef } from "@open-evals/core";
+import type { AnyHttpEvalPlanHead as HttpEvalPlanHead, AnyHttpEvalPlanVersionRecord, HttpEvalPlanFamily, MatchingHttpEvalSetRef as HttpEvalSetRef } from "@open-evals/core";
 import type { HttpEvalPlanSummary, listHttpEvalSources } from "@open-evals/db";
 
 export type HttpTargetSourcesView = Awaited<ReturnType<typeof listHttpEvalSources>>;

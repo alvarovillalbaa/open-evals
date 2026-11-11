@@ -1,3 +1,4 @@
+import { getCustomEvalSetVersionV3, listCustomEvalSetVersionsV3 } from "./eval-matching";
 import type { PoolClient } from "pg";
 import { getCustomEvalSetVersion } from "./custom-evals";
 import { getCustomEvalSetVersionV2, listCustomEvalSetVersionsV2 } from "./eval-composition";
@@ -14,8 +15,8 @@ const VERSION_ID = /^http_eval_plan_version_[0-9a-f]{64}$/;
 // A canonical JSON string can double when quoted by JSONB; the fixed metadata index is <64 KiB.
 const STORAGE_LIMIT = 2 * HTTP_RECORD_LIMIT + 65536;
 const PRIVATE = `(left(id, length('http_eval_plan_')) = 'http_eval_plan_'
-  or resolved_plan ->> 'schemaVersion' in ('http-target-eval-v1', 'http-eval-plan-record-v1', 'http-eval-plan-storage-v1','http-target-eval-v2','http-eval-plan-record-v2','http-eval-plan-storage-v2')
-  or resolved_plan #>> '{content,schemaVersion}' in ('http-target-eval-v1','http-target-eval-v2'))`;
+  or resolved_plan ->> 'schemaVersion' in ('http-target-eval-v1', 'http-eval-plan-record-v1', 'http-eval-plan-storage-v1','http-target-eval-v2','http-target-eval-v3','http-eval-plan-record-v2','http-eval-plan-record-v3','http-eval-plan-storage-v2','http-eval-plan-storage-v3')
+  or resolved_plan #>> '{content,schemaVersion}' in ('http-target-eval-v1','http-target-eval-v2','http-target-eval-v3'))`;
 export interface HttpEvalPlanSummary {
   planId: string; versionId: string; storageVersionId: string; version: number; name: string;
   fingerprint: string; createdAt: string;
@@ -24,7 +25,7 @@ export interface HttpEvalPlanSummary {
 function saveRequest(value: unknown): HttpEvalStoreSaveRequest {
   httpBounded(value, 2 * 1024 * 1024); const s = httpObject(value);
   httpKeys(s, ["schemaVersion", "draft", "expectedPreviewFingerprint"]);
-  if (s.schemaVersion !== "http-eval-plan-save-v1" && s.schemaVersion !== "http-eval-plan-save-v2") httpFail(422, "http_eval_invalid");
+  if (s.schemaVersion !== "http-eval-plan-save-v1" && s.schemaVersion !== "http-eval-plan-save-v2" && s.schemaVersion !== "http-eval-plan-save-v3") httpFail(422, "http_eval_invalid");
   const version = httpProfileVersion(s as {schemaVersion:string});
   httpFingerprint(s.expectedPreviewFingerprint);
   const d = httpObject(s.draft);
@@ -45,14 +46,14 @@ function requestFingerprint(workspaceId: string, request: HttpEvalStoreSaveReque
 export function httpPlanHead(record: HttpEvalStorePlan): HttpEvalStoreHead {
   const d = record.content.draft;
   return { planId: d.planId, versionId: d.versionId, version: d.version, name: d.name, fingerprint: record.fingerprint,
-    ...(record.schemaVersion==="http-eval-plan-record-v2"?{profile:"http-target-eval-v2" as const}:{}) };
+    ...(record.content.schemaVersion !== "http-target-eval-v1" ? {profile:record.content.schemaVersion}:{}) };
 }
 export function httpCanonicalPlan<P extends HttpEvalStorePlan>(value: unknown, workspaceId: string, parse: (value: unknown) => P): P {
   let r: P;
   try { httpBounded(value); r = parse(value); httpBounded(r); }
   catch { return httpConflict(); }
   const d = r.content.draft;
-  if (r.schemaVersion !== "http-eval-plan-record-v1" && r.schemaVersion !== "http-eval-plan-record-v2") httpConflict();
+  if (r.schemaVersion !== "http-eval-plan-record-v1" && r.schemaVersion !== "http-eval-plan-record-v2" && r.schemaVersion !== "http-eval-plan-record-v3") httpConflict();
   const version=httpProfileVersion(r);
   if (!httpSame(value, r) || r.content.schemaVersion !== httpTag("http-target-eval",version) || d.schemaVersion !== httpTag("http-eval-plan-draft",version)
     || r.workspaceId !== workspaceId || !httpSame(r.storage, httpPlanIds(workspaceId, d.planId, d.versionId))
@@ -78,7 +79,7 @@ function planStorage(record: HttpEvalStorePlan) {
 function storedPlan<P extends HttpEvalStorePlan>(raw:unknown,workspaceId:string,parse:(value:unknown)=>P):P {
   const storage=httpObject(httpParseRaw(raw,STORAGE_LIMIT));
   try {httpKeys(storage,["schemaVersion","workspaceId","storage","createdAt","content","fingerprint","recordText"]);}catch{return httpConflict();}
-  if((storage.schemaVersion!=="http-eval-plan-storage-v1"&&storage.schemaVersion!=="http-eval-plan-storage-v2")||typeof storage.recordText!=="string"
+  if((storage.schemaVersion!=="http-eval-plan-storage-v1"&&storage.schemaVersion!=="http-eval-plan-storage-v2"&&storage.schemaVersion!=="http-eval-plan-storage-v3")||typeof storage.recordText!=="string"
     ||Buffer.byteLength(storage.recordText)>HTTP_RECORD_LIMIT)httpConflict();
   const record=httpCanonicalPlan(httpParseRaw(storage.recordText),workspaceId,parse);
   if(storage.recordText!==httpStable(record)||!httpSame(storage,planStorage(record)))httpConflict();
@@ -143,21 +144,22 @@ async function readHead<P extends HttpEvalStorePlan>(client: PoolClient, workspa
   }
   return record;
 }
-type Selection = { datasetVersionId: string; evalSetVersionIds: string[] } | { schemaVersion: "http-eval-plan-draft-v2"; datasetVersionId: string; evalSetVersions: HttpEvalStoreSetRef[] };
+type Selection = { datasetVersionId: string; evalSetVersionIds: string[] } | { schemaVersion: "http-eval-plan-draft-v2" | "http-eval-plan-draft-v3"; datasetVersionId: string; evalSetVersions: HttpEvalStoreSetRef[] };
 function selection(value: unknown): Selection {
   const s=httpObject(value);httpBounded(s,2*1024*1024);httpText(s.datasetVersionId);
-  if(s.schemaVersion!==undefined&&s.schemaVersion!=="http-eval-plan-draft-v1"&&s.schemaVersion!=="http-eval-plan-draft-v2")httpFail(422,"http_eval_invalid");
-  if(s.schemaVersion!=="http-eval-plan-draft-v2"){
+  if(s.schemaVersion!==undefined&&s.schemaVersion!=="http-eval-plan-draft-v1"&&s.schemaVersion!=="http-eval-plan-draft-v2"&&s.schemaVersion!=="http-eval-plan-draft-v3")httpFail(422,"http_eval_invalid");
+  if(s.schemaVersion!=="http-eval-plan-draft-v2"&&s.schemaVersion!=="http-eval-plan-draft-v3"){
     if(!Array.isArray(s.evalSetVersionIds)||!s.evalSetVersionIds.length||s.evalSetVersionIds.length>8||new Set(s.evalSetVersionIds).size!==s.evalSetVersionIds.length)httpFail(422,"http_eval_invalid");
     for(const id of s.evalSetVersionIds)httpUuid(id);
     return {datasetVersionId:s.datasetVersionId as string,evalSetVersionIds:[...s.evalSetVersionIds] as string[]};
   }
   if(!Array.isArray(s.evalSetVersions)||!s.evalSetVersions.length||s.evalSetVersions.length>8)httpFail(422,"http_eval_invalid");
   const seen=new Set<string>();const refs=s.evalSetVersions.map(value=>{const r=httpObject(value);httpKeys(r,["schemaVersion","setId","versionId","fingerprint"]);
-    if(r.schemaVersion!=="custom-eval-set-ref-v1"&&r.schemaVersion!=="custom-eval-set-ref-v2")httpFail(422,"http_eval_invalid");
+    if(r.schemaVersion!=="custom-eval-set-ref-v1"&&r.schemaVersion!=="custom-eval-set-ref-v2"&&r.schemaVersion!=="custom-eval-set-ref-v3")httpFail(422,"http_eval_invalid");
+    if(s.schemaVersion==="http-eval-plan-draft-v2"&&r.schemaVersion==="custom-eval-set-ref-v3")httpFail(422,"http_eval_profile_invalid");
     httpUuid(r.setId);httpUuid(r.versionId);httpFingerprint(r.fingerprint);const key=`${r.schemaVersion}:${r.setId}:${r.versionId}`;
     if(seen.has(key))httpFail(422,"http_eval_invalid");seen.add(key);return {...r} as unknown as HttpEvalStoreSetRef;
-  });return {schemaVersion:"http-eval-plan-draft-v2",datasetVersionId:s.datasetVersionId as string,evalSetVersions:refs};
+  });return {schemaVersion:s.schemaVersion as "http-eval-plan-draft-v2" | "http-eval-plan-draft-v3",datasetVersionId:s.datasetVersionId as string,evalSetVersions:refs};
 }
 export async function getHttpEvalPlanSources(workspaceId: string, value: Selection | HttpEvalStoreDraft, readers?: HttpEvalStoreCompositionReaders) {
   httpText(workspaceId);const selected=selection(value);
@@ -176,20 +178,24 @@ async function sources(client: PoolClient, workspaceId: string, selected: Select
       evalSets.push({ref,contract:saved.contract,members:saved.members,sourceRecordFingerprint:null});
     }else{
       if(typeof readers?.restoreSet!=="function"||typeof readers?.restoreItem!=="function")httpFail(422,"http_eval_callbacks_required");
-      const saved=await getCustomEvalSetVersionV2(workspaceId,ref.setId,ref.versionId,{restoreSet:readers.restoreSet,restoreItem:readers.restoreItem},client);
+      if(ref.schemaVersion==="custom-eval-set-ref-v3"&&(typeof readers.restoreSetV3!=="function"||typeof readers.restoreMatchingItem!=="function"))httpFail(422,"http_eval_callbacks_required");
+      const saved=ref.schemaVersion==="custom-eval-set-ref-v3"
+        ? await getCustomEvalSetVersionV3(workspaceId,ref.setId,ref.versionId,{restoreSet:readers.restoreSetV3!,restoreItem:readers.restoreMatchingItem!},client)
+        : await getCustomEvalSetVersionV2(workspaceId,ref.setId,ref.versionId,{restoreSet:readers.restoreSet,restoreItem:readers.restoreItem},client);
       if(!saved)return undefined;if(saved.contract.fingerprint!==ref.fingerprint)httpFail(409,"http_eval_source_conflict");
       evalSets.push({ref,contract:saved.contract,members:saved.members,sourceRecordFingerprint:saved.fingerprint});
     }
   }
   return { dataset, evalSets };
 }
-/** Two independently bounded metadata lanes; immutable v1 supplied-output selectors are unchanged. */
+/** Independently bounded metadata lanes; immutable v1 supplied-output selectors are unchanged. */
 export async function listHttpEvalSources(workspaceId:string){
-  const [v1,v2]=await Promise.all([listProvidedOutputSources(workspaceId),listCustomEvalSetVersionsV2(workspaceId)]);
+  const [v1,v2,v3]=await Promise.all([listProvidedOutputSources(workspaceId),listCustomEvalSetVersionsV2(workspaceId),listCustomEvalSetVersionsV3(workspaceId)]);
   const evalSets:Array<{ref:HttpEvalStoreSetRef;name:string;version:number}>=[
     ...v1.evalSets.map(row=>({ref:{schemaVersion:"custom-eval-set-ref-v1" as const,setId:row.setId,versionId:row.versionId,fingerprint:row.fingerprint},name:row.name,version:row.version})),
-    ...v2.versions.map(row=>({ref:{schemaVersion:"custom-eval-set-ref-v2" as const,setId:row.setId,versionId:row.versionId,fingerprint:row.contractFingerprint},name:row.name,version:row.version}))];
-  return {datasets:v1.datasets,datasetsHasMore:v1.datasetsHasMore,evalSets,evalSetsHasMore:v1.evalSetsHasMore||v2.hasMore};
+    ...v2.versions.map(row=>({ref:{schemaVersion:"custom-eval-set-ref-v2" as const,setId:row.setId,versionId:row.versionId,fingerprint:row.contractFingerprint},name:row.name,version:row.version})),
+    ...v3.versions.map(row=>({ref:{schemaVersion:"custom-eval-set-ref-v3" as const,setId:row.setId,versionId:row.versionId,fingerprint:row.contractFingerprint},name:row.name,version:row.version}))];
+  return {datasets:v1.datasets,datasetsHasMore:v1.datasetsHasMore,evalSets,evalSetsHasMore:v1.evalSetsHasMore||v2.hasMore||v3.hasMore};
 }
 export async function getHttpEvalPlanHead<P extends HttpEvalStorePlan>(workspaceId: string, planId: string, parse: (value: unknown) => P): Promise<HttpEvalStoreHead | null> {
   httpText(workspaceId); httpUuid(planId);
@@ -251,7 +257,7 @@ function summary(workspaceId: string, row: SummaryRow): HttpEvalPlanSummary {
     if (row.id !== ids.versionId || row.storageVersionId !== ids.versionId || row.storagePlanId !== ids.planId
       || row.recordFingerprint !== row.fingerprint || row.recordCreatedAt !== httpIso(row.createdAt)
       || !Number.isInteger(row.version) || row.version < 1 || row.version > 2_147_483_647
-      || (row.family!=="http-target-eval-v1"&&row.family!=="http-target-eval-v2")||row.storageSchema!==httpTag("http-eval-plan-storage",httpProfileVersion({schemaVersion:row.family}))) httpConflict();
+      || (row.family!=="http-target-eval-v1"&&row.family!=="http-target-eval-v2"&&row.family!=="http-target-eval-v3")||row.storageSchema!==httpTag("http-eval-plan-storage",httpProfileVersion({schemaVersion:row.family}))) httpConflict();
     return { planId: row.planId, versionId: row.versionId, storageVersionId: row.id, version: row.version, name: row.name, fingerprint: row.fingerprint, createdAt: httpIso(row.createdAt),family:row.family };
   } catch { return httpConflict(); }
 }

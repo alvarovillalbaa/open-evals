@@ -8,16 +8,16 @@ import { HTTP_RECORD_LIMIT, httpBounded, httpClock, httpConflict, httpEventId, h
   type HttpEvalStoreCall, type HttpEvalStoreClaim, type HttpEvalStoreLedger, type HttpEvalStorePlan,
   type HttpEvalStoreRowEvent, type HttpEvalStoreRun, type HttpEvalStoreRunCallbacks, type HttpEvalStoreStartRequest } from "./http-eval-types";
 
-const WORKFLOWS = ["http-target-eval-v1","http-target-eval-v2"];
+const WORKFLOWS = ["http-target-eval-v1","http-target-eval-v2","http-target-eval-v3"];
 interface Reservation {
-  schemaVersion: "http-eval-reservation-v1" | "http-eval-reservation-v2"; workspaceId: string; actorId: string;
+  schemaVersion: "http-eval-reservation-v1" | "http-eval-reservation-v2" | "http-eval-reservation-v3"; workspaceId: string; actorId: string;
   request: HttpEvalStoreStartRequest; planVersionId: string; planFingerprint: string;
   startedAt: string; leaseToken: string; initialLedgerFingerprint: string; fingerprint: string;
 }
 function startRequest(value: unknown): HttpEvalStoreStartRequest {
   httpBounded(value, 4096); const s = httpObject(value);
   httpKeys(s, ["schemaVersion", "runId", "planVersionId", "expectedPlanFingerprint"]);
-  if ((s.schemaVersion !== "http-eval-start-v1"&&s.schemaVersion!=="http-eval-start-v2") || typeof s.planVersionId !== "string" || !/^http_eval_plan_version_[0-9a-f]{64}$/.test(s.planVersionId)) httpFail(422, "http_eval_invalid");
+  if ((s.schemaVersion !== "http-eval-start-v1"&&s.schemaVersion!=="http-eval-start-v2"&&s.schemaVersion!=="http-eval-start-v3") || typeof s.planVersionId !== "string" || !/^http_eval_plan_version_[0-9a-f]{64}$/.test(s.planVersionId)) httpFail(422, "http_eval_invalid");
   httpUuid(s.runId); httpFingerprint(s.expectedPlanFingerprint);
   return { schemaVersion: s.schemaVersion, runId: s.runId, planVersionId: s.planVersionId, expectedPlanFingerprint: s.expectedPlanFingerprint };
 }
@@ -33,7 +33,7 @@ function rowEventStorage(event:HttpEvalStoreRowEvent) {
 function storedRowEvent(raw:string):HttpEvalStoreRowEvent {
   const storage=httpObject(httpParseRaw(raw));
   try{httpKeys(storage,["schemaVersion","eventId","eventFingerprint","eventText"]);}catch{return httpConflict();}
-  if((storage.schemaVersion!=="http-eval-row-event-storage-v1"&&storage.schemaVersion!=="http-eval-row-event-storage-v2")||typeof storage.eventText!=="string")httpConflict();
+  if((storage.schemaVersion!=="http-eval-row-event-storage-v1"&&storage.schemaVersion!=="http-eval-row-event-storage-v2"&&storage.schemaVersion!=="http-eval-row-event-storage-v3")||typeof storage.eventText!=="string")httpConflict();
   const value=httpParseRaw(storage.eventText);httpObject(value);
   const event=value as HttpEvalStoreRowEvent;
   if(storage.eventText!==httpStable(event)||!httpSame(storage,rowEventStorage(event)))httpConflict();return event;

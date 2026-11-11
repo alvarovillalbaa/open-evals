@@ -129,6 +129,7 @@ export interface EvalItemVersion {
   type:
     | "llm_judge"
     | "string_check"
+    | "exact_match"
     | "text_similarity"
     | "trace_check"
     | "json_schema"

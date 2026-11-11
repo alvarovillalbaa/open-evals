@@ -1,3 +1,4 @@
+import type * as V3 from "./eval-matching-types";
 import type { CustomEvalSetContract } from "./custom-evals";
 import type { ProvidedOutputMemberProof } from "./provided-output-types";
 import type { EvalItemVersion, EvalSetVersion } from "./types";
@@ -220,20 +221,20 @@ export interface HttpEvalRunRecordV2 extends Omit<HttpEvalRunRecord, "schemaVers
   events: HttpEvalRowEventV2[];
   execution: HttpEvalExecutionV2;
 }
-export type AnyHttpEvalPlanDraft = HttpEvalPlanDraft | HttpEvalPlanDraftV2;
-export type AnyHttpEvalPlanSaveRequest = HttpEvalPlanSaveRequest | HttpEvalPlanSaveRequestV2;
-export type AnyHttpEvalPlanContent = HttpEvalPlanContent | HttpEvalPlanContentV2;
-export type AnyHttpEvalPlanPreview = HttpEvalPlanPreview | HttpEvalPlanPreviewV2;
-export type AnyHttpEvalPlanVersionRecord = HttpEvalPlanVersionRecord | HttpEvalPlanVersionRecordV2;
-export type AnyHttpEvalPlanHead = HttpEvalPlanHead | HttpEvalPlanHeadV2;
-export type AnyHttpEvalStartRequest = HttpEvalStartRequest | HttpEvalStartRequestV2;
-export type AnyHttpEvalRunLedger = HttpEvalRunLedger | HttpEvalRunLedgerV2;
-export type AnyHttpEvalRowEvent = HttpEvalRowEvent | HttpEvalRowEventV2;
-export type AnyHttpEvalExecution = HttpEvalExecution | HttpEvalExecutionV2;
-export type AnyHttpEvalRunRecord = HttpEvalRunRecord | HttpEvalRunRecordV2;
+export type AnyHttpEvalPlanDraft = HttpEvalPlanDraft | HttpEvalPlanDraftV2 | V3.HttpEvalPlanDraftV3;
+export type AnyHttpEvalPlanSaveRequest = HttpEvalPlanSaveRequest | HttpEvalPlanSaveRequestV2 | V3.HttpEvalPlanSaveRequestV3;
+export type AnyHttpEvalPlanContent = HttpEvalPlanContent | HttpEvalPlanContentV2 | V3.HttpEvalPlanContentV3;
+export type AnyHttpEvalPlanPreview = HttpEvalPlanPreview | HttpEvalPlanPreviewV2 | V3.HttpEvalPlanPreviewV3;
+export type AnyHttpEvalPlanVersionRecord = HttpEvalPlanVersionRecord | HttpEvalPlanVersionRecordV2 | V3.HttpEvalPlanVersionRecordV3;
+export type AnyHttpEvalPlanHead = HttpEvalPlanHead | HttpEvalPlanHeadV2 | V3.HttpEvalPlanHeadV3;
+export type AnyHttpEvalStartRequest = HttpEvalStartRequest | HttpEvalStartRequestV2 | V3.HttpEvalStartRequestV3;
+export type AnyHttpEvalRunLedger = HttpEvalRunLedger | HttpEvalRunLedgerV2 | V3.HttpEvalRunLedgerV3;
+export type AnyHttpEvalRowEvent = HttpEvalRowEvent | HttpEvalRowEventV2 | V3.HttpEvalRowEventV3;
+export type AnyHttpEvalExecution = HttpEvalExecution | HttpEvalExecutionV2 | V3.HttpEvalExecutionV3;
+export type AnyHttpEvalRunRecord = HttpEvalRunRecord | HttpEvalRunRecordV2 | V3.HttpEvalRunRecordV3;
 export interface AnyHttpEvalFinalizedRow {
   ledger: AnyHttpEvalRunLedger;
   event: AnyHttpEvalRowEvent;
   results: HttpEvalExecution["results"];
 }
-export type HttpEvalPlanFamily = "http-target-eval-v1" | "http-target-eval-v2";
+export type HttpEvalPlanFamily = "http-target-eval-v1" | "http-target-eval-v2" | "http-target-eval-v3";

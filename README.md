@@ -244,3 +244,6 @@ Screenshots are intentionally left as placeholders for maintainers to capture fr
 - More benchmark importers behind license checks.
 - Structural optimization work orders backed by connected GitHub pull requests.
 - Optional large-scale analytics adapter behind a non-required interface.
+
+Matching v3 adds literal exact checks and mixed saved contains/exact membership.
+See [the matching contract and current qualification boundary](docs/evaluator-matching.md).
