@@ -1,0 +1,20 @@
+schema_version = "1.4"
+
+[task]
+name = "open-evals/harbor-file-fixture"
+version = "1.0.0"
+description = "Authored file-output fixture; reference-agent verification only."
+
+[environment]
+network_mode = "no-network"
+cpus = 1
+memory_mb = 512
+storage_mb = 512
+build_timeout_sec = 60
+
+[agent]
+timeout_sec = 20
+
+[verifier]
+timeout_sec = 20
+environment_mode = "shared"

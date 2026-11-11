@@ -20,3 +20,4 @@ export * from "./custom-datasets";
 export * from "./http-eval-plans";
 export * from "./http-eval-runs";
 export * from "./eval-composition";
+export * from "./harbor-tasks";

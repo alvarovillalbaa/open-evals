@@ -1,0 +1,17 @@
+[project]
+name = "open-evals-harbor"
+version = "0.1.0"
+description = "Explicit local Harbor task snapshots and bounded result reporting for OpenEvals."
+requires-python = ">=3.12"
+license = "MIT"
+dependencies = []
+
+[project.optional-dependencies]
+runtime = ["harbor==0.25.0"]
+
+[project.scripts]
+open-evals-harbor = "open_evals_harbor.cli:main"
+
+[build-system]
+requires = ["uv_build>=0.9.0,<0.10.0"]
+build-backend = "uv_build"

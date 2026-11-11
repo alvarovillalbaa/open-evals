@@ -1,0 +1,44 @@
+name: Temporary Harbor native checks
+on:
+  create:
+permissions:
+  contents: read
+jobs:
+  authored-native:
+    if: github.event.ref_type == 'branch' && github.event.ref == 'qa/open-evals-harbor-native-20261111-1'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      HARBOR_SOURCE_COMMIT: SOURCE_COMMIT
+      PYTHONDONTWRITEBYTECODE: '1'
+      HARBOR_TELEMETRY: '0'
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: SOURCE_COMMIT
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
+        with:
+          node-version: '24.22.2'
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1
+        with:
+          python-version: '3.12.12'
+      - name: Verify exact source and run authored native checks
+        timeout-minutes: 17
+        run: python tests/helpers/harbor-native-ci.py
+      - name: Seal tracked source after execution
+        if: always() && env.HARBOR_PROOF != ''
+        run: python tests/helpers/harbor-source-guard.py "$HARBOR_PROOF/source-after.json"
+      - name: Retire only declared owned resources
+        if: always() && env.HARBOR_PROOF != ''
+        run: python tests/helpers/harbor-native-cleanup.py
+      - name: Validate evidence boundaries
+        if: success()
+        run: python tests/helpers/harbor-native-seal.py
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        if: always() && env.HARBOR_PROOF != ''
+        with:
+          name: harbor-native-proof
+          path: ${{ env.HARBOR_PROOF }}
+          retention-days: 7
+          if-no-files-found: error
