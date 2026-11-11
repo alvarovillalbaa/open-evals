@@ -25,7 +25,7 @@ env.update(HARBOR_PRODUCT_ROOT=str(root),HARBOR_PROOF=str(proof),HARBOR_WORK=str
     NPM_CONFIG_REGISTRY='https://registry.npmjs.org',NPM_CONFIG_CACHE=str(work/'npm-cache'),NPM_CONFIG_USERCONFIG=str(work/'npm-user-config'),NPM_CONFIG_GLOBALCONFIG=str(work/'npm-global-config'),
     XDG_CACHE_HOME=str(work/'cache'),XDG_CONFIG_HOME=str(work/'config'),TMPDIR=str(work/'tmp'),PLAYWRIGHT_BROWSERS_PATH=str(work/'browsers'),
     CI='true',AUTH_MODE='hosted',AUTH_SECRET='harbor-ci-authored-session-secret-20261111',API_KEY_PEPPER='harbor-ci-authored-key-pepper-20261111',
-    NEXT_TELEMETRY_DISABLED='1',HARBOR_TEST_ALLOW='local-disposable',HARBOR_TEST_URL='http://127.0.0.1:3291',DATABASE_SSL='false')
+    NEXT_TELEMETRY_DISABLED='1',TURBO_TELEMETRY_DISABLED='1',HARBOR_TEST_ALLOW='local-disposable',HARBOR_TEST_URL='http://127.0.0.1:3291',DATABASE_SSL='false')
 for name in ('cache','config','tmp'):(work/name).mkdir(mode=0o700)
 for name in ('npm-user-config','npm-global-config'):(work/name).write_text('')
 (proof/'driver-environment-keys.json').write_text(json.dumps(sorted(env))+'\n')
@@ -64,6 +64,7 @@ for row in json.loads((proof/'source-before.json').read_text()):
 (proof/'runtime-source-before.json').write_text(json.dumps(copies,indent=2)+'\n')
 run('pnpm-tool',['npm','install','--prefix',str(work/'tools'),'--ignore-scripts','--no-audit','--no-fund','pnpm@10.14.0'])
 pnpm=str(work/'tools/node_modules/.bin/pnpm')
+env['PATH']=str(work/'tools/node_modules/.bin')+os.pathsep+env['PATH']
 run('workspace-install',[pnpm,'install','--frozen-lockfile','--ignore-scripts','--store-dir',str(work/'pnpm-store')],240,repo)
 docs=repo/'apps/web/node_modules/next/dist/docs'
 doc_rows=[]
