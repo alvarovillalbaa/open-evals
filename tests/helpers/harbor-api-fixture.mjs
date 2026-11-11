@@ -26,7 +26,7 @@ export async function createHarborFixture() {
     return 'open_evals_session='+encoded+'.'+createHmac('sha256',process.env.AUTH_SECRET).update(encoded).digest('base64url');
   }
   for(const role of ['owner','editor','viewer'])data.cookies[role]=cookie(data.workspaceId,role);
-  data.cookies.foreign=cookie(data.foreignWorkspaceId,'owner');
+  data.cookies.foreignOwner=cookie(data.foreignWorkspaceId,'owner');
   for(const name of ['own','other','foreign','read','write','revoked'])data.keys[name]=id(name)+'_authored_disposable_key';
   const directory=join(process.env.HARBOR_WORK,'fixtures');await mkdir(directory,{recursive:true,mode:0o700});
   await writeFile(join(directory,prefix+'.json'),JSON.stringify(data),{flag:'wx',mode:0o600});
