@@ -49,7 +49,7 @@ test('HB-B02 narrow screen selects exact versions and persists a shared plan',as
   const {context,page,errors}=await surface(browser,390);
   try {
     await page.goto(fixture.endpoint+'/evals/harbor');await page.getByLabel('Plan name',{exact:true}).fill('Browser plan');
-    const project=page.getByLabel('Project',{exact:true});
+    const project=page.getByRole('combobox',{name:'Project',exact:true});
     await expect(project.locator('option').filter({hasText:/^Authored project · test$/})).toHaveAttribute('value',fixture.projectId);
     await project.selectOption({label:'Authored project · test'});
     await page.getByLabel(/Browser task revised · v2/).check();await page.getByLabel('Harbor agent',{exact:true}).fill('oracle');await page.getByLabel(/Share the selected task source/).check();
