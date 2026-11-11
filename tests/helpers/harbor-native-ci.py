@@ -24,15 +24,16 @@ environment = {key: os.environ[key] for key in ('HOME', 'PATH', 'LANG', 'RUNNER_
 environment.update(HARBOR_NATIVE_ROOT=str(root), HARBOR_PROOF=str(proof), HARBOR_WORK=str(work),
     HARBOR_TELEMETRY='0', PYTHONDONTWRITEBYTECODE='1', PIP_CONFIG_FILE='/dev/null', PIP_DISABLE_PIP_VERSION_CHECK='1',
     PIP_NO_CACHE_DIR='1', PIP_INDEX_URL='https://pypi.org/simple', NPM_CONFIG_REGISTRY='https://registry.npmjs.org',
-    NPM_CONFIG_CACHE=str(work / 'npm-cache'), NPM_CONFIG_USERCONFIG='/dev/null', NPM_CONFIG_GLOBALCONFIG='/dev/null',
+    NPM_CONFIG_CACHE=str(work / 'npm-cache'), NPM_CONFIG_USERCONFIG=str(work / 'npm-user-config'), NPM_CONFIG_GLOBALCONFIG=str(work / 'npm-global-config'),
     XDG_CACHE_HOME=str(work / 'cache'), XDG_CONFIG_HOME=str(work / 'config'), TMPDIR=str(work / 'tmp'),
     DOCKER_HOST='unix:///var/run/docker.sock', CI='true')
 for directory in ('cache', 'config', 'tmp'): (work / directory).mkdir(mode=0o700)
+for name in ('npm-user-config', 'npm-global-config'): (work / name).write_text('')
 source = Path.cwd()
 
-def run(name, args, timeout=180):
+def run(name, args, timeout=180, cwd=None):
     with (proof / (name + '.stdout')).open('wb') as out, (proof / (name + '.stderr')).open('wb') as err:
-        result = subprocess.run(args, env=environment, stdin=subprocess.DEVNULL, stdout=out, stderr=err, timeout=timeout)
+        result = subprocess.run(args, cwd=cwd, env=environment, stdin=subprocess.DEVNULL, stdout=out, stderr=err, timeout=timeout)
     print(f'{name}: exit {result.returncode}', flush=True)
     if result.returncode:
         # All inputs are authored fixtures or public dependency metadata; no secrets.
@@ -67,8 +68,25 @@ run('pip-freeze', [python, '-m', 'pip', 'freeze', '--all'])
 run('node-version', ['node', '--version'])
 run('pnpm-tool', ['npm', 'install', '--prefix', str(work / 'tools'), '--ignore-scripts', '--no-audit', '--no-fund', 'pnpm@10.14.0'])
 pnpm = str(work / 'tools/node_modules/.bin/pnpm')
-run('workspace-install', [pnpm, 'install', '--frozen-lockfile', '--ignore-scripts', '--store-dir', str(work / 'pnpm-store')], timeout=240)
-run('core-types', [pnpm, '--filter', '@open-evals/core', 'build'])
+# Dependencies live in an owned compile copy. The repository contains historical
+# tracked node_modules links; installation must not mutate those source entries.
+compile_root = work / 'compile'
+compile_root.mkdir()
+copies = []
+for row in json.loads((proof / 'source-before.json').read_text()):
+    path = row['path']
+    if path not in ('package.json', 'pnpm-lock.yaml', 'pnpm-workspace.yaml', 'tsconfig.base.json') and not path.startswith('packages/core/'):
+        continue
+    if 'node_modules' in Path(path).parts or row['mode'] == '120000': continue
+    data = (source / path).read_bytes()
+    assert hashlib.sha256(data).hexdigest() == row['sha256']
+    file = compile_root / path
+    file.parent.mkdir(parents=True, exist_ok=True)
+    file.write_bytes(data)
+    copies.append(row)
+(proof / 'compile-source.json').write_text(json.dumps(copies, indent=2) + '\n')
+run('workspace-install', [pnpm, 'install', '--frozen-lockfile', '--ignore-scripts', '--store-dir', str(work / 'pnpm-store')], timeout=240, cwd=compile_root)
+run('core-types', [pnpm, '--filter', '@open-evals/core', 'build'], cwd=compile_root)
 run('core-unit', ['node', '--experimental-vm-modules', '--test', 'tests/unit/harbor-tasks.test.mjs'])
 run('python-unit', [python, '-m', 'unittest', 'discover', '-s', 'python/open_evals_harbor/tests', '-p', 'test_transport.py', '-v'])
 run('fixture-image-pull', ['docker', 'pull', 'ubuntu:24.04'], timeout=120)
