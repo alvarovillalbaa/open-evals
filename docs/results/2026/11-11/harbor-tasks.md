@@ -73,7 +73,7 @@ results, screenshots, before/after source maps and failed-attempt evidence.
 Its ZIPs are derived archives of downloaded artifact members: each member was
 verified after archive creation. The published index keeps the separate
 original Actions ZIP digests; it does not equate those to derived ZIP hashes.
-The adjacent publication readback records asset identities and final source.
+The adjacent publication readback records asset identities and source bindings.
 
 Hosted Supabase/Auth/RLS/provider/session acceptance, physical devices, other
 Harbor profiles and model performance remain unverified. Docker image caches,

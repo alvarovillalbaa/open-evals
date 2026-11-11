@@ -1,0 +1,66 @@
+{
+  "schemaVersion": "open-evals-harbor-publication-v1",
+  "observedAtUtc": "2026-11-11T16:06:30Z",
+  "checkedApplicationSource": "466415b123b2382871da4ac0f732ecbdd6445a6c",
+  "checkedSourceTree": "4f324c828ef7edc6e69839eb28b8bdbd9edfc075",
+  "sourceReceipt": "45109094ef0808c27be3663ec88ec23de88407d5",
+  "baselineMain": "c0721e140feebc2c8bfcc495e98a57729e164e9a",
+  "release": {
+    "assets": [
+      {
+        "browser_download_url": "https://github.com/alvarovillalbaa/open-evals/releases/download/harbor-v1-evidence.1/harbor-evidence.json",
+        "digest": "sha256:5e8d764f0bfffeee3a367981041fe4c6109e11811ffc1e2b9eb55d897a6d0d66",
+        "id": 736070599,
+        "name": "harbor-evidence.json",
+        "size": 13308
+      },
+      {
+        "browser_download_url": "https://github.com/alvarovillalbaa/open-evals/releases/download/harbor-v1-evidence.1/harbor-failed-attempts-raw.zip",
+        "digest": "sha256:34a38d7439fafe9309eccdbc9a1680631be35cad2bf88b6ba8d8ee3e9e25151b",
+        "id": 736070162,
+        "name": "harbor-failed-attempts-raw.zip",
+        "size": 6488591
+      },
+      {
+        "browser_download_url": "https://github.com/alvarovillalbaa/open-evals/releases/download/harbor-v1-evidence.1/harbor-native-raw.zip",
+        "digest": "sha256:e89b747856433a0424a9082a90a8e1003941cfbf1558afb58a2a02e032576cad",
+        "id": 736069855,
+        "name": "harbor-native-raw.zip",
+        "size": 603845
+      },
+      {
+        "browser_download_url": "https://github.com/alvarovillalbaa/open-evals/releases/download/harbor-v1-evidence.1/harbor-product-raw.zip",
+        "digest": "sha256:be2981142aac06eee28fbda4fede3e5ac427f93cabebde8bc5d30bb5f52817e0",
+        "id": 736069931,
+        "name": "harbor-product-raw.zip",
+        "size": 2564640
+      }
+    ],
+    "draft": false,
+    "html_url": "https://github.com/alvarovillalbaa/open-evals/releases/tag/harbor-v1-evidence.1",
+    "id": 441911711,
+    "prerelease": true,
+    "published_at": "2026-11-11T16:05:54Z",
+    "tag_name": "harbor-v1-evidence.1",
+    "target_commitish": "45109094ef0808c27be3663ec88ec23de88407d5"
+  },
+  "serverAssetDigestsAndSizesMatchLocal": true,
+  "sourceReceiptChangesFromCheckedSource": [
+    "docs/results/2026/11-11/harbor-evidence.json",
+    "docs/results/2026/11-11/harbor-tasks.md"
+  ],
+  "temporaryControls": {
+    "nativeWorkflow": 414786561,
+    "productWorkflow": 414826095,
+    "workflowsDisabled": true,
+    "nativeQaRefsAbsent": true,
+    "productQaRefsAbsent": true
+  },
+  "limits": {
+    "hostedAuthRlsVerified": false,
+    "providerModelPerformanceVerified": false,
+    "physicalDeviceVerified": false,
+    "otherHarborProfilesVerified": false,
+    "imageCacheAndRunnerDisposalIndependentlyVerified": false
+  }
+}
