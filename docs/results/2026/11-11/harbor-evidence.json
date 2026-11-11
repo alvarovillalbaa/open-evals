@@ -1,0 +1,356 @@
+{
+  "schemaVersion": "open-evals-harbor-evidence-v1",
+  "baseline": "c0721e140feebc2c8bfcc495e98a57729e164e9a",
+  "nativeSource": "ecf18698c0a1fa0db841dfbce1f41dc2d4183328",
+  "productSource": "466415b123b2382871da4ac0f732ecbdd6445a6c",
+  "productTree": "4f324c828ef7edc6e69839eb28b8bdbd9edfc075",
+  "sourceFiles": 1759,
+  "sourceBytes": 13058918,
+  "sourceMapSha256": "f7efd49700ef2c63c65197515d790948ee0d45c26305258e65704f8cdea87763",
+  "distinctAcceptedChecks": 81,
+  "nativeAndTransportChecks": 36,
+  "newProtocolChecks": 18,
+  "apiSdkCliChecks": 23,
+  "browserChecks": 4,
+  "build": "10 packages passed",
+  "referenceAgents": [
+    "oracle",
+    "nop"
+  ],
+  "providerModelCalls": 0,
+  "nativeRuns": {
+    "component": {
+      "runId": 43040979043,
+      "jobId": 130592355926,
+      "oracleReward": 1,
+      "nopReward": 0
+    },
+    "product": {
+      "runId": 43052560644,
+      "activationHead": "631854757489983855cee6f491eb68f6ae16d793",
+      "runIdLocal": "d54d8354-9066-422b-b11a-c1fcde07907f",
+      "trialId": "2b912f4c-5d29-4622-8e49-a00d1742f363",
+      "nativeResultSha256": "c0d00d43901e6cbc2a8f736e5ad7c450ae7e8bc7bbc37b26bc2f17c28847929a",
+      "oracleReward": 1
+    }
+  },
+  "retiredWorkflows": [
+    {
+      "id": 414786561,
+      "state": "disabled_manually"
+    },
+    {
+      "id": 414826095,
+      "state": "disabled_manually"
+    }
+  ],
+  "retiredQaRefs": {
+    "native": 2,
+    "product": 8
+  },
+  "acceptedCleanup": {
+    "fixtureRowsRemovedAndReadBack": true,
+    "postgresContainerRemovedAndReadBack": true,
+    "nativeContainerNetworkVolumeAbsenceVerified": true,
+    "sourceBeforeAfterEqual": true,
+    "ownedWorkRemoved": true,
+    "noOpenHandlesVerified": true
+  },
+  "historicalUnverifiedCleanup": [
+    {
+      "runId": 43046885054,
+      "databaseContainerRemoved": true,
+      "ownedWorkRemoved": false,
+      "noOpenHandlesVerified": false,
+      "runnerDisposalIndependentlyVerified": false
+    }
+  ],
+  "limits": {
+    "hostedAuthRlsVerified": false,
+    "providerModelPerformanceVerified": false,
+    "physicalDeviceVerified": false,
+    "otherHarborProfilesVerified": false,
+    "imageCacheAndRunnerDisposalIndependentlyVerified": false
+  },
+  "archives": [
+    {
+      "name": "harbor-native-raw.zip",
+      "bytes": 603845,
+      "sha256": "e89b747856433a0424a9082a90a8e1003941cfbf1558afb58a2a02e032576cad",
+      "members": 54,
+      "uncompressedBytes": 2189385,
+      "derivedFromExtractedArtifacts": true,
+      "originalZipDigestCompared": false
+    },
+    {
+      "name": "harbor-product-raw.zip",
+      "bytes": 2564640,
+      "sha256": "be2981142aac06eee28fbda4fede3e5ac427f93cabebde8bc5d30bb5f52817e0",
+      "members": 78,
+      "uncompressedBytes": 4928422,
+      "derivedFromExtractedArtifacts": true,
+      "originalZipDigestCompared": false
+    },
+    {
+      "name": "harbor-failed-attempts-raw.zip",
+      "bytes": 6488591,
+      "sha256": "34a38d7439fafe9309eccdbc9a1680631be35cad2bf88b6ba8d8ee3e9e25151b",
+      "members": 411,
+      "uncompressedBytes": 20747413,
+      "derivedFromExtractedArtifacts": true,
+      "originalZipDigestCompared": false
+    }
+  ],
+  "originalArtifacts": [
+    {
+      "runId": 43040508346,
+      "artifacts": [
+        {
+          "id": 13865287160,
+          "name": "harbor-native-proof",
+          "size_in_bytes": 570341,
+          "url": "https://api.github.com/repos/alvarovillalbaa/open-evals/actions/artifacts/13865287160",
+          "archive_download_url": "https://api.github.com/repos/alvarovillalbaa/open-evals/actions/artifacts/13865287160/zip",
+          "expired": false,
+          "created_at": "2026-11-11T14:39:57Z",
+          "expires_at": "2026-11-18T14:39:56Z",
+          "updated_at": "2026-11-11T14:39:57Z",
+          "digest": "sha256:a496a87fdbe256fdc4ca2cafa7eb4838c78179493f7be98cb7b1392d7cb257da",
+          "workflow_run": {
+            "id": 43040508346,
+            "repository_id": 1279540731,
+            "head_repository_id": 1279540731,
+            "head_branch": "qa/open-evals-harbor-native-20261111-1",
+            "head_sha": "8a2b6315ad436d51b3f6bcc3d7f5fdb3c463079b"
+          }
+        }
+      ],
+      "isError": false
+    },
+    {
+      "runId": 43040979043,
+      "artifacts": [
+        {
+          "id": 13864723893,
+          "name": "harbor-native-proof",
+          "size_in_bytes": 589017,
+          "url": "https://api.github.com/repos/alvarovillalbaa/open-evals/actions/artifacts/13864723893",
+          "archive_download_url": "https://api.github.com/repos/alvarovillalbaa/open-evals/actions/artifacts/13864723893/zip",
+          "expired": false,
+          "created_at": "2026-11-11T14:43:45Z",
+          "expires_at": "2026-11-18T14:43:44Z",
+          "updated_at": "2026-11-11T14:43:45Z",
+          "digest": "sha256:4408ac0a5758f9fb326f2906f6b7f3581556fa23fe6af35d6e6d67fe3fab5920",
+          "workflow_run": {
+            "id": 43040979043,
+            "repository_id": 1279540731,
+            "head_repository_id": 1279540731,
+            "head_branch": "qa/open-evals-harbor-native-20261111-2",
+            "head_sha": "2400d76a4dc88de24ffdff2cd4e5f93dfe749f46"
+          }
+        }
+      ],
+      "isError": false
+    },
+    {
+      "runId": 43046482605,
+      "artifacts": [
+        {
+          "id": 13868540102,
+          "name": "harbor-product-proof",
+          "size_in_bytes": 386822,
+          "url": "https://api.github.com/repos/alvarovillalbaa/open-evals/actions/artifacts/13868540102",
+          "archive_download_url": "https://api.github.com/repos/alvarovillalbaa/open-evals/actions/artifacts/13868540102/zip",
+          "expired": false,
+          "created_at": "2026-11-11T15:16:03Z",
+          "expires_at": "2026-11-18T15:16:02Z",
+          "updated_at": "2026-11-11T15:16:03Z",
+          "digest": "sha256:f906b5751877d3a4a04d4eaeab51be52cdd296ce5ec28dcf72833353b43abe31",
+          "workflow_run": {
+            "id": 43046482605,
+            "repository_id": 1279540731,
+            "head_repository_id": 1279540731,
+            "head_branch": "qa/open-evals-harbor-product-20261111-1",
+            "head_sha": "c5f9e417f9193d8b54aba36855c5ea92ad54d66d"
+          }
+        }
+      ],
+      "isError": false
+    },
+    {
+      "runId": 43046885054,
+      "artifacts": [
+        {
+          "id": 13868236629,
+          "name": "harbor-product-proof",
+          "size_in_bytes": 712676,
+          "url": "https://api.github.com/repos/alvarovillalbaa/open-evals/actions/artifacts/13868236629",
+          "archive_download_url": "https://api.github.com/repos/alvarovillalbaa/open-evals/actions/artifacts/13868236629/zip",
+          "expired": false,
+          "created_at": "2026-11-11T15:23:23Z",
+          "expires_at": "2026-11-18T15:23:22Z",
+          "updated_at": "2026-11-11T15:23:23Z",
+          "digest": "sha256:07b2af7c83a98c91088efc75fda587eefff5d7f64c97770b63fad1b20831eb0f",
+          "workflow_run": {
+            "id": 43046885054,
+            "repository_id": 1279540731,
+            "head_repository_id": 1279540731,
+            "head_branch": "qa/open-evals-harbor-product-20261111-2",
+            "head_sha": "e33b1b9371fe16cd44d2111276d6e69955716b50"
+          }
+        }
+      ],
+      "isError": false
+    },
+    {
+      "runId": 43048328857,
+      "artifacts": [
+        {
+          "id": 13867438219,
+          "name": "harbor-product-proof",
+          "size_in_bytes": 715883,
+          "url": "https://api.github.com/repos/alvarovillalbaa/open-evals/actions/artifacts/13867438219",
+          "archive_download_url": "https://api.github.com/repos/alvarovillalbaa/open-evals/actions/artifacts/13867438219/zip",
+          "expired": false,
+          "created_at": "2026-11-11T15:28:14Z",
+          "expires_at": "2026-11-18T15:28:13Z",
+          "updated_at": "2026-11-11T15:28:14Z",
+          "digest": "sha256:588242078e3ecb7deae82b08c0957959dc3a962318933e05359816c494ba6447",
+          "workflow_run": {
+            "id": 43048328857,
+            "repository_id": 1279540731,
+            "head_repository_id": 1279540731,
+            "head_branch": "qa/open-evals-harbor-product-20261111-3",
+            "head_sha": "2b74a8fadb6149c247016d38577cfae90eae7e61"
+          }
+        }
+      ],
+      "isError": false
+    },
+    {
+      "runId": 43048895361,
+      "artifacts": [
+        {
+          "id": 13868612373,
+          "name": "harbor-product-proof",
+          "size_in_bytes": 722698,
+          "url": "https://api.github.com/repos/alvarovillalbaa/open-evals/actions/artifacts/13868612373",
+          "archive_download_url": "https://api.github.com/repos/alvarovillalbaa/open-evals/actions/artifacts/13868612373/zip",
+          "expired": false,
+          "created_at": "2026-11-11T15:31:58Z",
+          "expires_at": "2026-11-18T15:31:57Z",
+          "updated_at": "2026-11-11T15:31:58Z",
+          "digest": "sha256:75a96e90cf999bc141468120bdf53c28c0384aeb0dcee1596014ba29c6d9e186",
+          "workflow_run": {
+            "id": 43048895361,
+            "repository_id": 1279540731,
+            "head_repository_id": 1279540731,
+            "head_branch": "qa/open-evals-harbor-product-20261111-4",
+            "head_sha": "24d47bd3209351d099d8be0c7f341e5d96eeff06"
+          }
+        }
+      ],
+      "isError": false
+    },
+    {
+      "runId": 43049892143,
+      "artifacts": [
+        {
+          "id": 13868004258,
+          "name": "harbor-product-proof",
+          "size_in_bytes": 843318,
+          "url": "https://api.github.com/repos/alvarovillalbaa/open-evals/actions/artifacts/13868004258",
+          "archive_download_url": "https://api.github.com/repos/alvarovillalbaa/open-evals/actions/artifacts/13868004258/zip",
+          "expired": false,
+          "created_at": "2026-11-11T15:38:25Z",
+          "expires_at": "2026-11-18T15:38:23Z",
+          "updated_at": "2026-11-11T15:38:25Z",
+          "digest": "sha256:bc99ccd16c6e42b88af4dd946eb54c612c8f22a497d68e88bd290c4fb69e1f59",
+          "workflow_run": {
+            "id": 43049892143,
+            "repository_id": 1279540731,
+            "head_repository_id": 1279540731,
+            "head_branch": "qa/open-evals-harbor-product-20261111-5",
+            "head_sha": "4132d5663427641c3cec6fc0385981a7f6d48825"
+          }
+        }
+      ],
+      "isError": false
+    },
+    {
+      "runId": 43050762182,
+      "artifacts": [
+        {
+          "id": 13869855361,
+          "name": "harbor-product-proof",
+          "size_in_bytes": 1120660,
+          "url": "https://api.github.com/repos/alvarovillalbaa/open-evals/actions/artifacts/13869855361",
+          "archive_download_url": "https://api.github.com/repos/alvarovillalbaa/open-evals/actions/artifacts/13869855361/zip",
+          "expired": false,
+          "created_at": "2026-11-11T15:44:00Z",
+          "expires_at": "2026-11-18T15:43:59Z",
+          "updated_at": "2026-11-11T15:44:00Z",
+          "digest": "sha256:c2d0b973543d39bb352def77582b5fceba4db3506b5a5414f46085c9d57d33ba",
+          "workflow_run": {
+            "id": 43050762182,
+            "repository_id": 1279540731,
+            "head_repository_id": 1279540731,
+            "head_branch": "qa/open-evals-harbor-product-20261111-6",
+            "head_sha": "53fe9deec170234fbdbc95955370dec2f0cef0a3"
+          }
+        }
+      ],
+      "isError": false
+    },
+    {
+      "runId": 43051938331,
+      "artifacts": [
+        {
+          "id": 13871040060,
+          "name": "harbor-product-proof",
+          "size_in_bytes": 1252665,
+          "url": "https://api.github.com/repos/alvarovillalbaa/open-evals/actions/artifacts/13871040060",
+          "archive_download_url": "https://api.github.com/repos/alvarovillalbaa/open-evals/actions/artifacts/13871040060/zip",
+          "expired": false,
+          "created_at": "2026-11-11T15:50:44Z",
+          "expires_at": "2026-11-18T15:50:43Z",
+          "updated_at": "2026-11-11T15:50:44Z",
+          "digest": "sha256:894c82f281c42b1fad922c90a3e9d266ff2229a186f2b281837a553d9b077cbc",
+          "workflow_run": {
+            "id": 43051938331,
+            "repository_id": 1279540731,
+            "head_repository_id": 1279540731,
+            "head_branch": "qa/open-evals-harbor-product-20261111-7",
+            "head_sha": "5cce91581d1fae948675539c4dde3940c8a81180"
+          }
+        }
+      ],
+      "isError": false
+    },
+    {
+      "runId": 43052560644,
+      "artifacts": [
+        {
+          "id": 13869174186,
+          "name": "harbor-product-proof",
+          "size_in_bytes": 2536441,
+          "url": "https://api.github.com/repos/alvarovillalbaa/open-evals/actions/artifacts/13869174186",
+          "archive_download_url": "https://api.github.com/repos/alvarovillalbaa/open-evals/actions/artifacts/13869174186/zip",
+          "expired": false,
+          "created_at": "2026-11-11T15:54:16Z",
+          "expires_at": "2026-11-18T15:54:16Z",
+          "updated_at": "2026-11-11T15:54:16Z",
+          "digest": "sha256:31facba8f61dd4dae644b878c0f5204d184b85188e40d61a930dc6f803cea8b6",
+          "workflow_run": {
+            "id": 43052560644,
+            "repository_id": 1279540731,
+            "head_repository_id": 1279540731,
+            "head_branch": "qa/open-evals-harbor-product-20261111-8",
+            "head_sha": "631854757489983855cee6f491eb68f6ae16d793"
+          }
+        }
+      ],
+      "isError": false
+    }
+  ]
+}
