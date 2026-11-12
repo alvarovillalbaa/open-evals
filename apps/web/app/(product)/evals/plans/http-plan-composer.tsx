@@ -136,7 +136,15 @@ export function HttpPlanComposer({ canWrite, sources, initialHead = null, initia
       target: { targetId, targetVersion, endpoint: new URL(endpoint).href, timeoutMs: Number(timeoutMs) },
       limits: { concurrency: Number(concurrency), maxDurationSeconds: Number(duration) }
     };
-    const value: HttpEvalPlanDraft = isComposition ? { schemaVersion: isMatching ? "http-eval-plan-draft-v3" : "http-eval-plan-draft-v2", ...common, evalSetVersions: parsedRefs(setIds) } : { schemaVersion: "http-eval-plan-draft-v1", ...common, evalSetVersionIds: ids };
+    let value: HttpEvalPlanDraft;
+    if (isMatching) value = { schemaVersion: "http-eval-plan-draft-v3", ...common, evalSetVersions: parsedRefs(setIds) };
+    else if (isComposition) {
+      const refs = parsedRefs(setIds).map(ref => {
+        if (ref.schemaVersion === "custom-eval-set-ref-v3") throw new Error("matching_plan_required");
+        return ref;
+      });
+      value = { schemaVersion: "http-eval-plan-draft-v2", ...common, evalSetVersions: refs };
+    } else value = { schemaVersion: "http-eval-plan-draft-v1", ...common, evalSetVersionIds: ids };
     if (new TextEncoder().encode(JSON.stringify({ schemaVersion: isMatching ? "http-eval-plan-save-v3" : isComposition ? "http-eval-plan-save-v2" : "http-eval-plan-save-v1", draft: value, expectedPreviewFingerprint: "0".repeat(64) })).length > 2 * 1024 * 1024) throw new Error("request_limit");
     planIdentity.current = value.planId; pinnedDraft.current = value;
     return value;

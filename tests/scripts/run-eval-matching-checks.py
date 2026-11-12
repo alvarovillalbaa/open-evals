@@ -164,6 +164,9 @@ try:
     pnpm = ["node", str(tools / "node_modules/pnpm/bin/pnpm.cjs")]
     assert run("pnpm-version", pnpm + ["--version"]).strip() == "10.14.0"
     run("dependencies", pnpm + ["install", "--frozen-lockfile", "--ignore-scripts"], timeout=300)
+    run("route-types", pnpm + ["--filter", "@open-evals/web", "exec", "next", "typegen"], timeout=60)
+    run("semantic-types", pnpm + ["--filter", "@open-evals/web", "exec", "tsc", "--noEmit", "--pretty", "false"], timeout=120)
+    stages["semanticTypes"] = {"status": "passed", "scope": "generated Next route types and the real web TypeScript graph"}
     run("build", pnpm + ["--filter", "@open-evals/web", "build"], timeout=240)
     stages["build"] = {"status": "passed", "scope": "one production Next web build with current core and DB sources"}
     for port in (65432, 4173):

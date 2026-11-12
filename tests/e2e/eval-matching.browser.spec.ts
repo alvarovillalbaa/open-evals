@@ -80,7 +80,21 @@ test("XM-BR03 actual viewer project-key and foreign-workspace policy protects ma
 
 test("XM-BR04 production execution scores mixed sets once per row and reload never redispatches", async ({ page, owned }, info) => {
   const old = await owned.saveItem({ contains: "APPROVED" }), equal = await exact(page), mixedSet = await mixed(page, [old, equal]), containsSet = await owned.saveSet([old], { datasetPassRateThreshold: 0 });
-  const plan = await owned.savePlan([containsSet, mixedSet], await owned.dataset()) as AnyHttpEvalPlanVersionRecord;
+  const datasetVersionId = await owned.dataset(), journal = owned.journal();
+  await page.goto("/evals/plans?family=matching");
+  await page.getByLabel("Plan name", { exact: true }).fill("Matching UI acceptance");
+  await page.getByLabel("Exact dataset version ID", { exact: true }).fill(datasetVersionId);
+  await page.getByLabel("Add a recent saved custom evaluator version", { exact: true }).selectOption(`custom-eval-set-ref-v2/${containsSet.draft.setId}/${containsSet.draft.versionId}`);
+  await page.getByLabel("Add a recent saved custom evaluator version", { exact: true }).selectOption(`custom-eval-set-ref-v3/${mixedSet.draft.setId}/${mixedSet.draft.versionId}`);
+  await page.getByLabel("Target identity", { exact: true }).fill("authored-composition-target");
+  await page.getByLabel("Declared target version", { exact: true }).fill("1");
+  await page.getByLabel("Public HTTPS endpoint", { exact: true }).fill("https://composition-target.example.com/evaluate");
+  await page.getByLabel("Concurrent calls", { exact: true }).fill("2");
+  await page.getByLabel("Run duration (seconds)", { exact: true }).fill("15");
+  const preview = await capture<{ preview: { counts: { uniqueItemCount: number; resultPairs: number; targetCalls: number } } }>(page, "/api/v1/http-target-plans/preview", () => page.getByRole("button", { name: "Preview plan without calling target", exact: true }).click());
+  expect(preview.status).toBe(200); expect(preview.value.preview.counts).toMatchObject({ uniqueItemCount: 2, resultPairs: 4, targetCalls: 2 });
+  const saved = await capture<{ record: AnyHttpEvalPlanVersionRecord }>(page, "/api/v1/http-target-plans", () => page.getByRole("button", { name: "Save immutable plan without executing", exact: true }).click());
+  expect(saved.status).toBe(201); const plan = saved.value.record; await untouchedTransport(owned, journal);
   expect(plan.schemaVersion).toBe("http-eval-plan-record-v3");
   await page.goto(`/evals/plans/${plan.content.draft.planId}/versions/${plan.content.draft.versionId}`);
   const executionPath = `/api/v1/http-target-plans/${plan.content.draft.planId}/versions/${plan.content.draft.versionId}/runs`;

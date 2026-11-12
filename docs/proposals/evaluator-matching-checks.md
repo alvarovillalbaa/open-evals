@@ -44,7 +44,10 @@ installs the existing frozen lockfile with pinned pnpm 10.14.0 under Node
 because its source export omitted the workflows package. That failure and its
 original digest-verified ZIP remain evidence. The corrected runner checks every
 core source/fixture blob against that exact source and carries those42 passes
-without replay. It resumes one production web build, then real SQL and
+without replay. CI2 bundled successfully, then found a TypeScript union error
+in the new matching plan form. The repaired scenario creates its plan through
+that UI. The continuation generates Next16.2.9 route types and checks the real
+web TypeScript graph before resuming one production web build, then real SQL and
 Chromium against a new loopback-only PostgreSQL 16 cluster on port 65432.
 Only existing migrations 0001/0002 initialize this disposable database.
 
