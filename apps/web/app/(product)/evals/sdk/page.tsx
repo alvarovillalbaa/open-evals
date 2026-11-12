@@ -56,7 +56,7 @@ export default function SdkEvidencePage() {
         </Panel>
         <Panel title="Python" icon={<FileCode2 className="size-4" aria-hidden="true" />}>
           <p className="mb-3 text-sm leading-6 text-muted-foreground">
-            Use open_evals_sdk.py from python/open_evals_optimizers/src on your Python import path. Pass the actual execution payload.
+            Install the Python client from this repository with python3 -m pip install ./python/open_evals_sdk. Pass the actual execution payload.
           </p>
           <pre className="max-w-full overflow-x-auto bg-muted p-3 text-xs leading-5"><code>{pythonExample}</code></pre>
         </Panel>
