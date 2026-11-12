@@ -247,3 +247,6 @@ Screenshots are intentionally left as placeholders for maintainers to capture fr
 
 Matching v3 adds literal exact checks and mixed saved contains/exact membership.
 See [the matching contract and current qualification boundary](docs/evaluator-matching.md).
+Its [66-case result](docs/results/2026/11-12/evaluator-matching.md) retains the
+separate core, real PostgreSQL and Chromium sources, all earlier failures and
+the final successful build/cleanup. Hosted activation remains pending.

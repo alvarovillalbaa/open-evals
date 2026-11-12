@@ -74,9 +74,12 @@ See [the focused check scope](proposals/evaluator-matching-checks.md). Local
 authored checks established 24 core cases and 18 HTTP cases across preserved
 attempts, including original published v1/v2 full-record comparisons. Two HTTP
 assertions initially compared JavaScript prototypes; their corrected JSON-wire
-comparisons passed without changing scoring behavior. A production build,
-20 real disposable PostgreSQL cases and four Chromium scenarios still require
-their actual CI receipts. Source publication alone does not establish these.
+comparisons passed without changing scoring behavior. All66 distinct focused
+cases are now accepted across retained CI sources:42 core/HTTP,20 real
+PostgreSQL and four Chromium scenarios. The final continuation passed semantic
+checking, a fresh production build and saved-execution reload/readback, carrying
+the65 unchanged cases with exact input equality. Earlier failed invocations
+remain failed. See [results and original evidence](results/2026/11-12/evaluator-matching.md).
 
 Hosted database/configuration, provider auth/RLS, real external target transport
 and production acceptance remain separate. No production configuration or data

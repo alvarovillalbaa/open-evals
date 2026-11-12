@@ -1,0 +1,280 @@
+{
+  "schemaVersion": "eval-matching-evidence-v1",
+  "acceptedCandidate": "6c0c81850633004b8b9579a3653636608e1b064c",
+  "finalRunId": 43127918089,
+  "finalJobId": 130884598595,
+  "distinctPassed": 66,
+  "single66CaseInvocation": false,
+  "caseGroups": [
+    {
+      "ids": [
+        "XM01",
+        "XM02",
+        "XM03",
+        "XM04",
+        "XM05",
+        "XM06",
+        "XM07",
+        "XM08",
+        "XM09",
+        "XM10",
+        "XM11",
+        "XM12",
+        "XM13",
+        "XM14",
+        "XM15",
+        "XM16",
+        "XM17",
+        "XM18",
+        "XM19",
+        "XM20",
+        "XM21",
+        "XM22",
+        "XM23",
+        "XM24",
+        "XH01",
+        "XH02",
+        "XH03",
+        "XH04",
+        "XH05",
+        "XH06",
+        "XH07",
+        "XH08",
+        "XH09",
+        "XH10",
+        "XH11",
+        "XH12",
+        "XH13",
+        "XH14",
+        "XH15",
+        "XH16",
+        "XH17",
+        "XH18"
+      ],
+      "runId": 43122180243,
+      "source": "7d9b7f3e0e844ebe4543cdf7201ea7e112cba181"
+    },
+    {
+      "ids": [
+        "XM-PG01",
+        "XM-PG02",
+        "XM-PG03",
+        "XM-PG04",
+        "XM-PG05",
+        "XM-PG06",
+        "XM-PG07",
+        "XM-PG08",
+        "XM-PG09",
+        "XM-PG10",
+        "XM-PG11",
+        "XM-PG12",
+        "XM-PG13",
+        "XM-PG14",
+        "XM-PG15",
+        "XM-PG16",
+        "XM-PG17",
+        "XM-PG18",
+        "XM-PG19",
+        "XM-PG20"
+      ],
+      "runId": 43124736808,
+      "source": "fa04f8c8f377191f252d29745b59e115ccbbeafd"
+    },
+    {
+      "ids": [
+        "XM-BR01",
+        "XM-BR02",
+        "XM-BR03"
+      ],
+      "runId": 43126638209,
+      "source": "4d8aa6c6f6b1efca5210d4797ad164e9662933fe"
+    },
+    {
+      "ids": [
+        "XM-BR04"
+      ],
+      "runId": 43127918089,
+      "source": "6c0c81850633004b8b9579a3653636608e1b064c"
+    }
+  ],
+  "originalCiArchives": [
+    {
+      "attempt": 1,
+      "runId": 43122180243,
+      "source": "7d9b7f3e0e844ebe4543cdf7201ea7e112cba181",
+      "asset": "matching-ci-1-original.zip",
+      "artifactId": 13901551829,
+      "bytes": 160799,
+      "sha256": "894d627e9b4cffc23c80495bb4036d2dadf76bec46a4e5ce47eb2c5dcd0bea8d",
+      "originalArchive": true,
+      "overallStatus": "failed"
+    },
+    {
+      "attempt": 2,
+      "runId": 43123490078,
+      "source": "ec33dc2cbda5c7beda1a7528c022f047ffb8d374",
+      "asset": "matching-ci-2-original.zip",
+      "artifactId": 13900909322,
+      "bytes": 104037,
+      "sha256": "cefd125ec90ae27c2fbc2d23aca8e18cee2af7323961e74a5b19ce217003a352",
+      "originalArchive": true,
+      "overallStatus": "failed"
+    },
+    {
+      "attempt": 3,
+      "runId": 43124182185,
+      "source": "7c8585ae10d0401aa6acc5d843dfb9db21213d55",
+      "asset": "matching-ci-3-original.zip",
+      "artifactId": 13901886974,
+      "bytes": 103302,
+      "sha256": "c0ab8c19df961fd2c2235e5e4c2cdc2169ee721c0132412818bdb700504de1b6",
+      "originalArchive": true,
+      "overallStatus": "failed"
+    },
+    {
+      "attempt": 4,
+      "runId": 43124736808,
+      "source": "fa04f8c8f377191f252d29745b59e115ccbbeafd",
+      "asset": "matching-ci-4-original.zip",
+      "artifactId": 13902052124,
+      "bytes": 115668,
+      "sha256": "4aa9fa3e9ee4fc58aba7070add8d4137c3f794f5fb6a566dde0bcd0ef4a89bbc",
+      "originalArchive": true,
+      "overallStatus": "failed"
+    },
+    {
+      "attempt": 5,
+      "runId": 43126638209,
+      "source": "4d8aa6c6f6b1efca5210d4797ad164e9662933fe",
+      "asset": "matching-ci-5-original.zip",
+      "artifactId": 13902867881,
+      "bytes": 2377055,
+      "sha256": "73ba317c81c214bafdd759dc44d8ed6dd2cc2c91fc2da4269dc7d3a784e594f1",
+      "originalArchive": true,
+      "overallStatus": "failed"
+    },
+    {
+      "attempt": 6,
+      "runId": 43127918089,
+      "source": "6c0c81850633004b8b9579a3653636608e1b064c",
+      "asset": "matching-ci-6-original.zip",
+      "artifactId": 13902934216,
+      "bytes": 450164,
+      "sha256": "d4f5d3d3798029ff7babcb73fb415d31dc23582d860a7d12d9c00392ec990243",
+      "originalArchive": true,
+      "overallStatus": "passed"
+    }
+  ],
+  "localT2Carrier": {
+    "asset": "matching-local-t2-attempts.zip",
+    "bytes": 25596,
+    "sha256": "bac9837f5a47f6cddc80e97045fd295ba2fa99a740f80eac1301ba6655b7fe59",
+    "originalArchive": false,
+    "members": [
+      {
+        "path": "core-attempt-1/child-receipt.json",
+        "bytes": 254,
+        "sha256": "332b53705770ba0e83765e81e7e7dbb02c9a68d80654a6df85013d0140be20a4"
+      },
+      {
+        "path": "core-attempt-1/controller-before-child.json",
+        "bytes": 142,
+        "sha256": "d01962124bbbf34f1eee11252a651bb420e50f202ec12bff15309a8671d75bf3"
+      },
+      {
+        "path": "core-attempt-1/source-cleanup.json",
+        "bytes": 165,
+        "sha256": "4d388efcba953675d00a5fac2cba300251a2f5314d297fd2c9c7da5eec82fb8d"
+      },
+      {
+        "path": "core-attempt-1/source-manifest.json",
+        "bytes": 6251,
+        "sha256": "b3cff31934e268302461d29bcaa9fe13f4c4b9662b9e789e14b40aecd55da751"
+      },
+      {
+        "path": "core-attempt-1/stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "core-attempt-1/stdout.tap",
+        "bytes": 5481,
+        "sha256": "68925f1b900e7441113dd20ce7c8febda43b7684070d9913657600c10386fac3"
+      },
+      {
+        "path": "http-attempt-1/child-receipt.json",
+        "bytes": 256,
+        "sha256": "21b8640895d44cc0bc0e1e80c2704865c6a3b2442124987a8484dd95ce711ba8"
+      },
+      {
+        "path": "http-attempt-1/source-cleanup.json",
+        "bytes": 150,
+        "sha256": "178fecc4e2f82023d7f96edf5a56444a772c0333219b1e7001745d3429c52a1a"
+      },
+      {
+        "path": "http-attempt-1/source-manifest.json",
+        "bytes": 5287,
+        "sha256": "ab006ba9ea98270b4f8cfc109f53b57d2eb05c1405f207c8a263ec1954076f0d"
+      },
+      {
+        "path": "http-attempt-1/stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "http-attempt-1/stdout.tap",
+        "bytes": 129332,
+        "sha256": "62dfe5d6d28356359eebc0bfae13008cd10d0a828f9cbf754a3f047c688e25f0"
+      },
+      {
+        "path": "http-attempt-2/child-receipt.json",
+        "bytes": 198,
+        "sha256": "a6183cf9f962abe914bd9023dcba033e7a502af1bff0f712586b353d7389adb2"
+      },
+      {
+        "path": "http-attempt-2/source-cleanup.json",
+        "bytes": 158,
+        "sha256": "a70163edf42d233c90807959bb78be4438ab8086dcfc3440c765d714d8d0778d"
+      },
+      {
+        "path": "http-attempt-2/source-manifest.json",
+        "bytes": 5371,
+        "sha256": "b2cf8a5cf3f244752ce05ca3f467a2232e66ce824e3bd13cd29db73d9dcab663"
+      },
+      {
+        "path": "http-attempt-2/stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "http-attempt-2/stdout.tap",
+        "bytes": 556,
+        "sha256": "64a5591a7cc29c27f0cf78f91cdac8c1e64621a2a353f1b1de768d692e69655c"
+      }
+    ]
+  },
+  "finalCleanup": {
+    "appGroupAbsent": true,
+    "appReaped": true,
+    "appReturncode": 143,
+    "appExitedBeforeCleanup": false,
+    "fixturesEmpty": true,
+    "databaseAbsent": true,
+    "clusterStopped": true,
+    "sourceUnchangedExceptGenerated": true,
+    "generatedChanges": [],
+    "ownedRootAbsent": true
+  },
+  "buildAndSemanticTypes": "passed",
+  "carryEvidence": {
+    "core": "matching-ci-6-original.zip/core-carry.json",
+    "postgres": "matching-ci-6-original.zip/sql-carry.json",
+    "browser": "matching-ci-6-original.zip/browser-carry.json"
+  },
+  "earlierFailuresPreserved": true,
+  "ci4AppAndRootCleanup": "unproved",
+  "viewerPngVisualReadonlyAcceptance": false,
+  "externalTargetOrModelCalls": 0,
+  "productionAcceptance": false,
+  "hostedAuthRlsAcceptance": false
+}
