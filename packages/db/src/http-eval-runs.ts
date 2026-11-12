@@ -23,7 +23,7 @@ function startRequest(value: unknown): HttpEvalStoreStartRequest {
 }
 const startHash = (workspaceId: string, request: HttpEvalStoreStartRequest) => httpHash({ schemaVersion: httpTag("http-eval-start-fingerprint",httpProfileVersion(request)), workspaceId, request });
 const claimEventId = (workspaceId: string, runId: string, rowId: string) => `http_eval_claim_${httpHash({ workspaceId, runId, rowId })}`;
-function claimPayload(workspaceId: string, publicRunId: string, claim: HttpEvalStoreClaim,version:1|2) {
+function claimPayload(workspaceId: string, publicRunId: string, claim: HttpEvalStoreClaim,version:1|2|3) {
   const value = { schemaVersion: httpTag("http-eval-claim-event",version), workspaceId, publicRunId, claim };
   return { ...value, fingerprint: httpHash(value) };
 }

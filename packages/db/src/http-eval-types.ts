@@ -216,4 +216,4 @@ export function httpRunIds(workspaceId: string, runId: string) {
 }
 export const httpSampleId = (workspaceId: string, runId: string, rowId: string) => `http_eval_sample_${httpHash({ workspaceId, runId, rowId })}`;
 export const httpEventId = (workspaceId: string, runId: string, rowId: string) => `http_eval_event_${httpHash({ workspaceId, runId, rowId })}`;
-export const httpRunKey = (runId: string, version: 1 | 2 = 1) => `http-eval-run-v${version}:${runId}`;
+export const httpRunKey = (runId: string, version: 1 | 2 | 3 = 1) => `http-eval-run-v${version}:${runId}`;
