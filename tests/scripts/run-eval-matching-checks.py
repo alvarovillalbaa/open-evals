@@ -182,6 +182,37 @@ try:
                           "fixtureCleanup": {"fixturesEmpty": True, "databaseAbsent": True, "clusterStopped": True},
                           "originalOverallStatus": "failed_browser_start", "originalAppCleanup": "unproved", "replayed": False}
     write("sql-carry.json", stages["postgres"]); write("stages.json", stages)
+    browser_source = "4d8aa6c6f6b1efca5210d4797ad164e9662933fe"
+    browser_rows = run("browser-carry-tree", ["git", "ls-tree", "-r", "-z", "--long", browser_source], cwd=checkout).split("\0")
+    browser_blobs = {}
+    for value in browser_rows:
+        if value:
+            metadata, name = value.split("\t", 1); browser_blobs[name] = metadata.split()[2]
+    browser_roots = {"package.json", "pnpm-lock.yaml", "pnpm-workspace.yaml", "tsconfig.base.json", "turbo.json",
+                     "tests/e2e/eval-matching.browser.fixture.ts", "tests/e2e/eval-matching.browser.preload.mjs", "tests/e2e/eval-matching.browser.config.ts"}
+    def browser_input(name):
+        return (name.startswith(("apps/", "packages/", "workflows/")) or name in browser_roots) and "node_modules" not in Path(name).parts and not Path(name).name.startswith(".env") and not any(part in (".git", ".next", "dist", "coverage") for part in Path(name).parts)
+    browser_inputs = [row for row in exports if row["lane"] == "candidate" and browser_input(row["path"])]
+    assert {row["path"] for row in browser_inputs} == {name for name in browser_blobs if browser_input(name)}
+    for row in browser_inputs: assert browser_blobs[row["path"]] == row["gitBlob"], "closed browser source changed: " + row["path"]
+    spec_path = "tests/e2e/eval-matching.browser.spec.ts"
+    original_spec = subprocess.check_output(["git", "show", browser_source + ":" + spec_path], cwd=checkout)
+    current_spec = (source / spec_path).read_bytes()
+    def closed_slices(value):
+        markers = [('test("XM-BR0' + str(number)).encode() for number in range(1, 5)]
+        assert all(value.count(marker) == 1 for marker in markers)
+        positions = [value.index(marker) for marker in markers]
+        assert positions == sorted(positions)
+        return [value[:positions[0]]] + [value[positions[index]:positions[index + 1]] for index in range(3)]
+    old_slices, new_slices = closed_slices(original_spec), closed_slices(current_spec)
+    assert old_slices == new_slices, "closed browser cases or shared helpers changed"
+    stages["browserCarry"] = {"status": "carried_passed", "distinctCases": 3, "caseIds": ["XM-BR01", "XM-BR02", "XM-BR03"],
+                              "source": browser_source, "runId": 43126638209, "jobId": 130880275442, "artifactId": 13902867881,
+                              "originalArtifactSha256": "73ba317c81c214bafdd759dc44d8ed6dd2cc2c91fc2da4269dc7d3a784e594f1",
+                              "sourceEquality": [{"path": row["path"], "gitBlob": row["gitBlob"], "sha256": row["sha256"]} for row in browser_inputs],
+                              "sharedPrefixAndCaseSliceSha256": [digest(value) for value in new_slices],
+                              "originalOverallStatus": "failed_browser_reload_assertion", "originalCleanup": "passed", "replayed": False}
+    write("browser-carry.json", stages["browserCarry"]); write("stages.json", stages)
     # A fresh compiled app is needed on this disposable runner for the remaining browser cases.
     run("build", pnpm + ["--filter", "@open-evals/web", "build"], timeout=240)
     stages["semanticTypes"] = {"status": "passed", "scope": "fresh Next production build including generated route types and TypeScript"}
@@ -222,10 +253,10 @@ try:
             with socket.create_connection(("127.0.0.1", 4173), timeout=0.2): break
         except OSError: time.sleep(0.2)
     else: raise AssertionError("app did not listen")
-    run("browser", pnpm + ["exec", "playwright", "test", "--config", "tests/e2e/eval-matching.browser.config.ts"], timeout=420, extra=browser_env)
+    run("browser", pnpm + ["exec", "playwright", "test", "--config", "tests/e2e/eval-matching.browser.config.ts", "--grep", "XM-BR04"], timeout=420, extra=browser_env)
     report = json.loads((evidence / "browser-report.json").read_text())
-    assert report["stats"]["expected"] == 4 and all(report["stats"][key] == 0 for key in ("unexpected", "flaky", "skipped"))
-    stages["browser"] = {"status": "passed", "distinctCases": 4, "report": "browser-report.json", "externalTargetCalls": 0, "nativeDnsSocketTlsChecked": False}
+    assert report["stats"]["expected"] == 1 and all(report["stats"][key] == 0 for key in ("unexpected", "flaky", "skipped"))
+    stages["browser"] = {"status": "passed", "distinctCases": 1, "caseIds": ["XM-BR04"], "report": "browser-report.json", "externalTargetCalls": 0, "nativeDnsSocketTlsChecked": False}
     assert not app_overflow.is_set()
 except BaseException as error:
     errors.append(type(error).__name__ + ": " + str(error))

@@ -60,6 +60,16 @@ handles already-exited app cleanup, and carries the20 SQL passes only after
 full core/database/fixture/locked-environment input equality. It builds a fresh app and
 database for the four remaining browser cases without replaying the62 passes.
 
+CI5 run43126638209 passed browser scenarios XM-BR01–03. XM-BR04 created and
+executed its real mixed plan successfully, then incorrectly expected the plan
+page's transient execution panel to survive reload. Its corrected assertion
+opens the canonical saved execution page, reloads it and checks exact API
+readback without redispatch. All CI5 teardown checks passed; its overall failed
+assertion and original artifact remain evidence. The continuation carries the
+three passes only after exact application, dependency, fixture, shared helper
+and individual test-slice equality. Only XM-BR04 runs again:65 carried cases
+plus one remaining case, with a fresh compiled app and disposable database.
+
 Every child exit and original bounded stream is persisted before assertions.
 Failures remain evidence. Cleanup checks owned fixture absence, drops only the
 marked test database, stops its own cluster/app, verifies source hashes and

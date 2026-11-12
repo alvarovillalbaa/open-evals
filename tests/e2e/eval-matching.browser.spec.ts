@@ -116,6 +116,11 @@ test("XM-BR04 production execution scores mixed sets once per row and reload nev
     const transport = owned.journal(), calls = transport.filter(e => e.phase === "committed_claim_before_authored_response"); expect(calls).toHaveLength(2);
     expect(calls.every(e => e.actualExternalTargetCalls === 0 && e.nativeDnsSocketTlsChecked === false)).toBe(true);
     const snapshot = await owned.snapshot(); expect(snapshot.claims).toHaveLength(2); expect(snapshot.counts.results).toBe(4); expect(snapshot.counts.gates).toBe(16);
-    await page.screenshot({ path: info.outputPath("mixed-execution.png") }); await page.reload(); await expect(page.getByText("Execution status: completed", { exact: true })).toBeVisible(); await untouchedTransport(owned, transport);
+    await page.goto(`/evals/plans/runs/${result.ledger.publicRunId}`);
+    await expect(page.getByText("Execution status: completed", { exact: true })).toBeVisible();
+    await page.screenshot({ path: info.outputPath("mixed-execution.png") }); await page.reload();
+    await expect(page.getByText("Execution status: completed", { exact: true })).toBeVisible();
+    const read = await page.context().request.get(`/api/v1/http-target-plans/runs/${result.ledger.publicRunId}`);
+    expect(read.status()).toBe(200); expect((await read.json()).record).toEqual(result); await untouchedTransport(owned, transport);
   } finally { await page.unroute(match, handler); }
 });
