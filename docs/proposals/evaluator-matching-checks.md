@@ -51,6 +51,15 @@ web TypeScript graph before resuming one production web build, then real SQL and
 Chromium against a new loopback-only PostgreSQL 16 cluster on port 65432.
 Only existing migrations 0001/0002 initialize this disposable database.
 
+CI4 run43124736808 passed real semantic checks, the production build and all20
+PostgreSQL cases. Browser startup then exposed an incorrect require flag for
+the async ESM fixture preload. Database fixtures were empty, the database was
+dropped and its cluster stopped; that attempt's app/root cleanup remains
+unproved and its overall failure is retained. The corrected runner uses import,
+handles already-exited app cleanup, and carries the20 SQL passes only after
+full core/database/fixture/locked-environment input equality. It builds a fresh app and
+database for the four remaining browser cases without replaying the62 passes.
+
 Every child exit and original bounded stream is persisted before assertions.
 Failures remain evidence. Cleanup checks owned fixture absence, drops only the
 marked test database, stops its own cluster/app, verifies source hashes and

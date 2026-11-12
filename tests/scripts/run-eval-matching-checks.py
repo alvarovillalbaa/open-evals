@@ -12,6 +12,7 @@ import stat
 import subprocess
 import threading
 import time
+import traceback
 
 checkout = Path(os.environ["GITHUB_WORKSPACE"]).resolve()
 temporary = Path(os.environ["RUNNER_TEMP"]).resolve()
@@ -164,10 +165,26 @@ try:
     pnpm = ["node", str(tools / "node_modules/pnpm/bin/pnpm.cjs")]
     assert run("pnpm-version", pnpm + ["--version"]).strip() == "10.14.0"
     run("dependencies", pnpm + ["install", "--frozen-lockfile", "--ignore-scripts"], timeout=300)
-    run("route-types", pnpm + ["--filter", "@open-evals/web", "exec", "next", "typegen"], timeout=60)
-    run("semantic-types", pnpm + ["--filter", "@open-evals/web", "exec", "tsc", "--noEmit", "--pretty", "false"], timeout=120)
-    stages["semanticTypes"] = {"status": "passed", "scope": "generated Next route types and the real web TypeScript graph"}
+    sql_source = "fa04f8c8f377191f252d29745b59e115ccbbeafd"
+    previous_tree = run("sql-carry-tree", ["git", "ls-tree", "-r", "-z", "--long", sql_source], cwd=checkout).split("\0")
+    previous_blobs = {}
+    for value in previous_tree:
+        if value:
+            metadata, name = value.split("\t", 1); previous_blobs[name] = metadata.split()[2]
+    sql_roots = {"package.json", "pnpm-lock.yaml", "pnpm-workspace.yaml", "tsconfig.base.json", "tests/integration/eval-matching.node.mjs"}
+    sql_inputs = [row for row in exports if row["lane"] == "candidate" and (row["path"].startswith(("packages/core/", "packages/db/")) or row["path"] in sql_roots)]
+    assert sql_roots <= {row["path"] for row in sql_inputs}
+    for row in sql_inputs: assert previous_blobs.get(row["path"]) == row["gitBlob"], "closed SQL source changed: " + row["path"]
+    stages["postgres"] = {"status": "carried_passed", "distinctCases": 20, "source": sql_source,
+                          "runId": 43124736808, "jobId": 130873827564, "artifactId": 13902052124,
+                          "originalArtifactSha256": "4aa9fa3e9ee4fc58aba7070add8d4137c3f794f5fb6a566dde0bcd0ef4a89bbc",
+                          "sourceEquality": [{"path": row["path"], "gitBlob": row["gitBlob"], "sha256": row["sha256"]} for row in sql_inputs],
+                          "fixtureCleanup": {"fixturesEmpty": True, "databaseAbsent": True, "clusterStopped": True},
+                          "originalOverallStatus": "failed_browser_start", "originalAppCleanup": "unproved", "replayed": False}
+    write("sql-carry.json", stages["postgres"]); write("stages.json", stages)
+    # A fresh compiled app is needed on this disposable runner for the remaining browser cases.
     run("build", pnpm + ["--filter", "@open-evals/web", "build"], timeout=240)
+    stages["semanticTypes"] = {"status": "passed", "scope": "fresh Next production build including generated route types and TypeScript"}
     stages["build"] = {"status": "passed", "scope": "one production Next web build with current core and DB sources"}
     for port in (65432, 4173):
         with socket.socket() as connection: connection.bind(("127.0.0.1", port))
@@ -182,8 +199,6 @@ try:
     database_url = "postgresql://postgres@127.0.0.1:65432/" + database
     for number, filename in (("1", "0001_init.sql"), ("2", "0002_hosted_integrations.sql")):
         run("migration-" + number, [str(pgbin / "psql"), "-X", "-v", "ON_ERROR_STOP=1", "-d", database, "-f", "packages/db/migrations/" + filename], extra=pg)
-    cases("postgres", ["node", "--import", "tsx", "--test", "--test-reporter=tap", "tests/integration/eval-matching.node.mjs"], 20,
-          {"EVAL_MATCHING_TEST_ALLOW": "local-disposable", "EVAL_MATCHING_TEST_DATABASE_URL": database_url})
     run("chromium-install", pnpm + ["exec", "playwright", "install", "chromium"], timeout=180, extra={"PLAYWRIGHT_BROWSERS_PATH": str(tools / "browsers")})
     binding, journal = evidence / "transport-binding.json", evidence / "transport-journal.jsonl"
     binding.write_text(json.dumps({"schemaVersion": "eval-matching-transport-unarmed-v1", "cohort": cohort})); binding.chmod(0o600)
@@ -194,14 +209,15 @@ try:
                    "EVAL_MATCHING_BROWSER_REPORT": str(evidence / "browser-report.json"), "PLAYWRIGHT_BROWSERS_PATH": str(tools / "browsers"),
                    "AUTH_SECRET": "authored_open_evals_matching_v3_20261112_fixture_only", "API_KEY_PEPPER": "authored_matching_v3_browser_pepper_20261112_fixture_only"}
     server_env = {**safe, **browser_env, "DATABASE_URL": database_url, "AUTH_MODE": "hosted", "NODE_ENV": "production"}
-    app = subprocess.Popen(["node", "--require", str(source / "tests/e2e/eval-matching.browser.preload.mjs"),
+    app = subprocess.Popen(["node", "--import", str(source / "tests/e2e/eval-matching.browser.preload.mjs"),
                             str(source / "apps/web/node_modules/next/dist/bin/next"), "start", "--hostname", "127.0.0.1", "--port", "4173"],
                            cwd=source / "apps/web", env=server_env, stdin=subprocess.DEVNULL, stdout=subprocess.PIPE, stderr=subprocess.PIPE, start_new_session=True)
     for key in ("stdout", "stderr"):
         thread = threading.Thread(target=pump, args=(getattr(app, key), evidence / ("server." + key + ".txt")), daemon=True)
         thread.start(); app_threads.append(thread)
     for attempt in range(100):
-        assert app.poll() is None and not app_overflow.is_set()
+        assert app.poll() is None, "application exited before listening; see original server streams"
+        assert not app_overflow.is_set(), "server stream limit exceeded"
         try:
             with socket.create_connection(("127.0.0.1", 4173), timeout=0.2): break
         except OSError: time.sleep(0.2)
@@ -213,17 +229,34 @@ try:
     assert not app_overflow.is_set()
 except BaseException as error:
     errors.append(type(error).__name__ + ": " + str(error))
+    (evidence / "error-traceback.txt").write_text(traceback.format_exc())
 finally:
     cleanup_phase = True
     if app is not None:
         try:
-            os.killpg(app.pid, signal.SIGTERM)
+            already_exited = app.poll() is not None
+            if not already_exited: os.killpg(app.pid, signal.SIGTERM)
             try: app.wait(timeout=5)
             except subprocess.TimeoutExpired: os.killpg(app.pid, signal.SIGKILL); app.wait(timeout=5)
             for thread in app_threads: thread.join(timeout=5)
             assert all(not thread.is_alive() for thread in app_threads)
+            try: os.killpg(app.pid, 0)
+            except ProcessLookupError: cleanup["appGroupAbsent"] = True
+            else: raise AssertionError("application process group remains; owned root retained")
             cleanup["appReaped"] = True
+            cleanup["appReturncode"] = app.returncode
+            cleanup["appExitedBeforeCleanup"] = already_exited
         except BaseException as error: errors.append("app_cleanup: " + str(error))
+        if errors:
+            import base64
+            for key in ("stdout", "stderr"):
+                path = evidence / ("server." + key + ".txt")
+                if path.exists() and path.stat().st_size <= 262144:
+                    value = path.read_bytes()
+                    print("OE_MATCHING_FAILED_STREAM_BEGIN " + path.name, flush=True)
+                    encoded = base64.b64encode(value).decode("ascii")
+                    for index in range(0, len(encoded), 4096): print(encoded[index:index + 4096], flush=True)
+                    print("OE_MATCHING_FAILED_STREAM_END " + path.name, flush=True)
     if cluster_started:
         try:
             pg = {"PGHOST": "127.0.0.1", "PGPORT": "65432", "PGUSER": "postgres"}
