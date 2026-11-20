@@ -1,5 +1,9 @@
 # open-evals
 
+<!-- project-family:start -->
+> **Project family:** [AI Research & Evaluation](https://github.com/alvarovillalbaa#ai-research-and-evaluation) · **Area:** Evaluation platform
+<!-- project-family:end -->
+
 Last updated: 2026-11-10
 
 `open-evals` is an MIT-licensed, provider-independent platform for two product functions:
