@@ -1,0 +1,14 @@
+{
+  "date": "2026-11-10",
+  "scope": "Standalone SDK packaging; source implementation unchanged",
+  "source_base": "c0721e140feebc2c8bfcc495e98a57729e164e9a",
+  "checks": {
+    "exit_code": 0,
+    "original_token_count": 94,
+    "output": "test_default_and_optional_key (test_sdk.SdkTests.test_default_and_optional_key) ... ok\ntest_errors_propagate_without_retry (test_sdk.SdkTests.test_errors_propagate_without_retry) ... ok\ntest_methods_preserve_transport (test_sdk.SdkTests.test_methods_preserve_transport) ... ok\n\n----------------------------------------------------------------------\nRan 3 tests in 0.003s\n\nOK\n"
+  },
+  "limits": [
+    "Fresh install/wheel build blocked by Storage Guard: 11.9 GiB free, 34 GiB required.",
+    "No web build, browser smoke, service/auth/DB change, or live SDK request."
+  ]
+}

@@ -1,5 +1,7 @@
 # SDK trace evidence
 
+Last updated: 2026-11-10
+
 Connect application instrumentation through the TypeScript or Python SDK.
 Trace and span records supply evidence for evaluations and prompt improvement.
 The product has no manual trace-upload form, CLI trace-file command or MCP
@@ -10,9 +12,12 @@ which explains the supported SDK workflow without sending data itself.
 
 The TypeScript source is [packages/sdk/src/index.ts](../packages/sdk/src/index.ts).
 The Python source is
-[open_evals_sdk.py](../python/open_evals_optimizers/src/open_evals_sdk.py).
-These are repository SDK modules; no public npm/PyPI installation is established
-by this guide.
+[open_evals_sdk.py](../python/open_evals_sdk/src/open_evals_sdk.py).
+The Python client is an independent source package. From a repository checkout,
+run `python3 -m pip install ./python/open_evals_sdk`. See the
+[package guide](../python/open_evals_sdk/README.md) for compatibility.
+Consuming projects should pin the Git commit and VCS subdirectory.
+No public npm/PyPI release is established by this guide.
 
 Configure the actual service URL and a server-held project API key explicitly.
 TypeScript accepts `{ endpoint, apiKey }`; Python accepts `endpoint` and
